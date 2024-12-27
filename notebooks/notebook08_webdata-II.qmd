@@ -1,0 +1,1044 @@
+---
+title: Using with `pyspark` for data preprocessing
+jupyter: python3
+---
+
+
+## Data description
+
+The data is a `parquet` file which contains a dataframe with 8 columns:
+
+- `xid`: unique user id
+- `action`: type of action. 'C' is a click, 'O' or 'VSL' is a web-display
+- `date`: date of the action
+- `website_id`: unique id of the website
+- `url`: url of the webpage
+- `category_id`: id of the display
+- `zipcode`: postal zipcode of the user
+- `device`: type of device used by the user
+
+## Q1. Some statistics / computations
+
+Using `pyspark.sql` we want to do the following things:
+
+1. Compute the total number of unique users
+2. Construct a column containing the total number of actions per user
+3. Construct a column containing the number of days since the last action of the user
+4. Construct a column containing the number of actions of each user for each modality of device 
+
+## Q2. Binary classification
+
+Then, we want to construct a classifier to predict the click on the category 1204. 
+Here is an agenda for this:
+
+1. Construction of a features matrix for which each line corresponds to the information concerning a user.
+2. In this matrix, we need to keep only the users that have been exposed to the display in category 1204
+3. Using this training dataset, train a binary classifier, and evaluate your classifier using a precision / recall curve computed on test data.
+
+
+# Download/read the data and a first look at the data
+
+```{python}
+import os
+import sys
+
+os.environ['PYSPARK_PYTHON'] = sys.executable
+os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
+```
+
+
+::: {.callout-note}
+
+### Spark in local mode
+
+
+
+```{python}
+from pyspark import SparkConf, SparkContext
+from pyspark.sql import SparkSession
+
+spark = (SparkSession
+    .builder
+    .appName("Spark Webdata")
+    .getOrCreate()
+)
+```
+
+```{python}
+import requests, zipfile, io
+from pathlib import Path
+
+path = Path('webdata.parquet')
+if not path.exists():
+    url = "https://stephanegaiffas.github.io/big_data_course/data/webdata.parquet.zip"
+    r = requests.get(url)
+    z = zipfile.ZipFile(io.BytesIO(r.content))
+    z.extractall(path='./')
+```
+
+```{python}
+input_path = './'
+
+input_file = os.path.join(input_path, 'webdata.parquet')
+
+df = spark.read.parquet(input_file)
+```
+
+
+::: {.callout-note}
+
+We can also give a try to `pyarrow.parquet` module to load the Parquet file in an Arrow table.
+
+:::
+
+```{python}
+import pyarrow as pa
+import comet    as co
+import pyarrow.parquet as pq
+
+dfa = pq.read_table(input_file)
+```
+
+```{python}
+dfa.num_columns
+```
+
+::: {.callout-warning}
+
+Let us go back to the spark data frame
+
+:::
+
+```{python}
+df.printSchema()
+```
+
+```{python}
+df.rdd.getNumPartitions()
+```
+
+::: {.callout-note  title="Question"}
+
+Explain the partition size. 
+
+:::
+
+```{python}
+df.rdd.toDebugString()
+```
+
+# Basic statistics
+
+First we need to import some things:
+
+- `Window` class
+- SQL functions module
+- Some very useful functions
+- Spark types
+
+```{python}
+from pyspark.sql import Window
+import pyspark.sql.functions as func
+from pyspark.sql.types import *
+from pyspark.sql.functions import col, lit
+```
+
+## Compute the total number of unique users
+
+```{python}
+( 
+    df.select('xid')
+      .distinct()
+      .count()
+)
+```
+
+```{python}
+def foo(x): yield len(set(x))
+```
+
+```{python}
+
+( df.rdd
+    .map(lambda x : x.xid)
+    .mapPartitions(foo)
+    .collect()
+)
+```
+
+
+This might pump up some computational resources 
+
+```{python}
+( 
+    df.select('xid')
+      .distinct() 
+      .explain()
+)
+```
+
+::: {.callout-note}
+
+The distinct values of `xid` seem to be evenly spread among the six files making the `parquet` directory. Note that the last six partitions look empty. 
+
+:::
+
+## Construct a column containing the total number of actions per user
+
+```{python}
+xid_partition = Window.partitionBy('xid')
+
+n_events = func.count(col('action')).over(xid_partition)
+
+df = df.withColumn('n_events', n_events)
+
+df.head(n=2)
+```
+
+```{python}
+( 
+  df
+    .groupBy('xid')
+    .agg(func.count('action'))
+    .head(5)
+)
+```
+
+
+## Construct a column containing the number of days since the last action of the user
+
+```{python}
+max_date = (
+  func
+    .max(col('date'))
+    .over(xid_partition)
+)
+
+n_days_since_last_event = func.datediff(func.current_date(), max_date)
+
+df = df.withColumn('n_days_since_last_event',
+                   n_days_since_last_event)
+
+df.head(n=2)
+```
+
+```{python}
+df.printSchema()
+```
+
+## Construct a column containing the number of actions of each user for each modality of device
+
+Does this `partitionBy` triggers shuffling? 
+
+```{python}
+xid_device_partition = xid_partition.partitionBy('device')
+
+n_events_per_device = func.count(col('action')).over(xid_device_partition)
+
+df = df.withColumn('n_events_per_device', n_events_per_device)
+
+df.head(n=2)
+```
+
+## Number of devices per user {{< fa mug-hot >}}
+
+```{python}
+# xid_partition = Window.partitionBy('xid')
+
+rank_device = (
+  func
+    .dense_rank()
+    .over(xid_partition.orderBy('device'))
+)
+
+n_unique_device = (
+    func
+      .last(rank_device)
+      .over(xid_partition)
+)
+
+df = df.withColumn('n_device', n_unique_device)
+
+df.head(n=2)
+```
+
+
+
+
+```{python}
+df\
+    .where(col('n_device') > 1)\
+    .select('xid', 'device', 'n_events',  'n_device', 'n_events_per_device')\
+    .head(n=8)
+```
+
+```{python}
+df\
+    .where(col('n_device') > 1)\
+    .select('xid', 'device', 'n_events',  'n_device', 'n_events_per_device')\
+    .count()
+```
+
+# Let's select the correct users and build a training dataset
+
+We construct a ETL (Extract Transform Load) process on this data using the `pyspark.sql` API.
+
+## Extraction
+
+Here extraction is just about reading the data
+
+```{python}
+df = spark.read.parquet(input_file)
+df.head(n=3)
+```
+
+## Transformation of the data
+
+At this step we compute a lot of extra things from the data. The aim is to build *features* that describe users.
+
+```{python}
+def n_events_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    n_events = func.count(col('action')).over(xid_partition)
+    
+    df = df.withColumn('n_events', n_events)
+
+    return df
+```
+
+```{python}
+def n_events_per_action_transformer(df):
+    xid_action_partition = Window.partitionBy('xid', 'action')
+    n_events_per_action = func.count(col('action')).over(xid_action_partition)
+
+    df = df.withColumn('n_events_per_action', n_events_per_action)
+    
+    return df
+```
+
+```{python}
+def hour_transformer(df):
+    hour = func.hour(col('date'))
+    df = df.withColumn('hour', hour)
+    return df
+
+def weekday_transformer(df):
+    weekday = func.date_format(col('date'), 'EEEE')
+    df = df.withColumn('weekday', weekday)
+    return df
+
+def n_events_per_hour_transformer(df):
+    xid_hour_partition = Window.partitionBy('xid', 'hour')
+    n_events_per_hour = func.count(col('action')).over(xid_hour_partition)
+    df = df.withColumn('n_events_per_hour', n_events_per_hour)
+    return df
+
+def n_events_per_weekday_transformer(df):
+    xid_weekday_partition = Window.partitionBy('xid', 'weekday')
+    n_events_per_weekday = func.count(col('action')).over(xid_weekday_partition)
+    df = df.withColumn('n_events_per_weekday', n_events_per_weekday)
+    return df
+
+def n_days_since_last_event_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    max_date = func.max(col('date')).over(xid_partition)
+    n_days_since_last_event = func.datediff(func.current_date(), max_date)
+    df = df.withColumn('n_days_since_last_event',
+                       n_days_since_last_event + lit(0.1))
+    return df
+
+def n_days_since_last_action_transformer(df):
+    xid_partition_action = Window.partitionBy('xid', 'action')
+    max_date = func.max(col('date')).over(xid_partition_action)
+    n_days_since_last_action = func.datediff(func.current_date(),
+                                                        max_date)
+    df = df.withColumn('n_days_since_last_action',
+                       n_days_since_last_action + lit(0.1))
+    return df
+
+def n_unique_day_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    dayofyear = func.dayofyear(col('date'))
+    rank_day = func.dense_rank().over(xid_partition.orderBy(dayofyear))
+    n_unique_day = func.last(rank_day).over(xid_partition)
+    df = df.withColumn('n_unique_day', n_unique_day)
+    return df
+
+def n_unique_hour_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    rank_hour = func.dense_rank().over(xid_partition.orderBy('hour'))
+    n_unique_hour = func.last(rank_hour).over(xid_partition)
+    df = df.withColumn('n_unique_hour', n_unique_hour)
+    return df
+
+def n_events_per_device_transformer(df):
+    xid_device_partition = Window.partitionBy('xid', 'device')
+    n_events_per_device = func.count(func.col('device')) \
+        .over(xid_device_partition)
+    df = df.withColumn('n_events_per_device', n_events_per_device)
+    return df
+
+def n_unique_device_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    rank_device = func.dense_rank().over(xid_partition.orderBy('device'))
+    n_unique_device = func.last(rank_device).over(xid_partition)
+    df = df.withColumn('n_device', n_unique_device)
+    return df
+
+def n_actions_per_category_id_transformer(df):
+    xid_category_id_partition = Window.partitionBy('xid', 'category_id',
+                                                   'action')
+    n_actions_per_category_id = func.count(func.col('action')) \
+        .over(xid_category_id_partition)
+    df = df.withColumn('n_actions_per_category_id', n_actions_per_category_id)
+    return df
+
+def n_unique_category_id_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    rank_category_id = func.dense_rank().over(xid_partition\
+                                              .orderBy('category_id'))
+    n_unique_category_id = func.last(rank_category_id).over(xid_partition)
+    df = df.withColumn('n_unique_category_id', n_unique_category_id)
+    return df
+
+def n_events_per_category_id_transformer(df):
+    xid_category_id_partition = Window.partitionBy('xid', 'category_id')
+    n_events_per_category_id = func.count(func.col('action')) \
+        .over(xid_category_id_partition)
+    df = df.withColumn('n_events_per_category_id', n_events_per_category_id)
+    return df
+
+def n_events_per_website_id_transformer(df):
+    xid_website_id_partition = Window.partitionBy('xid', 'website_id')
+    n_events_per_website_id = func.count(col('action'))\
+        .over(xid_website_id_partition)
+    df = df.withColumn('n_events_per_website_id', n_events_per_website_id)
+    return df
+```
+
+```{python}
+transformers = [
+    hour_transformer,
+    weekday_transformer,
+    n_events_per_hour_transformer,
+    n_events_per_weekday_transformer,
+    n_days_since_last_event_transformer,
+    n_days_since_last_action_transformer,
+    n_unique_day_transformer,
+    n_unique_hour_transformer,
+    n_events_per_device_transformer,
+    n_unique_device_transformer,
+    n_actions_per_category_id_transformer,
+    n_events_per_category_id_transformer,
+    n_events_per_website_id_transformer,
+]
+```
+
+```{python}
+N = 10000
+```
+
+```{python}
+sample_df = df.sample(withReplacement=False, fraction=.05)
+```
+
+```{python}
+sample_df.count()
+```
+
+```{python}
+for transformer in transformers:
+    df = transformer(df)
+
+df.head(n=1)
+```
+
+```{python}
+for transformer in transformers:
+    sample_df = transformer(sample_df)
+
+sample_df.head(n=1)
+```
+
+```{python}
+df = sample_df
+```
+
+```{python}
+sorted(df.columns)
+```
+
+```{python}
+df.explain()
+```
+
+```{python}
+
+spark._sc.setCheckpointDir(".")   
+
+df.checkpoint()
+```
+
+```{python}
+df.explain()
+```
+
+## Load step
+
+Here, we use all the previous computations (saved in the columns of the dataframe) 
+to compute aggregated informations about each user.
+
+
+::: {.callout-note}
+
+This should be DRYED 
+
+:::
+
+
+```{python}
+def n_events_per_hour_loader(df):
+    csr = df\
+        .select('xid', 'hour', 'n_events_per_hour')\
+        .withColumnRenamed('n_events_per_hour', 'value')\
+        .distinct() 
+            # action
+    feature_name = func.concat(lit('n_events_per_hour#'), col('hour'))
+
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('hour')
+    return csr
+
+def n_events_per_website_id_loader(df):
+    csr = df.select('xid', 'website_id', 'n_events_per_website_id')\
+        .withColumnRenamed('n_events_per_hour', 'value')\
+        .distinct()
+
+    feature_name = func.concat(lit('n_events_per_website_id#'),
+                               col('website_id'))
+    
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('website_id')
+    return csr
+
+def n_events_per_hour_loader(df):
+    csr = df\
+        .select('xid', 'hour', 'n_events_per_hour')\
+        .withColumnRenamed('n_events_per_hour', 'value')\
+        .distinct()
+
+    feature_name = func.concat(lit('n_events_per_hour#'), col('hour'))
+    
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('hour')
+    return csr
+
+def n_events_per_weekday_loader(df):
+    csr = df\
+        .select('xid', 'weekday', 'n_events_per_weekday')\
+        .withColumnRenamed('n_events_per_weekday', 'value')\
+        .distinct()
+
+    feature_name = func.concat(lit('n_events_per_weekday#'), col('weekday'))
+    
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('weekday')
+
+    return csr
+
+def n_days_since_last_event_loader(df):
+    csr = df.select('xid',  'n_days_since_last_event')\
+        .withColumnRenamed('n_days_since_last_event', 'value')\
+        .distinct()
+    feature_name = lit('n_days_since_last_event')
+    csr = csr\
+        .withColumn('feature_name', feature_name)
+    return csr
+
+def n_days_since_last_action_loader(df):
+    csr = df.select('xid', 'action', 'n_days_since_last_action')\
+        .withColumnRenamed('n_days_since_last_action', 'value')\
+        .distinct()
+    feature_name = func.concat(lit('n_days_since_last_action#'), col('action'))
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('action')
+    return csr
+
+def n_unique_day_loader(df):
+    csr = df.select('xid', 'n_unique_day')\
+        .withColumnRenamed('n_unique_day', 'value')\
+        .distinct()
+    feature_name = lit('n_unique_day')
+    csr = csr\
+        .withColumn('feature_name', feature_name)
+    return csr
+
+def n_unique_hour_loader(df):
+    csr = df.select('xid', 'n_unique_hour')\
+        .withColumnRenamed('n_unique_hour', 'value')\
+        .distinct()
+    feature_name = lit('n_unique_hour')
+    csr = csr\
+        .withColumn('feature_name', feature_name)
+    return csr
+
+def n_events_per_device_loader(df):
+    csr = df\
+        .select('xid', 'device', 'n_events_per_device')\
+        .withColumnRenamed('n_events_per_device', 'value')\
+        .distinct()
+    feature_name = func.concat(lit('n_events_per_device#'), col('device'))
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('device')
+    return csr
+
+def n_unique_device_loader(df):
+    csr = df.select('xid', 'n_device')\
+        .withColumnRenamed('n_device', 'value')\
+        .distinct()
+    feature_name = lit('n_device')
+    csr = csr\
+        .withColumn('feature_name', feature_name)
+    return csr
+
+def n_events_per_category_id_loader(df):
+    csr = df.select('xid', 'category_id', 'n_events_per_category_id')\
+        .withColumnRenamed('n_events_per_category_id', 'value')\
+        .distinct()
+    feature_name = func.concat(lit('n_events_per_category_id#'),
+                               col('category_id'))
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('category_id')
+    return csr
+
+def n_actions_per_category_id_loader(df):
+    csr = df.select('xid', 'category_id', 'action', 'n_actions_per_category_id')\
+        .withColumnRenamed('n_actions_per_category_id', 'value')\
+        .distinct()
+    feature_name = func.concat(lit('n_actions_per_category_id#'),
+                               col('action'), lit('#'), 
+                               col('category_id'))
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('category_id')\
+        .drop('action')
+    return csr
+
+def n_events_per_website_id_loader(df):
+    csr = df.select('xid', 'website_id', 'n_events_per_website_id')\
+        .withColumnRenamed('n_events_per_website_id', 'value')\
+        .distinct()
+    feature_name = func.concat(lit('n_events_per_website_id#'),
+                               col('website_id'))
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('website_id')
+    return csr
+```
+
+```{python}
+from functools import reduce
+```
+
+```{python}
+loaders = [
+    n_events_per_hour_loader,
+    n_events_per_website_id_loader,
+    n_events_per_hour_loader,
+    n_events_per_weekday_loader,
+    n_days_since_last_event_loader,
+    n_days_since_last_action_loader,
+    n_unique_day_loader,
+    n_unique_hour_loader,
+    n_events_per_device_loader,
+    n_unique_device_loader,
+    n_events_per_category_id_loader,
+    n_actions_per_category_id_loader,
+    n_events_per_website_id_loader,
+]
+```
+
+```{python}
+def union(df, other):
+    return df.union(other)
+```
+
+::: {.callout-caution title="About DataFrame.union()"}
+
+This method performs a SQL-style set union of the rows from both DataFrame objects, with no automatic deduplication of elements.
+
+Use the distinct() method to perform deduplication of rows.
+
+The method resolves columns by position (not by name), following the standard behavior in SQL.
+
+:::
+
+```{python}
+spam = [loader(df) for loader in loaders]
+```
+
+```{python}
+spam[0].printSchema()
+```
+
+```{python}
+all(spam[0].columns == it.columns for it in spam[1:])
+```
+
+```{python}
+len(spam)
+```
+
+```{python}
+csr = reduce(
+    lambda df1, df2: df1.union(df2),
+    spam
+)
+
+csr.head(n=3)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:25:54.862814Z', start_time: '2020-05-03T15:25:54.857914Z'}
+csr.columns
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:26:13.629146Z', start_time: '2020-05-03T15:25:55.683800Z'}
+csr.show(5)
+```
+
+```{python}
+csr.rdd.getNumPartitions()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:30:20.643141Z', start_time: '2020-05-03T15:29:45.221790Z'}
+# Replace features names and xid by a unique number
+feature_name_partition = Window().orderBy('feature_name')
+
+xid_partition = Window().orderBy('xid')
+
+col_idx = func.dense_rank().over(feature_name_partition)
+row_idx = func.dense_rank().over(xid_partition)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:30:20.643141Z', start_time: '2020-05-03T15:29:45.221790Z'}
+csr = csr.withColumn('col', col_idx)\
+    .withColumn('row', row_idx)
+
+csr = csr.na.drop('any')
+
+csr.head(n=5)
+```
+
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:32:02.552364Z', start_time: '2020-05-03T15:31:14.990298Z'}
+# Let's save the result of our hard work into a new parquet file
+output_path = './'
+output_file = os.path.join(output_path, 'csr.parquet')
+csr.write.parquet(output_file, mode='overwrite')
+```
+
+# Preparation of the training dataset
+
+```{python}
+
+csr_path = './'
+csr_file = os.path.join(csr_path, 'csr.parquet')
+
+df = spark.read.parquet(csr_file)
+df.head(n=5)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:33:17.229477Z', start_time: '2020-05-03T15:33:16.995048Z'}
+#| scrolled: true
+df.count()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:33:20.881392Z', start_time: '2020-05-03T15:33:19.624525Z'}
+#| scrolled: true
+# What are the features related to campaign_id 1204 ?
+features_names = \
+    df.select('feature_name')\
+    .distinct()\
+    .toPandas()['feature_name']
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:33:21.818568Z', start_time: '2020-05-03T15:33:21.812810Z'}
+features_names
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:33:27.083141Z', start_time: '2020-05-03T15:33:27.078374Z'}
+#| scrolled: true
+[feature_name for feature_name in features_names if '1204' in feature_name]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:33:28.560631Z', start_time: '2020-05-03T15:33:27.903921Z'}
+#| scrolled: true
+# Look for the xid that have at least one exposure to campaign 1204
+keep = func.when(
+    (col('feature_name') == 'n_actions_per_category_id#C#1204.0') |
+    (col('feature_name') == 'n_actions_per_category_id#O#1204.0'),
+    1).otherwise(0)
+df = df.withColumn('keep', keep)
+
+df.where(col('keep') > 0).count()
+```
+
+```{python}
+# Sum of the keeps :)
+xid_partition = Window.partitionBy('xid')
+sum_keep = func.sum(col('keep')).over(xid_partition)
+df = df.withColumn('sum_keep', sum_keep)
+```
+
+```{python}
+# Let's keep the xid exposed to 1204
+df = df.where(col('sum_keep') > 0)
+```
+
+```{python}
+df.count()
+```
+
+```{python}
+df.select('xid').distinct().count()
+```
+
+```{python}
+row_partition = Window().orderBy('row')
+col_partition = Window().orderBy('col')
+
+row_new = func.dense_rank().over(row_partition)
+col_new = func.dense_rank().over(col_partition)
+
+df = df.withColumn('row_new', row_new)
+df = df.withColumn('col_new', col_new)
+
+csr_data = df.select('row_new', 'col_new', 'value').toPandas()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:33:52.617724Z', start_time: '2020-05-03T15:33:52.609488Z'}
+#| scrolled: true
+csr_data.head()
+```
+
+```{python}
+#| scrolled: true
+features_names = df.select('feature_name', 'col_new').distinct()
+features_names.where(col('feature_name') == 'n_actions_per_category_id#C#1204.0').head()
+```
+
+```{python}
+features_names.where(col('feature_name') == 'n_actions_per_category_id#O#1204.0').head()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:34:11.510538Z', start_time: '2020-05-03T15:34:11.454802Z'}
+from scipy.sparse import csr_matrix
+import numpy as np
+
+rows = csr_data['row_new'].values - 1
+cols = csr_data['col_new'].values - 1
+vals = csr_data['value'].values
+
+X_csr = csr_matrix((vals, (rows, cols)))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:34:11.977267Z', start_time: '2020-05-03T15:34:11.972602Z'}
+X_csr.shape
+```
+
+```{python}
+X_csr.shape, X_csr.nnz
+```
+
+```{python}
+
+X_csr.nnz / (X_csr.shape[0]* X_csr.shape[1])   # 0152347 * 92)
+```
+
+```{python}
+# The label vector. Let's make it dense, flat and binary
+y = np.array(X_csr[:, 1].todense()).ravel()
+y = np.array(y > 0, dtype=np.int64)
+```
+
+```{python}
+
+#| scrolled: true
+X_csr.shape
+```
+
+```{python}
+
+# We remove the second and fourth column. 
+# It actually contain the label we'll want to predict.
+kept_cols = list(range(X_csr.shape[1]))
+kept_cols.pop(1)
+kept_cols.pop(2)
+X = X_csr[:, kept_cols]
+```
+
+```{python}
+len(kept_cols)
+```
+
+```{python}
+X_csr.shape, X.shape
+```
+
+## Finally !!
+
+Wow ! That was a lot of work. Now we have a features matrix $X$ and a vector of labels $y$.
+
+```{python}
+#| scrolled: true
+X.indices
+```
+
+
+```{python}
+
+#| scrolled: true
+X.indptr
+```
+
+```{python}
+X.shape, X.nnz
+```
+
+```{python}
+
+y.shape, y.sum()
+```
+
+# Some learning for/from this data
+
+```{python}
+
+from sklearn.preprocessing import MaxAbsScaler
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
+# Normalize the features
+X = MaxAbsScaler().fit_transform(X)
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=0.3)
+
+clf = LogisticRegression(
+    penalty='l2',
+    C=1e3,
+    solver='lbfgs',
+    class_weight='balanced'
+)
+
+clf.fit(X_train, y_train)
+```
+
+```{python}
+
+#| scrolled: true
+features_names = features_names.toPandas()['feature_name']
+```
+
+```{python}
+features_names[range(6)]
+```
+
+```{python}
+
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+
+```{python}
+
+plt.figure(figsize=(16, 5))
+plt.stem(clf.coef_[0]) # , use_line_collection=True)
+plt.title('Logistic regression coefficients', fontsize=18)
+```
+
+```{python}
+clf.coef_[0].shape[0]
+```
+
+```{python}
+len(features_names)
+```
+
+```{python}
+#| eval: false
+# We change the fontsize of minor ticks label
+_ = plt.xticks(np.arange(clf.coef_[0].shape[0]), features_names, 
+           rotation='vertical', fontsize=8)
+```
+
+```{python}
+
+_ = plt.yticks(fontsize=14)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-05-03T15:51:25.280157Z', start_time: '2020-05-03T15:51:25.081464Z'}
+from sklearn.metrics import precision_recall_curve, f1_score
+
+precision, recall, _ = precision_recall_curve(y_test, clf.predict_proba(X_test)[:, 1])
+    
+plt.figure(figsize=(8, 6))
+plt.plot(recall, precision, label='LR (F1=%.2f)' % f1_score(y_test, clf.predict(X_test)), lw=2)
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('Recall', fontsize=16)
+plt.ylabel('Precision', fontsize=16)
+plt.title('Precision/recall curve', fontsize=18)
+plt.legend(loc="upper right", fontsize=14)
+```
+
+# Analyse the tables 
+
+```{python}
+query = """ANALYZE TABLE db_table COMPUTE STATISTICS
+            FOR COLUMNS xid"""
+```
+
+```{python}
+df.createOrReplaceTempView("db_table")
+```
+
+```{python}
+df.columns
+```
+
+```{python}
+#| eval: false
+spark.sql("cache table db_table")
+```
+
+```{python}
+#| eval: false
+spark.sql(query)
+```
+
+```{python}
+#| eval: false
+spark.sql("show tables")
+```
+

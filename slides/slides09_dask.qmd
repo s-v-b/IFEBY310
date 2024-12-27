@@ -1,0 +1,695 @@
+---
+title: "Technologies Big Data"
+subtitle: "Master I MIDS & Informatique"
+author: "A. Gheerbrandt, S. Gaïffas, V. Ravelomanana, S. Boucheron"
+institute: "Université Paris Cité"
+date: "2024-02-19"
+params:
+  title: "Dask"
+  curriculum: "Master I MIDS Master I Informatique"
+  coursetitle: "Technologies Big Data: Dask"
+  lecturer: "A. Gheerbrandt, S. Gaïffas, V. Ravelomanana, S. Boucheron"
+  homepage: "http://stephane-v-boucheron.fr/courses/grosses-data/"
+  curriculum_homepage: "https://master.math.univ-paris-diderot.fr/annee/m1-mids/"
+toc: true
+toc-depth: 1
+toc-title: Roadmap
+output-location: fragment
+center: true
+
+execute: 
+  eval: true
+  echo: true
+---
+
+# Dask:  Big picture  {background-color="#1c191c"}
+
+------------------------------------------------------------------------
+
+![Dask in picture](IMG/dask_nutshell.png)
+
+
+
+
+## {{< fa map >}}  {.scrollable}
+
+-   Overview - dask's place in the universe.
+
+-   `Delayed` - the single-function way to parallelize general python code.
+
+-   1x. `Lazy` - some of the principles behind lazy execution, for the interested
+
+-   `Bag` - the first high-level collection: a generalized iterator for use with a functional programming style and to clean messy data (scaling up and out Python lists)
+
+-   `Array` - blocked `numpy`-like functionality with a collection of `numpy` arrays spread across your cluster
+
+-   `Dataframe` - parallelized operations on many `pandas` `dataframes` spread across your cluster
+
+-   `Distributed` - Dask's scheduler for clusters, with details of how to view the UI
+
+-   Advanced Distributed - further details on distributed computing, including how to debug
+
+-   `Dataframe` Storage - efficient ways to read and write dataframes to disc
+
+-   Machine Learning - applying `dask` to machine-learning problems.
+
+## Flavours of (big) data
+
+| Type        |     Typical size      | Features                                     |   Tool |
+|:--------------|:-----------------------:|:-----------------|--------------:|
+| Small data  |     Few GigaBytes     | Fits in RAM                                  | Pandas |
+| Medium data | Less than 2 Terabytes | Does not fit in RAM, fits on hard drive |   Dask |
+| Large data  |       Petabytes       | Does not fit on hard drivve                  |  Spark |
+
+---
+
+![](./IMG/dask_horizontal.svg)
+
+
+Dask provides multi-core and distributed parallel execution on larger-than-memory datasets.
+
+. . .
+
+Dask provides high-level `Array`, `Bag`, and `DataFrame` collections that mimic `NumPy`, `lists`, and `Pandas` but can operate in parallel on datasets that don't fit into memory
+
+. . . 
+Dask provides dynamic task schedulers that execute *task graphs* in parallel.
+
+These execution engines power the high-level collections but can also power custom, user-defined workloads.
+
+These schedulers are low-latency and work hard to run computations in a small memory footprint
+
+---
+
+
+[Dask Tutorial SciPy 2020](https://tutorial.dask.org "Dask Tutorial SciPy 2020")
+
+---
+
+[Dask FAQ](https://docs.dask.org/en/latest/faq.html)
+
+
+## Trends
+
+![Dask adoption metrics](IMG/dask_adoption.png)
+
+------------------------------------------------------------------------
+
+# Delayed  {background-color="#1c191c"}
+
+---
+
+> The single-function way to parallelize general python code.
+
+## Imports
+
+```{python}
+import dask
+
+dask.config.set(scheduler='threads')
+dask.config.set({'dataframe.query-planning': True})
+```
+
+```{python}
+import dask.dataframe as dd
+import dask.bag as db
+```
+
+```{python}
+from dask import delayed
+import dask.threaded
+
+from dask.distributed import Client
+from dask.diagnostics import ProgressBar
+from dask.diagnostics import Profiler, ResourceProfiler, CacheProfiler
+```
+
+## `LocalCluster`
+
+Dask can set itself up easily in your Python session if you create a `LocalCluster` object, which sets everything up for you.
+
+```{python}
+#| eval: false
+# from dask.distributed import LocalCluster
+
+# cluster = LocalCluster()
+# client = cluster.get_client()
+```
+
+### Normal Dask work ...
+
+Alternatively, you can skip this part, and Dask will operate within a thread pool contained entirely with your local process.
+
+
+```{python}
+
+```
+
+## Delaying Pyhton tasks
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+## A job (I)
+
+```{python}
+def inc(x):
+  return x + 1
+
+def double(x):
+  return x * 2
+
+def add(x, y):
+  return x + y
+```
+
+## A job (II)
+
+```{python}
+data = [1, 2, 3, 4, 5]
+
+output = []
+for x in data:
+  a = inc(x)   #<<
+  b = double(x) #<<
+  c = add(a, b) #<<
+  output.append(c)
+  
+total = sum(output)
+  
+total 
+```
+
+## Delaying existing functions
+
+```{python}
+output = []
+
+for x in data:
+  a = dask.delayed(inc)(x)   #<<
+  b = dask.delayed(double)(x) #<<
+  c = dask.delayed(add)(a, b) #<<
+  output.append(c)
+  
+total = dask.delayed(sum)(output) #<< 
+  
+total
+```
+
+```{python}
+total.compute()
+```
+
+## Another way of using decorators
+
+```{python}
+@dask.delayed
+def inc(x):
+  return x + 1
+
+@dask.delayed
+def double(x):
+  return x * 2
+
+@dask.delayed
+def add(x, y):
+  return x + y
+
+data = [1, 2, 3, 4, 5]
+
+output = []
+for x in data:
+  a = inc(x)
+  b = double(x)
+  c = add(a, b)
+  output.append(c)
+  
+total = dask.delayed(sum)(output)
+total
+total.compute()
+```
+
+## Visualizing the task graph
+
+```{python}
+total.visualize()
+```
+
+# Tweaking the task graph  {background-color="#1c191c"}
+
+## Another job
+
+```{python}
+DATA = []
+
+@dask.delayed
+def inc(x):
+  return x + 1
+
+@dask.delayed
+def add_data(x):
+  DATA.append(x)
+
+@dask.delayed
+def sum_data(x):
+  return sum(DATA) + x
+
+a = inc(1)
+b = add_data(a)
+c = inc(3)
+d = add_data(c)
+e = inc(5)
+f = sum_data(e)
+f.compute()
+```
+
+## A flawed task graph
+
+```{python}
+f.visualize()
+```
+
+## Fixing
+
+::: columns
+::: {.column width="40%"}
+```{python}
+from dask.graph_manipulation import bind
+
+g = bind(sum_data, [b, d])(e)
+
+g.compute()
+```
+
+::: smaller
+
+The result of the evaluation of `sum_data()` depends not only on its argument, hence on the `Delayed` `e` but also on the side effects of `add_data()`, that is on the `Delayed` `b` and `d`
+
+Note that not only the DAG was wrong but the result obtained above was not the intended result.
+
+:::
+
+:::
+
+::: {.column width="60%"}
+::: smaller
+```{python}
+g.visualize()
+```
+:::
+:::
+
+:::
+
+------------------------------------------------------------------------
+
+> By default, Dask `Delayed` uses the *threaded* scheduler in order to avoid data transfer costs.
+
+> Consider using *multi-processing* scheduler or *dask.distributed* scheduler on a local machine or on a cluster if your code does not release the `GIL` well (computations that are dominated by pure Python code, or computations wrapping external code and holding onto it).
+
+------------------------------------------------------------------------
+
+# Futures  {background-color="#1c191c"}
+
+------------------------------------------------------------------------
+
+## Objectives
+
+Sometimes you want to create and destroy work during execution, launch tasks from other tasks, etc. For this, see the `Futures` interface.
+
+------------------------------------------------------------------------
+
+# High level collections  {background-color="#1c191c"}
+
+------------------------------------------------------------------------
+
+## Importing the usual suspects
+
+```{python}
+import numpy as np
+import pandas as pd
+
+import dask.dataframe as dd
+import dask.array as da
+import dask.bag as db
+```
+
+---
+
+## Bird-eye view
+
+
+# Arrays 
+
+```{python}
+import xarray as xr
+```
+
+# Bags  {background-color="#1c191c"}
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+# Dataframes   {background-color="#1c191c"}
+
+
+##
+
+> Dask Dataframes parallelize the popular pandas library, providing:
+
+> - Larger-than-memory execution for single machines, allowing you to process data that is larger than your available RAM
+
+> - Parallel execution for faster processing
+
+> - Distributed computation for terabyte-sized datasets
+
+. . .
+
+> Dask Dataframes are similar in this regard to Apache Spark, but use the familiar pandas API and memory model. One Dask dataframe is simply a collection of pandas dataframes on different computers.
+
+
+##
+
+> Dask DataFrame helps you process large tabular data by parallelizing pandas, either on your laptop for larger-than-memory computing, or on a distributed cluster of computers.
+
+![](IMG/dask-dataframe.svg)
+
+> Just pandas: Dask DataFrames are a collection of many pandas DataFrames.
+
+> The API is the same. The execution is the same.
+
+> Large scale: Works on 100 GiB on a laptop, or 100 TiB on a cluster.
+
+> Easy to use: Pure Python, easy to set up and debug.
+
+> Column of four squares collectively labeled as a Dask DataFrame with a single constituent square labeled as a pandas DataFrame.
+
+> Dask DataFrames coordinate many pandas DataFrames/Series arranged along the index. A Dask DataFrame is partitioned row-wise, grouping rows by index value for efficiency. These pandas objects may live on disk or on other machines.
+
+##
+
+[Demo](https://www.youtube.com/watch?v=HTKzEDa2GA8)
+
+
+------------------------------------------------------------------------
+
+## Creating a dask dataframe
+
+```{python}
+index = pd.date_range("2021-09-01", 
+                      periods=2400, 
+                      freq="1H")
+
+df = pd.DataFrame({
+  "a": np.arange(2400), 
+  "b": list("abcaddbe" * 300)}, 
+  index=index)
+  
+ddf = dd.from_pandas(df, npartitions=20) # <1>
+
+ddf.head()                              # <2>
+```
+
+1.  As in Spark, in Dask, proper partitioning is a key performance issue
+2.  The dataframe API is (almost) the same as in Pandas!
+
+
+------------------------------------------------------------------------
+
+## Inside the dataframe
+
+::: columns
+
+::: {.column width="50%"}
+
+::: smaller
+
+### A sketch of the interplay between index and partitioning
+
+```{python}
+ddf.divisions
+```
+
+### A dataframe has a task graph
+
+```{python}
+ddf.visualize()
+```
+:::
+
+:::
+
+::: {.column width="50%"}
+::: smaller
+
+
+### What's in a partition?
+
+```{python}
+ddf.partitions[1] # <1>
+```
+
+1.  This is the second class of the partition
+
+### Slicing
+
+```{python}
+ddf["2021-10-01":"2021-10-09 5:00"] # <1>
+```
+
+1.  Like slicing NumPy arrays or pandas DataFrame.
+:::
+:::
+:::
+
+
+##
+
+> Dask DataFrames coordinate many Pandas DataFrames/Series arranged along an index. 
+
+> We define a Dask DataFrame object with the following components:
+
+> - A Dask graph with a special set of keys designating partitions, such as ('x', 0), ('x', 1), ...
+
+> - A name to identify which keys in the Dask graph refer to this DataFrame, such as 'x'
+
+> - An empty Pandas object containing appropriate *metadata* (e.g. column names, dtypes, etc.)
+
+> - A sequence of partition boundaries along the index called *divisions*
+
+
+------------------------------------------------------------------------
+
+## Methods
+
+::: columns
+::: {.column width="50%"}
+```{python}
+( 
+  ddf.a
+    .mean()
+)
+```
+
+```{python}
+( 
+  ddf.a
+    .mean()
+    .compute()
+)
+```
+
+```{python}
+(
+  ddf
+    .b
+    .unique()
+)
+```
+:::
+
+::: {.column width="50%"}
+::: smaller
+
+
+:::
+:::
+
+:::
+
+------------------------------------------------------------------------
+
+## Reading and writing from `parquet`
+
+```{python}
+fname = 'fhvhv_tripdata_2022-11.parquet'
+dpath = '../../../../Downloads/'
+
+globpath = 'fhvhv_tripdata_20*-*.parquet'
+
+!ls -l ../../../../Downloads/fhvhv_tripdata_20*-*.parquet
+```
+
+---
+
+```{python}
+%%time 
+
+data = dd.read_parquet(os.path.join(dpath, globpath),
+                       categories= ['PULocationID',      'DOLocationID'], 
+                       engine='auto'
+                      )
+```
+
+
+```{python}
+type(data)
+```
+
+
+
+```{python}
+#| eval: false
+df = data.to_dask_dataframe()
+```
+
+```{python}
+#| eval: false
+df.info()
+df._meta.dtypes
+
+df.npartitions
+```
+
+```{python}
+#| eval: false
+df.head()
+```
+
+```{python}
+#| eval: false
+type(df)
+```
+
+```{python}
+#| eval: false
+df._meta.dtypes
+```
+
+```{python}
+#| eval: false
+df._meta_nonempty
+```
+
+```{python}
+#| eval: false
+df.info()
+```
+
+```{python}
+#| eval: false
+df.divisions
+```
+
+```{python}
+#| eval: false
+df.describe(include="all")
+```
+
+## Partitioning and saving to parquet
+
+
+```{python}
+#| eval: false
+import pyarrow as pa
+
+schm = pa.Schema.from_pandas(df._meta)
+
+schm
+```
+
+
+```{python}
+#| eval: false
+df.PULocationID.unique().compute()
+```
+
+
+
+```{python}
+#| eval: false
+df.to_parquet( 
+  'fhvhv_tripdata_2022-11',
+  partition_on= ['PULocationID'],
+  engine='pyarrow', 
+  schema = schm
+  )
+```
+
+```{python}
+#| eval: false
+df.info(memory_usage=True)
+```
+
+
+
+
+
+
+# Schedulers   {background-color="#1c191c"}
+
+---
+
+> After you have generated a task graph, it is the scheduler's job to execute it (see Scheduling).
+
+> By default, for the majority of Dask APIs, when you call `compute()` on a Dask object, Dask uses the *thread pool* on your computer (a.k.a threaded scheduler) to run computations in parallel. This is true for `Dask Array`, `Dask DataFrame`, and `Dask Delayed`. The exception being `Dask Bag` which uses the multiprocessing scheduler by default.
+
+> If you want more control, use the `distributed scheduler` instead. Despite having "distributed" in it's name, the distributed scheduler works well on both single and multiple machines. Think of it as the "advanced scheduler".
+
+------------------------------------------------------------------------
+
+# Performance  {background-color="#1c191c"}
+
+------------------------------------------------------------------------
+
+> Dask schedulers come with diagnostics to help you understand the performance characteristics of your computations.
+
+
+> By using these diagnostics and with some thought, we can often identify the slow parts of troublesome computations.
+
+> The single-machine and distributed schedulers come with different diagnostic tools. These tools are deeply integrated into each scheduler, so a tool designed for one will not transfer over to the other.
+
+------------------------------------------------------------------------
+
+## Visualize task graphs
+
+------------------------------------------------------------------------
+
+## Single threaded scheduler and a normal Python profiler
+
+------------------------------------------------------------------------
+
+## Diagnostics for the single-machine scheduler
+
+------------------------------------------------------------------------
+
+## Diagnostics for the distributed scheduler and dashboard
+
+
+# References   {background-color="#1c191c"}
+
+##  Reference
+    *  [Docs](https://dask.org/)
+    *  [Examples](https://examples.dask.org/)
+    *  [Code](https://github.com/dask/dask/)
+    *  [Blog](https://blog.dask.org/)
+  
+##  Tutorials
+    *  [Scipy 2020]()
+
+##  Ask for help
+    *   [`dask`](http://stackoverflow.com/questions/tagged/dask) tag on Stack Overflow, for usage questions
+    *   [github issues](https://github.com/dask/dask/issues/new) for bug reports and feature requests
+    *   [gitter chat](https://gitter.im/dask/dask) for general, non-bug, discussion

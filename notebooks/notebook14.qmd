@@ -1,0 +1,324 @@
+---
+title: Using with `pyspark` for data preprocessing
+jupyter: python3
+---
+
+
+
+```{python}
+import os
+import sys
+import pyarrow as pa
+import comet as co
+import pyarrow.parquet as pq
+```
+
+
+```{python}
+from pyspark.sql import Window
+import pyspark.sql.functions as func
+from pyspark.sql.types import *
+from pyspark.sql.functions import col, lit
+```
+
+```{python}
+from functools import reduce
+```
+
+```{python}
+os.environ['PYSPARK_PYTHON'] = sys.executable
+os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
+```
+
+```{python}
+from pyspark.sql import SparkSession
+
+spark = (SparkSession
+    .builder
+    .appName("Web data")         
+    .getOrCreate()
+)
+```
+
+```{python}
+%timeit
+input_path = './'
+
+input_file = os.path.join(input_path, 'webdata.parquet')
+
+df = spark.read.parquet(input_file)
+```
+
+```{python}
+df.printSchema()
+```
+
+```{python}
+df.rdd.getNumPartitions()
+```
+
+
+```{python}
+%timeit
+dfa = pq.read_table(input_file)
+```
+
+
+
+```{python}
+print(dfa.schema)
+```
+
+```{python}
+( 
+    df.select('xid')
+      .distinct()
+      .explain()
+)
+```
+
+```{python}
+# 
+( 
+    df.select('xid')
+      .distinct()
+      .count()
+)
+```
+
+```{python}
+xid_partition = Window.partitionBy('xid')
+n_events = func.count(col('action')).over(xid_partition)
+df = df.withColumn('n_events', n_events)
+df.head(n=2)
+```
+
+```{python}
+( 
+  df
+    .groupBy('xid')
+    .agg(func.count('action'))
+    .head(5)
+)
+```
+
+```{python}
+
+```
+
+
+```{python}
+df = df.repartitionByRange(20, 'xid')
+```
+
+
+```{python}
+df.persist()
+```
+
+
+```{python}
+xid_partition = Window.partitionBy('xid')
+
+max_date = (
+  func
+    .max(col('date'))
+    .over(xid_partition)
+)
+
+n_days_since_last_event = func.datediff(func.current_date(), max_date)
+
+df = df.withColumn('n_days_since_last_event',
+                   n_days_since_last_event)
+
+df.head(n=2)
+```
+
+```{python}
+n_events = func.count(col('action')).over(xid_partition)
+
+df = df.withColumn('n_events', n_events)
+
+df.head(n=2)
+```
+
+```{python}
+xid_device_partition = xid_partition.partitionBy('device')
+
+n_events_per_device = (
+    func.count(col('action'))
+        .over(xid_device_partition)
+)
+
+df = df.withColumn('n_events_per_device', n_events_per_device)
+df.head(n=2)
+```
+
+
+
+```{python}
+rank_device = (
+  func
+    .dense_rank()
+    .over(xid_partition.orderBy('device'))
+)
+
+n_unique_device = (
+    func
+      .last(rank_device)
+      .over(xid_partition)
+)
+
+df = df.withColumn('n_device', n_unique_device)
+
+df.head(n=2)
+```
+
+```{python}
+df.printSchema()
+```
+
+
+```{python}
+(
+  df
+    .where(col('n_device') > 1)
+    .select('xid', 
+            'device', 
+            'n_events', 
+            'n_device', 
+            'n_events_per_device')
+    .head(n=8)
+)
+```
+
+```{python}
+
+```
+
+
+
+```{python}
+def n_events_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    n_events = func.count(col('action')).over(xid_partition)
+    
+    df = df.withColumn('n_events', n_events)
+
+    return df
+```
+
+
+```{python}
+def my_count_window_transform(df, input_col, output_col, part_col):
+    w = Window.partitionBy(part_col)
+    out_col = func.count(col(input_col)).over(w)
+
+    return df.withColumn(output_col, out_col)
+```
+
+
+```{python}
+def hour_transformer(df):
+    hour = func.hour(col('date'))
+    df = df.withColumn('hour', hour)
+    return df
+
+def weekday_transformer(df):
+    weekday = func.date_format(col('date'), 'EEEE')
+    df = df.withColumn('weekday', weekday)
+    return df
+```
+
+```{python}
+def n_events_per_hour_transformer(df):
+    xid_hour_partition = Window.partitionBy('xid', 'hour')
+    n_events_per_hour = func.count(col('action')).over(xid_hour_partition)
+    df = df.withColumn('n_events_per_hour', n_events_per_hour)
+    return df
+```
+
+```{python}
+def n_events_per_weekday_transformer(df):
+    xid_weekday_partition = Window.partitionBy('xid', 'weekday')
+    n_events_per_weekday = func.count(col('action')).over(xid_weekday_partition)
+    df = df.withColumn('n_events_per_weekday', n_events_per_weekday)
+    return df
+
+def n_days_since_last_event_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    max_date = func.max(col('date')).over(xid_partition)
+    n_days_since_last_event = func.datediff(func.current_date(), max_date)
+    df = df.withColumn('n_days_since_last_event',
+                       n_days_since_last_event + lit(0.1))
+    return df
+
+def n_days_since_last_action_transformer(df):
+    xid_partition_action = Window.partitionBy('xid', 'action')
+    max_date = func.max(col('date')).over(xid_partition_action)
+    n_days_since_last_action = func.datediff(func.current_date(),
+                                                        max_date)
+    df = df.withColumn('n_days_since_last_action',
+                       n_days_since_last_action + lit(0.1))
+    return df
+
+def n_unique_day_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    dayofyear = func.dayofyear(col('date'))
+    rank_day = func.dense_rank().over(xid_partition.orderBy(dayofyear))
+    n_unique_day = func.last(rank_day).over(xid_partition)
+    df = df.withColumn('n_unique_day', n_unique_day)
+    return df
+
+def n_unique_hour_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    rank_hour = func.dense_rank().over(xid_partition.orderBy('hour'))
+    n_unique_hour = func.last(rank_hour).over(xid_partition)
+    df = df.withColumn('n_unique_hour', n_unique_hour)
+    return df
+
+def n_events_per_device_transformer(df):
+    xid_device_partition = Window.partitionBy('xid', 'device')
+    n_events_per_device = func.count(func.col('device')) \
+        .over(xid_device_partition)
+    df = df.withColumn('n_events_per_device', n_events_per_device)
+    return df
+
+def n_unique_device_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    rank_device = func.dense_rank().over(xid_partition.orderBy('device'))
+    n_unique_device = func.last(rank_device).over(xid_partition)
+    df = df.withColumn('n_device', n_unique_device)
+    return df
+
+def n_actions_per_category_id_transformer(df):
+    xid_category_id_partition = Window.partitionBy('xid', 'category_id',
+                                                   'action')
+    n_actions_per_category_id = func.count(func.col('action')) \
+        .over(xid_category_id_partition)
+    df = df.withColumn('n_actions_per_category_id', n_actions_per_category_id)
+    return df
+
+def n_unique_category_id_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    rank_category_id = func.dense_rank().over(xid_partition\
+                                              .orderBy('category_id'))
+    n_unique_category_id = func.last(rank_category_id).over(xid_partition)
+    df = df.withColumn('n_unique_category_id', n_unique_category_id)
+    return df
+
+def n_events_per_category_id_transformer(df):
+    xid_category_id_partition = Window.partitionBy('xid', 'category_id')
+    n_events_per_category_id = func.count(func.col('action')) \
+        .over(xid_category_id_partition)
+    df = df.withColumn('n_events_per_category_id', n_events_per_category_id)
+    return df
+
+def n_events_per_website_id_transformer(df):
+    xid_website_id_partition = Window.partitionBy('xid', 'website_id')
+    n_events_per_website_id = func.count(col('action'))\
+        .over(xid_website_id_partition)
+    df = df.withColumn('n_events_per_website_id', n_events_per_website_id)
+    return df
+
+```

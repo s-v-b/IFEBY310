@@ -1,0 +1,779 @@
+---
+title: "Data preprocessing and visualisation of a credit scoring dataset"
+jupyter: python3
+---
+
+
+We'll work on a dataset `gro.csv` for **credit scoring** that was proposed some years ago as a data challenge on some data challenge website.
+It is a realistic and somewhat messy dataset that contains a lot of missing values, several types of features (dates, categories, continuous features), so that serious data cleaning and formating is required.
+This dataset contains the following columns:
+
+| Column name          | Description |
+|:---------------------|:------------|
+| BirthDate            | Date of birth of the client |
+| Customer_Open_Date   | Creation date of the client's first account at the bank |
+| Customer_Type        | Type of client (existing / new) | 
+| Educational_Level    | Highest diploma |
+| Id_Customer          | Id of the client |
+| Marital_Status       | Family situation |
+| Nb_Of_Products       | Number of products held by the client |
+| Net_Annual_Income    | Annual revenue |
+| Number_Of_Dependant  | Number of dependents |
+| P_Client             | Non-disclosed feature |
+| Prod_Category        | Product category |
+| Prod_Closed_Date     | Closing date of the last product |
+| Prod_Decision_Date   | Decision date of the last agreement for a financing product |
+| Prod_Sub_Category    | Sub-category of the product |
+| Source               | Financing source (Branch or Sales) |
+| Type_Of_Residence    | Residential situation |
+| Y                    | Credit was granted (yes / no) |
+| Years_At_Business    | Number of year at the current job position |
+| Years_At_Residence   | Number of year at the current housing |
+
+# Your job
+
+Read the `gro.csv` dataset and work on it using `pandas`, `matplotlib` and `seaborn`.
+- The column separator in the CSV file is not `,` but `;` so you need to use the `sep` option in `pd.read_csv`
+- The categorical columns must be imported as `category` type 
+- Something weird is going on with the `Net_Annual_Income` column... Try to  understand what is going on and try to correct the problem
+- Several columns are empty, we need to remove them (or not even read them)
+- Dates must be imported as dates and not strings
+- Remove rows with missing values
+
+Many of these things can be done right from the beginning, when reading the CSV file, through some options to the `pd.read_csv` function. You might need to read carefully its documentation in order to understand some useful options. Once you are happy with your importation and cleaning of the data, you can:
+- Use `matplotlib` and `pandas` to perform data visualization...
+- ... in order to understand visually the impact of some features on `Y` (credit was granted or not). For this, you need to decide on the plots that make sense for this and produce them
+
+We will provide thorough explanations and code that performs all of this in subsequent sessions.
+
+
+# A quick and easy (but actually bad) import
+
+Let's import the data into a pandas dataframe, as simply as possible
+The only thing we care about for now is the fact that the column separator 
+is `';'` and not `','` as it should be in a `.csv` file.
+
+```{python}
+import requests
+import os
+
+# The path containing your notebook
+path_data = './'
+# The name of the file
+filename = 'gro.csv.gz'
+
+if os.path.exists(os.path.join(path_data, filename)):
+    print('The file %s already exists.' % os.path.join(path_data, filename))
+else:
+    url = 'https://stephanegaiffas.github.io/big_data_course/data/gro.csv.gz'
+    r = requests.get(url)
+    with open(os.path.join(path_data, filename), 'wb') as f:
+        f.write(r.content)
+    print('Downloaded file %s.' % os.path.join(path_data, filename))
+```
+
+```{python}
+#| scrolled: false
+import numpy as np
+import pandas as pd
+import pyspark.pandas as ps
+from pyspark.sql import SparkSession
+```
+
+```{python}
+filename = "gro.csv.gz"
+pdf = pd.read_csv(filename, sep=';')
+pdf.head(n=5)
+```
+
+
+```{python}
+psdf = ps.from_pandas(pdf)
+```
+
+
+```{python}
+psdf.columns
+
+psdf.info
+
+psdf.describe()
+```
+
+
+```{python}
+spark = SparkSession.builder.getOrCreate()
+
+sdf = spark.createDataFrame(pdf)
+
+sdf.show()
+```
+
+
+**Remark**. There are weird columns in the end, they look empty. 
+They don't appear in the description of the data.
+
+```{python}
+psdf.info()
+```
+
+```{python}
+psdf["BirthDate"].head()
+```
+
+```{python}
+type(psdf.loc[0, 'BirthDate'])
+```
+
+This means that dates are indeed imported as a strings...
+
+```{python}
+#| scrolled: false
+psdf['Prod_Sub_Category'].head()
+```
+
+```{python}
+#| scrolled: true
+type(psdf.loc[0, 'Prod_Sub_Category'])
+```
+
+Categorical variables are imported as a strings as well
+
+```{python}
+#| scrolled: false
+psdf['Net_Annual_Income'].head(n=10)
+```
+
+```{python}
+#| scrolled: true
+type(psdf.loc[0, 'Net_Annual_Income'])
+```
+
+Net actual income is a string as well ! While it is clearly a number !!!
+
+Caveat: there are slight differences between Pandas API on Spark and Pandas API.
+```{python}
+#| scrolled: false
+# psdf.describe(include='all')
+```
+
+## Let's assess what we did
+
+It appears that we have to work a little bit more for a correct import of the data.
+Here is a list of the problems we face.
+- The last three columns are empty
+- Dates are actually `str` (python's **string** type)
+- There is a lot of missing values
+- Categorial features are `str`
+- The `Net_Annual_Income` is imported as a string
+
+By looking at the column names, the descriptions of the columns and using some basic, we infer the type of features that we have.
+There are dates features, continuous features, categorical features, and
+some features that could be either treated as categorical or continuous.
+
+- There are **many** missing values, that need to be handled.
+- The annual net income is imported as a string, we need to understand why.
+- We really need to treat dates as dates and not strings (because we want to compute the age of a client based on its birth year for instance).
+
+Here is a tentative structure of the features
+
+**Continuous features**
+
+- `Years_At_Residence`
+- `Net_Annual_Income`
+- `Years_At_Business`
+
+**Features to be decided**
+
+- `Number_Of_Dependant`
+- `Nb_Of_Products`
+
+**Categorical features**
+
+- `Customer_Type`
+- `P_Client`
+- `Educational_Level`
+- `Marital_Status`
+- `Prod_Sub_Category`
+- `Source`
+- `Type_Of_Residence`
+- `Prod_Category`
+
+**Date features**
+
+- `BirthDate`
+- `Customer_Open_Date`
+- `Prod_Decision_Date`
+- `Prod_Closed_Date`
+
+# A closer look at the import problems
+
+Let's find solutions to all these import problems.
+
+## The last three columns are weird and empty 
+
+It seems to come from the fact that the data always ends with several `';'` characters. 
+We can remove them simply using the `usecols` option from `read_csv`.
+
+## Dates are actually `str`
+
+We need to specify which columns must be encoded as dates using the `parse_dates` option from `read_csv`.
+Fortunately enough, `pandas` is clever enough to interpret the date format.
+
+```{python}
+#| scrolled: true
+type(psdf.loc[0, 'BirthDate'])
+```
+
+## There is a lot of missing values 
+
+We'll see below that actually a single column mostly contain missing values.
+
+```{python}
+#| scrolled: false
+psdf.isnull().sum()
+```
+
+The column `Prod_Closed_Date` contains mostly missing values !
+
+```{python}
+psdf[['Prod_Closed_Date']].head(5)
+```
+
+Let's remove the useless columns and check the remaining missing values
+
+Again there are variations. Keyword `inplace` is not legal in Pandas API on Spark
+```{python}
+# df.drop(['Prod_Closed_Date', 'Unnamed: 19', 
+#          'Unnamed: 20', 'Unnamed: 21'], axis="columns", inplace=True)
+
+psdf = psdf.drop(['Prod_Closed_Date', 
+        'Unnamed: 19', 
+        'Unnamed: 20', 
+        'Unnamed: 21'], 
+        axis="columns")
+        
+psdf.head()         
+```
+
+Let's display the rows with missing values and let's highlight them
+
+```{python}
+#| scrolled: false
+# psdf[psdf.isnull().any(axis="columns")].style.highlight_null()
+```
+
+## Categorial features are `str`
+
+We need to say the dtype we want to use for some columns using the `dtype` option of `read_csv`.
+
+```{python}
+#| scrolled: true
+type(psdf.loc[0, 'Prod_Sub_Category'])
+```
+
+```{python}
+#| scrolled: false
+psdf['Prod_Sub_Category'].unique()
+```
+
+## The annual net income is imported as a string
+
+This problem comes from the fact that the decimal separator is in European notation: it's a `','` and not a `'.'`, so we need to specify it using the `decimal` option to `read_csv`. (Data is French, pardon my French...) 
+
+```{python}
+#| scrolled: true
+type(psdf.loc[0, 'Net_Annual_Income'])
+```
+
+```{python}
+#| scrolled: false
+psdf['Net_Annual_Income'].head(n=10)
+```
+
+# A correct import of the data
+
+- We build a dict that specifies the dtype to use for each column 
+and pass it to `read_csv` using the `dtype` option
+- We also specify the `decimal`, `usecols` and `parse_dates` options
+
+**Very pro remark.** Some columns could be imported as `int`. 
+However, `pandas` (actually its `numpy`) does not support columns 
+with integer dtype and missing values.
+
+```{python}
+#| eval: true
+# Does not work completely
+gro_dtypes = {
+    'Years_At_Residence': np.int64,
+    'Net_Annual_Income' : np.float64,
+    'Years_At_Business': np.float64,
+    'Number_Of_Dependant': np.float64,
+    'Nb_Of_Products': np.int64,
+    'Customer_Type': 'category',
+    'P_Client': 'category',
+    'Educational_Level': 'category',
+    'Marital_Status': 'category',
+    'Prod_Sub_Category': 'category',
+    'Source': 'category',
+    'Type_Of_Residence': 'category',
+    'Prod_Category': 'category',
+}
+
+pssdf = ps.read_csv(
+    # Filename
+    "gro.csv.gz",
+    # Column separator
+    sep=';',
+    # Decimal separator
+    decimal=',',
+    # Range of the columns to keep (remove the last three ones)
+    usecols=range(19),
+    # Which columns should be parsed as dates
+    # parse_dates=['BirthDate', 'Customer_Open_Date', 'Prod_Decision_Date', 
+    #              'Prod_Closed_Date'],
+    # Specify some dtypes
+    dtype=gro_dtypes
+)
+```
+
+```{python}
+pssdf.dtypes
+```
+
+```{python}
+#| scrolled: false
+(
+  pssdf
+    .loc[:, [c for c in psdf.columns 
+               if (c.endswith('Date'))]]
+    .head()
+)
+```
+
+```{python}
+for c in pssdf.columns:
+    if (not c.endswith('Date')):
+        continue
+    pssdf[c] =ps.to_datetime(pssdf[c], format='%d/%m/%Y')
+
+```
+
+```{python}
+pssdf.dtypes
+```
+
+```{python}
+pssdf.loc[:, [c for c in pssdf.columns if (c.endswith('Date'))]].head()
+```
+```{python}
+pssdf['Prod_Sub_Category'].head()
+```
+
+```{python}
+truc = pssdf['Prod_Sub_Category'].head()
+```
+
+```{python}
+pssdf.loc[0, 'BirthDate']
+```
+
+Let's remove `Prod_Closed_Date` (mostly contains missing values)
+
+```{python}
+prod_closed_date = pssdf.pop('Prod_Closed_Date')
+pssdf.shape
+```
+
+And remove the remaining rows with missing values
+
+```{python}
+#| scrolled: true
+print(pssdf.shape)
+pssdf = pssdf.dropna()
+print(pssdf.shape)
+```
+
+```{python}
+# Now we save the cleaned dataset into a CSV file
+pssdf.to_csv("gro_spark_cleaned.csv")
+```
+
+```{python}
+!pwd
+!ls -al gro_*
+```
+
+## Comment on file formats
+
+You can use other methods starting with `.to_XX` to save in another format.
+Here are some main examples
+
+- OK to use `csv` for "small" datasets (several MB)
+- Use `pickle` for more compressed and faster format (limited to 4GB). It's the standard binary serialization format of `Python`
+- `feather` is another fast and lightweight file format for storing data frames. A very popular exchange format. 
+- `parquet` is a format for big distributed data (works nicely with `Spark`)
+
+among several others...
+
+```{python}
+#df.to_pickle("gro_cleaned.pkl")
+pssdf.to_parquet("gro_cleaned.parquet")
+# pssdf.reset_index().to_feather("gro_cleaned.feather")
+```
+
+```{python}
+pssdf.index
+```
+
+And you can read again using the corresponding `read_XX` function
+
+```{python}
+pssdf = ps.read_parquet("gro_cleaned.parquet")
+pssdf.head()
+```
+
+```{python}
+!ls -alh gro_cleaned*
+```
+
+## The net income columns is very weird
+
+```{python}
+#| scrolled: true
+income = pssdf['Net_Annual_Income']
+income.describe()
+```
+
+```{python}
+(income <= 100).sum(), (income > 100).sum()
+```
+
+Most values are smaller than 100, while some are much much larger...
+
+```{python}
+#| eval: false
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+%matplotlib inline
+
+sns.set_context("notebook", font_scale=1.2)
+```
+
+```{python}
+#| eval: false
+sns.displot(x='Net_Annual_Income', 
+            data=pssdf, 
+            bins=20,
+            height=4, 
+            aspect=1.5)
+```
+
+```{python}
+pssdf["Net_Annual_Income"].plot.hist(bins=40, 
+hitsnorm='density', log_x=True)
+```
+
+```{python}
+pssdf["Net_Annual_Income"].plot.kde(bw_method=10, log_x=True)
+```
+
+This is annoying, we don't really see much...
+
+```{python}
+#| eval: false
+#| scrolled: false
+sns.displot(x='Net_Annual_Income', 
+            data=pssdf, 
+            bins=20, 
+            height=4, 
+            aspect=1.5, 
+            log_scale=(False, True))
+```
+
+Distribution for less than 100K revenue
+
+```{python}
+#| eval: false
+sns.displot(x='Net_Annual_Income', 
+            data=pssdf[pssdf['Net_Annual_Income'] < 100], 
+            bins=15, 
+            height=4, 
+            aspect=1.5)
+```
+
+Distribution for less than 400K revenue
+
+```{python}
+#| scrolled: false
+#| eval: false
+sns.displot(x='Net_Annual_Income', data=pssdf[pssdf['Net_Annual_Income'] < 400], 
+            bins=15, height=4, aspect=1.5)
+```
+
+```{python}
+#| scrolled: true
+(pssdf['Net_Annual_Income'] == 36.0).sum()
+```
+
+```{python}
+#| scrolled: false
+income_counts = (
+    ps.DataFrame({
+        "income_category": pssdf['Net_Annual_Income'].astype("category"),
+        "income": pssdf['Net_Annual_Income']
+    })
+    .groupby("income_category")
+    .count()
+    .reset_index()
+    .rename(columns={"income": "#customers"})
+    .sort_values(by="#customers", axis="index", ascending=False)
+)
+```
+
+```{python}
+income_counts["%cummulative clients"] \
+    = income_counts["#customers"].cumsum() / income_counts["#customers"].sum()
+
+income_counts.iloc[:20].style.bar(subset=["%cummulative clients"], vmin=0, vmax=1)
+```
+
+- We have some overrepresented values (many possible explanations for this)
+- To clean the data, we can, for instance, keep only the revenues between [10, 200], or leave it as such
+
+```{python}
+#| scrolled: false
+#| eval: false
+df = df[(df['Net_Annual_Income'] >= 10) & (df['Net_Annual_Income'] <= 200)]
+
+sns.displot(x='Net_Annual_Income', data=df, bins=15, height=4, aspect=1.5)
+```
+
+# Some data visualization with `pandas` + `seaborn`
+
+```{python}
+#| scrolled: false
+plt.figure(figsize=(8, 5))
+sns.stripplot(x='Educational_Level', 
+              y='Net_Annual_Income', 
+              hue='Y', 
+              jitter=True, 
+              data=df)
+```
+
+```{python}
+plt.figure(figsize=(12, 6))
+sns.boxplot(x='Educational_Level', y='Net_Annual_Income', 
+            hue='Y', data=df)
+```
+
+```{python}
+#| scrolled: false
+plt.figure(figsize=(12, 6))
+sns.violinplot(x='Marital_Status', y='Net_Annual_Income', 
+               hue='Y', split=True, data=df)
+```
+
+```{python}
+plt.figure(figsize=(10, 5))
+sns.countplot(x='Marital_Status', hue='Y', data=df)
+```
+
+```{python}
+#| scrolled: false
+fig, axes = plt.subplots(nrows=4, ncols=3, figsize=(16, 16))
+columns = ['Customer_Type', 'P_Client', 'Educational_Level', 
+           'Number_Of_Dependant', 'Marital_Status', 'Prod_Sub_Category',
+           'Source', 'Type_Of_Residence', 'Nb_Of_Products', 
+           'Prod_Category', 'Y']
+
+for i, colname in enumerate(columns):
+    sns.countplot(x=colname, data=df, ax=fig.axes[i])
+plt.tight_layout()
+```
+
+# Final preparation of the dataset
+
+```{python}
+# First we make lists of continuous, categorial and date features
+
+cnt_featnames = [
+    'Years_At_Residence',
+    'Net_Annual_Income',
+    'Years_At_Business',
+    'Number_Of_Dependant'
+]
+
+cat_featnames = [
+    'Customer_Type',
+    'P_Client',
+    'Educational_Level',
+    'Marital_Status',
+    'Prod_Sub_Category',
+    'Source',
+    'Type_Of_Residence',
+    'Prod_Category',
+    'Nb_Of_Products'
+]
+
+date_featnames = [
+    'BirthDate',
+    'Customer_Open_Date',
+    'Prod_Decision_Date'
+    #'Prod_Closed_Date'
+]
+```
+
+## Creation of the features matrix
+
+```{python}
+#| scrolled: false
+df[cnt_featnames].head()
+```
+
+```{python}
+#| scrolled: false
+bin_features = pd.get_dummies(df[cat_featnames],
+                              prefix_sep='#', drop_first=True)
+```
+
+```{python}
+#| scrolled: false
+bin_features.head()
+```
+
+```{python}
+cnt_features = df[cnt_featnames]
+cnt_features.head()
+```
+
+```{python}
+#| scrolled: true
+from pandas import Timestamp
+
+def age(x):
+    today = Timestamp.today()
+    return (today - x).dt.days
+
+date_features = df[date_featnames].apply(age, axis="index")
+date_features.head()
+```
+
+```{python}
+today = Timestamp.today()
+today
+```
+
+```{python}
+tt = (today - df["BirthDate"]).loc[0]
+```
+
+```{python}
+(today - df["BirthDate"]).dt.days
+```
+
+```{python}
+tt
+```
+
+## Final features matrix
+
+```{python}
+all_features = pd.concat([bin_features, cnt_features, date_features], axis=1)
+```
+
+```{python}
+#| scrolled: true
+all_features.columns
+```
+
+```{python}
+all_features.head()
+```
+
+```{python}
+df_debile = pd.DataFrame({"nom etudiant": ["yiyang", "jaouad", "mokhtar", "massil", "simon"], 
+              "portable": [True, True, None, True, False]})
+```
+
+```{python}
+df_debile
+```
+
+```{python}
+df_debile.index
+```
+
+```{python}
+df_debile.dropna().index
+```
+
+
+```{python}
+df_debile.info()
+```
+
+
+
+**VERY IMPORTANT**: we removed lines of data that contained missing values. The index of the dataframe is
+    therefore not contiguous anymore
+
+```{python}
+all_features.index.max()
+```
+
+This could be a problem for later. So let's reset the index to get a contiguous one
+
+```{python}
+all_features.shape
+```
+
+```{python}
+all_features.reset_index(inplace=True, drop=True)
+```
+
+```{python}
+all_features.head()
+```
+
+## Let's save the data using `pickle`
+
+```{python}
+#| eval: false
+import pickle as pkl
+
+X = all_features
+y = df['Y']
+
+# Let's put eveything in a dictionary
+df_pkl = {}
+# The features and the labels
+df_pkl['features'] = X
+df_pkl['labels'] = y
+# And also the list of columns we built above
+df_pkl['cnt_featnames'] = cnt_featnames
+df_pkl['cat_featnames'] = cat_featnames
+df_pkl['date_featnames'] = date_featnames
+
+with open("gro_training.pkl", 'wb') as f:
+    pkl.dump(df_pkl, f)
+```
+
+```{python}
+ls -al gro*
+```
+
+The preprocessed data is saved in a pickle file called `gro_training.pkdfl`.
+
+
+
+[Databricks blog about Koalas, SPIP, Zen](https://www.databricks.com/blog/2021/10/04/pandas-api-on-upcoming-apache-spark-3-2.html)
+
+> pandas users will be able scale their workloads with one simple line change in the upcoming Spark 3.2 release:
+
+```{.python}
+<s>from pandas import read_csv</s>
+from pyspark.pandas import read_csv
+pdf = read_csv("data.csv")
+```

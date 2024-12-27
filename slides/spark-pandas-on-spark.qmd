@@ -1,0 +1,10 @@
+---
+title: "Spark Catalyst"
+
+format:
+  revealjs: 
+    footer: |
+      [Spark MediaLab Presentation](https://stephane-v-boucheron.fr/slides/spark-sql.html)
+        
+  
+---

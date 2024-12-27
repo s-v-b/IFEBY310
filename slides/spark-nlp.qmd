@@ -1,0 +1,547 @@
+---
+title: "Spark NLP"
+
+format:
+  revealjs: 
+    footer: |
+      [Spark NLP Presentation](https://stephane-v-boucheron.fr/slides/spark-sql.html)
+
+execute: 
+  eval: false
+  echo: true
+---
+
+# Spark-NLP in perspective {background-color="#1c191c"}
+
+## Spark NLP
+
+[Spark NLP](https://sparknlp.org) provides an example of an application in the Apache Spark Ecosystem
+
+. . .
+
+Spark NLP relies on the Spark SQL Lib and Spark Dataframes (high level APIs) and also on the Spark ML Lib.
+
+. . .
+
+Spark NLP borrows ideas from existing NLP softwares and adapts the known techniques to the Spark principles
+
+
+...
+
+NLP deals with many applications of machine learning
+
+- Automatic translation  (see [deepl.com](https://www.deepl.com/translator))
+- Topic modeling (text clustering)
+- Sentiment Analysis
+- LLMs
+- ...
+
+
+
+# NLP Libraries {background-color="#1c191c"}
+
+## Two flavors of NLP libraries
+
+-   *Functionality* Libraries  [nltk.org](https://www.nltk.org)
+
+-   *Annotation* Libraries [spaCy's site](https://spacy.io)
+
+
+## spaCy and Spark?
+
+A [databricks notebook](https://winf-hsos.github.io/databricks-notebooks/big-data-analytics/ss-2020/NLP%20with%20Python%20and%20spaCy%20-%20First%20Steps.html) discusses possible interactions between spaCy and Spark on a use case:
+
+. . .
+
+-   Get the tweets (the texts) into a Spark dataframe using `spark.sql()`
+-   Convert the Spark dataframe to a `numpy` array
+-   Stream all tweets in batches using `nlp.pipe()`
+-   Go through the processed tweets and take copy everything we need in a large array object
+-   Convert back the large array object into a Spark dataframe
+-   Save the dataframe as table, so we can query the whole thing withh SQL again
+
+. . .
+
+::: callout-warning
+
+### No hint at parallelizing spaCy's annotation process
+
+:::
+
+## spaCy v2 (current v3.7)
+
+> spaCy v2 now fully supports the `Pickle` protocol, making it easy to use spaCy with Apache Spark.
+
+[spaCy v2 documentation](https://spacy.io/usage/v2)
+
+# A short example (from [John Snow Labs](https://sparknlp.org)) {background-color="#1c191c"}
+
+---
+
+-   Initializing a `sparknlp` session
+-   Building a toy NLP pipeline for detecting dates in a text
+
+## Imports sparknlp and others
+
+```{python}
+# Import Spark NLP
+from sparknlp.base import *
+from sparknlp.annotator import *
+from sparknlp.pretrained import PretrainedPipeline
+import sparknlp
+```
+
+```{python}
+#| echo: false
+from pyspark.sql import SparkSession
+from pyspark.sql.types import StructField, StringType, StructType, DateType
+from pyspark.sql.functions import countDistinct, count, approx_count_distinct
+from pyspark.sql import SparkSession
+
+from datetime import date
+from pathlib import Path
+import regex as re
+```
+
+## Initiate Spark session
+
+Assuming `standalone` mode on a laptop. `master` runs on `localhost`
+
+```{python}
+spark = SparkSession.builder \
+            .appName("Spark NLP") \
+#            .master("spark://localhost:7077") \
+            .config("spark.driver.memory", "16G") \
+            .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer") \
+            .config("spark.kryoserializer.buffer.max", "2000M") \
+            .config("spark.driver.maxResultSize", "0") \
+            .config("spark.jars.packages", "com.johnsnowlabs.nlp:spark-nlp_2.12:5.2.3") \
+            .getOrCreate()
+```
+
+. . .
+
+```{python}
+sparknlp.version()
+```
+
+...
+
+```{python}
+spark
+```
+
+
+## Toy (big) data
+
+```{python}
+fr_articles = [
+  ("Le dimanche 11 juillet 2021, Chiellini a utilisé le mot Kiricocho lorsque Saka s'est approché du ballon pour le penalty.",),
+  ("La prochaine Coupe du monde aura lieu en novembre 2022.",),
+  ("À Noël 800, Charlemagne se fit couronner empereur à Rome.",),
+  ("Le Marathon de Paris a lieu le premier dimanche d'avril 2024",)
+]
+```
+
+. . .
+
+```{python}
+articles_cols = ["text"]
+
+df = spark.createDataFrame(
+  data=fr_articles, 
+  schema=articles_cols)
+
+df.printSchema()
+```
+
+## Pipelines
+
+```{python}
+document_assembler = DocumentAssembler() \
+            .setInputCol("text") \
+            .setOutputCol("document")
+```
+
+::: callout
+Column `document` contains the 'text' to be annotated as well as some possible metadata.
+
+Starting point of any annotation process
+
+Spark NLP relies on Saprk SQL for storing, moving, data.
+:::
+
+. . .
+
+```{python}
+date_matcher = DateMatcher() \
+            .setInputCols(['document']) \
+            .setOutputCol("date") \
+            .setOutputFormat("MM/dd/yyyy") \
+            .setSourceLanguage("fr")
+```
+
+::: callout
+-   Spark NLP adopts an original way of storing annotations
+-   Spark NLP creates columns for annotations
+-   Spark NLP stores annotation in Spark dataframes
+-   Annotators are
+    -   Tranformers
+    -   Estimators
+    -   Models
+:::
+
+## Transformation/Action
+
+```{python}
+assembled = ( 
+  document_assembler.transform(df)
+)
+```
+
+```{python}
+(
+ date_matcher
+  .transform(assembled)
+  .select('date')
+  .show(10, False)
+)
+```
+
+## More
+
+
+
+```{python}
+
+fr_articles.append(("Nous nous sommes rencontrés le 13/05/2018 puis le 18/05/2020.",))
+
+fr_articles.append(("Nous nous sommes rencontrés il y a 2 jours et il m'a dit qu'il nous rendrait visite la semaine prochaine.",))
+
+```
+
+```{python}
+df = spark.createDataFrame(
+  data=fr_articles, 
+  schema=articles_cols)
+
+df.printSchema()
+df.show()
+```
+
+```{python}
+assembled = ( 
+  document_assembler.transform(df)
+)
+```
+
+```{python}
+(
+ date_matcher
+  .transform(assembled)
+  .select('date')
+  .show(10, False)
+)
+```
+
+## Another annotator
+
+```{python}
+date_matcher_bis = MultiDateMatcher() \
+            .setInputCols(['document']) \
+            .setOutputCol("date") \
+            .setOutputFormat("MM/dd/yyyy") \
+            .setSourceLanguage("fr")
+```
+
+```{python}
+(
+  date_matcher_bis
+    .transform(assembled)
+    .select("date")
+    .show(10, False)
+)
+```
+
+# Spark NLP Design {background-color="#1c191c"}
+
+## SQL Lib and Dataframes
+
+## ML Lib, Transformers and Estimators
+
+# Spark NLP Pipelines {background-color="#1c191c"}
+
+##  Getting a corpus : ETL
+
+```{python}
+pattern = 'URL: http://www.nytimes.com/(?P<zedate>[0-9]{4}/[0-9]{2}/[0-9]{2})/.*'
+title = 'URL: http://www.nytimes.com/[0-9]{4}/[0-9]{2}/[0-9]{2}/(.*)'
+reg_date = re.compile(pattern)
+reg_title = re.compile(title)
+```
+
+```{python}
+nypath = Path('../data/nytimes_news_articles.txt')
+corpus_list = list()
+```
+
+```{python}
+with open(nypath, encoding='UTF-8')  as fd:
+    doc, document = None, None
+    while l := fd.readline():        
+        if m := reg_date.match(l):
+            if doc is not None:
+                corpus_list.append((*document, doc))
+                doc, document = None, None
+            ymd = date(*[int(n) for n in m.groups()[0].split('/')])
+            title = (
+                reg_title.match(l)
+                  .groups()[0]
+                  .split('/')
+            )
+            document =  (ymd, title[-1], '/'.join(title[:-1]))
+            doc = ''
+        else: doc = doc + l
+    else:
+        if doc is not None:
+            corpus_list.append((*document, doc))
+```
+
+```{python}
+df_texts = spark.createDataFrame(corpus_list,
+                      schema= StructType([
+    StructField('date', DateType(), False),
+    StructField('title', StringType(), False),
+    StructField('topic', StringType(), False),
+    StructField('text', StringType(), True)
+]))
+```
+
+```{python}
+df_texts.printSchema()
+df_texts.count()
+```
+
+## Saving 
+
+Locally
+```{python}
+#| eval: false
+df_texts.write.parquet('../data/ny_corpus_pq')
+```
+
+```{python}
+#| eval: false
+spam = spark.read.parquet('../data/ny_corpus_pq')
+
+spam.printSchema()
+```
+
+```{python}
+spam.rdd.getNumPartitions()
+```
+
+## 
+```{python}
+corpus_assembled = ( 
+  document_assembler.transform(df_texts)
+)
+```
+
+```{python}
+corpus_assembled.printSchema()
+```
+
+```{python}
+(
+  date_matcher_bis
+    .transform(corpus_assembled)
+    .select("title", "date")
+    .show(10, False)
+)
+```
+
+::: {.callout-warning}
+Extracted dates should be taken with a grain of salt 
+:::
+
+
+## Public pipelines
+
+
+```{python}
+from sparknlp.pretrained import PretrainedPipeline
+explain_document_pipeline = PretrainedPipeline("explain_document_ml")
+```
+## Chaining annotators
+
+
+```{python}
+sentenceDetector = SentenceDetector() \
+    .setInputCols(["document"]) \
+    .setOutputCol("sentence")
+regexTokenizer = Tokenizer() \
+    .setInputCols(["sentence"]) \
+    .setOutputCol("token")
+```
+
+```{python}
+finisher = Finisher() \
+    .setInputCols(["token"]) \
+    .setIncludeMetadata(True)
+```
+
+```{python}
+pipeline = Pipeline().setStages([
+    document_assembler,
+    sentenceDetector,
+    regexTokenizer,
+    finisher
+])
+```
+
+## Fitting and transforming
+
+```{python}
+spam = ( 
+  pipeline.fit(df_texts)
+    .transform(df_texts)
+    .select("finished_token")
+    .collect()
+)
+```
+
+## A customized pipeline
+
+```{python}
+stemmer = (
+  Stemmer()
+    .setInputCols(['token'])
+    .setOutputCol('stem')
+)
+```
+
+```{python}
+lemmatizer = (
+  LemmatizerModel.pretrained()
+    .setInputCols(['token'])
+    .setOutputCol('lemma')
+)
+```
+
+::: {.callout-warning}
+```{.verbatim}
+lemma_antbnc download started this may take some time.
+Approximate size to download 907.6 KB
+[ / ]lemma_antbnc download started this may take some time.
+Approximate size to download 907.6 KB
+[ / ]Download done! Loading the resource.
+[ — ]
+
+[OK!]
+```
+:::
+
+```{python}
+posTagger = PerceptronModel.pretrained() \
+    .setInputCols(["document", "token"]) \
+    .setOutputCol("pos")
+```
+
+::: {.callout-warning}
+
+```
+pos_anc download started this may take some time.
+Approximate size to download 3.9 MB
+[ — ]pos_anc download started this may take some time.
+Approximate size to download 3.9 MB
+[ \ ]Download done! Loading the resource.
+[Stage 34:===========================================>              (3 + 1) / 4]
+[ | ]
+                                                                
+[OK!]
+```
+
+:::
+```{python}
+finisher = (
+  Finisher()
+    .setInputCols([
+      'token', 
+#      'stem', 
+#      'lemma', 
+      'pos'])
+    .setIncludeMetadata(False)
+    .setOutputAsArray(True)
+)
+```
+## 
+
+```{python}
+pipeline = (
+  Pipeline()
+    .setStages([
+      document_assembler,
+      sentenceDetector,
+      regexTokenizer,
+      posTagger, 
+      finisher
+    ])
+)
+```
+
+
+```{python}
+spam = ( 
+  pipeline.fit(df_texts)
+    .transform(df_texts)
+    .selectExpr("*")
+    .collect()
+)
+```
+
+# Spark NLP and feature engineering {background-color="#1c191c"}
+
+## Topic modelling
+
+## TF-IDF
+
+## Latent Dirichlet Allocation
+
+# Distributed computations {background-color="#1c191c"}
+
+## Execution modes
+
+-   standalone
+-   client
+-   cluster
+-   
+
+# Spark NLP and composite types in Spark Dataframes 
+
+```{.python}
+
+>>> result = documentAssembler.transform(data)
+>>> result.select("document").show(truncate=False)
++----------------------------------------------------------------------------------------------+
+|document                                                                                      |
++----------------------------------------------------------------------------------------------+
+|[[document, 0, 51, Spark NLP is an open-source text processing library., [sentence -> 0], []]]|
++----------------------------------------------------------------------------------------------+
+>>> result.select("document").printSchema()
+root
+|-- document: array (nullable = True)
+|    |-- element: struct (containsNull = True)
+|    |    |-- annotatorType: string (nullable = True)
+|    |    |-- begin: integer (nullable = False)
+|    |    |-- end: integer (nullable = False)
+|    |    |-- result: string (nullable = True)
+|    |    |-- metadata: map (nullable = True)
+|    |    |    |-- key: string
+|    |    |    |-- value: string (valueContainsNull = True)
+|    |    |-- embeddings: array (nullable = True)
+|    |    |    |-- element: float (containsNull = False)
+```
+
+
+Column `document` is of type `ArrayType()`. The basetype of `document` column is of `StructType()` (`element`), the `element` contains subfields of primitive type, but alo a field of type `map` (`MapType()`) and a field of type `StructType()`.  

@@ -1,0 +1,37 @@
+
+
+```{python}
+from graphframes import GraphFrame
+from pyspark import SparkConf, SparkContext
+from pyspark.sql import SparkSession
+
+conf = SparkConf().setAppName("Spark graphx Course")
+sc = SparkContext(conf=conf)  # no need for Spark 3...
+
+spark = (SparkSession
+         .builder
+         .appName("Spark graphx Course")
+         .getOrCreate()
+         )
+
+spark._sc is sc
+
+```
+
+```{python}
+v = spark.createDataFrame([
+    ("a", "Alice", 34),
+    ("b", "Bob", 36),
+    ("c", "Charlie", 30),
+], ["id", "name", "age"])
+# Create an Edge DataFrame with "src" and "dst" columns
+e = spark.createDataFrame([
+    ("a", "b", "friend"),
+    ("b", "c", "follow"),
+    ("c", "b", "follow"),
+], ["src", "dst", "relationship"])
+```
+
+```{python}
+g = GraphFrame(v, e)
+```

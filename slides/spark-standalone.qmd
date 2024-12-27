@@ -1,0 +1,113 @@
+---
+title: "Spark standalone"
+
+format:
+  revealjs: 
+    footer: |
+      [Spark Standalone](https://stephane-v-boucheron.fr/slides/spark-standalone.html)
+        
+execute:
+  eval: false
+  echo: true
+---
+
+
+# Setting up manually
+
+
+## 
+
+::: {.callout}
+The current working directory is where `spark-3.5.0-bin-hadoop3` has been installed
+:::
+
+```{.verbatim}
+.
+├── bin
+├── conf
+├── data
+├── examples
+├── jars
+├── kubernetes
+├── LICENSE
+├── licenses
+├── logs
+├── NOTICE
+├── python
+├── R
+├── README.md
+├── RELEASE
+├── sbin
+├── work
+└── yarn
+```
+
+## Start the standalone master server 
+
+```{bash}
+./sbin/start-master.sh
+```
+
+. . . 
+
+WWW UI 
+
+```{.verbatin}
+--webui-port 8080
+```
+
+Monitoring of 
+
+- workers
+- running applications
+- completed applications
+
+. . .
+
+```{.verbatim}
+Spark Master at spark://<host>:<port>
+```
+
+## Starting a worker 
+
+
+```{bash}
+./sbin/start-worker.sh spark://boucheron-Precision-5480:7077
+```
+
+
+## Back to the Web UI
+
+
+![](./IMG/webUI-oneworker.png)
+
+## Starting workers
+
+
+## Options
+
+- `--host`
+- `--port` default 7077
+- `--wbeui-port` default 8080
+
+
+# Connecting an application to the server
+
+## Connecting `pyspark` to the cluster
+
+To run an application on the Spark cluster, simply pass the spark://IP:PORT URL of the master as to the SparkContext constructor.
+
+To run an interactive Spark shell against the cluster, run the following command:
+
+```{bash}
+./bin/pyspark --master spark://boucheron-Precision-5480:7077
+```
+
+
+## xxx
+
+
+# Launching Spark Applications
+
+## 
+

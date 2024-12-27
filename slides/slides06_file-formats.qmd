@@ -1,0 +1,525 @@
+---
+title: "Technologies Big Data"
+subtitle: "Master I MIDS & Informatique"
+author: "A. Gheerbrandt, S. Gaïffas, V. Ravelomanana, S. Boucheron"
+institute: "Université Paris Cité"
+date: "2024-02-19"
+params:
+  title: "SPARK & JSON"
+  curriculum: "Master I MIDS Master I Informatique"
+  coursetitle: "Technologies Big Data"
+  lecturer: "A. Gheerbrandt, S. Gaïffas, V. Ravelomanana, S. Boucheron"
+  homepage: "http://stephane-v-boucheron.fr/courses/grosses-data/"
+  curriculum_homepage: "https://master.math.univ-paris-diderot.fr/annee/m1-mids/"
+toc: true
+toc-depth: 1
+toc-title: Roadmap
+output-location: fragment
+center: true
+
+execute: 
+  eval: true
+  echo: true
+---
+
+#  File formats  {background-color="#1c191c"}
+
+
+---
+
+## File formats
+
+- You will need to choose the *right format* for your data
+
+- The right format typically *depends on the use-case*
+
+## Why different file formats ?
+
+- A **huge bottleneck** for big data applications is *time spent to find data* in a particular location and *time spent to write it* back to another location
+
+- Even more complicated with **large datasets** with *evolving schemas*, or *storage constraints*
+
+- Several `Hadoop` file formats **evolved to ease these issues** across a number of use cases
+
+
+## File formats  (trade-offs)
+
+Choosing an appropriate file format has the following potential benefits
+
+- Faster **reads** or faster **writes**
+
+- **Splittable** files
+
+- **Schema evolution** support (schema changes over time)
+
+- **Advanced compression** support
+
+Some file formats are designed for *general use*
+
+Others for more *specific use cases*
+
+Some with *specific data characteristics* in mind
+
+
+::: {.notes}
+
+What is the meaning of *Schema*? May depend on format. 
+
+:::
+
+
+
+# Main file formats for big data {background-color="#1c191c"}
+
+
+---
+
+## Main file formats
+
+::: {.center}
+
+
+:::
+<img src="IMG/parquet.png" style="width: 30%;" />
+<img src="" style="width: 5%;" />
+<img src="IMG/orc.png" style="width: 23%;" />
+<img src="" style="width: 5%;" />
+<img src="IMG/avro.png" style="width: 25%;" />
+]
+
+We shall talk about the *core concepts* and *use-cases* for the following popular data formats:
+
+- `Avro` : [https://avro.apache.org](https://avro.apache.org)
+
+- `ORC` : [https://parquet.apache.org](https://parquet.apache.org)
+
+- `Parquet` : [https://orc.apache.org](https://orc.apache.org)
+
+---
+
+
+
+#  `Avro` {background-color="#1c191c"}
+
+
+## Avro: Principles 
+
+::: {.columns}
+::: {.column}
+
+- `Avro` is a *row-based data format and data serialization system* released by the `Hadoop` working group in 2009
+
+- Data schema is stored as `JSON` in the header. Rest of the data stored in a **binary format** to make it compact and efficient
+
+- `Avro` is language-neutral and can be used by many languages (for now `C`, `C++`, `...`, `Python`, and `R`)
+
+- One shining point of `Avro`: *robust support for schema evolution*
+
+
+:::
+
+::: {.column}
+
+![](IMG/avro.png)
+
+:::
+::: 
+
+
+<!-- end columns -->
+
+
+::: {.notes}
+
+Avro is used in streaming applications
+
+On Hadoop portal, Avro is described as a data serialization system
+
+In the old days, Avro used to be an aircraft manufacturer
+
+
+> https://en.wikipedia.org/wiki/Avro
+
+> Confluent Platform works with any data format you prefer, but we added some special facilities for Avro because of its popularity. In the rest of this document I’ll go through some of the reasons why.
+
+> Avro has a JSON like data model, but can be represented as either JSON or in a compact binary form. It comes with a very sophisticated schema description language that describes data.
+
+> We think Avro is the best choice for a number of reasons:
+
+- It has a direct mapping to and from JSON
+- It has a very compact format. The bulk of JSON, repeating every field name with every single record, is what makes JSON inefficient for high-volume usage.
+- It is very fast.
+- It has great bindings for a wide variety of programming languages so you can generate Java objects that make working with event data easier, but it does not require code generation so tools can be written generically for any data stream.
+- It has a rich, extensible schema language defined in pure JSON
+- It has the best notion of compatibility for evolving your data over time.
+- Though it may seem like a minor thing handling this kind of metadata turns out to be one of the most critical and least appreciated aspects in keeping data high quality and easily useable at organizational scale.
+
+
+
+:::
+
+
+
+
+---
+
+## `Avro`: rationale
+
+- `Avro` provides rich data structures: can create a record that contains an array, an enumerated type and a sub-record
+
+Ideal candidate to *store data in a data lake* since:
+
+1. Data is usually **read as a whole** in a data lake for further processing by downstream systems
+
+2. Downstream systems can **retrieve schemas easily from files** (no need to store the schemas separately).
+
+3. Any source *schema change is easily handled*
+
+
+::: {.notes}
+
+- data lake 
+- data warehouse
+- databse 
+
+Spot the differences 
+
+
+:::
+
+
+## `Avro`: organization
+
+::: {.center}
+
+<img src="IMG/avro-file.png" style="width: 100%;" />
+
+:::
+
+
+#  `Parquet` {background-color="#1c191c"}
+
+
+## Parquet: History and Principles
+
+
+::: {.columns}
+
+::: {.column}
+
+- `Parquet` is an open-source file format for [`Hadoop`](https://hadoop.apache.org) created by [`Cloudera`](https://en.wikipedia.org/wiki/Cloudera) and [`Twitter` {{< fa brands twitter >}}]() in 2013
+
+- It stores **nested data structures** in a *flat columnar format*. 
+
+- Compared to traditional **row-oriented approaches**, `Parquet` is *more efficient in terms of storage and performance*
+
+- It is especially good for queries that need *read a small subset of columns* from a data file with many columns : *only the required columns are read* (optimized I/O)
+
+:::
+
+::: {.column}
+
+![](IMG/parquet.png)
+
+:::
+
+::: 
+
+
+<!-- end columns -->
+
+
+
+::: {.notes}
+
+- meaning of nested data structure
+
+:::
+
+
+
+
+
+## Parquet: Row-wise VS columnar storage format
+
+If you have a dataframe  like this
+
+```
++----+-------+----------+
+| ID | Name  | Product  | 
++----+-------+----------+
+| 1  | name1 | product1 |
+| 2  | name2 | product2 |
+| 3  | name3 | product3 |
++----+-------+----------+
+```
+
+In **row-wise** storage format *records are contiguous* in the file:
+
+```python
+1 name1 product1 2 name2 product2 3 name3 product3 
+```
+
+While in the **columnar storage** format, *columns are stored together*:
+
+```python
+1 2 3 name1 name2 name3 product1 product2 product3
+```
+
+
+## `Parquet`: organization
+
+- This makes **columnar storage** more efficient when *querying a few columns* from the table
+
+- No need to read whole records, but only the *required columns*
+
+- A unique feature of `Parquet` is that even *nested fields* can be read individually without the need to read all the fields 
+
+- `Parquet` uses **record shredding** and an **assembly algorithm** to store nested structures in a columnar fashion
+
+
+::: {.notes}
+
+Examples of nested fields 
+
+:::
+
+
+
+
+---
+
+## `Parquet`: organization (continued) 
+
+::: {.center}
+
+<img src="IMG/parquet-format.gif" style="width: 80%;" />
+
+:::
+
+
+---
+
+## `Parquet`: organization (lexikon)
+
+The main entities in a `Parquet` file are the following:
+
+Row group
+: a horizontal partitioning of the data into rows. A row group consists of a column chunk for each column in the dataset
+
+Column chunk
+: a chunk of the data for a particular column. These column chunks live in a particular row group and are guaranteed to be contiguous in the file
+
+Page
+: column chunks are divided up into pages written back to back. The pages share a common header and readers can skip the page they are not interested in
+
+---
+
+## About `Parquet`
+
+::: {.center}
+
+<img src="IMG/parquet-dive.png" style="width: 80%;" />
+
+:::
+
+
+## `Parquet`: headers and footers
+
+- The header just contains a magic number "PAR1" (4-byte) that identifies the file as `Parquet` format file
+
+The footer contains:
+
+- **File metadata**: all the locations of all the column metadata start locations. Readers first read the file metadata to find the column chunks they need. Column chunks are then read sequentially. It also includes the format version, the schema, and any extra key-value pairs.
+
+- **length** of file metadata (4-byte)
+
+- **magic number** "PAR1" (4-byte)
+
+
+# `ORC` {background-color="#1c191c"}
+
+## ORC: principles
+
+::: {.columns}
+
+::: {.column  width="60%"}
+
+- `ORC` stands for *Optimized Row Columnar* file format. Created by Hortonworks in 2013 in order to speed up `Hive` {{< fa brands hive >}}
+
+- `ORC` file format provides a *highly efficient way to store data*
+
+- It is a *raw columnar data format* highly optimized for reading, writing, and processing data in `Hive`
+
+- It stores data in a *compact way* and enables *skipping quickly irrelevant parts*
+
+:::
+
+
+::: {.column width="40%"}
+
+::: {.center}
+
+![](IMG/orc.png)
+
+:::
+
+:::
+
+::: 
+
+<!-- end columns -->
+
+
+::: {.notes}
+
+A few words about `Hive`
+
+[Hive official site](https://hive.apache.org)
+
+:::
+
+
+## About `ORC`: organization
+
+- `ORC` stores *collections of rows in one file*. Within the collection, row data is stored in a *columnar format*
+
+- An `ORC` file contains **groups of row data** called *stripes*, along with auxiliary information in a file footer. 
+At the end of the file a postscript holds compression parameters and the size of the compressed footer
+
+- The default stripe size is 250 MB. **Large stripe** sizes enable *large, efficient reads from HDFS*
+
+- The **file footer** contains a list of stripes in the file, the number of rows per stripe, and each column’s data type. It also contains column-level aggregates count, min, max, and sum
+
+
+## About `ORC`  (onctinued)
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+- **Index data** include min and max values for each column and the row’s positions within each column
+
+- **`ORC` indexes** are used only for the selection of stripes and row groups and not for answering queries
+
+:::
+
+::: {.column width="50%"}
+
+![ORC file structure](IMG/orc-file-structure.png)
+
+:::
+
+::: 
+
+<!-- end columns -->
+
+
+## About `ORC`
+
+`ORC` file format has many advantages such as:
+
+- `Hive` type support including `DateTime`, `decimal`, and the complex types (`struct`, `list`, `map` and `union`)
+
+- **Concurrent reads** of the same file
+
+- Ability to split files **without scanning for markers**
+
+- Estimate an **upper bound on heap memory allocation** based on the information in the file footer.
+
+
+# Comparison between formats {background-color="#1c191c"}
+
+
+## `Avro` versus `Parquet`
+
+- `Avro` is a *row-based* storage format whereas `Parquet` is a *columnar based* storage format
+
+- `Parquet` is much better for *analytical querying* i.e. reads and querying are much more efficient than writing.
+
+- **Write operations** in `Avro` are better than in `Parquet`.
+
+- `Avro` is more mature than `Parquet` for *schema evolution*: `Parquet` supports only **schema append** while `Avro` supports more things, such as **adding or modifying columns**
+
+- `Parquet` is ideal for *querying a subset of columns* in a multi-column table. `Avro` is ideal for **operations where all the columns are needed** (such as in a ETL workflow)
+
+---
+
+## `ORC` vs `Parquet`
+
+- `Parquet` is more capable of *storing nested data*
+
+- `ORC` is more capable of *predicate pushdown* (SQL queries on a data file are better optimized, chunks of data can be **skipped** directly while reading)
+
+- `ORC` is more *compression efficient*
+
+---
+
+## In summary...
+
+::: {.center}
+
+<img src="IMG/file-formats.png" style="width: 80%;" />
+
+:::
+
+
+
+# How to choose a file format {background-color="#1c191c"}
+
+
+
+## R ead / write intensive & query pattern
+
+- **Row-based** file formats are overall better for storing write-intensive data because *appending new records is easier*
+
+- If only a **small subset of columns** is queried frequently, *columnar formats will be better* since  only those needed columns will be accessed and transmitted (whereas row formats need to pull all the columns)
+
+
+
+## C ompression
+
+- Compression is one of the key aspects to consider since *compression helps reduce the resources* required to store and transmit data
+
+- *Columnar formats are better than row-based formats in terms of compression* because **storing the same type of values together allows more efficient compression**
+
+- In columnar formats, **a different and efficient encoding is utilized for each column** 
+
+- `ORC` has the best compression rate of all three, thanks to its **stripes**
+
+
+## S chema Evolution
+
+- One challenge in big data is the *frequent change of data schema*: e.g. **adding/dropping columns** and changing columns names
+
+- If you know that the **schema of the data will change** several times, *the best choice is `Avro`*
+
+- `Avro` data schema is in JSON and `Avro` is able to keep data compact even when many different schemas exist
+
+See [Schema merging for parquet files](https://spark.apache.org/docs/latest/sql-data-sources-parquet.html#schema-merging)
+
+## N ested Columns
+
+- If you have a lot of *complex nested columns* in your dataset and often only query a **subset of columns or subcolumns**, *Parquet is the best choice*
+
+- Parquet allows to *access and retrieve subcolumns without pulling the rest* of the nested column
+
+
+## F ramework support
+
+- You have *consider the framework* you are using when choosing a data format
+
+- Data formats **perform differently** depending on where they are used
+
+- `ORC` works best with [`Hive` {{< fa brands hive >}}]() (it was designed for it)
+
+- `Spark` provides great support for processing `Parquet` formats.
+
+- `Avro` is often a good choice for [`Kafka`](https://kafka.apache.org) (streaming applications)
+
+But... you can *use an try all formats with any framework*
+
+
+
+# Thank you !  {.unlisted background-color="#1c191c"}
+
