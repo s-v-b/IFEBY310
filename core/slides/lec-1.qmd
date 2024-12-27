@@ -1,0 +1,59 @@
+---
+title: "Lecture 1"
+subtitle: "Course organization"
+---
+
+# Objectives
+
+# Environment
+
+# Git
+
+## Forking the course repository
+
+## Feedback
+
+# Docker
+
+## Useful Docker images
+
+## Running an image
+
+# Quarto
+
+# Python
+
+## Jupyter 
+
+## Numpy, Scipy 
+
+## Pandas
+
+## Plotly, Altair
+
+# Dask 
+
+# Spark
+
+## Pyspark
+
+## Libraries 
+
+# PotGreSQL
+
+# R 
+
+## rstudio
+
+## tidyverse
+
+## sparklyr 
+
+# Evaluations
+
+## Github accounts
+
+## Inviting  to a private project
+
+# References
+

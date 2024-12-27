@@ -1,0 +1,8 @@
+---
+title: "Spark R: sparkR and sparklyr"
+
+format:
+  revealjs: 
+    footer: |
+      [Spark and R](https://stephane-v-boucheron.fr/slides/spark-sql.html)
+---

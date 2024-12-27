@@ -1,0 +1,534 @@
+---
+title: Imports
+jupyter: python3
+---
+
+
+
+```{python}
+import glob
+
+import os
+import sys
+import re 
+import shutils
+import logging 
+
+import pandas as pd
+import numpy as np
+
+
+
+import datetime
+
+# from functools import reduce
+import itertools
+
+import zipfile
+from zipfile import ZipFile
+from tqdm import tqdm
+
+import pyarrow as pa
+import comet    as co
+import pyarrow.parquet as pq
+import pyarrow.dataset as ds
+
+
+import dask
+
+os.environ['PYSPARK_PYTHON'] = sys.executable
+os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
+```
+
+```{python}
+from dask.distributed import Client
+
+client = Client(n_workers=20, threads_per_worker=2, memory_limit="2GB")
+client
+```
+
+```{python}
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
+logger.debug('This message should go to the log file')
+logger.info('So should this')
+logger.warning('And this, too')
+logger.error('And non-ASCII stuff, too, like Øresund and Malmö')
+```
+
+## Paths
+
+Downloaded zip archives are in `data_dir`
+
+Extracted csv files are in `extract_dir`
+
+Parquet files are in `parquet_dir`
+
+```{python}
+
+data_dir = '../data'
+os.path.exists(data_dir)
+
+extract_dir = os.path.join(data_dir, 'xcitibike')
+if not os.path.exists(extract_dir):
+    os.mkdir(extract_dir)
+
+parquet_dir = os.path.join(data_dir, 'pq_citibike')
+if not os.path.exists(parquet_dir):
+    os.mkdir(parquet_dir)
+```
+
+## Extracting archives
+
+Zip archive files contain directory trees where the `csv` files are to be found.
+
+```{python}
+citibike_archives_paths = sorted(glob.glob(data_dir + '/*-citibike-tripdata.zip'))
+```
+
+TODO: 
+- parallelize part of the extraction process 
+- one thread per element in `citibike_archives_paths`
+- should be doable with dask
+
+```{python}
+for ar_path in tqdm(citibike_archives_paths):
+    myzip = ZipFile(ar_path)
+    to_extract = [elt  for elt in myzip.namelist() if (elt.endswith(".csv") and not (elt.startswith('__MACOSX')))]
+    myzip.extractall(path=extract_dir,
+                     members=to_extract)
+```
+
+## Collecting headers
+
+The extracted `csv` files do not share the same schema and the same datetime encoding format.
+
+Walking through the `csv` files in `extract_dir`, allows to gather the three different column naming patterns.
+
+TODO: 
+- Save the schemata with inferred types in a `json` file. Different typing patterns may correspond to the same column naming pattern
+- For each `csv` file spot the column naming pattern, the datetime encoding format
+
+```{python}
+# schemata_names = set()
+
+# for (root, dirs ,files) in os.walk(extract_dir, topdown=True):
+#    if dirs:
+#        continue
+#    for fn in files:
+#        if fn.endswith('.csv'):
+#            with open(os.path.join(root, fn), 'r') as fd:
+#                schemata_names.add(fd.readline())
+
+# schemata_names = [s.replace('\n', '').split(',') for s in schemata_names]
+```
+
+```{python}
+schemata_names = [
+    ['ride_id',
+  'rideable_type',
+  'started_at',
+  'ended_at',
+  'start_station_name',
+  'start_station_id',
+  'end_station_name',
+  'end_station_id',
+  'start_lat',
+  'start_lng',
+  'end_lat',
+  'end_lng',
+  'member_casual'],
+ ['tripduration',
+  'starttime',
+  'stoptime',
+  'start station id',
+  'start station name',
+  'start station latitude',
+  'start station longitude',
+  'end station id',
+  'end station name',
+  'end station latitude',
+  'end station longitude',
+  'bikeid',
+  'usertype',
+  'birth year',
+  'gender'],
+ ['Trip Duration',
+  'Start Time',
+  'Stop Time',
+  'Start Station ID',
+  'Start Station Name',
+  'Start Station Latitude',
+  'Start Station Longitude',
+  'End Station ID',
+  'End Station Name',
+  'End Station Latitude',
+  'End Station Longitude',
+  'Bike ID',
+  'User Type',
+  'Birth Year',
+  'Gender']
+]
+```
+
+For each `csv` file, find the column naming pattern, build a dictionary  with this information.
+
+TODO: 
+- should done during the first walk.
+
+```{python}
+schemata_numbers = {}
+
+for (root, dirs ,files) in os.walk(extract_dir, topdown=True):
+    if dirs:
+        continue
+    for fn in files:
+        if fn.endswith('.csv'):        
+            with open(os.path.join(root, fn), 'r') as fd:
+                col_names = fd.readline().replace('\n', '').split(',')
+                schemata_numbers[fn] = schemata_names.index(col_names)
+```
+
+## Building renaming dictionaries
+
+### From `0` 
+
+Nothing to do
+
+### From `1`
+
+Use 
+```
+{
+ 'tripduration': 'trip_duration',
+ 'starttime': 'started_at',
+ 'stoptime': 'ended_at',
+ 'bikeid': 'bike_id',
+ 'usertype': 'user_type',
+ 'start station latitude': 'start_lat',
+ 'start station longitude': 'start_lng',
+ 'end station latitude': 'end_lat',
+ 'end station longitude': 'end_lng'
+}
+```
+and replace ` ` with '_'.
+
+
+### From `2`
+
+```
+{
+ 'Trip Duration': 'trip_duration',
+  'Start Time': 'started_at',
+  'Stop Time': 'ended_at',
+  'Start Station Latitude': 'start_lat',
+  'Start Station Longitude': 'start_lng',
+  'End Station Latitude': 'end_lat',
+  'End Station Longitude': 'end_lng'    
+}
+
+```
+and replace ` ` with '_', use `lower()`.
+
+```{python}
+dicts_rename = {
+    1: {
+ 'tripduration': 'trip_duration',
+ 'starttime': 'started_at',
+ 'stoptime': 'ended_at',
+ 'bikeid': 'bike_id',
+ 'usertype': 'user_type',
+ 'start station latitude': 'start_lat',
+ 'start station longitude': 'start_lng',
+ 'end station latitude': 'end_lat',
+ 'end station longitude': 'end_lng'
+} ,
+  2:  {
+ 'Trip Duration': 'trip_duration',
+  'Start Time': 'started_at',
+  'Stop Time': 'ended_at',
+  'Start Station Latitude': 'start_lat',
+  'Start Station Longitude': 'start_lng',
+  'End Station Latitude': 'end_lat',
+  'End Station Longitude': 'end_lng'    
+}
+}
+```
+
+Another problem. 
+
+`start_station_id`, `end_station_id` is not consistently formatted.
+
+## Building a parquet replica
+
+TODO:
+    - explain why `engine='pyarrow'` is useful when using `pd.read_csv()`
+    - clean up the renaming schemes
+
+Datetime hand-made parsing for non ISO compliant `csv` file 
+
+```{python}
+
+def my_parse(s):
+    """datetime parsing for non-ISO enco
+
+    Args:
+        s (str): a datetime encoding string '%m/%d/%Y H:M[:S]'
+
+    Returns:
+        datetime: a datetime object without timezone
+    """
+    rem = re.compile(r"(\d+)/(\d+)/(\d+) (\d+)?(:\d+)?(:\d+)?")
+
+    matches = rem.search(s).groups()
+    month, day, year, hours, mins, secs = [int(x.replace(':','')) if x else 0 for x in matches]
+
+    zdt = datetime.datetime(year, month, day, hours, mins, secs)
+    return zdt
+
+```
+
+
+TODO: 
+- parallelize this 
+
+```{python}
+def csv2pq(root, dirs, files):
+    if dirs:
+        return
+
+    for fn in files:
+        if not fn.endswith('.csv'):  
+            continue
+
+        df = pd.read_csv(
+                    os.path.join(root, fn),
+                    engine = 'pyarrow'
+            )
+                    
+        if 1==schemata_numbers[fn]: 
+            df = ( 
+                df
+                    .rename(columns=dicts_rename[1])
+                    .rename(mapper= lambda s : s.replace(' ', '_'), axis='columns')
+            )                
+        elif 2==schemata_numbers[fn]:
+            df = ( 
+                df
+                    .rename(columns=dicts_rename[2])
+                    .rename(mapper= lambda s : s.lower().replace(' ', '_'), axis='columns')
+            )
+
+        if (str(df.dtypes.loc['ended_at'])=='object'):
+            # Format is either '%m/%d/%Y %H:%M:%S'or '%m/%d/%Y %H:%M'
+            try:
+                df['ended_at'] = pd.to_datetime(df.ended_at, format='%m/%d/%Y %H:%M:%S')
+                df['started_at'] = pd.to_datetime(df.started_at, format='%m/%d/%Y %H:%M:%S')
+            except ValueError:
+                df['ended_at'] = pd.to_datetime(df.ended_at, format='%m/%d/%Y %H:%M')
+                df['started_at'] = pd.to_datetime(df.started_at, format='%m/%d/%Y %H:%M')
+            except:
+                df['ended_at'] = df.ended_at.map(my_parse)
+                df['started_at'] = df.started_at.map(my_parse)
+
+
+        # if df.start_station_id.dtype != np.dtype('O'):
+
+        df['start_station_id'] = df.start_station_id.astype(np.dtype('O'))  
+        df['end_station_id'] = df.end_station_id.astype(np.dtype('O')) 
+            
+        df['start_year'] = df.started_at.dt.year
+        df['start_month'] = df.started_at.dt.month  
+        
+        table = pa.Table.from_pandas(df)
+
+        logger.info('writing: ' + fn)
+
+        pq.write_to_dataset(
+                table,
+                parquet_dir,
+                partition_cols=["start_year", "start_month"],
+        )    
+
+    return root 
+```
+
+```{python}
+todo = dask.delayed([dask.delayed(csv2pq)(root, dirs ,files)
+    for (root, dirs ,files) in os.walk(extract_dir, topdown=True)
+ ])
+```
+
+```{python}
+foo = todo.compute()
+```
+
+```{python}
+[x  for x in foo if x]
+```
+
+```{python}
+list(schemata_numbers.keys())
+```
+
+```{python}
+
+for (root, dirs ,files) in tqdm(os.walk(extract_dir, topdown=True)):
+    if dirs:
+        continue
+    for fn in files:
+        if not fn.endswith('.csv'):  
+            continue
+
+        df = pd.read_csv(
+                os.path.join(root, fn),
+                engine = 'pyarrow'
+        )
+                
+        if 1==schemata_numbers[fn]: 
+            df = ( 
+                df
+                  .rename(columns=dicts_rename[1])
+                  .rename(mapper= lambda s : s.replace(' ', '_'), axis='columns')
+            )                
+        elif 2==schemata_numbers[fn]:
+            df = ( 
+                df
+                  .rename(columns=dicts_rename[2])
+                  .rename(mapper= lambda s : s.lower().replace(' ', '_'), axis='columns')
+            )
+        
+        if (str(df.dtypes.loc['ended_at'])=='object'):
+            # Format is either '%m/%d/%Y %H:%M:%S'or '%m/%d/%Y %H:%M'
+            try:
+                df['ended_at'] = pd.to_datetime(df.ended_at, format='%m/%d/%Y %H:%M:%S')
+                df['started_at'] = pd.to_datetime(df.started_at, format='%m/%d/%Y %H:%M:%S')
+            except ValueError:
+                df['ended_at'] = pd.to_datetime(df.ended_at, format='%m/%d/%Y %H:%M')
+                df['started_at'] = pd.to_datetime(df.started_at, format='%m/%d/%Y %H:%M')
+            except:
+                df['ended_at'] = df.ended_at.map(my_parse)
+                df['started_at'] = df.started_at.map(my_parse) 
+
+        
+
+        if df.start_station_id.dtype != np.dtype('O'):
+            df['start_station_id'] = df.start_station_id.astype(np.dtype('O'))  
+            df['end_station_id'] = df.end_station_id.astype(np.dtype('O')) 
+         
+        df['start_year'] = df.started_at.dt.year
+        df['start_month'] = df.started_at.dt.month  
+      
+        table = pa.Table.from_pandas(df)
+
+        pa.schema(table)
+
+        pq.write_to_dataset(
+             table,
+             parquet_dir,
+             partition_cols=["start_year", "start_month"],
+        )
+```
+
+```{python}
+df.start_station_id.astype(np.dtype('O'))
+```
+
+## TODOs
+
+### Handling schema evolution
+
+Schema changed between 2021 January and 2021 February
+
+| Old Column   | New Column |  Action |
+|:-------------|:-------------------------|:-----------------------------------------------------------|
+|                |   `ride_id`            |  Primary key ?                                             |
+|                |   `ride_type`          |  `docked_bike`                                     |
+| `tripduration` |                        |  In seconds, can be recovered from `started_at`/`ended_at` | 
+| `starttime`    |   `started_at`         |  No need for microseconds before 2021 January              |                                          
+| `stoptime`     |   `ended_at`           |  No need for microseconds before 2021 January              |
+| `start station id` | `start_station_id` |  Order mismatch, code mismatch. Before : int. After:       |
+| `start station name` |  `start_station_name` |    Check consistency                                  |
+| `start station latitude` |  `start_lat`      |    Check consistency                                  |
+| `start station longitude`|  `start_lng`      |    Check consistency                                  |
+
+| Old Column   | New Column |  Action |
+|:-------------|:-------------------------|:-----------------------------------------------------------|
+| `end station id`         |  `end_station_id`|     Check consistency                                  |
+| `end station name`       |  `end_station_name` |  Check consistency                                  |
+| `end station latitude`   |  `end_lat`       |     Check consistency                                  |
+| `end station longitude`  |  `end_lng`       |     Check consistency                                  |
+| `bikeid`                 |                  |                                                        |
+| `usertype`               |                  |    `Subscriber`/`Customer`                             |
+| `birth year`             |                  |                                                        |
+| `gender`                 |                  |      0, 1                                                  |
+|                          | `member_casual`  |   `casual`/`member`                                    |
+
+        
+
+- reading side: just read `start_time`, `end_time`, `start_station_id`, `end_station_id`,
+- `start_at` and `end_at` must be translated to `start_time`, `end_time`
+- `trip_duration`, `user_type`, `bike_id`, `member_casual`
+
+- Prepare for a dimension table for stations
+    - `id`
+    - `name`
+    - `lat`
+    - `lon`
+    - `more`
+ 
+### Select from the colum names
+
+Can we read directly as a pyarrow table ? Yes, but Pandas is convenient for datetime manipulations, and possibly for renaming
+
+### Usage `pyarrow.unify_schemas`
+
+
+### Parsing dates 
+
+For some files, timestamps are not in ISO format. 
+
+From 2014-09-01 till 2016-09-.., `started_at`  and `ended_at` do  not abide ISO format, but `%m/%d/%Y %H:%M:%S`.
+
+Try to use `pd.to_datetime()`. If failure, use regular expression to parse the putative date column. Handle the optional field that way.
+
+Better ask forgiveness than permission.
+
+
+```{python}
+root, dirs, fn = next(os.walk(os.path.join(parquet_dir, 'start_year=2013', 'start_month=9')))
+```
+
+```{python}
+spam = pq.read_metadata(os.path.join(root, fn[0]))
+```
+
+```{python}
+from  dask import dataframe as dd
+```
+
+```{python}
+spam = dd.read_parquet(os.path.join(parquet_dir, 'start_year=2023' ))
+```
+
+```{python}
+spam.dtypes
+```
+
+```{python}
+foo_path = os.path.join(parquet_dir, 'start_year=2023', 'start_month=1')
+```
+
+```{python}
+root, dirs, fn = next(os.walk(foo_path))
+```
+
+```{python}
+parquet_file = pq.ParquetFile(os.path.join(root, fn[0]))
+schema = parquet_file.schema
+```
+
+```{python}
+schema
+```
+

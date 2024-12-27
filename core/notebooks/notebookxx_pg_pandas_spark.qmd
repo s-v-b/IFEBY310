@@ -1,0 +1,110 @@
+---
+title: "PostgreSQL and Spark"
+format: html
+---
+
+
+[Reading and sriting Spark Dataframes from and to Databases](https://spark.apache.org/docs/latest/sql-data-sources-jdbc.html)
+
+
+```{python}
+import pyspark
+from pyspark import SparkConf
+from pyspark.sql import SparkSession
+
+import os
+import getpass
+```
+
+## Connect to Pg server
+
+```{python}
+ulogin = getpass.getuser()
+pw = getpass.getpass()
+```
+
+Spark `jdbc` readers and writers rely on a collection of options.
+Some options are used repeatedly. In order to avoid cut and paste, 
+we pack them in a dictionary. 
+
+```{python}
+dico_jdbc_pg = {
+    "url":  "jdbc:postgresql://localhost:5434/bd_2023-24",  
+    "user":  ulogin, 
+    "password":  pw, 
+    "driver":  "org.postgresql.Driver"
+}
+```
+
+```{python}
+dbschema = 'nycflights'  
+```
+
+## Reading Spark Dataframes from a PostgreSQL database
+
+```{python}
+spark_home = "/home/boucheron/.local/share/spark-3.5.0-bin-hadoop3"
+```
+
+> To get started you will need to include the JDBC driver for your particular database on the spark classpath. 
+
+```{python}
+spark = (
+  SparkSession 
+    .builder 
+    .appName("Python Spark SQL basic example") 
+    .config("spark.jars", 
+            spark_home + "/jars/" + "postgresql-42.7.2.jar") 
+    .getOrCreate()
+)
+```
+
+## Downloading a table to Spark
+
+We rely on dictionary union and dictionary unpacking to set the options. 
+
+```{python}
+df_airlines = (
+  spark
+    .read
+    .format("jdbc")
+    .options(**(dico_jdbc_pg | {'dbtable': 'nycflights.airlines'}))
+    .load()
+)
+```
+
+```{python}
+df_airlines.show(5)
+```
+
+## Querying the database
+
+
+```{python}
+query = """
+    SELECT DISTINCT fl.carrier, al.name, fl.origin, fl.dest
+    FROM nycflights.airlines al JOIN 
+        nycflights.flights fl ON (fl.carrier=al.carrier)
+"""
+```
+
+```{python}
+df_query = (
+  spark
+    .read
+    .format("jdbc")
+    .options(**(dico_jdbc_pg | {'query': query}))
+    .load()
+)
+```
+
+```{python}
+df_query.show()
+```
+
+## The end
+
+
+```{python}
+spark.stop()
+```

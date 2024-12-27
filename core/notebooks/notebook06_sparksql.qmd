@@ -1,0 +1,796 @@
+---
+title: '`DataFrame`'
+jupyter: python3
+---
+
+```{python}
+import os
+import sys
+
+os.environ['PYSPARK_PYTHON'] = sys.executable
+os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-02-08T20:23:05.867529Z', start_time: '2022-02-08T20:23:01.418071Z'}
+from pyspark import SparkConf, SparkContext
+from pyspark.sql import SparkSession
+
+conf = SparkConf().setAppName("Spark SQL Course")
+sc = SparkContext(conf=conf)  # no need for Spark 3...
+
+spark = (SparkSession
+    .builder
+    .appName("Spark SQL Course")
+    .getOrCreate()
+)
+```
+
+
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:46.926825Z', start_time: '2022-01-26T10:58:46.920913Z'}
+#| scrolled: true
+from pyspark.sql import Row
+
+row1 = Row(name="John", age=21)
+row2 = Row(name="James", age=32)
+row3 = Row(name="Jane", age=18)
+row1['name']
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:57.185741Z', start_time: '2022-01-26T10:58:57.155181Z'}
+df = spark.createDataFrame([row1, row2, row3])
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:59:13.491438Z', start_time: '2022-01-26T10:59:13.486119Z'}
+df.printSchema()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:59:17.760344Z', start_time: '2022-01-26T10:59:17.597166Z'}
+df.show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:59:25.889372Z', start_time: '2022-01-26T10:59:25.866666Z'}
+print(df.rdd.toDebugString().decode("utf-8"))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:59:45.432264Z', start_time: '2022-01-26T10:59:45.426727Z'}
+df.rdd.getNumPartitions()
+```
+
+## Creating dataframes
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:18.707591Z', start_time: '2022-01-26T10:58:18.220608Z'}
+rows = [
+    Row(name="John", age=21, gender="male"),
+    Row(name="James", age=25, gender="female"),
+    Row(name="Albert", age=46, gender="male")
+]
+
+df = spark.createDataFrame(rows)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:18.707591Z', start_time: '2022-01-26T10:58:18.220608Z'}
+df.show()
+```
+
+```{python}
+help(Row)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:19.065539Z', start_time: '2022-01-26T10:58:18.710711Z'}
+column_names = ["name", "age", "gender"]
+rows = [
+    ["John", 21, "male"],
+    ["James", 25, "female"],
+    ["Albert", 46, "male"]
+]
+df = spark.createDataFrame(rows, column_names)
+df.show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:19.074335Z', start_time: '2022-01-26T10:58:19.068088Z'}
+df.printSchema()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:19.840178Z', start_time: '2022-01-26T10:58:19.077057Z'}
+# sc = SparkContext(conf=conf)  # no need for Spark 3...
+
+column_names = ["name", "age", "gender"]
+rdd = sc.parallelize([
+    ("John", 21, "male"),
+    ("James", 25, "female"),
+    ("Albert", 46, "male")
+])
+df = spark.createDataFrame(rdd, column_names)
+df.show()
+```
+
+## Schema
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:19.850578Z', start_time: '2022-01-26T10:58:19.843835Z'}
+df.schema
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:19.860631Z', start_time: '2022-01-26T10:58:19.854012Z'}
+type(df.schema)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:20.199419Z', start_time: '2022-01-26T10:58:19.863528Z'}
+from pyspark.sql.types import *
+
+schema = StructType([
+    StructField("name", StringType(), True),
+    StructField("age", IntegerType(), True),
+    StructField("gender", StringType(), True)
+])
+rows = [("John", 21, "male")]
+df = spark.createDataFrame(rows, schema)
+df.printSchema()
+df.show()
+```
+
+# Queries
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:20.882311Z', start_time: '2022-01-26T10:58:20.201993Z'}
+column_names = ["name", "age", "gender"]
+rows = [
+    ["John", 21, "male"],
+    ["Jane", 25, "female"]
+]
+df = spark.createDataFrame(rows, column_names)
+
+# Create a temporary view from the DataFrame
+df.createOrReplaceTempView("new_view")
+
+# Apply the query
+query = "SELECT name, age FROM new_view WHERE gender='male'"
+men_df = spark.sql(query)
+men_df.show()
+```
+
+## `SELECT`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:21.162623Z', start_time: '2022-01-26T10:58:20.884802Z'}
+df.createOrReplaceTempView("table")    
+query = "SELECT name, age FROM table"
+spark.sql(query).show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:21.388097Z', start_time: '2022-01-26T10:58:21.164840Z'}
+df.select("name", "age").show()
+```
+
+## `WHERE`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:21.704402Z', start_time: '2022-01-26T10:58:21.402155Z'}
+df.createOrReplaceTempView("table")
+query = "SELECT * FROM table WHERE age > 21"
+spark.sql(query).show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:21.924501Z', start_time: '2022-01-26T10:58:21.706741Z'}
+df.where("age > 21").show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:22.377417Z', start_time: '2022-01-26T10:58:21.926708Z'}
+# Alternatively:
+df.where(df['age'] > 21).show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:22.566385Z', start_time: '2022-01-26T10:58:22.380036Z'}
+df.where(df.age > 21).show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:22.837136Z', start_time: '2022-01-26T10:58:22.569324Z'}
+( 
+    df.where("age > 21")
+      .select(["name", "age"])
+      .show()
+)
+```
+
+## `LIMIT`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:23.315363Z', start_time: '2022-01-26T10:58:22.842106Z'}
+df.createOrReplaceTempView("table")
+query = query = "SELECT * FROM table LIMIT 1"
+spark.sql(query).show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:23.522646Z', start_time: '2022-01-26T10:58:23.318694Z'}
+df.limit(1).show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:23.778517Z', start_time: '2022-01-26T10:58:23.525281Z'}
+df.select("*").limit(1).show()
+```
+
+## `ORDER BY`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:24.190838Z', start_time: '2022-01-26T10:58:23.781166Z'}
+df.createOrReplaceTempView("table")
+
+query = "SELECT * FROM table ORDER BY name ASC"
+
+spark.sql(query).show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:24.368069Z', start_time: '2022-01-26T10:58:24.193899Z'}
+df.orderBy(df.name.asc()).show()
+```
+
+## `ALIAS`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:24.643668Z', start_time: '2022-01-26T10:58:24.370758Z'}
+df.createOrReplaceTempView("table")
+query = "SELECT name, age, gender AS sex FROM table"
+spark.sql(query).show()
+```
+
+```{python}
+type(df.age)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:24.858104Z', start_time: '2022-01-26T10:58:24.646119Z'}
+df.select(df.name, df.age, df.gender.alias('sex')).show()
+```
+
+## `CAST`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:25.072286Z', start_time: '2022-01-26T10:58:24.860474Z'}
+df.createOrReplaceTempView("table")
+query = "SELECT name, cast(age AS float) AS age_f FROM table"
+spark.sql(query).show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:25.384433Z', start_time: '2022-01-26T10:58:25.074523Z'}
+df.select(df.name, df.age.cast("float").alias("age_f")).show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:25.648155Z', start_time: '2022-01-26T10:58:25.386952Z'}
+new_age_col = df.age.cast("float").alias("age_f")
+type(new_age_col), type(df.age)
+```
+
+```{python}
+df.select(df.name, new_age_col).show()
+```
+
+## Adding new columns
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:25.931495Z', start_time: '2022-01-26T10:58:25.651283Z'}
+df.createOrReplaceTempView("table")
+query = "SELECT *, 12*age AS age_months FROM table"
+spark.sql(query).show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:26.195480Z', start_time: '2022-01-26T10:58:25.933620Z'}
+df.withColumn("age_months", df.age * 12).show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:26.422122Z', start_time: '2022-01-26T10:58:26.197759Z'}
+#| scrolled: true
+df.select("*", (df.age * 12).alias("age_months")).show()
+```
+
+```{python}
+import datetime
+
+hui = datetime.date.today()
+
+hui = hui.replace(year=hui.year-21)
+
+str(hui)
+```
+
+```{python}
+# df.select("*", hui.replace(year=hui.year - df.age ).alias("yob")).show()
+```
+
+# Column functions
+
+## Numeric functions examples
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:26.748718Z', start_time: '2022-01-26T10:58:26.425451Z'}
+from pyspark.sql import functions as fn
+
+columns = ["brand", "cost"]
+df = spark.createDataFrame([
+    ("garnier", 3.49),
+    ("elseve", 2.71)
+], columns)
+
+round_cost = fn.round(df.cost, 1)
+floor_cost = fn.floor(df.cost)
+ceil_cost = fn.ceil(df.cost)
+
+df.withColumn('round', round_cost)\
+    .withColumn('floor', floor_cost)\
+    .withColumn('ceil', ceil_cost)\
+    .show()
+```
+
+## String functions examples
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:27.055563Z', start_time: '2022-01-26T10:58:26.751235Z'}
+from pyspark.sql import functions as fn
+
+columns = ["first_name", "last_name"]
+
+df = spark.createDataFrame([
+    ("John", "Doe"),
+    ("Mary", "Jane")
+], columns)
+
+last_name_initial = fn.substring(df.last_name, 0, 1)
+# last_name_initial_dotted = fn.concat(last_name_initial, ".")
+
+name = fn.concat_ws(" ", df.first_name, last_name_initial)
+df.withColumn("name", name).show()
+```
+
+```{python}
+( 
+    df.selectExpr("*", "substring(last_name, 0, 1) as lni")
+      .selectExpr("first_name", "last_name", "concat(first_name, ' ', lni, '.') as nname")
+      .show()
+)
+```
+
+
+## Date functions examples
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:27.373396Z', start_time: '2022-01-26T10:58:27.057938Z'}
+from datetime import date
+from pyspark.sql import functions as fn
+
+df = spark.createDataFrame([
+    (date(2015, 1, 1), date(2015, 1, 15)),
+    (date(2015, 2, 21), date(2015, 3, 8)),
+], ["start_date", "end_date"])
+
+days_between = fn.datediff(df.end_date, df.start_date)
+start_month = fn.month(df.start_date)
+
+df.withColumn('days_between', days_between)\
+    .withColumn('start_month', start_month)\
+    .show()
+```
+
+```{python}
+str(date(2015, 1, 1) - date(2015, 1, 15))
+```
+
+```{python}
+from datetime import timedelta
+
+date(2023, 2 , 14) + timedelta(days=3)
+```
+
+## Conditional transformations
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:27.630822Z', start_time: '2022-01-26T10:58:27.375855Z'}
+df = spark.createDataFrame([
+    ("John", 21, "male"),
+    ("Jane", 25, "female"),
+    ("Albert", 46, "male"),
+    ("Brad", 49, "super-hero")
+], ["name", "age", "gender"])
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:27.630822Z', start_time: '2022-01-26T10:58:27.375855Z'}
+supervisor = ( 
+    fn.when(df.gender == 'male', 'Mr. Smith')
+      .when(df.gender == 'female', 'Miss Jones')
+      .otherwise('NA')
+)
+
+type(supervisor), type(fn.when)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:27.630822Z', start_time: '2022-01-26T10:58:27.375855Z'}
+df.withColumn("supervisor", supervisor).show()
+```
+
+## User-defined functions
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:28.037428Z', start_time: '2022-01-26T10:58:27.633093Z'}
+from pyspark.sql import functions as fn
+from pyspark.sql.types import StringType
+
+df = spark.createDataFrame([(1, 3), (4, 2)], ["first", "second"])
+
+def my_func(col_1, col_2):
+    if (col_1 > col_2):
+        return "{} is bigger than {}".format(col_1, col_2)
+    else:
+        return "{} is bigger than {}".format(col_2, col_1)
+
+my_udf = fn.udf(my_func, StringType())
+
+df.withColumn("udf", my_udf(df['first'], df['second'])).show()
+```
+
+# Joins
+
+## Using the `spark.sql` API
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:29.098957Z', start_time: '2022-01-26T10:58:28.042691Z'}
+from datetime import date
+
+products = spark.createDataFrame([
+    ('1', 'mouse', 'microsoft', 39.99),
+    ('2', 'keyboard', 'logitech', 59.99),
+], ['prod_id', 'prod_cat', 'prod_brand', 'prod_value'])
+
+purchases = spark.createDataFrame([
+    (date(2017, 11, 1), 2, '1'),
+    (date(2017, 11, 2), 1, '1'),
+    (date(2017, 11, 5), 1, '2'),
+], ['date', 'quantity', 'prod_id'])
+
+# The default join type is the "INNER" join
+purchases.join(products, 'prod_id').show()
+```
+
+```{python}
+purchases.join(products, 'prod_id').explain()
+```
+
+## Using a `SQL` query
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:29.731271Z', start_time: '2022-01-26T10:58:29.101559Z'}
+#| scrolled: true
+products.createOrReplaceTempView("products")
+purchases.createOrReplaceTempView("purchases")
+
+query = """
+    SELECT * 
+    FROM purchases AS prc INNER JOIN 
+        products AS prd 
+    ON prc.prod_id = prd.prod_id
+"""
+spark.sql(query).show()
+```
+
+```{python}
+spark.sql(query).explain()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:30.660419Z', start_time: '2022-01-26T10:58:29.734282Z'}
+new_purchases = spark.createDataFrame([
+    (date(2017, 11, 1), 2, '1'),
+    (date(2017, 11, 2), 1, '3'),
+], ['date', 'quantity', 'prod_id_x'])
+
+# The default join type is the "INNER" join
+join_rule = new_purchases.prod_id_x == products.prod_id
+
+print(type(join_rule))
+
+new_purchases.join(products, join_rule, 'left').show()
+```
+
+```{python}
+join_rule.info
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:31.319336Z', start_time: '2022-01-26T10:58:30.663809Z'}
+#| scrolled: true
+new_purchases = spark.createDataFrame([
+    (date(2017, 11, 1), 2, '1'),
+    (date(2017, 11, 2), 1, '3'),
+], ['date', 'quantity', 'prod_id_x'])
+
+# The default join type is the "INNER" join
+join_rule = new_purchases.prod_id_x == products.prod_id
+
+new_purchases.join(products, join_rule, 'left').show()
+```
+
+## Various types of joins
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:31.376310Z', start_time: '2022-01-26T10:58:31.323600Z'}
+left = spark.createDataFrame([
+    (1, "A1"), (2, "A2"), (3, "A3"), (4, "A4")], 
+    ["id", "value"])
+
+right = spark.createDataFrame([
+    (3, "A3"), (4, "A4"), (4, "A4_1"), (5, "A5"), (6, "A6")], 
+    ["id", "value"])
+
+join_types = [
+    "inner", "outer", "left", "right",
+    "leftsemi", "leftanti"
+]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:34.708236Z', start_time: '2022-01-26T10:58:31.380091Z'}
+for join_type in join_types:
+    print(join_type)
+    left.join(right, on="id", how=join_type)\
+        .orderBy("id")\
+        .show()
+```
+
+# Agregations
+
+## Examples using the API
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:35.398306Z', start_time: '2022-01-26T10:58:34.710552Z'}
+from pyspark.sql import functions as fn
+
+products = spark.createDataFrame([
+    ('1', 'mouse', 'microsoft', 39.99),
+    ('2', 'mouse', 'microsoft', 59.99),
+    ('3', 'keyboard', 'microsoft', 59.99),
+    ('4', 'keyboard', 'logitech', 59.99),
+    ('5', 'mouse', 'logitech', 29.99),
+], ['prod_id', 'prod_cat', 'prod_brand', 'prod_value'])
+
+products.groupBy('prod_cat').avg('prod_value').show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:35.782623Z', start_time: '2022-01-26T10:58:35.400724Z'}
+products.groupBy('prod_cat').agg(fn.avg('prod_value')).show()
+```
+
+```{python}
+(
+    products
+        .groupBy('prod_cat')
+        .agg(fn.mean('prod_value'), fn.stddev('prod_value'))
+        .show()
+)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:36.195471Z', start_time: '2022-01-26T10:58:35.784780Z'}
+from pyspark.sql import functions as fn
+
+products.groupBy('prod_brand', 'prod_cat')\
+    .agg(fn.avg('prod_value')).show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:36.650354Z', start_time: '2022-01-26T10:58:36.207985Z'}
+from pyspark.sql import functions as fn
+
+products.groupBy('prod_brand').agg(
+    fn.round(fn.avg('prod_value'), 1).alias('average'),
+    fn.ceil(fn.sum('prod_value')).alias('sum'),
+    fn.min('prod_value').alias('min')
+).show()
+```
+
+## Example using a query
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:37.089099Z', start_time: '2022-01-26T10:58:36.652842Z'}
+products.createOrReplaceTempView("products")
+```
+
+```{python}
+
+query = """
+SELECT
+prod_brand,
+round(avg(prod_value), 1) AS average,
+min(prod_value) AS min
+FROM products
+GROUP BY prod_brand
+"""
+
+spark.sql(query).show()
+```
+
+# Window functions
+
+## Numerical window functions
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:37.751296Z', start_time: '2022-01-26T10:58:37.092075Z'}
+from pyspark.sql import Window
+from pyspark.sql import functions as fn
+
+# First, we create the Window definition
+window = Window.partitionBy('prod_brand')
+
+print(type(window))
+```
+
+
+```{python}
+
+# Then, we can use "over" to aggregate on this window
+avg = fn.avg('prod_value').over(window)
+
+# Finally, we can it as a classical column
+products.withColumn('avg_brand_value', fn.round(avg, 2)).show()
+```
+
+With SQL queries, using multiple windows is not a problem
+
+```{python}
+query = """
+SELECT *, 
+    ROUND(AVG(prod_value) OVER w1, 2)  AS avg_brand_value,
+    ROUND(AVG(prod_value) OVER w2, 1)  AS avg_prod_value
+FROM products
+WINDOW w1 AS (PARTITION BY prod_brand),
+       w2 AS (PARTITION BY prod_cat)
+"""
+
+spark.sql(query).show()
+```
+
+```{python}
+window2 = Window.partitionBy('prod_cat')
+
+avg2 = fn.avg('prod_value').over(window2)
+
+# Finally, we can it as a classical column
+( 
+    products
+        .withColumn('avg_brand_value', fn.round(avg, 2))
+        .withColumn('avg_prod_value', fn.round(avg2, 1))
+        .show()
+)
+```
+
+```{python}
+( 
+    products
+        .withColumn('avg_brand_value', fn.round(avg, 2))
+        .withColumn('avg_prod_value', fn.round(avg2, 1))
+        .explain()
+)
+```
+
+```{python}
+spark.sql(query).explain()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:38.261379Z', start_time: '2022-01-26T10:58:37.753256Z'}
+from pyspark.sql import Window
+from pyspark.sql import functions as fn
+
+# The window can be defined on multiple columns
+window = Window.partitionBy('prod_brand', 'prod_cat')
+
+avg = fn.avg('prod_value').over(window)
+
+products.withColumn('avg_value', fn.round(avg, 2)).show()
+```
+
+
+## Lag and Lead
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:39.785452Z', start_time: '2022-01-26T10:58:39.084502Z'}
+purchases = spark.createDataFrame([
+    (date(2017, 11, 1), 'mouse'),
+    (date(2017, 11, 2), 'mouse'),
+    (date(2017, 11, 4), 'keyboard'),
+    (date(2017, 11, 6), 'keyboard'),
+    (date(2017, 11, 9), 'keyboard'),
+    (date(2017, 11, 12), 'mouse'),
+    (date(2017, 11, 18), 'keyboard')
+], ['date', 'prod_cat'])
+purchases.show()
+
+window = Window.partitionBy('prod_cat').orderBy('date')
+
+prev_purch = fn.lag('date', 1).over(window)
+next_purch = fn.lead('date', 1).over(window)
+
+purchases\
+    .withColumn('prev', prev_purch)\
+    .withColumn('next', next_purch)\
+    .orderBy('prod_cat', 'date')\
+    .show()
+```
+
+## Rank, DenseRank and RowNumber
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:40.005845Z', start_time: '2022-01-26T10:58:39.787433Z'}
+contestants = spark.createDataFrame([
+    ('veterans', 'John', 3000),
+    ('veterans', 'Bob', 3200),
+    ('veterans', 'Mary', 4000),
+    ('young', 'Jane', 4000),
+    ('young', 'April', 3100),
+    ('young', 'Alice', 3700),
+    ('young', 'Micheal', 4000),
+], ['category', 'name', 'points'])
+
+contestants.show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:58:40.653650Z', start_time: '2022-01-26T10:58:40.009618Z'}
+window = Window.partitionBy('category')\
+    .orderBy(contestants.points.desc())
+
+rank = fn.rank().over(window)
+dense_rank = fn.dense_rank().over(window)
+row_number = fn.row_number().over(window)
+
+contestants\
+    .withColumn('rank', rank)\
+    .withColumn('dense_rank', dense_rank)\
+    .withColumn('row_number', row_number)\
+    .orderBy('category', fn.col('points').desc())\
+    .show()
+```
+
+# Connection to a database
+
+```{python}
+# df = spark.read \
+#     .format("jdbc") \
+#     .option("url", "jdbc:postgresql://localhost:5432/postgres") \
+#     .option("dbschema", "imdb")\
+#     .option("dbtable", "title_basics") \
+#     .option("user", "postgres") \
+#     .option("password", "postgres") \
+#     .option("driver", "org.postgresql.Driver") \
+#     .load()
+
+# df.printSchema()
+```
+
+

@@ -1,0 +1,1040 @@
+---
+title: "Annotating SOTU corpus"
+subtitle: "M2MO Algorithmes pour données massives"
+author: ""
+date: "updated: `r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: ["xaringan-themer.css", "default", "default-fonts", "hygge"]
+    lib_dir: libs
+    seal: false
+    toc: true
+    toc_depth: 2
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+mono_light(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Droid Mono")
+)
+```
+
+
+class: middle, center, inverse
+
+# Annotating a corpus with SpaCy
+
+##  M2MO Algorithmes pour données massives
+
+### Université Paris-Diderot
+
+#### `r Sys.Date()`
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
+#libs <- c('tm', 'tidyverse', 'text_reuse', 'FNN', 'caret', "foreach", "ggfortify")
+#rc <- plyr::llply(libs, require, character.only=TRUE)
+```
+
+
+```{r, load_refs, echo=FALSE, cache=FALSE, eval=TRUE}
+library(RefManageR)
+BibOptions(check.entries = FALSE,
+           bib.style = "authoryear",
+           cite.style = 'alphabetic',
+           style = "markdown",
+           hyperlink = FALSE,
+           dashed = FALSE)
+myBib <- ReadBib("./mmd.bib", check = FALSE)
+```
+
+
+---
+name: layout-general
+layout: true
+class: left, top
+background-image: url('./figures/uparis.png')
+background-size: 5%
+background-position: 5% 97%
+
+---
+# Annotating a corpus using Spacy
+
+
+
+The aim is to study the _State of the Union_ (SOTU) corpus using `SpaCy`.
+
+.pull-left[
+The SOTU corpus is a collection of $236$ yearly
+speeches delivered to the Congress by U.S. presidents
+since the foundation of the United States.
+
+According to year of delivery, these speeches are either transmitted as a written text or read.
+
+They are broadcast between December (19th century) and February (20th century).
+]
+
+.pull-right[
+```{r echo=FALSE, eval=TRUE, out.width="90%"}
+knitr::include_graphics('./figures/rushmore.jpg')
+```
+]
+
+
+
+
+
+---
+
+```{python load_modules, echo=FALSE, eval=FALSE}
+# %%
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+from pathlib import Path
+import sys
+import timeit
+from IPython.display import display, Markdown as md, Latex
+
+# spacy
+import spacy   # nlp software
+from spacy.lang.en import English
+from spacy.tokens  import Doc  #
+from spacy.vocab import Vocab  #
+import rpy2
+# from rpy2.robjects import r, pandas2ri
+# %%
+
+```
+
+## SOTU data, texts and (R) package
+
+- `R` package `sotu` (State Of The Union)
+- `Python` module `rpy2` enables to load this meta information into `Python` session
+- `rpy2` allows a Python session to interact with an R session
+
+```{python, eval=FALSE, include=FALSE}
+# %%
+# env CC=/usr/local/Cellar/gcc/9.2.0_3/bin/gcc-9 pip3 install rpy2     # If needed
+# %%
+```
+
+```{python, eval=FALSE}
+# %% [codecell]
+
+from rpy2.robjects import r, pandas2ri
+
+pandas2ri.activate()
+# %%
+```
+
+Thanks to `pandas2ri.activate()`, `R` dataframes are (implicitely) converted
+intto `Pandas` dataframes.
+
+---
+
+
+```{python rpy2_sotu, eval=FALSE}
+# %%
+sotu = r("sotu::sotu_meta")
+# %%
+```
+
+Each row in `sotu` DataFrame corresponds to a document from the corpus
+
+|President         | Year|Years active |Party       |Type |
+|:-----------------|:----:|:----------:|:-----------|:---------|
+|George Washington | 1790|1789-1793    |Nonpartisan |speech    |
+|George Washington | 1790|1789-1793    |Nonpartisan |speech    |
+|George Washington | 1791|1789-1793    |Nonpartisan |speech    |
+|George Washington | 1792|1789-1793    |Nonpartisan |speech    |
+|George Washington | 1793|1793-1797    |Nonpartisan |speech    |
+|George Washington | 1794|1793-1797    |Nonpartisan |speech    |
+
+---
+
+### Loading texts
+
+To get a corpus tied to the meta information,
+load the texts from the `R` package
+
+We add a `text` column to the `sotu` Pandas dataframe
+
+```{python text_from_sotu_r, eval=FALSE}
+# %%
+sotu_corpus = r("sotu::sotu_text")
+type(sotu_corpus)
+sotu['text'] = sotu_corpus
+
+type(sotu['text'])
+# %%
+```
+
+Implicit coercions:
+
+- `sotu_corpus` is a `numpy` array
+- `sotu['text']` is a `pandas` `Series`
+
+---
+
+### Listing the ten most prolific presidents
+
+Metadata can be used to answer simple questions
+
+Some presidents gave more addresses than others
+
+Usually because they served for more terms  (FDR
+won four elections)
+
+```{python topten, eval=FALSE}
+# %%
+top_10 = sotu.president\
+             .value_counts()\
+             .head(10)
+
+sotu.loc[sotu.president.isin(top_10.index),
+         ['president', 'years_active', 'party']]\
+    .drop_duplicates()
+# %%
+```
+
+.small[We could do that with SQL!]
+
+---
+
+```{r, eval=FALSE, echo=FALSE, include=FALSE}
+# %%
+sotu::sotu_meta %>%
+    dplyr::group_by(president) %>%
+    dplyr::summarise(n=n()) %>%
+    dplyr::arrange(desc(n)) %>%
+    dplyr::top_n(16) %>%
+    dplyr::select(president) %>%
+    unlist() -> long_pres
+
+sotu::sotu_meta %>%
+    dplyr::filter(president %in% long_pres) %>%
+    dplyr::group_by(president, party) %>%
+    dplyr::summarise(activity=stringr::str_c((min(year)), (max(year)),sep = '-')) %>%
+    dplyr::arrange(activity) %>%
+    knitr::kable(format="markdown")
+# %%
+```
+
+
+|President             |Party                 |Activity  |
+|:---------------------|:---------------------|:---------:|
+|George Washington     |Nonpartisan           |1790-1796 |
+|Thomas Jefferson      |Democratic-Republican |1801-1808 |
+|James Madison         |Democratic-Republican |1809-1816 |
+|James Monroe          |Democratic-Republican |1817-1824 |
+|Andrew Jackson        |Democratic            |1829-1836 |
+|Ulysses S. Grant      |Republican            |1869-1876 |
+|Grover Cleveland      |Democratic            |1885-1896 |
+|Theodore Roosevelt    |Republican            |1901-1908 |
+|Woodrow Wilson        |Democratic            |1913-1920 |
+|Franklin D. Roosevelt |Democratic            |1934-1945 |
+|Harry S Truman        |Democratic            |1946-1953 |
+|Dwight D. Eisenhower  |Republican            |1953-1961 |
+|Ronald Reagan         |Republican            |1981-1988 |
+|William J. Clinton    |Democratic            |1993-2000 |
+|George W. Bush        |Republican            |2001-2008 |
+|Barack Obama          |Democratic            |2009-2016 |
+
+---
+
+```{python, eval=FALSE}
+# %%
+sotu.president.value_counts().index
+# %%
+```
+
+
+---
+
+### Annotating using [`SpaCy`](https://spacy.io)
+
+
+.pull-left[
+We iterate over the rows of the dataframe. On each `text`,
+we invoke the callable object `nlp` resulting from instanciation
+of class `Language` of package `spacy`.
+
+In order to annotate a document, `SpaCy` needs **models**
+
+Models are language dependent.
+
+`en_core_web_sm` is a small model that has been installed on the local machine.
+
+```{python info_model, eval=FALSE}
+# %%
+import spacy
+
+spacy.info('en_core_web_sm')
+
+# spacy.info('en_core_web_lg')
+# %%
+```
+]
+
+.pull-right[
+
+
+- This model handles documents written in English.
+- It consists of a `pipeline` comprising a `tagger`, a `parser` and a `ner (named entity recognizer)`.
+- It comes with accuracy indicators, *precision* and *recall*
+- It comes with speed estimates for are given  `cpu`
+
+The model consists of trained *Convolutional Neural Networks*.
+
+.small[
+> English multi-task CNN trained on OntoNotes,
+with GloVe vectors trained on Common Crawl.
+Assigns word vectors, context-specific token vectors,
+POS tags, dependency parse and named entities.
+]
+]
+
+
+---
+
+
+#### Precision
+
+ratio between number of True Positives (TP)  and sum of True Positives and False Postives (FP). (TP/(TP + FP)). This is the complement of the False Discovery Rate.
+
+#### Recall
+
+ratio  TP/(TP+FN). Another name for power at the alternative.
+
+#### F-measure
+
+reciprocal of the harmonic mean of Precision and Recall
+
+#### Measuring inter-annotator agreement. Cohen's Kappa
+
+Quantifying the agreement on discrete labeling tasks
+
+The numerator is the difference between the observed agreement and the chance agreement.
+The denominator is the difference between perfect agreement and chance agreement.
+
+
+---
+
+### Loading the model
+
+`spacy.load()`  returns a `Language` object
+contaning all components and data needed to process text.
+
+```{python  load_spacy_en, eval=FALSE}
+# %%
+
+# %timeit foo = spacy.load('en_core_web_sm')
+# 432 ms ± 6.85 ms per loop
+# (mean ± std. dev. of 7 runs, 1 loop each)
+
+nlp = spacy.load('en_core_web_sm')
+
+# %%
+```
+
+
+---
+
+### Annotating the corpus and timing
+
+.pull-left[
+Annotating a document takes time
+
+```{python sotu, eval=FALSE}
+# %%
+foo = sotu.iloc[151, 5]
+bar = nlp(foo)
+# 393 ms ± 6.48 ms per loop
+# %%
+```
+
+
+.small[
+
+> Processor Name: Intel Core i7
+Processor Speed: 3.3 GHz
+Number of Processors: 1
+Total Number of Cores: 4
+L2 Cache (per Core): 256 KB
+L3 Cache: 6 MB
+Memory:	16 GB
+]
+]
+
+.pull-right[
+Annotating a corpus takes even more time
+
+```{python anootate_corpus, eval=FALSE}
+# %%
+before = timeit.time.time()
+ann_sotu = {idx: nlp(row['text']) for idx, row in sotu.iterrows()}
+after = timeit.time.time()
+print(
+"""It took roughly {0:6f} seconds
+to annotate the SOTU corpus
+""".format(after - before))
+# %%
+```
+
+
+It took roughly `243` seconds to
+annotate the modest SOTU corpus
+on a powerful laptodesktop computer
+
+
+]
+
+
+---
+
+### Making annotations persistent (pythonic way)
+
+As annotating is no picnic, the results should be saved in any form.
+In order to be saved, objects need to be serialized.
+
+.pull-left[
+Python provides a serializing
+mechanism through packages `pickle/shelve`. We do not
+need to import `pickle` explicitly. `shelve` does the
+job under the hood.
+
+```{python , eval=FALSE}
+# %%  very time consuming!
+import shelve
+
+with shelve.open('sotudb') as db:
+  for idx, ann in ann_sotu.items():
+    print(idx)
+    db[str(idx)] = ann  # keys have to be strings
+# %%
+```
+]
+
+
+.pull-right[
+
+Saving the Spacy way
+
+
+```{python save_text_from_sotu_r, eval=FALSE}
+# %%
+p = Path.cwd()
+os.chdir(p.parent.joinpath('CM2020/RMD'))
+os.mkdir('./backup')
+p = Path.cwd()
+
+for idx, row in sotu.iterrows():
+  doc = ann_sotu[idx]
+  pres = row['president'].lower()
+  pres = pres.replace(' ','_')
+  y = str(row['year'])
+  suff = str(idx) + '.bin'
+  fn = '_'.join((pres,  y, suff))
+  doc.to_disk(p.joinpath('./backup/'+fn))
+# %%
+```
+]
+
+
+---
+
+### Restoring off the shelf
+
+
+.pull-left[
+Using `pickle/shelve`, the saved annotated corpus can be used as a (slow) dictionnary.
+
+Specific values can be imported in the current environment in a
+way that parallels extracting a value from a dictionnary.
+
+```{python, eval=FALSE}
+# %%
+import shelve
+
+with shelve.open('sotudb') as db:
+    ted  = db['102']
+# %%
+```
+]
+
+.pull-right[
+
+Information saved on disk in the SpaCy way, can also be reloaded.
+
+.small[
+```{python old_loading_annotated_corpus, eval=FALSE}
+# %%
+folder = './backup/'
+
+corpus = {
+  fn.replace('.bin', ''):
+  Doc(Vocab()).from_disk(folder+fn)
+  for fn in os.listdir(folder)
+}
+# %%
+```
+]
+]
+
+???
+
+```python
+# %%
+from shelve import DbfilenameShelf
+
+with DbfilenameShelf('sotudb') as db:
+    ted = db['113']
+
+# %%
+```
+
+
+```python
+# %%
+os.chdir('/Users/stephaneboucheron/Dropbox/MMD2019')
+os.getcwd()
+
+with DbfilenameShelf('sotudb', protocol=3) as db_:
+    ted = db_['113']
+
+ted[100:110]
+# %%
+```
+
+
+
+```python
+# %%
+t = sotu.iloc[113, 5]
+
+import regex as re
+
+fa = re.compile('revenue')
+
+fa.findall(t)
+
+for i, t in enumerate(sotu.iloc[113:121, 5]):
+    if fa.findall(t):
+        print(i)
+
+# %%
+```
+
+
+---
+class: center, middle
+
+![Teddy (Bear) Roosevelt](./figures/pexels-teddy-bears-165263.jpeg)
+
+---
+template: layout-general
+
+### Exploring an annotation
+
+.pull-left[Let us look at the annotation of the 1902 address by
+[Theodore Roosevelt](https://en.wikipedia.org/wiki/Theodore_Roosevelt) (Teddy Bear).
+
+We retrieved it from the shelf as `db[113]`.
+
+The output of the annotation process is an object of class `Doc`.
+
+An object of class `Doc` contains a `sequence` of objects of class `Token`.
+
+It is possible to iterate
+on such a sequence `it = iter(ted)`. Iteration delivers the *tokens*.
+
+
+]
+
+.pull-right[
+```{r echo=FALSE, eval=TRUE, out.width="90%"}
+knitr::include_graphics('./figures/rushmore.jpg')
+```
+
+A `Doc` object may be indexed or sliced. A slice is called a `Span`.
+The next span matches a sentence: `repr(ted[93:114])` returns
+
+> Such a perusal could not fail to excite
+a higher appreciation of the vast labor and
+conscientious effort which are given to
+the conduct of our civil administration.
+
+]
+
+???
+
+`Doc` class is endowed with attributes and methods.
+
+At first glance, splitting a document into tokens looks like a trivial task that
+can be performed by `text.split(' ')`. Each language has its own rules.
+
+A span is really  a sequence of tokens. A token is much more than a string.
+---
+
+### Tokens have [attributes](https://spacy.io/api/token#attributes)
+
+.pull-left[
+
+The part of speech attribute (`pos`, `pos_`)
+predicts the token grammatical category
+
+```{python, eval=FALSE}
+# %%
+slice = ted[93:114]
+for t in slice:
+  print(t, t.pos_, t.dep_)
+
+# %%
+```
+
+This requires modelling since the same word may be used
+either as a verb or a noun
+
+The `Dep` attribute allows to dig further in grammatical
+analysis
+]
+
+.pull-right[
+
+Token | Part Of Speech | Dep
+:------|:-----:|:----:
+Such | ADJ | predet
+a | DET | det
+perusal | NOUN | nsubj
+could | VERB | aux
+not | ADV | neg
+fail | VERB | ROOT
+to | PART | aux
+excite | VERB | xcomp
+a | DET | det
+higher | ADJ | amod
+
+]
+
+???
+
+```{python, eval=FALSE}
+# %%
+for t in slice:
+    print(t, t.ent_id_)
+
+#dir(t)
+# %%
+```
+
+---
+exclude: true
+
+
+### The `prob` attribute
+
+Asserting the  type of a token consists in
+predicting this type. It comes with a self-confidence
+score. The `prob` attribute is a smoothed
+log probability estimate of token's type.
+
+
+
+```{python, eval=FALSE}
+# %%
+for t in slice:
+  print(t, t.pos_, t.dep_, t.prob)
+# %%
+```
+
+???
+
+In Document 102, all `prob` attributes are the same
+
+
+---
+
+### Method `count_by()`
+
+
+
+```{python, eval=FALSE}
+# %%
+for idx, cnt in ted.count_by(spacy.attrs.ENT_TYPE).items():
+    for t in ted:
+        if t.ent_type==idx:
+            print(t, t.ent_type_, t.pos_)
+# %%
+```
+
+???
+
+Some attributions  are questionable: is `Santo Dominguo` really a pearson?
+
+---
+
+### Conjuncts
+
+```{python, eval=FALSE}
+# %%
+cnt = 100
+for t in ted:
+    if t.conjuncts and len(list(t.conjuncts))>0:
+        print(t, list(t.conjuncts))
+        cnt += -1
+    if not cnt:
+        break
+
+# %%
+```
+
+---
+
+### Subtree
+
+```{python, eval=FALSE}
+# %%
+for t in slice:
+    print(t, list(t.subtree))
+# %%
+```
+
+
+---
+
+### Computing similarities between documents
+
+.pull-left[
+This is not a cheap operation
+```{python, eval=FALSE}
+# %%
+# TODO: something
+
+
+with DbfilenameShelf('sotudb', protocol=3) as db:
+    db['11'].similarity(db['172'])
+
+# %%
+```
+
+```
+1.35 s ± 29.1 ms per loop
+(mean ± std. dev. of 7 runs,
+  1 loop each)
+```
+]
+
+.pull-right[
+Computing all pairwise similarities between
+all documents in the corpus is prohibitively expensive ...
+
+You may try
+
+```{python, eval=FALSE}
+# %%
+sims = np.empty((len(db), len(db)))
+
+for i, j in itertools.combinations(db.keys(), 2):
+    sims[int(i), int(j)] = db[i].similarity(db[j])
+# %%
+```
+]
+
+- Are those similarities meaningful?
+- How is a similarity between two documents computed?
+-
+
+
+---
+
+### [Similarity](https://spacy.io/usage/vectors-similarity)
+
+> Each `Doc`, `Span` and `Token` comes with a `.similarity()` method
+that lets you compare it with another object, and determine the similarity.
+
+> Similarity is determined by comparing word vectors or *word embeddings*,
+multi-dimensional meaning representations of a word.
+Word vectors can be generated using an algorithm like `word2vec`.
+
+```{python, eval=FALSE}
+# %%
+import itertools
+
+# FIXME: restrict to tokens of comparable types
+
+for t1, t2 in itertools.combinations((t for t in ted if not t.is_stop), 2):
+    s =  t1.similarity(t2)
+    if s < .99 and s > .6:
+        print(t1, t2, s)
+# %%
+```
+
+
+
+
+---
+exclude: true
+
+
+### Vector
+
+In our document, each token is associated with a `vector`.
+All vectors (of type 'numpy' 'array')
+live in $\mathbb{R}^{384}$.
+
+```{python, eval=FALSE}
+# %%
+all([384==len(t.vector) for t in db['141']])
+for t in slice:
+    print(type(t.vector))
+
+len(ted[109].vector)
+# %%
+```
+
+
+????
+
+To make them compact and fast, spaCy's small models
+(all packages that end in sm) don't ship with word vectors,
+and only include context-sensitive tensors.
+This means you can still use the similarity()
+methods to compare documents, spans and tokens,
+but the result won't be as good,
+and individual tokens won't have any vectors assigned.
+
+So in order to use real word vectors, you need to download a larger model:
+
+ Word vectors let you import knowledge from raw text into your model. The knowledge is represented as a table of numbers, with one row per term in your vocabulary. If two terms are used in similar contexts, the algorithm that learns the vectors should assign them rows that are quite similar, while words that are used in different contexts will have quite different values. This lets you use the row-values assigned to the words as a kind of dictionary, to tell you some things about what the words in your text mean.
+
+Word vectors are particularly useful for terms which aren't well represented in your labelled training data. For instance, if you're doing named entity recognition, there will always be lots of names that you don't have examples of. For instance, imagine your training data happens to contain some examples of the term "Microsoft", but it doesn't contain any examples of the term "Symantec". In your raw text sample, there are plenty of examples of both terms, and they're used in similar contexts. The word vectors make that fact available to the entity recognition model. It still won't see examples of "Symantec" labelled as a company. However, it'll see that "Symantec" has a word vector that usually corresponds to company terms, so it can make the inference.
+
+In order to make best use of the word vectors, you want the word vectors table to cover a very large vocabulary. However, most words are rare, so most of the rows in a large word vectors table will be accessed very rarely, or never at all. You can usually cover more than 95% of the tokens in your corpus with just a few thousand rows in the vector table. However, it's those 5% of rare terms where the word vectors are most useful. The problem is that increasing the size of the vector table produces rapidly diminishing returns in coverage over these rare terms.
+
+---
+exclude: true
+
+## [Word2Vec](https://code.google.com/archive/p/word2vec/)
+
+Two techniques for computing vector representations of words
+
+- Bag of words
+- skip-gram
+
+Both algorithms learn the representation
+of a word that is useful
+for prediction of other words in the sentence.
+
+The `word2vec` tool takes a text corpus as input and produces
+the word vectors as output.
+
+It first constructs a *vocabulary* from the training text
+data and then learns vector representation of words.
+
+The resulting word vector file can be used as
+*features* in NLP and ML applications.
+
+- Word vectors and analogies
+-
+
+???
+
+#### TODO:
+
+- Feeding the annotated corpus to `Spark`
+-
+-
+
+---
+exclude: true
+
+```{python, eval=FALSE, echo=FALSE}
+# %%
+# classes utile pour un affichage pertinent
+# ref : https://stackoverflow.com/questions/8924173/how-do-i-print-bold-text-in-python
+
+class color:
+   PURPLE = '\033[95m'
+   CYAN = '\033[96m'
+   DARKCYAN = '\033[36m'
+   BLUE = '\033[94m'
+   GREEN = '\033[92m'
+   YELLOW = '\033[93m'
+   RED = '\033[91m'
+   BOLD = '\033[1m'
+   UNDERLINE = '\033[4m'
+   END = '\033[0m'
+
+#dictionaire pour assigner une couleur par candidat
+dcicolor = {
+    'Trump' : '\033[95m',
+    'Obama' : '\033[96m',
+    'Clinton' : '\033[94m',
+    'BushPere' : '\033[91m',
+    'Bush'  :'\033[93m'}
+# %%
+```
+
+---
+
+### CrossPlatform problems
+
+The annotated corpus has been dumped using module `shelve`
+under `MacOs Mojave` using `Python 3.6`.
+
+```{python, eval=FALSE}
+# %%
+import pickle
+import shelve
+
+%cd ~/Dropbox/MMD2019
+
+corpus = {}
+with shelve.DbfilenameShelf('./sotudb', flag='r', protocol=3) as db_:
+    for k in db_:
+        corpus[k] = db_[k]
+# %%
+```
+
+---
+
+## Documentwise annotation saving
+
+```{python, eval=FALSE}
+# %%
+%cd ~/Dropbox/MMD2019/PICKLE_SOTU
+
+for k in corpus:
+    with open('sotu_' + k, mode='wb') as fd:
+        pickle.dump(corpus[k], fd, protocol=3)
+# %%
+```
+
+---
+
+## Documentwise annotation loading
+
+
+```{python, eval=FALSE}
+# %%
+%cd ~/Dropbox/MMD2019/PICKLE_SOTU/
+
+del corpus
+
+corpus = {}
+for fn in os.listdir():
+    k = fn.split('_')[1]
+    with open(fn, 'rb') as fd:
+        corpus[k] = pickle.load(fd)
+# %%
+```
+
+---
+
+# Using large model
+
+
+---
+
+
+## Large models
+
+
+```python
+# %%
+spacy.info('en_core_web_lg')
+# %%
+```
+
+```{python, eval=FALSE}
+# %%
+{'lang': 'en',
+ 'name': 'core_web_lg',
+ ...
+ 'pipeline': ['tagger', 'parser', 'ner'],
+ 'labels': {
+  'tagger': ['AFX', 'CC', 'CD', 'DT', 'EX', ..., 'WP$', 'WRB', 'XX', '_SP', '``'],
+  'parser': ['ROOT', 'acl', 'acomp', 'advcl', 'advmod',..., 'predet', 'prep', 'prt', 'punct', 'quantmod', 'relcl', 'xcomp'],
+  'ner': ['CARDINAL', 'DATE', 'EVENT', 'FAC', 'GPE', 'LANGUAGE', 'LAW', 'LOC', ..., 'PRODUCT', 'QUANTITY', 'TIME', 'WORK_OF_ART']},
+ 'vectors': {'width': 300, 'vectors': 684831, 'keys': 684830, 'name': 'en_core_web_lg.vectors'},
+ }
+# %%
+```
+
+
+---
+
+
+##
+
+```{python, eval=FALSE}
+# %%
+nlp = spacy.load('en_core_web_lg')
+# %%
+```
+
+
+The large model looks just as fast as the small one.
+
+
+```{python, eval=FALSE}
+# %%
+before = timeit.time.time()
+ann_sotu = {idx: nlp(row['text']) for idx, row in sotu.iterrows()}
+after = timeit.time.time()
+print(
+"""It took roughly {0:6f} seconds
+to annotate the SOTU corpus
+""".format(after - before))
+# %%
+```
+
+```python
+# %%
+list(str(i) for i in range(112, 120))
+ted112 = ann_sotu['112']
+ted117 = ann_sotu['117']
+ted112.similarity()
+help("spacy.Doc")
+# %%
+```
+
+---
+
+# Exploring similarities between documents using Spacy
+
+---
+
+## Problems with raw similarity computations
+
+```python
+# %%
+
+# %%
+```
+
+---
+class: left, middle
+
+##  References
+
+```{r, echo=FALSE, eval=TRUE}
+NoCite(myBib, "arnold2015humanities")
+NoCite(myBib, "eisenstein2019introduction")
+```
+
+.small[
+```{r, 'refs', results='asis', echo=FALSE, eval=TRUE}
+PrintBibliography(myBib)
+```
+]

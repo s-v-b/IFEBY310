@@ -1,0 +1,759 @@
+---
+title: Using `JSON` data with `Python`
+jupyter: python3
+execute: 
+  eval: false
+---
+
+
+This notebook is concerned with `JSON` a format that serves many purposes. Just as `csv` files, `json` files are important sources and sinks for Spark. As a exchange format, `JSON` is also a serialization tool for Python  and many other languages. `JSON` provides a way to accomodate *semi-structured* data in otherwise tabular environments (dataframes and databases tables). 
+
+The notebook is organized in the following way:
+
+- Serialization/Deserialization of Python builtin types using `JSON`
+- Serialization/Deserialization of (some) custom types using `JSON`
+- `JSON` readers and writers for Spark dataframes
+- Composite types in Spark dataframes
+- Advanced `JSON` readers and writers for Spark dataframes
+
+
+## Serialization and deserialization of built-in types
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:25.759874Z', start_time: '2020-03-17T14:29:25.726787Z'}
+#| scrolled: true
+import json
+
+obj = {
+    "name": "Foo Bar",
+    "age": 78,
+    "friends": ["Jane","John"],
+    "balance": 345.80,
+    "other_names":("Doe","Joe"),
+    "active": True,
+    "spouse": None
+}
+
+print(json.dumps(obj, sort_keys=True, indent=4))
+```
+
+::: {.callout-note}
+
+`json.dumps()` outputs a `JSON` formatted string. 
+
+Not every type of object can be fed to `json.dumps()`. Licit types are:
+
+- 
+
+:::
+
+
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:26.039839Z', start_time: '2020-03-17T14:29:26.027858Z'}
+with open('user.json','w') as file:
+    json.dump(obj, file, sort_keys=True, indent=4)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:27.110218Z', start_time: '2020-03-17T14:29:26.479550Z'}
+!cat user.json
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:27.137307Z', start_time: '2020-03-17T14:29:27.114179Z'}
+json.loads('{"active": true, "age": 78, "balance": 345.8, "friends": ["Jane","John"], "name": "Foo Bar", "other_names": ["Doe","Joe"],"spouse":null}')
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:27.149816Z', start_time: '2020-03-17T14:29:27.140548Z'}
+with open('user.json', 'r') as file:
+    user_data = json.load(file)
+
+print(user_data)
+```
+
+::: {.callout}
+
+What happens if we feed `json.dumps()` with a `numpy` array? 
+
+:::
+
+## Serialization and deserialization of custom objects
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:27.733203Z', start_time: '2020-03-17T14:29:27.718399Z'}
+class User(object):
+    """Custom User Class
+    """
+    def __init__(self, name, age, active, balance, 
+                 other_names, friends, spouse):
+        self.name = name
+        self.age = age
+        self.active = active
+        self.balance = balance
+        self.other_names = other_names
+        self.friends = friends
+        self.spouse = spouse
+            
+    def __repr__(self):
+        s = "User("
+        s += "name=" + repr(self.name)
+        s += ", age=" + repr(self.age)
+        s += ", active=" + repr(self.active)
+        s += ", other_names=" + repr(self.other_names)
+        s += ", friends=" + repr(self.friends)
+        s += ", spouse=" + repr(self.spouse) + ")"
+        return s
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:27.733203Z', start_time: '2020-03-17T14:29:27.718399Z'}
+new_user = User(
+    name = "Foo Bar",
+    age = 78,
+    friends = ["Jane", "John"],
+    balance = 345.80,
+    other_names = ("Doe", "Joe"),
+    active = True,
+    spouse = None
+)
+
+new_user
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:49.613442Z', start_time: '2020-03-17T14:29:49.601102Z'}
+# This will raise a TypeError
+# json.dumps(new_user)
+```
+
+As expected, the custom object `new_user` is not JSON serializable. So let's build a method that does that for us.
+
+- This comes as no surprise to us, since earlier on we observed that
+the `json` module only handles the built-in types, and `User` is not one.
+
+- We need to send our user data to a client over a network, so how do we get 
+ourselves out of this error state?
+
+- A simple solution would be to convert our custom type into a serializable
+type that is a built-in type. We can conveniently define a method `convert_to_dict()`
+that returns a dictionary representation of our object. `json.dumps()` 
+takes in a optional argument, `default`, which specifies a function to be called if the object is not serializable. This function returns a JSON encodable version of the object.
+
+Recall that class `obj` has a dunder method `__dict__` that provides a basis for obtaining a dictionary with the attributes of any object:
+
+```{python}
+new_user.__dict__
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:52.854067Z', start_time: '2020-03-17T14:29:52.847015Z'}
+def obj_to_dict(obj):
+    """Converts an object to a dictionary representation of the object including 
+    meta-data information about the object's module and class name.
+
+    Parameters
+    ----------
+    obj : `object`
+        A python object to be converted into a dictionary representation
+
+    Returns
+    -------
+    output : `dict`
+        A dictionary representation of the object
+    """
+    # Add object meta data 
+    obj_dict = {
+        "__class__": obj.__class__.__name__,
+        "__module__": obj.__module__
+    }
+    # Add the object properties
+    return obj_dict | obj.__dict__
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:52.854067Z', start_time: '2020-03-17T14:29:52.847015Z'}
+obj_to_dict(new_user)
+```
+
+The function `convert_to_dict` does the following:
+
+- create a dictionary named `obj_dict` to act as the dict representation of our object.
+
+- magic methods `__class__.__name__` and `__module__` provide crucial metadata on the object: the class name and the module name
+
+  add the instance attributes of the object using `obj.__dict__` (`Python` stores instance attributes in a dictionary under the hood)
+
+- The resulting `obj_dict` is now serializable (provided all attributes of our object are).
+
+Now we can comfortably call `json.dumps()` on the object and pass `default=convert_to_dict`
+
+::: {.callout-note}
+
+Obviously this fails if one of the attributes is not `JSON` serializable
+
+:::
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:53.566068Z', start_time: '2020-03-17T14:29:53.560201Z'}
+print(json.dumps(new_user, default=obj_to_dict, indent=4, sort_keys=True))
+```
+
+Now, if we want to decode (deserialiaze) a custom object, and create the correct object type, we need a function that does the opposite of convert_to_dict, since `json.loads` simply returns a `dict`:
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:54.413286Z', start_time: '2020-03-17T14:29:54.408660Z'}
+#| scrolled: true
+user_data = json.loads(json.dumps(new_user, default=obj_to_dict))
+print(user_data)
+```
+
+We need `json.loads()` to reconstruct a `User` object from this dictionary: `json.loads()`
+takes an optional argument `object_hook` which specifies a function that returns the desired custom object, given the decoded output (which in this case is a `dict`).
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:55.257839Z', start_time: '2020-03-17T14:29:55.253496Z'}
+def dict_to_obj(input_dict):
+    """Converts a dictionary representation of an object to an instance of the object.
+
+    Parameters
+    ----------
+    input_dict : `dict`
+        A dictionary representation of the object, containing "__module__" 
+        and "__class__" metadata
+
+    Returns
+    -------    
+    obj : `object`
+        A python object constructed from the dictionary representation    
+    """
+    assert "__class__" in input_dict and "__module__" in input_dict
+    class_name = input_dict.pop("__class__")
+    module_name = input_dict.pop("__module__")
+    module = __import__(module_name)
+    class_ = getattr(module, class_name)
+    obj = class_(**input_dict)
+    return obj
+```
+
+This function does the following: 
+
+- Extract the class name from the dictionary under the key `__class__`
+
+- Extract the module name from the dictionary under the key `__module__`
+
+- Imports the module and get the class
+
+- Instantiate the class by giving to the class constructor all the instance arguments through dictionary unpacking
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:57.102787Z', start_time: '2020-03-17T14:29:57.097553Z'}
+obj_data = json.dumps(new_user, default=obj_to_dict)
+new_object = json.loads(obj_data, object_hook=dict_to_obj)
+new_object
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:57.944835Z', start_time: '2020-03-17T14:29:57.939581Z'}
+type(new_object)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T14:29:58.679143Z', start_time: '2020-03-17T14:29:58.673617Z'}
+#| scrolled: true
+new_object.age
+```
+
+::: {.callout-note}
+
+Functions `obj_to_dict()` and `dict_to_obj()`  are showcases for special/magic/dunder methods.
+
+In the definition of class `User`, two special methods were explicitly defined: `__init__` and `__repr__`. But many more are available, including `__dir__()`. 
+
+:::
+
+```{python}
+[dude for dude in dir(new_object) if dude.startswith('__')]
+```
+
+```{python}
+new_object.__getattribute__('age')
+```
+
+::: {.callout-note}
+
+Class `User` could have been implemented as a `dataclass`
+
+:::
+
+```{python}
+from dataclasses import dataclass
+
+@dataclass
+class UserBis(object):
+    """Custom User Class
+    """
+    name: str 
+    age: int
+    active: bool
+    balance: float
+    other_names: list[str]
+    friends: list[str]
+    spouse: str
+```
+
+```{python}
+other_user = UserBis(**(new_user.__dict__))
+```
+
+```{python}
+repr(other_user)
+```
+
+```{python}
+{dude for dude in dir(other_user) if dude.startswith('__')} -  {dude for dude in dir(new_user) if dude.startswith('__')}
+```
+
+# Using `JSON` with Spark
+
+First, we download the data if it's not there yet
+
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T16:19:34.238130Z', start_time: '2020-03-17T16:19:34.163729Z'}
+import requests, zipfile, io
+from pathlib import Path
+
+path = Path('drug-enforcement.json')
+if not path.exists():
+    url = "https://stephanegaiffas.github.io/big_data_course/data/drug-enforcement.json.zip"
+    r = requests.get(url)
+    z = zipfile.ZipFile(io.BytesIO(r.content))
+    z.extractall(path='./')
+```
+
+```{python}
+!ls drug*
+```
+
+## Reading a `JSON` dataset with `Spark`
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:13:47.583384Z', start_time: '2020-03-17T17:13:43.123090Z'}
+from pyspark import SparkConf, SparkContext
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as fn
+from pyspark.sql.functions import col
+
+spark = (SparkSession
+    .builder
+    .appName("Spark JSON")
+    .getOrCreate()
+)
+
+sc = spark._sc
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:13:47.590453Z', start_time: '2020-03-17T17:13:47.585590Z'}
+filename = "drug-enforcement.json"
+```
+
+First, lets look at the data. It's a large set of JSON records about drugs enforcement.
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:13:48.148481Z', start_time: '2020-03-17T17:13:47.594201Z'}
+#| scrolled: true
+!head -n 1000 drug-enforcement.json
+```
+
+We need to tell spark that rows span on several lines with the `multLine` option
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:13:52.259661Z', start_time: '2020-03-17T17:13:48.152192Z'}
+df = spark.read.json(filename, multiLine=True)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:13:52.294898Z', start_time: '2020-03-17T17:13:52.261550Z'}
+df.printSchema()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:13:52.355556Z', start_time: '2020-03-17T17:13:52.297210Z'}
+df.schema
+```
+
+
+
+::: {.callout-note}
+
+This dataset is a little bit of a mess! 
+
+This should not be surprising. The data used to populate the Spark dataframe are not classically tabular but what people call *semi-structured*. Json is well-suited to store, represent, and exchange such data. 
+
+In the classical age of tabular data (according to Codd's principles), a table cell could only hold a scalar value (numeric, logical, text, date, timestamp, ...), nowadays Relational Database Management Systems handle Arrays, Composite Types, Range Types, ..., and Json (see [PostgreSQL](https://www.postgresql.org/docs/current/datatype-json.html)). 
+
+Spark, `R`, and `Pandas` also allow us to work with complex types. 
+
+:::
+
+- First, there is a nested `opendfa` dictionary. Each element of the dictionary is an array
+- A first good idea is to **"flatten" the schema of the DataFrame**, so that there is no nested types
+
+## Flattening of the schema
+
+All the columns in the nested structure `openfda` are put up in the schema. These columns nested in the openfda are as follows:
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:14:00.472548Z', start_time: '2020-03-17T17:14:00.352058Z'}
+df.select('openfda.*').columns
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:14:01.904242Z', start_time: '2020-03-17T17:14:00.646360Z'}
+#| scrolled: true
+df.select("openfda.*").head(2)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:14:02.230811Z', start_time: '2020-03-17T17:14:01.906641Z'}
+for c in df.select("openfda.*").columns:
+    df = df.withColumn("openfda_" + c, col("openfda." + c))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:14:07.644985Z', start_time: '2020-03-17T17:14:07.501380Z'}
+df = df.select([c for c in df.columns if c != "openfda"])
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:14:09.871658Z', start_time: '2020-03-17T17:14:09.865537Z'}
+df.printSchema()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:14:19.204515Z', start_time: '2020-03-17T17:14:18.651165Z'}
+df.head(2)
+```
+
+Note that the display of the `DataFrame` is not as usual... it displays the dataframe like a list of `Row`, since the columns "openfda*" contain arrays of varying length
+
+## Missing data
+
+A strategy can be to remove rows with missing data. 
+`dropna` has several options, explained below.
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:17.413952Z', start_time: '2020-03-17T17:41:16.898211Z'}
+df.dropna().count()
+```
+
+If we remove all lines with at least one missing value, we end up with an empty dataframe !
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:17.895108Z', start_time: '2020-03-17T17:41:17.416108Z'}
+df.dropna(how='all').count()
+```
+
+`dropna` accepts the following arguments
+
+- `how`: can be `'any'` or `'all'`. If `'any'`, rows containing any null values will be dropped entirely (this is the default). If `'all'`, only rows which are entirely empty will be dropped.
+
+- `thresh`: accepts an integer representing the "threshold" for how many empty cells a row must have before being dropped. `tresh` is a middle ground between `how='any'` and `how='all'`. As a result, the presence of `thresh` will override `how`
+
+- `subset`: accepts a list of column names. When a subset is present, N/A values will only be checked against the columns whose names are provided.
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:17.901172Z', start_time: '2020-03-17T17:41:17.897860Z'}
+n_columns = len(df.columns)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:18.415066Z', start_time: '2020-03-17T17:41:17.904093Z'}
+df.dropna(thresh=n_columns).count()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:18.931320Z', start_time: '2020-03-17T17:41:18.417317Z'}
+#| scrolled: true
+df.dropna(thresh=n_columns-1).count()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:19.439726Z', start_time: '2020-03-17T17:41:18.934217Z'}
+df.dropna(thresh=n_columns-10).count()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:19.752318Z', start_time: '2020-03-17T17:41:19.441809Z'}
+df = df.dropna(subset=['postal_code', 'city', 'country', 'address_1'])
+df.count()
+```
+
+But before this, let's count the number of missing value for each column
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:20.424178Z', start_time: '2020-03-17T17:41:19.754255Z'}
+# For each column we create a new column containing 1 if the value is null and 0 otherwise.
+# We need to bast Boolean to Int so that we can use fn.sum after
+for c in df.columns:
+    # Do not do this for _isnull columns (ince case you run this cell twice...)
+    if not c.endswith("_isnull"):
+        df = df.withColumn(c + "_isnull", fn.isnull(col(c)).cast('int'))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:20.925299Z', start_time: '2020-03-17T17:41:20.426204Z'}
+df.head()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:22.053794Z', start_time: '2020-03-17T17:41:20.927796Z'}
+# Get the list of _isnull columns
+isnull_columns = [c for c in df.columns if c.endswith("_isnull")]
+
+# On the _isnull columns :
+#  - we compute the sum to have the number of null values and rename the column
+#  - convert to pandas for better readability
+#  - transpose the pandas dataframe for better readability
+missing_values = df.select(isnull_columns)\
+    .agg(*[fn.sum(c).alias(c.replace("_isnull", "")) for c in isnull_columns])\
+    .toPandas()
+
+missing_values.T\
+    .rename({0: "missing values"}, axis="columns")
+```
+
+We see that `more_code_info` is always null and that `termination_date` if often null. 
+Most of the `openfda*` columns are also almost always empty.
+
+We can keep only the columns with no missing values
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:24.802336Z', start_time: '2020-03-17T17:41:24.797411Z'}
+# This line can seem complicated, run pieces of each to understand
+kept_columns = list(
+    missing_values.columns[(missing_values.iloc[0] == 0).values]
+)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:27.488388Z', start_time: '2020-03-17T17:41:27.398503Z'}
+df_kept = df.select(kept_columns)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:27.948018Z', start_time: '2020-03-17T17:41:27.539797Z'}
+df_kept.head(2)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:41:41.419929Z', start_time: '2020-03-17T17:41:41.413784Z'}
+df_kept.printSchema()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:43:23.207185Z', start_time: '2020-03-17T17:43:22.829140Z'}
+df_kept.count()
+```
+
+## Filtering by string values 
+
+Cases from South San Francisco
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:43:54.396689Z', start_time: '2020-03-17T17:43:53.465012Z'}
+df.filter(df.city == "South San Francisco")\
+    .toPandas()
+```
+
+**Remark.** Once again, we use `.toPandas()` to pretty format the results in the notebook. 
+But it's a BAD idea to do this if the spark DataFrame is large, since it requires a `collect()`
+
+Aside from filtering strings by a perfect match, there are plenty of other powerful ways to filter by strings in `pyspark` :
+
+- `df.filter(df.city.contains('San Francisco'))`: returns rows where strings of a column contain a provided substring. In our example, filtering by rows which contain the substring "San Francisco" would be a good way to get all rows in San Francisco, instead of just "South San Francisco".
+
+- `df.filter(df.city.startswith('San'))`: Returns rows where a string starts with a provided substring.
+
+- `df.filter(df.city.endswith('ice'))`: Returns rows where a string starts with a provided substring.
+
+- `df.filter(df.city.isNull())`: Returns rows where values in a provided column are null.
+
+- `df.filter(df.city.isNotNull())`: Opposite of the above.
+
+- `df.filter(df.city.like('San%'))`: Performs a SQL-like query containing the LIKE clause.
+
+- `df.filter(df.city.rlike('[A-Z]*ice$'))`: Performs a regexp filter.
+
+- `df.filter(df.city.isin('San Francisco', 'Los Angeles'))`: Looks for rows where the string value of a column matches any of the provided strings exactly.
+
+You can try some of these to understand
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:48:19.328007Z', start_time: '2020-03-17T17:48:18.572570Z'}
+df.filter(df.city.contains('San Francisco'))\
+    .toPandas()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:48:10.490019Z', start_time: '2020-03-17T17:48:09.784496Z'}
+df.filter(df.city.isin('San Francisco', 'Los Angeles')).toPandas()
+```
+
+## Filtering by Date Values
+
+In addition to filtering by strings, we can also filter by columns where the values are stored as dates or datetimes (or strings that can be inferred as dates). Perhaps the most useful way to filter dates is by using the `between()` method, which allows us to find results within a certain date range. Here we find all the results which were reported in the years 2013 and 2014:
+
+```{python}
+#| ExecuteTime: {end_time: '2020-03-17T17:50:34.344304Z', start_time: '2020-03-17T17:50:33.638867Z'}
+df.filter(df.city == "South San Francisco")\
+    .filter(df.report_date.between('2013-01-01 00:00:00','2015-03-11 00:00:00'))\
+    .toPandas()
+```
+
+::: {.callout-caution}
+
+Is Spark smart enough to understand that the string in column `report_date` contains a date?
+
+:::
+
+```{python}
+df.filter(df.city == "South San Francisco")\
+    .filter(df.center_classification_date.between('2013-01-01 00:00:00','2013-12-31 00:00:00'))\
+    .toPandas()
+```
+
+
+```{python}
+df_dates = df.select([c for c in df.columns if c.endswith("date")])
+
+df_dates.printSchema()
+```
+
+```{python}
+df_dates.show(5)
+```
+
+Columns are not dates  (`DateType`) but strings (`StringType`). When comparing `report_date` 
+with `'2013-01-01 00:00:00'` and `'2015-03-11 00:00:00'`, we are comparing strings and are lucky enough that in unicode `'-' < '0' < '...' < '9'` so that `2013-....` is less that any string starting with `20130...`, while any string starting with `2013...` is less than any string starting with `2015..`. 
+
+::: {.callout-caution}
+
+If some field in a Jason string is meant to represent a date or a datetime object, spark should be given a hint. 
+
+Json loaders (from `Python`) as well as the Spark Json reader have optional arguments that can be used to indicate the date parser to be used. 
+
+:::
+
+
+## Handling complex types 
+
+Bridging the gap between tabular and semi-structured data. 
+
+::: {.callout-note}
+
+SQL, `R`, `Pandas` ... 
+
+:::
+
+`struct`, `array`, `map`
+
+
+
+
+```{python}
+# struct
+```
+
+
+The problems we faced after loading data from the json file pertained to the fact that column `fda` was of complex `StrucType()` type. We shall revisit this dataframe. 
+
+
+```{python}
+df = spark.read.json(filename, multiLine=True)
+```
+
+The dataframe schema `df.schema` which is of type `StructType` (defined in `pyspark.sql.types`) can be converted to a json string which in turn can be converted into a Python dictionary. 
+
+```{python}
+df = spark.read.json(filename, multiLine=True)
+
+sj = json.loads(df.schema.json())
+```
+
+We equip the dataframe with a primary key 
+
+```{python}
+from pyspark.sql import Window
+
+w = Window.orderBy(col("center_classification_date"))
+
+df = (
+  df
+    .withColumn("row_id", fn.row_number()
+    .over(w))
+)
+```
+
+```{python}
+[(f['name'], f['type']) 
+ for f in sj['fields'] if not isinstance(f['type'], str)]
+```
+
+Column `openfda` has type `StrucType()` with fields with composite type.
+
+
+```{python}
+{f['type']['type']
+ for f in sj['fields'] if not isinstance(f['type'], str)}
+```
+
+Projecting on `row_id`  and `openfda.*` leads to a (partially) flattened datafame, that, thanks to the `row_id` column can be joined with the original dataframe. 
+
+```{python}
+df_proj = df.select('row_id', 'openfda.*')
+
+df_proj.printSchema()
+```
+
+We can inspect the length of the arrays. 
+
+```{python}
+# array
+df_proj.select(
+    fn.max(fn.size(col("application_number"))).alias("Max"), 
+    fn.min(fn.size(col("application_number"))).alias("min"), 
+    fn.avg(fn.size(col("application_number"))).alias("Mean")).show(1)
+```
+
+In some rows, the *size* of the array is `-1` because the field is `NULL`.
+
+```{python}
+(
+  df_proj
+    .where(fn.size(col("application_number"))>1)
+    .select("row_id")
+    .show(5)
+)
+```
+
+An `array` column can be *exploded*. This is like pivoting into long form. The result contains one row per item in the array. 
+ 
+```{python}
+(
+  df_proj
+    .select('row_id', 'application_number')
+    .withColumn("exploded", fn.explode(col("application_number")))
+    .select('row_id', 'exploded')
+    .groupBy('row_id')
+    .agg(fn.count('exploded').alias("n_lignes"))
+    .where("n_lignes > 1")
+    .show(5)
+)
+```
+
+
+

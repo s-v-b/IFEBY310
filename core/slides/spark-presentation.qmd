@@ -1,0 +1,411 @@
+---
+title: "A glimpse at  Spark"
+
+format:
+  revealjs: 
+    footer: |
+      [Spark MediaLab Presentation](https://stephane-v-boucheron.fr/slides/spark-sql.html)
+---
+
+# Spark in perspective {background-color="#1c191c"}
+
+## From the archive
+
+Spark project
+
+:   launched in 2010 by M. Zaharia (UC Berkeley) et al.
+
+. . .
+
+Spark 1.0.0 released (May 30, 2014):
+
+:   ... This release expands Spark’s standard libraries, introducing a new SQL package (Spark SQL) that lets users integrate SQL queries into existing Spark workflows. MLlib, Spark’s machine learning library, is expanded with sparse vector support and several new algorithms. The GraphX and Streaming libraries also introduce new features and optimizations. Spark’s core engine adds support for secured YARN clusters, a unified tool for submitting Spark applications, and several performance and stability improvements.
+
+. . .
+
+Spark 2.0.0 released (July 26, 2016)
+
+:   The major updates are API usability, SQL 2003 support, performance improvements, structured streaming, R UDF support, as well as operational improvements.
+
+## From the archive (continued)
+
+Spark 3.0.0 released (June 18, 2020)
+
+:   ... This year is Spark’s 10-year anniversary as an open source project. Since its initial release in 2010, Spark has grown to be one of the most active open source projects. Nowadays, Spark is the de facto unified engine for big data processing, data science, machine learning and data analytics workloads.
+
+. . .
+
+Spark SQL is the top active component in this release. 46% of the resolved tickets are for Spark SQL. These enhancements benefit all the higher-level libraries, including structured streaming and MLlib, and higher level APIs, including SQL and DataFrames. Various related optimizations are added in this release. In TPC-DS 30TB benchmark, Spark 3.0 is roughly two times faster than Spark 2.4.
+
+::: notes
+Python is now the most widely used language on Spark. PySpark has more than 5 million monthly downloads on PyPI, the Python Package Index. This release improves its functionalities and usability, including the pandas UDF API redesign with Python type hints, new pandas UDF types, and more Pythonic error handling.
+
+Here are the feature highlights in Spark 3.0: adaptive query execution; dynamic partition pruning; ANSI SQL compliance; significant improvements in pandas APIs; new UI for structured streaming; up to 40x speedups for calling R user-defined functions; accelerator-aware scheduler; and SQL reference documentation.
+
+From <https://spark.apache.org/releases/spark-release-3-0-0.html>
+:::
+
+::: notes
+> "Présentation de l'outil SPARK. Cette séance offrira tout d'abord un aperçu général et théorique du développement de cette technologie, un rappel historique et des solutions existantes, la scalabilité, entre autres. Un second volet de la présentation se concentrera sur l'application de cette technologie dans la recherche, avec une démonstration pratique illustrant son utilisation."
+:::
+
+## Why Spark?
+
+::: columns
+::: {.column width="60%"}
+::: incremental
+-   Scalability
+
+-   Beyond OLTP: OLAP (and BI)
+
+-   From Data Mining to Big Data
+
+-   From Datawarehouses to Datalakes
+:::
+
+::: {.fragment .fade-in}
+-   MapReduce {{< fa brands google >}}
+:::
+
+::: {.fragment .fade-in}
+-   Apache Hadoop
+:::
+
+::: {.fragment .fade-in}
+-   Hive {{< fa brands hive >}} {{< fa brands facebook >}}
+    -   Before 2010, de facto big data SQL API
+    -   Helped propel `Hadoop` to industry
+:::
+:::
+
+::: {.column width="40%"}
+::: {.fragment .fade-in}
+![1995-2005 Beyond ACID SQL](IMG/harrison_next_gen_database.jpg)
+:::
+:::
+:::
+
+# Spark organization {background-color="#1c191c"}
+
+------------------------------------------------------------------------
+
+::: columns
+::: column
+![Cluster overview from Spark official documentation](IMG/cluster-overview.png)
+:::
+
+::: column
+::: {.fragment .fade-in-out}
+::: callout-note
+
+-   There is one master per cluster.
+-   The cluster manager/master is launched by `start-master.sh`.
+-   There are as many workers per machine on the cluster.
+-   A worker process is launched by `start-worker.sh` (standalone mode)
+-   Spark applications (interactive or not) exchange informations using a driver process.
+-   Master is per cluster, and driver is per application.
+:::
+:::
+:::
+:::
+
+## 
+
+![](./IMG/spark_archi.png)
+
+## Sparksession
+
+```{python}
+#| echo: true
+from pyspark.sql import SparkSession
+
+spark = (
+    SparkSession 
+        .builder 
+        .appName("Presentation") 
+        .getOrCreate()
+)
+```
+
+
+# Spark SQL and Dataframes {background-color="#1c191c"}
+
+---
+
+::: {.middle}
+
+::: {.center}
+
+![](./IMG/pyspark-apis.png)
+
+:::
+
+:::
+
+## Spark core
+
+- Implements the `RDD` (Resilient Distributed Datasets)
+
+. . .
+
+- Spark project was launched to implement the RDD concept presented by Zaharia et al at the end of the 2000'
+
+. . .
+
+- In words, RDDs behave like distributed, fault-tolerant, Python collections (list or dict)
+
+. . .
+
+- RDDs areo *immutable*, they can be *transformed* using `map` like operations, transformed RDDs can be *reduced*, and the result can be `collected` to the driver process   
+
+
+## Spark SQL and `HIVE` (Hadoop InteractiVE)
+
+Spark SQL relies on Hive SQL's conventions and functions
+
+Since release 2.0, Spark offers a native SQL parser that supports ANSI-SQL and HiveQL
+
+Works for analysts, data engineers, data scientists
+
+. . .
+
+::: {.callout-caution}
+
+### Spark-SQL is geared towards OLAP not OLTP
+
+:::
+
+## Rows
+
+Spark dataframes are RDDs (collections of `Row`s)
+
+```{python}
+#| code-line-numbers: 3-5|12|14
+from pyspark.sql import Row
+
+row1 = Row(name="John", age=21)
+row2 = Row(name="James", age=32)
+row3 = Row(name="Jane", age=18)
+
+row1['name']
+
+rows = [row1, row2, row3]
+column_names = ["Name", "Age"]
+
+df = spark.createDataFrame(rows, column_names)
+
+df.show()
+```
+
+## Schema
+
+```{python}
+df.printSchema()
+```
+
+## From dataframes to `RDDs`
+
+```{python}
+print(df.rdd.toDebugString().decode("utf-8"))
+```
+
+```{python}
+df.rdd.getNumPartitions()
+```
+
+## Spark dataframe API
+
+The Spark dataframe API offers a developper-friendly API for implementing 
+
+- Relational algebra  $\sigma, \pi, \bowtie, \cup, \cap, \setminus$
+- Partitionning `GROUP BY`
+- Aggregation and Window functions 
+
+. . .
+
+Compare the  Spark `Dataframe` API  with: 
+
+{{< fa brands r-project >}} `dplyr`, `dtplyr`, `dbplyr` in `R` `Tidyverse`
+
+{{< fa brands python >}} `Pandas`  
+
+{{< fa brands python >}} `Pandas on Spark`
+
+Chaining and/or piping enable modular query construction
+
+## Basic Single Tables Operations (methods/verbs)
+
+
+| Operation | Description |
+|:---|:----|
+| `select` | Chooses columns from the table   $\pi$ |
+| `selectExpr` | Chooses columns and expressions from table $\pi$ |
+| `where` | Filters rows based on a boolean rule  $\sigma$ |
+| `limit` | Limits the number of rows `LIMIT ...`|
+| `orderBy` | Sorts the DataFrame based on one or more columns `ORDER BY ...` |
+| `alias` | Changes the name of a column `AS ...`|
+| `cast` | Changes the type of a column |
+| `withColumn` | Adds a new column |
+
+## Toy example
+
+```{python}
+column_names = ["name", "age", "gender"]
+rows = [
+        ["John", 21, "male"],
+        ["Jane", 25, "female"]
+    ]
+df = spark.createDataFrame(rows, column_names)
+
+df.show()
+```
+
+## Querying SQL style
+
+```{python}
+## Create a temporary view from the DataFrame
+df.createOrReplaceTempView("new_view")
+
+## Define the query
+query = """
+  SELECT name, age 
+  FROM new_view 
+  WHERE gender='male'
+"""
+
+men_df = spark.sql(query)
+men_df.show()
+```
+
+## Select 
+
+The argument of `select()`  is `*cols` where `cols` 
+can be built from column names (strings), column expressions like `df.age + 10`,  lists 
+
+```{python}
+df.select(df.name.alias("nom"), df.age+10 ).show()
+```
+
+```{python}
+df.select([c for c in df.columns if "a" in c]).show()
+```
+
+## Adding new columns
+
+```{python}
+## In a SQL query:
+query = "SELECT *, 12*age AS age_months FROM table"
+
+## Using Spark SQL API:
+df.withColumn("age_months", df.age * 12).show()
+
+## Or
+df.select("*", 
+          (df.age * 12).alias("age_months")
+  ).show()
+```
+
+## Basic operations
+
+- The *full list of operations* that can be applied to a `DataFrame` can be found in the [[DataFrame doc]](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame)
+
+- The *list of operations on columns* can be found in the [[Column docs]](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.Column)
+
+
+# Spark APIs for `R` {background-color="#1c191c"}
+
+## `sparkR` and `sparklyr`
+
+::: {.fragment .fade-in-then-semi-out}
+-   `sparkR` is the official Spark API for `R` users
+:::
+
+::: {.fragment .fade-in}
+-   `sparklyr` (released 2016) is the de facto Spark API for `tidyverse`
+:::
+
+## A glimpse at Sparklyr
+
+::: {.fragment .fade-in}
+Spark dataframes can be handled through `dplyr` pipelines
+
+``` r
+#| code-line-numbers: |4|5|6|7
+sc <- spark_connect(master="local", version="3.5")
+wh <- copy_to(sc, whiteside)
+
+wh |> 
+    group_by(Insul) |> 
+    mutate(Fn=(1+n()-min_rank(desc(Temp)))/n()) |> 
+    arrange(Insul, Temp)
+```
+:::
+
+::: {.fragment .fade-in}
+```         
+# Source:     spark<?> [?? x 4]
+# Groups:     Insul
+# Ordered by: Insul, Temp
+   Insul  Temp   Gas     Fn
+   <chr> <dbl> <dbl>  <dbl>
+ 1 After  -0.7   4.8 0.0333
+ 2 After   0.8   4.6 0.0667
+ 3 After   1     4.7 0.1   
+ 4 After   1.4   4   0.133 
+ 5 After   1.5   4.2 0.167 
+ 6 After   1.6   4.2 0.2   
+ 7 After   2.3   4.1 0.233 
+ 8 After   2.5   4   0.3   
+ 9 After   2.5   3.5 0.3   
+10 After   3.1   3.2 0.333 
+# ℹ more rows
+# ℹ Use `print(n = ...)` to see more rows
+```
+:::
+
+## Under the hood
+
+``` r
+> wh |>  
+    summarise(x=quantile(Temp,.25)) |> 
+    show_query()
+```
+
+::: {.fragment .fade-in}
+```         
+<SQL>
+SELECT PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY `Temp`) AS `x`
+FROM `whiteside`
+```
+:::
+
+::: {.fragment .fade-in}
+`dplyr` queries are translated into `Spark/Hive SQL`
+
+{{< fa hand-point-right >}} `quantile()` is a `base R` function, it is matched to the `Spark/Hive` `percentile()` function
+
+`sparklyr` aims at avoiding sending `R` functions/objects across the cluster
+
+:::
+
+
+## In words
+
+> ... `sparklyr` translates `dplyr` functions such as `arrange` into a SQL query plan that is used by SparkSQL. This is not the case with `SparkR`, which has functions for SparkSQL tables and Spark DataFrames.
+
+. . .
+
+> ... Databricks does not recommended combining `SparkR` and `sparklyr` APIs in the same script, notebook, or job.
+
+ 
+##  {background-iframe="https://therinspark.com"}
+
+
+# Pandas Spark API {background-color="#1c191c"}
+
+--- 
+
+> Apache Spark includes Arrow-optimized execution of Python logic in the form of `pandas` function APIs, which allow users to apply `pandas` transformations directly to PySpark DataFrames. Apache Spark also supports `pandas` UDFs, which use similar Arrow-optimizations for arbitrary user functions defined in Python.
+
+##  {background-iframe="https://spark.apache.org/docs/latest/api/python/getting_started/quickstart_ps.html"}
+

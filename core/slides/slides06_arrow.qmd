@@ -1,0 +1,179 @@
+---
+title: "SPARK & JSON"
+date: "2024-02-19"
+
+format: 
+  revealjs:
+    header: "SPARK & JSON"
+
+execute: 
+  eval: true
+  echo: true
+---
+
+#  Apache Arrow  {background-color="#1c191c"}
+
+## What ?
+
+Apache Arrow project was announced in 2016
+
+> Apache Arrow defines a language-independent *columnar memory format* for flat and hierarchical data, organized for efficient analytic operations on modern hardware like CPUs and GPUs. The Arrow memory format also supports zero-copy reads for lightning-fast data access without serialization overhead.
+
+See [Arrow website](https://arrow.apache.org)
+
+Apache Arrow complements columnar formats for files (on disk) like Parquet and ORC (also sponsored by Apache)
+
+## In Memory Analytics
+
+
+
+## Why ?
+
+The columnar format has some key features:
+
+- Data adjacency for sequential access (scans)
+
+- $O(1)$ (constant-time) random access
+
+- SIMD and vectorization-friendly
+
+- Relocatable without *pointer swizzling*, allowing for *true zero-copy access* in shared memory
+
+> The Arrow columnar format provides analytical performance and data locality guarantees in exchange for comparatively more expensive mutation operations
+
+::: {.notes}
+
+See also Harrisson for columnar databases
+
+- Columnar compression
+- Columnar write penalty 
+
+> The column stores perform poorly during single-row modifications 
+
+:::
+
+# Arrow columnar format {background-color="#1c191c"}
+
+
+## Specification
+
+The Arrow Columnar Format includes 
+
+- a language-agnostic in-memory data structure specification
+
+- metadata serialization
+
+- a protocol for serialization and generic data transport
+
+## Lexikon 
+
+
+## Physical layout
+
+
+## Padding
+
+## Null values
+
+> All array types, with the exception of union types (more on these later), utilize a dedicated memory buffer, known as the *validity (or “null”) bitmap*, to encode the nullness or non-nullness of each value *slot*. 
+> 
+> The validity bitmap must be large enough to have at least 1 bit for each array slot.
+
+
+## Metadata serialization
+
+Uses {{< fa brands google >}} Flatbuffers
+
+
+# Python `pyarrow` module  {background-color="#1c191c"}
+ 
+##
+
+```{python}
+import pyarrow as pa
+```
+
+## Arrow arrays
+
+## Arrow tables 
+
+## Arrow to and from Parquet
+
+## Arrow to and from Pandas   {.smaller .scrollable}
+
+Arrow, Numpy, Pandas offer sequential structures (1-dimensional Numpy arrays, Pandas Series, ...) and tables. Arrow offers tools to convert from Arrow format to Pandas and back
+
+> The equivalent to a pandas DataFrame in Arrow is a Table. Both consist of a set of named columns of equal length. 
+
+. . .
+
+> While pandas only supports *flat* columns, the Table also provides *nested* columns, thus it can represent more data than a DataFrame, so a full conversion is not always possible.
+
+
+```{python}
+import pyarrow as pa
+import pandas as pd
+
+df = pd.DataFrame({"a": [1, 2, 3]})
+# Convert from pandas to Arrow
+table = pa.Table.from_pandas(df)
+# Convert back to pandas
+df_new = table.to_pandas()
+# Infer Arrow schema from pandas
+schema = pa.Schema.from_pandas(df)
+```
+
+::: {.notes}
+
+- [Arrow doc](https://arrow.apache.org/docs/python/pandas.html)
+- [Pandas doc]()
+
+:::
+
+## Handling pandas Indexes  {.smaller}
+
+
+> Methods like `pyarrow.Table.from_pandas()` have a `preserve_index` option which defines how to preserve (store) or not to preserve (to not store) the data in the index member of the corresponding pandas object. This data is tracked using schema-level metadata in the internal `arrow::Schema` object.
+
+The default of `preserve_index` is `None`, which behaves as follows:
+
+- `RangeIndex` is stored as metadata-only, not requiring any extra storage.
+
+- Other index types are stored as one or more physical data columns in the resulting Table
+
+To not store the index at all pass `preserve_index=False`. Since storing a `RangeIndex` can cause issues in some limited scenarios (such as storing multiple `DataFrame` objects in a Parquet file), to force all index data to be serialized in the resulting table, pass `preserve_index=True`.
+
+
+## Arrow, Pandas, and  categorical datatypes
+
+> Pandas categorical columns are converted to Arrow dictionary arrays, a special array type optimized to handle repeated and limited number of possible values.
+
+## Arrow database connectivity
+
+
+# Spark and Arrow   {background-color="#1c191c"}
+
+## From the [Apache Arrow blog](https://arrow.apache.org/blog/2024/03/06/comet-donation/)  {.smaller}
+
+> The Apache Arrow PMC is pleased to announce the donation of the Comet project, a native *Spark SQL Accelerator* built on Apache Arrow *DataFusion*.
+
+> Comet is an Apache Spark plugin that uses Apache Arrow DataFusion to accelerate Spark workloads. It is designed as a drop-in replacement for Spark’s JVM based SQL execution engine and offers significant performance improvements for *some* workloads.
+
+> With Comet, users interact with the same Spark ecosystem, tools and APIs such as Spark SQL. Queries still run through Spark's query optimizer and planner. However, the execution is delegated to Comet, which is significantly faster and more resource efficient than a JVM based implementation.
+
+::: {.notes}
+
+There exist several Spark Accelerators like RAPIDS (for GPUs) Photon (from Databricks). Comet is one of them
+
+:::
+
+## Arrow to and from Spark
+
+
+## Pyspark and Comet
+
+[Read the Docs](https://www.comet.com/docs/v2/integrations/ml-frameworks/pyspark/)
+
+
+
+#  Thank You  {.unlisted background-color="#1c191c"}

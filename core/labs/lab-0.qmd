@@ -1,0 +1,14 @@
+---
+title: "Lab 0"
+subtitle: "Random generation"
+
+engine: jupyter
+---
+
+# Random allocations
+
+# Balanced allocations
+
+# Chinese Restaurant Process
+
+

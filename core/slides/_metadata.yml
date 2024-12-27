@@ -1,0 +1,100 @@
+
+
+
+format: 
+  revealjs:
+    theme: [default, "custom-rladies.scss"]
+    # logo: /images/logo.png
+    footer: "[IFEBY030](http://s-v-b.github.io/IFEBY030) -- Technos Big Data -- M1 MIDS/MFA/LOGOS -- UParis Cité"
+
+    smaller: false
+    highlight-style: github
+    
+    code-fold: false
+    code-link: true
+    code-annotations: hover
+
+    slide-number: c/t
+    show-slide-number: all
+    scrollable: true
+    preview-links: true
+    navigation-mode: vertical
+    controls-layout: bottom-right
+    controls-tutorial: true
+    lang: fr-FR
+
+    subtitle: "[Technologies Big Data Master MIDS/MFA/LOGOIS](https://s-v-b.github.io/IFEBY030/)"
+    author: Équipe de Statistique 
+    institute: "[LPSM Université Paris-Cité](https://u-paris.fr)"
+
+    link-external-icon: true
+    link-external-newwindow: true
+
+
+    header-logo: /images/logo.png
+    header-logo-link: "https://u-paris.fr"
+
+
+    title-slide-attributes:
+      data-background-color: "#1c191c"
+  
+    include-in-header:
+      text: |
+        <script>
+        MathJax = {
+          loader: {
+            load: ['[tex]/boldsymbol']
+          },
+          tex: {
+            tags: "all",
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            packages: {
+              '[+]': ['boldsymbol']
+            }
+          }
+        };
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+
+
+filters:
+  - reveal-header
+  - pseudocode
+
+pseudocode:
+  caption-prefix: "Algorithm"
+  reference-prefix: "Algorithm"
+  caption-number: true
+
+# filters:
+#   - d2
+# d2:
+#   layout: elk
+#   theme: "GrapeSoda"
+
+execute: 
+  echo: true
+  eval: false
+
+toc: true
+center: true
+toc-depth: 1
+output-location: fragment
+toc-title: Roadmap
+
+
+params:
+  title: "Technologies Big Data "
+  # curriculum: "Licence MIASHS"
+  coursetitle: "Technologies Big Data IFEBY310"
+  lecturer: "Equipe Statistique"
+  homepage: "http://s-v-b.gitub.io/IFEBY310/"
+  curriculum_homepage: "https://licence.math.univ-paris-diderot.fr/"
+
+
+engine: knitr
+

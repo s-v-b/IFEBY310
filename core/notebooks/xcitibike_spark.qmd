@@ -1,0 +1,179 @@
+---
+title: Building parquet dataset from extracted csv files
+jupyter: python3
+---
+
+
+
+```{python}
+import os
+import sys
+import re 
+import pandas as pd
+import datetime
+from tqdm import tqdm
+
+os.environ['PYSPARK_PYTHON'] = sys.executable
+os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
+```
+
+```{python}
+data_dir = "../data"
+# os.path.exists(data_dir)
+
+extract_dir = os.path.join(data_dir, "xcitibike")
+if not os.path.exists(extract_dir):
+    os.mkdir(extract_dir)
+
+parquet_dir = os.path.join(data_dir, "pq_citibike")
+if not os.path.exists(parquet_dir):
+    os.mkdir(parquet_dir)
+
+checkpoint_dir = os.path.join(data_dir, "citibike_charlie")
+if not os.path.exists(checkpoint_dir):
+    os.mkdir(checkpoint_dir)
+```
+
+```{python}
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as fn
+from pyspark.sql.functions import pandas_udf
+from pyspark.sql.types import BooleanType
+from pyspark.sql.functions import PandasUDFType
+```
+
+```{python}
+spark = (SparkSession
+    .builder
+    .appName("Spark building citibike parquet file")
+    .getOrCreate()
+)
+```
+
+```{python}
+spark.sparkContext.setCheckpointDir(checkpoint_dir)
+```
+
+```{python}
+@pandas_udf(BooleanType())
+def detect_non_ISO(s: pd.Series) -> bool:
+    r = s.str.match(r"\d+/\d+/\d+").any()
+    return r
+
+@pandas_udf("string")
+def make_iso(s: pd.Series) -> pd.Series:
+    t = s.str.split(' ', expand=True)
+    u = t[0].str.split('/')
+    v = u.map(lambda x  : [x[2], x[0], x[1]]).str.join('-')
+    w = v.combine(t[1], lambda x, y : ' '.join([x, y]))
+    return w
+```
+
+```{python}
+dicts_rename = {
+    1: {
+ 'tripduration': 'trip_duration',
+ 'starttime': 'started_at',
+ 'stoptime': 'ended_at',
+ 'bikeid': 'bike_id',
+ 'usertype': 'user_type',
+ 'start station latitude': 'start_lat',
+ 'start station longitude': 'start_lng',
+ 'end station latitude': 'end_lat',
+ 'end station longitude': 'end_lng'
+} ,
+  2:  {
+ 'Trip Duration': 'trip_duration',
+  'Start Time': 'started_at',
+  'Stop Time': 'ended_at',
+  'Start Station Latitude': 'start_lat',
+  'Start Station Longitude': 'start_lng',
+  'End Station Latitude': 'end_lat',
+  'End Station Longitude': 'end_lng'    
+}
+}
+```
+
+```{python}
+for (root, dirs ,files) in tqdm(os.walk(extract_dir, topdown=True)):
+    if dirs:
+        continue
+
+    for flnm in files:
+        if not flnm.endswith('.csv'):  
+            continue
+
+        fpath = os.path.join(root, flnm)
+        df = spark.read.option("header","true").csv(fpath)
+
+        df = (
+            df.withColumnsRenamed(dicts_rename[1])
+            .withColumnsRenamed(dicts_rename[2])
+        )
+
+        df = df.toDF(*[c.replace(' ','_').lower() for c in df.columns])
+
+        if re.match(r"\d+/\d+/\d+", df.select("started_at").first()[0]):
+            df = (
+                   df
+                    .withColumn('started_at', make_iso(fn.col("started_at")))
+                    .withColumn('ended_at', make_iso(fn.col("ended_at")))
+            ) 
+
+        df = df.withColumns(
+                {
+                'started_at': fn.to_timestamp(fn.col("started_at")),
+                'ended_at': fn.to_timestamp(fn.col("ended_at"))
+                }
+            )   
+
+        df = df.withColumns(
+                {
+                    'start_year': fn.year(fn.col('started_at')),
+                    'start_month': fn.month(fn.col('ended_at'))
+                }
+            )
+
+        df.checkpoint(eager=True)
+
+        # df.printSchema()
+
+        df.write.parquet(
+            parquet_dir, 
+            partitionBy=['start_year', 'start_month'], 
+            mode="append"
+        )
+
+```
+
+``` 
+sch_1 = StructType(
+    [
+        StructField('trip_duration', StringType(), True), 
+        StructField('started_at', TimestampType(), True), 
+        StructField('ended_at', TimestampType(), True), 
+        StructField('start_station_id', StringType(), True), 
+        StructField('start_station_name', StringType(), True), 
+        StructField('start_lat', StringType(), True), 
+        StructField('start_lng', StringType(), True), 
+        StructField('end_station_id', StringType(), True), 
+        StructField('end_station_name', StringType(), True), 
+        StructField('end_lat', StringType(), True), 
+        StructField('end_lng', StringType(), True), 
+        StructField('bike_id', StringType(), True), 
+        StructField('user_type', StringType(), True), 
+        StructField('birth_year', StringType(), True), 
+        StructField('gender', StringType(), True), 
+        StructField('start_year', IntegerType(), True), 
+        StructField('start_month', IntegerType(), True)
+    ])
+```
+
+```{python}
+# spark.stop()
+```
+
+## References
+
+[Python vectorized string computations](https://jakevdp.github.io/PythonDataScienceHandbook/03.10-working-with-strings.html)
+

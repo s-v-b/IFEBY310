@@ -1,0 +1,550 @@
+---
+title: "Technologies Big Data"
+subtitle: "Master I MIDS & Informatique"
+author: "A. Gheerbrandt, S. Gaïffas, V. Ravelomanana, S. Boucheron"
+institute: "Université Paris Cité"
+date: "2024-02-19"
+params:
+  title: "SPARK & JSON"
+  curriculum: "Master I MIDS Master I Informatique"
+  coursetitle: "Technologies Big Data"
+  lecturer: "A. Gheerbrandt, S. Gaïffas, V. Ravelomanana, S. Boucheron"
+  homepage: "http://stephane-v-boucheron.fr/courses/grosses-data/"
+  curriculum_homepage: "https://master.math.univ-paris-diderot.fr/annee/m1-mids/"
+toc: true
+toc-depth: 1
+output-location: fragment
+
+execute: 
+  eval: true
+  echo: true
+
+---
+
+#  JSON data format
+
+
+
+## What is `JSON` ?
+
+- JavaScript Object Notation (JSON) is a *lightweight data-interchange format* based on the syntax of JavaScript objects
+
+- It is a text-based, human-readable, language-independent format for **representing structured object data** for **easy transmission** or **saving**
+
+- `JSON` objects can also be **stored in files** — typically a text file with a `.json` extension
+
+- `JSON` is used for **two-way data transmission** between a web-server and a client, but it is also often used as a *semi-structured data format*
+
+- Its syntax **closely resembles JavaScript** objects, but `JSON` can be used independently of `JavaScript`
+
+::: {.notes}
+
+https://career.guru99.com/top-19-json-interview-questions/
+
+> JSON is a  data exchange format.  JSON means JavaScript Object Notation; it is language and platform independent.
+
+:::
+---
+
+## Handling `JSON`?
+
+- Most languages have libraries to manipulate `JSON`
+
+- In {{< fa brands python >}}  we shall use `JSON` data in `python` using the `json` module from the standard library
+
+- {{< fa brands r-project >}} has several `JSON` packages to handle `JSON`. For example `jsonlite`
+
+
+
+## Lexikon
+
+- `JSON` objects should be thought of as *strings* or a *sequences* (or series) of *bytes* complying with the JSON syntax
+
+. . .
+
+- *Serialization*: convert an object (for example a  `dict`) to a `JSON` representation. The object is *encoded* for easy storage and/or transmission
+
+. . .
+
+- *Deserialization*: the reverse transformation of serialization. Involves *decoding* data in `JSON` format to *native data types* that can be manipulated
+
+
+::: {.notes}
+
+Strings and Bytes 
+
+:::
+
+
+---
+
+## Why `JSON` ?
+
+- .stress[Much smaller representation than `XML`] (its predecessor) in client-server  communication: *faster data transfers*
+
+- `JSON` exists as a *sequence of bytes*: very useful to transmit (stream) data over a network
+
+- `JSON` is *reader-friendly* since it is ultimately *text* and simultaneously *machine-friendly*
+
+- `JSON` has an *expressive syntax* for representing arrays, objects, numbers and booleans/logicals
+
+
+
+# Using JSON with Python  {background-color="#1c191c"}
+
+
+## Working with built-in datatypes
+
+The `json` module  ({{< fa brands python >}})
+
+- encodes `Python` objects as `JSON` strings using instances of class `json.JSONEncoder` 
+
+- decodes `JSON` strings into `Python` objects using instances of class `json.JSONDecoder`
+
+::: {.callout-warning}
+
+The `JSON` encoder only handles native `Python` data types (`str`, `int`, `float`, `bool`, `list`, `tuple` and `dict`)
+
+:::
+
+## Dumps() and Dump()
+
+The `json` module provides two very handy methods for *serialization* :
+
+| Function      | Description |
+| :---------| :----- |
+| `dumps()` | serializes an object to a `JSON` *formatted string* |
+| `dump()`  | serializes an object to a `JSON` *formatted stream* (which supports writing to a file).  |
+
+
+## Serialization of built-in datatypes
+
+`json.dumps()` and `json.dump()` use the following mapping conventions for built-in datatypes :
+
+::: {.columns}
+::: {.column}
+
+| Python      | `JSON` |
+| :---------- | -----: |
+| dict        | object |
+| list, tuple | array  |
+| str         | string |
+| int, float  | number |
+| True        | true   |
+| False       | false  |
+| None        | null   |
+
+
+:::
+
+. . .
+
+::: {.column}
+
+::: {.callout-warning}
+
+`list` and `tuple`  are mapped to the same `json` type.
+
+`int` and `float` are mapped  to the same `json` type
+
+:::
+
+:::
+
+:::
+
+---
+
+## Serialization example
+
+::: {.columns}
+
+::: {.column}
+
+Serialize a `Python` object into a `JSON` formatted string using `json.dumps()`
+
+```{python}
+#| eval: true
+import json
+
+spam = json.dumps({
+  "name": "Foo Bar",
+  "age": 78,
+  "friends": ["Jane","John"],
+  "balance": 345.80,
+  "other_names":("Doe","Joe"),
+  "active": True,
+  "spouse": None
+  }, 
+  sort_keys=True, 
+  indent=4
+)
+```
+```{python}
+#| eval: true
+type(spam)
+```
+
+::: {.callout-note title="Remember:"}
+
+`JSON.dumps()` converts a Python object into a JSON formatted text.
+
+:::
+
+:::
+
+
+::: {.column}
+
+
+
+```{python}
+#| eval: true
+print(spam)
+```
+
+Pretty printing options
+
+- `sort_keys=True`:  sort the keys of the JSON object
+- `indent=4`: indent using 4 spaces
+ 
+
+:::
+
+:::
+
+
+
+
+
+## Dumping a date
+
+A Python `date` object is not serializable.
+
+```{python}
+from datetime import date
+td = date.today()
+```
+
+
+```{.python}
+>>> js.dumps(td)
+...
+TypeError: Object of type date is not JSON serializable
+
+```
+
+
+But it can be converted into serializable types.
+
+
+```{python}
+json.dumps(td.isoformat())
+```
+```{python}
+json.dumps(td.isocalendar())
+```
+
+```{python}
+json.dumps(td.timetuple())
+```
+
+## Serialization example
+
+`json.dump()` allows to write the output stream to a file
+
+```{python}
+with open('user.json','w') as file:
+        json.dump({
+            "name": "Foo Bar",
+            "age": 78,
+            "friends": ["Jane","John"],
+            "balance": 345.80,
+            "other_names": ("Doe","Joe"),
+            "active": True,
+            "spouse": None
+          }, 
+          file, 
+          sort_keys=True, indent=4
+        )
+```
+
+. . . 
+
+This writes a `user.json` file to disk with similar content as in the previous example
+
+```{python}
+!ls -l *.json
+```
+
+---
+
+## Deserializing built-in datatypes
+
+Similarly to serialization, the `json` module exposes two methods for deserialization:
+
+| Function                     | Description |
+|:---------|:-----|
+| `loads()` | deserializes a `JSON` document to a Python object |
+| `load()`  | deserializes a `JSON` formatted stream (which supports reading from a file) to a Python object |
+
+
+---
+
+## Deserializing built-in datatypes
+
+The decoder converts `JSON` encoded data into native Python data types as in the table below:
+
+
+| `JSON`                              |  Python |
+| :--------------------------------- | ---------------: |
+| object                 |           dict |
+| array | list  |
+| string    |         str |
+| number (int)  |       int |
+| number (real)   |      float |
+| true        |     True |
+| false |     False 
+| null | None |
+
+
+
+## Deserialization example
+
+Pass a `JSON` string to the `json.loads()` method :
+
+```{python}
+spam = json.loads('{"active": true, "age": 78, "balance": 345.8, "friends": ["Jane","John"], "name": "Foo Bar", "other_names": ["Doe","Joe"],"spouse":null}')
+```
+
+. . .
+
+we obtain a dictionary as  output:
+
+```{python}
+spam
+```
+
+---
+
+## Deserialization example
+
+We can also read from the `user.json` file  we created before:
+
+```{python}
+with open('user.json', 'r') as file:
+  user_data = json.load(file)
+
+user_data
+```
+
+. . .
+
+We obtain the same `dict`. This is *simple* and  fast.
+
+
+---
+
+## Serialize and deserialize custom objects
+
+- Using `JSON`, we serialized and deserialized objects containing only *encapsulated built-in types*
+
+- We can also work a little bit to serialize *custom objects*
+
+- Let's go to [notebook07_json-format.ipynb](/labs/grosses-data/_ipynbs/notebook07_json-format.ipynb)
+
+
+
+# Using JSON data with Spark {background-color="#1c191c"}
+
+
+
+## Using `JSON` data with `Spark`
+
+Typically achieved using
+
+```{.python}
+spark.read.json(filepath, multiLine=True)
+```
+
+. . .
+
+- Pretty simple
+
+- but usually requires *extra cleaning* or *schema flattening*
+
+(Almost) Everything is explained in the notebook : 
+
+::: {.center}
+  
+[notebook07_json-format.ipynb](/labs/grosses-data/_ipynbs/notebook07_json-format.ipynb)
+
+:::
+
+. . .
+
+`JSON`  reader and writer allows us save and read Spark dataframes with composite types. 
+
+
+## Obtaininig JSON objects from an API
+
+> A common use of JSON is to collect JSON data from a web server as a file or HTTP request, and convert the JSON data to a Python/R/Spark object.
+
+# Recap  JSON objects {background-color="#1c191c"}
+
+## {{< fa syringe >}} What is a JSON object?
+
+> An object can be defined as an unordered set of name/value pairs.  An object in JSON starts with **{**left brace} and finish or ends with {right brace**}**.  Every name is followed by**:** (colon) and the name/value pairs are parted by**,** (comma).
+
+## {{< fa syringe >}} JSON syntax
+
+JSON syntax is a subset of the JavaScript object notation syntax.
+
+- Data is in *name/value pairs*
+- Data is separated by comma **,**
+- Curly brackets **{}** hold `objects`
+- Square bracket **[]** holds `arrays`
+
+## {{< fa syringe >}} JSON and types 
+
+JSON types: 
+
+- Number, 
+- Array, 
+- Boolean, 
+- String
+- Object
+- Null
+
+## `json`  versus `pickle`
+
+Two competing serialization modules?
+
+. . .
+
+- `Pickle` is Python bound 
+- `Pickle` handles (almost) everything that can be defined in `Python`
+- Other computing environments have to develop bypasses to handle `pickle` dumps.
+
+. . .
+
+- `json` is used by widely different languages and systems
+- `json` is readable
+- `json` is less prone to malicious code injection
+
+## Json dialects : spatial data {.smaller}
+
+JSON objects are used extensively to handle spatial or textual data.
+
+JSON objects are used by spatial extensions of Pandas and Spark.
+
+. . .
+
+[GeoJSON](https://geojson.org) is a format for encoding a variety of geographic data structures. GeoJSON supports the following geometry types: `Point`, `LineString`, `Polygon`, `MultiPoint`, `MultiLineString`, and `MultiPolygon`. Geometric objects with additional properties are `Feature` objects. Sets of features are contained by `FeatureCollection` objects.
+
+. . .
+
+```{python}
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          2.381584638521815,
+          48.82906361931293
+        ],
+        "type": "Point"
+      }
+    }
+  ]
+}
+```
+
+See [Loading GeoJSON using Spark](https://sedona.apache.org/1.5.1/tutorial/sql/?h=json#load-geojson-using-spark-json-data-source)
+
+## Semi-structured data and  NLP  {.smaller}
+
+Natural Language Processing (NLP) handles corpora of texts (called documents), annotates the documents, parses the   documents into sentences and tokens, performs syntactic analysis (POS tagging), and eventually enables *topic modeling*, *sentiment analysis*, automatic translation, and other machine learning tasks.
+
+Corpus annotation can be performed using [`spark-nlp`](https://www.johnsnowlabs.com/spark-nlp/) a package developped by the [John Snow Labs](https://www.johnsnowlabs.com) to offer NLP above `Spark SQL`  and `Spark MLLib`.
+
+
+Annotation starts by applying a `DocumentAssembler()` transformation to a corpus. This introduces columns with composite types
+
+
+## Document Assembling {.smaller}
+
+```{.python}
+
+>>> result = documentAssembler.transform(data)
+>>> result.select("document").show(truncate=False)
++----------------------------------------------------------------------------------------------+
+|document                                                                                      |
++----------------------------------------------------------------------------------------------+
+|[[document, 0, 51, Spark NLP is an open-source text processing library., [sentence -> 0], []]]|
++----------------------------------------------------------------------------------------------+
+>>> result.select("document").printSchema()
+root
+|-- document: array (nullable = True)
+|    |-- element: struct (containsNull = True)
+|    |    |-- annotatorType: string (nullable = True)
+|    |    |-- begin: integer (nullable = False)
+|    |    |-- end: integer (nullable = False)
+|    |    |-- result: string (nullable = True)
+|    |    |-- metadata: map (nullable = True)
+|    |    |    |-- key: string
+|    |    |    |-- value: string (valueContainsNull = True)
+|    |    |-- embeddings: array (nullable = True)
+|    |    |    |-- element: float (containsNull = False)
+```
+
+
+Column `document` is of type `ArrayType()`. The basetype of `document` column is of `StructType()` (`element`), the `element` contains subfields of primitive type, but alo a field of type `map` (`MapType()`) and a field of type `StructType()`.  
+
+
+# Querying JSON strings {background-color="#1c191c"}
+
+## JSON path
+
+The SQL/JSON path language: specify the items to be retrieved from JSON data
+
+- Path expressions
+- Evaluation
+- Result
+
+Different dialects
+
+- `jsonpath`  see [PostgreSQL]()
+- `jmespath` see [JMES Path](https://jmespath.org)
+- `...`
+
+## Examples
+
+- ...
+- ...
+- ...
+
+
+
+# References {background-color="#1c191c"}
+
+
+- [Documentation Python json](https://docs.python.org/3/library/json.html)
+
+- [PostgreSQL json types](https://www.postgresql.org/docs/current/datatype-json.html)
+
+- [Spark Composite types]()
+
+- [GeoJSON](https://geojson.io)
+
+- [GeoPandas](https://geopandas.org/en/stable/)
+
+- [Spark NLP](https://sparknlp.org/api/python/index.html)
+  
+- [SQL JSON Path language](https://www.postgresql.org/docs/current/functions-json.html#FUNCTIONS-SQLJSON-PATH)
+
+# Thank you !  {background-color="#1c191c"}
+

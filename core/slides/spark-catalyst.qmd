@@ -1,0 +1,28 @@
+---
+title: "Spark Catalyst"
+
+format:
+  revealjs: 
+    footer: |
+      [Spark MediaLab Presentation](https://stephane-v-boucheron.fr/slides/spark-sql.html)
+        
+  
+---
+
+
+# Catalyst overview  {background-color="#1c191c"}
+
+
+# SQL query planning {background-color="#1c191c"}
+
+
+# Dataframes {background-color="#1c191c"}
+
+
+# Managed tables {background-color="#1c191c"}
+
+
+# Unmanaged tables {background-color="#1c191c"}
+
+
+# References {background-color="#1c191c"}

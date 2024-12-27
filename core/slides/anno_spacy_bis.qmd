@@ -1,0 +1,280 @@
+---
+title: "CM 4 : Streamz/Dask/..."
+subtitle: "MMD Master II, MIDS & M2MO"
+author: "Stéphane Boucheron"
+institute: "Université de Paris"
+date: "2021/02/04 (updated: `r Sys.Date()`)"
+
+format: html
+
+engine: jupyter
+---
+
+
+
+
+
+
+
+# Streamz/Dask
+
+### `r Sys.Date()`
+
+#### [MMD Master II MIDS et M2MO](http://stephane-v-boucheron.fr/courses/mmd)
+
+#### [Stéphane Boucheron](http://stephane-v-boucheron.fr)
+
+
+
+## Dask 101
+
+
+
+
+
+
+
+- Overview - dask's place in the universe.
+
+- `Delayed` - the single-function way to parallelize general python code.
+
+- 1x. `Lazy` - some of the principles behind lazy execution, for the interested
+
+- `Bag` - the first high-level collection: a generalized iterator for use with a functional programming style and to clean messy data (scaling up and out Python lists)
+
+- `Array` - blocked `numpy`-like functionality with a collection of `numpy` arrays spread across your cluster
+
+- `Dataframe` - parallelized operations on many `pandas` `dataframes` spread across your cluster
+
+- `Distributed` - Dask's scheduler for clusters, with details of how to view the UI
+
+- Advanced Distributed - further details on distributed computing, including how to debug
+
+- `Dataframe` Storage - efficient ways to read and write dataframes to disc
+
+- Machine Learning - applying `dask` to machine-learning problems.
+
+
+
+## Why? and When?
+
+
+
+### Flavours of (big) data
+
+| Type | Typical size | Features |  Tool|
+|:-----|:-------------:|:----------|----:|
+|Small data   | Few GigaBytes  | Fits in RAM  | Pandas |
+|Medium data   | Less than 2 Terabytes  | Does not fit in RAM, fits on hard hard drive  | Dask |
+|Large data   |  Petabytes  | Does not fit on hard drivve  | Spark |
+
+---
+
+### Big picture
+
+
+Dask provides multi-core and distributed parallel execution on larger-than-memory datasets.
+
+Dask provides high-level `Array`, `Bag`, and `DataFrame` collections that mimic `NumPy`, `lists`, and `Pandas` but can operate in parallel on datasets that don't fit into memory
+
+Dask provides dynamic task schedulers that execute _task graphs_ in parallel.
+
+These execution engines power the high-level collections  but can also power custom, user-defined workloads.
+
+These schedulers are low-latency and work hard to run computations in a small memory footprint
+
+Dask Tutorial SciPy 2020
+
+
+
+## Threaded Scheduler
+
+
+
+```{python}
+import dask
+import dask.dataframe as dd
+import dask.bag as db
+from dask import delayed
+```
+
+```{python}
+import dask.threaded
+from dask.distributed import Client
+```
+
+```{python}
+from dask.diagnostics import ProgressBar
+from dask.diagnostics import Profiler, ResourceProfiler, CacheProfiler
+```
+
+```{python}
+dask.config.set(scheduler='threads')
+```
+
+```{python}
+!ls ../data
+```
+
+### Loading a small corpus
+
+```{python}
+import pandas as pd
+```
+
+```{python}
+df_2016 = pd.read_parquet('../data/ny_corpus_pq/')
+
+```
+
+```{python}
+df_2016.info(memory_usage="deep")
+
+corpus = df_2016.text
+```
+
+---
+
+### Intermezzo : loading SpaCy
+
+```{python}
+import spacy
+nlp = spacy.load('en_core_web_sm')
+```
+
+[SpaCy's website](https://spacy.io)
+
+`nlp` is an annotator for English texts
+
+
+---
+template: inter-slide
+
+## Bag
+
+---
+
+### Bags
+
+Bags serve as general purpose containers
+
+```{python}
+
+with Profiler() as prof:
+  out = (
+    db.from_sequence(corpus, npartitions=20)
+    .map(nlp)
+    .compute()
+    )
+
+```
+
+- We first build a `Bag`  from the sequence of texts in the corpus
+- The `Bag` is made of 4 partitions (which matches the number of cores on the machine)
+- We apply `nlp` to each item in the `Bag`
+- The tasks are distributed amongst the 4 workers and the full power of the machine is used
+
+
+---
+
+### Tidying Spacy's output
+
+As in `r fontawesome::fa("r-project")`, `tidyverse` system, tidying the output of analytical
+tool like `SpaCy`  consists of building a dataframe (here a `Pandas`  dataframe) from the output
+
+.panelset[
+
+.panel[.panel-name[Tidy Annotations]
+
+```{python}
+from dframcy import DframCy
+```
+
+```{python}
+doc_to_df = DframCy(nlp).to_dataframe
+
+td_out = doc_to_df(out[0])
+```
+]
+
+.panel[.panel-name[A dataframe]
+
+```{python, results='hide'}
+print((td_out.loc[0:5,
+           ["token_text", "token_pos_", "token_tag_",  "token_dep_", "token_head"]]
+           .head()
+           .to_markdown()))
+```
+
+.f6[
+
+|    | token\_text   | token\_pos\_   | token\_tag\_   | token\_dep\_   | token\_head   |
+|---:|:-------------|:-------------|:-------------|:-------------|:-------------|
+|  0 |              | SPACE        | _SP          | ROOT         |              |
+|  1 | Among        | ADP          | IN           | prep         | ’s           |
+|  2 | all          | DET          | PDT          | predet       | anxieties    |
+|  3 | the          | DET          | DT           | det          | anxieties    |
+|  4 | anxieties    | NOUN         | NNS          | pobj         | Among        |
+
+]
+]
+]
+---
+template: inter-slide
+
+## Delayed
+
+---
+template: inter-slide
+
+## Array
+
+---
+template: inter-slide
+
+## Dataframe
+
+---
+
+###
+
+
+---
+
+### GIL Global Interpreter Lock
+
+
+
+---
+template: inter-slide
+
+## Distributed
+
+---
+
+### The distributed scheduler
+
+.bg-light-gray.b--light-gray.ba.bw1.br3.shadow-5.ph4.mt5.[
+
+The distributed scheduler is now generally the recommended engine for executing task work, even on single workstations or laptops.
+
+]
+
+
+---
+template: inter-slide
+
+## References
+
+---
+
+- [SciPy 2020 Dask Video Tutorials](https://www.youtube.com/watch?v=EybGGLbLipI)
+- []()
+- [Real time processing](https://pycon.hk/2020-spring/real-time-stream-processing-with-python-at-scale/)
+
+---
+class: center, middle, inverse
+background-image: url(img/pexels-cottonbro-3171837.jpg)
+background-size: cover
+
+## The End

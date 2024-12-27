@@ -1,0 +1,1706 @@
+---
+title: "Technologies Big Data"
+subtitle: "Master I MIDS & Informatique"
+author: "A. Gheerbrandt, S. Gaïffas, V. Ravelomanana, S. Boucheron"
+institute: "Université Paris Cité"
+date: "2024-02-19"
+
+params:
+  title: "SPARK SQL"
+  curriculum: "Master I MIDS Master I Informatique"
+  coursetitle: "Technologies Big Data"
+  lecturer: "A. Gheerbrandt, S. Gaïffas, V. Ravelomanana, S. Boucheron"
+  homepage: "http://stephane-v-boucheron.fr/courses/grosses-data/"
+  curriculum_homepage: "https://master.math.univ-paris-diderot.fr/annee/m1-mids/"
+
+---
+
+ 
+
+
+# Spark SQL  Bird Eye View  {background-color="#1c191c"}
+
+
+
+## [PySpark overview](https://spark.apache.org/docs/latest/api/python/)
+
+![](./IMG/pyspark-apis.png)
+
+[Official documentation](https://spark.apache.org/docs/latest/sql-programming-guide.html)
+
+
+
+
+## Overview
+
+- `Spark SQL` is a library included in `Spark` since version 1.3
+
+- `Spark Dataframes` was introduced with version 
+
+- It provides an *easier interface to process tabular data*
+
+- Instead of `RDD`s, we deal with `DataFrame`s
+
+- Since `Spark` 1.6, there is also the concept of `Dataset`s, but only for `Scala` and `Java`
+
+
+
+
+## `SparkContext` and `SparkSession`
+
+- Before `Spark 2`, there was only `SparkContext` and `SQLContext`
+
+- All core functionality was accessed with `SparkContext`
+
+- All `SQL` functionality needed the `SQLContext`, which can be created from an `SparkContext`
+
+- With `Spark 2` came the `SparkSession` class
+
+- `SparkSession` is the .stress[*global entry-point*] for everything `Spark`-related
+
+::: {.notes}
+
+- `SparkContext` was enough for handling RDDs
+- Purpose of `SQLContext` ?
+- Could we use `SparkSession` to handle RDDs?
+
+:::
+
+
+---
+
+## `SparkContext` and `SparkSession`
+
+Before `Spark 2`
+
+```{.python}
+>>> from pyspark import SparkConf, SparkContext
+>>> from pyspark.sql import SQLContext
+
+>>> conf = SparkConf().setAppName(appName).setMaster(master)
+>>> sc = SparkContext(conf = conf)
+>>> sql_context = new SQLContext(sc)
+```
+
+. . .
+
+
+Since `Spark 2`
+
+```{python}
+from pyspark.sql import SparkSession
+
+app_name = "Spark Dataframes"
+
+spark = (
+  SparkSession 
+    .builder 
+    .appName(app_name) 
+#        .master(master) 
+#        .config("spark.some.config.option", "some-value") \
+    .getOrCreate()
+)
+```
+
+---
+
+
+
+
+#  DataFrame  {background-color="#1c191c"}
+
+
+
+---
+
+## `DataFrame`
+
+- The main entity of `Spark SQL` is the `DataFrame`
+
+- A DataFrame is actually an `RDD` of `Row`s with a *schema*
+
+- A schema gives the **names of the columns** and their **types**
+
+- `Row` is a class representing a row of the `DataFrame`.
+
+- It can be used almost as a `python` `list`, with its size equal to the number of columns in the schema.
+
+
+::: {.notes}
+
+Row-oriented or column-oriented?
+
+:::
+
+
+---
+
+## `DataFrame`
+
+```{python}
+from pyspark.sql import Row
+
+row1 = Row(name="John", age=21)
+row2 = Row(name="James", age=32)
+row3 = Row(name="Jane", age=18)
+row1['name']
+```
+
+```{python}
+df = spark.createDataFrame([row1, row2, row3])
+df
+```
+
+```{python}
+df.show()
+```
+
+::: {.notes}
+
+Relate `Row` to named tuple or dictionary 
+
+What does `.show()` ?
+
+:::
+
+
+
+## `DataFrame`
+
+```{python}
+df.printSchema()
+```
+
+You can access the underlying `RDD` object using `.rdd`
+
+```{python}
+print(df.rdd.toDebugString().decode("utf-8"))
+```
+
+```{python}
+df.rdd.getNumPartitions()
+```
+
+::: {.notes}
+
+:::
+
+
+## Creating DataFrames
+
+- We can use the method `createDataFrame` from the SparkSession instance
+
+- Can be used to create a `Spark` `DataFrame` from:
+
+  - a `pandas.DataFrame` object
+  - a local python list
+  - an RDD
+
+- Full documentation can be found in the [[API docs]](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.SparkSession.createDataFrame)
+
+
+
+## Creating DataFrames
+
+```{python}
+rows = [
+        Row(name="John", age=21, gender="male"),
+        Row(name="Jane", age=25, gender="female"),
+        Row(name="Albert", age=46, gender="male")
+    ]
+df = spark.createDataFrame(rows)
+df.show()
+```
+
+
+
+## Creating DataFrames
+
+```{python}
+column_names = ["name", "age", "gender"]
+rows = [
+        ["John", 21, "male"],
+        ["James", 25, "female"],
+        ["Albert", 46, "male"]
+    ]
+df = spark.createDataFrame(rows, column_names)
+df.show()
+```
+
+
+## Creating DataFrames
+
+```{python}
+column_names = ["name", "age", "gender"]
+
+sc = spark._sc
+
+rdd = sc.parallelize([
+        ("John", 21, "male"),
+        ("James", 25, "female"),
+        ("Albert", 46, "male")
+    ])
+
+df = spark.createDataFrame(rdd, column_names)
+df.show()
+```
+
+
+
+#  Schemas and types {background-color="#1c191c"}
+
+
+## Schema and Types
+
+- A `DataFrame` always contains a *schema*
+
+- The schema defines the *column names* and *types*
+
+- In all previous examples, the schema was *inferred*
+
+- The schema of a `DataFrame` is represented by the class `types.StructType` [[API doc]](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.types.StructType)
+
+- When creating a `DataFrame`, the schema can be either **inferred** or **defined by the user**
+
+```{python}
+from pyspark.sql.types import *
+
+df.schema
+# StructType(List(StructField(name,StringType,true),
+#                 StructField(age,IntegerType,true),
+#                 StructField(gender,StringType,true)))
+```
+
+::: {.notes}
+
+check absence of quotation
+
+Spark has its own collection (tree) of types. The Python counterparts are defined in `pyspark.sql.types` 
+
+:::
+
+
+
+
+
+
+## Creating a custom Schema
+
+```{python}
+from pyspark.sql.types import *
+
+schema = StructType([
+    StructField("name", StringType(), True),
+    StructField("age", IntegerType(), True),
+    StructField("gender", StringType(), True)
+])
+
+rows = [("John", 21, "male")]
+df = spark.createDataFrame(rows, schema)
+df.printSchema()
+df.show()
+```
+
+
+## Types supported by `Spark SQL`
+
+- `StringType`
+- `IntegerType`
+- `LongType`
+- `FloatType`
+- `DoubleType`
+- `BooleanType`
+- `DateType`
+- `TimestampType`
+- `...`
+  
+  
+The full list of types can be found in [[API doc]](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#module-pyspark.sql.types)
+
+
+::: {.notes}
+
+:::
+
+
+
+
+#  Reading data {background-color="#1c191c"}
+
+
+## Reading data from sources
+
+- Data is usually read from *external sources* 
+(move the **algorithms**, not the **data**)
+
+- `Spark SQL` provides *connectors* to read from many different sources:
+
+  - Text files (`CSV`, `JSON`)
+
+  - Distributed tabular files (`Parquet`, `ORC`)
+
+  - In-memory data sources (`Apache Arrow`)
+
+  - General relational Databases (via `JDBC`)
+
+  - Third-party connectors to connect to many other databases
+
+  - And you can create your own connector for `Spark` (in `Scala`)
+
+
+## Reading data from sources
+
+- In all cases, the syntax is similar: 
+
+```{.python} 
+spark.read.{source}(path)
+```
+
+- Spark supports different *file systems* to look at the data:
+
+  - Local files: `file://path/to/file` or just `path/to/file`
+
+  - `HDFS` (Hadoop Distributed FileSystem): `hdfs://path/to/file`
+
+  - `Amazon S3`: `s3://path/to/file`
+
+
+
+## Reading from a `CSV` file
+
+```{python}
+path_to_csv = "../../../../Downloads/tips.csv"
+df = spark.read.csv(path_to_csv)
+```
+
+```{python}
+df = (
+  spark.read
+    .format('csv')
+    .option('header', 'true')
+    .option('sep', ",")
+    .load(path_to_csv)
+)
+```
+
+
+```{python}
+my_csv_options = {
+  'header': True,
+  'sep': ';',
+}
+
+df = (
+  spark
+    .read
+    .csv(path_to_csv, **my_csv_options)
+)
+```
+
+::: {.notes}
+
+:::
+
+
+
+---
+
+## Reading from a `CSV` file  
+
+**Main options**
+
+Some important options of the `CSV` reader are listed here:
+
+
+
+| Option | Description |
+|:----|:------ |
+| `sep` | The separator character |
+| `header` | If "true", the first line contains the column names |
+| `inferSchema` | If "true", the column types will be guessed from the contents |
+| `dateFormat` | A string representing the format of the date columns |
+
+
+The full list of options can be found in the [API Docs](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrameReader.csv)
+
+---
+
+## Reading from other file types
+
+```{.python}
+## JSON file
+df = spark.read.json("/path/to/file.json")
+df = spark.read.format("json").load("/path/to/file.json")
+```
+
+```{.python}
+## Parquet file (distributed tabular data)
+df = spark.read.parquet("hdfs://path/to/file.parquet")
+df = spark.read.format("parquet").load("hdfs://path/to/file.parquet")
+```
+
+```{.python}
+## ORC file (distributed tabular data)
+df = spark.read.orc("hdfs://path/to/file.orc")
+df = spark.read.format("orc").load("hdfs://path/to/file.orc")
+```
+
+---
+
+## Reading from external databases
+
+- We can use `JDBC` drivers (Java) to read from relational databases
+
+- Examples of databases: `Oracle`, `PostgreSQL`, `MySQL`, etc.
+
+- The `java` driver file must be uploaded to the cluster before trying to access
+
+- This operation can be **very heavy**. When available, specific connectors should be used
+
+- Specific connectors are often provided by **third-party libraries**
+
+---
+
+## Reading from external databases
+
+
+```{python}
+#| eval: false
+spark = (
+  SparkSession 
+    .builder 
+    .appName("Python Spark SQL basic example") 
+    .config("spark.jars", 
+            spark_home + "/jars/" + "postgresql-42.7.2.jar") 
+    .getOrCreate()
+)
+```
+
+```{python}
+#| eval: false
+df = (
+  spark
+    .read.format("jdbc") 
+    .option("url", "jdbc:postgresql:dbserver") 
+    .option("dbtable", "schema.tablename") 
+    .option("user", usrnm) 
+    .option("password", pwd) 
+    .load()
+)
+```
+or
+```{.python}
+df = spark.read.jdbc(
+      url="jdbc:postgresql:dbserver",
+      table="schema.tablename"
+      properties={
+          "user": "username",
+          "password": "p4ssw0rd"
+      }
+)
+```
+
+```{python}
+#| eval: false
+df_airlines = (
+  spark
+    .read
+    .format("jdbc")
+    .options(**(dico_jdbc_pg | {'dbtable': 'nycflights.airlines'}))
+    .load()
+)
+```
+---
+
+# Queries in Spark SQL  {background-color="#1c191c"}
+
+---
+
+## Spark SQL as a Substitute for `HiveQL`
+
+- {{< fa brands hive >}} `Hive` (`Hadoop` InteractiVE)
+  + Devlopped by {{< fa brands facebook >}} dring 2000's
+  + Released 2010 as `Apache` project
+
+`HiveQL`:
+SQL-like interface to query data stored in various databases and file systems that integrate with Hadoop.  
+
+
+[`Hive` on wikipedia](https://en.wikipedia.org/wiki/Apache_Hive)
+
+::: {.notes}
+
+> Apache Hive is a data warehouse software project, built on top of Apache Hadoop for providing data query and analysis.[3][4] Hive gives an SQL-like interface to query data stored in various databases and file systems that integrate with Hadoop. Traditional SQL queries must be implemented in the MapReduce Java API to execute SQL applications and queries over distributed data. Hive provides the necessary SQL abstraction to integrate SQL-like queries (HiveQL) into the underlying Java without the need to implement queries in the low-level Java API. Since most data warehousing applications work with SQL-based querying languages, Hive aids the portability of SQL-based applications to Hadoop.[5] While initially developed by Facebook, Apache Hive is used and developed by other companies such as Netflix and the Financial Industry Regulatory Authority (FINRA).[6][7] Amazon maintains a software fork of Apache Hive included in Amazon Elastic MapReduce on Amazon Web Services.[8]
+
+
+:::
+
+---
+
+## Performing queries
+
+- `Spark SQL` is designed to be compatible with ANSI SQL queries
+
+- `Spark SQL` allows  `SQL`-like queries to be evaluated on Spark `DataFrame`s  (and on many other tables)
+
+- Spark `DataFrames` have to be *tagged as temporary views*
+
+- `Spark SQL` Queries can be submitted using `spark.sql()`
+
+{{< fa hand-point-right >}} Method `sql` for class `SparkSession` provides access to `SQLContext`
+
+---
+
+## Performing queries
+
+```{python}
+column_names = ["name", "age", "gender"]
+rows = [
+        ["John", 21, "male"],
+        ["Jane", 25, "female"]
+    ]
+df = spark.createDataFrame(rows, column_names)
+
+df.show()
+```
+
+. . .
+
+```{python}
+## Create a temporary view from the DataFrame
+df.createOrReplaceTempView("new_view")
+
+## Define the query
+query = """
+  SELECT name, age 
+  FROM new_view 
+  WHERE gender='male'
+"""
+
+men_df = spark.sql(query)
+men_df.show()
+```
+
+::: {.notes}
+
+:::
+
+---
+
+## Using the API
+
+`SQL` queries form an expresive feature, it's *not the best way* to code a complex logic
+
+- Errors are **harder to find** in strings
+- Queries makes the code **less modular**
+
+. . .
+
+The Spark dataframe API offers a developper-friendly API for implementing 
+
+- Relational algebra  $\sigma, \pi, \bowtie, \cup, \cap, \setminus$
+- Partitionning `GROUP BY`
+- Aggregation and Window functions 
+
+. . .
+
+Compare the  Spark `Dataframe` API  with: 
+
+{{< fa brands r-project >}} `dplyr`, `dtplyr`, `dbplyr` in `R` `Tidyverse`
+
+{{< fa brands python >}} `Pandas`  
+
+Chaining and/or piping enable modular query construction
+
+---
+
+## Basic Single Tables Operations (methods/verbs)
+
+
+| Operation | Description |
+|:---|:----|
+| `select` | Chooses columns from the table   $\pi$ |
+| `selectExpr` | Chooses columns and expressions from table $\pi$ |
+| `where` | Filters rows based on a boolean rule  $\sigma$ |
+| `limit` | Limits the number of rows `LIMIT ...`|
+| `orderBy` | Sorts the DataFrame based on one or more columns `ORDER BY ...` |
+| `alias` | Changes the name of a column `AS ...`|
+| `cast` | Changes the type of a column |
+| `withColumn` | Adds a new column |
+
+
+---
+
+## `SELECT`
+
+```{python}
+## SQL query:
+query = """
+  SELECT name, age 
+  FROM table
+"""
+
+## Using Spark SQL API:
+( 
+  df.select("name", "age")
+    .show()
+)
+```
+
+
+
+
+## `SELECT` (continued)
+
+The argument of `select()`  is `*cols` where `cols` 
+can be built from column names (strings), column expressions like `df.age + 10`,  lists 
+
+```{python}
+df.select( df.name.alias("nom"), df.age+10 ).show()
+```
+
+```{python}
+df.select([c for c in df.columns if "a" in c]).show()
+```
+
+
+
+## `selectExpr`
+
+```python
+###  A variant of select() that accepts SQL expressions.
+>>> df.selectExpr("age * 2", "abs(age)").collect()
+```
+
+. . .
+
+
+
+## `WHERE`
+
+```{python}
+## In a SQL query:
+query = """
+  SELECT * 
+  FROM table 
+  WHERE age > 21
+"""
+
+## Using Spark SQL API:
+df.where("age > 21").show()
+
+## Alternatively:
+# df.where(df['age'] > 21).show()
+# df.where(df.age > 21).show()
+# df.select("*").where("age > 21").show()
+```
+
+---
+
+## `LIMIT`
+
+```{python}
+## In a SQL query:
+query = """
+  SELECT * 
+  FROM table 
+  LIMIT 1
+"""
+
+## Using Spark SQL API:
+( 
+  df.limit(1)
+    .show()
+)
+
+## Or even
+df.select("*").limit(1).show()
+```
+
+---
+
+## `ORDER BY`
+
+```{python}
+## In a SQL query:
+query = """
+  SELECT * 
+  FROM table 
+  ORDER BY name ASC
+"""
+
+## Using Spark SQL API:
+df.orderBy(df.name.asc()).show()
+```
+
+---
+
+## `ALIAS` (name change)
+
+```{python}
+## In a SQL query:
+query = """
+  SELECT name, age, gender AS sex 
+  FROM table
+"""
+
+## Using Spark SQL API:
+df.select(
+    df.name, 
+    df.age, 
+    df.gender.alias('sex')
+  ).show()
+```
+
+---
+
+## `CAST` (type change)
+
+```{python}
+## In a SQL query:
+query = """
+  SELECT name, cast(age AS float) AS age_f 
+  FROM table
+"""
+
+## Using Spark SQL API:
+df.select(
+  df.name, 
+  df.age.cast("float").alias("age_f")
+).show()
+
+## Or
+new_age_col = df.age.cast("float").alias("age_f")
+
+df.select(df.name, new_age_col).show()
+```
+
+---
+
+## Adding new columns
+
+```{python}
+## In a SQL query:
+query = "SELECT *, 12*age AS age_months FROM table"
+
+## Using Spark SQL API:
+df.withColumn("age_months", df.age * 12).show()
+
+## Or
+df.select("*", 
+          (df.age * 12).alias("age_months")
+  ).show()
+```
+
+---
+
+## Basic operations
+
+- The *full list of operations* that can be applied to a `DataFrame` can be found in the [[DataFrame doc]](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrame)
+
+- The *list of operations on columns* can be found in the [[Column docs]](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.Column)
+
+---
+
+#  Column functions  {background-color="#1c191c"}
+
+---
+
+## Column functions
+
+- Often, we need to make many *transformations using one or more functions*
+
+- `Spark SQL` has a package called `functions` with many functions available for that
+
+- Some of those functions are only for **aggregations** <br> Examples: `avg`, `sum`, etc. We will cover them later
+
+- Some others are for **column transformation** or **operations** <br> Examples:  
+  - `substr`, `concat`, ... (string and regex manipulation)
+  - `datediff`, ... (timestamp and duration)
+  - `floor`, ... (numerics)
+ 
+- The full list is, once again, in the [[API docs]](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#module-pyspark.sql.functions)
+
+---
+
+## Column functions
+
+To use these functions, we first need to import them:
+
+```{python}
+from pyspark.sql import functions as fn
+```
+
+**Note**: the "`as fn`" part is important to **avoid confusion** with native `Python` functions such as "sum"
+
+---
+
+## Numeric functions examples
+
+```{python}
+from pyspark.sql import functions as fn
+
+columns = ["brand", "cost"]
+df = spark.createDataFrame([
+        ("garnier", 3.49),
+        ("elseve", 2.71)
+        ], columns)
+
+round_cost = fn.round(df.cost, 1)
+floor_cost = fn.floor(df.cost)
+ceil_cost = fn.ceil(df.cost)
+
+df.withColumn('round', round_cost)\
+        .withColumn('floor', floor_cost)\
+        .withColumn('ceil', ceil_cost)\
+        .show()
+
+```
+
+---
+
+## String functions examples
+
+```{python}
+from pyspark.sql import functions as fn
+
+columns = ["first_name", "last_name"]
+
+df = spark.createDataFrame([
+        ("John", "Doe"),
+        ("Mary", "Jane")
+  ], 
+  columns      
+)
+
+last_name_initial = fn.substring(df.last_name, 0, 1)
+name = fn.concat_ws(" ", df.first_name, last_name_initial)
+df.withColumn("name", name).show()
+```
+
+---
+
+## Date functions examples
+
+```{python}
+from datetime import date
+from pyspark.sql import functions as fn
+
+df = spark.createDataFrame([
+        (date(2015, 1, 1), date(2015, 1, 15)),
+        (date(2015, 2, 21), date(2015, 3, 8)),
+        ], ["start_date", "end_date"]
+    )
+days_between = fn.datediff(df.end_date, df.start_date)
+start_month = fn.month(df.start_date)
+
+df.withColumn('days_between', days_between)\
+        .withColumn('start_month', start_month)\
+        .show()
+```
+
+---
+
+## Conditional transformations
+
+- In the `functions` package is a *special function* called `when`
+
+- This function is used to *create a new column* which value **depends on the value of other columns**
+
+- `otherwise` is used to match "the rest"
+
+- Combination between conditions can be done using `"&"` for "and" and `"|"` for "or"
+
+
+---
+
+## Examples
+
+```{python}
+df = spark.createDataFrame([
+        ("John", 21, "male"),
+        ("Jane", 25, "female"),
+        ("Albert", 46, "male"),
+        ("Brad", 49, "super-hero")
+    ], ["name", "age", "gender"])
+
+supervisor = fn.when(df.gender == 'male', 'Mr. Smith')\
+        .when(df.gender == 'female', 'Miss Jones')\
+        .otherwise('NA')
+
+df.withColumn("supervisor", supervisor).show()
+```
+
+
+---
+
+## {{< fa database >}} Functions in Relational Database Management Systems
+
+Compare functions defined in `pyspark.sql.functions` with functions specified in ANSI SQL and defined in popular RDBMs
+
+[PostgreSQL Documentation](https://www.postgresql.org/docs/current/index.html)
+
+{{< fa hand-point-right >}} [Section on Functions and Operators](https://www.postgresql.org/docs/current/functions.html)
+
+::: {.callout}
+
+In RDBMs functions serve many purposes
+
+- querying
+- system administration
+- triggers
+- ...
+
+:::
+
+---
+
+## User-defined functions
+
+- When you need a **transformation** that is **not available** in the `functions` package, you can create a *User Defined Function* (UDF)
+
+- **Warning**: the performance of this can be *very very low*
+
+- So, it should be used **only** when you are **sure** the operation *cannot be done* with available functions
+
+- To create an UDF, use `functions.udf`, passing a lambda or a named functions
+
+- It is similar to the `map` operation of RDDs
+
+---
+
+## Example
+
+```{python}
+from pyspark.sql import functions as fn
+from pyspark.sql.types import StringType
+
+df = spark.createDataFrame([(1, 3), (4, 2)], ["first", "second"])
+
+def my_func(col_1, col_2):
+        if (col_1 > col_2):
+            return "{} is bigger than {}".format(col_1, col_2)
+        else:
+            return "{} is bigger than {}".format(col_2, col_1)
+
+my_udf = fn.udf(my_func, StringType())
+
+df.withColumn("udf", my_udf(df['first'], df['second'])).show()
+
+```
+
+---
+
+
+
+
+#  Joins  {background-color="#1c191c"}
+
+---
+
+## Performing joins  {.smaller}
+
+- `Spark SQL` supports *joins* between two `DataFrame`
+
+- As in  `ANSI SQL`, a join **rule** must be defined
+
+- The **rule** can either be a set of **join keys** (equi-join), or a **conditional rule**
+($\theta$-join)
+
+- Join with conditional rules ($\theta$-joins) in `Spark` can be *very heavy*
+
+- **Several types of joins** are available, default is `inner`
+
+Syntax  for $\texttt{left_df} \bowtie_{\texttt{cols}} \texttt{right_df}$
+ is simple:
+```{.python}
+left_df.join(
+  other=right_df, 
+  on=cols, 
+  how=join_type
+)
+```
+- `cols` contains a column name or a list of column names
+- `join_type` is the type of join
+
+
+
+---
+
+## Examples
+
+```{python}
+#| code-line-numbers: 1-12|14
+from datetime import date
+
+products = spark.createDataFrame([
+        ('1', 'mouse', 'microsoft', 39.99),
+        ('2', 'keyboard', 'logitech', 59.99),
+    ], ['prod_id', 'prod_cat', 'prod_brand', 'prod_value'])
+
+purchases = spark.createDataFrame([
+        (date(2017, 11, 1), 2, '1'),
+        (date(2017, 11, 2), 1, '1'),
+        (date(2017, 11, 5), 1, '2'),
+    ], ['date', 'quantity', 'prod_id'])
+
+# The default join type is the "INNER" join
+purchases.join(products, 'prod_id').show()
+```
+
+---
+
+## Examples
+
+```{python}
+#| code-line-numbers: 4-9|11
+# We can also use a query string (not recommended)
+products.createOrReplaceTempView("products")
+purchases.createOrReplaceTempView("purchases")
+
+query = """
+  SELECT * 
+  FROM  purchases AS prc INNER JOIN 
+        products AS prd 
+    ON (prc.prod_id = prd.prod_id)
+"""
+
+spark.sql(query).show()
+```
+
+---
+
+## Examples
+
+```{python}
+new_purchases = spark.createDataFrame([
+        (date(2017, 11, 1), 2, '1'),
+        (date(2017, 11, 2), 1, '3'),
+    ], ['date', 'quantity', 'prod_id_x']
+)
+
+join_rule = new_purchases.prod_id_x == products.prod_id
+
+new_purchases.join(products, join_rule, 'left').show()
+```
+
+
+---
+
+## Performing joins: some remarks
+
+- Spark *removes the duplicated column* in the `DataFrame` it outputs after a join operation
+
+- When joining using columns *with nulls*, `Spark` just skips those
+
+```{.scala}
+>>> df1.show()               >>> df2.show()
++----+-----+                 +----+-----+
+|  id| name|                 |  id| dept|
++----+-----+                 +----+-----+
+| 123|name1|                 |null|sales|
+| 456|name3|                 | 223|Legal|
+|null|name2|                 | 456|   IT|
++----+-----+                 +----+-----+
+
+>>> df1.join(df2, "id").show
++---+-----+-----+
+| id| name| dept|
++---+-----+-----+
+|123|name1|sales|
+|456|name3|   IT|
++---+-----+-----+
+```
+
+---
+
+## Join types   {.smaller}
+
+
+| SQL Join Type | In Spark (synonyms)                | Description          |
+|:--------------|:-----------------------------------|:---------------------|
+| `INNER`         | `"inner"`                          | Data from left and right matching both ways (intersection) |
+| `FULL OUTER`    | `"outer"`, `"full"`, `"fullouter"` | All rows from left and right with extra data if present (union) |
+| `LEFT OUTER`    | `"leftouter"`, `"left"`            | Rows from left with extra data from right if present |
+| `RIGHT OUTER`   | `"rightouter"`, `"right"`          | Rows from right with extra data from left if present |
+| `LEFT SEMI`     | `"leftsemi"`                       | Data from left with a match with right |
+| `LEFT ANTI`     | `"leftanti"`                       | Data from left with no match with right |
+| `CROSS`         | `"cross"`                          | Cartesian product of left and right (never used) |
+
+
+---
+
+
+
+## Join types
+
+::: {.center}
+
+<img width="700px" src="./IMG/join-types.png"/>
+
+:::
+
+---
+
+## Inner join ("inner")
+
+```{.python}
+>>> inner = df_left.join(df_right, "id", "inner")
+
+df_left                df_right             
++---+-----+            +---+-----+
+| id|value|            | id|value|
++---+-----+            +---+-----+
+|  1|   A1|            |  3|   A3|
+|  2|   A2|            |  4| A4_1|
+|  3|   A3|            |  4|   A4|
+|  4|   A4|            |  5|   A5|
++---+-----+            |  6|   A6|
+                       +---+-----+
+inner
++---+-----+-----+
+| id|value|value|
++---+-----+-----+
+|  3|   A3|   A3|
+|  4|   A4|   A4|
+|  4|   A4| A4_1|
++---+-----+-----+
+```
+
+---
+
+## Outer join ("outer", "full" or "fullouter")
+
+```{.python}
+>>> outer = df_left.join(df_right, "id", "outer")
+df_left                df_right             
++---+-----+            +---+-----+
+| id|value|            | id|value|
++---+-----+            +---+-----+
+|  1|   A1|            |  3|   A3|
+|  2|   A2|            |  4| A4_1|
+|  3|   A3|            |  4|   A4|
+|  4|   A4|            |  5|   A5|
++---+-----+            |  6|   A6|
+                       +---+-----+
+outer
++---+-----+-----+
+| id|value|value|
++---+-----+-----+
+|  1|   A1| null|
+|  2|   A2| null|
+|  3|   A3|   A3|
+|  4|   A4|   A4|
+|  4|   A4| A4_1|
+|  5| null|   A5|
+|  6| null|   A6|
++---+-----+-----+
+```
+
+---
+
+## Left join ("leftouter" or "left" )
+
+```{.python}
+>>> left = df_left.join(df_right, "id", "left")
+
+df_left                df_right             
++---+-----+            +---+-----+
+| id|value|            | id|value|
++---+-----+            +---+-----+
+|  1|   A1|            |  3|   A3|
+|  2|   A2|            |  4| A4_1|
+|  3|   A3|            |  4|   A4|
+|  4|   A4|            |  5|   A5|
++---+-----+            |  6|   A6|
+                       +---+-----+
+left
++---+-----+-----+
+| id|value|value|
++---+-----+-----+
+|  1|   A1| null|
+|  2|   A2| null|
+|  3|   A3|   A3|
+|  4|   A4|   A4|
+|  4|   A4| A4_1|
++---+-----+-----+
+```
+
+---
+
+## Right ("rightouter" or "right")
+
+```{.python}
+>>> right = df_left.join(df_right, "id", "right")
+
+df_left                df_right             
++---+-----+            +---+-----+
+| id|value|            | id|value|
++---+-----+            +---+-----+
+|  1|   A1|            |  3|   A3|
+|  2|   A2|            |  4| A4_1|
+|  3|   A3|            |  4|   A4|
+|  4|   A4|            |  5|   A5|
++---+-----+            |  6|   A6|
+                       +---+-----+
+right
++---+-----+-----+
+| id|value|value|
++---+-----+-----+
+|  3|   A3|   A3|
+|  4|   A4|   A4|
+|  4|   A4| A4_1|
+|  5| null|   A5|
+|  6| null|   A6|
++---+-----+-----+
+```
+
+---
+
+## Left semi join ("leftsemi")
+
+```{.python}
+>>> left_semi = df_left.join(df_right, "id", "leftsemi")
+
+df_left                df_right             
++---+-----+            +---+-----+
+| id|value|            | id|value|
++---+-----+            +---+-----+
+|  1|   A1|            |  3|   A3|
+|  2|   A2|            |  4| A4_1|
+|  3|   A3|            |  4|   A4|
+|  4|   A4|            |  5|   A5|
++---+-----+            |  6|   A6|
+                       +---+-----+
+left_semi
++---+-----+
+| id|value|
++---+-----+
+|  3|   A3|
+|  4|   A4|
++---+-----+
+```
+
+---
+
+## Left anti joint ("leftanti")
+
+```{.python}
+>>> left_anti = df_left.join(df_right, "id", "leftanti")
+
+df_left                df_right             
++---+-----+            +---+-----+
+| id|value|            | id|value|
++---+-----+            +---+-----+
+|  1|   A1|            |  3|   A3|
+|  2|   A2|            |  4| A4_1|
+|  3|   A3|            |  4|   A4|
+|  4|   A4|            |  5|   A5|
++---+-----+            |  6|   A6|
+                       +---+-----+
+left_anti
++---+-----+
+| id|value|
++---+-----+
+|  1|   A1|
+|  2|   A2|
++---+-----+
+```
+
+---
+
+
+## Performing joins
+
+- Node-to-node communication strategy 
+
+- Per node computation strategy
+
+
+
+::: {.notes}
+
+Section *“How Spark Performs Joins”
+
+:::
+
+
+
+---
+
+
+### From the Definitive Guide: 
+
+> Spark approaches cluster communication in two different ways during joins. 
+
+> It either incurs a *shuffle* join, which results in an all-to-all communication or a *broadcast* join. 
+
+> The core foundation of our simplified view of joins is that in Spark you will have either a big table or a small table. 
+
+> When you join a big table to another big table, you end up with a *shuffle* join
+
+---
+
+
+> When you join a big table to another big table, you end up with a *shuffle* join
+
+
+![](./IMG/spark_shuffle_join.jpg)
+
+
+---
+
+
+> When you join a big table to a small table, you end up with a *broadcast* join
+
+![](./IMG/spark_broadcast_join.jpg)
+
+
+---
+
+
+# Aggregations  {background-color="#1c191c"}
+
+---
+
+## Performing aggregations
+
+- Maybe *the most used operations* in `SQL` and `Spark SQL`
+
+- Similar to `SQL`, we use `"group by"` to perform *aggregations*
+
+- We usually can call the aggregation function just after `groupBy` <br> 
+Namely, we use `groupBy().agg()`
+
+- *Many aggregation functions* in `pyspark.sql.functions`
+
+- Some examples:
+
+  - Numerical: `fn.avg`, `fn.sum`, `fn.min`, `fn.max`, etc.
+
+  - General: `fn.first`, `fn.last`, `fn.count`, `fn.countDistinct`, etc.
+
+---
+
+## Examples
+
+```{python}
+from pyspark.sql import functions as fn
+
+products = spark.createDataFrame([
+        ('1', 'mouse', 'microsoft', 39.99),
+        ('2', 'mouse', 'microsoft', 59.99),
+        ('3', 'keyboard', 'microsoft', 59.99),
+        ('4', 'keyboard', 'logitech', 59.99),
+        ('5', 'mouse', 'logitech', 29.99),
+    ], ['prod_id', 'prod_cat', 'prod_brand', 'prod_value'])
+
+products.groupBy('prod_cat').avg('prod_value').show()
+
+# Or
+products.groupBy('prod_cat').agg(fn.avg('prod_value')).show()
+
+```
+
+---
+
+## Examples
+
+```{python}
+from pyspark.sql import functions as fn
+
+products.groupBy('prod_brand', 'prod_cat')\
+        .agg(fn.avg('prod_value')).show()
+```
+
+
+---
+
+## Examples
+
+```{python}
+from pyspark.sql import functions as fn
+
+products.groupBy('prod_brand').agg(
+    fn.round(fn.avg('prod_value'), 1).alias('average'),
+    fn.ceil(fn.sum('prod_value')).alias('sum'),
+    fn.min('prod_value').alias('min')
+).show()
+```
+
+---
+
+## Examples
+
+
+```{python}
+# Using an SQL query
+products.createOrReplaceTempView("products")
+
+query = """
+  SELECT
+    prod_brand,
+    round(avg(prod_value), 1) AS average,
+    min(prod_value) AS min
+  FROM products
+  GROUP BY prod_brand
+"""
+
+spark.sql(query).show()
+```
+
+
+# Window functions  {background-color="#1c191c"}
+
+
+
+## Window (analytic) functions
+
+- A very, very *powerful feature*
+
+- They allow to solve *complex problems*
+
+- ANSI SQL2003 allows for a `window_clause` in aggregate function calls, 
+the addition of which makes those functions into window functions
+
+- A good article about this feature is [[here]](https://databricks.com/blog/2015/07/15/introducing-window-functions-in-spark-sql.html)
+
+See also :
+
+[https://www.postgresql.org/docs/current/tutorial-window.html](https://www.postgresql.org/docs/current/tutorial-window.html)
+
+::: {.notes}
+
+> A window function performs a calculation across a set of table rows that are somehow related to the current row. 
+> This is comparable to the type of calculation that can be done with an aggregate function. 
+> However, window functions do not cause rows to become grouped into a single output row like non-window aggregate calls would. 
+> Instead, the rows retain their separate identities. 
+> Behind the scenes, the window function is able to access more than just the current row of the query result.
+
+:::
+
+
+## Window functions
+
+- It's *similar to aggregations*, but the **number of rows doesn't change**
+
+- Instead, *new columns are created*, and the **aggregated values are duplicated** for values of the same "group"
+
+- There are 
+  + "traditional" aggregations, such as `min`, `max`, `avg`, `sum` and 
+  + "special" types, such as `lag`, `lead`, `rank`
+
+
+## Numerical window functions
+
+```{python}
+from pyspark.sql import Window
+from pyspark.sql import functions as fn
+
+# First, we create the Window definition
+window = Window.partitionBy('prod_brand')
+
+# Then, we can use "over" to aggregate on this window
+avg = fn.avg('prod_value').over(window)
+
+# Finally, we can it as a classical column
+products.withColumn('avg_brand_value', fn.round(avg, 2)).show()
+```
+
+
+## Numerical window functions
+
+```{python}
+from pyspark.sql import Window
+from pyspark.sql import functions as fn
+
+# The window can be defined on multiple columns
+window = Window.partitionBy('prod_brand', 'prod_cat')
+
+avg = fn.avg('prod_value').over(window)
+
+products.withColumn('avg_value', fn.round(avg, 2)).show()
+```
+
+
+## Numerical window functions
+
+```{python}
+from pyspark.sql import Window
+from pyspark.sql import functions as fn
+
+# Multiple windows can be defined
+window1 = Window.partitionBy('prod_brand')
+window2 = Window.partitionBy('prod_cat')
+
+avg_brand = fn.avg('prod_value').over(window1)
+avg_cat = fn.avg('prod_value').over(window2)
+
+products \
+  .withColumn('avg_by_brand', fn.round(avg_brand, 2)) \
+  .withColumn('avg_by_cat', fn.round(avg_cat, 2)) \
+  .show()
+```
+
+
+
+## Lag and Lead
+
+- `lag` and `lead` are special functions used over an *ordered window*
+
+- They are used to **take the "previous" and "next" value** within the window
+
+- Very useful in datasets with a date column for instance
+
+
+## Lag and Lead
+
+```{python}
+purchases = spark.createDataFrame([
+        (date(2017, 11, 1), 'mouse'),
+        (date(2017, 11, 2), 'mouse'),
+        (date(2017, 11, 4), 'keyboard'),
+        (date(2017, 11, 6), 'keyboard'),
+        (date(2017, 11, 9), 'keyboard'),
+        (date(2017, 11, 12), 'mouse'),
+        (date(2017, 11, 18), 'keyboard')
+    ], ['date', 'prod_cat'])
+purchases.show()
+```
+
+
+## Lag and Lead
+
+```{python}
+window = Window.partitionBy('prod_cat').orderBy('date')
+
+prev_purch = fn.lag('date', 1).over(window)
+next_purch = fn.lead('date', 1).over(window)
+
+purchases\
+  .withColumn('prev', prev_purch)\
+  .withColumn('next', next_purch)\
+  .orderBy('prod_cat', 'date')\
+  .show()
+```
+
+
+## Rank, DenseRank and RowNumber
+
+- Another set of **useful "special" functions**
+
+- Also used on *ordered windows*
+
+- They create a **rank**, or an **order** of the items within the window
+
+
+## Rank and RowNumber
+
+```{python}
+contestants = spark.createDataFrame([
+    ('veterans', 'John', 3000),
+    ('veterans', 'Bob', 3200),
+    ('veterans', 'Mary', 4000),
+    ('young', 'Jane', 4000),
+    ('young', 'April', 3100),
+    ('young', 'Alice', 3700),
+    ('young', 'Micheal', 4000)], 
+  ['category', 'name', 'points']
+)
+
+contestants.show()
+```
+
+
+## Rank and RowNumber
+
+```{python}
+window = Window.partitionBy('category')\
+        .orderBy(contestants.points.desc())
+
+rank = fn.rank().over(window)
+dense_rank = fn.dense_rank().over(window)
+row_number = fn.row_number().over(window)
+
+contestants\
+        .withColumn('rank', rank)\
+        .withColumn('dense_rank', dense_rank)\
+        .withColumn('row_number', row_number)\
+        .orderBy('category', fn.col('points').desc())\
+        .show()
+```
+
+#  Writing dataframes  {background-color="#1c191c"}
+
+
+## Writing dataframes   {.smaller}
+
+- Very *similar to reading*. Output formats are the same: `csv`, `json`, `parquet`, `orc`, `jdbc`, etc. Note that `write` *is an action*
+
+- Instead of `df.read.{source}` use `df.write.{target}`
+
+- Main option is `mode` with possible values:
+
+  - `"append"`: append contents of this `DataFrame` to existing data.
+  - `"overwrite"`: overwrite existing data
+  - `"error"`: throw an exception if data already exists
+  - `"ignore"`: silently ignore this operation if data already exists.
+
+Example
+
+```{python}
+#| eval: false
+products.write.csv('./products.csv')
+products.write.mode('overwrite').parquet('./produits.parquet')
+products.write.format('parquet').save('./produits_2.parquet')
+```
+
+
+
+# Under the hood...  {background-color="#1c191c"}
+
+## Query planning and optimization
+
+A *lot happens under the hood* when executing an **action** on a `DataFrame`.
+The query goes through the following **exectution stages**:
+
+1. Logical Analysis
+1. Caching Replacement
+1. Logical Query Optimization (using rule-based and cost-based optimizations)
+1. Physical Planning
+1. Physical Optimization (e.g. Whole-Stage Java Code Generation or Adaptive Query Execution)
+1. Constructing the RDD of Internal Binary Rows (that represents the structured query in terms of Spark Core’s RDD API)
+
+::: {.aside}
+
+[https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql.html](https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql.html)]
+
+:::
+
+
+## Query planning and optimization
+
+::: {.center}
+  
+![](./IMG/QueryExecution-execution-pipeline.png)
+
+:::
+
+::: {.aside}
+
+[https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql.html](https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql.html)]
+
+:::
+
+## References 
+
+[PySpark Quickstart](https://spark.apache.org/docs/latest/api/python/getting_started/quickstart_ps.html)
+
+[Pandas on Spark User's Guide](https://spark.apache.org/docs/latest/api/python/user_guide/pandas_on_spark/index.html)
+
+
+
+
+
+# Thank you !  {.unlisted background-color="#1c191c"}
+

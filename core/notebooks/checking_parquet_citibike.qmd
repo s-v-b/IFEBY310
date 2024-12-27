@@ -1,0 +1,172 @@
+---
+title: Check consistency of parquet files
+jupyter: python3
+---
+
+
+
+```{python}
+import glob
+
+import os
+import sys
+import re 
+import shutils
+
+import pandas as pd
+import numpy as np
+
+import datetime
+
+import itertools
+
+import zipfile
+from zipfile import ZipFile
+from tqdm import tqdm
+
+import pyarrow as pa
+import comet    as co
+import pyarrow.parquet as pq
+import pyarrow.dataset as ds
+
+os.environ['PYSPARK_PYTHON'] = sys.executable
+os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
+```
+
+## Paths
+
+```{python}
+data_dir = "../data"
+os.path.exists(data_dir)
+
+extract_dir = os.path.join(data_dir, "xcitibike")
+if not os.path.exists(extract_dir):
+    os.mkdir(extract_dir)
+
+parquet_dir = os.path.join(data_dir, "pq_citibike")
+if not os.path.exists(parquet_dir):
+    os.mkdir(parquet_dir)
+```
+
+## Spark session
+
+```{python}
+from pyspark import SparkConf, SparkContext
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as fn
+from pyspark.sql.types import *
+```
+
+```{python}
+
+spark = (SparkSession
+    .builder
+    .appName("Spark checking citibike parquet file")
+    .getOrCreate()
+)
+```
+
+## Try to load parquet file
+
+```{python}
+sch_1 = StructType([
+    StructField('trip_duration', StringType(), True), 
+    StructField('started_at', TimestampType(), True), 
+    StructField('ended_at', TimestampType(), True), 
+    StructField('start_station_id', StringType(), True), 
+    StructField('start_station_name', StringType(), True), 
+    StructField('start_lat', StringType(), True), 
+    StructField('start_lng', StringType(), True), 
+    StructField('end_station_id', StringType(), True), 
+    StructField('end_station_name', StringType(), True), 
+    StructField('end_lat', StringType(), True), 
+    StructField('end_lng', StringType(), True), 
+    StructField('bike_id', StringType(), True), 
+    StructField('user_type', StringType(), True), 
+    StructField('birth_year', StringType(), True), 
+    StructField('gender', StringType(), True), 
+    StructField('start_year', IntegerType(), True), 
+    StructField('start_month', IntegerType(), True)
+    ]
+)
+```
+
+```{python}
+input_file = os.path.join(parquet_dir, 'start_year=2022')
+
+df = ( 
+    spark.read
+        .option("mergeSchema", "true")
+        .parquet(parquet_dir)
+)
+```
+
+```{python}
+df.printSchema()
+```
+
+```
+root
+ |-- trip_duration: string (nullable = true)
+ |-- started_at: timestamp (nullable = true)
+ |-- ended_at: timestamp (nullable = true)
+ |-- start_station_id: string (nullable = true)
+ |-- start_station_name: string (nullable = true)
+ |-- start_lat: string (nullable = true)
+ |-- start_lng: string (nullable = true)
+ |-- end_station_id: string (nullable = true)
+ |-- end_station_name: string (nullable = true)
+ |-- end_lat: string (nullable = true)
+ |-- end_lng: string (nullable = true)
+ |-- bike_id: string (nullable = true)
+ |-- user_type: string (nullable = true)
+ |-- birth_year: string (nullable = true)
+ |-- gender: string (nullable = true)
+ |-- ride_id: string (nullable = true)
+ |-- rideable_type: string (nullable = true)
+ |-- member_casual: string (nullable = true)
+ |-- start_year: integer (nullable = true)
+ |-- start_month: integer (nullable = true)
+```
+
+```{python}
+df.select(["started_at", "ended_at"]).show(5)
+```
+
+```{python}
+print(df.rdd.toDebugString().decode("utf-8"))
+```
+
+```{python}
+df.rdd.getNumPartitions()
+```
+
+```{python}
+df_pd = df.groupBy(['start_year', 'start_month']).count().toPandas()
+```
+
+```{python}
+df_pd.sort_values(by=['start_year', 'start_month'])
+```
+
+```{python}
+(
+    df
+        .groupBy('rideable_type')
+        .agg(fn.count('started_at'))
+        .show()
+)
+```
+
+```{python}
+spark.stop()
+```
+
+```{python}
+from pyspark.sql.types import *
+```
+
+```{python}
+print(sch_1)
+```
+

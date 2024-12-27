@@ -1,0 +1,54 @@
+---
+title: "Appache Arrow"
+author: Stéphane Boucheron
+institute: LPSM Université Paris-Cité
+format: 
+    revealjs:
+        smaller: true
+        scrollable: true
+        navigation-mode: vertical
+---
+
+
+# Apache Arrow
+
+
+## Bird-eye perspective
+
+
+## Why Arrow?
+
+
+##
+
+
+
+# Arrow HDFS
+
+## Hadoop Distributed File System
+
+
+
+
+# ORC
+
+## ...
+
+
+## ...
+
+
+
+
+# Parquet
+
+
+
+# Feather
+
+
+# Avro
+
+
+
+
