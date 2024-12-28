@@ -1,11 +1,10 @@
----
-title: "A glimpse at  Spark"
 
-format:
-  revealjs: 
-    footer: |
-      [Spark MediaLab Presentation](https://stephane-v-boucheron.fr/slides/spark-sql.html)
 ---
+title: "Spark Presentation"
+engine: knitr
+date: "2025-01-17"
+---
+
 
 # Spark in perspective {background-color="#1c191c"}
 

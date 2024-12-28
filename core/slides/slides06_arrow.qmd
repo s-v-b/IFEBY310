@@ -1,14 +1,7 @@
 ---
-title: "SPARK & JSON"
+title: "Apache Arrow"
 date: "2024-02-19"
-
-format: 
-  revealjs:
-    header: "SPARK & JSON"
-
-execute: 
-  eval: true
-  echo: true
+engine: knitr
 ---
 
 #  Apache Arrow  {background-color="#1c191c"}

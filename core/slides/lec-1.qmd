@@ -1,6 +1,7 @@
 ---
 title: "Lecture 1"
 subtitle: "Course organization"
+date: "2025-01-17"
 ---
 
 # Objectives

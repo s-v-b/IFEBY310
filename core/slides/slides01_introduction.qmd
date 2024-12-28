@@ -1,0 +1,860 @@
+---
+date: "2025/01/17 (updated: `r Sys.Date()`)"
+title: "Big data technologies"
+engine: knitr
+---
+
+<center>
+    <img src="/images/lpsm.pnog" style="height: 160px;" />
+    <img src="" style="width: 30px;" />
+    <img src="/images/paris-diderot.png" style="height: 90px;" />
+    <img src="" style="width: 30px;" />
+    <img src="/images/uparis.png" style="height: 120px;" />
+</center>
+
+
+
+
+#  Course logistics {background-color="#1c191c"}
+
+
+
+
+##  Who are we ?
+
+::: {.columns}
+
+::: {.column}
+
+<center>
+<img src="/images/stephaneb.jpg" style="height:140px;" />
+</center>
+
+- Stéphane Boucheron
+- LPSM
+- Statistics {{< fa chart-area >}}
+- [https://stephane-v-boucheron.fr](https://stephane-v-boucheron.fr)
+
+
+:::
+
+
+::: {.column}
+
+<center>
+<img src="/images/cristina.jpeg" style="height: 140px;" />
+</center>
+
+
+- Cristina Sirangelo
+- IRIF
+- Data Science, Databases {{< fa database >}}
+- [https://www.irif.fr/~amelie/](https://www.irif.fr/~cristina/)
+
+:::
+
+:::
+
+##  Course logistics
+
+- 24 hours = 2 hours $\times$ *12 weeks* : classes + hands-on
+
+- [Agenda](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
+
+
+### About the hands-on
+
+- Hands-on and homeworks using .stress[`Jupyter` notebooks/Quarto notebooks]
+
+- Using a `Docker` image  built for the course
+
+- {{< fa laptop-code >}} Hands-on must be carried out using your *own laptop*. Bring it at **all the courses**
+
+
+
+##  Course logistics
+
+- The {{< fa globe >}} webpage of the course is:
+
+[https://stephane-v-boucheron.fr/courses/grosses-data/](https://stephane-v-boucheron.fr/courses/grosses-data/)
+
+- {{< fa bookmark >}} Bookmark it !
+
+- Follow *carefully* the steps described in the `tools` page:
+
+<center>
+[https://s-v-b.github.io/IFEBY310/tools](https://s-v-b.github.io/IFEBY310/tools)
+</center>
+
+- {{< fa brands docker >}} Who knows about `docker` ?
+
+
+##  Course evaluation
+
+- *Evaluation* using **homeworks** and a **final project**
+
+- Find a *friend* : all work done by **pairs of students**
+
+- **All your work** goes in your private repository and nowhere else: *no emails* !
+
+- All your homework will be using `quarto` files
+
+
+
+
+#  {{< fa brands docker >}} `Docker`   {background-color="#1c191c"}
+
+
+##  Why [`docker`](https://www.docker.com) ? What is it ?
+
+- Don't mess with your `python` env. and configuration files
+- Everything in embedded in a *container* (better than a Virtual Machine)
+- A *container* is an **instance** of an *image*
+- Same image = same environment for everybody 
+- Same image = no {version, dependencies, install} problems
+- It is an *industrial standard* used everywhere now!
+
+
+<img src="/images/containers.png" style="width: 70%;" />
+
+
+<img src="/images/python_environment.png" style="width: 75%;" />
+
+
+
+##  `docker`
+
+- Have a look at
+
+[https://s-v-b.github.io/IFEBY310/tools](https://s-v-b.github.io/IFEBY310/tools)
+
+- have a look at the `Dockerfile` to explain a little bit how the image is built
+
+- perform a quick demo on how to use the `docker` image
+
+
+
+### And that's it for the logistics !
+
+
+
+#  Big data  {background-color="#1c191c"}
+
+
+##  Big data
+
+- *Moore's Law*: *computing power* **doubled** every two years between 1975 and 2012
+
+- Nowadays, **less** than two years and a half
+
+- *Rapid growth of datasets*: **internet activity**, social networks, genomics, physics, censor networks, IOT, ...
+
+- *Data size trends*: **doubles every year** according to [IDC executive summary](https://www.emc.com/leadership/digital-universe/2014iview/executive-summary.htm)
+
+- *Data deluge*: Today, data is growing faster than computing power
+
+
+##  Question  {{< fa brain >}}
+
+- How do we **catch up** to **process the data deluge** and to **learn from it** ?
+
+
+
+##  Order of magnitudes
+
+#### bit
+
+A *bit* is a value of either a 1 or 0 (on or off)
+
+#### byte (B)
+
+A *byte* is made of 8 bits
+
+- 1 character, e.g., "a", is one byte
+
+#### Kilobyte (KB)
+
+A kilobyte is $1024 =2^{10}$ bytes
+
+- **2** or **3** paragraphs of ASCII text
+
+
+
+##  Some more comparisons
+
+#### Megabyte (MB)
+
+A megabyte is $1 048 576=2^{20}$ B or $1 024$ KB
+
+- **873** pages of plain text
+- **4** books (200 pages or 240 000 characters)
+
+#### Gigabyte (GB)
+
+A gigabyte is $1 073 741 824=2^{30}$ B, $1 024$ MB or $1 048 576$ KB
+
+- **894 784** pages of plain text (1 200 characters)
+- **4 473** books (200 pages or 240 000 characters)
+- **640** web pages (with 1.6 MB average file size)
+- **341** digital pictures (with 3 MB average file size)
+- **256** MP3 audio files (with 4 MB average file size)
+- **1,5** 650 MB CD
+
+
+
+##  Even more
+
+#### Terabyte (TB)
+
+A terabyte is $1 099 511 627 776=2^{40}$ B, **1 024** GB  or **1 048 576** MB.
+
+- **916 259 689** pages of plain text (1 200 characters)
+- **4 581 298** books (200 pages or 240 000 characters)
+- **655 360** web pages (with 1.6 MB average file size)
+- **349 525** digital pictures (with 3 MB average file size)
+- **262 144** MP3 audio files (with 4 MB average file size)
+- **1 613** 650 MB CD's
+- **233** 4.38 GB DVDs
+- **40** 25 GB Blu-ray discs
+
+
+
+##  The deluge
+
+### Petabyte (PB)
+
+A petabyte is **1 024** TB, **1 048 576** GB or **1 073 741 824** MB
+
+$$1125899906842624 = 2^{50} \quad\text{Bytes}$$
+
+- **938 249 922 368** pages of plain text (1 200 characters)
+- **4 691 249 611** books (200 pages or 240 000 characters)
+- **671 088 640** web pages (with 1.6 MB average file size)
+- **357 913 941** digital pictures (with 3 MB average file size)
+- **268 435 456** MP3 audio files (with 4 MB average file size)
+- **1 651 910** 650 MB CD's
+- **239 400** 4.38 GB DVDs
+- **41 943** 25 GB Blu-ray discs
+
+### Exabyte, etc.
+
+- 1 EB = 1 exabyte = 1 024 PB
+- 1 ZB = 1 zettabyte = 1 024 EB
+
+
+
+##  Some figures
+
+You have every *single second* $\mbox{}^1$ :
+
+- At least **8,000 tweets** sent
+
+- **900+ photos** posted on **Instagram**
+
+- **Thousands of Skype calls** made
+
+- Over **70,000 Google searches** performed
+
+- Around **80,000 YouTube videos** viewed
+
+- Over **2 million emails** sent
+
+[https://www.internetlivestats.com](https://www.internetlivestats.com)
+
+
+
+##  Some figures
+
+There are $\mbox{}^1$ :
+
+- *5 billion web pages* as of mid-2019 (indexed web)
+
+and we expected$^2$ :
+
+- *4.8 ZB* of annual IP traffic in 2022
+
+Note that
+
+- **1** ZB $\approx$ **36 000** years of HD video
+- Netflix's **entire catalog** is $\approx$ **3.5 years** of HD video
+
+
+1. [https://www.worldwidewebsize.com](https://www.worldwidewebsize.com) 
+2. Cisco's Visual Networking Index
+
+
+
+
+##  Some figures
+
+More figures :
+
+- **facebook** daily logs: **60TB**
+
+- **1000 genomes** project: **200TB**
+
+- Google web index: **10+ PB**
+
+- Cost of **1TB** of storage: **~$35**
+
+- Time to read **1TB** from disk: **3 hours** if **100MB/s**
+
+<!-- ### Let's give some *latencies* now -->
+
+
+
+##  Latency numbers
+
+| Memory type                        | Latency(ns)      | Latency(us) | (ms)   |                             |
+|:---------------------------------|---------------:|----------:|-----:|:--------------------------|
+| L1 cache reference                 |           0.5 ns |             |        |                             |  
+| L2 cache reference                 |           7   ns |             |        | 14x L1 cache                |
+| Main memory reference              |         100   ns |             |        | 20x L2, 200x L1             |
+| Compress 1K bytes with Zippy/Snappy|       3,000   ns |        3 us |        |                             |
+| Send 1K bytes over 1 Gbps network  |      10,000   ns |       10 us |        |                             |
+| Read 4K randomly from SSD*         |     150,000   ns |      150 us |        | ~1GB/sec SSD                |
+| Read 1 MB sequentially from memory |     250,000   ns |      250 us |        |                             |
+| Round trip within same datacenter  |     500,000   ns |      500 us |        |                             |
+| Read 1 MB sequentially from SSD*   |   1,000,000   ns |    1,000 us |   1 ms | ~1GB/sec SSD, 4X memory     |
+| Disk seek                          |  10,000,000   ns |   10,000 us |  10 ms | 20x datacenter roundtrip    |
+| Read 1 MB sequentially from disk   |  20,000,000   ns |   20,000 us |  20 ms | 80x memory, 20x SSD         |
+| Send packet US -> Europe -> US     | 150,000,000   ns |  150,000 us | 150 ms | 600x memory                 |
+
+
+
+## {.smaller}
+
+
+```
+traceroute to mathscinet.ams.org (104.238.176.204), 64 hops max
+  1   192.168.10.1  3,149ms  1,532ms  1,216ms 
+  2   192.168.0.254  1,623ms  1,397ms  1,309ms 
+  3   78.196.1.254  2,571ms  2,120ms  2,371ms 
+  4   78.255.140.126  2,813ms  2,621ms  2,200ms 
+  5   78.254.243.86  2,626ms  2,528ms  2,517ms 
+  6   78.254.253.42  2,517ms  4,129ms  2,671ms 
+  7   78.254.242.54  2,535ms  2,258ms  2,350ms 
+  8   *  *  * 
+  9   195.66.224.191  12,231ms  11,718ms  12,486ms 
+ 10   *  *  * 
+ 11   63.218.14.58  26,213ms  19,264ms  18,949ms 
+ 12   63.218.231.106  29,135ms  22,078ms  17,954ms
+```
+
+
+##  Latency numbers
+
+- Reading 1MB from **disk** = **100 x** reading 1MB from **memory**
+
+- Sending packet from **US to Europe to US** = **1 000 000 x** main memory reference
+
+### General tendency
+
+True in general, not always:
+
+- memory operations : *fastest*
+
+- disk operations : *slow*
+
+- network operations : *slowest*
+
+
+
+##  Latency numbers
+
+[https://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html](https://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html)
+
+<center>
+  <img src="/images/latency_numbers.png" style="width: 100%;" />
+</center>
+
+
+
+##  Humanized latency numbers
+
+Lets multiply all these durations by a billion
+
+
+| Memory type                        | Latency      | Human duration                                        |
+|:---------------------------------|-----------:|----------------------------------------------------:|
+| L1 cache reference                 | 0.5 s        | One heart beat (0.5 s)                                |
+| L2 cache reference                 | 7 s          | Long yawn                                             | 
+| Main memory reference              | 100 s        | Brushing your teeth                                   |
+| Send 2K bytes over 1 Gbps network  | 5.5 hr       | From lunch to end of work day                         | 
+| SSD random read                    | 1.7 days     | A normal weekend                                      | 
+| Read 1 MB sequentially from memory | 2.9 days     | A long weekend                                        |
+| Round trip within same datacenter  | 5.8 days     | A medium vacation                                     | 
+| Read 1 MB sequentially from SSD    | 11.6 days    | Waiting for almost 2 weeks for a delivery             |
+| Disk seek                          | 16.5 weeks   | A semester in university                              |
+| Read 1 MB sequentially from disk   | 7.8 months   | Almost producing a new human being                    | 
+| Send packet US -> Europe -> US     | 4.8 years    | Average time it takes to complete a bachelor's degree | 
+
+
+
+#  Challenges  {background-color="#1c191c"}
+
+
+
+##  Challenges with big datasets
+
+
+- Large data *don't fit* on a **single** hard-drive
+
+- **One** large (and expensive) machine *can't process or store* **all** the data
+
+- For **computations** how do we *stream data* from the **disk to the different 
+layers of memory** ?
+
+- **Concurrent accesses** to the data: disks *cannot* be **read in parallel**
+
+
+
+
+##  Solutions
+
+- Combine *several machines* containing **hard drives** and **processors** on a **network**
+
+- Using *commodity hardware*: cheap, common architecture i.e. **processor** + **RAM** + **disk**
+
+- *Scalability* = **more machines** on the network
+
+- *Partition* the data across the machines
+
+
+
+
+##  Challenges
+
+Dealing with distributed computations adds **software complexity**
+
+- *Scheduling*: How to **split the work across machines**? Must exploit and optimize data locality since moving data is very expensive
+
+- *Reliability*: How to **deal with failure**? Commodity (cheap) hardware fails more often. @Google [1%, 5%] HD failure/year and 0.2% [DIMM](https://en.wikipedia.org/wiki/DIMM) failure/year 
+
+- *Uneven performance* of the machines: some nodes are slower than others
+
+##
+
+::: {.columns}
+
+::: {.column}
+
+Problems sketched in 
+
+.
+![](/images/next-gen-databases.png)
+
+:::
+
+
+::: {.column}
+
+
+:::
+:::
+
+
+
+##  Solutions
+
+- *Schedule*, **manage** and **coordinate** threads and resources using appropriate software
+
+- *Locks* to **limit** access to resources
+
+- *Replicate* data for **faster reading** and **reliability**
+
+
+
+##  Is it HPC ?
+
+- **High Performance Computing** (HPC)
+
+- **Parallel computing**
+
+### Comments
+
+
+- For HPC, *scaling up* means using a *bigger machine*
+
+- Huge performance increase for **medium** scale problems
+
+- *Very expensive*, specialized machines, lots of processors and memory
+
+### Answer is no !
+
+
+##
+
+> Google committed to a number of key tenants when designing its data center architecture. Most
+significantly—and at the time, uniquely—Google committed to massively parallelizing and distributing
+processing across very large numbers of commodity servers. Google also adopted a “Jedis build their own
+lightsabers” attitude: very little third party— and virtually no commercial—software would be found in the
+Google architecture. “Build” was considered better than “buy” at Google.
+
+
+
+##  The Big Data universe
+
+Many technologies combining *software* and *cloud computing*
+
+<center>
+  <img src="/images/teasing2.jpg" style="width: 100%;" />
+</center>
+
+
+
+##  The Big Data universe
+
+Often used with/for with *Machine Learning* (or AI)
+
+<center>
+  <img src="/images/teasing3.png" style="width: 90%;" />
+</center>
+
+
+
+##  Tools
+
+- Softwares such as `HadoopMR` (Hadoop Map Reduce) and more recently  `Spark` and `Dask`  cope with these challenges
+- They are *distributed computational engines*: softwares that ease the development of distributed algorithms
+
+They run on *clusters* (several machine on a network), managed by a *resource manager* such as :
+- **`Yarn` :** 
+[https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html)
+- **`Kubernetes :` **[https://kubernetes.io](https://kubernetes.io/)
+
+A resource manager ensures that the tasks running on the cluster do not try to use the same resources all at once
+
+
+
+
+
+
+
+
+
+#  `Apache Spark`     {background-color="#1c191c"}
+
+
+
+##  Apache `Spark`
+
+The course will focus mainly on `Spark` for big data processing
+
+<center>
+  <img src="/images/spark.png" style="width: 35%;" />
+
+  [https://spark.apache.org](https://spark.apache.org)
+</center>
+
+- `Spark` is an *industrial standard* <br>
+(cf [https://spark.apache.org/powered-by.html](https://spark.apache.org/powered-by.html))
+- One of the most used *big data processing framework*
+- *Open source*
+
+The predecessor of `Spark` is [`Hadoop`](ttps://hadoop.apache.org)
+
+
+
+See Chapter 2 in [Next Generation Dabases](https://link.springer.com/book/10.1007/978-1-4842-1329-2)
+
+[Guy Harrison](https://www.guyharrison.net)
+
+
+
+##  [`Hadoop`](ttps://hadoop.apache.org)
+
+- `Hadoop` has a simple API and good fault tolerance (tolerance to nodes failing midway through a processing job)
+
+- The cost is lots of *data shuffling* across the network
+
+- With intermediate computations *written to disk* **over the network** which we know is *very time expensive* 
+
+It is made of three components:
+
+- `HDFS` (Highly Distributed File System) inspired from `GoogleFileSystem`, see 
+[https://ai.google/research/pubs/pub51](https://ai.google/research/pubs/pub51)
+
+- `YARN` (Yet Another Ressource Negociator) for processing management.
+
+- `MapReduce` inspired from Google for processing again.<br> [https://research.google.com/archive/mapreduce.html](https://research.google.com/archive/mapreduce.html)
+
+
+##
+
+> The Hadoop 1.0 architecture is powerful and easy to understand, but it is limited to MapReduce
+workloads and it provides limited flexibility with regard to scheduling and resource allocation. 
+
+> In the Hadoop 2.0 architecture, YARN (Yet Another Resource Negotiator or, recursively, YARN Application Resource
+Negotiator) improves scalability and flexibility by splitting the roles of the Task Tracker into two processes.
+
+> A *Resource Manager* controls access to the clusters resources (memory, CPU, etc.) while the *Application
+Manager* (one per job) controls task execution.  
+
+
+Guy Harrison. Next Generation Database
+
+
+
+
+##  MapReduce's wordcount example
+
+<center>
+  <img src="/images/WordCountFlow.JPG" width=95%/>
+</center>
+
+
+
+##  `Spark`
+
+Advantages of `Spark` over `HadoopMR` ?
+
+- *In-memory storage*: use **RAM** for fast iterative computations
+- *Lower overhead* for starting jobs
+- *Simple and expressive* with `Scala`, `Python`, `R`, `Java` APIs
+- *Higher level libraries* with `SparkSQL`, `SparkStreaming`, etc.
+
+Disadvantages of `Spark` over `HadoopMR` ?
+ 
+- `Spark` requires servers with **more CPU** and **more memory**
+- But still much cheaper than HPC
+
+`Spark` is *much faster* than `Hadoop`
+
+- `Hadoop` uses **disk** and **network** 
+- `Spark` tries to use **memory** as much as possible for operations while minimizing network use
+
+
+
+##  `Spark` and `Hadoop` comparison
+
+
+
+
+|                          | HadoopMR     | Spark                           |
+|:-------------------------|:--------------|:------------------------------ |
+| Storage                  | Disk         | in-memory or disk               |
+| Operations               | Map, reduce  | Map, reduce, join, sample, ...  |
+| Execution model          | Batch        | Batch, interactive, streaming   |
+| Programming environments | Java         | Scala, Java, Python, R          |
+
+
+
+
+
+##  `Spark` and `Hadoop` comparison
+
+For **logistic regression** training (a simple **classification** algorithm which requires **several passes** on a dataset)
+
+<center>
+  <img src="/images/spark-dev3.png" width=50%/>
+</center>
+<br>
+<center>
+  <img src="/images/logistic-regression.png" width=30%/>
+</center>
+
+
+
+##  The `Spark` stack
+
+<center>
+  <img src="/images/spark_stack.png" width=85%/>
+</center>
+
+
+
+
+##  The `Spark` stack
+
+<center>
+  <img src="/images/spark-env-source.png" width=95%/>
+</center>
+
+
+
+##  `Spark` can run "everywhere"
+
+<center>
+  <img src="/images/spark-runs-everywhere.png" width=55%/>
+</center>
+
+##
+
+- [https://mesos.apache.org](https://mesos.apache.org): Apache Mesos abstracts CPU, memory, storage, and other compute resources away from machines (physical or virtual), enabling fault-tolerant and elastic distributed systems to easily be built and run effectively. Mesos is built using the same principles as the Linux kernel, only at a different level of abstraction. The Mesos
+kernel runs on every machine and provides applications (e.g., Hadoop, Spark, Kafka, Elasticsearch) with API’s for
+resource management and scheduling across entire datacenter and cloud environments.
+
+- [https://kubernetes.io](https://kubernetes.io) Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+
+
+#  Agenda, tools and references   {background-color="#1c191c"}
+
+
+
+##  Very tentative agenda for the course
+
+**Weeks 1, 2 and 3** <br> 
+The `Python` data-science stack for **medium-scale** problems
+
+**Weeks 4 and 5** <br>
+Introduction to `spark` and its *low-level API*
+
+**Weeks 6, 7 and 8** <br>
+`Spark`'s high level API: .stress[`spark.sql`]. Data from different formats and sources
+
+**Week 9** <br>
+Run a job on a cluster with `spark-submit`, monitoring, mistakes and debugging
+
+**Weeks 10, 11, 12** <br>
+Introduction to `spark-streaming` and a glimpse on other big data technologies (Dask)
+
+
+##  Main tools for the course (tentative...)
+
+#### Infrastructure
+
+<center>
+<img src="/images/docker.png" width=25%/>
+<img src="" width=10%/>
+</center>
+
+### Python stack
+
+<center>
+<img src="/images/python.png" width=20%/>
+<img src="" width=5%/>
+<img src="/images/numpy.jpg" width=18%/>
+<img src="" width=5%/>
+<img src="/images/pandas.png" width=28%/>
+<img src="" width=5%/>
+<img src="/images/jupyter_logo.png" width=7%/>
+</center>
+
+### Data Visualization
+
+<center>
+<img src="/images/matplotlib.png" width=20%/>
+<img src="" width=5%/>
+<img src="/images/seaborn.png" width=20%/>
+<img src="" width=5%/>
+<img src="/images/bokeh.png" width=20%/>
+<img src="" width=5%/>
+<img src="/images/plotly-logo.png" width=20%/>
+</center>
+
+
+
+##  Main tools for the course (tentative...)
+
+#### Big data processing
+
+<center>
+<img src="/images/spark.png" width=20%/>
+<img src="" width=10%/>
+<img src="/images/pyspark.jpg" width=20%/>
+<img src="" width=10%/>
+<img src="/images/dask.png" width=10%/>
+</center>
+
+#### Data storage / formats / querying
+
+<center>
+<img src="/images/sql.jpg" width=20%/>
+<img src="" width=5%/>
+<img src="/images/orc.png" width=20%/>
+<img src="" width=5%/>
+<img src="/images/parquet.png" width=30%/>
+
+<img src="/images/json.png" width=20%/>
+<img src="" width=15%/>
+<img src="/images/hdfs.png" width=25%/>
+</center>
+
+---
+
+##  Learning resources
+
+- *Spark Documentation Website*  <br>
+.small[[http://spark.apache.org/docs/latest/](http://spark.apache.org/docs/latest/)]
+
+- *API docs* <br>
+.small[[http://spark.apache.org/docs/latest/api/scala/index.html](http://spark.apache.org/docs/latest/api/scala/index.html)] <br>
+.small[[http://spark.apache.org/docs/latest/api/python/](http://spark.apache.org/docs/latest/api/python/)]
+
+- `Databricks` learning notebooks <br>
+.small[[https://databricks.com/resources](https://databricks.com/resources)]
+
+- *StackOverflow* <br>
+.small[[https://stackoverflow.com/tags/apache-spark](https://stackoverflow.com/tags/apache-spark)]  <br>
+.small[[https://stackoverflow.com/tags/pyspark](https://stackoverflow.com/tags/pyspark)]
+
+- *More advanced* <br>
+.small[[http://books.japila.pl/apache-spark-internals/](http://books.japila.pl/apache-spark-internals/)]
+
+
+- *Misc.* <br>
+.small[[Next Generation Databases: NoSQLand Big Data by Guy Harrison](https://link.springer.com/book/10.1007/978-1-4842-1329-2)]<br>
+.small[[Data Pipelines Pocket Reference by J. Densmore](https://www.oreilly.com/library/view/data-pipelines-pocket/9781492087823/)]
+
+
+
+
+
+##  Learning Resources
+
+.pull-left-80[
+- *Book*: **"Spark The Definitive Guide"** 
+  .small[[http://shop.oreilly.com/product/0636920034957.do](http://shop.oreilly.com/product/0636920034957.do)] <br>
+  .tiny[[https://github.com/databricks/Spark-The-Definitive-Guide](https://github.com/databricks/Spark-The-Definitive-Guide)]
+]
+
+.pull-right-20[
+  <img src="/images/spark_book.gif" style="height: 160px;" />
+]
+
+<img src="" style="height: 200px;" />
+
+And the **most important thing is:**
+
+.pull-left[
+.stress[.large[Practice!]]
+]
+.pull-right[
+  <img src="/images/wtf.jpg" style="height: 200px;" />
+]
+
+
+
+
+# Data centers   {background-color="#1c191c"}
+
+
+
+##  Data centers
+
+Wonder what a *datacenter looks like* ?
+
+- Have a look at [http://www.google.com/about/datacenters](http://www.google.com/about/datacenters)
+
+
+
+##  Data centers
+
+Wonder what a *datacenter looks like* ?
+
+<img src="/images/datacenter2.jpg" width=80%/>
+
+
+##  Data centers
+
+Wonder what a *datacenter looks like* ?
+
+
+<iframe width="672" height="378" src="https://www.youtube.com/embed/avP5d16wEp0" 
+        frameborder="0" allowfullscreen>
+</iframe>
+
+
+
+# Thank you !   {background-color="#1c191c"}

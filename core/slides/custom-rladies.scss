@@ -1,0 +1,103 @@
+/*-- scss:defaults --*/
+// importing fonts
+// @import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Lato&family=Yanone+Kaffeesatz&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Cabin:600,600i&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+@import url(https://fonts.googleapis.com/css?family=Helvetica+Neue:300,600,300italic);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+@import 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap';
+
+// $font-family: "Atkinson Hyperlegible", sans-serif;
+
+// fonts
+$font-family-sans-serif: 'Atkinson Hyperlegible', 'Helvetica Neue', Tahoma, sans-serif !default;
+
+// headings
+$presentation-heading-font: 'Yanone Kaffeesatz',  Tahoma, sans-serif  !default;
+// $presentation-heading-color: rgb(183, 29, 86) !default;
+$h1-font-size: 1.35rem !default;
+$h2-font-size: 1.25rem !default;
+$h3-font-size: 1.15rem !default;
+
+//code
+$code-color: #ec1515 !default;
+$font-family-monospace: 'Ubuntu Mono', monospace  !default;
+
+// general  
+// $body-bg: #fff;
+// $body-color: #000000;
+// $link-color: rgb(142, 5, 55);
+$presentation-font-size-root: 28px;
+
+/*-- scss:rules --*/
+.reveal pre code {
+  // background-color: rgb(63 63 63);
+  // font-size: 1rem;
+  // padding: 0.5rem;
+  // line-height: 1.15rem;
+}
+
+
+.subtitle {
+  // color: $body-bg;
+  font-size: $h2-font-size;
+  font-family: $presentation-heading-font;
+}
+
+.author {
+  // color: $body-bg;
+  font-size: $h2-font-size;
+  font-family: $presentation-heading-font;
+}
+
+.institute {
+  // color: $body-bg;
+  font-size: $h2-font-size;
+  font-family: $presentation-heading-font;
+}
+
+.footer {
+  font-family: $presentation-heading-font;
+}
+
+.reveal .slide-number {
+  font-family: $presentation-heading-font;
+}
+
+.reveal .panel-tabset [role=tab] {
+    font-size: 0.8em;
+}
+
+.reveal .footer {
+    // color: #000000;
+}
+
+
+.center-x{
+    text-align: center;
+}
+
+section.has-dark-background a, section.has-dark-background a:hover {
+    // color: #c2bf36;
+}
+
+
+.slide-logo {
+  display: block !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 10px !important;
+  max-height: 10% !important;
+  height: 100% !important;
+  width: auto !important;
+  color: $body-color !important;
+}
+
+.slide-number, .reveal.has-logo .slide-number {
+  bottom: 10px !important;
+  right: 10px !important;
+  top: unset !important;
+  color: $body-color !important;
+}

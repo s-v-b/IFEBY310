@@ -1,13 +1,10 @@
 ---
-title: "Spark Catalyst"
-
-format:
-  revealjs: 
-    footer: |
-      [Spark MediaLab Presentation](https://stephane-v-boucheron.fr/slides/spark-sql.html)
-        
-  
+title: "Spark catalyst"
+engine: knitr
+date: "2025-01-17"
 ---
+        
+
 
 
 # Catalyst overview  {background-color="#1c191c"}

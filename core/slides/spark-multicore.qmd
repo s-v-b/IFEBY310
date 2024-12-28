@@ -1,11 +1,9 @@
 ---
-title: "Spark on multiple cores"
-
-format:
-  revealjs: 
-    footer: |
-      [Spark NLP Presentation](https://stephane-v-boucheron.fr/slides/spark-sql.html)
+title: "Spark multicore"
+engine: knitr
+date: "2025-01-17"
 ---
+
 
 
 

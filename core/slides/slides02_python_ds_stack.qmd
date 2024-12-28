@@ -1,0 +1,527 @@
+---
+date: "2025/01/17 (updated: `r Sys.Date()`)"
+title: "Python Data Science Stack"
+engine: knitr
+---
+
+# What is `Python` ?  {background-color="#1c191c"}
+
+---
+
+<center>
+<img src="/images/python.png" width=40%/>
+</center>
+
+- born in 1990
+- designed by Guido van Rossum (BDFL)
+- multi-purpose
+- easy to read
+- easy to learn
+- object-oriented
+- strongly and dynamically typed
+- cross-platform
+
+
+
+# Features of `Python`  {background-color="#1c191c"}
+
+---
+
+- High-level data types (`tuples`, `dict`, `list`, `set`, etc.)
+- Standard libraries with batteries included
+  - String services, 
+  - Regular expressions
+  - Datetime 
+  - ...
+- Libraries for scientific computing
+- Easy and efficient I/O, many file formats
+- OS, threading, multiprocessing
+- Networking, email, html, webserver, scrapping
+- Can be extended with `C/C++` and easily accelerated (`cython`, `numba`, `pypy`)
+- Tons of external libraries
+
+## Features of `Python`
+
+<center>
+  <img src="/images/python_antigravity.png" style="width:45%;" />
+</center>
+
+
+# Trends  {background-color="#1c191c"}
+
+## The [`stackoverflow` 2022 survey](https://survey.stackoverflow.co/2022/)
+
+<center>
+  <img src="/images/stackoverflow-survey.png" style="width:40%;" />  
+</center>
+
+
+## `Python` popularity growth
+
+<center>
+  <img src="/images/python_growth_major_languages.png" style="width:60%;" />  
+</center>
+
+
+## `Python` popularity growth
+
+<center>
+  <img src="/images/python_growth_smaller_languages.png" style="width:75%;" />  
+</center>
+
+
+# Why `Python` for  data science ?  {background-color="#1c191c"}
+
+---
+
+Besides these features, `Python` has:
+
+- large communities for data science, analytics, etc.
+- many, well-established, well-documented libraries
+- *huge* demand from the industry
+
+
+
+
+
+# The `Python` Data Science Stack: Maths / Science  {background-color="#1c191c"}
+
+## Numpy
+
+::: {#numpy-scipy}
+
+<center>
+<img src="/images/numpy.jpg" width=28%/>
+<img src="" width=10%/>
+<img src="/images/scipy.png" width=28%/>
+</center>
+
+:::
+
+::: {.fragment .fade-in}
+
+- `numpy` is all about multi-dimensional arrays and matrices
+- high-level computation such as 
+  + linear algebra: `numpy.linalg` 
+  + random number generation:`numpy.random`
+- Fast but not optimized for multi-threaded architectures
+- Not for distributed multi-machine settings
+
+
+:::
+
+## Scipy
+
+{{< contents  numpy-scipy >}}
+
+::: {.fragment .fade-in}
+
+- `scipy` extends `numpy` with extra modules:
+  + optimization, 
+  + integration, 
+  +  FFT, signal and image processing
+  +  ...
+- Sparse matrix formats in `scipy.sparse`
+
+::: 
+
+
+
+# The `Python` Data Science Stack: Data processing   {background-color="#1c191c"}
+
+
+## Pandas 
+
+
+::: {#pydss-dp}
+
+<center>
+<img src="/images/pandas.png" width=40%/>
+<img src="" width=5%/>
+<img src="/images/dask.png" width=10%/>
+<img src="" width=5%/>
+<img src="/images/pyspark.jpg" width=20%/>
+</center>
+
+:::
+
+{{< contents pydss-dp >}}
+
+::: {.fragment .fade-in}
+
+- `pandas` builds upon `numpy` to provide a high-performance, easy-to-use `DataFrame` object, with high-level data processing
+- Easy I/O with most data format : `csv`, `json`, `hdf5`, `feather`, `parquet`, etc.
+- `SQL` semantics: `select`, `filter`, `join`, `groupby`, `agg`, , `where`, etc.
+- Very large *general-purpose library for data processing*, not distributed, *medium scale* data only
+
+:::
+
+::: {.fragment .fade-in}
+
+::: {.callout-note title="Links"}
+
+- [Pandas online book](https://wesmckinney.com/book/)
+- [Pandas homepage](https://pandas.pydata.org)
+- [Polars homepage]() 
+- [Polars versus Pandas](https://blog.jetbrains.com/pycharm/2024/07/polars-vs-pandas/)
+
+:::
+
+:::
+
+
+## Dask
+
+{{< contents pydss-dp >}}
+
+::: {.fragment .fade-in}
+
+- `dask` is roughly a *distributed* and *parallel* `pandas`
+- Same API has `pandas` !
+- Task scheduling, lazy evaluation, distributed dataframes
+- Still young and *far behind* `spark`, but can be useful
+- Easier than `spark`, full `Python` (no `JVM`)
+
+:::
+
+::: {.fragment .fade-in}
+
+::: {.callout-note title="Links"}
+
+- [Dask homepage](https://www.dask.org)
+- []()
+
+:::
+
+:::
+
+
+## Pyspark
+
+{{< contents pydss-dp >}}
+
+::: {.fragment .fade-in}
+
+- `pyspark` is the `python` API to `spark`, a big data processing framework
+- We will use it *a lot* in this course
+- Native API to `spark` is `scala`: `pyspark` can be *slower* (much slower if you are not careful)
+
+:::
+
+::: {.fragment .fade-in}
+
+::: {.callout-note title="Links"}
+
+- [Pyspark documentation](https://spark.apache.org/docs/latest/api/python/index.html)
+- [Spark Apache Project](https://spark.apache.org)
+
+:::
+
+:::
+
+## `SQLAlchemy`
+
+{{< contents pydss-dp >}}
+
+- Object Relational Model (ORM)
+- ODBC
+- 
+
+::: {.fragment .fade-in}
+::: {.callout-note title="Links"}
+
+- [SQl Alchemy homepage](https://www.sqlalchemy.org)
+- [`psycopg2`](https://www.psycopg.org)
+- [psycopg documentation](https://www.psycopg.org/docs/)
+
+:::
+:::
+
+## Pyarrow
+
+{{< contents pydss-dp >}}
+
+::: {.fragment .fade-in}
+
+> The universal columnar format and multi-language toolbox for fast data interchange and in-memory analytics
+
+> Apache Arrow defines a language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware like CPUs and GPUs. The Arrow memory format also supports zero-copy reads for lightning-fast data access without serialization overhead.
+ 
+:::
+
+::: {.fragment .fade-in}
+::: {.callout-note title="Links"}
+
+- [Apache Arrow Project Homepage](https://arrow.apache.org)
+- [Pyarrow documentation](https://arrow.apache.org/docs/python/index.html)
+
+:::
+:::
+
+
+# The `Python` Data Science Stack: Data Visualization {background-color="#1c191c"}
+
+
+
+## Matplotlib 
+
+:::  {#dataviz}
+
+<center>
+<!-- <img src="/images/matplotlib.png" width=25%/> -->
+<!-- <img src="" width=10%/> -->
+<!-- <img src="/images/plotly_images.png" width=20%/> -->
+<!-- <img src="" width=10%/> -->
+<!-- <img src="/images/altair-logo-light.png" width=20%/> -->
+
+||||||
+|:-----------|:---:|:---------:|:----:|----------------:|
+|![](/images/matplotlib.png){width=150px}||![](/images/plotly_images.png){width=150px}||![](/images/altair-logo-light.png){width=150px}|
+
+</center>
+
+:::
+
+{{< contents dataviz >}}
+
+- `matplotlib` provides versatile *2D plotting capabilities*
+  - scientific computing 
+  - data visualization
+- Large and customizable library
+- The historical one, somewhat low-level when plotting things related to data
+
+::: {.fragment .fade-in}
+
+::: {.callout-note title="Links"}
+
+[Matplotlib Homepage](https://matplotlib.org)
+
+:::
+:::
+
+
+## Plotly
+
+{{< contents dataviz >}}
+
+- An **interactive visualization library** for web browsers based on `javascript` graphic library [`d3.js`](https://d3js.org)  
+- With a clean and simple `python` interface, can be used in a `jupyter` notebook
+- Interactions enabled by default (zoom, etc.) and fast rendering
+- Very good looking plots with good default parameters
+
+::: {.fragment .fade-in}
+
+::: {.callout-note title="Links"}
+
+- [Plotly homepage](https://plotly.com)
+
+:::
+
+:::
+
+
+## Altair
+
+{{< contents dataviz >}}
+
+
+::: {.fragment .fade-in}
+
+> Vega-Altair: Declarative Visualization in Python
+>
+> Vega-Altair is a declarative visualization library for Python. Its simple, friendly and consistent API, built on top of the powerful Vega-Lite grammar, empowers you to spend less time writing code and more time exploring your data.
+
+:::
+
+::: {.fragment .fade-in}
+
+::: {.callout-note title="Links"}
+
+- [Altair homepage](https://altair-viz.github.io)
+- [Vega-Lite: A Grammar of Interactive Graphics](https://vega.github.io/vega-lite/)
+
+:::
+
+:::
+
+
+# The `Python` Data Science Stack: Dashboards {background-color="#1c191c"}
+
+## Dash
+
+```{=html}
+<iframe width="780" height="400" src="https://dash.plotly.com" title="Dash from plotly"></iframe>
+```
+
+::: {.callout-note title="Links"}
+
+[Dash homepage](https://dash.plotly.com)
+
+:::
+
+## Shiny
+
+```{=html}
+<iframe width="780" height="400" src="https://shiny.posit.co" title="Shiny"></iframe>
+```
+
+::: {.callout-note title="Links"}
+
+[Shiny homepage](https://shiny.posit.co)
+
+:::
+
+# `Python` Data Science Stack: environments  {background-color="#1c191c"}
+
+---
+
+::: {#jupyter}
+
+<img src="/images/python.png" width=35%/>
+<img src="" width=10%/>
+<img src="/images/ipython.jpg" width=20%/>
+<img src="" width=10%/>
+<img src="/images/jupyter_logo.png" width=12%/>
+
+:::
+
+## Pure Python interfaces
+
+{{< contents jupyter >}}
+
+::: {.fragment .fade-in}
+
+Ways to use all these tools
+
+- Write a script `script.py` and use `python` directly in a CLI : `python script.py`
+
+- Use the `ipython` interactive shell
+
+:::
+
+
+## Interfaces : Jupyter
+
+{{< contents jupyter >}}
+
+::: {.fragment .fade-in}
+
+- Use `jupyter`: a web application that allows to create and run documents, called **notebooks** (with `.ipynb` extension) 
+- Notebooks can contain code, equations, visualizations, text, etc. (literate programming)
+- Each `notebook` has a `kernel` running a `python`/`R`,`Julia`, ... thread
+- A **problem**: a `ipynb` file is a `json` document. Leads to bad code diff, a problem with `git` versioning
+
+:::
+
+::: {.fragment .fade-in}
+
+::: {.callout-note title="Links"}
+
+- [jupyter](https://jupyter.org)
+- [jupyterlab](https://jupyterlab.readthedocs.io/en/latest/)
+- [polynote](https://polynote.org/latest/)
+
+:::
+:::
+
+## `Quarto`
+
+```{=html}
+<iframe width="780" height="500" src="https://quarto.org/" title="Quarto homepage"></iframe>
+```
+
+
+## Interfaces/IDE : VS Code (and other editors)
+
+
+```{=html}
+<iframe width="780" height="500" src="https://code.visualstudio.com/docs/languages/python" title="VS Code & Python"></iframe>
+```
+
+
+# Python and R {background-color="#1c191c"}
+
+## `Reticulate`
+
+::: {.fragment  .fade-in}
+
+> Reticulate embeds a Python session within your R session, enabling seamless, high-performance interoperability. If you are an R developer that uses Python for some of your work or a member of data science team that uses both languages, reticulate can dramatically streamline your workflow!
+
+:::
+
+::: {.fragment  .fade-in}
+
+::: {.callout-note title="Links"}
+
+- [Reticulate homepage](https://rstudio.github.io/reticulate/)
+
+:::
+
+:::
+
+## `Py2R`
+
+::: {.fragment  .fade-in}
+
+> Python has several well-written packages for statistics and data science, but CRAN, R’s central repository, contains thousands of packages implementing sophisticated statistical algorithms that have been field-tested over many years. Thanks to the `rpy2` package, Pythonistas can take advantage of the great work already done by the R community. `rpy2` provides an interface that allows you to run R in Python processes. Users can move between languages and use the best of both programming languages.
+
+:::
+
+
+::: {.fragment  .fade-in}
+
+[rpy2 homepage](https://rpy2.github.io)
+
+:::
+
+
+# But also...  {background-color="#1c191c"}
+
+Many libraries for statistics, machine learning and deep learning
+
+## Statistics 
+
+```{=html}
+<iframe width="780" height="400" src="https://www.statsmodels.org/stable/index.html" title="statsmodels package"></iframe>
+```
+
+- [`statsmodels`](https://www.statsmodels.org/stable/index.html)
+
+## Machine learning  
+
+- [`scikit-learn`](https://scikit-learn.org/stable/) 
+- [`xgboost`](https://xgboost.readthedocs.io/en/stable/) 
+- [`lightgbm`](https://lightgbm.readthedocs.io/en/stable/)
+- [`vowpalwabbit`](https://vowpalwabbit.org)
+- ...
+
+## Deep learning
+
+- [`keras`](https://keras.io)
+- [`tensorflow`](https://www.tensorflow.org) 
+- [`pytorch`](https://pytorch.org)
+- ...
+
+
+## Getting faster
+
+- `numba`, `cython`, `cupy`
+
+
+
+## And ...  {background-color="#1c191c"}
+
+- `Python` APIs for most databases and clouds
+
+- Processing and plotting tools for Geospatial data
+
+- Image processing
+
+- Web development, web scrapping
+
+among many many many other things...
+
+
+
+# Thank you !  {background-color="#1c191c"}
+

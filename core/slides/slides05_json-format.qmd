@@ -1,24 +1,7 @@
 ---
-title: "Technologies Big Data"
-subtitle: "Master I MIDS & Informatique"
-author: "A. Gheerbrandt, S. Gaïffas, V. Ravelomanana, S. Boucheron"
-institute: "Université Paris Cité"
 date: "2024-02-19"
-params:
-  title: "SPARK & JSON"
-  curriculum: "Master I MIDS Master I Informatique"
-  coursetitle: "Technologies Big Data"
-  lecturer: "A. Gheerbrandt, S. Gaïffas, V. Ravelomanana, S. Boucheron"
-  homepage: "http://stephane-v-boucheron.fr/courses/grosses-data/"
-  curriculum_homepage: "https://master.math.univ-paris-diderot.fr/annee/m1-mids/"
-toc: true
-toc-depth: 1
-output-location: fragment
-
-execute: 
-  eval: true
-  echo: true
-
+title: "SPARK & JSON"
+engine: knitr
 ---
 
 #  JSON data format

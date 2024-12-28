@@ -1,14 +1,7 @@
 ---
 title: "Spark NLP"
-
-format:
-  revealjs: 
-    footer: |
-      [Spark NLP Presentation](https://stephane-v-boucheron.fr/slides/spark-sql.html)
-
-execute: 
-  eval: false
-  echo: true
+engine: knitr
+date: "2025-01-17"
 ---
 
 # Spark-NLP in perspective {background-color="#1c191c"}
