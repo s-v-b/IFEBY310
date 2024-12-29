@@ -1,0 +1,130 @@
+project:
+  type: website
+  render:
+    - "*.qmd"
+    - "weeks/"
+    - "core/notebooks/"
+    - "core/labs/"
+    - "!core/slides/"
+    - "!core/labs-solutions/"
+    - "!projects/"
+    - "!corrections-listings.qmd"
+    - "!projects-listings.qmd"
+    - "!notebooks-solutions/"
+    - "!technos/"
+  output-dir: _site
+
+website:
+  page-navigation: true
+  title: "IFEBY310 - Spring 2025"
+  description: "Homepage for course IFEBY310 - Big Data Technologies, Master MIDS Spring 2025."
+  site-url: "https://s-v-b.github.io/IFEBY310/"
+
+  repo-url: https://github.com/s-v-b/IFEBY310
+  repo-actions: [edit, issue]
+
+  open-graph: true
+
+  page-footer:
+    right: "This page is built with blood, sweat, tears, and [Quarto](https://quarto.org/)."
+    left: "&copy; Copyright 2024, Stéphane Boucheron"
+    background: "#D9E3E4"
+
+  sidebar:
+    background: "#D9E3E4"
+    logo: "images/hexlogo_ma7BY020.png"
+    pinned: true
+    align: center
+    tools:
+      - icon: github
+        href: https://github.com/s-v-b/IFEBY310
+        text: "GitHub organization"
+      - icon: person-fill
+        text: "Moodle"
+        menu:
+          - text: Discussion forum
+            url: https://moodle.u-paris.fr/course/view.php?id=28534
+          - text: Dépot 
+            url: https://moodle.u-paris.fr/course/view.php?id=28534
+          - text: Notes
+            url: https://moodle.u-paris.fr/course/view.php?id=28534
+
+    style: "docked"
+    search: true
+    collapse-level: 1
+    contents:
+      - section: "Information"
+        contents:
+          - href: index.qmd
+            text: Glimpse
+          - href: course-syllabus.qmd
+            text: Syllabus
+          - href: course-team.qmd
+            text: Team
+      - section: "Support"
+        contents:
+          - href: computing-access.qmd
+            text: "Computing resources"
+          - href: rstudio-client.qmd
+            text: "rstudio"
+          - href: posit-cloud.qmd
+            text: "Posit cloud"
+          - href: jupyter.qmd
+            text: "Jupyter"
+          - href: quarto-format.qmd
+            text: "Quarto"
+          - href: docker.qmd
+            text: "Docker"
+      - href: slides-listings.qmd
+        text: Slides
+      - href: notebooks-listings.qmd
+        text: Notebooks
+      - href: labs-listings.qmd
+        text: Labs
+      - href: labs-solutions-listings.qmd
+        text: Solutions  
+      - section: "Journal"
+        contents:
+          - href: weeks/week-1.qmd
+            text: "Week 1"
+          - href: weeks/week-2.qmd
+            text: "Week 2"
+          - href: weeks/week-3.qmd
+            text: "Week 3"
+          - href: weeks/week-4.qmd
+            text: "Week 4"
+          - href: weeks/week-5.qmd
+            text: "Week 5"
+          - href: weeks/week-6.qmd
+            text: "Week 6"
+          - href: weeks/week-7.qmd
+            text: "Week 7"
+          - href: weeks/week-8.qmd
+            text: "Week 8"
+          - href: weeks/week-9.qmd
+            text: "Week 9"
+          - href: weeks/week-10.qmd
+            text: "Week 10"
+          - href: weeks/week-11.qmd
+            text: "Week 11"
+          - href: weeks/week-12.qmd
+            text: "Week 12"
+          - href: weeks/week-13.qmd
+            text: "Week 13"
+
+format:
+  html:
+    theme:
+      light: [cosmo, theme.scss]
+      dark: [cosmo, theme-dark.scss]
+    mainfont: "Atkinson Hyperlegible"
+    code-copy: true
+    code-overflow: wrap
+    toc: true
+    link-external-newwindow: true
+
+execute:
+  freeze: auto
+  cache: true
+
+editor: source

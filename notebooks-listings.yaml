@@ -1,0 +1,15 @@
+- title: "Python Stack for Data Science"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-01-15"
+  path: "notebooks/lab-python.html"
+  categories: [Python]
+- title: "Numpy and Scipy"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-01-15"
+  path: "notebooks/lab-numpy-scipy.html"
+  categories: [Python, Numpy, Scipy, Plotly]
+- title: "Table wranglig with Pandas"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-01-22"
+  path: "notebooks/lab-pandas.html"
+  categories: [Python, Pandas]

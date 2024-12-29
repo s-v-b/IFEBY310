@@ -1,0 +1,65 @@
+- title: "Introduction aux Grosses Données"
+  author: "Master MIDS/MFA/LOGOS UParis Cité"
+  date: "2025-09-13"
+  path: "core/slides/BD_intro.html"
+  categories: []
+- title: "Python data stack : Numpy et Scipy"
+  author: "Master MIDS/MFA/LOGOS UParis Cité"
+  date: "2025-09-13"
+  path: "core/slides/SQL_0.html"
+  categories: []
+- title: "Python data stack : Pandas "
+  author: "Master MIDS/MFA/LOGOS UParis Cité"
+  date: "2025-09-20"
+  path: "core/slides/SQL_1.html"
+  categories: []
+- title: "Python data stack : Dask"
+  author: "Master MIDS/MFA/LOGOS UParis Cité"
+  date: "2025-09-27"
+  path: "core/slides/SQL_2.html"
+  categories: []
+- title: "SQL : Agrégations, Paritions, Fenêtres"
+  author: "Master MIDS/MFA/LOGOS UParis Cité"
+  date: "2025-10-04"
+  path: "core/slides/SQL_3.html"
+  categories: []
+- title: "SQL : Définition de données"
+  author: "Master MIDS/MFA/LOGOS UParis Cité"
+  date: "2025-10-11"
+  path: "core/slides/LDD_0.html"
+  categories: []
+- title: "SQL : Définition de données, Contraintes simples"
+  author: "Master MIDS/MFA/LOGOS UParis Cité"
+  date: "2025-10-18"
+  path: "core/slides/LDD_1.html"
+  categories: []
+- title: "SQL : Définition de données, Contraintes d'exclusion"
+  author: "Master MIDS/MFA/LOGOS UParis Cité"
+  date: "2025-10-25"
+  path: "core/slides/LDD_2.html"
+  categories: []
+- title: "Modélisation : Entité-Association"
+  author: "Master MIDS/MFA/LOGOS UParis Cité"
+  date: "2025-11-08"
+  path: "core/slides/Modelisation_1.html"
+  categories: []
+- title: "Modélisation : Pattes de corbeaux"
+  author: "Master MIDS/MFA/LOGOS UParis Cité"
+  date: "2025-11-15"
+  path: "core/slides/Modelisation_2.html"
+  categories: []
+- title: "Normalisation : Dépendances fonctionnelles, Fermetures"
+  author: "Master MIDS/MFA/LOGOS UParis Cité"
+  date: "2025-11-22"
+  path: "core/slides/DF_norm_1.html"
+  categories: []
+- title: "Normalisation: FNBC, Décomposition SPI, Poursuite"
+  author: "Master MIDS/MFA/LOGOS UParis Cité"
+  date: "2025-11-29"
+  path: "core/slides/DF_norm_1.html"
+  categories: []
+- title: "Normalisation: FN3, Décomposition SPI et sans perte de DF"
+  author: "Master MIDS/MFA/LOGOS UParis Cité"
+  date: "2025-12-06"
+  path: "core/slides/DF_norm_3.html"
+  categories: []

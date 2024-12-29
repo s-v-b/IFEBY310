@@ -1,0 +1,36 @@
+---
+title: "Slides"
+listing:
+  - id: "diapos"
+    contents: 
+      - slides-listings.yaml
+    type: table  
+    table-striped: true
+    table-hover: true
+    sort: date
+    fields: [date, title, categories] 
+    field-display-names: 
+      title: "Titre"
+      categories: "Description"
+---
+
+Slides provide the framework for the course. You can use them to familiarise yourself with the material for the next lesson, and/or to review previous lessons.
+
+Icon {{< fa person-chalkboard >}} points to chalkboard arguments.
+
+
+
+
+::: {#diapos}
+:::
+
+
+::: {.callout-note}
+### Mode d'emploi
+
+Slides use [`revealjs`](https://revealjs.com) de {{< fa brands js >}}. They are best 
+viewed using a browser.  
+
+Keyboard shortcut {{< fa question >}} takes you to the Help page.
+
+:::
