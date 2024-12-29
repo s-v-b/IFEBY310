@@ -87,13 +87,13 @@ output-location: fragment
 toc-title: Roadmap
 
 
-params:
-  title: "Technologies Big Data "
-  # curriculum: "Licence MIASHS"
-  coursetitle: "Technologies Big Data IFEBY310"
-  lecturer: "Equipe Statistique"
-  homepage: "http://s-v-b.gitub.io/IFEBY310/"
-  curriculum_homepage: "https://licence.math.univ-paris-diderot.fr/"
+# params:
+#   title: "Technologies Big Data "
+#   # curriculum: "Licence MIASHS"
+#   coursetitle: "Technologies Big Data IFEBY310"
+#   lecturer: "Equipe Statistique"
+#   homepage: "http://s-v-b.gitub.io/IFEBY310/"
+#   curriculum_homepage: "https://licence.math.univ-paris-diderot.fr/"
 
 
 engine: knitr

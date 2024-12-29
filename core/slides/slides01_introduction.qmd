@@ -1,22 +1,23 @@
 ---
 date: "2025/01/17 (updated: `r Sys.Date()`)"
 title: "Big data technologies"
+
 engine: knitr
 ---
 
-<center>
-    <img src="/images/lpsm.pnog" style="height: 160px;" />
-    <img src="" style="width: 30px;" />
-    <img src="/images/paris-diderot.png" style="height: 90px;" />
-    <img src="" style="width: 30px;" />
-    <img src="/images/uparis.png" style="height: 120px;" />
-</center>
 
 
 
 
 #  Course logistics {background-color="#1c191c"}
 
+<center>
+    <img src="/images/lpsm.png" style="height: 160px;" />
+    <img src="" style="width: 30px;" />
+    <img src="" style="width: 160px;" />
+    <img src="" style="width: 30px;" />
+    <img src="/images/uparis.png" style="height: 120px;" />
+</center>
 
 
 
@@ -64,43 +65,37 @@ engine: knitr
 
 ### About the hands-on
 
-- Hands-on and homeworks using .stress[`Jupyter` notebooks/Quarto notebooks]
+- Hands-on and homeworks using  `Jupyter/Quarto` notebooks
+  
+- Using a `Docker` image {{< fa brands docker >}} built for the course
 
-- Using a `Docker` image  built for the course
-
-- {{< fa laptop-code >}} Hands-on must be carried out using your *own laptop*. Bring it at **all the courses**
+- {{< fa laptop-code >}} Hands-on must be carried out using your *own laptop*
 
 
 
 ##  Course logistics
 
-- The {{< fa globe >}} webpage of the course is:
-
-[https://stephane-v-boucheron.fr/courses/grosses-data/](https://stephane-v-boucheron.fr/courses/grosses-data/)
+- {{< fa globe >}} course : [https://s-v-b.github.io/IFEBY310](https://s-v-b.github.io/IFEBY310)
 
 - {{< fa bookmark >}} Bookmark it !
 
-- Follow *carefully* the steps described in the `tools` page:
+- {{< fa tools >}} Follow the steps described on the `tools` page:
 
 <center>
 [https://s-v-b.github.io/IFEBY310/tools](https://s-v-b.github.io/IFEBY310/tools)
 </center>
 
-- {{< fa brands docker >}} Who knows about `docker` ?
-
+- Use {{< fa brands docker >}} 
 
 ##  Course evaluation
 
 - *Evaluation* using **homeworks** and a **final project**
 
-- Find a *friend* : all work done by **pairs of students**
+- Find a *friend*: all work done by **pairs of students**
 
-- **All your work** goes in your private repository and nowhere else: *no emails* !
+- **All your work** goes in your private git repository and nowhere else: *no emails* !
 
-- All your homework will be using `quarto` files
-
-
-
+- All your homework will be using [`quarto` files](https://quarto.org)
 
 #  {{< fa brands docker >}} `Docker`   {background-color="#1c191c"}
 
@@ -112,29 +107,32 @@ engine: knitr
 - A *container* is an **instance** of an *image*
 - Same image = same environment for everybody 
 - Same image = no {version, dependencies, install} problems
-- It is an *industrial standard* used everywhere now!
+- It is an *entreprise standard* used everywhere now!
 
+## {{< fa brands docker >}}
 
 <img src="/images/containers.png" style="width: 70%;" />
 
+## {{< fa brands docker >}}
 
 <img src="/images/python_environment.png" style="width: 75%;" />
 
 
 
-##  `docker`
+## {{< fa brands docker >}} `docker`
 
-- Have a look at
+- Have a look at [https://s-v-b.github.io/IFEBY310/tools](https://s-v-b.github.io/IFEBY310/tools)
 
-[https://s-v-b.github.io/IFEBY310/tools](https://s-v-b.github.io/IFEBY310/tools)
+- Have a look at the `Dockerfile` to explain a little bit how the image is built
 
-- have a look at the `Dockerfile` to explain a little bit how the image is built
-
-- perform a quick demo on how to use the `docker` image
+- Perform a quick demo on how to use the `docker` image
 
 
+::: {.callout-note}
 
-### And that's it for the logistics !
+### And that's it for logistics !
+
+:::
 
 
 
@@ -219,7 +217,7 @@ A terabyte is $1 099 511 627 776=2^{40}$ B, **1 024** GB  or **1 048 576** MB.
 
 
 
-##  The deluge
+##  The deluge  {.smaller}
 
 ### Petabyte (PB)
 
@@ -245,7 +243,7 @@ $$1125899906842624 = 2^{50} \quad\text{Bytes}$$
 
 ##  Some figures
 
-You have every *single second* $\mbox{}^1$ :
+You have every *single second*^[[https://www.internetlivestats.com](https://www.internetlivestats.com)]:
 
 - At least **8,000 tweets** sent
 
@@ -259,17 +257,17 @@ You have every *single second* $\mbox{}^1$ :
 
 - Over **2 million emails** sent
 
-[https://www.internetlivestats.com](https://www.internetlivestats.com)
+
 
 
 
 ##  Some figures
 
-There are $\mbox{}^1$ :
+There are^[[https://www.worldwidewebsize.com](https://www.worldwidewebsize.com)]:
 
 - *5 billion web pages* as of mid-2019 (indexed web)
 
-and we expected$^2$ :
+and we expected^[Cisco's Visual Networking Index]:
 
 - *4.8 ZB* of annual IP traffic in 2022
 
@@ -279,8 +277,8 @@ Note that
 - Netflix's **entire catalog** is $\approx$ **3.5 years** of HD video
 
 
-1. [https://www.worldwidewebsize.com](https://www.worldwidewebsize.com) 
-2. Cisco's Visual Networking Index
+  
+
 
 
 
@@ -303,7 +301,7 @@ More figures :
 
 
 
-##  Latency numbers
+##  Latency numbers  {.smaller}
 
 | Memory type                        | Latency(ns)      | Latency(us) | (ms)   |                             |
 |:---------------------------------|---------------:|----------:|-----:|:--------------------------|
@@ -322,10 +320,10 @@ More figures :
 
 
 
-## {.smaller}
+## 
 
 
-```
+```{.bash}
 traceroute to mathscinet.ams.org (104.238.176.204), 64 hops max
   1   192.168.10.1  3,149ms  1,532ms  1,216ms 
   2   192.168.0.254  1,623ms  1,397ms  1,309ms 
@@ -360,9 +358,7 @@ True in general, not always:
 
 
 
-##  Latency numbers
-
-[https://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html](https://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html)
+##  Latency numbers ^[https://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html](https://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html)
 
 <center>
   <img src="/images/latency_numbers.png" style="width: 100%;" />
@@ -370,9 +366,9 @@ True in general, not always:
 
 
 
-##  Humanized latency numbers
+##  Latency numbers for mortals {.smaller}
 
-Lets multiply all these durations by a billion
+Multiply all durations by a billion $10^9$
 
 
 | Memory type                        | Latency      | Human duration                                        |
@@ -427,11 +423,14 @@ layers of memory** ?
 
 Dealing with distributed computations adds **software complexity**
 
-- *Scheduling*: How to **split the work across machines**? Must exploit and optimize data locality since moving data is very expensive
+Scheduling
+: How to *split the work across machines*? Must exploit and optimize data locality since moving data is very expensive
 
-- *Reliability*: How to **deal with failure**? Commodity (cheap) hardware fails more often. @Google [1%, 5%] HD failure/year and 0.2% [DIMM](https://en.wikipedia.org/wiki/DIMM) failure/year 
+Reliability
+: How to *handle  failures*? Commodity (cheap) hardware fails more often. @Google [1%, 5%] HD failure/year and 0.2% [DIMM](https://en.wikipedia.org/wiki/DIMM) failure/year 
 
-- *Uneven performance* of the machines: some nodes are slower than others
+Uneven performance of machines
+: some nodes are slower than others
 
 ##
 
@@ -441,13 +440,18 @@ Dealing with distributed computations adds **software complexity**
 
 Problems sketched in 
 
-.
-![](/images/next-gen-databases.png)
+![](/images/next-gen-databases.png){height=500px}
 
 :::
 
 
 ::: {.column}
+
+
+
+[Next Generation Dabases](https://link.springer.com/book/10.1007/978-1-4842-1329-2) describes the challenges faces by 
+database industry between 1995 and 2015, that is during the onset of the 
+data deluge 
 
 
 :::
@@ -457,41 +461,57 @@ Problems sketched in
 
 ##  Solutions
 
-- *Schedule*, **manage** and **coordinate** threads and resources using appropriate software
+- *Schedule*, *manage* and *coordinate* threads and resources using appropriate software
 
-- *Locks* to **limit** access to resources
+- *Locks* to *limit* access to resources
 
-- *Replicate* data for **faster reading** and **reliability**
+- *Replicate* data for *faster reading* and *reliability*
 
 
 
 ##  Is it HPC ?
 
-- **High Performance Computing** (HPC)
+- *High Performance Computing* (HPC)
 
-- **Parallel computing**
+- *Parallel computing*
 
-### Comments
+::: {.fragment .fade-in}
 
+::: {.fragment .semi-fade-out}
+
+::: {.callout-note}
 
 - For HPC, *scaling up* means using a *bigger machine*
-
-- Huge performance increase for **medium** scale problems
-
+- Huge performance increase for *medium* scale problems
 - *Very expensive*, specialized machines, lots of processors and memory
 
-### Answer is no !
+:::
 
+:::
 
-##
+:::
 
-> Google committed to a number of key tenants when designing its data center architecture. Most
-significantly—and at the time, uniquely—Google committed to massively parallelizing and distributing
-processing across very large numbers of commodity servers. Google also adopted a “Jedis build their own
-lightsabers” attitude: very little third party— and virtually no commercial—software would be found in the
-Google architecture. “Build” was considered better than “buy” at Google.
+::: {.fragment .fade-in}
 
+::: {.callout-caution}
 
+### No
+
+:::
+
+:::
+
+## {{< fa jedi >}} and {{< fa brands google >}}
+
+> Google committed to a number of key tenants when designing its data center architecture. Most significantly —and at the time, uniquely— Google committed to massively parallelizing and distributing
+processing across very large numbers of commodity servers. 
+
+> Google also adopted a “Jedis build their own
+lightsabers” attitude: very little third party —and virtually no commercial— software would be found in the Google architecture. 
+
+> *Build* was considered better than *buy* at Google.
+
+From  [Next Generation Dabases](https://link.springer.com/book/10.1007/978-1-4842-1329-2)
 
 ##  The Big Data universe
 
@@ -503,7 +523,7 @@ Many technologies combining *software* and *cloud computing*
 
 
 
-##  The Big Data universe
+##  The Big Data universe (still expanding)
 
 Often used with/for with *Machine Learning* (or AI)
 
@@ -513,15 +533,16 @@ Often used with/for with *Machine Learning* (or AI)
 
 
 
-##  Tools
+##  Tools {{< fa tools >}}
 
 - Softwares such as `HadoopMR` (Hadoop Map Reduce) and more recently  `Spark` and `Dask`  cope with these challenges
 - They are *distributed computational engines*: softwares that ease the development of distributed algorithms
 
 They run on *clusters* (several machine on a network), managed by a *resource manager* such as :
-- **`Yarn` :** 
+
+- {{< fa brands yarn >}} Yarn : 
 [https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html)
-- **`Kubernetes :` **[https://kubernetes.io](https://kubernetes.io/)
+- Kubernetes :  [https://kubernetes.io](https://kubernetes.io/)
 
 A resource manager ensures that the tasks running on the cluster do not try to use the same resources all at once
 
@@ -537,7 +558,7 @@ A resource manager ensures that the tasks running on the cluster do not try to u
 
 
 
-##  Apache `Spark`
+##  Apache `Spark`  {.smaller}
 
 The course will focus mainly on `Spark` for big data processing
 
@@ -547,14 +568,12 @@ The course will focus mainly on `Spark` for big data processing
   [https://spark.apache.org](https://spark.apache.org)
 </center>
 
-- `Spark` is an *industrial standard* <br>
+- `Spark` is an *enterprise standard* <br>
 (cf [https://spark.apache.org/powered-by.html](https://spark.apache.org/powered-by.html))
 - One of the most used *big data processing framework*
 - *Open source*
 
 The predecessor of `Spark` is [`Hadoop`](ttps://hadoop.apache.org)
-
-
 
 See Chapter 2 in [Next Generation Dabases](https://link.springer.com/book/10.1007/978-1-4842-1329-2)
 
@@ -568,14 +587,14 @@ See Chapter 2 in [Next Generation Dabases](https://link.springer.com/book/10.100
 
 - The cost is lots of *data shuffling* across the network
 
-- With intermediate computations *written to disk* **over the network** which we know is *very time expensive* 
+- With intermediate computations *written to disk* *over the network* which we know is *very time expensive* 
 
 It is made of three components:
 
 - `HDFS` (Highly Distributed File System) inspired from `GoogleFileSystem`, see 
 [https://ai.google/research/pubs/pub51](https://ai.google/research/pubs/pub51)
 
-- `YARN` (Yet Another Ressource Negociator) for processing management.
+- {{< fa brands yarn >}}`YARN` (Yet Another Ressource Negociator) for processing management.
 
 - `MapReduce` inspired from Google for processing again.<br> [https://research.google.com/archive/mapreduce.html](https://research.google.com/archive/mapreduce.html)
 
@@ -605,7 +624,7 @@ Guy Harrison. Next Generation Database
 
 
 
-##  `Spark`
+##  `Spark`  {.smaller}
 
 Advantages of `Spark` over `HadoopMR` ?
 
@@ -626,7 +645,7 @@ Disadvantages of `Spark` over `HadoopMR` ?
 
 
 
-##  `Spark` and `Hadoop` comparison
+##  `Spark` versus  `Hadoop` 
 
 
 
@@ -644,7 +663,7 @@ Disadvantages of `Spark` over `HadoopMR` ?
 
 ##  `Spark` and `Hadoop` comparison
 
-For **logistic regression** training (a simple **classification** algorithm which requires **several passes** on a dataset)
+For *logistic regression* training (a simple *classification* algorithm which requires *several passes* on a dataset)
 
 <center>
   <img src="/images/spark-dev3.png" width=50%/>
@@ -707,7 +726,7 @@ Introduction to `spark` and its *low-level API*
 Run a job on a cluster with `spark-submit`, monitoring, mistakes and debugging
 
 **Weeks 10, 11, 12** <br>
-Introduction to `spark-streaming` and a glimpse on other big data technologies (Dask)
+Introduction to spark applications and `spark-streaming` 
 
 
 ##  Main tools for the course (tentative...)
@@ -771,31 +790,30 @@ Introduction to `spark-streaming` and a glimpse on other big data technologies (
 <img src="/images/hdfs.png" width=25%/>
 </center>
 
----
 
 ##  Learning resources
 
 - *Spark Documentation Website*  <br>
-.small[[http://spark.apache.org/docs/latest/](http://spark.apache.org/docs/latest/)]
+[http://spark.apache.org/docs/latest/](http://spark.apache.org/docs/latest/)
 
 - *API docs* <br>
-.small[[http://spark.apache.org/docs/latest/api/scala/index.html](http://spark.apache.org/docs/latest/api/scala/index.html)] <br>
-.small[[http://spark.apache.org/docs/latest/api/python/](http://spark.apache.org/docs/latest/api/python/)]
+[http://spark.apache.org/docs/latest/api/scala/index.html](http://spark.apache.org/docs/latest/api/scala/index.html) <br>
+[http://spark.apache.org/docs/latest/api/python/](http://spark.apache.org/docs/latest/api/python/)
 
 - `Databricks` learning notebooks <br>
-.small[[https://databricks.com/resources](https://databricks.com/resources)]
+[https://databricks.com/resources](https://databricks.com/resources)
 
 - *StackOverflow* <br>
-.small[[https://stackoverflow.com/tags/apache-spark](https://stackoverflow.com/tags/apache-spark)]  <br>
-.small[[https://stackoverflow.com/tags/pyspark](https://stackoverflow.com/tags/pyspark)]
+[https://stackoverflow.com/tags/apache-spark](https://stackoverflow.com/tags/apache-spark)  <br>
+[https://stackoverflow.com/tags/pyspark](https://stackoverflow.com/tags/pyspark)
 
 - *More advanced* <br>
-.small[[http://books.japila.pl/apache-spark-internals/](http://books.japila.pl/apache-spark-internals/)]
+[http://books.japila.pl/apache-spark-internals/](http://books.japila.pl/apache-spark-internals/)
 
 
 - *Misc.* <br>
-.small[[Next Generation Databases: NoSQLand Big Data by Guy Harrison](https://link.springer.com/book/10.1007/978-1-4842-1329-2)]<br>
-.small[[Data Pipelines Pocket Reference by J. Densmore](https://www.oreilly.com/library/view/data-pipelines-pocket/9781492087823/)]
+[Next Generation Databases: NoSQLand Big Data by Guy Harrison](https://link.springer.com/book/10.1007/978-1-4842-1329-2)<br>
+[Data Pipelines Pocket Reference by J. Densmore](https://www.oreilly.com/library/view/data-pipelines-pocket/9781492087823/)
 
 
 
@@ -803,27 +821,31 @@ Introduction to `spark-streaming` and a glimpse on other big data technologies (
 
 ##  Learning Resources
 
-.pull-left-80[
-- *Book*: **"Spark The Definitive Guide"** 
-  .small[[http://shop.oreilly.com/product/0636920034957.do](http://shop.oreilly.com/product/0636920034957.do)] <br>
-  .tiny[[https://github.com/databricks/Spark-The-Definitive-Guide](https://github.com/databricks/Spark-The-Definitive-Guide)]
-]
 
-.pull-right-20[
-  <img src="/images/spark_book.gif" style="height: 160px;" />
-]
+::: {.columns}
+::: {.column width="80%"}
 
-<img src="" style="height: 200px;" />
+- *Book*: *Spark The Definitive Guide*
+  [http://shop.oreilly.com/product/0636920034957.do](http://shop.oreilly.com/product/0636920034957.do) <br>
+  [https://github.com/databricks/Spark-The-Definitive-Guide](https://github.com/databricks/Spark-The-Definitive-Guide)
 
-And the **most important thing is:**
+:::
+::: {.column width="20%"}
 
-.pull-left[
-.stress[.large[Practice!]]
-]
-.pull-right[
+<img src="/images/spark_book.gif" style="height: 160px;" />
+
+:::
+::: 
+
+
+::: {.fragment .fade-in}
+
+Above all
+
   <img src="/images/wtf.jpg" style="height: 200px;" />
-]
 
+
+:::
 
 
 
