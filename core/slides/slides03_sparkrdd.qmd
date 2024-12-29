@@ -13,54 +13,83 @@ engine: knitr
 
 `Spark` computing framework deals with many complex issues: fault tolerance, slow machines, big datasets, etc.
 
-*"Here's an operation, run it on all the data."*
+. . .
+
+It follows the next guideline
+
+*Here is an operation, run it on all the data.*
+
+::: {.callout-note}
+
+###
 
 - I do not care where it runs
 - Feel free to run it twice on different nodes
 
+:::
+
 . . .
 
-Jobs are divided in tasks, that are executed by the workers
+*Jobs* are divided in *tasks* that are executed by the *workers*
+
+::: {.callout-note}
+###
 
 - How do we deal with *failure*? Launch *another* task!  
 - How do we deal with *stragglers*? Launch *another task*! <br> ... and kill the original task
 
+:::
 
 
 
-## Job:
 
-A job in Spark represents a complete computation triggered by an *action* in the application code.
+## Job 
 
-When you invoke an action (such as `collect()`, `saveAsTextFile()`, etc.) on a Spark RDD,
-DataFrame, or Dataset, it triggers the execution of one or more jobs.
+A *job* in Spark represents a complete computation triggered by an *action* in the application code.
 
-Each job consists of one or more *stages*, where each stage represents a set of *tasks*
+When you invoke an *action* (such as `collect()`, `saveAsTextFile()`, etc.) on a Spark RDD,
+DataFrame, or Dataset, it triggers the execution of one or more *jobs*.
+
+. . .
+
+Each *job* consists of one or more *stages*, where each stage represents a set of *tasks*
 that can be executed in parallel.
 
-Jobs in Spark are created by *transformations* that have no dependency on each other,
-meaning each stage can execute independently.
+*Jobs* in Spark are created by *transformations* that have no dependency on each other,
+meaning each *stage* can execute independently.
 
 
-## Task:
+## Task
 
-A task is the smallest unit of work in Spark and represents 
+A *task* is the smallest unit of work in Spark and represents 
 the execution of a computation on a single *partition* of data.
 
-Tasks are created for each partition of the RDD, DataFrame, or Dataset involved in the computation.
+. . .
 
-Spark's execution engine assigns tasks to individual executor nodes in the cluster for parallel execution.
+*Tasks* are created for each *partition* of the RDD, DataFrame, or Dataset involved in the computation.
 
-Tasks are executed within the context of a specific *stage*, 
-and each task typically operates on a subset of the data distributed across the cluster.
+. . .
 
-The number of tasks within a stage depends on the number of partitions of the input data and the degree of parallelism configured for the Spark application.
+Spark's execution engine assigns *tasks* to individual *executor* nodes in the *cluster* for parallel execution.
 
-In summary, a "job" represents the entire computation triggered by an action, 
-composed of one or more stages, 
-each of which is divided into smaller units of work called "tasks." 
+. . .
 
-Tasks operate on individual partitions of the data in parallel to achieve efficient and scalable distributed computation in Spark.
+*Tasks* are executed within the context of a specific *stage*, 
+and each *task* typically operates on a subset of the data distributed across the *cluster*.
+
+. . .
+
+The number of *tasks* within a *stage* depends on the number of *partitions* of the input data and the degree of parallelism configured for the `Spark` application.
+
+. . .
+
+In summary, a *job* represents the entire computation triggered by an *action*, 
+composed of one or more *stages*, 
+each of which is divided into smaller units of work called *tasks*. 
+
+. . .
+
+*Tasks* operate on individual *partitions* of the data in parallel to achieve efficient and scalable distributed computation in `Spark`.
 
 ---
 
@@ -70,24 +99,33 @@ An *API* allows a user to interact with the software
 
 `Spark` is implemented in [Scala](https://www.scala-lang.org), runs on the *JVM* (Java Virtual Machine)
 
+. . .
+
 *Multiple* Application Programming Interfaces (APIs):
 
 - `Scala` (JVM)
 - `Java` (JVM)
-- `Python`
-- `R` 
+- {{< fa brands python >}} `Python`
+- {{< fa brands r-project >}} `R` 
 
-*This course uses the `Python` API*. Easier to learn than `Scala` and `Java`
+. . .
 
-- About the `R` APIs:  See [Mastering Spark in R](https://therinspark.com)
+*This course uses primarily the `Python` API*. Easier to learn than `Scala` and `Java`
 
----
+::: {.callout-tip}
 
-API: Application Programming Interface 
+About the `R` APIs:  See [Mastering Spark in R](https://therinspark.com)
+
+:::
+
+
+## Digression on acronym API (Application Programming Interface) 
 
 See [https://en.wikipedia.org/wiki/API](https://en.wikipedia.org/wiki/API) for more on this acronym
 
 In `Python` language, look at `interface`  and corresponding chapter *Interfaces, Protocols and ABCs* in [Fluent Python](https://www.fluentpython.com)
+
+. . .
 
 For `R` there are in fact two APIs, or two packages that offer a `Spark` API
 
@@ -103,7 +141,7 @@ See [Mastering `Spark` with `R` by Javier Luraschi, Kevin Kuo, Edgar Ruiz](https
 When you interact with `Spark` through its API, you send instructions to the *Driver*
 
 
-- The *Driver* is the **central coordinator**
+- The *Driver* is the *central coordinator*
 - It communicates with distributed workers called *executors*
 - Creates a *logical directed acyclic graph* (DAG) of operations
 - *Merges operations* that can be merged
@@ -121,24 +159,25 @@ When you interact with `Spark` through its API, you send instructions to the *Dr
 
 # SparkSession and SparkContext {background-color="#1c191c"}
 
----
+## `SparkContext` versus `SparkSession`
 
 `SparkContext` and `SparkSession` serve different purposes
 
+. . .
 
-SparkContext was the main entry point for Spark applications in first versions of Apache Spark.
+`SparkContext` was the main entry point for Spark applications in first versions of Apache Spark.
 
-SparkContext represented the connection to a Spark cluster, allowing the application to interact with the cluster manager.
+`SparkContext` represented the connection to a Spark *cluster*, allowing the application to interact with the *cluster manager*.
 
-SparkContext was responsible for coordinating and managing the execution of *jobs* and *tasks*.
+`SparkContext` was responsible for coordinating and managing the execution of *jobs* and *tasks*.
 
-SparkContext provided APIs for creating `RDDs` (Resilient Distributed Datasets), which were the primary abstraction in Spark for representing distributed data.
+`SparkContext` provided APIs for creating `RDDs` (Resilient Distributed Datasets), which were the primary abstraction in Spark for representing distributed data.
 
 
 
 ## SparkContext object
 
-Your `python` session interacts with the **driver** through a `SparkContext` object 
+Your `python` session interacts with the *driver* through a `SparkContext` object 
 
 
 - In the `Spark` interactive shell <br> An object of class `SparkContext` is automatically created in the session and named `sc`
@@ -148,7 +187,11 @@ Your `python` session interacts with the **driver** through a `SparkContext` obj
 ```{.python}
 >>> from pyspark import SparkConf, SparkContext
 
->>> conf = SparkConf().setAppName(appName).setMaster(master)
+>>> conf = (
+  SparkConf()
+  .setAppName(appName)
+  .setMaster(master)
+)
 >>> sc = SparkContext(conf=conf)
 ```
 
@@ -157,48 +200,67 @@ Your `python` session interacts with the **driver** through a `SparkContext` obj
 In Spark 2.0 and later versions, `SparkContext` is still available 
 but is not the primary entry point. 
 
-Instead, SparkSession is preferred. 
+Instead, `SparkSession` is preferred. 
 
-`SparkSession` was introduced in Spark 2.0 as a higher-level abstraction that encapsulates SparkContext, SQLContext, and HiveContext.
+`SparkSession` was introduced in Spark 2.0 as a higher-level abstraction that encapsulates `SparkContext`, `SQLContext`, and `HiveContext`.
 
 `SparkSession` provides a unified entry point for Spark functionality, integrating 
 Structured APIs:
 
-- SQL, 
-- DataFrame, 
-- Dataset  
+- `SQL`, 
+- `DataFrame`, 
+- `Dataset`  
  
 and the traditional RDD-based APIs.
 
----
+## 
 
 `SparkSession` is designed to make it easier to work with structured data (like data stored in tables or files with a schema) using Spark's DataFrame and Dataset APIs.
 
-It also provides built-in support for reading data from various sources (like Parquet, JSON, JDBC, etc.) into DataFrames and writing DataFrames back to different formats.
-Additionally, SparkSession simplifies the configuration of Spark properties and provides a Spark SQL CLI and a Spark Shell with SQL and DataFrame support.
-It's important to note that SparkSession internally creates and manages a SparkContext, so when you create a SparkSession, you don't need to create a SparkContext separately.
-In summary, while SparkContext is lower-level and primarily focused on managing the execution of Spark jobs and interacting with the cluster, SparkSession provides a higher-level, more user-friendly interface for working with structured data and integrates various Spark functionalities, including SQL, DataFrame, and Dataset APIs.
+. . .
+
+`SparkSession` also provides built-in support for reading data from various sources (like Parquet, JSON, JDBC, etc.) into DataFrames and writing DataFrames back to different formats.
+
+. . .
+
+Additionally, `SparkSession` simplifies the configuration of Spark properties and provides a Spark SQL CLI and a Spark Shell with SQL and DataFrame support.
+
+. . .
+
+::: {.callout-note}
+
+###
+
+`SparkSession` internally creates and manages a `SparkContext`, so when you create a `SparkSession`, you don't need to create a `SparkContext` separately.
+
+:::
+
+## {{< fa bullhorn >}}
+
+`SparkContext` is lower-level and primarily focused on managing the execution of Spark *jobs* and interacting with the *cluster* 
+
+`SparkSession` provides a higher-level, more user-friendly interface for working with structured data and integrates various Spark functionalities, including SQL, DataFrame, and Dataset APIs.
 
 
 ## RDDs and running model
 
-Spark programs are written in terms of operations on **RDDs**
+Spark programs are written in terms of operations on *RDDs*
 
-- *RDD* = **Resilient Distributed Dataset** <br>
+- *RDD* stands for *Resilient Distributed Dataset* <br>
 
--  An **immutable distributed collection** of objects spread across the cluster disks or memory
+-  An *immutable distributed collection* of objects spread across the cluster disks or memory
 
-- RDDs can contain any type of Python, Java, or Scala objects, including user-defined classes
+- *RDDs* can contain any type of Python, Java, or Scala objects, including user-defined classes
 
 - Parallel *transformations* and *actions* can be applied to RDDs
 
-- RDDs are automatically rebuilt on machine failure
+- *RDDs* are automatically rebuilt on machine failure
 
 
 
 ## Creating a RDD
 
-From an iterable object `iterator` (e.g. a `Python` `list`, etc.):
+From an iterable object `iterator` (e.g. a Python `list`, etc.):
 
 ```{.python}
 lines = sc.parallelize(iterator)
@@ -212,15 +274,20 @@ lines = sc.textFile("/path/to/file.txt")
 
 where `lines` is the resulting RDD, and `sc` the spark context
 
-**Remarks**
+
+::: {.callout-note}
+
+### Remarks
 
 - `parallelize` not really used in practice
-- In real life: **load data from external storage**
-- External storage is often **HDFS** (Hadoop Distributed File System)
+- In real life: *load data from external storage*
+- External storage is often *HDFS* (Hadoop Distributed File System)
 - Can read most formats (`json`, `csv`, `xml`, `parquet`, `orc`, etc.)
 
+:::
 
----
+
+## {{< fa hand-point-right >}}
 
 For iterators look again at [Fluent Python](https://www.fluentpython.com), chapter 17 *Iterators, Generators, and Classic Coroutines*
 
@@ -229,17 +296,24 @@ For iterators look again at [Fluent Python](https://www.fluentpython.com), chapt
 
 ## Operations on RDD
 
-**Two families of operations** can be performed on RDDs
+*Two families of operations* can be performed on RDDs
+
+. . .
 
 - *Transformations* <br> Operations on RDDs which return a new RDD <br> *Lazy evaluation*
 
-- *Actions* <br> Operations on RDDs that return some other data type <br> **Triggers computations**
+. . .
 
-What is *lazy evaluation* ? 
+- *Actions* <br> Operations on RDDs that return some other data type <br> *Triggers computations*
 
----
+. . .
 
-When a transformation is called on a RDD:
+{{< fa brain >}} What is *lazy evaluation* ? 
+
+## {{< fa hand-point-right >}}
+
+When a *transformation* is called on a RDD:
+
 - The operation is *not immediately performed*
 - Spark internally *records that this operation has been requested*
 - Computations are triggered only *if an action requires the result of this transformation* at some point
@@ -256,7 +330,7 @@ When a transformation is called on a RDD:
 The most important transformation is `map`
 
 | transformation | description                                     |
-| :-------------: |:-----------------------------------------------|
+|:-------------:|:-----------------------------------------------|
 | `map(f)`       | apply a function `f` to each element of the RDD |
 
 . . .
@@ -269,8 +343,13 @@ Here is an example:
 [[1], [1, 2], [1, 2, 3]]
 ```
 
+. . .
+
 - We need to call `collect` (an *action*) otherwise *nothing happens*
 - Once again, transformation `map` is lazy-evaluated  `r fontawesome::fa("triangle-exclamation")`
+
+. . .
+
 - In `Python`, *three options for passing functions* into `Spark`
   - for short functions: `lambda` expressions (anonymous functions)
   - top-level functions 
@@ -285,11 +364,18 @@ About passing functions to `map`:
 - Involves *serialization* with `pickle`
 - `Spark` sends the *entire pickled function* to worker nodes
 
-`r fontawesome::fa("radiation")`Warning. If the function is an *object method*:
+
+::: {.callout-warning}
+
+### Warning 
+
+If the function is an *object method*:
 
 - The *whole object is pickled* since the method contains references to the object (`self`) and references to attributes of the object
 - The whole object can be *large* 
 - The whole object *may not be serializable with `pickle`*
+
+:::
 
 ::: aside
 
@@ -297,30 +383,35 @@ About passing functions to `map`:
 
 :::
 
----
-
-> *serialization*
-
-> Converting an object from its in-memory structure to a binary or text-oriented format for storage or transmission, 
-> in a way that allows the future reconstruction of a clone of the object on the same system or on a different one. 
-> The `pickle` module supports serialization of arbitrary `Python` objects to a binary format.
 
 
-from Fluent Python by Ramalho
+## {{< fa hand-point-right >}} Serialization
+
+> Converting an object from its in-memory structure to a binary or text-oriented format for storage or transmission, in a way that allows the future reconstruction of a clone of the object on the same system or on a different one. 
+
+. . .
+
+> The `pickle` module supports serialization of arbitrary `Python` objects to a binary format
 
 
-## Transformations
+from [Fluent Python]() by Ramalho
+
+
+## Transformations (continued)
 
 Then we have `flatMap`
 
 
-
 | transformation | description                      |
-| :------------: | :------------------------------- |
+|:------------:|:-------------------------------|
 | `flatMap(f)`   | apply `f` to each element of the RDD, then flattens the results |
 
 
-Example
+. . .
+
+::: {.callout-note}
+
+### Example
 
 ```{.python}
 >>> rdd = sc.parallelize([2, 3, 4, 5])
@@ -328,19 +419,24 @@ Example
 [1, 1, 2, 1, 2, 3, 1, 2, 3, 4]
 ```
 
+:::
 
 
-## Transformations
+## Transformations (continued)
 
 `filter` allows to filter an RDD
 
 
 | transformation | description                      |
-| :-------------: | :------------------------------ |
+|:-------------:|:------------------------------|
 | `filter(f)`    | Return an RDD consisting of only elements that pass the condition `f` passed to `filter()` |
 
 
-Example
+. . .
+
+::: {.callout-note}
+
+### Example
 
 ```{.python}
 >>> rdd = sc.parallelize(range(10))
@@ -348,6 +444,7 @@ Example
 [0, 2, 4, 6, 8]
 ```
 
+:::
 
 ## Transformations
 
@@ -355,12 +452,16 @@ About `distinct` and `sample`
 
 
 | transformation | description                      |
-| :-------------: | :------------------------------- |
+|:-------------:|:-------------------------------|
 | `distinct()`  | Removes duplicates |
 | `sample(withReplacement, fraction, [seed])`  | Sample an RDD, with or without replacement |
 
 
-Example
+. . .
+
+::: {.callout-note}
+
+### Example
 
 ```{.python}
 >>> rdd = sc.parallelize([1, 1, 4, 2, 1, 3, 3])
@@ -368,7 +469,7 @@ Example
 [1, 2, 3, 4]
 ```
 
-
+:::
 
 ## Transformations
 
@@ -381,13 +482,18 @@ We have also pseudo-set-theoretical operations
 | `instersection(otherRdd)`  | Returns intersection with `otherRdd` |
 | `subtract(otherRdd)`  | Return each value in `self` that is not contained in `otherRdd`. |
 
+. . .
 
-- If if there are duplicates in the input RDD, the result of `union()` *will* contain duplicates (fixed with `distinct()`)
+::: {.callout-note}
+
+### 
+
+- If there are duplicates in the input RDD, the result of `union()` *will* contain duplicates (fixed with `distinct()`)
 - `intersection()` removes all duplicates (including duplicates from a single RDD)
 - Performance of `intersection()` is much worse than `union()` since it requires a *shuffle* to identify common elements
-- `subtract` also requires a shuffle
+- `subtract` also requires a *shuffle*
 
-
+:::
 
 ## Transformations
 
@@ -401,7 +507,11 @@ We have also pseudo-set-theoretical operations
 | `subtract(otherRdd)`  | Return each value in `self` that is not contained in `otherRdd`. |
 
 
-Example with `union` and `distinct`
+. . .
+
+::: {.callout-note}
+
+### Example with `union` and `distinct`
 
 ```{.python}
 >>> rdd1 = sc.parallelize(range(5))
@@ -416,22 +526,33 @@ Example with `union` and `distinct`
 [0, 1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
-
+:::
 
 ## About shuffles 
 
 - Certain operations trigger a *shuffle*
-- It is `Spark`’s mechanism for *re-distributing data* so that it’s grouped differently across partitions
-- It involves *copying data across executors and machines*, making the shuffle a complex and costly operation
-- We will discuss shuffles in detail later in the course
+- It is `Spark`’s mechanism for *redistributing data* so as tp modify the partitioning
+- It involves *moving data across executors and machines*, making  *shuffle* a complex and costly operation
+- More on *shuffles*  later
 
 ## Performance Impact  
 
-- A shuffle involves disk I/O, data serialization and network I/O. 
-- To organize data for the shuffle, `Spark` generates sets of *tasks*
-  - *map tasks* to organize the data
-  - and a set of *reduce tasks* to aggregate it. This nomenclature comes from MapReduce and does not directly relate to Spark’s map and reduce operations.
+- A *shuffle* involves 
+  - disk I/O, 
+  - data serialization 
+  - network I/O. 
 
+. . .
+
+- To organize data for the shuffle, `Spark` generates sets of *tasks*:
+  - *map tasks* to organize the data and
+  - *reduce tasks* to aggregate it. 
+
+::: aside
+
+This nomenclature comes from MapReduce and does not directly relate to Spark’s map and reduce operations.
+
+:::
 
 ## Transformations
 
@@ -443,7 +564,11 @@ Another "pseudo set" operation
 | `cartesian(otherRdd)`  | Return the Cartesian product of this RDD and another one |
 
 
-Example
+. . .
+
+::: {.callout-note}
+
+### Example
 
 ```{.python}
 >>> rdd1 = sc.parallelize([1, 2])
@@ -452,7 +577,9 @@ Example
 [(1, 'a'), (1, 'b'), (2, 'a'), (2, 'b')]
 ```
 
-- `cartesian()` is **very expensive** for large RDDs
+:::
+
+{{< fa hand-point-right >}} `cartesian()` is **very expensive** for large RDDs
 
 ::: aside
 
@@ -463,19 +590,18 @@ Example
 # Actions  {background-color="#1c191c"}
 
 
-
 ## Actions
 
 `collect` brings the `RDD` back to the driver
-
-
 
 | transformation | description                      |
 |:-------------:|:-------------------------------|
 | `collect()`    | Return all elements from the RDD |
 
 
-Example
+::: {.callout-note}
+
+### Example
 
 ```{.python}
 >>> rdd = sc.parallelize([1, 2, 3, 3])
@@ -483,20 +609,20 @@ Example
 [1, 2, 3, 3]
 ```
 
+:::
+
 ::: {.callout-note}
 
-
-
-- `r fontawesome::fa("triangle-exclamation")` Be sure that the *retrieved data fits in the driver memory* !
+- {{< fa triangle-exclamation >}} Be sure that the *retrieved data fits in the driver memory* !
 - Useful when developping and working on small data for testing
-- `r fontawesome::fa("hand-point-right")` We'll use it a lot here, but *we don't use it in real-world problems*
+- {{< fa hand-point-right >}} We'll use it a lot here, but *we don't use it in real-world problems*
 
 :::
 
 
 ## Actions
 
-It's important to count !
+It's important to count!
 
 
 | transformation | description                      |
@@ -505,7 +631,9 @@ It's important to count !
 | `countByValue()` | Return the count of each unique value in the RDD as a dictionary of `{value: count}` pairs. |
 
 
-Example
+::: {.callout-note}
+
+### Example
 
 ```{.python}
 >>> rdd = sc.parallelize([1, 3, 1, 2, 2, 2])
@@ -518,27 +646,27 @@ Example
 defaultdict(int, {1: 2, 3: 1, 2: 3})
 ```
 
+:::
 
 
 
+## Actions: cherry-picking
 
-## Actions
-
-How to get some values in an RDD ?
+How to get some (but not all) values in an RDD ?
 
 
 | action         | description                      |
 |:-------------:|:-------------------------------|
 | `take(n)`      | Return `n` elements from the RDD (deterministic)|
-| `top(n)`       | Return first `n` elements from the RDD (decending order)|
+| `top(n)`       | Return first `n` elements from the RDD (descending order)|
 | `takeOrdered(num, key=None)`    | Get the N elements from a RDD ordered in ascending order or as specified by the optional key function.|
 
-
+. . .
 
 ::: {.callout-note}
 
 - `take(n)` returns n elements from the RDD and attempts to **minimize the number of partitions it accesses**
-- `r fontawesome::fa("triangle-exclamation")` the result  may be a *biased* collection
+- {{< fa triangle-exclamation >}} the result  may be a *biased* collection
 - `collect` and `take` may return the elements in an order you  don't expect
 
 :::
@@ -556,10 +684,11 @@ How to get some values in an RDD ?
 | `top(n)`       | Return first `n` elements from the RDD (decending order)|
 | `takeOrdered(num, key=None)`  | Get the $N $elements from a RDD ordered in ascending order or as specified by the optional key function.|
 
-
+. . .
 
 ::: {.callout-note }
 
+### Example 
 
 ```{.python}
 >>> rdd = sc.parallelize([(3, 'a'), (1, 'b'), (2, 'd')])
@@ -571,42 +700,40 @@ How to get some values in an RDD ?
 >>> rdd.takeOrdered(2, key=lambda x: x[1])
 [(3, 'a'), (1, 'b')]
 ```
+
 :::
 
 
 
-## Actions
+## Actions: reduction(s)
 
-The `reduce` action
-
+::: {#reductions-preamble}
 
 | action         | description                      |
 |:-------------:|:-------------------------------|
 | `reduce(f)`    | Reduces the elements of this RDD using the specified commutative and associative binary operator `f`. |
 | `fold(zeroValue, op)`    | Same as `reduce()` but with the provided zero value. |
 
+:::
 
+{{< contents reductions-preamble >}}
+
+. . .
 
 - `op(x, y)` is allowed to modify x and return it as its result value to avoid object allocation; however, it should not modify y.
 - `reduce` applies some operation to pairs of elements until there is just one left. Throws an exception for empty collections.
 - `fold` has initial zero-value: defined for empty collections.
 
 
+## Actions: reduction(s)
 
+{{< contents reductions-preamble >}}
 
-
-## Actions
-
-The `reduce` action
-
-
-| action         | description                      |
-|:-------------:|:-------------------------------|
-| `reduce(f)`    | Reduces the elements of this RDD using the specified commutative and associative binary operator `f`. |
-| `fold(zeroValue, op)`    | Same as `reduce()` but with the provided zero value. |
-
+. . .
 
 ::: {.callout-note}
+
+### Example
 
 ```{.python}
 >>> rdd = sc.parallelize([1, 2, 3])
@@ -621,20 +748,17 @@ The `reduce` action
 
 :::
 
+## Actions: reduction(s)
 
+{{< contents reductions-preamble >}}
 
-## Actions
+. . .
 
-The `reduce` action
+::: {.callout-warning}
 
+### Warning 
 
-| action         | description                      |
-|:-------------:|:-------------------------------|
-| `reduce(f)`    | Reduces the elements of this RDD using the specified commutative and associative binary operator `f`. |
-| `fold(zeroValue, op)`    | Same as `reduce()` but with the provided zero value. |
-
-
-**Warning with `fold`.** Solutions can depend on the number of partitions
+With `fold`,  solutions can depend on the number of partitions
 
 ```{.python}
 >>> rdd = sc.parallelize([1, 2, 4], 2) # RDD with 2 partitions
@@ -646,26 +770,27 @@ The `reduce` action
 - Sum in the partitions: 2.5 + (1 + 2) = 5.5  and  2.5 + (4) = 6.5
 - Sum over partitions: 2.5 + (5.5 + 6.5) = 14.5
 
+:::
+
+## Actions: reduction(s)
+
+{{< contents reductions-preamble >}}
+
+. . .
 
 
-## Actions
+::: {.callout-warning}
 
-The `reduce` action
+### Warning 
 
-
-| action         | description                      |
-|:-------------:|:-------------------------------|
-| `reduce(f)`    | Reduces the elements of this RDD using the specified commutative and associative binary operator `f`. |
-| `fold(zeroValue, op)`    | Same as `reduce()` but with the provided zero value. |
-
-
-**Warning with `fold`.** Solutions can depend on the number of partitions
+Solutions can depend on the number of partitions
 
 ```{.python}
 >>> rdd = sc.parallelize([1, 2, 3], 5) # RDD with 5 partitions
 >>> rdd.fold(2, lambda a, b: a + b)
-???
 ```
+
+:::
 
 ::: {.callout-note}
 
@@ -674,18 +799,17 @@ The `reduce` action
 :::
 
 
-## Actions
+## Actions: reduction(s)
 
-The `reduce` action
+{{< contents reductions-preamble >}}
 
+. . .
 
-| action         | description                      |
-|:-------------:|:-------------------------------|
-| `reduce(f)`    | Reduces the elements of this RDD using the specified commutative and associative binary operator `f`. |
-| `fold(zeroValue, op)`    | Same as `reduce()` but with the provided zero value. |
+::: {.callout-warning}
 
+### Warning 
 
-**Warning with `fold`.** Solutions can depend on the number of partitions
+Solutions can depend on the number of partitions
 
 ```{.python}
 >>> rdd = sc.parallelize([1, 2, 3], 5) # RDD with 5 partitions
@@ -696,38 +820,40 @@ The `reduce` action
 - Yes, even if there is less partitions than elements !
 - 18 = 2 * 5 + (1+2+3) + 2
 
+:::
 
 
-## Actions
+## Actions : aggregate
 
-The `aggregate` action
+::: {#action-aggregate}
 
 
 | action         | description                      |
 |:-------------:|:-------------------------------|
 | `aggregate(zero, seqOp, combOp)` | Similar to `reduce()` but used to return a different type. |
 
+:::
+
+{{< contents action-aggregate >}}
+
+. . .
 
 Aggregates the elements of each partition, and then the results for all the partitions, given aggregation functions and zero value.
 
-- `seqOp(acc, val)`: function to combine the elements of a partition from the RDD (`val`) with an accumulator (`acc`). 
+- `seqOp(acc, val)`: function to combine the elements of a partition from the RDD (`val`) with an accumulator (`acc`). <br> 
 It can return a different result type than the type of this `RDD`
 - `combOp`: function that merges the accumulators of two partitions
-- Once again, in both functions, the first argument can be modified while the second cannot
+- In both functions, the first argument can be modified while the second cannot
 
+## Actions : aggregate
 
-## Actions
+{{< contents action-aggregate >}}
 
-The `aggregate` action
-
-
-| action         | description                      |
-|:-------------:|:-------------------------------|
-| `aggregate(zero, seqOp, combOp)` | Similar to `reduce()` but used to return a different type. |
-
+. . .
 
 ::: {.callout-note}
 
+### Example
 
 
 ```{.python}
@@ -763,12 +889,16 @@ The `foreach` action
 |:-------------:|:-------------------------------|
 | `foreach(f)` | Apply a function `f` to each element of a RDD |
 
+. . .
+
 
 - Performs an action on all of the elements in the RDD without returning any result to the driver.
 
 - Example : insert records into a database with `f`
 
-The `foreach()` action lets us perform computations on each element in the RDD without bringing it back locally
+. . .
+
+{{< fa hand-point-right >}} The `foreach()` action lets us perform computations on each element in the RDD without bringing it back locally
 
 
 
@@ -779,33 +909,35 @@ The `foreach()` action lets us perform computations on each element in the RDD w
 
 ## Lazy evaluation and persistence
 
-- Spark RDDs are **lazily evaluated**
+- Spark RDDs are *lazily evaluated*
 
 - Each time an action is called on a RDD, this RDD and all its dependencies are *recomputed*
 
 - If you plan to reuse a RDD multiple times, you should use *persistence*
 
-**Remarks**
+::: {.callout-note}
+
 - Lazy evaluation helps `spark` to **reduce the number of passes** over the data it has to make by grouping operations together
 - No substantial benefit to writing a single complex map instead of chaining together many simple operations
 - Users are free to organize their program into **smaller**, more **manageable operations**
 
+:::
 
 ## Persistence
 
 How to use persistence ?
-
 
 | method                       | description                                  |
 |:---------------------------:|:--------------------------------------------|
 | `cache()`                    | Persist the RDD in memory                    |
 | `persist(storageLevel)`      | Persist the RDD according to `storageLevel`  |
 
+. . .
+
+{{< fa hand-point-right >}} These methods must be called *before* the action, and do not trigger the computation
 
 
-- These methods must be called *before* the action, and do not trigger the computation
-
-Usage of `storageLevel`
+## Usage of `storageLevel`
 
 ```{.python}
 pyspark.StorageLevel(
@@ -813,15 +945,12 @@ pyspark.StorageLevel(
 )
 ```
 
----
+## Shades of persistence {.incremental}
 
-- What does persistence in memory mean?
+- What does persistence *in memory* mean?
 - Make `storageLevel` explicit
 - Any difference between `cache()` and `persist()` with `useMemory`?
 - Why do we call persistence caching? 
-
-
-
 
 
 ## Options for persistence
@@ -916,31 +1045,36 @@ Use `unpersist()` to RDDs to **manually remove them** from the cache
 
 
 
-## Reminder: about passing functions (`r fontawesome::fa("syringe")`)
+## Reminder: about passing functions {{< fa syringe >}}
 
 
 ::: {.callout-warning}
+
+### Warning 
 
 When passing functions, you can *inadvertently serialize the object containing the function*. 
 
 :::
 
 If you pass a function that:
--  is the member of an object
+
+- is the member of an object (a method)
 - contains references to fields in an object
 
-then `Spark` sends the *entire object to worker nodes*, which can be **much larger** than the bit of information you need
+then `Spark` sends the *entire object to worker nodes*, which can be *much larger* than the bit of information you need
 
 ::: {.callout-caution}
 
-This can cause your *program to fail*, if your class contains objects that **Python can't pickle**
+### Caution
+
+This can cause your *program to fail*, if your class contains objects that *Python can't pickle*
 
 :::
 
 
 ## About passing functions
 
-Passing a function with field references (don’t do this !  `r fontawesome::fa("hammer")` `r fontawesome::fa("skull-crossbones")`)
+Passing a function with field references (don’t do this !  {{< fa hammer >}} {{< fa skull-crossbones >}})
 
 ```{.python}
 class SearchFunctions(object):
@@ -960,7 +1094,13 @@ class SearchFunctions(object):
       return rdd.filter(lambda x: self.query in x)
 ```
 
-Instead, **just extract the fields you need** from your object into a local variable and pass that in
+::: {.callout-tip}
+
+### Tip
+
+Instead, *just extract the fields you need* from your object into a local variable and pass that in
+
+:::
 
 
 
@@ -980,7 +1120,7 @@ def getMatchesNoReference(self, rdd):
 
 . . .
 
-Much better to do this instead
+Much better to do this instead  {{< fa champagne-glasses >}}
 
 
 
@@ -989,11 +1129,13 @@ Much better to do this instead
 
 ## Pair RDD: key-value pairs
 
-It's roughly an RDD where each element is a tuple with two elements: a key and a value
+It's roughly a RDD where each element is a *tuple* with two elements: a *key* and a *value*
+
+. . .
 
 - For numerous tasks, such as aggregations tasks, storing information as `(key, value)` pairs into RDD is very convenient
 - Such RDDs are called `PairRDD`
-- Pair RDDs expose *new operations* such as **grouping together** data with the same key, and **grouping together two different RDDs**
+- Pair RDDs expose *new operations* such as *grouping together* data with the same *key*, and *grouping together two different RDDs*
 
 ## Creating a pair RDD
 
@@ -1007,7 +1149,7 @@ Calling `map` with a function returning a `tuple` with two elements
 ```
 
 
-## `r fontawesome::fa("triangle-exclamation")` Warning
+## {{< fa triangle-exclamation >}} Warning
 
 All elements of a `PairRDD` must be tuples with two elements (the key and the value)
 
@@ -1021,7 +1163,7 @@ All elements of a `PairRDD` must be tuples with two elements (the key and the va
 
 . . .
 
-For things to work as expected you **must** do
+For things to work as expected you *must* do
 
 ```{.python}
 >>> rdd = sc.parallelize([[1, "a", 7], [2, "b", 13], [2, "c", 17]])\
@@ -1031,6 +1173,9 @@ For things to work as expected you **must** do
 >>> rdd.values().collect()
 [['a', 7], ['b', 13], ['c', 17]]
 ```
+
+
+
 
 
 
@@ -1050,9 +1195,12 @@ For things to work as expected you **must** do
 
 {{< contents transformations-for-a-single-PairRDD >}}
 
----
+## Transformations for a single `PairRDD`
+
 
 {{< contents transformations-for-a-single-PairRDD >}}
+
+. . .
 
 Example with `mapValues`
 
@@ -1062,13 +1210,11 @@ Example with `mapValues`
 [('a', ['x', 'y', 'z']), ('b', ['p', 'r'])]
 ```
 
-
-
-
----
+## Transformations for a single `PairRDD`
 
 {{< contents transformations-for-a-single-PairRDD >}}
 
+. . .
 
 Example with `flatMapValues`
 
@@ -1097,9 +1243,12 @@ Example with `flatMapValues`
 
 {{< contents transformations-for-a-single-PairRDD-keyed >}}
 
----
+## Transformations for a single `PairRDD` (keyed)
+
 
 {{< contents transformations-for-a-single-PairRDD-keyed >}}
+
+. . .
 
 Example with `groupByKey`
 
@@ -1112,16 +1261,17 @@ Example with `groupByKey`
 [('c', [42]), ('b', [1, 3]), ('a', [1, 1])]
 ```
 
----
+##
 
 <center>
-  <img src="/images/group_by.png">
+![](/images/group_by.png) 
 </center>
 
----
-
+## Transformations for a single `PairRDD` (keyed)
 
 {{< contents transformations-for-a-single-PairRDD-keyed >}}
+
+. . .
 
 Example with `reduceByKey`
 
@@ -1134,29 +1284,34 @@ Example with `reduceByKey`
 - The reducing occurs first **locally** (within partitions)
 - Then, a shuffle is performed with the local results to reduce globally
 
----
+##
 
 <center>
-  <img src="/images/reduce_by.png">
+![](/images/reduce_by.png)
 </center>
 
----
+## Transformations for a single `PairRDD` (keyed)
+
 
 {{< contents transformations-for-a-single-PairRDD-keyed >}}
 
+. . .
 
+`combineByKey` Transforms an `RDD[(K, V)]` into another RDD of type `RDD[(K, C)]` for a *combined* type `C` that can be different from `V`
 
-`combineByKey` Transforms an `RDD[(K, V)]` into another RDD of type `RDD[(K, C)]` for a "combined" type `C` that can be different from `V`
+. . .
 
 The user must define
+
 - `createCombiner` : which turns a `V` into a `C`
 - `mergeValue` : to merge a `V` into a `C`
 - `mergeCombiners` : to combine two `C`’s into a single one
 
----
+## Transformations for a single `PairRDD` (keyed)
 
 {{< contents transformations-for-a-single-PairRDD-keyed >}}
 
+. . .
 
 In this example
 
@@ -1191,7 +1346,7 @@ In this example
 - Left join: the key must be present in the `other` RDD
 
 <center>
-  <img width='600px' src="/images/join-types.png">
+![](/images/join-types.png){width=600px}
 </center>
 
 
@@ -1242,7 +1397,9 @@ In practice, you can specify the number of partitions with
 rdd.partitionBy(100)
 ```
 
-You can also use a custom partition function `hash` such that `hash(key)` returns a hash
+. . .
+
+You can also use a custom partition function `hash` such that `hash(key)` returns a hash value
 
 ```{.python}
 import urlparse
@@ -1255,9 +1412,6 @@ rdd.partitionBy(20, hash_domain) # Create 20 partitions
 ```
 
 To have finer control on partitionning, you must use the Scala API.
-
-
-
 
 
 # Thank you !  {background-color="#1c191c"}
