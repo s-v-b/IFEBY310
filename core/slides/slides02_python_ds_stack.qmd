@@ -9,7 +9,7 @@ engine: knitr
 ---
 
 <center>
-<img src="/images/python.png" width=40%/>
+![](/images/python.png){width="40%"}  
 </center>
 
 - born in 1990
@@ -25,7 +25,9 @@ engine: knitr
 
 # Features of `Python`  {background-color="#1c191c"}
 
----
+
+## Features of `Python`
+
 
 - High-level data types (`tuples`, `dict`, `list`, `set`, etc.)
 - Standard libraries with batteries included
@@ -43,30 +45,30 @@ engine: knitr
 ## Features of `Python`
 
 <center>
-  <img src="/images/python_antigravity.png" style="width:45%;" />
+![](/images/python_antigravity.png){width="45%"}
 </center>
 
 
 # Trends  {background-color="#1c191c"}
 
-## The [`stackoverflow` 2022 survey](https://survey.stackoverflow.co/2022/)
+## The [`stackoverflow` 2023 survey](https://survey.stackoverflow.co/2023/)
+
+
+
+<iframe width="780" height="500" src="https://survey.stackoverflow.co/2023/#section-most-popular-technologies-programming-scripting-and-markup-languages" title="Stackoverflow survey"></iframe>
+
+
+## `Python` popularity growth
 
 <center>
-  <img src="/images/stackoverflow-survey.png" style="width:40%;" />  
+![](/images/python_growth_major_languages.png){width="60%"}
 </center>
 
 
 ## `Python` popularity growth
 
 <center>
-  <img src="/images/python_growth_major_languages.png" style="width:60%;" />  
-</center>
-
-
-## `Python` popularity growth
-
-<center>
-  <img src="/images/python_growth_smaller_languages.png" style="width:75%;" />  
+![](/images/python_growth_major_languages.png){width="75%"}
 </center>
 
 
@@ -97,6 +99,8 @@ Besides these features, `Python` has:
 </center>
 
 :::
+
+{{< contents  numpy-scipy >}}
 
 ::: {.fragment .fade-in}
 
@@ -225,7 +229,7 @@ Besides these features, `Python` has:
 
 - Object Relational Model (ORM)
 - ODBC
-- 
+  
 
 ::: {.fragment .fade-in}
 ::: {.callout-note title="Links"}
@@ -268,11 +272,6 @@ Besides these features, `Python` has:
 :::  {#dataviz}
 
 <center>
-<!-- <img src="/images/matplotlib.png" width=25%/> -->
-<!-- <img src="" width=10%/> -->
-<!-- <img src="/images/plotly_images.png" width=20%/> -->
-<!-- <img src="" width=10%/> -->
-<!-- <img src="/images/altair-logo-light.png" width=20%/> -->
 
 ||||||
 |:-----------|:---:|:---------:|:----:|----------------:|
