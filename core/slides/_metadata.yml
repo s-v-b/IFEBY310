@@ -8,7 +8,7 @@ format:
     footer: "[IFEBY030](http://s-v-b.github.io/IFEBY030) -- Technos Big Data -- M1 MIDS/MFA/LOGOS -- UParis Cité"
 
     smaller: false
-    highlight-style: github
+    highlight-style: github-dark
     
     code-fold: false
     code-link: true
@@ -85,16 +85,6 @@ center: true
 toc-depth: 1
 output-location: fragment
 toc-title: Roadmap
-
-
-# params:
-#   title: "Technologies Big Data "
-#   # curriculum: "Licence MIASHS"
-#   coursetitle: "Technologies Big Data IFEBY310"
-#   lecturer: "Equipe Statistique"
-#   homepage: "http://s-v-b.gitub.io/IFEBY310/"
-#   curriculum_homepage: "https://licence.math.univ-paris-diderot.fr/"
-
 
 engine: knitr
 

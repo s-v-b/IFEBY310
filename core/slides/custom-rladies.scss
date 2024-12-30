@@ -1,3 +1,5 @@
+// adapted from custom-rladies.scss  by
+// 
 /*-- scss:defaults --*/
 // importing fonts
 // @import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Lato&family=Yanone+Kaffeesatz&display=swap');
@@ -22,8 +24,9 @@ $h2-font-size: 1.25rem !default;
 $h3-font-size: 1.15rem !default;
 
 //code
-$code-color: #ec1515 !default;
+ $code-color: #1520ec !default;
 $font-family-monospace: 'Ubuntu Mono', monospace  !default;
+$code-block-font-size: .75em !default ; 
 
 // general  
 // $body-bg: #fff;
@@ -34,9 +37,9 @@ $presentation-font-size-root: 28px;
 /*-- scss:rules --*/
 .reveal pre code {
   // background-color: rgb(63 63 63);
-  // font-size: 1rem;
-  // padding: 0.5rem;
-  // line-height: 1.15rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+  line-height: 1.15rem;
 }
 
 
@@ -100,4 +103,12 @@ section.has-dark-background a, section.has-dark-background a:hover {
   right: 10px !important;
   top: unset !important;
   color: $body-color !important;
+}
+
+
+// resizing fonts in callouts 
+// 
+
+.reveal .slide .callout.callout-style-default div.callout-body {
+  font-size: var(--r-main-font-size);
 }
