@@ -1,0 +1,154 @@
+---
+title: "IFEBY310 Syllabus"
+---
+
+<!-- [**Télécharger  "PDF du syllabus"**](/documents/ma15y030-syllabus.pdf) -->
+
+
+::: {.callout-note}
+
+## Organization 
+
+|           | Day       | Hour              | Room                       |  Start |
+|:---------:|:-----------:|:-------------------:|:--------------------------------|:--------|
+| Cours     | Friday  | 15:45  - 17:46  | TBA      | 2025-01-17 |
+
+### [{{< fa cal >}}](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
+
+:::
+
+::: {.callout-note}
+
+## Objectives
+
+
+{{< include _objectifs_ifeby310.qmd >}}
+
+:::
+
+::: {.callout-note}
+
+## [Université Paris Cité](https://u-paris.fr)
+
+Useful links:
+
+- [Charte Université Paris Cité](https://u-paris.fr/valeurs/)
+
+- [Démarches et accessibilité](https://u-paris.fr/demarches-administratives-de-scolarite/)
+
+- [Centre de contact](https://u-paris.fr/centre-de-contact/)
+
+- [Relais handicap](https://u-paris.fr/etudes-et-handicap/)
+
+:::
+
+
+::: {.callout-note}
+
+
+### Communication  {{< fa bullhorn >}}
+
+Course  material:   [s-v-b.github.io/IFEBY310](https://s-v-b.github.io/IFEBY310) Fork the repo, use github issues to send feedback (no email please)
+
+Alerts are spread through [Moodle](https://moodle.u-paris.fr/course/view.php?id=2313)
+
+Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=2313) to be updated 
+
+:::
+
+::: {.callout-note}
+
+### [Computing environment](/course-support.html) {{< fa bullhorn >}}
+
+{{< fa database >}} We use the PostGreSQL server from UFR de Mathématiques. To obtain an ENT account  {{< fa user-secret >}} follow procedure  [Moodle](https://moodle.u-paris.fr/course/view.php?id=2313)
+
+{{< fa laptop-code >}} On client side, you may use 
+
+- [`psql`](https://www.postgresql.org/docs/current/app-psql.html)
+- [`pgcli`](https://www.pgcli.com)
+
+
+:::
+
+
+::: {.callout-note}
+
+
+## Références  {{< fa book >}}
+
+- [Database Systems: The Complete Book (DS:CB), by Hector Garcia-Molina, Jeff Ullman, and Jennifer Widom]()
+- [Alice](http://webdam.inria.fr/Alice/)
+- [Documentation PostGres](https://www.postgresql.org/docs/current/)
+- [Next Generation Databases NoSQLand Big Data, Guy Harrison ](https://link.springer.com/book/10.1007/978-1-4842-1329-2)
+- [Guy Harrison Blog](https://www.guyharrison.net)
+- [Databases trends and applications](https://www.dbta.com)
+- [Upcoming book “Principles of Databases”, by Marcelo Arenas, Pablo Barcelo, Leonid Libkin, Wim Martens, and Andreas Pieris.](https://github.com/pdm-book/community)
+- 
+:::
+
+
+::: {.callout-note}
+
+### Courses {{< fa chalkboard-teacher >}}
+
+[slides](/slides-listings.qmd) 
+
+[Notebooks](/notebooks-listings.qmd) (html and ipynb)
+
+[Corrected notebooks](/corriges-tds.qmd) (html and ipynb)
+
+:::
+
+::: {.callout-important}
+
+### Evaluation   {{< fa graduation-cap >}}
+
+
+- Three homeworks/projects
+
+- Grading
+
+:::
+
+::: {.callout-tip}
+
+### {{< fa wizard >}} Trucs 
+
+- Have a look at slides before the course
+- Don't jump to corrections
+- Use online help (StackOverflow, ChatGPT, copilot, ...)
+- Read error messages
+
+:::
+
+
+::: {.callout-warning}
+
+### Code of conduct
+
+**TL;DR: No cheating!**
+
+:::
+
+
+
+ 
+
+::: {.callout-important}
+
+### Save the dates !  {{< fa calendar >}}
+
+-   **January 17:** Course kick-off
+-   **February 14:** *No session* 
+-   **February 28:** Winter Holidays
+-   **March 7:** Session 6
+-   **April 18:** Eastern Holidays
+-   **April 25:** Eastern Holidays
+-   **May 2:** Session 12
+   
+
+[Université Paris Cité calendar](https://u-paris.fr/calendrier-universitaire/) 
+
+[M1 MIDS calendar](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1) 
+
+:::

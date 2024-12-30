@@ -1,0 +1,6 @@
+Après avoir suivi ce cours, vous serez capable :
+
+- d'interroger une base de données relationnelle
+- de lire un schéma  de base de données 
+- de concevoir une base de données
+- d'améliorer une base de données 
