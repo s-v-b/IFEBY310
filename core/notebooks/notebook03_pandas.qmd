@@ -1,0 +1,929 @@
+---
+title: Introduction to `pandas`
+jupyter: python3
+---
+
+
+The `pandas` library (https://pandas.pydata.org) is one of the most used tool at the disposal of people working with data in `python` today.
+
+- It allows to **crunch data** easily
+- It mainly provides a `DataFrame` object (a **table of data**) with a huge set of functionalities
+
+
+## Why ?
+
+Through `pandas`, you get acquainted with your data by **analyzing** it 
+
+- What's the average, median, max, or min of each column?
+- Does column A correlate with column B?
+- What does the distribution of data in column C look like?
+
+## Why  (con't) ?
+
+you get acquainted with your data by **cleaning** and  **transforming** it 
+
+- Removing missing values, filter rows or columns using some criteria
+- Store the cleaned, transformed data back into virtually any format or database
+- Data visualization (when combined `matplotlib` or `seaborn` or others)
+
+## Where ?
+
+`pandas` is a central component of the `python` "stack" for data science
+
+- `pandas` is built on top of `numpy`
+- often used in conjunction with other libraries
+- a `DataFrame` is often fed to plotting functions or machine learning algorithms (such as `scikit-learn`)
+- Well-interfaced with `jupyter`, leading to a nice interactive environment for data exploration and modeling
+
+## Core components of pandas
+
+The two primary components of pandas are the `Series` and `DataFrame`.
+
+- A `Series` is essentially a column
+
+- A `DataFrame` is a multi-dimensional table made up of a collection of `Series` with equal length
+
+## Creating a `DataFrame` from scratch
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:07:08.634333Z', start_time: '2022-01-19T11:07:08.201274Z'}
+import pandas as pd
+
+fruits = {
+    "apples": [3, 2, 0, 1],
+    "oranges": [0, 3, 7, 2]
+}
+
+df_fruits = pd.DataFrame(fruits)
+df_fruits
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:08:05.535463Z', start_time: '2022-01-19T11:08:05.530187Z'}
+type(df_fruits)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:08:12.680877Z', start_time: '2022-01-19T11:08:12.674128Z'}
+#| scrolled: true
+df_fruits["apples"]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:08:40.517193Z', start_time: '2022-01-19T11:08:40.511875Z'}
+type(df_fruits["apples"])
+```
+
+## Indexing
+
+- By default, a `DataFrame` uses a contiguous index
+- But what if we want to say **who** buys the fruits ?
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:08:51.018797Z', start_time: '2022-01-19T11:08:51.009897Z'}
+df_fruits = pd.DataFrame(fruits, index=["Daniel", "Sean", "Pierce", "Roger"])
+df_fruits
+```
+
+## `.loc` versus `.iloc`
+
+- `.loc` **loc**ates by name
+- `.iloc` **loc**ates by numerical **i**ndex
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:11:43.050618Z', start_time: '2022-01-19T11:11:43.042623Z'}
+df_fruits
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:12:17.606988Z', start_time: '2022-01-19T11:12:17.599866Z'}
+#| scrolled: true
+# What's in Sean's basket ?
+df_fruits.loc['Sean']
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:12:31.777154Z', start_time: '2022-01-19T11:12:31.771307Z'}
+# Who has oranges ?
+df_fruits.loc[:, 'oranges']
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:13:12.355217Z', start_time: '2022-01-19T11:13:12.350177Z'}
+# How many apples in Pierce's basket ?
+df_fruits.loc['Pierce', 'apples']
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:13:18.688274Z', start_time: '2022-01-19T11:13:18.676461Z'}
+#| scrolled: true
+df_f®ruits
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:13:20.548872Z', start_time: '2022-01-19T11:13:20.542442Z'}
+df_fruits.iloc[2, 1]
+```
+
+## Main attributes and methods of a `DataFrame`
+
+A `DataFrame` has many **attributes**
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:13:38.902805Z', start_time: '2022-01-19T11:13:38.896985Z'}
+#| scrolled: true
+df_fruits.columns
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:14:23.322276Z', start_time: '2022-01-19T11:14:23.316645Z'}
+df_fruits.index
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:14:32.512895Z', start_time: '2022-01-19T11:14:32.506454Z'}
+df_fruits.dtypes
+```
+
+A `DataFrame` has many **methods**
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:17:20.721882Z', start_time: '2022-01-19T11:17:20.708707Z'}
+df_fruits.info()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:15:35.080217Z', start_time: '2022-01-19T11:15:35.062875Z'}
+#| slideshow: {slide_type: subslide}
+df_fruits.describe()
+```
+
+## Missing values
+
+What if we don't know how many apples are in Sean's basket ?
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:15:57.731545Z', start_time: '2022-01-19T11:15:57.721720Z'}
+#| scrolled: true
+df_fruits.loc['Sean', 'apples'] = None
+df_fruits
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:16:40.181235Z', start_time: '2022-01-19T11:16:40.163184Z'}
+#| scrolled: true
+df_fruits.describe()
+```
+
+Note that `count` is **3** for apples now, since we have 1 missing value among the 4
+
+## Adding a column
+
+Ooooops, we forgot about the bananas !
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:17:38.191383Z', start_time: '2022-01-19T11:17:38.181663Z'}
+df_fruits["bananas"] = [0, 2, 1, 6]
+df_fruits
+```
+
+## Adding a column with the date
+
+And we forgot the dates !
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:17:45.450938Z', start_time: '2022-01-19T11:17:45.439619Z'}
+#| scrolled: true
+df_fruits['time'] = [
+    "2020/10/08 12:13", "2020/10/07 11:37", 
+    "2020/10/10 14:07", "2020/10/09 10:51"
+]
+df_fruits
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:18:04.481768Z', start_time: '2022-01-19T11:18:04.475480Z'}
+#| scrolled: true
+#| slideshow: {slide_type: subslide}
+df_fruits.dtypes
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:18:19.387128Z', start_time: '2022-01-19T11:18:19.381754Z'}
+#| scrolled: true
+type(df_fruits.loc["Roger", "time"])
+```
+
+It's not a date but a string (`str`) ! So we convert this column to something called `datetime`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:19:11.306595Z', start_time: '2022-01-19T11:19:11.293662Z'}
+#| scrolled: true
+df_fruits["time"] = pd.to_datetime(df_fruits["time"])
+df_fruits
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:19:41.683741Z', start_time: '2022-01-19T11:19:41.677507Z'}
+df_fruits.dtypes
+```
+
+What if we want to keep only the baskets after (including) October, 9th ?
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:19:51.787589Z', start_time: '2022-01-19T11:19:51.775535Z'}
+#| scrolled: false
+df_fruits.loc[df_fruits["time"] >= pd.Timestamp("2020/10/09")]
+```
+
+## Slices and subsets of rows or columns
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:20:30.215178Z', start_time: '2022-01-19T11:20:30.205482Z'}
+df_fruits
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:20:32.076067Z', start_time: '2022-01-19T11:20:32.066100Z'}
+df_fruits.loc[:, "oranges":"time"]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:20:46.504725Z', start_time: '2022-01-19T11:20:46.494468Z'}
+df_fruits.loc["Daniel":"Sean", "apples":"bananas"]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:21:08.463797Z', start_time: '2022-01-19T11:21:08.452887Z'}
+#| scrolled: true
+df_fruits[["apples", "time"]]
+```
+
+## Write our data to a CSV file
+
+What if we want to write the file ?
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:22:26.287324Z', start_time: '2022-01-19T11:22:26.277669Z'}
+df_fruits
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:22:28.613982Z', start_time: '2022-01-19T11:22:28.602540Z'}
+df_fruits.to_csv("fruits.csv")
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:22:41.309341Z', start_time: '2022-01-19T11:22:40.971618Z'}
+#| scrolled: false
+# Use !dir on windows
+!ls -alh | grep fru
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:23:12.183964Z', start_time: '2022-01-19T11:23:11.859384Z'}
+!head -n 5 fruits.csv
+```
+
+## Reading data and working with it
+
+Let's read the file `tips.csv`. It is a `CSV` file (**C**omma **S**eparated **V**alues).
+
+It contains data about a restaurant: the bill, tip and some informations about the customers.
+
+```{python}
+#| scrolled: true
+#| slideshow: {slide_type: skip}
+!ls
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:24:03.254808Z', start_time: '2022-01-19T11:24:03.193606Z'}
+#| scrolled: true
+#| slideshow: {slide_type: subslide}
+import requests
+import os
+
+# The path containing your notebook
+path_data = './'
+# The name of the file
+filename = 'tips.csv'
+
+if os.path.exists(os.path.join(path_data, filename)):
+    print('The file %s already exists.' % os.path.join(path_data, filename))
+else:
+    url = 'http://stephanegaiffas.github.io/big_data_course/data/tips.csv'
+    r = requests.get(url)
+    with open(os.path.join(path_data, filename), 'wb') as f:
+        f.write(r.content)
+    print('Downloaded file %s.' % os.path.join(path_data, filename))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:25:11.872794Z', start_time: '2022-01-19T11:25:11.854234Z'}
+#| scrolled: true
+df = pd.read_csv("tips.csv")
+
+# `.head()` shows the first rows of the dataframe
+df.head(n=10)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:25:14.135464Z', start_time: '2022-01-19T11:25:14.120703Z'}
+#| scrolled: true
+df.info()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:25:55.860622Z', start_time: '2022-01-19T11:25:55.855132Z'}
+#| scrolled: true
+df.loc[42, "day"]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:26:04.074000Z', start_time: '2022-01-19T11:26:04.068748Z'}
+#| scrolled: true
+type(df.loc[42, "day"])
+```
+
+By default, columns that are non-numerical contain strings (`str` type)
+
+## The `category` type
+
+An important type in `pandas` is `category` for variables that are **non-numerical**
+
+**Pro tip.** It's always a good idea to tell `pandas` which columns should be imported as **categorical**
+
+So, let's read again the file specifying some `dtype`s to the `read_csv` function
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:27:43.266029Z', start_time: '2022-01-19T11:27:43.254997Z'}
+dtypes = {
+    "sex": "category",
+    "smoker": "category",
+    "day": "category",
+    "time": "category"
+} 
+
+df = pd.read_csv("tips.csv", dtype=dtypes)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:27:43.397120Z', start_time: '2022-01-19T11:27:43.390806Z'}
+#| scrolled: true
+df.dtypes
+```
+
+## Computing statistics
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:28:48.597833Z', start_time: '2022-01-19T11:28:48.572605Z'}
+# The describe method only shows statistics for the numerical columns by default
+df.describe()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:28:52.927812Z', start_time: '2022-01-19T11:28:52.861560Z'}
+#| scrolled: true
+# We use the include="all" option to see everything
+df.describe(include="all")
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-19T11:30:32.769008Z', start_time: '2022-01-19T11:30:32.758201Z'}
+# Correlation between the numerical columns
+df.corr(numeric_only = True)
+```
+
+```{python}
+?df.corr
+```
+
+# Data visualization with `matplotlib` and `seaborn`
+
+Let's show how we can use `matplotlib` and `seaborn` to visualize data contained in a `pandas` dataframe
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T07:51:56.942207Z', start_time: '2022-01-26T07:51:55.697821Z'}
+import matplotlib.pyplot as plt
+import seaborn as sns
+```
+
+## How do the tip depends on the total bill ?
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:19.482039Z', start_time: '2021-01-15T09:51:19.072820Z'}
+sns.jointplot(x="total_bill", y="tip", data=df)
+```
+
+## When do customers go to this restaurant ?
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:19.607955Z', start_time: '2021-01-15T09:51:19.484391Z'}
+#| scrolled: false
+sns.countplot(x='day', hue="time", data=df)
+```
+
+## When do customers spend the most ?
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:19.809624Z', start_time: '2021-01-15T09:51:19.609684Z'}
+plt.figure(figsize=(7, 5))
+sns.boxplot(x='day', y='total_bill', hue='time', data=df)
+plt.legend(loc="upper left")
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:20.023200Z', start_time: '2021-01-15T09:51:19.812067Z'}
+plt.figure(figsize=(7, 5))
+sns.violinplot(x='day', y='total_bill', hue='time', split=True, data=df)
+plt.legend(loc="upper left")
+```
+
+## Who spends the most ?
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:20.225167Z', start_time: '2021-01-15T09:51:20.025918Z'}
+#| scrolled: true
+sns.boxplot(x='sex', y='total_bill', hue='smoker', data=df)
+```
+
+## When should waiters want to work ?
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:20.442940Z', start_time: '2021-01-15T09:51:20.227565Z'}
+#| scrolled: true
+sns.boxplot(x='day', y='tip', hue='time', data=df)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:20.689849Z', start_time: '2021-01-15T09:51:20.444898Z'}
+sns.violinplot(x='day', y='tip', hue='time', data=df)
+```
+
+# Data processing with `pandas`
+
+Let us read again the `tips.csv` file
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:20.710132Z', start_time: '2021-01-15T09:51:20.692036Z'}
+#| scrolled: true
+import pandas as pd
+
+dtypes = {
+    "sex": "category",
+    "smoker": "category",
+    "day": "category",
+    "time": "category"
+} 
+
+df = pd.read_csv("tips.csv", dtype=dtypes)
+df.head()
+```
+
+## Computations using `pandas` : broadcasting
+
+Let's add a column that contains the tip percentage
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:20.725863Z', start_time: '2021-01-15T09:51:20.712207Z'}
+#| scrolled: false
+df["tip_percentage"] = df["tip"] / df["total_bill"]
+df.head()
+```
+
+The computation
+```python
+df["tip"] / df["total_bill"]
+```
+uses a **broadcast** rule.
+
+- We can multiply, add, subtract, etc. together `numpy` arrays, `Series` or `pandas` dataframes when the computation **makes sense** in view of their respective **shape**
+
+This principle is called **broadcast** or **broadcasting**.
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:20.732473Z', start_time: '2021-01-15T09:51:20.727786Z'}
+#| scrolled: false
+df["tip"].shape, df["total_bill"].shape
+```
+
+The `tip` and `total_bill`columns have the same `shape`, so broadcasting performs **pairwise division**.
+
+This corresponds to the following "hand-crafted" approach with a `for` loop:
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:20.839274Z', start_time: '2021-01-15T09:51:20.734938Z'}
+for i in range(df.shape[0]):
+    df.loc[i, "tip_percentage"] = df.loc[i, "tip"] / df.loc[i, "total_bill"]
+```
+
+But using such a loop is: 
+
+- much longer to write
+- prone to mistakes
+- ugly 
+- and **excruciatingly slower** :(
+
+**NEVER** use `Python` for-loops for numerical computations !
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:25.284758Z', start_time: '2021-01-15T09:51:20.841712Z'}
+%%timeit -n 10
+for i in range(df.shape[0]):
+    df.loc[i, "tip_percentage"] = df.loc[i, "tip"] / df.loc[i, "total_bill"]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:25.332780Z', start_time: '2021-01-15T09:51:25.286877Z'}
+%%timeit -n 10
+df["tip_percentage"] = df["tip"] / df["total_bill"]
+```
+
+The `for` loop is $\approx$ **200 times slower** ! (even worse on larger data)
+
+### Pitfall. Changing values in a `DataFrame`
+
+When you want to change a value in a `DataFrame`, never use
+```python
+df["tip_percentage"].loc[i] = 42
+```
+but use
+```python
+df.loc[i, "tip_percentage"] = 42
+```
+namely, use a **single** `loc` or `iloc` statement. The first version **might not work**: it might modify a copy of the column and not the dataframe itself !
+
+Another example of broadcasting is:
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:25.345631Z', start_time: '2021-01-15T09:51:25.335148Z'}
+(100 * df[["tip_percentage"]]).head()
+```
+
+where we multiplied **each entry** of the `tip_percentage` column by 100.
+
+**Remark.** Note the difference between
+```python
+df[['tip_percentage']]
+```
+which returns a `DataFrame` containing only the `tip_percentage` column and
+```python
+df['tip_percentage']
+```
+which returns a `Series` containing the data of the `tip_percentage` column
+
+## Some more plots
+
+### How do the tip percentages relates to the total bill ?
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:25.832352Z', start_time: '2021-01-15T09:51:25.349460Z'}
+sns.jointplot(x="total_bill", y="tip_percentage", data=df)
+```
+
+### Who tips best ?
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.063153Z', start_time: '2021-01-15T09:51:25.835329Z'}
+sns.boxplot(x='sex', y='tip_percentage', hue='smoker', data=df)
+```
+
+### Who tips best without the `tip_percentage` outliers ?
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.338967Z', start_time: '2021-01-15T09:51:26.065918Z'}
+sns.boxplot(
+    x='sex', y='tip_percentage', hue='smoker', 
+    data=df.loc[df["tip_percentage"] <= 0.3]
+)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.347568Z', start_time: '2021-01-15T09:51:26.341347Z'}
+id(df)
+```
+
+## The all-mighty `groupby` and `aggregate`
+
+Many computations can be formulated as a **groupby** followed by and **aggregation**.
+
+### What is the mean `tip` and `tip percentage` each day ?
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.367070Z', start_time: '2021-01-15T09:51:26.350529Z'}
+df.head()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.385448Z', start_time: '2021-01-15T09:51:26.369477Z'}
+#| scrolled: true
+df.groupby("day").mean()
+```
+
+But we don't care about the `size` column here, so we can use insead
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.404776Z', start_time: '2021-01-15T09:51:26.389083Z'}
+df[["total_bill", "tip", "tip_percentage", "day"]].groupby("day").mean()
+```
+
+If we want to be more precise, we can `groupby` using several columns
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.441028Z', start_time: '2021-01-15T09:51:26.408033Z'}
+(
+    df[["total_bill", "tip", "tip_percentage", "day", "time"]]   # selection
+        .groupby(["day", "time"])                                # partition
+        .mean()                                                  # aggregation
+)
+```
+
+**Remarks**
+
+- We obtain a `DataFrame` with a two-level indexing: on the `day` and the `time`
+- Groups must be homogeneous: we have `NaN` values for empty groups (e.g. `Sat`, `Lunch`)
+
+### Pro tip
+
+Sometimes, it's more convenient to get the groups as columns instead of a multi-level index.<br>
+For this, use `reset_index`:
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.477405Z', start_time: '2021-01-15T09:51:26.444302Z'}
+(
+    df[["total_bill", "tip", "tip_percentage", "day", "time"]]   # selection
+        .groupby(["day", "time"])                                # partition
+        .mean() # aggregation
+        .reset_index()   # ako ungroup
+)
+```
+
+### Another pro tip
+
+Computations with pandas can include many operations that are **pipelined** until the final computation.<br>
+Pipelining many operations is good practice and perfectly normal, but in order to make the code readable you can put it between parenthesis (`python` expression) as follows:
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.511329Z', start_time: '2021-01-15T09:51:26.480282Z'}
+#| scrolled: true
+(
+    df[["total_bill", "tip", "tip_percentage", "day", "time"]]
+    .groupby(["day", "time"])
+    .mean()
+    .reset_index()
+    # and on top of all this we sort the dataframe with respect 
+    # to the tip_percentage
+    .sort_values("tip_percentage")
+)
+```
+
+## Displaying a `DataFrame` with `style`
+
+Now, we can answer, with style, to the question: what are the average tip percentages along the week ?
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.668935Z', start_time: '2021-01-15T09:51:26.514338Z'}
+#| scrolled: true
+(
+    df[["tip_percentage", "day", "time"]]
+    .groupby(["day", "time"])
+    .mean()
+    # At the end of the pipeline you can use .style
+    .style
+    # Print numerical values as percentages 
+    .format("{:.2%}")
+    .background_gradient()
+)
+```
+
+## Removing the `NaN` values
+
+But the `NaN` values are somewhat annoying. Let's remove them
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.704232Z', start_time: '2021-01-15T09:51:26.674169Z'}
+(
+    df[["tip_percentage", "day", "time"]]
+    .groupby(["day", "time"])
+    .mean()
+    # We just add this from the previous pipeline
+    .dropna()
+    .style
+    .format("{:.2%}")
+    .background_gradient()
+)
+```
+
+Now, we clearly see when `tip_percentage` is maximal. But what about the standard deviation ?
+
+- We used only `.mean()` for now, but we can use several aggregating function using `.agg()`
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.766086Z', start_time: '2021-01-15T09:51:26.707178Z'}
+#| scrolled: true
+(
+    df[["tip_percentage", "day", "time"]]
+    .groupby(["day", "time"])
+    .agg(["mean", "std"])          # we feed `agg`  with a list of names of callables 
+    .dropna()
+    .style
+    .format("{:.2%}")
+    .background_gradient()
+)
+```
+
+And we can use also `.describe()` as aggregation function. Moreover we
+- use the `subset` option to specify which column we want to style
+- we use `("tip_percentage", "count")` to access multi-level index
+
+```{python}
+(
+    df[["tip_percentage", "day", "time"]]
+    .groupby(["day", "time"])
+    .describe()    # all-purpose summarising function
+)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.851497Z', start_time: '2021-01-15T09:51:26.768613Z'}
+(
+    df[["tip_percentage", "day", "time"]]
+    .groupby(["day", "time"])
+    .describe()
+    .dropna()
+    .style
+    .bar(subset=[("tip_percentage", "count")])
+    .background_gradient(subset=[("tip_percentage", "50%")])
+)
+```
+
+## Supervised learning of `tip` based on the `total_bill` 
+
+As an example of very simple **machine-learning** problem, let's try to understand how we can predict `tip` based on `total_bill`.
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:26.993824Z', start_time: '2021-01-15T09:51:26.854233Z'}
+import numpy as np
+
+plt.scatter(df["total_bill"], df["tip"])
+plt.xlabel("total_bill", fontsize=12)
+plt.ylabel("tip", fontsize=12)
+```
+
+There's a rough **linear** dependence between the two. Let's try to find it by hand!<br>
+Namely, we look for numbers $b$ and $w$ such that
+
+$$
+\texttt{tip} \approx b + w \times \texttt{total_bill}
+$$
+
+for all the examples of pairs of $(\texttt{tip}, \texttt{total_bill})$ we observe in the data.
+
+In **machine learning**, we say that this is a very simple example of a **supervised learning** problem (here it is a regression problem), where $\texttt{tip}$ is the **label** and where $\texttt{total_bill}$ is the (only) **feature**, for which we intend to use a **linear predictor**.
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:27.158925Z', start_time: '2021-01-15T09:51:26.996352Z'}
+plt.scatter(df["total_bill"], df["tip"])
+plt.xlabel("total_bill", fontsize=12)
+plt.ylabel("tip", fontsize=12)
+
+slope = 1.0
+intercept = 0.0
+
+x = np.linspace(0, 50, 1000)
+plt.plot(x, intercept + slope * x, color="red")
+```
+
+### A more interactive way 
+
+This might require
+
+```python
+!pip install ipympl
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:27.164804Z', start_time: '2021-01-15T09:51:27.161590Z'}
+!pip install ipympl
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:27.361662Z', start_time: '2021-01-15T09:51:27.167569Z'}
+#| scrolled: false
+#| slideshow: {slide_type: subslide}
+import ipywidgets as widgets
+import matplotlib.pyplot as plt
+import numpy as np
+
+%matplotlib widget
+%matplotlib inline
+
+x = np.linspace(0, 50, 1000)
+
+@widgets.interact(intercept=(-5, 5, 1.), slope=(0, 1, .05))
+def update(intercept=0.0, slope=0.5):
+    plt.scatter(df["total_bill"], df["tip"])
+    plt.plot(x, intercept + slope * x, color="red")
+    plt.xlim((0, 50))
+    plt.ylim((0, 10))
+    plt.xlabel("total_bill", fontsize=12)
+    plt.ylabel("tip", fontsize=12)
+```
+
+This is kind of tedious to do this by hand... it would be nice to come up with an **automated** way of doing this. Moreover:
+
+- We are using a **linear** function, while something more complicated (such as a polynomial) might be better
+- More importantly, we use **only** the `total_bill` column to predict the `tip`, while we know about many other things
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:27.383439Z', start_time: '2021-01-15T09:51:27.364363Z'}
+df.head()
+```
+
+## One-hot encoding of categorical variables
+
+We can't perform computations (products and sums) with columns containing **categorical** variables. So, we can't use them like this to predict the `tip`.
+We need to **convert** them to numbers somehow.
+
+The most classical approach for this is **one-hot encoding** (or "create dummies" or "binarize") of the categorical variables, which can be easily achieved with `pandas.get_dummies`
+
+Why *one-hot* ? See [wikipedia](https://en.wikipedia.org/wiki/One-hot) for a plausible explanation
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:57:27.607858Z', start_time: '2021-01-15T09:57:27.563562Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+df_one_hot = pd.get_dummies(df, prefix_sep='#')
+df_one_hot.head(5)
+```
+
+Only the categorical columns have been one-hot encoded. For instance, the `"day"` column is replaced by 4 columns named `"day#Thur"`, `"day#Fri"`, `"day#Sat"`, `"day#Sun"`, since `"day"` has 4 modalities (see next line).
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:27.433926Z', start_time: '2021-01-15T09:51:27.426358Z'}
+#| scrolled: true
+df['day'].unique()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:27.442464Z', start_time: '2021-01-15T09:51:27.436439Z'}
+#| scrolled: false
+df_one_hot.dtypes
+```
+
+## Pitfall. Colinearities with one-hot encoding
+
+Sums over dummies for `sex`, `smoker`, `day`, `time` and `size` are all equal to one (by constrution of the one-hot encoded vectors).
+
+- Leads to **colinearities** in the matrix of features
+- It is **much harder** to train a linear regressor when the columns of the features matrix has colinearities
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:27.456985Z', start_time: '2021-01-15T09:51:27.445235Z'}
+#| scrolled: true
+day_cols = [col for col in df_one_hot.columns if col.startswith("day")]
+df_one_hot[day_cols].head()
+df_one_hot[day_cols].sum(axis=1)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:27.466975Z', start_time: '2021-01-15T09:51:27.459209Z'}
+all(df_one_hot[day_cols].sum(axis=1) == 1)
+```
+
+The most standard solution is to remove a modality (i.e. remove a one-hot encoding vector). Simply achieved by specifying `drop_first=True` in the `get_dummies` function.
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:27.477837Z', start_time: '2021-01-15T09:51:27.469797Z'}
+df["day"].unique()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:51:27.516588Z', start_time: '2021-01-15T09:51:27.480318Z'}
+pd.get_dummies(df, prefix_sep='#', drop_first=True).head()
+```
+
+Now, if a categorical feature has $K$ modalities, we use only $K-1$ dummies.
+For instance, there is no more `sex#Female` binary column. 
+
+**Question.** So, a linear regression won't fit a weight for `sex#Female`. But, where do the model weights of the dropped binary columns go ?
+
+**Answer.** They just "go" to the **intercept**: interpretation of the population bias depends on the "dropped" one-hot encodings.
+
+So, we actually fit
+
+$$
+\begin{align*}
+\texttt{tip} \approx b &+ w_1 \times \texttt{total_bill}
++ w_2 \times \texttt{size} \\
+&+ w_3 \times \texttt{sex#Male}
++ w_4 \times \texttt{smoker#Yes} \\
+&+ w_5 \times \texttt{day#Sat}
++ w_6 \times \texttt{day#Sun}
++ w_7 \times \texttt{day#Thur} \\
+&+ w_8 \times \texttt{time#Lunch}
+\end{align*}
+$$
+
+

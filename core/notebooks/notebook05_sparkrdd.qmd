@@ -1,0 +1,566 @@
+---
+title: Introduction to `Spark` RDD
+jupyter: python3
+---
+
+```{python}
+import numpy as np
+```
+
+```{python}
+import os
+import sys
+import inspect
+
+os.environ['PYSPARK_PYTHON'] = sys.executable
+os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:48:52.492489Z', start_time: '2022-01-26T09:48:47.745746Z'}
+#| scrolled: false
+from pyspark import SparkConf, SparkContext
+
+conf = SparkConf().setAppName("Spark RDD Course")
+sc = SparkContext(conf=conf)
+```
+
+
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:50:15.768694Z', start_time: '2022-01-26T09:50:15.760506Z'}
+rdd = sc.parallelize(range(64))
+```
+
+Note that `parallelize` takes an optional argument to choose the number of partitions
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:50:16.584063Z', start_time: '2022-01-26T09:50:16.578637Z'}
+rdd.getNumPartitions()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:50:17.040781Z', start_time: '2022-01-26T09:50:17.025565Z'}
+rdd = sc.parallelize(range(1000), 10)
+rdd.getNumPartitions()
+```
+
+## Transformations
+
+### `map`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:50:26.775706Z', start_time: '2022-01-26T09:50:26.766162Z'}
+rdd = sc.parallelize([2, 3, 4])
+rdd = rdd.map(lambda x: list(range(1, x)))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:50:32.871701Z', start_time: '2022-01-26T09:50:32.848329Z'}
+rdd
+```
+
+```{python}
+(
+    sc.parallelize([2, 3, 4])
+      .map(lambda x: list(range(1, x)))
+)
+```
+
+`map` is a *transformation*. It is *lazily* evaluated. Hence execution is delayed until an *action* is met in the DAG).
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:50:52.179698Z', start_time: '2022-01-26T09:50:50.637422Z'}
+rdd.collect()  # collect is an action 
+```
+
+```{python}
+(
+    sc.parallelize([2, 3, 4])
+      .map(lambda x: list(range(1, x)))
+      .collect()
+)
+```
+
+### Exercice: `map` with a method
+
+**Warning.** This example is a bad practice !!! Don't do this at home
+
+```{python}
+dbtel = {'arthur': 1234, 'riad': 4567, 'anatole': 3615}
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:53:08.722461Z', start_time: '2022-01-26T09:53:08.718705Z'}
+class TelephoneDB(object):
+    
+    def __init__(self):
+        self.tel = {'arthur': 1234, 'riad': 4567, 'anatole': 3615}
+   
+    def add_tel(self, name):
+        return name, self.tel.get(name)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:53:09.073597Z', start_time: '2022-01-26T09:53:08.885832Z'}
+tel_db = TelephoneDB()
+names = ['arthur', 'riad']
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:53:09.073597Z', start_time: '2022-01-26T09:53:08.885832Z'}
+rdd = sc.parallelize(names).map(tel_db.add_tel).collect()
+rdd
+```
+
+- Replace the `tel` dictionary by a `defaultdict` with default number `999` 
+- Use it on a `rdd` containing names as above including an unknown one, and try it
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:53:18.248482Z', start_time: '2022-01-26T09:53:18.244348Z'}
+from collections import defaultdict
+
+class TelephoneDefaultDB(object):
+    
+    def __init__(self):
+        self.tel = defaultdict(lambda: 999, {'arthur': 1234, 'riad': 4567, 'anatole': 3615})
+    
+    def add_tel(self, name):
+        return name, self.tel[name]
+    
+    def add_tel_rdd(self, rdd):  
+        return rdd.map(self.add_tel)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:53:26.542121Z', start_time: '2022-01-26T09:53:26.397964Z'}
+#| scrolled: false
+tel_db = TelephoneDefaultDB()
+names = ['riad', 'anatole', 'yiyang']
+rdd = sc.parallelize(names).map(tel_db.add_tel).collect()
+rdd
+```
+
+**Warning**. Once again, this is a bad idea to pass *class methods* to spark's `map`.
+Since `add_tel` needs `self`, the whole object is serialized so that `spark` can use it.
+This breaks if the `tel` is large, or if it is not serializable.
+
+### `flatMap`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:54:17.952337Z', start_time: '2022-01-26T09:54:17.822486Z'}
+rdd = sc.parallelize([2, 3, 4, 5])
+rdd.flatMap(lambda x: range(1, x)).collect()
+```
+
+### `filter`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:54:19.802984Z', start_time: '2022-01-26T09:54:19.642499Z'}
+rdd = sc.parallelize(range(10))
+rdd.filter(lambda x: x % 2 == 0).collect()
+```
+
+### `distinct`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:55:01.842894Z', start_time: '2022-01-26T09:55:00.971479Z'}
+rdd = sc.parallelize([1, 1, 4, 2, 1, 3, 3])
+rdd.distinct().collect()
+```
+
+### "Pseudo-set" operations
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:57:28.799644Z', start_time: '2022-01-26T09:57:28.539049Z'}
+rdd1 = sc.parallelize(range(5))
+rdd2 = sc.parallelize(range(3, 9))
+rdd3 = rdd1.union(rdd2)
+rdd3.collect()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:57:29.358513Z', start_time: '2022-01-26T09:57:28.854902Z'}
+rdd3.distinct().collect()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T09:57:30.724296Z', start_time: '2022-01-26T09:57:30.513790Z'}
+#| scrolled: true
+rdd1 = sc.parallelize([1, 2])
+rdd2 = sc.parallelize(["a", "b"])
+rdd1.cartesian(rdd2).collect()
+```
+
+## Actions
+
+Well, `collect` is obviously an action...
+
+### `count`, `countByValue`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:00:47.366718Z', start_time: '2022-01-26T10:00:47.244554Z'}
+rdd = sc.parallelize([1, 3, 1, 2, 2, 2])
+rdd.count()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:00:47.784731Z', start_time: '2022-01-26T10:00:47.670195Z'}
+rdd.countByValue()
+```
+
+Why does `countByValue()` returns de dictionary?
+
+Are `count()` and `countByValue()` actions or transformations?
+
+```{python}
+u = np.int32((np.random.sample(100000) * 100000))  # 100000 random integers uniformly distributed on 0, ..., 100000
+
+p = (
+    sc.parallelize(u)
+    .countByValue()
+)
+
+q = sorted(p.items(), key = lambda x : x[1], reverse=True)
+
+q[0]
+
+# q[0], 1 + np.log(len(u))/ np.log(np.log(len(u))), len(q)
+```
+
+- How many distinct values do you expect in `u` ?
+- How large is the largest value in $q$ ?
+
+```{python}
+len(q), (1-np.exp(-1)) * len(u), 1 + np.log(len(u))/ np.log(np.log(len(u))), np.log(len(u))
+```
+
+### `take`, `takeOrdered`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:01:12.133043Z', start_time: '2022-01-26T10:01:12.123139Z'}
+rdd = sc.parallelize([(3, 'a'), (1, 'b'), (2, 'd')])
+```
+
+```{python}
+(1, 'b') <=  (2, 'd') <= (3, 'a')
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:01:12.502110Z', start_time: '2022-01-26T10:01:12.368857Z'}
+rdd.takeOrdered(2)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:01:41.658196Z', start_time: '2022-01-26T10:01:41.561914Z'}
+rdd.takeOrdered(2, key=lambda x: x[1])
+```
+
+### `reduce`, `fold`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:04:55.619063Z', start_time: '2022-01-26T10:04:55.488243Z'}
+rdd = sc.range(1, 4)
+rdd.reduce(lambda a, b: a + b)
+```
+
+```{python}
+rdd = sc.range(1, 4, numSlices=7)
+rdd.reduce(lambda a, b: a + b)
+```
+
+```{python}
+rdd = sc.parallelize(range(1,4), 3)
+rdd.reduce(lambda a, b: a + b)
+```
+
+```{python}
+( 
+    sc.parallelize(range(1, 4), 2)
+      .fold(0, lambda a, b: a + b)
+)
+```
+
+```{python}
+( 
+    sc.parallelize(range(1, 4), 1)
+      .fold(3, lambda a, b: a + b)
+),( 
+    sc.parallelize(range(1, 4), 2)
+      .fold(2, lambda a, b: a + b)
+)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:04:56.257006Z', start_time: '2022-01-26T10:04:56.168743Z'}
+rdd =  sc.parallelize(range(1, 4),3)
+rdd.fold(1, lambda a, b: a + b), rdd.getNumPartitions()
+```
+
+```{python}
+rdd =  sc.parallelize(range(1, 4),4)
+rdd.fold(1, lambda a, b: a + b), rdd.getNumPartitions()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:06:13.531030Z', start_time: '2022-01-26T10:06:13.468375Z'}
+rdd = sc.parallelize([1, 2, 4], 2)
+rdd.fold(2, lambda a, b: a + b)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:06:34.534202Z', start_time: '2022-01-26T10:06:34.481600Z'}
+rdd = sc.parallelize([1, 2, 4], 3)
+rdd.fold(2, lambda a, b: a + b)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:07:09.860863Z', start_time: '2022-01-26T10:07:09.855285Z'}
+rdd.getNumPartitions()
+```
+
+### `aggregate`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:10:45.189587Z', start_time: '2022-01-26T10:10:45.103199Z'}
+seqOp = lambda x, y: (x[0] + y, x[1] + 1)
+combOp = lambda x, y: (x[0] + y[0], x[1] + y[1])
+
+rdd = sc.parallelize([1, 2, 3, 4], 8)
+rdd.aggregate((0, 0), seqOp, combOp), rdd.getNumPartitions()
+```
+
+```{python}
+op = lambda x, y: x+y
+rdd = sc.parallelize([1, 2, 3, 4], 4)
+rdd.aggregate(0, op, op), rdd.getNumPartitions()
+```
+
+### Exercice: sum of powers with `aggregate`
+
+- Using `aggregate`, compute the sum, the sum of squares $x^2$ and the sum of $x^3$ for 
+$x \in \{1, \ldots, 10 \}$.
+- Check your computations using `numpy`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:12:45.646275Z', start_time: '2022-01-26T10:12:45.642587Z'}
+seqOp = lambda x, y: (x[0] + y, x[1] + y ** 2, x[2] + y ** 3)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:12:46.202729Z', start_time: '2022-01-26T10:12:46.198959Z'}
+combOp = lambda x, y: (x[0] + y[0], x[1] + y[1], x[2] + y[2])
+```
+
+```{python}
+sc.range(5)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:12:46.809504Z', start_time: '2022-01-26T10:12:46.691691Z'}
+sc.range(1, 11).aggregate((0, 0, 0), seqOp, combOp)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:13:08.815852Z', start_time: '2022-01-26T10:13:08.809493Z'}
+import numpy as np
+
+x = np.arange(1, 11)
+x
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:13:09.313575Z', start_time: '2022-01-26T10:13:09.308073Z'}
+#| scrolled: true
+x.sum(), (x**2).sum(), (x**3).sum(), x.cumsum()
+```
+
+### Computing an empirical variance with `aggregate`
+
+Assume a sample is stored as a RDD. Using `aggregate`, compute the sample variance $\frac{1}{n}\sum_{i=1}^n (x_i - \overline{X}_n)^2$ where $\overline{X}_n = \frac{1}{n} \sum_{i=1}^n x_i$ 
+
+# `PairRDD`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:32:47.309881Z', start_time: '2022-01-26T10:32:47.145371Z'}
+rdd = sc.parallelize([[1, "a", 7], [2, "b", 13], [2, "c", 17]])
+
+rdd.collect()  # not yet 
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:32:47.309881Z', start_time: '2022-01-26T10:32:47.145371Z'}
+#| scrolled: false
+rdd = rdd.map(lambda x: (x[0], x[1:]))
+
+rdd.collect()  # done 
+```
+
+## Transformations
+
+### `keys`, `values`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:33:19.840293Z', start_time: '2022-01-26T10:33:19.737836Z'}
+#| scrolled: true
+rdd.keys().collect()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:33:21.985283Z', start_time: '2022-01-26T10:33:21.884455Z'}
+#| scrolled: true
+rdd.values().collect()
+```
+
+**Warning**. All elements must be tuples with two elements (the key and the value)
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:41:19.297283Z', start_time: '2022-01-26T10:41:19.170242Z'}
+rdd = sc.parallelize([[1, "a", 7], [2, "b", 13], [2, "c", 17]])
+rdd.keys().collect()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:41:19.869715Z', start_time: '2022-01-26T10:41:19.771203Z'}
+rdd.values().collect()
+```
+
+The values are **not** what we expected wrong... so we **must** do
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:41:21.144124Z', start_time: '2022-01-26T10:41:21.029252Z'}
+rdd = ( sc.parallelize([[1, "a", 7], [2, "b", 13], [2, "c", 17]])
+          .map(lambda x: (x[0], x[1:]))
+      )
+rdd.keys().collect()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:41:21.296200Z', start_time: '2022-01-26T10:41:21.184436Z'}
+rdd.values().collect()
+```
+
+Now the values are correct. 
+
+### `mapValues`, `flatMapValues`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:41:22.989789Z', start_time: '2022-01-26T10:41:22.894772Z'}
+rdd = sc.parallelize([("a", "x y z"), ("b", "p r")])
+
+rdd.mapValues(lambda v: v.split(' ')).collect(), rdd.collect()
+```
+
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:41:23.311835Z', start_time: '2022-01-26T10:41:23.217639Z'}
+#| scrolled: true
+rdd.flatMapValues(lambda v: v.split(' ')).collect()
+```
+
+### `groupByKey`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:41:23.830837Z', start_time: '2022-01-26T10:41:23.575739Z'}
+rdd = sc.parallelize([("a", 1), ("b", 1), ("a", 1), ("b", 3), ("c", 42)])
+( 
+    rdd.groupByKey()
+       .mapValues(list)
+       .collect()
+)
+```
+
+```{python}
+rdd.groupByKey().collect()
+```
+
+### `reduceByKey`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:41:24.139532Z', start_time: '2022-01-26T10:41:23.921367Z'}
+rdd = sc.parallelize([("a", 1), ("b", 1), ("a", 1)])
+rdd.reduceByKey(lambda a, b: a + b).collect()
+```
+
+### `combineByKey`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:41:24.455934Z', start_time: '2022-01-26T10:41:24.224593Z'}
+rdd = sc.parallelize([('a', 1), ('b', 2), ('a', 13)])
+
+def add(a, b): 
+    return a + str(b)
+
+rdd.combineByKey(str, add, add).collect()
+```
+
+### `join`, `rightOuterJoin`, `leftOuterJoin`
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:46:47.184819Z', start_time: '2022-01-26T10:46:47.176731Z'}
+employees = sc.parallelize([
+    (31, "Rafferty"),
+    (33, "Jones"),
+    (33, "Heisenberg"),
+    (34, "Robinson"),
+    (34, "Smith"),
+    (None, "Williams")
+])
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:46:47.380011Z', start_time: '2022-01-26T10:46:47.371802Z'}
+departments = sc.parallelize([
+    (31, "Sales"),
+    (33, "Engineering"),
+    (34, "Clerical"),
+    (35, "Marketing")
+])
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:46:49.996596Z', start_time: '2022-01-26T10:46:49.194948Z'}
+#| scrolled: true
+employees.join(departments).sortByKey().collect()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:46:01.966800Z', start_time: '2022-01-26T10:46:01.121856Z'}
+#| scrolled: false
+employees.rightOuterJoin(departments).sortByKey().collect()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:46:02.369216Z', start_time: '2022-01-26T10:46:01.970100Z'}
+employees.leftOuterJoin(departments).collect()
+```
+
+## Actions
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:47:05.544827Z', start_time: '2022-01-26T10:47:05.452900Z'}
+employees.countByKey()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:47:06.217008Z', start_time: '2022-01-26T10:47:06.120690Z'}
+#| scrolled: true
+employees.lookup(33)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:47:29.274325Z', start_time: '2022-01-26T10:47:29.191957Z'}
+#| scrolled: false
+employees.lookup(None)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2022-01-26T10:47:33.540110Z', start_time: '2022-01-26T10:47:33.511434Z'}
+employees.collectAsMap()
+```
+
+## References
+
+[Spark Core reference](https://spark.apache.org/docs/3.3.1/api/python/reference/pyspark.html)
+
+

@@ -1,0 +1,3005 @@
+---
+title: Introduction to Python
+jupyter: python3
+---
+
+
+We introduce here the `python` language. 
+Only the bare minimum necessary for getting started with the data-science stack (a bunch of libraries for data science).
+Python is a **programming language**, as are `C++`, `java`, `fortran`, `javascript`,
+etc.
+
+
+## Specific features of Python
+
+- an **interpreted** (as opposed to *compiled*) language. Contrary to e.g.
+`C++` or `fortran`, one does not compile Python code before executing it. 
+
+- Used as a scripting language, by python `python script.py` in a terminal
+
+- But can be used also **interactively**: the jupyter notebook, iPython, etc.
+
+- A free software released under an **open-source** license: Python can
+be used and distributed free of charge, even for building commercial
+software.
+
+- **multi-platform**: Python is available for all major operating
+systems, Windows, Linux/Unix, MacOS X, most likely your mobile phone
+OS, etc.
+
+- A very readable language with clear non-verbose syntax
+
+- A language for which a **large amount of high-quality** packages are
+available for various applications, including web-frameworks and scientific
+computing
+
+- It has been one of the top **languages for data science** and **machine learning** for several years, because it is  expressive and and easy to deploy
+
+- An object-oriented language
+
+See https://www.python.org/about/ for more information about distinguishing features of Python.
+
+::: {.callout-important}
+
+### Python 2 or Python 3?
+
+- Simple answer: *don't use Python 2, use Python 3*
+- Python 2 is *mostly deprecated* and *has not been maintained* for years 
+- You'll end up hanged if you use Python 2
+- If Python 2 is mandatory at your workplace, find another work
+
+:::
+
+::: {.callout-important}
+
+### Jupyter or Quarto notebooks?
+
+- `quarto` is more git friendly than `jupyter`
+- Enjoy authentic editors
+  
+- Go for `quarto`
+  
+:::
+
+# Hello world
+
+- In a `jupyter`/`quarto` notebook, you have an interactive interpreter.
+
+- You type in the cells, execute commands 
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:21:39.584103Z', start_time: '2021-01-26T10:21:39.577509Z'}
+#| slideshow: {slide_type: fragment}
+print("Hi everybody!")
+```
+
+# Basic types
+
+## Integers
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:21:48.191166Z', start_time: '2021-01-26T10:21:48.181921Z'}
+#| slideshow: {slide_type: fragment}
+1 + 42
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:21:50.119817Z', start_time: '2021-01-26T10:21:50.115692Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+type(1+1)
+```
+
+We can assign values to variables with `=`
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:22:09.152051Z', start_time: '2021-01-26T10:22:09.148135Z'}
+#| slideshow: {slide_type: '-'}
+a = (3 + 5 ** 2) % 4
+a
+```
+
+## Remark
+
+We don't declare the type of a variable before assigning its value. 
+In C, conversely, one should write
+
+```C
+int a = 4;
+```
+
+## Something cool
+
+- **Arbitrary large** integer arithmetics
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:22:20.017016Z', start_time: '2021-01-26T10:22:20.012996Z'}
+#| slideshow: {slide_type: fragment}
+17 ** 542
+```
+
+## Floats
+
+There exists a floating point type that is created when the variable has decimal values
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:22:48.180478Z', start_time: '2021-01-26T10:22:48.177424Z'}
+#| slideshow: {slide_type: '-'}
+c = 2.
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:22:48.386461Z', start_time: '2021-01-26T10:22:48.381009Z'}
+#| slideshow: {slide_type: '-'}
+type(c)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:22:53.303241Z', start_time: '2021-01-26T10:22:53.298876Z'}
+#| scrolled: true
+#| slideshow: {slide_type: fragment}
+c = 2
+type(c)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:23:15.640321Z', start_time: '2021-01-26T10:23:15.636205Z'}
+#| slideshow: {slide_type: fragment}
+truc = 1 / 2
+truc
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:23:36.468643Z', start_time: '2021-01-26T10:23:36.464148Z'}
+1 // 2 + 1 % 2
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:23:41.839969Z', start_time: '2021-01-26T10:23:41.835363Z'}
+#| slideshow: {slide_type: '-'}
+type(truc)
+```
+
+## Boolean
+Similarly, boolean types are created from a comparison
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:23:43.765175Z', start_time: '2021-01-26T10:23:43.761701Z'}
+#| slideshow: {slide_type: fragment}
+test = 3 > 4
+test
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:23:47.310818Z', start_time: '2021-01-26T10:23:47.306145Z'}
+#| slideshow: {slide_type: '-'}
+type(test)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:23:48.899891Z', start_time: '2021-01-26T10:23:48.895700Z'}
+#| slideshow: {slide_type: fragment}
+False == (not True)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:23:56.264231Z', start_time: '2021-01-26T10:23:56.259609Z'}
+#| scrolled: true
+#| slideshow: {slide_type: fragment}
+1.41 < 2.71 and 2.71 < 3.14
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:24:06.450423Z', start_time: '2021-01-26T10:24:06.446054Z'}
+#| slideshow: {slide_type: '-'}
+# It's equivalent to
+1.41 < 2.71 < 3.14
+```
+
+## Type conversion (casting)
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:24:23.846051Z', start_time: '2021-01-26T10:24:23.841709Z'}
+#| scrolled: true
+#| slideshow: {slide_type: fragment}
+a = 1
+type(a)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:24:24.566291Z', start_time: '2021-01-26T10:24:24.561510Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+b = float(a)
+type(b)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:24:44.986299Z', start_time: '2021-01-26T10:24:44.981939Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+str(b)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:24:52.865090Z', start_time: '2021-01-26T10:24:52.860248Z'}
+#| slideshow: {slide_type: fragment}
+bool(b)
+# All non-zero, non empty objects are casted to boolean as True (more later)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:24:59.506191Z', start_time: '2021-01-26T10:24:59.502013Z'}
+#| slideshow: {slide_type: '-'}
+bool(1-1)
+```
+
+#  Containers
+
+Python provides many efficient types of *containers* or *sequences*, in which collections of objects can be stored. 
+
+The main ones are `list`, `tuple`, `set` and `dict` (but there are many others...)
+
+## Tuples
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:27:14.513637Z', start_time: '2021-01-26T10:27:14.509638Z'}
+#| slideshow: {slide_type: fragment}
+tt = 'truc', 3.14, "truc"
+tt
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:27:18.172578Z', start_time: '2021-01-26T10:27:18.168425Z'}
+#| slideshow: {slide_type: '-'}
+tt[0]
+```
+
+You can't change a tuple, we say that it's *immutable*
+
+```{python}
+#| 
+#| ExecuteTime: {end_time: '2021-01-26T10:28:02.315034Z', start_time: '2021-01-26T10:28:02.306507Z'}
+#| slideshow: {slide_type: '-'}
+try:
+    tt[0] = 1
+except TypeError:
+    print(f"TypeError: 'tuple' object does not support item assignment")
+```
+
+Three ways of doing the same thing
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:28:15.173558Z', start_time: '2021-01-26T10:28:15.169603Z'}
+#| slideshow: {slide_type: '-'}
+# Method 1
+tuple([1, 2, 3])
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:28:18.262396Z', start_time: '2021-01-26T10:28:18.257807Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+# Method 2
+1, 2, 3
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:28:32.225077Z', start_time: '2021-01-26T10:28:32.219931Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+# Method 3
+(1, 2, 3)
+```
+
+**Simpler is better in Python**, so usually you want to use Method 2.
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:28:35.028409Z', start_time: '2021-01-26T10:28:35.023677Z'}
+#| slideshow: {slide_type: fragment}
+toto = 1, 2, 3
+toto
+```
+
+- This is serious !
+
+## The Zen of Python easter's egg
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:28:41.814008Z', start_time: '2021-01-26T10:28:41.805313Z'}
+#| slideshow: {slide_type: '-'}
+import this
+```
+
+## Lists
+
+A list is an ordered collection of objects. These objects may have different types. For example:
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:28:56.683616Z', start_time: '2021-01-26T10:28:56.680383Z'}
+#| slideshow: {slide_type: '-'}
+colors = ['red', 'blue', 'green', 'black', 'white']
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:29:21.606351Z', start_time: '2021-01-26T10:29:21.601561Z'}
+colors[0]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:29:07.632451Z', start_time: '2021-01-26T10:29:07.627681Z'}
+#| slideshow: {slide_type: '-'}
+type(colors)
+```
+
+*Indexing:* accessing individual objects contained in the list by their position
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:29:24.838416Z', start_time: '2021-01-26T10:29:24.833616Z'}
+#| slideshow: {slide_type: '-'}
+colors[2]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:29:25.132251Z', start_time: '2021-01-26T10:29:25.124359Z'}
+#| slideshow: {slide_type: '-'}
+colors[2] = 3.14
+colors
+```
+
+::: {.callout-warning}
+
+For any *iterable* object in Python, indexing *starts at 0* (as in C), not at 1 (as in Fortran, R, or Matlab).
+
+:::
+
+Counting from the end with negative indices:
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:29:44.258856Z', start_time: '2021-01-26T10:29:44.254238Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+colors[-1]
+```
+
+Index must remain in the range of the list
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:29:47.674912Z', start_time: '2021-01-26T10:29:47.666346Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+#| eval: false
+try:
+    colors[10]
+except IndexError:
+    print(f"IndexError: 10 >= {len(colors)} ==len(colors), index out of range ")
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:30:01.912160Z', start_time: '2021-01-26T10:30:01.907265Z'}
+#| slideshow: {slide_type: subslide}
+colors
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:30:02.143331Z', start_time: '2021-01-26T10:30:02.137270Z'}
+tt
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:30:34.000220Z', start_time: '2021-01-26T10:30:33.995039Z'}
+#| slideshow: {slide_type: '-'}
+colors.append(tt)
+colors
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:30:47.434827Z', start_time: '2021-01-26T10:30:47.429744Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+len(colors)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:30:52.949200Z', start_time: '2021-01-26T10:30:52.944225Z'}
+len(tt)
+```
+
+## Slicing: obtaining sublists of regularly-spaced elements
+
+This work with anything iterable whenever it makes sense (`list`, `str`, `tuple`, etc.)
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:30:59.895713Z', start_time: '2021-01-26T10:30:59.890434Z'}
+#| scrolled: true
+#| slideshow: {slide_type: fragment}
+colors
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:31:26.118892Z', start_time: '2021-01-26T10:31:26.113811Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+list(reversed(colors))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-26T10:32:55.756965Z', start_time: '2021-01-26T10:32:55.752090Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+colors[::-1]
+```
+
+::: {.callout-important}
+
+### Slicing syntax: 
+
+`colors[start:stop:stride]`
+
+`start, stop, stride` are optional, with default values `0, len(sequence), 1`
+
+:::
+l
+
+```{python}
+print(slice(4))
+print(slice(1,5))
+print(slice(None,13,3))
+```
+
+```{python}
+sl = slice(1,5,2)
+colors[sl]
+```
+
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:10.985959Z', start_time: '2021-01-15T08:34:10.980519Z'}
+#| slideshow: {slide_type: subslide}
+colors
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:11.188011Z', start_time: '2021-01-15T08:34:11.182382Z'}
+#| slideshow: {slide_type: '-'}
+colors[3:]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:11.462017Z', start_time: '2021-01-15T08:34:11.457005Z'}
+#| slideshow: {slide_type: '-'}
+colors[:3]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:11.666073Z', start_time: '2021-01-15T08:34:11.661006Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+colors[1::2]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:11.892685Z', start_time: '2021-01-15T08:34:11.886394Z'}
+#| slideshow: {slide_type: '-'}
+colors[::-1]
+```
+
+## Strings
+
+Different string syntaxes (simple, double or triple quotes):
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:12.527044Z', start_time: '2021-01-15T08:34:12.522242Z'}
+#| slideshow: {slide_type: fragment}
+s = 'tintin'
+type(s)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:12.741025Z', start_time: '2021-01-15T08:34:12.735783Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+s
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:12.954647Z', start_time: '2021-01-15T08:34:12.948403Z'}
+#| slideshow: {slide_type: fragment}
+s = """         Bonjour,
+Je m'appelle Stephane.
+Je vous souhaite une bonne journée.
+Salut.       
+"""
+s
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:13.096374Z', start_time: '2021-01-15T08:34:13.091122Z'}
+#| slideshow: {slide_type: '-'}
+s.strip()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:13.378652Z', start_time: '2021-01-15T08:34:13.372858Z'}
+#| scrolled: true
+#| slideshow: {slide_type: subslide}
+print(s.strip())
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:13.455410Z', start_time: '2021-01-15T08:34:13.449943Z'}
+#| slideshow: {slide_type: '-'}
+len(s)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:14.309647Z', start_time: '2021-01-15T08:34:14.304154Z'}
+#| scrolled: true
+#| slideshow: {slide_type: fragment}
+# Casting to a list
+list(s.strip()[:15])
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:14.523496Z', start_time: '2021-01-15T08:34:14.518586Z'}
+#| scrolled: true
+#| slideshow: {slide_type: fragment}
+# Arithmetics
+print('Bonjour' * 2)
+print('Hello' + ' all')
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:15.160961Z', start_time: '2021-01-15T08:34:15.155909Z'}
+#| slideshow: {slide_type: '-'}
+sss = 'A'
+sss += 'bc'
+sss += 'dE'
+sss.lower()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:15.363145Z', start_time: '2021-01-15T08:34:15.357847Z'}
+#| scrolled: true
+#| slideshow: {slide_type: subslide}
+ss = s.strip()
+print(ss[:10] + ss[24:28])
+```
+
+```{python}
+s.strip()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:15.594172Z', start_time: '2021-01-15T08:34:15.588495Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+s.strip().split('\n')
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:17.689813Z', start_time: '2021-01-15T08:34:17.684346Z'}
+#| slideshow: {slide_type: '-'}
+s[::3]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:23.785045Z', start_time: '2021-01-15T08:34:23.779973Z'}
+#| slideshow: {slide_type: '-'}
+s[3:10]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:23.993089Z', start_time: '2021-01-15T08:34:23.987450Z'}
+#| slideshow: {slide_type: fragment}
+" ".join(['Il', 'fait', 'super', 'beau', "aujourd'hui"])
+```
+
+Chaining method calls is the basic of pipeline building. 
+
+```{python}
+( 
+    " ".join(['Il', 'fait', 'super', 'beau', "aujourd'hui"])
+       .title()
+       .replace(' ', '')
+       .replace("'","")
+)
+```
+
+### Important
+
+A string is *immutable* !!
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:24.332754Z', start_time: '2021-01-15T08:34:24.329558Z'}
+#| slideshow: {slide_type: '-'}
+#|
+s = 'I am an immutable guy'
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:24.511029Z', start_time: '2021-01-15T08:34:24.499601Z'}
+#| slideshow: {slide_type: '-'}
+
+try:  
+    s[2] = 's'
+except TypeError:
+    print(f"Strings are immutable! s is still '{s}'")
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:24.732120Z', start_time: '2021-01-15T08:34:24.725628Z'}
+#| slideshow: {slide_type: fragment}
+id(s)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:25.275379Z', start_time: '2021-01-15T08:34:25.269724Z'}
+#| scrolled: true
+print(s + ', for sure')
+id(s), id(s + ' for sure')
+```
+
+### Extra stuff with strings
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:25.685455Z', start_time: '2021-01-15T08:34:25.679575Z'}
+#| slideshow: {slide_type: '-'}
+'square of 2 is ' + str(2 ** 2)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:26.075613Z', start_time: '2021-01-15T08:34:26.070551Z'}
+#| slideshow: {slide_type: '-'}
+'square of 2 is %d' % 2 ** 2
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:28.906445Z', start_time: '2021-01-15T08:34:28.900777Z'}
+#| slideshow: {slide_type: '-'}
+'square of 2 is {}'.format(2 ** 2)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:29.230345Z', start_time: '2021-01-15T08:34:29.225362Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+'square of 2 is {square}'.format(square=2 ** 2)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:29.464228Z', start_time: '2021-01-15T08:34:29.457777Z'}
+#| slideshow: {slide_type: fragment}
+# And since Python 3.6 you can use an `f-string`
+number = 2
+square = number ** 2
+
+f'square of {number} is {square}'
+```
+
+
+
+### The `in` keyword
+
+You can use the `in` keyword with any container, whenever it makes sense
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:29.779042Z', start_time: '2021-01-15T08:34:29.774313Z'}
+#| scrolled: true
+#| slideshow: {slide_type: fragment}
+print(s)
+print('Salut' in s)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:30.599065Z', start_time: '2021-01-15T08:34:30.595645Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+print(tt)
+print('truc' in tt)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:30.819735Z', start_time: '2021-01-15T08:34:30.813275Z'}
+#| scrolled: true
+#| slideshow: {slide_type: fragment}
+print(colors)
+print('truc' in colors)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:31.035913Z', start_time: '2021-01-15T08:34:31.030502Z'}
+#| scrolled: true
+('truc', 3.14, 'truc') in colors
+```
+
+::: {.callout-warning}
+
+Strings are not bytes. Have a look at chapter 4 *Unicode Text versus Bytes* in [Fluent Python](https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/) 
+
+:::
+
+### Brain-teasing
+
+Explain this weird behaviour:
+
+```{python}
+5 in [1, 2, 3, 4] == False
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:31.612963Z', start_time: '2021-01-15T08:34:31.607708Z'}
+#| slideshow: {slide_type: '-'}
+[1, 2, 3, 4] == False
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:31.825068Z', start_time: '2021-01-15T08:34:31.819205Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+5 not in [1, 2, 3, 4]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:32.299157Z', start_time: '2021-01-15T08:34:32.293640Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+(5 in [1, 2, 3, 4]) == False
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:32.524705Z', start_time: '2021-01-15T08:34:32.518440Z'}
+#| slideshow: {slide_type: fragment}
+# ANSWER.
+# This is a chained comparison. We have seen that 
+1 < 2 < 3
+# is equivalent to
+(1 < 2) and (2 < 3)
+# so that
+5 in [1, 2, 3, 4] == False
+# is equivalent to
+(5 in [1, 2, 3, 4]) and ([1, 2, 3, 4] == False)
+```
+
+```{python}
+(5 in [1, 2, 3, 4])
+```
+
+```{python}
+([1, 2, 3, 4] == False)
+```
+
+## Dictionaries
+
+- A dictionary is basically an efficient table that **maps keys to values**.
+- The **MOST** important container in Python. 
+- Many things are actually a `dict` under the hood in `Python`
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:33.375226Z', start_time: '2021-01-15T08:34:33.371037Z'}
+#| scrolled: true
+#| slideshow: {slide_type: fragment}
+tel = {'emmanuelle': 5752, 'sebastian': 5578}
+print(tel)
+print(type(tel))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:33.572354Z', start_time: '2021-01-15T08:34:33.566227Z'}
+#| slideshow: {slide_type: fragment}
+tel['emmanuelle'], tel['sebastian']
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:33.711591Z', start_time: '2021-01-15T08:34:33.705748Z'}
+tel['francis'] = '5919'
+tel
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:33.889041Z', start_time: '2021-01-15T08:34:33.883802Z'}
+#| scrolled: true
+len(tel)
+```
+
+### Important remarks
+
+- Keys can be of different types
+- A key must be of **immutable** type
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:35.180227Z', start_time: '2021-01-15T08:34:35.172919Z'}
+#| scrolled: true
+tel[7162453] = [1, 3, 2]
+tel[3.14] = 'bidule'
+tel[('jaouad', 2)] = 1234
+tel
+```
+
+```{python}
+try:
+    sorted(tel)
+except TypeError:
+    print("TypeError: '<' not supported between instances of 'int' and 'str'")    
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:35.781423Z', start_time: '2021-01-15T08:34:35.770370Z'}
+# A list is mutable and not hashable
+try:
+    tel[['jaouad']] = '5678'
+except TypeError:
+    print("TypeError: unhashable type: 'list'")
+```
+
+```{python}
+try:
+    tel[2]
+except KeyError:
+    print("KeyError: 2")
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:35.984417Z', start_time: '2021-01-15T08:34:35.978289Z'}
+#| slideshow: {slide_type: subslide}
+tel = {'emmanuelle': 5752, 'sebastian' : 5578, 'jaouad' : 1234}
+print(tel.keys())
+print(tel.values())
+print(tel.items())
+```
+
+```{python}
+list(tel.keys())[2]
+```
+
+```{python}
+tel.values().mapping
+```
+
+```{python}
+type(tel.keys())
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:36.135136Z', start_time: '2021-01-15T08:34:36.129801Z'}
+#| slideshow: {slide_type: fragment}
+'rémi' in tel
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:36.649224Z', start_time: '2021-01-15T08:34:36.643788Z'}
+list(tel)
+```
+
+```{python}
+'rémi' in tel.keys()
+```
+
+You can swap values like this
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:37.036245Z', start_time: '2021-01-15T08:34:37.032296Z'}
+#| scrolled: true
+print(tel)
+tel['emmanuelle'], tel['sebastian'] = tel['sebastian'], tel['emmanuelle']
+print(tel)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:37.755117Z', start_time: '2021-01-15T08:34:37.750155Z'}
+#| scrolled: true
+# It works, since
+a, b = 2.71, 3.14
+a, b = b, a
+a, b
+```
+
+### Exercise 1
+
+Get keys of `tel` sorted by decreasing order
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:38.375787Z', start_time: '2021-01-15T08:34:38.372593Z'}
+#| slideshow: {slide_type: '-'}
+tel = {'emmanuelle': 5752, 'sebastian' : 5578, 'jaouad' : 1234}
+```
+::: {.content-visible when-profile='solution'} 
+ 
+#### Answer
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:38.860742Z', start_time: '2021-01-15T08:34:38.855547Z'}
+#| scrolled: true
+sorted(tel, reverse=True)
+```
+
+```{python}
+type(sorted(tel, reverse=True))
+```
+
+:::
+
+### Exercise 2
+
+Get keys of `tel` sorted by increasing _values_
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:39.295210Z', start_time: '2021-01-15T08:34:39.291759Z'}
+tel = {'emmanuelle': 5752, 'sebastian' : 5578, 'jaouad' : 1234}
+```
+
+::: {.content-visible when-profile='solution'} 
+ 
+#### Answer
+
+```{python}
+tel["sebastian"]
+```
+
+```{python}
+tel.get('rémi')
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:39.696800Z', start_time: '2021-01-15T08:34:39.691171Z'}
+#| slideshow: {slide_type: '-'}
+sorted(tel, key=tel.get)
+```
+
+:::
+
+### Exercise 3
+
+Obtain a sorted-by-key version of `tel`
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:40.064213Z', start_time: '2021-01-15T08:34:40.060078Z'}
+tel = {'emmanuelle': 5752, 'sebastian' : 5578, 'jaouad' : 1234}
+```
+
+::: {.content-visible when-profile='solution'} 
+ 
+#### Answer
+
+- A dict is inherently **orderless**
+- Only a _representation_ of a dict can be ordered
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:41.012018Z', start_time: '2021-01-15T08:34:41.006814Z'}
+#| slideshow: {slide_type: fragment}
+# Simplest is through a list
+print(type(tel.items()))
+issubclass(type(tel.items()), list)
+```
+
+```{python}
+sorted(tel.items())
+```
+
+If you really want an ordered dict `OrderDict` memorizes order of insertion in it
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:41.406578Z', start_time: '2021-01-15T08:34:41.400640Z'}
+from collections import OrderedDict
+
+OrderedDict(sorted(tel.items()))
+```
+
+:::
+
+## Sets
+
+A set is an unordered container, containing unique elements
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:43.408375Z', start_time: '2021-01-15T08:34:43.402917Z'}
+#| scrolled: true
+ss = {1, 2, 2, 2, 3, 3, 'tintin', 'tintin', 'toto'}
+ss
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:43.689264Z', start_time: '2021-01-15T08:34:43.683234Z'}
+s = 'truc truc bidule truc'
+set(s)
+```
+
+```{python}
+set(list(s))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:43.900734Z', start_time: '2021-01-15T08:34:43.894591Z'}
+#| slideshow: {slide_type: fragment}
+{1, 5, 2, 1, 1}.union({1, 2, 3})
+```
+
+```{python}
+set((1, 5, 3, 2))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:44.236053Z', start_time: '2021-01-15T08:34:44.230406Z'}
+set([1, 5, 2, 1, 1]).intersection(set([1, 2, 3]))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:44.521051Z', start_time: '2021-01-15T08:34:44.515051Z'}
+ss.add('tintin')
+ss
+```
+
+```{python}
+ss.difference(range(6))
+```
+
+You can combine all containers together
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:45.317823Z', start_time: '2021-01-15T08:34:45.310957Z'}
+#| scrolled: true
+dd = {
+    'truc': [1, 2, 3], 
+    5: (1, 4, 2),
+    (1, 3): {'hello', 'world'}
+}
+dd
+```
+
+# Assigments in `Python` is name binding
+
+## Everything is either mutable or immutable
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:46.250900Z', start_time: '2021-01-15T08:34:46.245797Z'}
+#| slideshow: {slide_type: subslide}
+ss = {1, 2, 3}
+sss = ss
+sss, ss
+```
+
+```{python}
+id(ss), id(sss)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:46.487601Z', start_time: '2021-01-15T08:34:46.484299Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+sss.add("Truc")
+```
+
+**Question.** What is in `ss` ?
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:47.555940Z', start_time: '2021-01-15T08:34:47.549993Z'}
+#| slideshow: {slide_type: fragment}
+ss, sss
+```
+
+`ss` and `sss` are names for the same object
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:47.889439Z', start_time: '2021-01-15T08:34:47.883802Z'}
+#| slideshow: {slide_type: '-'}
+id(ss), id(sss)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:48.385040Z', start_time: '2021-01-15T08:34:48.380259Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+ss is sss
+```
+
+```{python}
+help('is')
+```
+
+## About assigments
+
+- Python never copies an object
+- Unless you ask him to
+
+When you code
+```python
+x = [1, 2, 3]
+y = x
+```
+you just
+- **bind** the variable name `x` to a list `[1, 2, 3]`
+- give another name `y` to the same object
+
+**Important remarks**
+
+- **Everything** is an object in Python
+- Either **immutable** or **mutable**
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:48.640520Z', start_time: '2021-01-15T08:34:48.635298Z'}
+#| scrolled: true
+id(1), id(1+1), id(2)
+```
+
+**A `list` is mutable**
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:48.849673Z', start_time: '2021-01-15T08:34:48.845469Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+x = [1, 2, 3]
+print(id(x), x)
+x[0] += 42; x.append(3.14)
+print(id(x), x)
+```
+
+**A `str` is immutable**
+
+In order to "change" an **immutable** object, Python creates a new one
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:48.989090Z', start_time: '2021-01-15T08:34:48.984655Z'}
+s = 'to'
+print(id(s), s)
+s += 'to'
+print(id(s), s)
+```
+
+**Once again, a `list` is mutable**
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:49.185045Z', start_time: '2021-01-15T08:34:49.179743Z'}
+#| slideshow: {slide_type: '-'}
+super_list = [3.14, (1, 2, 3), 'tintin']
+other_list = super_list
+id(other_list), id(super_list)
+```
+
+- `other_list` and `super_list` are the same list
+- If you change one, you change the other.
+- `id` returns the identity of an object. Two objects with the same idendity are the same (not only the same type, but the same instance)
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:49.490066Z', start_time: '2021-01-15T08:34:49.483598Z'}
+other_list[1] = 'youps'
+other_list, super_list
+```
+
+```{python}
+id(super_list), id(other_list)
+```
+
+## If you want a copy, to need to ask for one
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:49.810775Z', start_time: '2021-01-15T08:34:49.804825Z'}
+other_list = super_list.copy()
+id(other_list), id(super_list)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:50.044319Z', start_time: '2021-01-15T08:34:50.038631Z'}
+other_list[1] = 'copy'
+other_list, super_list
+```
+
+Only `other_list` is modified. 
+
+But... what if you have a `list` of `list` ? (or a mutable object containing mutable objects)
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:50.522523Z', start_time: '2021-01-15T08:34:50.515916Z'}
+#| slideshow: {slide_type: fragment}
+l1, l2 = [1, 2, 3], [4, 5, 6]
+list_list = [l1, l2]
+list_list
+```
+
+```{python}
+id(list_list), id(list_list[0]), id(l1), list_list[0] is l1
+```
+
+Let's make a copy of `list_list`
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:50.900506Z', start_time: '2021-01-15T08:34:50.894593Z'}
+copy_list = list_list.copy()
+copy_list.append('super')
+list_list, copy_list
+```
+
+```{python}
+id(list_list[0]), id(copy_list[0])
+```
+
+OK, only `copy_list` is modified, as expected
+
+But now...
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:51.550226Z', start_time: '2021-01-15T08:34:51.545049Z'}
+copy_list[0][1] = 'oups'
+copy_list, list_list
+```
+
+**Question.** What happened ?!?
+
+- The `list_list` object is copied
+- But NOT what it's containing !
+- By default `copy` does a *shallow* copy, not a *deep* copy
+- It does not build copies of what is contained
+- If you want to copy an object and all that is contained in it, you need to use `deepcopy`.
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:52.242785Z', start_time: '2021-01-15T08:34:52.236814Z'}
+from copy import deepcopy
+
+copy_list = deepcopy(list_list)
+copy_list[0][1] = 'incredible !'
+list_list, copy_list
+```
+
+## Final remarks
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:52.389405Z', start_time: '2021-01-15T08:34:52.384515Z'}
+tt = ([1, 2, 3], [4, 5, 6])
+print(id(tt), tt)
+print(list(map(id, tt)))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:52.490073Z', start_time: '2021-01-15T08:34:52.483857Z'}
+#| scrolled: true
+tt[0][1] = '42'
+print(id(tt), tt)
+print(list(map(id, tt)))
+```
+
+```{python}
+s = [1, 2, 3]
+```
+
+```{python}
+s2 = s
+```
+
+```{python}
+s2 is s
+```
+
+```{python}
+id(s2), id(s)
+```
+
+# Control flow and other stuff...
+
+Namely tests, loops, again booleans, etc.
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:52.822274Z', start_time: '2021-01-15T08:34:52.818018Z'}
+#| slideshow: {slide_type: subslide}
+if 2 ** 2 == 5:
+    print('Obvious')
+else:
+    print('YES')
+print('toujours')
+```
+
+## Blocks are delimited by indentation!
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:53.244482Z', start_time: '2021-01-15T08:34:53.240054Z'}
+a = 3
+if a > 0:
+    if a == 1:
+        print(1)
+    elif a == 2:
+        print(2)
+elif a == 2:
+    print(2)
+elif a == 3:
+    print(3)
+else:
+    print(a)
+```
+
+## Anything can be understood as a boolean
+
+For example, don't do this to test if a list is empty
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:53.660533Z', start_time: '2021-01-15T08:34:53.655820Z'}
+l2 = ['hello', 'everybody']
+
+if len(l2) > 0:
+    print(l2[0])
+```
+
+but this
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:54.244191Z', start_time: '2021-01-15T08:34:54.239801Z'}
+#| scrolled: true
+if l2:
+    print(l2[0])
+```
+
+**Some poetry**
+
+- An empty `dict` is `False`
+- An empty `string` is `False`
+- An empty `list` is `False`
+- An empty `tuple` is `False`
+- An empty `set` is `False`
+- `0` is `False`
+- `.0` is `False`
+- etc...
+- everything else is `True`
+
+## While loops
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:55.427330Z', start_time: '2021-01-15T08:34:55.422079Z'}
+a = 10
+b = 1
+while b < a:
+    b = b + 1
+    print(b)
+```
+
+Compute the decimals of Pi using the Wallis formula
+
+$$
+\pi = 2 \prod_{i=1}^{100} \frac{4i^2}{4i^2 - 1}
+$$
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:55.901297Z', start_time: '2021-01-15T08:34:55.815952Z'}
+pi = 2
+eps = 1e-10
+dif = 2 * eps
+i = 1
+while dif > eps:
+    pi, i, old_pi = pi * 4 * i ** 2 / (4 * i ** 2 - 1), i + 1, pi
+    dif = pi - old_pi
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:55.998039Z', start_time: '2021-01-15T08:34:55.993033Z'}
+pi
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:56.672400Z', start_time: '2021-01-15T08:34:56.667181Z'}
+from math import pi
+
+pi
+```
+
+##  `for` loop with `range`
+- Iteration with an index, with a list, with many things !
+- `range` has the same parameters as with slicing `start:end:stride`, all parameters being optional
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:57.074626Z', start_time: '2021-01-15T08:34:57.068953Z'}
+#| scrolled: true
+for i in range(10):
+    print(i)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:34:57.288732Z', start_time: '2021-01-15T08:34:57.283152Z'}
+#| scrolled: true
+#| slideshow: {slide_type: subslide}
+for i in range(4):
+    print(i + 1)
+print('-')
+
+for i in range(1, 5):
+    print(i)
+print('-')
+
+for i in range(1, 10, 3):
+    print(i)
+```
+
+**Something for nerds**. You can use `else` in a `for` loop
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:03.792632Z', start_time: '2021-01-15T08:35:03.788211Z'}
+names = ['stephane', 'mokhtar', 'jaouad', 'simon', 'yiyang']
+
+for name in names:
+    if name.startswith('u'):
+        print(name)
+        break
+else:
+    print('Not found.')
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:11.089072Z', start_time: '2021-01-15T08:35:11.084070Z'}
+#| scrolled: true
+names = ['stephane', 'mokhtar', 'jaouad', 'ulysse', 'simon', 'yiyang']
+
+for name in names:
+    if name.startswith('u'):
+        print(name)
+        break
+else:
+    print('Not found.')
+```
+
+## For loops over iterable objects
+
+You can iterate using `for` over any container: `list`, `tuple`, `dict`, `str`, `set` among others...
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:14.358404Z', start_time: '2021-01-15T08:35:14.354354Z'}
+colors = ['red', 'blue', 'black', 'white']
+peoples = ['stephane', 'jaouad', 'mokhtar', 'yiyang', 'rémi']
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:14.546348Z', start_time: '2021-01-15T08:35:14.541964Z'}
+#| scrolled: true
+# This is stupid
+for i in range(len(colors)):
+    print(colors[i])
+    
+# This is better
+for color in colors:
+    print(color)
+```
+
+To iterate over several sequences at the same time, use `zip`
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:15.578703Z', start_time: '2021-01-15T08:35:15.574575Z'}
+for color, people in zip(colors, peoples):
+    print(color, people)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:15.787784Z', start_time: '2021-01-15T08:35:15.781691Z'}
+#| slideshow: {slide_type: fragment}
+l = ["Bonjour", {'francis': 5214, 'stephane': 5123}, ('truc', 3)]
+for e in l:
+    print(e, len(e))
+```
+
+**Loop over a `str`**
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:16.284944Z', start_time: '2021-01-15T08:35:16.279583Z'}
+#| scrolled: true
+s = 'Bonjour'
+for c in s:
+    print(c)
+```
+
+**Loop over a `dict`**
+
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:24.915816Z', start_time: '2021-01-15T08:35:24.910552Z'}
+dd = {(1, 3): {'hello', 'world'}, 'truc': [1, 2, 3], 5: (1, 4, 2)}
+
+# Default is to loop over keys
+for key in dd:
+    print(key)
+```
+
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:25.116664Z', start_time: '2021-01-15T08:35:25.112459Z'}
+#| scrolled: true
+# Loop over values
+for e in dd.values():
+    print(e)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:25.253625Z', start_time: '2021-01-15T08:35:25.248561Z'}
+# Loop over items (key, value) pairs
+for key, val in dd.items():
+    print(key, val)
+```
+
+```{python}
+for t in dd.items():
+    print(t)
+```
+
+## Comprehensions
+
+You can construct a `list`, `dict`, `set` and others using the **comprehension** syntax
+
+**`list` comprehension**
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:27.023136Z', start_time: '2021-01-15T08:35:27.016816Z'}
+print(colors)
+print(peoples)
+
+```
+
+```{python}
+l = []
+for p, c in zip(peoples, colors):
+    if len(c)<=4 :
+        l.append(p)
+print(l)
+```
+
+```{python}
+
+
+# The list of people with favorite color that has no more than 4 characters
+
+[people for color, people in zip(colors, peoples) if len(color) <= 4]
+```
+
+**`dict` comprehension**
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:29.425720Z', start_time: '2021-01-15T08:35:29.418729Z'}
+#| scrolled: true
+{people: color for color, people in zip(colors, peoples) if len(color) <= 4}
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:29.650791Z', start_time: '2021-01-15T08:35:29.645099Z'}
+#| slideshow: {slide_type: fragment}
+# Allows to build a dict from two lists (for keys and values)
+{key: value for (key, value) in zip(peoples, colors)}
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:29.733037Z', start_time: '2021-01-15T08:35:29.728275Z'}
+# But it's simpler (so better) to use
+dict(zip(peoples, colors))
+```
+
+Something very convenient is `enumerate`
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:34.108535Z', start_time: '2021-01-15T08:35:34.101660Z'}
+for i, color in enumerate(colors):
+    print(i, color)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:34.308091Z', start_time: '2021-01-15T08:35:34.302386Z'}
+list(enumerate(colors))
+```
+
+```{python}
+dict(enumerate(s))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:34.436719Z', start_time: '2021-01-15T08:35:34.432315Z'}
+#| slideshow: {slide_type: fragment}
+print(dict(enumerate(s)))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:35.307514Z', start_time: '2021-01-15T08:35:35.302402Z'}
+s = 'Hey everyone'
+{c: i for i, c in enumerate(s)}
+```
+
+## About functional programming
+
+We can use `lambda` to define **anonymous** functions, and use them in the `map` and `reduce` functions
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:37.077273Z', start_time: '2021-01-15T08:35:37.071704Z'}
+#| scrolled: true
+square = lambda x: x ** 2
+square(2)
+```
+
+```{python}
+type(square)
+```
+
+```{python}
+dir(square)
+```
+
+```{python}
+s = "a"
+```
+
+```{python}
+try:
+    square("a")
+except TypeError:
+    print("TypeError: unsupported operand type(s) for ** or pow(): 'str' and 'int'")
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:37.269771Z', start_time: '2021-01-15T08:35:37.265389Z'}
+sum2 = lambda a, b: a + b
+print(sum2('Hello', ' world'))
+print(sum2(1, 2))
+```
+
+Intended for short and one-line function. 
+
+More complex functions use `def` (see below)
+
+## Exercise
+
+Print the squares of even numbers between 0 et 15
+
+1. Using a list comprehension as before
+2. Using `map`
+
+::: {.content-visible when-profile='solution'} 
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:45.251215Z', start_time: '2021-01-15T08:35:45.245421Z'}
+#| slideshow: {slide_type: fragment}
+# Answer to 1.
+[i ** 2 for i in range(15) if i % 2 == 0]
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:46.363026Z', start_time: '2021-01-15T08:35:46.357149Z'}
+#| slideshow: {slide_type: fragment}
+# Answer to 2. 
+list(map(lambda x: x ** 2, range(0, 15, 2)))
+```
+
+**Remark**. We will see later why we need to use `list` above
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:49.386681Z', start_time: '2021-01-15T08:35:49.380699Z'}
+map(lambda x: x ** 2, range(0, 15, 2))
+```
+
+Now, to get the sum of these squares, we can use `sum`
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:49.730719Z', start_time: '2021-01-15T08:35:49.725389Z'}
+#| scrolled: true
+sum(map(lambda x: x ** 2, range(0, 15, 2)))
+```
+
+We can also use `reduce` (not a good idea here, but it's good to know that it exists)
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:50.125792Z', start_time: '2021-01-15T08:35:50.119351Z'}
+from functools import reduce
+
+reduce(lambda a, b: a + b, map(lambda x: x ** 2, range(0, 15, 2)))
+```
+
+There is also something that can be useful in `functool` called `partial`
+
+It allows to **simplify** functions by freezing some arguments
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:51.690112Z', start_time: '2021-01-15T08:35:51.683874Z'}
+#| slideshow: {slide_type: '-'}
+from functools import partial
+
+def mult(a, b):
+    return a * b
+
+double = partial(mult, b=2)
+double(2) 
+```
+
+:::
+
+## Brain-teasing
+
+What is the output of
+
+```{python}
+#| eval: false
+reduce(lambda a, b: a + b[0] * b[1], enumerate('abcde'), 'A')
+```
+
+::: {.content-visible when-profile='solution'} 
+ 
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:53.480678Z', start_time: '2021-01-15T08:35:53.474794Z'}
+#| scrolled: true
+#| slideshow: {slide_type: fragment}
+reduce(lambda a, b: a + b[0] * b[1], enumerate('abcde'), 'A')
+```
+
+This does the following
+
+```{python}
+list(enumerate('abcde'))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:35:55.504410Z', start_time: '2021-01-15T08:35:55.498980Z'}
+((((('A' + 0 * 'a') + 1 * 'b') + 2 * 'c') + 3 * 'd') + 4 * 'e')
+```
+
+:::
+
+
+# Generators
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:00.984160Z', start_time: '2021-01-15T08:36:00.402833Z'}
+#| slideshow: {slide_type: subslide}
+import sys
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+```{python}
+plt.figure(figsize=(6, 6))
+plt.plot([sys.getsizeof(list(range(i))) for i in range(10000)], lw=3)
+plt.plot([sys.getsizeof(range(i)) for i in range(10000)], lw=3)
+plt.xlabel('Number of elements (value of i)', fontsize=14)
+plt.ylabel('Size (in bytes)', fontsize=14)
+_ = plt.legend(['list(range(i))', 'range(i)'], fontsize=16)
+```
+
+## Why generators ?
+
+The memory used by `range(i)` does not scale linearly with `i`
+
+What is happening ?
+
+- `range(n)` does not allocate a list of `n` elements ! 
+- It **generates on the fly** the list of required integers
+- We say that such an object behaves like a **generator** in `Python`
+- Many things in the `Python` standard library behaves like this
+
+
+**Warning.** Getting the real memory footprint of a `Python` object is difficult. 
+Note that `sizeof` calls the `__sizeof__` method of `r`, which does not give in general the actual memory used by an object. But nevermind here.
+
+The following computation has no memory footprint:
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:17.535131Z', start_time: '2021-01-15T08:36:16.258179Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+sum(range(10**8))
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:17.541785Z', start_time: '2021-01-15T08:36:17.537229Z'}
+#| scrolled: true
+map(lambda x: x**2, range(10**7))
+```
+
+`map` does not return a `list` for the same reason
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:17.817857Z', start_time: '2021-01-15T08:36:17.544451Z'}
+sum(map(lambda x: x**2, range(10**6)))
+```
+
+## Generator expression
+
+Namely generators defined through comprehensions.
+Just replace `[]` by `()` in the comprehension.
+
+A generator can be iterated on only **once**
+
+```{python}
+range(10)
+```
+
+```{python}
+carres = (i**2 for i in range(10))
+```
+
+```{python}
+carres
+```
+
+```{python}
+for c in carres:
+    print(c)
+```
+
+```{python}
+for i in range(4):
+    for j in range(3):
+        print(i, j)
+```
+
+```{python}
+from itertools import product
+
+for t in product(range(4), range(3)):
+    print(t)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:19.688387Z', start_time: '2021-01-15T08:36:19.683024Z'}
+from itertools import product
+
+gene = (i + j for i, j in product(range(3), range(3)))
+gene
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:19.886398Z', start_time: '2021-01-15T08:36:19.879904Z'}
+print(list(gene))
+print(list(gene))
+```
+
+## `yield`
+
+Something very powerful
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:21.518680Z', start_time: '2021-01-15T08:36:21.514939Z'}
+def startswith(words, letter):
+    for word in words:
+        if word.startswith(letter):
+            yield word
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:21.681758Z', start_time: '2021-01-15T08:36:21.676154Z'}
+words = [
+    'Python', "is", 'awesome', 'in', 'particular', 'generators', 
+    'are', 'really', 'cool'
+]
+```
+
+```{python}
+
+list(word for word in words if word.startswith("a"))
+```
+
+
+
+```{python}
+a = 2
+```
+
+```{python}
+float(a)
+```
+
+But also with a `for` loop
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:25.112354Z', start_time: '2021-01-15T08:36:25.107107Z'}
+#| scrolled: true
+for word in startswith(words, letter='a'):
+    print(word)
+```
+
+```{python}
+it = startswith(words, letter='a')
+```
+
+```{python}
+type(it)
+```
+
+```{python}
+next(it)
+```
+
+```{python}
+next(it)
+```
+
+```{python}
+try:
+    next(it)
+except StopIteration:
+    print("StopIteration exception!")
+```
+
+# A glimpse at the ` collections` module
+
+(This is where the good stuff hides)
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:26.046700Z', start_time: '2021-01-15T08:36:26.041712Z'}
+#| slideshow: {slide_type: subslide}
+texte = """             
+Bonjour,
+Python c'est super.
+Python ca a l'air quand même un peu compliqué.
+Mais bon, ca a l'air pratique.
+Peut-être que je pourrais m'en servir pour faire des trucs super.
+"""
+texte
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:28.485696Z', start_time: '2021-01-15T08:36:28.481795Z'}
+print(texte)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:28.891498Z', start_time: '2021-01-15T08:36:28.886862Z'}
+#| scrolled: true
+#| slideshow: {slide_type: subslide}
+# Some basic text preprocessing 
+new_text = (
+    texte
+    .strip()
+    .replace('\n', ' ')
+    .replace(',', ' ')
+    .replace('.', ' ')
+    .replace("'", ' ')
+)
+
+print(new_text)
+print('-' * 8)
+
+words = new_text.split()
+print(words)
+```
+
+## Exercise 
+
+Count the number of occurences of all the words in `words`. 
+
+Output must be a dictionary containg ``word: count``
+
+ 
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:30.579563Z', start_time: '2021-01-15T08:36:30.573645Z'}
+print(words)
+```
+
+::: {.content-visible when-profile='solution'} 
+
+### Solution 1: hand-made
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:32.221188Z', start_time: '2021-01-15T08:36:32.216317Z'}
+#| slideshow: {slide_type: '-'}
+words_counts = {}
+for word in words:
+    if word in words_counts:
+        words_counts[word] += 1
+    else:
+        words_counts[word] = 1
+
+print(words_counts)
+```
+
+:::
+
+::: {.content-visible when-profile='solution'} 
+
+### Solution 2: using `defaultdict`
+
+```{python}
+int()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:32.539800Z', start_time: '2021-01-15T08:36:32.534351Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+from collections import defaultdict
+
+words_counts = defaultdict(int)
+for word in words:
+    words_counts[word] += 1
+
+print(words_counts)
+```
+
+- `defaultdict` can be extremely useful
+- A dict with a default value: here an `int` is created (defaults to 0) if key is not found
+- Allows to avoid a test
+
+### About `defaultdict`
+
+- the argument must be a "callable" (something that can be called)
+- Beware: as soon as a key is searched, a default value is added to the `defaultdict`
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:43.344984Z', start_time: '2021-01-15T08:36:43.340012Z'}
+addresses = defaultdict(lambda: 'unknown')
+addresses['huyen']
+addresses['stephane'] = '8 place Aurelie Nemours'
+print(addresses)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:43.539021Z', start_time: '2021-01-15T08:36:43.533855Z'}
+# Somewhat nasty...
+print('jean-francois' in addresses)
+print(addresses['jean-francois'])
+print('jean-francois' in addresses)
+```
+
+:::
+
+::: {.content-visible when-profile='solution'} 
+
+### Solution 3. Don't do it by hand ! Use `counter`
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:47.448243Z', start_time: '2021-01-15T08:36:47.442365Z'}
+#| slideshow: {slide_type: '-'}
+from collections import Counter
+
+print(dict(Counter(words)))
+```
+
+`Counter` counts the number of occurences of all objects in an iterable
+
+**Question.** Which one do you prefer ?
+
+- The `Counter` one right ?
+
+### Morality
+
+- When you need to do something, assume that there is a tool to do it directly 
+
+- If you can't find it, ask `google` or `stackoverflow`
+
+- Otherwise, try to do it as simply as possible
+
+:::
+
+## Exercise 
+
+Compute the number of occurences AND the length of each word in `words`.
+
+Output must be a dictionary containing ``word: (count, length)``
+
+::: {.content-visible when-profile='solution'} 
+
+### Solution
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:36:59.414057Z', start_time: '2021-01-15T08:36:59.406260Z'}
+#| slideshow: {slide_type: '-'}
+from collections import Counter
+
+{word: (count, len(word)) for word, count in Counter(words).items()}
+```
+
+## The `namedtuple`
+
+There is also the `namedtuple`. It's a `tuple` but with named attributes
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:37:03.255687Z', start_time: '2021-01-15T08:37:03.249481Z'}
+from collections import namedtuple
+
+Jedi = namedtuple('Jedi', ['firstname', 'lastname', 'age', 'color'])
+yoda = Jedi('Minch', 'Yoda', 900, 'green')
+yoda
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:37:03.466246Z', start_time: '2021-01-15T08:37:03.460414Z'}
+#| scrolled: true
+yoda.firstname
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:37:03.594771Z', start_time: '2021-01-15T08:37:03.589467Z'}
+yoda[1]
+```
+
+**Remark.** A better alternative since `Python 3.7` is dataclasses. We will talk about it later
+
+:::
+
+# I/O, reading and writing files
+
+Next, put a text file `miserables.txt` in the folder containing 
+this notebook.  If it is not there, the next cell downloads it, if is it there, then we do nothing.
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T09:18:44.977524Z', start_time: '2021-01-15T09:18:44.691253Z'}
+#| scrolled: true
+import requests
+import os
+
+# The path containing your notebook
+path_data = './'
+# The name of the file
+filename = 'miserables.txt'
+
+if os.path.exists(os.path.join(path_data, filename)):
+    print('The file %s already exists.' % os.path.join(path_data, filename))
+else:
+    url = 'https://stephanegaiffas.github.io/big_data_course/data/miserables.txt'
+    r = requests.get(url)
+    with open(os.path.join(path_data, filename), 'wb') as f:
+        f.write(r.content)
+    print('Downloaded file %s.' % os.path.join(path_data, filename))
+```
+
+```{python}
+#| scrolled: true
+ls -alh
+```
+
+```{python}
+# !rm -f miserables.txt
+```
+
+```{python}
+#| scrolled: true
+os.path.join(path_data, filename)
+```
+
+In `jupyter` and `ipython` you can run terminal command lines using `!`
+
+Let's count number of lines and number of words with the `wc` command-line tool (linux or mac only, don't ask me how on windows)
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:39:34.789525Z', start_time: '2021-01-15T08:39:34.498167Z'}
+#| slideshow: {slide_type: '-'}
+# Lines count
+!wc -l miserables.txt
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:39:35.525235Z', start_time: '2021-01-15T08:39:35.244691Z'}
+# Word count
+!wc -w miserables.txt
+```
+
+## Exercise
+
+Count the number of occurences of each word in the text file `miserables.txt`.
+We use a `open` *context* and the `Counter` from before.
+
+::: {.content-visible when-profile='solution'} 
+
+### Solution
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:39:38.300109Z', start_time: '2021-01-15T08:39:38.073213Z'}
+#| slideshow: {slide_type: '-'}
+from collections import Counter
+
+counter = Counter()
+
+with open('miserables.txt', encoding='utf8') as f:
+    for line_idx, line in enumerate(f):
+        line = line.strip().replace('\n', ' ')\
+            .replace(',', ' ')\
+            .replace('.', ' ')\
+            .replace('»', ' ')\
+            .replace('-', ' ')\
+            .replace('!', ' ')\
+            .replace('(', ' ')\
+            .replace(')', ' ')\
+            .replace('?', ' ').split()
+
+        counter.update(line)
+```
+
+
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:39:40.361408Z', start_time: '2021-01-15T08:39:40.332944Z'}
+#| scrolled: true
+#| slideshow: {slide_type: subslide}
+counter
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:39:40.577854Z', start_time: '2021-01-15T08:39:40.547026Z'}
+#| scrolled: true
+#| slideshow: {slide_type: subslide}
+counter.most_common(500)
+```
+
+:::
+
+
+## Contexts 
+
+- A *context* in Python is something that we use with the `with` keyword.
+
+- It allows to deal automatically with the opening and the closing of the file.
+
+Note the for loop:
+```python
+for line in f:
+    ...
+```
+You loop directly over the lines of the open file from **within** the `open` context
+
+## About `pickle`
+
+You can save your computation with `pickle`. 
+
+- `pickle` is a way of saving **almost anything** with Python.
+- It serializes the object in a binary format, and is usually the simplest and fastest way to go.
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:19.146250Z', start_time: '2021-01-15T08:40:19.105800Z'}
+import pickle as pkl
+
+# Let's save it
+with open('miserable_word_counts.pkl', 'wb') as f:
+    pkl.dump(counter, f)
+
+# And read it again
+with open('miserable_word_counts.pkl', 'rb') as f:
+    counter = pkl.load(f)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:20.330093Z', start_time: '2021-01-15T08:40:20.320482Z'}
+#| scrolled: true
+counter.most_common(10)
+```
+
+# Defining functions
+
+You **must** use function to order and reuse code
+
+## Function definition
+
+Function blocks must be indented as other control-flow blocks.
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:22.581564Z', start_time: '2021-01-15T08:40:22.574422Z'}
+def test():
+    return 'in test function'
+
+test()
+```
+
+## Return statement
+
+Functions can *optionally* return values.
+By default, functions return ``None``.
+
+The syntax to define a function:
+
+- the ``def`` keyword;
+- is followed by the function's **name**, then
+- the arguments of the function are given between parentheses followed by a colon
+- the function body;
+- and ``return object`` for optionally returning values.
+
+```{python}
+None is None
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:25.396369Z', start_time: '2021-01-15T08:40:25.389580Z'}
+def f(x):
+    return x + 10
+f(20)
+```
+
+A function that returns several elements returns a `tuple`
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:25.827300Z', start_time: '2021-01-15T08:40:25.821162Z'}
+def f(x):
+    return x + 1, x + 4
+
+f(5)
+```
+
+```{python}
+type(f)
+```
+
+```{python}
+f.truc = "bonjour"
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:26.056197Z', start_time: '2021-01-15T08:40:26.050039Z'}
+type(f(5))
+```
+
+## Parameters
+
+Mandatory parameters (positional arguments)
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:26.897893Z', start_time: '2021-01-15T08:40:26.891052Z'}
+def double_it(x):
+    return x * 2
+
+double_it(2)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:27.154900Z', start_time: '2021-01-15T08:40:27.127912Z'}
+try:
+    double_it()
+except TypeError:
+    print("TypeError: double_it() missing 1 required positional argument: 'x'")
+```
+
+Optimal parameters
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:28.071546Z', start_time: '2021-01-15T08:40:28.065551Z'}
+#| slideshow: {slide_type: '-'}
+def double_it(x=2):
+    return x * 2
+
+double_it()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:30.162845Z', start_time: '2021-01-15T08:40:30.155840Z'}
+double_it(3)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:30.451386Z', start_time: '2021-01-15T08:40:30.446933Z'}
+#| slideshow: {slide_type: subslide}
+def f(x, y=2, z=10):
+    print(x, '+', y, '+', z, '=', x + y + z)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:30.696765Z', start_time: '2021-01-15T08:40:30.691179Z'}
+f(5)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:31.857293Z', start_time: '2021-01-15T08:40:31.851956Z'}
+f(5, -2)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:32.095421Z', start_time: '2021-01-15T08:40:32.089684Z'}
+f(5, -2, 8)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:32.310466Z', start_time: '2021-01-15T08:40:32.304981Z'}
+f(z=5, x=-2, y=8)
+```
+
+## Argument unpacking and keyword argument unpacking
+
+You can do stuff like this, using unpacking `*` notation
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:32.767851Z', start_time: '2021-01-15T08:40:32.762760Z'}
+a, *b, c = 1, 2, 3, 4, 5
+a, b, c
+```
+
+Back to function `f` you can unpack a `tuple` as positional arguments
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:33.123879Z', start_time: '2021-01-15T08:40:33.117094Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+tt = (1, 2, 3)
+f(*tt)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:33.344119Z', start_time: '2021-01-15T08:40:33.339429Z'}
+dd = {'y': 10, 'z': -5}
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:33.503933Z', start_time: '2021-01-15T08:40:33.497965Z'}
+f(3, **dd)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:33.713710Z', start_time: '2021-01-15T08:40:33.708290Z'}
+#| slideshow: {slide_type: subslide}
+def g(x, z, y, t=1, u=2):
+    print(x, '+', y, '+', z, '+', t, '+', 
+          u, '=', x + y + z + t + u)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:33.853331Z', start_time: '2021-01-15T08:40:33.847946Z'}
+#| scrolled: true
+tt = (1, -4, 2)
+dd = {'t': 10, 'u': -5}
+g(*tt, **dd)
+```
+
+## The prototype of all functions in `Python`
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:34.122929Z', start_time: '2021-01-15T08:40:34.118269Z'}
+#| slideshow: {slide_type: '-'}
+def f(*args, **kwargs):
+    print('args=', args)
+    print('kwargs=', kwargs)
+
+f(1, 2, 'truc', lastname='gaiffas', firstname='stephane')
+```
+
+- Uses `*` for **argument unpacking** and `**` for **keyword argument unpacking**
+- The names `args` and `kwargs` are a convention, not mandatory 
+- (but you are fired if you name these arguments otherwise)
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:34.735447Z', start_time: '2021-01-15T08:40:34.728777Z'}
+#| slideshow: {slide_type: fragment}
+# How to get fired
+def f(*aaa, **bbb):
+    print('args=', aaa)
+    print('kwargs=', bbb)
+f(1, 2, 'truc', lastname='gaiffas', firstname='stephane')    
+```
+
+**Remark**. A function is a regular an object... you can add attributes on it !
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:34.887176Z', start_time: '2021-01-15T08:40:34.884378Z'}
+f.truc = 4
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:34.968083Z', start_time: '2021-01-15T08:40:34.963229Z'}
+#| scrolled: true
+f(1, 3)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:35.082074Z', start_time: '2021-01-15T08:40:35.076581Z'}
+f(3, -2, y='truc')
+```
+
+# Object-oriented programming (OOP)
+
+Python supports object-oriented programming (OOP). The goals of OOP are:
+
+- to organize the code, and
+- to re-use code in similar contexts.
+
+Here is a small example: we create a `Student` class, which is an object
+gathering several custom functions (called *methods*) and variables 
+(called *attributes*).
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:35.228158Z', start_time: '2021-01-15T08:40:35.221388Z'}
+#| slideshow: {slide_type: subslide}
+class Student(object):
+
+    def __init__(self, name, birthyear, major='computer science'):
+        self.name = name
+        self.birthyear = birthyear
+        self.major = major
+
+    def __repr__(self):
+        return "Student(name='{name}', birthyear={birthyear}, major='{major}')"\
+                .format(name=self.name, birthyear=self.birthyear, major=self.major)
+
+anna = Student('anna', 1987)
+anna
+```
+
+The `__repr__` is what we call a 'magic method' in Python, that allows 
+to display an object as a string easily. There is a very large number of such magic methods.
+There are used to implement **interfaces**
+
+## Exercise 
+
+Add a `age` method to the Student class that computes the age of the student. 
+- You  can (and should) use the `datetime` module. 
+- Since we only know about the birth year, let's assume that the day of the birth is January, 1st.
+
+::: {.content-visible when-profile='solution'} 
+
+### Correction
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:38.739250Z', start_time: '2021-01-15T08:40:38.731816Z'}
+from datetime import datetime
+
+class Student(object):
+
+    def __init__(self, name, birthyear, major='computer science'):
+        self.name = name
+        self.birthyear = birthyear
+        self.major = major
+
+    def __repr__(self):
+        return "Student(name='{name}', birthyear={birthyear}, major='{major}')"\
+                .format(name=self.name, birthyear=self.birthyear, major=self.major)
+
+    def age(self):
+        return datetime.now().year - self.birthyear
+        
+anna = Student('anna', 1987)
+anna.age()
+```
+
+:::
+
+
+## Properties
+
+We can make methods look like attributes using **properties**, as shown below
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:41.454538Z', start_time: '2021-01-15T08:40:41.447007Z'}
+#| scrolled: true
+class Student(object):
+
+    def __init__(self, name, birthyear, major='computer science'):
+        self.name = name
+        self.birthyear = birthyear
+        self.major = major
+
+    def __repr__(self):
+        return "Student(name='{name}', birthyear={birthyear}, major='{major}')"\
+                .format(name=self.name, birthyear=self.birthyear, major=self.major)
+
+    @property
+    def age(self):
+        return datetime.now().year - self.birthyear
+        
+anna = Student('anna', 1987)
+anna.age
+```
+
+## Inheritance 
+
+A `MasterStudent` is a `Student` with a new extra mandatory `internship` attribute
+
+```{python}
+"%d" % 2
+```
+
+```{python}
+x = 2
+
+f"truc {x}"
+```
+
+```{python}
+class MasterStudent(Student):
+    
+    def __init__(self, name, age, internship, major='computer science'):
+        # Student.__init__(self, name, age, major)
+        Student.__init__(self, name, age, major)
+        self.internship = internship
+
+    def __repr__(self):
+        return f"MasterStudent(name='{self.name}', internship={self.internship}, birthyear={self.birthyear}, major={self.major})"
+    
+MasterStudent('djalil', 22, 'pwc')
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:44.047633Z', start_time: '2021-01-15T08:40:44.039779Z'}
+class MasterStudent(Student):
+    
+    def __init__(self, name, age, internship, major='computer science'):
+        # Student.__init__(self, name, age, major)
+        Student.__init__(self, name, age, major)
+        self.internship = internship
+
+    def __repr__(self):
+        return "MasterStudent(name='{name}', internship='{internship}'" \
+               ", birthyear={birthyear}, major='{major}')"\
+                .format(name=self.name, internship=self.internship,
+                        birthyear=self.birthyear, major=self.major)
+    
+djalil = MasterStudent('djalil', 1996, 'pwc')
+```
+
+```{python}
+djalil.__dict__
+```
+
+```{python}
+djalil.birthyear
+```
+
+```{python}
+djalil.__dict__["birthyear"]
+```
+
+## Monkey patching
+
+- Classes in `Python`  are `objects` and actually `dict`s under the hood...
+- Therefore classes are objects that can be changed on the fly
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:44.745686Z', start_time: '2021-01-15T08:40:44.739499Z'}
+class Monkey(object):
+    
+    def __init__(self, name):
+        self.name = name
+
+    def describe(self):
+        print("Old monkey %s" % self.name)
+
+def patch(self):
+    print("New monkey %s" % self.name)
+
+monkey = Monkey("Baloo")
+monkey.describe()
+
+Monkey.describe = patch
+monkey.describe()
+```
+
+```{python}
+monkeys = [Monkey("Baloo"), Monkey("Super singe")]
+
+
+monkey_name = monkey.name
+
+for i in range(1000):    
+    monkey_name
+```
+
+
+## Data classes
+
+Since `Python 3.7` you can use a dataclass for this
+
+Does a lot of work for you (produces the `__repr__` among many other things for you)
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:46.810275Z', start_time: '2021-01-15T08:40:46.796524Z'}
+from dataclasses import dataclass
+from datetime import datetime 
+
+@dataclass
+class Student(object):
+    name: str
+    birthyear: int
+    major: str = 'computer science'
+
+    @property
+    def age(self):
+        return datetime.now().year - self.birthyear
+        
+anna = Student(name="anna", birthyear=1987)
+anna
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:47.251530Z', start_time: '2021-01-15T08:40:47.246324Z'}
+print(anna.age)
+```
+
+# Most common mistakes
+
+- Let us wrap this up with the most common mistakes with `Python`
+
+First, best way to learn and practice:
+
+- Start with the official tutorial https://docs.python.org/fr/3/tutorial/index.html
+
+- Look at https://python-3-for-scientists.readthedocs.io/en/latest/index.html
+
+- Continue with the documentation at https://docs.python.org/fr/3/index.html and work!
+
+## Using a mutable value as a default value
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:51.446805Z', start_time: '2021-01-15T08:40:51.441178Z'}
+def foo(bar=[]):
+    bar.append('oops')
+    return bar
+
+print(foo())
+print(foo())
+print(foo())
+
+print('-' * 8)
+print(foo(['Ah ah']))
+print(foo([]))
+```
+
+```{python}
+print(foo.__defaults__)
+foo()
+print(foo.__defaults__)
+```
+
+- The default value for a function argument is evaluated once, when the function is defined
+- `the` bar argument is initialized to its default (i.e., an empty list) only when foo() is first defined
+- successive calls to `foo()` (with no a `bar` argument specified) use the same list!
+
+One should use instead
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:52.916162Z', start_time: '2021-01-15T08:40:52.908617Z'}
+#| slideshow: {slide_type: '-'}
+def foo(bar=None):
+    if bar is None:
+        bar = []
+    bar.append('oops')
+    return bar
+
+print(foo())
+print(foo())
+print(foo())
+print(foo(['OK']))
+```
+
+```{python}
+print(foo.__defaults__)
+foo()
+print(foo.__defaults__)
+```
+
+No problem with immutable types
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:53.337268Z', start_time: '2021-01-15T08:40:53.330411Z'}
+def foo(bar=()):
+    bar += ('oops',)
+    return bar
+
+print(foo())
+print(foo())
+print(foo())
+```
+
+```{python}
+print(foo.__defaults__)
+```
+
+## Class attributes VS object attributes
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:53.948439Z', start_time: '2021-01-15T08:40:53.942319Z'}
+class A(object):
+    x = 1
+
+    def __init__(self):
+        self.y = 2
+
+class B(A):
+    def __init__(self):
+        super().__init__()
+
+class C(A):
+    def __init__(self):
+        super().__init__()
+
+a, b, c = A(), B(), C()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:54.135498Z', start_time: '2021-01-15T08:40:54.131029Z'}
+#| scrolled: true
+print(a.x, b.x, c.x)
+print(a.y, b.y, c.y)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:54.858324Z', start_time: '2021-01-15T08:40:54.853424Z'}
+#| scrolled: true
+#| slideshow: {slide_type: subslide}
+a.y = 3
+print(a.y, b.y, c.y)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:55.058452Z', start_time: '2021-01-15T08:40:55.050679Z'}
+#| scrolled: true
+a.x = 3  # Adds a new attribute named x in object a
+print(a.x, b.x, c.x)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:55.812247Z', start_time: '2021-01-15T08:40:55.805966Z'}
+#| scrolled: true
+A.x = 4 # Changes the class attribute x of class A
+print(a.x, b.x, c.x)
+```
+
+- Attribute `x` is not an **attribute** of `b` nor `c`
+- It is also not a **class attribute** of classes `B` and `C`
+- So, it is is looked up in the base class `A`, which contains a **class attribute** `x`
+
+Classes and objects contain a hidden `dict` to store their attributes, and are accessed following a method resolution order (MRO)
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:56.589556Z', start_time: '2021-01-15T08:40:56.583455Z'}
+#| slideshow: {slide_type: '-'}
+a.__dict__, b.__dict__, c.__dict__
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:57.372472Z', start_time: '2021-01-15T08:40:57.365176Z'}
+A.__dict__, B.__dict__, C.__dict__
+```
+
+This can lead to **nasty** errors when using class attributes: learn more about this
+
+## Python scope rules
+
+```{python}
+try:
+    ints += [4]
+except NameError:
+    print("NameError: name 'ints' is not defined")
+```
+
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:58.254394Z', start_time: '2021-01-15T08:40:58.250379Z'}
+ints = [1]
+
+def foo1():
+    ints.append(2)
+    return ints
+
+def foo2():
+    ints += [2]
+    return ints
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:58.471436Z', start_time: '2021-01-15T08:40:58.464761Z'}
+foo1()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:40:58.668154Z', start_time: '2021-01-15T08:40:58.647332Z'}
+#| scrolled: true
+#| slideshow: {slide_type: '-'}
+
+try:    
+    foo2()
+except UnboundLocalError as inst:
+    print(inst)
+```
+
+### What the hell ?
+
+- An assignment to a variable in a scope assumes that the variable is local to that scope 
+- and shadows any similarly named variable in any outer scope
+
+```{.python}
+ints += [2]
+```
+means
+```{.python}
+ints = ints + [2]
+```
+
+which is an *assigment*: `ints` must be defined in the local scope, but it is not, while
+```{.python}
+ints.append(2)
+```
+
+is not an *assignemnt*
+
+## Modify a `list` while iterating over it
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:41:05.902243Z', start_time: '2021-01-15T08:41:05.890704Z'}
+odd = lambda x: bool(x % 2)
+numbers = list(range(10))
+
+try:
+  for i in range(len(numbers)):
+      if odd(numbers[i]):
+          del numbers[i]
+except IndexError as inst:
+    print(inst)
+```
+
+Typically an example where one should use a list comprehension
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:41:16.008696Z', start_time: '2021-01-15T08:41:16.002196Z'}
+[number for number in numbers if not odd(number)]
+```
+
+## No docstrings
+
+Accept to spend time to write clean docstrings (look at `numpydoc` style)
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:41:17.239948Z', start_time: '2021-01-15T08:41:17.236031Z'}
+def create_student(name, age, address, major='computer science'):
+    """Add a student in the database
+    
+    Parameters
+    ----------
+    name: `str`
+        Name of the student
+    
+    age: `int`
+        Age of the student
+    
+    address: `str`
+        Address of the student
+    
+    major: `str`, default='computer science'
+        The major chosen by the student
+    
+    Returns
+    -------
+    output: `Student`
+        A fresh student
+    """
+    pass
+```
+
+```{python}
+create_student('Duduche', 28, 'Chalons')
+```
+
+## Not using available methods and/or the simplest solution
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:41:19.794009Z', start_time: '2021-01-15T08:41:19.785191Z'}
+dd = {'stephane': 1234, 'gael': 4567, 'gontran': 891011}
+
+# Bad
+for key in dd.keys():
+    print(key, dd[key])
+
+print('-' * 8)
+
+# Good
+for key, value in dd.items():
+    print(key, value)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:41:20.116770Z', start_time: '2021-01-15T08:41:20.104428Z'}
+#| slideshow: {slide_type: subslide}
+colors = ['black', 'yellow', 'brown', 'red', 'pink']
+
+# Bad
+for i in range(len(colors)):
+    print(i, colors[i])
+
+print('-' * 8)
+
+# Good
+for i, color in enumerate(colors):
+    print(i, color)
+```
+
+## Not using the standard library 
+
+While it's **always** better than a hand-made solution
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:41:21.109134Z', start_time: '2021-01-15T08:41:21.101392Z'}
+list1 = [1, 2]
+list2 = [3, 4]
+list3 = [5, 6, 7]
+
+for a in list1:
+    for b in list2:
+        for c in list3:
+            print(a, b, c)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2021-01-15T08:41:22.827474Z', start_time: '2021-01-15T08:41:22.819519Z'}
+#| slideshow: {slide_type: subslide}
+from itertools import product
+
+for a, b, c in product(list1, list2, list3):
+    print(a, b, c)
+```
+
+# That's it for now !
+
