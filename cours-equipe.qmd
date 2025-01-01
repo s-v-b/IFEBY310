@@ -1,0 +1,26 @@
+---
+title: "Équipe enseignante"
+---
+
+## {{< fa chalkboard-teacher >}} Cours 
+
+![](images/team/avatar.jpg){style="float:right;padding: 0 0 0 10px;" fig-alt="Headshot of S. Boucheron" width="100"}
+
+[**S. Boucheron**](http://stephane-v-boucheron.fr/)  Professeur de Mathématiques à l'Université Paris Cité/[Laboratoire de Probabilités, Statistiques et Modélisatiion LPSM](https://www.lpsm.paris).
+
+
+
+
+## {{< fa laptop-code >}} Travaux dirigés
+
+| Nom                | Horaire                  | Salle                       |          
+|:-------------------|:-------------------------|:---------------------------:|
+| [Stéphane Boucheron](http://stephane-v-boucheron.fr/) | Vendredi  15h45 - 18h15  |  2004/5 Sophie Germain      |
+|[Cristina Sirangelo](https://www.irif.fr/~cristina/)| Vendredi  15h45 - 18h15 | 2006 Sophie Germain|
+|[Amine Souiri](https://fr.linkedin.com/in/aminesouiri)| Jeudi 13h30 - 16h00 | 2006 Sophie Germain|
+| [Sylvain Schmitz](https://www.irif.fr/en/users/schmitz/index)    |   |    |
+| [Amélie Gheerbrant](https://www.irif.fr/~amelie/) | | |
+| [Anatole Dahan]()| | |
+
+
+

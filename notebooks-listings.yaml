@@ -1,15 +1,36 @@
 - title: "Python Stack for Data Science"
   author: "Master I MIDS UParis Cité"
   date: "2025-01-15"
-  path: "notebooks/lab-python.html"
+  path: "core/notebooks/notebook01_python.html"
   categories: [Python]
 - title: "Numpy and Scipy"
   author: "Master I MIDS UParis Cité"
   date: "2025-01-15"
-  path: "notebooks/lab-numpy-scipy.html"
+  path: "core/notebooks/notebook02_numpy.html"
   categories: [Python, Numpy, Scipy, Plotly]
 - title: "Table wranglig with Pandas"
   author: "Master I MIDS UParis Cité"
   date: "2025-01-22"
-  path: "notebooks/lab-pandas.html"
+  path: "core/notebooks/notebook03_pandas.html"
   categories: [Python, Pandas]
+- title: "Spark Resilient Distributed Datasets"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-01-22"
+  path: "core/notebooks/notebook05_sparkrdd.html"
+  categories: [PySpark, Spark, RDD]
+- title: "Spark SQL"
+  path: "core/notebooks/notebook06_sparksql.html"
+  date: "2025-01-22"
+  categories: [PySpark, Spark, SQL]
+- title: "JSON format"
+  path: "core/notebooks/notebook07_json-format.html"
+  date: "2025-01-22"
+  categorie: [JSON, serialization]
+- title: "Web data"
+  path: "core/notebooks/notebook08_webdata-II.html"
+  date: "2025-01-22"
+  categorie: []
+- title: "Spark again"
+  date: "2025-01-22"
+  categorie: [Spark, tips]
+  path: "core/notebooks/notebook11_dive.html"

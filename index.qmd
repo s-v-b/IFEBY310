@@ -1,0 +1,49 @@
+---
+title: "MA15Y030: Introduction aux Bases de Données"
+about:
+  id: hero-heading
+  template: trestles
+  image: ./images/pexels-artunchained-9101888.jpg 
+  image-width: 10em
+  image-shape: round
+  links:
+    - icon: person-fill
+      text: moodle
+      href: https://moodle.u-paris.fr/course/view.php?id=2313
+    - icon: github
+      text: Github
+      href: https://github.com
+---
+
+:::{#hero-heading}
+
+### {{< fa database >}} 
+
+Le cours MA15Y030: *Introduction aux Bases de Données*  
+de la Licence MIASHS (L3) de l'[Université Paris Cité](https:/r/www.u-paris.fr) est une initiation à l'usage des *données tabulaires*. Ce cours est conçu pour des étudiantes intéressées par l'analyse de données au sens large. Cela va de l'alimentation, la maintenance de bases de données tabulaires à la statistique descriptive classique, à l'apprentissage machine et à la statistique prédictive.
+
+### {{< fa user-graduate >}} 
+
+Au travers de ce cours, vous allez 
+
+- Apprendre à interroger une base de données relationnelle
+- Apprendre à lire un schéma  de base de données 
+- Apprendre à concevoir une base de données
+- Apprendre à améliorer une base de données 
+
+### {{< fa server >}} 
+
+Le cours s'appuiera sur un serveur [PostGres](https://www.postgresql.org) 
+
+:::
+
+Vous trouverez sur ce site information et matériel
+
+- [Un syllabus](/cours-syllabus.qmd)
+- [L'équipe enseignante](/cours-equipe.qmd)
+- [Les clients utilisables](/computing-access.qmd)
+- [Les diapositives du cours magistral](/slides-listings.qmd)
+- [Les feuilles d'exercices](/td-listings.qmd)
+- [Les corrigés](/corriges-tds.qmd)
+- [Les annales d'examen](/exams-listings.qmd)
+

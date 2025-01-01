@@ -6,12 +6,11 @@ project:
     - "core/notebooks/"
     - "core/labs/"
     - "!core/slides/"
+    - "!core/ipynb/"
     - "!core/labs-solutions/"
-    - "!projects/"
-    - "!corrections-listings.qmd"
+    - "!core/projects/"
     - "!projects-listings.qmd"
-    - "!notebooks-solutions/"
-    - "!technos/"
+    - "!core/technos/"
   output-dir: _site
 
 website:
@@ -32,7 +31,7 @@ website:
 
   sidebar:
     background: "#D9E3E4"
-    logo: "images/hexlogo_ma7BY020.png"
+    logo: "images/UniversiteParisCite_logo_horizontal_couleur_RVB.png"
     pinned: true
     align: center
     tools:
@@ -109,14 +108,12 @@ website:
             text: "Week 11"
           - href: weeks/week-12.qmd
             text: "Week 12"
-          - href: weeks/week-13.qmd
-            text: "Week 13"
 
 format:
   html:
     theme:
-      light: [slate, theme.scss]
       dark: [slate, theme-dark.scss]
+      light: [slate, theme.scss]
     mainfont: "Atkinson Hyperlegible"
     code-copy: true
     code-overflow: wrap
