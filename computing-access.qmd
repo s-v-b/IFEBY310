@@ -1,0 +1,294 @@
+---
+title: "Moyens de calcul"
+
+format:
+  html:
+    highlight-style: zenburn
+---
+
+
+# Serveur 
+
+Le cours et les TP 
+
+- Serveur `PostGreSQL`
+- Machine dédiée : `etu-pgsql.math.univ-paris-diderot.fr`
+
+
+# Clients 
+
+En salle TP, vous pourrez choisir entre trois *clients*
+
+- `psql`
+- `pgcli`
+- `dbeaver`
+
+`psql` et `pgcli` sont très proches. Ce sont des applications qui fonctionnent en mode ligne de commande. `pgcli` est un peu plus conviviale que `psql` avec un système de complétion plus performant. L'ensemble des commandes spéciales proposées par  `pgcli` est un peu moins vaste que celui proposé par `psql`
+
+`dbeaver` est un client graphique qui ne tombe pas dans le *cliquodrome*. `dbeaver` permet d'attaquer une grande famille de SGBDs. 
+
+Tous ces clients doivent utiliser des connexions sécurisées `ssh`. 
+
+# Connexions `ssh`  (Linux/MacOS)
+
+Pour accéder au serveur `Postgres` (SGBD), il faut d'abord  se connecter à la machine qui héberge ce serveur `etu-pgsql.math.univ-paris-diderot.fr`. 
+
+Pour se connecter à `etu-pgsql.math.univ-paris-diderot.fr`, on utilise le protocole [`ssh`](https://en.wikipedia.org/wiki/Secure_Shell), avec son identifiant et son mot de passe `ENT`.
+
+```{.bash}
+$ ssh username@etu-pgsql.math.univ-paris-diderot.fr
+(username@etu-pgsql.math.univ-paris-diderot.fr) Password for username@etu-pgsql.math.univ-paris-diderot.fr:
+Last login: ..................
+....
+....
+This fortune brought to you by:
+$FreeBSD$
+[username@etu-pgsql ~]$ ...
+```
+
+Attention : pas d'écho lorsque vous saisissez votre  mot de passe.
+
+On peut maintenant se connecter au serveur Postgres, toujours avec son identifiant et son mot de passe `ENT`
+
+Ici, nous proposons d'utiliser le *client* `pgcli` exécuté sur `etu-pgsql.math.univ-paris-diderot.fr` :
+
+```{.bash}
+[username@etu-pgsql ~]$ pgcli -d bd_2023-24 
+Password for username: 
+Server: PostgreSQL 13.8
+Version: 3.5.0
+Home: http://pgcli.com
+userame@/tmp:bd_2023-24> 
+```
+
+::: {.callout-note}
+
+### Pourquoi préciser `-d bd_2023-24` ?
+
+`bd_2023-24` est un des *catalogues* hébergés par le serveur `PostGres`. `bd_2023-24` contient les *schemas* sur lesquels nous travaillerons.
+
+:::
+
+
+Nous sommes maintenant dans une *session* du serveur 
+
+```{.bash}
+username@/tmp:bd_2023-24> \conninfo
+You are connected to database "bd_2023-24" as user "username" on socket "/tmp" at port "None".
+Time: 0.000s
+```
+
+Pour obtenir de l'aide, utiliser la commande `\d?` et laissez vous guider.
+
+
+Nous nous intéresserons en général à un ensemble de tables formant un schéma. 
+Ici, nous choisissons comme schéma par défaut `world` et nous affichons les tables du schéma. 
+
+
+```{.bash}
+username@/tmp:bd_2023-24> set search_path to world ;
+SET
+Time: 0.001s
+username@/tmp:bd_2023-24> \dt
++--------+-----------------+-------+-----------+
+| Schema | Name            | Type  | Owner     |
+|--------+-----------------+-------+-----------|
+| world  | city            | table | boucheron |
+| world  | country         | table | boucheron |
+| world  | countrylanguage | table | boucheron |
++--------+-----------------+-------+-----------+
+SELECT 3
+Time: 0.011s
+username@/tmp:bd_2023-24> ...
+```
+
+::: {.callout-important}
+
+### Plus pratique
+
+Pour `pgcli`  et `psql`, il est plus pratique d'exécuter `psql`  et/ou `pgcli` sur votre machine 
+et de communiquer avec le serveur Postgres via un tunnel `ssh`. Voir [détails pour `pgcli`](/computing-pgcli.qmd) et [détails pour `psql`](/computing-psql.qmd).
+
+:::
+
+
+# Connexions `ssh` sous `windows`
+
+
+Pour accéder au serveur `Postgres` (SGBD), il faut d'abord  se connecter à la machine qui héberge ce serveur `etu-pgsql.math.univ-paris-diderot.fr`. 
+
+Pour se connecter à `etu-pgsql.math.univ-paris-diderot.fr`, on utilise le protocole [`ssh`](https://en.wikipedia.org/wiki/Secure_Shell), avec son identifiant et son mot de passe `ENT`.
+
+On lance d'abord une fenêtre `Powershell`. 
+
+```{.bash}
+$ ssh username@etu-pgsql.math.univ-paris-diderot.fr
+(username@etu-pgsql.math.univ-paris-diderot.fr) Password for username@etu-pgsql.math.univ-paris-diderot.fr:
+Last login: ..................
+....
+....
+This fortune brought to you by:
+$FreeBSD$
+[username@etu-pgsql ~]$ ...
+```
+
+{{< fa triangle-exclamation >}} Attention : pas d'écho lorsque vous saisissez votre  mot de passe.
+
+On peut maintenant se connecter au serveur Postgres, toujours avec son identifiant et son mot de passe `ENT`
+
+Ici, nous proposons d'utiliser le *client* `pgcli`  :
+
+```{.bash}
+[username@etu-pgsql ~]$ pgcli -d bd_2023-24 
+Password for username: 
+Server: PostgreSQL 13.8
+Version: 3.5.0
+Home: http://pgcli.com
+userame@/tmp:bd_2023-24> 
+```
+
+::: {.callout-note}
+
+### Pourquoi préciser `-d bd_2023-24` ?
+
+`bd_2023-24` est un des *catalogues* hébergés par le serveur `PostGres`. `bd_2023-24` contient les *schemas* sur lesquels nous travaillerons.
+
+:::
+
+
+Nous sommes maintenant dans une *session* du serveur 
+
+```{.bash}
+username@/tmp:bd_2023-24> \conninfo
+You are connected to database "bd_2023-24" as user "username" on socket "/tmp" at port "None".
+Time: 0.000s
+```
+
+Pour obtenir de l'aide, utiliser la commande `\d?` et laissez vous guider.
+
+
+Nous nous intéresserons en général à un ensemble de tables formant un schéma. 
+Ici, nous choisissons comme schéma par défaut `world` et nous affichons les tables du schéma. 
+
+
+```{.bash}
+username@/tmp:bd_2023-24> set search_path to world ;
+SET
+Time: 0.001s
+username@/tmp:bd_2023-24> \dt
++--------+-----------------+-------+-----------+
+| Schema | Name            | Type  | Owner     |
+|--------+-----------------+-------+-----------|
+| world  | city            | table | boucheron |
+| world  | country         | table | boucheron |
+| world  | countrylanguage | table | boucheron |
++--------+-----------------+-------+-----------+
+SELECT 3
+Time: 0.011s
+username@/tmp:bd_2023-24> ...
+```
+
+
+# Connexions `ssh` avec *tunnel*
+
+Vous avez pu constater que les connexions `ssh` sous MacOS, Linux et Windows sont presque identiques. 
+
+Mais utiliser une connexion `ssh` et un *client base de données* qui s'exécute sur `etu-pgsql.math.univ-paris-diderot.fr`
+n'est pas la manière la plus confortable de travailler. 
+
+Il est plus agréable d'utiliser un *client base de données* qui s'exécute sur sa propre machine (en local) et qui 
+interagit avec le serveur PostGres au travers d'un *tunnel* `ssh`. 
+
+La commande suivante établit un tunnel en *tâche de fond* (*background job*) grâce à l'option `-f`
+```{.bash}
+$ ssh -f username@etu-pgsql.math.univ-paris-diderot.fr -L 5436:localhost:5432 -N
+(username@etu-pgsql.math.univ-paris-diderot.fr) Password for username@etu-pgsql.math.univ-paris-diderot.fr:
+$ 
+```
+Une fois le tunnel établi, on peut continuer d'utiliser la fenêtre terminal, par exemple pour lancer `pgcli` ou `psql`. 
+
+La commande suivante établit aussi un tunnel mais en tâche de premier plan. 
+```{.bash}
+$ ssh username@etu-pgsql.math.univ-paris-diderot.fr -L 5436:localhost:5432 -N
+(username@etu-pgsql.math.univ-paris-diderot.fr) Password for username@etu-pgsql.math.univ-paris-diderot.fr:
+$ 
+```
+Une fois le tunnel établi, la fenêtre terminal est bloquée. Si on veut lancer  `pgcli` ou `psql`, il faut disposer d'une autre 
+fenêtre. 
+
+::: {.callout-note}
+
+### Tunnel en tâche de fond ou pas ?
+
+Le lancement du tunnel en tâche de premier plan peut paraître moins pratique que le lancement du tunnel en tâche de fond. 
+
+Il présente un avantage : lorsque le tunnel cesse de fonctionner (en général parce qu'on ne s'en est pas servi depuis quelques minutes), il faut termniner (tuer) le processus qui contrôle le tunnel, pour pouvoir récupérer l'usage du port local ; si le tunnel est contrôlé par une tache de premier plan, c'est trivial (`^C` sous Unix), si le tunnel est contrôlé par une tâche de fond, il faut déterminer le processus contrôleur, puis le terminer explicitement (`$ kill -9 pid`).  
+ 
+:::
+
+::: {.callout-note}
+
+### Renvoi de port  `-L 5436:localhost:5432`
+
+Un serveur PostGres *écoute* (attend) d'éventuels clients sur le port *officiel*  `5432`. Le serveur que nous utiliserons 
+attend effectivement ses clients sur le port `5432`  de la machine qui l'héberge. Notre client local ne va pas s'adresser directement au port 5432 de `etu-pgsql.math.univ-paris-diderot.fr` (c'est interdit). Notre client local s'adressera au port `5436` de la machine qui héberge le client et qui est lui-même renvoyé via le tunnel `ssh`  vers le port `5432` de la machine qui héberge le serveur.  
+
+:::
+
+
+On peut maintenant lancer un client sur sa propre machine (`localhost`) en précisant qu'on s'adresse au port *local* 
+`5436` (ou le port que vous choisissez), la requête de conexion au serveur PostGres distant sera transmise par le *tunnel* : elle sera envoyée sur le port *officiel* `5432`  de la machine distante. Une fois la *session* établie,
+tout se passsera comme précédemment (ou presque).
+
+
+```{.bash}
+$ pgcli -d bd_2023-24 -h localhost -p 5436 -u username -W
+Server: PostgreSQL 13.8
+Version: 3.5.0
+Home: http://pgcli.com
+bd_2023-24> \dn
++----------------+--------------+
+| Name           | Owner        |
+|----------------+--------------|
+...
+...
+```
+
+
+# Client `dbeaver`
+
+Le mécanisme du tunnel `ssh` peut être utilisé pour connecter un client plus ambitieux au serveur. 
+Le client [`dbeaver`](https://dbeaver.io) est particulièrement facile à utiliser. 
+
+
+
+# Client VS Code + extensions `SQLTools` 
+
+Si vous êtes déjà habitué à l'éditeur Visual Studio Code (VS Code), vous pouvez utiliser l'extension [`SQLToos`](https://vscode-sqltools.mteixeira.dev/en/home) et son pilote ['PostgreSQL/Cockroach'](https://vscode-sqltools.mteixeira.dev/en/drivers/postgre-sql). 
+
+Votre configuration de connexion devrait ressembler à :
+
+```{.json}
+{
+  "label": "etu-pgsql",
+  "host": "localhost",
+  "user": "<identifiant ENT>",
+  "port": 5436,
+  "ssl": false,
+  "database": "bd_2023-24",
+  "schema": "world",
+  "password": "Ask on connect"
+}
+```
+
+Il faut par ailleurs ouvrir un tunnel `SSH` dans un terminal 
+
+```{.bash}
+$ ssh  username@etu-pgsql.math.univ-paris-diderot.fr -L 5436:localhost:5432 -N
+(username@etu-pgsql.math.univ-paris-diderot.fr) Password for username@etu-pgsql.math.univ-paris-diderot.fr:
+$ 
+```
+
+en remplaçant `username` par votre identifiant ENT. 
+
+

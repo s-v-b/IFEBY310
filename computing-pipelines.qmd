@@ -1,0 +1,8 @@
+---
+title: "Pipelines"
+editor: source
+---
+
+# Interroger une base de données avec `R` (via ODBC)
+
+# Interroger une base de données avec `Python` (via ODBC)

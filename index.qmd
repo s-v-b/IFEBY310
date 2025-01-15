@@ -1,11 +1,11 @@
 ---
-title: "MA15Y030: Introduction aux Bases de Données"
+title: "IFEBY310: Big Data Technologies"
 about:
   id: hero-heading
   template: trestles
-  image: ./images/pexels-artunchained-9101888.jpg 
-  image-width: 10em
-  image-shape: round
+  image: https://imgs.xkcd.com/comics/data_pipeline.png
+  image-width: 15em
+  image-shape: rectangle
   links:
     - icon: person-fill
       text: moodle
@@ -19,31 +19,29 @@ about:
 
 ### {{< fa database >}} 
 
-Le cours MA15Y030: *Introduction aux Bases de Données*  
-de la Licence MIASHS (L3) de l'[Université Paris Cité](https:/r/www.u-paris.fr) est une initiation à l'usage des *données tabulaires*. Ce cours est conçu pour des étudiantes intéressées par l'analyse de données au sens large. Cela va de l'alimentation, la maintenance de bases de données tabulaires à la statistique descriptive classique, à l'apprentissage machine et à la statistique prédictive.
+Course IFEBY310: *Big Data Technologies*  
+for Master MIDS (M1) at [Université Paris Cité](https:/r/www.u-paris.fr) introduces a collection of software technologies dedicated to Big Data management. This course is designed for students with dual background in Mathematics and Computer Science. 
 
 ### {{< fa user-graduate >}} 
 
-Au travers de ce cours, vous allez 
+During this course, you shall learn to:
 
-- Apprendre à interroger une base de données relationnelle
-- Apprendre à lire un schéma  de base de données 
-- Apprendre à concevoir une base de données
-- Apprendre à améliorer une base de données 
+- Handle middlesize data using Python Data Stack: Numpy/Scipy/Pandas
+- Scale up and down with Dask
+- Handle Big Data with Spark (PySpark) 
+- Manage and store data using dedicated columnar formats (Parquet, ORC, Avro, Arrow)
 
 ### {{< fa server >}} 
 
-Le cours s'appuiera sur un serveur [PostGres](https://www.postgresql.org) 
+We will work using Docker images.
 
 :::
 
 Vous trouverez sur ce site information et matériel
 
-- [Un syllabus](/cours-syllabus.qmd)
-- [L'équipe enseignante](/cours-equipe.qmd)
-- [Les clients utilisables](/computing-access.qmd)
-- [Les diapositives du cours magistral](/slides-listings.qmd)
-- [Les feuilles d'exercices](/td-listings.qmd)
-- [Les corrigés](/corriges-tds.qmd)
-- [Les annales d'examen](/exams-listings.qmd)
-
+- [Course Syllabus](/cours-syllabus.qmd)
+- [Current and past teams](/cours-equipe.qmd)
+- [Software tips](/computing-access.qmd)
+- [Slides](/slides-listings.qmd)
+- [Notebooks](/notebooks-listings.qmd)
+- [Projects](/projet-listings.qmd)

@@ -1,0 +1,34 @@
+---
+title: "Course team"
+---
+
+
+::: {.columns}
+::: {.column width=40%}
+
+# {{< fa chalkboard-teacher >}}  Teachers 2024-25
+
+- [**C. Sirangelo**](https://www.irif.fr/~cristina/)  Professeur d'Informatique à l'Université Paris Cité/[Institut de Recherche en Informatique Fondamentale](https://www.irif.fr).
+  
+- [**S. Boucheron**](http://stephane-v-boucheron.fr/)  Professeur de Mathématiques à l'Université Paris Cité/[Laboratoire de Probabilités, Statistiques et Modélisatiion LPSM](https://www.lpsm.paris).
+  
+:::
+
+::: {.column width=10%}
+
+:::
+
+::: {.column width=40%}
+
+# {{< fa graduation-cap >}}  Former contributors
+
+- [Stéphane Gaiffas](https://stephanegaiffas.github.io/) 
+- [Sothéa Has](https://hassothea.github.io) 
+- [Amélie Gheerbrant](https://www.irif.fr/~amelie/)
+- [Vlady Ravelomanana](https://www.irif.fr/~vlad/)
+
+
+:::
+::: 
+
+

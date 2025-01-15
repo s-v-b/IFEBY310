@@ -9,11 +9,22 @@ title: "IFEBY310 Syllabus"
 
 ## Organization 
 
+
+We will have one weeky lecture. Each lecture is organized around [Slides](slides-listings.qmd) and [Notebooks](notebooks-listings.qmd). We will switch from blackboard to laptop and back. You are invited to bring your laptop to the lectures. 
+
+
 |           | Day       | Hour              | Room                       |  Start |
 |:---------:|:-----------:|:-------------------:|:--------------------------------|:--------|
-| Cours     | Friday  | 15:45  - 17:46  | TBA      | 2025-01-17 |
+| Lecture     | Friday  | 15:45  - 17:46  | Sophie Germain 014 | 2025-01-17 |
 
 ### [{{< fa cal >}}](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
+
+{{< fa hand-point-right >}} We will not attempt to complete the notebooks during the sessions. You are expected to complete the noteboks on your own time. Solutions (at least partial solutions) are available on the course website.
+
+You can fork the [course repository](https://github.com/s-v-b/IFEBY310) and post issues, comments, and corrections.
+
+
+
 
 :::
 
@@ -22,25 +33,10 @@ title: "IFEBY310 Syllabus"
 ## Objectives
 
 
-{{< include _objectifs_ifeby310.qmd >}}
+{{< include _objectives_ifeby310.qmd >}}
 
 :::
 
-::: {.callout-note}
-
-## [Université Paris Cité](https://u-paris.fr)
-
-Useful links:
-
-- [Charte Université Paris Cité](https://u-paris.fr/valeurs/)
-
-- [Démarches et accessibilité](https://u-paris.fr/demarches-administratives-de-scolarite/)
-
-- [Centre de contact](https://u-paris.fr/centre-de-contact/)
-
-- [Relais handicap](https://u-paris.fr/etudes-et-handicap/)
-
-:::
 
 
 ::: {.callout-note}
@@ -50,9 +46,9 @@ Useful links:
 
 Course  material:   [s-v-b.github.io/IFEBY310](https://s-v-b.github.io/IFEBY310) Fork the repo, use github issues to send feedback (no email please)
 
-Alerts are spread through [Moodle](https://moodle.u-paris.fr/course/view.php?id=2313)
+Alerts are spread through [Moodle](https://moodle.u-paris.fr/course/view.php?id=28534)
 
-Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=2313) to be updated 
+Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=28534) to be updated 
 
 :::
 
@@ -60,13 +56,26 @@ Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=2313) t
 
 ### [Computing environment](/course-support.html) {{< fa bullhorn >}}
 
-{{< fa database >}} We use the PostGreSQL server from UFR de Mathématiques. To obtain an ENT account  {{< fa user-secret >}} follow procedure  [Moodle](https://moodle.u-paris.fr/course/view.php?id=2313)
+{{< fa database >}} We use the PostGreSQL server from UFR de Mathématiques. To obtain an ENT account  {{< fa user-secret >}} follow procedure  [Moodle](https://moodle.u-paris.fr/course/view.php?id=28534)
 
-{{< fa laptop-code >}} On client side, you may use 
+{{< fa laptop-code >}} You may install and use 
 
+- [`Python`](https://www.python.org)
+- [`Jupyter`](https://jupyter.org)
+- [`Pandas`](https://pandas.pydata.org)
+- [`Numpy`](https://numpy.org)
+- [`Scipy`](https://www.scipy.org)
+- [`Plotly`](https://plotly.com)
+- [`Altair`](https://altair-viz.github.io)
+- [`Dask`](https://dask.org)
+- [`Spark`](https://spark.apache.org)
+- [`Parquet`](https://parquet.apache.org)
+- ['Arrow'](https://arrow.apache.org)
+- [`Docker`](https://www.docker.com)
+- [`Quarto`](https://www.quarto.org)
+- [`R`](https://www.r-project.org)
 - [`psql`](https://www.postgresql.org/docs/current/app-psql.html)
-- [`pgcli`](https://www.pgcli.com)
-
+- [`VS Code`](https://code.visualstudio.com)
 
 :::
 
@@ -76,6 +85,11 @@ Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=2313) t
 
 ## Références  {{< fa book >}}
 
+- [Pandas Book](https://pandas.pydata.org/docs/getting_started/index.html)
+- [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
+- [Dask Book](https://tutorial.dask.org)
+- [Spark Book](https://spark.apache.org/docs/latest/index.html)
+- [Data pipelines](https://www.dataengineeringpodcast.com)
 - [Database Systems: The Complete Book (DS:CB), by Hector Garcia-Molina, Jeff Ullman, and Jennifer Widom]()
 - [Alice](http://webdam.inria.fr/Alice/)
 - [Documentation PostGres](https://www.postgresql.org/docs/current/)
@@ -95,7 +109,7 @@ Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=2313) t
 
 [Notebooks](/notebooks-listings.qmd) (html and ipynb)
 
-[Corrected notebooks](/corriges-tds.qmd) (html and ipynb)
+<!-- [Corrected notebooks](/corriges-tds.qmd) (html and ipynb) -->
 
 :::
 
@@ -104,7 +118,7 @@ Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=2313) t
 ### Evaluation   {{< fa graduation-cap >}}
 
 
-- Three homeworks/projects
+- Two homeworks/projects
 
 - Grading
 
@@ -130,8 +144,6 @@ Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=2313) t
 
 :::
 
-
-
  
 
 ::: {.callout-important}
@@ -142,6 +154,7 @@ Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=2313) t
 -   **February 14:** *No session* 
 -   **February 28:** Winter Holidays
 -   **March 7:** Session 6
+-   **April 4:** Room 2017
 -   **April 18:** Eastern Holidays
 -   **April 25:** Eastern Holidays
 -   **May 2:** Session 12
@@ -150,5 +163,19 @@ Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=2313) t
 [Université Paris Cité calendar](https://u-paris.fr/calendrier-universitaire/) 
 
 [M1 MIDS calendar](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1) 
+
+:::
+
+
+::: {.callout-note}
+
+## [Université Paris Cité](https://u-paris.fr)
+
+Useful links:
+
+- [Charte Université Paris Cité](https://u-paris.fr/valeurs/)
+- [Démarches et accessibilité](https://u-paris.fr/demarches-administratives-de-scolarite/)
+- [Centre de contact](https://u-paris.fr/centre-de-contact/)
+- [Relais handicap](https://u-paris.fr/etudes-et-handicap/)
 
 :::

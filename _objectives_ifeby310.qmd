@@ -1,6 +1,6 @@
-Après avoir suivi ce cours, vous serez capable :
+During this course, you shall learn to:
 
-- d'interroger une base de données relationnelle
-- de lire un schéma  de base de données 
-- de concevoir une base de données
-- d'améliorer une base de données 
+- Handle middlesize data using Python Data Stack: Numpy/Scipy/Pandas
+- Scale up and down with Dask
+- Handle Big Data with Spark (PySpark) 
+- Manage and store data using dedicated columnar formats (Parquet, ORC, Avro, Arrow)

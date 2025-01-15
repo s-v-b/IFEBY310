@@ -3,6 +3,7 @@
   date: "2025-01-15"
   path: "core/notebooks/notebook01_python.html"
   categories: [Python]
+  href: "[<i class='fa-solid fa-download'></i>](core/ipynb/notebook01_python.ipynb)"
 - title: "Numpy and Scipy"
   author: "Master I MIDS UParis Cité"
   date: "2025-01-15"

@@ -6,12 +6,14 @@ listing:
       - notebooks-listings.yaml
     type: table  
     table-striped: true
-    table-hover: true
+    table-hover: false
     sort: date
-    fields: [date, title, categories] 
+    fields: [date, title, categories, href] 
+    field-links: [title]
     field-display-names: 
       title: "Title"
       categories: "Description"
+      href: "Jupyter notebook"
 ---
 
 Slides provide the framework for the course. You can use them to familiarise yourself with the material for the next lesson, and/or to review previous lessons.

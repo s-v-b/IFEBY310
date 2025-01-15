@@ -1,0 +1,109 @@
+---
+title: "{{< fa brands docker >}}: Docker"
+
+# format:
+#   html:
+#     highlight-style: zenburn
+---
+
+
+
+
+## Get a Docker account and connect
+
+- Download, install and launch docker on your laptop 
+  
+Follow instructions at https://www.docker.com/get-started
+
+::: {.callout-note}
+
+It is enough to install the CLI tool. 
+
+:::
+
+- Create an account on docker hub (if you don’t have one already) at https://hub.docker.com
+
+> Docker Hub is a service provided by Docker for finding and sharing container images with your team. Learn more and find images at https://hub.docker.com
+
+- Open a terminal (powershell on windows) and type
+
+```{,bash}
+docker login
+```
+
+and provide the username and password you use at https://hub.docker.com
+
+## Docker desktop (optional)
+
+
+
+## Pull docker iamges
+
+```{.bash}
+docker pull svbo/ifeby310
+```
+
+```{.bash}
+docker image ls
+```
+
+## Run containers
+
+> A container is a runtime instance of a docker image. A container
+will always run the same, regardless of the infrastructure.
+Containers isolate software from its environment and ensure
+that it works uniformly despite differences for instance between
+development and staging.
+
+### Configure `docker-compose.yml`
+
+`docker-compose.yml`
+
+```{.yaml}
+version: "3.7"
+services:
+  big_data_course:
+    container_name: ifeby310  
+    image: svbo/ifeby310
+    ports:
+      - "8192:8192"
+      - "8888:8888"
+      - "4040:4040"
+    restart: always
+    volumes:
+      - "PATH_GROSSES_DATA:/opt/polynote/notebooks/"
+    restart: always
+    environment:
+      - PYSPARK_ALLOW_INSECURE_GATEWAY=1
+```
+
+::: {.callout-important}
+
+`PATH_GROSSES_DATA` denotes the path on your hard drive where you will work during this course. It denotes a local volume that is mapped on container path `/opt/polynote/notebooks`
+
+:::
+
+### Compose the container
+
+
+```{.bash}
+docker-compose up
+```
+
+```{.bash}
+docker container ls 
+```
+
+## What happens?
+
+
+
+## Use jupyter notebooks
+
+## Use `pyspark` and `spark-submit`
+
+## Use `polynote`
+
+## Docker cheatsheet
+
+[From docker.com](https://docs.docker.com/get-started/docker_cheatsheet.pdf)
