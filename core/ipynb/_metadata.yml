@@ -2,3 +2,5 @@ execute:
   cache: false
   error: true
   eval: false
+
+format: ipynb

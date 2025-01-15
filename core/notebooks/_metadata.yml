@@ -3,3 +3,5 @@ execute:
   error: true
   eval: true
 
+code-fold: true
+
