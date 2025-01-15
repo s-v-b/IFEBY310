@@ -1,0 +1,36 @@
+---
+title: "Week 1"
+subtitle: "Introduction"
+editor: source
+draft: false
+---
+
+::: callout-important
+
+-   Room: TBA 
+-   Friday 17 January 2025  15h45-17h45
+-   {{< fa cal >}} [Calendar](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
+
+:::
+
+
+## Lecture : slides
+
+- {{< fa display >}} [Introduction to Big Data](/core/slides/slides01_introduction){target="_blank"}
+- {{< fa display >}} [Python Data Science Stack](/core/slides/slides02_python_ds_stack.html){target="_blank"} 
+
+## Notebooks
+
+- {{< fa brands python >}}  [notebook](/core/ipynb/notebook01_python.ipynb)
+- {{< fa globe >}} [html](/core/notebooks/notebook01_python.html)  
+- {{< fa file-pdf >}} [pdf](/core/notebooks/notebook01_python.pdf)
+
+## Logistics
+
+{{< fa bullhorn >}} If you do not already have an ENT account, follow instructions on  [Moodle](https://moodle.u-paris.fr/course/view.php?id=2313) to get  one. You shall need this account to connect to  PostGres cluster.
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [Agenda](/slides-listings.qmd) ⏎
+:::
