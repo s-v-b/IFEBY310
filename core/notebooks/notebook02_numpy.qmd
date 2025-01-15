@@ -1070,22 +1070,16 @@ for i, r in enumerate(ranks):
 
 ### Variations
 
-- 
+In the code above, we recompute the SVD of `X` for every element in list `rank`.    
+In the next chunk, we compute the SVD once, and define a *generator* to generate the low rank approximations of matrix `X`. We take advantage of the fact that the SVD defines 
+an orthonormal basis for the space of matrices. In this adapted orthonormal basis 
+the optimal  low rank approximations of $X$ have  a sparse expansion.
 
 :::
 
 
-```{.python}
-    """Generator for low rank 
-    approximation of a matrix X using truncated SVD.
 
-    Args:
-        X (numpy.ndarray): a numerical matrix
 
-    Yields:
-        numpy.ndarray: 
-    """
-```
 ```{python}
 def gen_rank_k_approx(X):
     """Generator for low rank 
@@ -1096,16 +1090,7 @@ def gen_rank_k_approx(X):
 
     Yields:
         (int,numpy.ndarray): rank k and best rank-k approximation of X using truncated SVD(according to Eckart-Young theorem).
-    """    
-    """Generator for low rank 
-    approximation of a matrix X using truncated SVD.
-
-    Args:
-        X (numpy.ndarray): a numerical matrix
-
-    Yields:
-        numpy.ndarray: best rank-k approximation of X using truncated SVD(according to Eckart-Young theorem).
-    """    
+    """  
     U, S, V = np.linalg.svd(X, full_matrices=False)
     r = 0
     Y = np.zeros_like(X, dtype='float64')
@@ -1120,6 +1105,7 @@ def gen_rank_k_approx(X):
 ```{python}
 g = gen_rank_k_approx(X_reshaped) 
 ```
+
 ```{python}
 for i in range(100):
     _, Xr = next(g)

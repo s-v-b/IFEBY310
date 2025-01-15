@@ -23,7 +23,7 @@ draft: false
 
 - {{< fa brands python >}}  [notebook](/core/ipynb/notebook01_python.ipynb)
 - {{< fa globe >}} [html](/core/notebooks/notebook01_python.html)  
-- {{< fa file-pdf >}} [pdf](/core/notebooks/notebook01_python.pdf)
+<!-- - {{< fa file-pdf >}} [pdf](/core/notebooks/notebook01_python.pdf) -->
 
 ## Logistics
 

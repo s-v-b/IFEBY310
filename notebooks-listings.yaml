@@ -9,6 +9,7 @@
   date: "2025-01-15"
   path: "core/notebooks/notebook02_numpy.html"
   categories: [Python, Numpy, Scipy, Plotly]
+  href: "[<i class='fa-solid fa-download'></i>](core/ipynb/notebook02_numpy.ipynb)"
 - title: "Table wranglig with Pandas"
   author: "Master I MIDS UParis Cité"
   date: "2025-01-22"

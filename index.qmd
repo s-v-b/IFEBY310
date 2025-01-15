@@ -4,7 +4,7 @@ about:
   id: hero-heading
   template: trestles
   image: https://imgs.xkcd.com/comics/data_pipeline.png
-  image-width: 15em
+  image-width: 20em
   image-shape: rectangle
   links:
     - icon: person-fill
@@ -33,11 +33,11 @@ During this course, you shall learn to:
 
 ### {{< fa server >}} 
 
-We will work using Docker images.
+We will work on Spark using Docker images.
+It is a good idea to install Python and the Python data stack on your laptop. 
 
 :::
 
-Vous trouverez sur ce site information et matériel
 
 - [Course Syllabus](/cours-syllabus.qmd)
 - [Current and past teams](/cours-equipe.qmd)

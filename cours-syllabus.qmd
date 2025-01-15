@@ -85,12 +85,12 @@ Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=28534) 
 
 ## Références  {{< fa book >}}
 
-- [Pandas Book](https://pandas.pydata.org/docs/getting_started/index.html)
+- [Pandas Book](https://wesmckinney.com/book/)
 - [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
-- [Dask Book](https://tutorial.dask.org)
-- [Spark Book](https://spark.apache.org/docs/latest/index.html)
+- [Dask](https://tutorial.dask.org)
+- [Spark](https://spark.apache.org/docs/latest/index.html)
+- [Data pipelines](https://www.oreilly.com/library/view/data-pipelines-pocket/9781492087823/)
 - [Data pipelines](https://www.dataengineeringpodcast.com)
-- [Database Systems: The Complete Book (DS:CB), by Hector Garcia-Molina, Jeff Ullman, and Jennifer Widom]()
 - [Alice](http://webdam.inria.fr/Alice/)
 - [Documentation PostGres](https://www.postgresql.org/docs/current/)
 - [Next Generation Databases NoSQLand Big Data, Guy Harrison ](https://link.springer.com/book/10.1007/978-1-4842-1329-2)
