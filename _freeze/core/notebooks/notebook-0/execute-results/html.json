@@ -1,0 +1,12 @@
+{
+  "hash": "014e5cd3cee957aeb2ef193c3d42c480",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Notebook 0\"\nsubtitle: \"Iterators, generators, coroutines\"\n\nengine: jupyter\n---\n\n\n# Iterators\n\n# Generators\n\n\n# Coroutines \n\n",
+    "supporting": [
+      "notebook-0_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

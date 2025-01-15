@@ -1,0 +1,19 @@
+{
+  "hash": "8482813dd618306920814aba0059e33b",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Spark standalone\"\nengine: knitr\ndate: \"2025-01-17\"\n---\n\n\n\n\n# Setting up manually\n\n\n## \n\n::: {.callout}\nThe current working directory is where `spark-3.5.0-bin-hadoop3` has been installed\n:::\n\n```{.verbatim}\n.\n├── bin\n├── conf\n├── data\n├── examples\n├── jars\n├── kubernetes\n├── LICENSE\n├── licenses\n├── logs\n├── NOTICE\n├── python\n├── R\n├── README.md\n├── RELEASE\n├── sbin\n├── work\n└── yarn\n```\n\n## Start the standalone master server \n\n\n\n::: {.cell}\n\n```{.bash .cell-code}\n./sbin/start-master.sh\n```\n:::\n\n\n\n. . . \n\nWWW UI \n\n```{.verbatin}\n--webui-port 8080\n```\n\nMonitoring of \n\n- workers\n- running applications\n- completed applications\n\n. . .\n\n```{.verbatim}\nSpark Master at spark://<host>:<port>\n```\n\n## Starting a worker \n\n\n\n\n::: {.cell}\n\n```{.bash .cell-code}\n./sbin/start-worker.sh spark://boucheron-Precision-5480:7077\n```\n:::\n\n\n\n\n## Back to the Web UI\n\n\n![](./IMG/webUI-oneworker.png)\n\n## Starting workers\n\n\n## Options\n\n- `--host`\n- `--port` default 7077\n- `--wbeui-port` default 8080\n\n\n# Connecting an application to the server\n\n## Connecting `pyspark` to the cluster\n\nTo run an application on the Spark cluster, simply pass the spark://IP:PORT URL of the master as to the SparkContext constructor.\n\nTo run an interactive Spark shell against the cluster, run the following command:\n\n\n\n::: {.cell}\n\n```{.bash .cell-code}\n./bin/pyspark --master spark://boucheron-Precision-5480:7077\n```\n:::\n\n\n\n\n## xxx\n\n\n# Launching Spark Applications\n\n## \n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-after-body": [
+        "\n<script>\n  // htmlwidgets need to know to resize themselves when slides are shown/hidden.\n  // Fire the \"slideenter\" event (handled by htmlwidgets.js) when the current\n  // slide changes (different for each slide format).\n  (function () {\n    // dispatch for htmlwidgets\n    function fireSlideEnter() {\n      const event = window.document.createEvent(\"Event\");\n      event.initEvent(\"slideenter\", true, true);\n      window.document.dispatchEvent(event);\n    }\n\n    function fireSlideChanged(previousSlide, currentSlide) {\n      fireSlideEnter();\n\n      // dispatch for shiny\n      if (window.jQuery) {\n        if (previousSlide) {\n          window.jQuery(previousSlide).trigger(\"hidden\");\n        }\n        if (currentSlide) {\n          window.jQuery(currentSlide).trigger(\"shown\");\n        }\n      }\n    }\n\n    // hookup for slidy\n    if (window.w3c_slidy) {\n      window.w3c_slidy.add_observer(function (slide_num) {\n        // slide_num starts at position 1\n        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);\n      });\n    }\n\n  })();\n</script>\n\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
