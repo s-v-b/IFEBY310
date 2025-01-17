@@ -9,12 +9,13 @@
   date: "2025-01-15"
   path: "core/notebooks/notebook02_numpy.html"
   categories: [Python, Numpy, Scipy, Plotly]
-  href: "[<i class='fa-solid fa-download'></i>](core/ipynb/notebook02_numpy.ipynb)"
+  href: '<a href="core/ipynb/notebook02_numpy.ipynb" download="notebook02_numpy.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Table wranglig with Pandas"
   author: "Master I MIDS UParis Cité"
   date: "2025-01-22"
   path: "core/notebooks/notebook03_pandas.html"
   categories: [Python, Pandas]
+  href: '<a href="core/ipynb/notebook03_pandas.ipynb" download="notebook03_pandas.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Spark Resilient Distributed Datasets"
   author: "Master I MIDS UParis Cité"
   date: "2025-01-22"

@@ -7,7 +7,7 @@ draft: false
 
 ::: callout-important
 
--   Room: TBA 
+-   Room: Sophie Germain 0014 
 -   Friday 17 January 2025  15h45-17h45
 -   {{< fa cal >}} [Calendar](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
 
@@ -16,18 +16,43 @@ draft: false
 
 ## Lecture : slides
 
+We went (rapidly) through the two decks of slides :
+
 - {{< fa display >}} [Introduction to Big Data](/core/slides/slides01_introduction){target="_blank"}
 - {{< fa display >}} [Python Data Science Stack](/core/slides/slides02_python_ds_stack.html){target="_blank"} 
 
+We shall come back to the description of `Spark` in a couple of weeks
+
+During the next two weeks, we shall explore the Python Data Stack. 
+
+
+
 ## Notebooks
 
-- {{< fa brands python >}}  [notebook](/core/ipynb/notebook01_python.ipynb)
-- {{< fa globe >}} [html](/core/notebooks/notebook01_python.html)  
-<!-- - {{< fa file-pdf >}} [pdf](/core/notebooks/notebook01_python.pdf) -->
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook01_python.ipynb" download>Jupyter notebook I : tour of Python</a> 
+- {{< fa globe >}} [html: tour of Python](/core/notebooks/notebook01_python.html)  
+
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook02_numpy.ipynb" download>Jupyter notebook II : tour of numpy</a> 
+- {{< fa globe >}} [html: tour of numpy](/core/notebooks/notebook02_numpy.html)  
+
+## References 
+
+You can watch the  Introduction to NumPy conference presented at [EuroSciPy 2023](https://euroscipy.org)
+
+{{< video https://www.youtube.com/embed/8v3u6cydeoY >}}
+
 
 ## Logistics
 
-{{< fa bullhorn >}} If you do not already have an ENT account, follow instructions on  [Moodle](https://moodle.u-paris.fr/course/view.php?id=2313) to get  one. You shall need this account to connect to  PostGres cluster.
+{{< fa bullhorn >}} To work the `jupyter` notebooks, install `python 3`, 
+and modules related to `jupyter`: `jupyter-cache`, `jupyter_client`,
+`jupyter_core`, `jupyterlab_widgets` (this induces the installation of dependencies).
+
+<https://jupyter.org>
+
+Download the jupyter notebooks from  [notebooks listings](/notebooks-listings.qmd). 
+
+{{< fa bullhorn >}} If you do not already have an ENT account, follow instructions on  [Moodle](https://moodle.u-paris.fr/course/view.php?id=28534) to get  one. You shall need this account to connect to  PostGres cluster.
 
 <br><br>
 
