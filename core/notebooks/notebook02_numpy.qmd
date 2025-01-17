@@ -1,15 +1,17 @@
 ---
 title: Introduction to `numpy`
 jupyter: python3
+
+engine: jupyter
 ---
 
 
 [`NumPy`](https://numpy.org) is the fundamental package for scientific computing with Python. It contains among other things:
 
-- a powerful N-dimensional array object
-- (sophisticated) broadcasting functions
+- a powerful [N-dimensional array object](https://numpy.org/doc/stable/user/basics.indexing.html)
+- (sophisticated) [broadcasting functions](https://numpy.org/doc/stable/user/basics.broadcasting.html)
 - tools for integrating C/C++ and Fortran code
-- useful linear algebra, Fourier transform, and random generation capabilities
+- useful [linear algebra](https://numpy.org/doc/stable/reference/routines.linalg.html), [Fourier transform](https://numpy.org/doc/stable/user/basics.indexing.html), and [random generation capabilities](https://numpy.org/doc/stable/reference/random/index.html)
 
 Besides its obvious scientific uses, `NumPy` can also be used as an efficient multi-dimensional container for general data. Arbitrary data-types can be defined. This allows `NumPy` to seamlessly and speedily integrate with a wide variety of databases.
 
@@ -21,6 +23,7 @@ Library documentation: <a>http://numpy.org/</a>
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-19T10:03:56.772810Z', start_time: '2022-01-19T10:03:56.767960Z'}
 #| slideshow: {slide_type: subslide}
+#| label:  setup
 import numpy as np
 
 # declare a vector using a list as the argument
@@ -61,6 +64,14 @@ v.dtype
 #| ExecuteTime: {end_time: '2022-01-19T10:04:40.960057Z', start_time: '2022-01-19T10:04:40.955004Z'}
 np.uint8 is int
 ```
+
+::: {.callout-tip collapse="true"} 
+
+Use copilot *explain* to understand the chunks:
+
+>  The np.uint8 is a data type in NumPy, representing an unsigned 8-bit integer, which can store values from 0 to 255. The int type is the built-in integer type in Python, which can represent any integer value without a fixed size limit.
+
+:::
 
 ```{python}
 np.array([2**120, 2**40], dtype=np.int64)
@@ -204,6 +215,14 @@ print(a2, a2.shape, a2.ndim)
 
 [More on NumPy quickstart](https://numpy.org/devdocs/user/quickstart.html)
 
+::: {.callout-note}
+
+List the attributes and methods of class `numpy.ndarray`. 
+You may use function `dir()` and filter the result using 
+methods for objects of class `string`. 
+
+:::
+
 ## Matrix multiplication
 
 ```{python}
@@ -223,7 +242,7 @@ a2.dot(a1) # inner product
 ```{python}
 (
     np.array([a2])
-        .transpose()#.shape
+    .transpose()#.shape
 )
 ```
 
@@ -275,6 +294,11 @@ y
 ```{python}
 x @ y, x.dot(y)
 ```
+
+::: {.callout-note}
+
+
+:::
 
 ## Generating arrays
 
@@ -648,6 +672,12 @@ a1.dot(a2)
 np.outer(a1, a2)
 ```
 
+::: {.callout-note}
+
+Visit <https://numpy.org/doc/stable/reference/arrays.ndarray.html#arrays-ndarray>
+
+:::
+
 ## Sparse matrices
 
 ```{python}
@@ -741,6 +771,8 @@ X.shape
 #| ExecuteTime: {end_time: '2022-01-19T10:39:51.793204Z', start_time: '2022-01-19T10:39:51.787910Z'}
 X.ndim
 ```
+
+Visit <https://numpy.org/doc/stable/reference/arrays.ndarray.html#arrays-ndarray>
 
 # Aggregations and statistics
 
@@ -1120,3 +1152,6 @@ for i in range(100):
       _ = plt.axis('off')
       plt.tight_layout()
 ```
+
+
+Visit <https://numpy.org/numpy-tutorials/content/tutorial-svd.html>
