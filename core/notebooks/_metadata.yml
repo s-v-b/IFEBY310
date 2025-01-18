@@ -4,4 +4,8 @@ execute:
   eval: true
 
 code-fold: true
+code-tools: 
+  source: repo
+
+jupyter: python3
 
