@@ -21,7 +21,7 @@ format:
     navigation-mode: vertical
     controls-layout: bottom-right
     controls-tutorial: true
-    lang: fr-FR
+    lang: en-US
 
     subtitle: "[Technologies Big Data Master MIDS/MFA/LOGOIS](https://s-v-b.github.io/IFEBY030/)"
     author: Équipe de Statistique 

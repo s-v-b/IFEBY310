@@ -32,7 +32,7 @@ $code-block-font-size: .75em !default ;
 // $body-bg: #fff;
 // $body-color: #000000;
 // $link-color: rgb(142, 5, 55);
-$presentation-font-size-root: 28px;
+$presentation-font-size-root: 26px;
 
 /*-- scss:rules --*/
 .reveal pre code {
@@ -110,5 +110,6 @@ section.has-dark-background a, section.has-dark-background a:hover {
 // 
 
 .reveal .slide .callout.callout-style-default div.callout-body {
-  font-size: var(--r-main-font-size);
+  # font-size: var(--r-main-font-size) !important;
+  font-size: 1rem;
 }

@@ -372,7 +372,8 @@ else:
 ```{python}
 #| eval: false
 #| scrolled: true
-df = pd.read_csv("tips.csv", 
+df = pd.read_csv(
+    "tips.csv", 
     delimiter=","
 )
 ```

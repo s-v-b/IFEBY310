@@ -1,0 +1,85 @@
+---
+title: "Week 2"
+subtitle: "Algèbre relationnelle et SQL"
+editor: source
+draft: false
+---
+
+
+::: callout-important
+
+-   Room: Sophie Germain 0014 
+-   Friday 24 January 2025  15h45-17h45
+-   {{< fa cal >}} [Calendar](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
+
+:::
+
+
+## Lecture : slides
+
+We shall briefly come back to several parts of 
+
+- {{< fa display >}} [Python Data Science Stack](/core/slides/slides02_python_ds_stack.html){target="_blank"} 
+
+  + [Data processing](https://s-v-b.github.io/IFEBY310/core/slides/slides02_python_ds_stack.html#/the-python-data-science-stack-data-processing)
+  + [Visualization](https://s-v-b.github.io/IFEBY310/core/slides/slides02_python_ds_stack.html#/the-python-data-science-stack-data-visualization)
+
+
+## Notebooks
+
+You shall have gone through (on your own)
+
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook01_python.ipynb" download>Jupyter notebook I : tour of Python</a> 
+- {{< fa globe >}} [html: tour of Python](/core/notebooks/notebook01_python.html)  
+
+You shall have gone through 
+
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook02_numpy.ipynb" download>Jupyter notebook II : tour of numpy</a> 
+- {{< fa globe >}} [html: tour of numpy](/core/notebooks/notebook02_numpy.html)  
+
+up to Section *Sparse Matrices* (not included)
+
+We shall spend most of the lecture on 
+
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook03_pandas.ipynb" download>Jupyter notebook III : tour of pandas</a> 
+- {{< fa globe >}} [html: tour of Pandas](/core/notebooks/notebook03_pandas.html)  
+
+
+## References 
+
+You can watch the  Introduction to NumPy conference presented at [EuroSciPy 2023](https://euroscipy.org)
+
+{{< video https://www.youtube.com/embed/8v3u6cydeoY >}}
+
+[The Pandas book by Wes McKinney](https://wesmckinney.com/book/)
+
+[Pandas exercises on Kaggle](https://www.kaggle.com/learn/pandas)
+
+{{< video https://www.youtube.com/watch?v=3qDhDXNRgHE >}}
+
+{{< video https://www.youtube.com/watch?v=ZjrUmNq41Eo >}}
+
+Contenders to Pandas are gaining attention: [Polars](https://pola.rs)
+
+{{< video https://www.youtube.com/watch?v=CJ0f45evuME >}}
+
+
+## Logistics
+
+{{< fa bullhorn >}} To work the `jupyter` notebooks, install `python 3`, 
+and modules related to `jupyter`: `jupyter-cache`, `jupyter_client`,
+`jupyter_core`, `jupyterlab_widgets` (this induces the installation of dependencies).
+
+<https://jupyter.org>
+
+Download the jupyter notebooks from  [notebooks listings](/notebooks-listings.qmd). 
+
+{{< fa bullhorn >}} If you do not already have an ENT account, follow instructions on  [Moodle](https://moodle.u-paris.fr/course/view.php?id=28534) to get  one. You shall need this account to connect to  PostGres cluster.
+
+
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [Agenda](/slides-listings.qmd) ⏎
+:::
