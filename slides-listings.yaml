@@ -20,12 +20,12 @@
   categories: []
 - title: "Spark : RDDs"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-02-07"
+  date: "2025-02-06"
   path: "core/slides/slides03_sparkrdd.html"
   categories: []
 - title: "Spark : SQL"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-02-21"
+  date: "2025-02-07"
   path: "core/slides/slides04_sparkl.html"
   categories: []
 - title: "JSON"

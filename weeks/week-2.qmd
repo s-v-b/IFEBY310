@@ -1,6 +1,6 @@
 ---
 title: "Week 2"
-subtitle: "Algèbre relationnelle et SQL"
+subtitle: "Python Data Science Stack"
 editor: source
 draft: false
 ---
