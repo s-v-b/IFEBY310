@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -68,8 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-65bb2660d2added026bc737f6d61009c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -292,6 +292,18 @@ window.Quarto = {
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -348,7 +360,7 @@ window.Quarto = {
 </header>
 
 
-<div id="c0cfd958" class="cell" data-execution_count="1">
+<div id="7d37a707" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -358,7 +370,7 @@ window.Quarto = {
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">'PYSPARK_DRIVER_PYTHON'</span>] <span class="op">=</span> sys.executable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="7a9cc7ed" class="cell" data-execution_count="2">
+<div id="4ec914ed" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark <span class="im">import</span> SparkConf, SparkContext</span>
@@ -374,38 +386,39 @@ window.Quarto = {
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>25/01/18 14:18:52 WARN Utils: Your hostname, boucheron-Precision-5480 resolves to a loopback address: 127.0.1.1; using 192.168.10.120 instead (on interface wlp0s20f3)
-25/01/18 14:18:52 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+<pre><code>25/02/03 23:21:16 WARN Utils: Your hostname, boucheron-Precision-5480 resolves to a loopback address: 127.0.1.1; using 192.168.10.120 instead (on interface wlp0s20f3)
+25/02/03 23:21:16 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-25/01/18 14:18:52 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</code></pre>
+25/02/03 23:21:16 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/02/03 23:21:17 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.</code></pre>
 </div>
 </div>
-<div id="7e3f52dc" class="cell" data-execution_count="3">
+<div id="7e2a69ef" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> spark._sc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="6e96315a" class="cell" data-execution_count="4">
+<div id="789cfa33" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rdd <span class="op">=</span> sc.parallelize([(<span class="st">"a"</span>, <span class="dv">1</span>), (<span class="st">"b"</span>, <span class="dv">1</span>), (<span class="st">"a"</span>, <span class="dv">1</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="e6cb01f1" class="cell" data-execution_count="5">
+<div id="b6432ed7" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rdd.reduceByKey(<span class="kw">lambda</span> a, b: a <span class="op">+</span> b).collect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>[Stage 0:&gt;                                                        (0 + 20) / 20][Stage 0:================================================&gt;        (17 + 3) / 20]                                                                                </code></pre>
+<pre><code>[Stage 0:&gt;                                                        (0 + 20) / 20]                                                                                </code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>[('b', 1), ('a', 2)]</code></pre>
 </div>
 </div>
-<div id="a766979b" class="cell" data-execution_count="6">
+<div id="85515e20" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests, zipfile, io</span>
@@ -448,7 +461,7 @@ File <span class="ansi-green-fg">/usr/lib/python3.12/zipfile/__init__.py:1416</s
 </div>
 </div>
 </div>
-<div id="3ecd0305" class="cell" data-execution_count="7">
+<div id="8b4d7022" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>input_path <span class="op">=</span> <span class="st">'./'</span></span>
@@ -499,7 +512,7 @@ File <span class="ansi-green-fg">~/Documents/IFEBY310/.venv/lib/python3.12/site-
 </div>
 </div>
 </div>
-<div id="abcaa6c4" class="cell" data-execution_count="8">
+<div id="83bcc7f1" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -515,7 +528,7 @@ Cell <span class="ansi-green-fg">In[8], line 1</span>
 </div>
 </div>
 </div>
-<div id="2dde4457" class="cell" data-execution_count="9">
+<div id="fa299f48" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -531,7 +544,7 @@ Cell <span class="ansi-green-fg">In[9], line 1</span>
 </div>
 </div>
 </div>
-<div id="a5a13316" class="cell" data-execution_count="10">
+<div id="12fd0e3b" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df.count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -550,7 +563,7 @@ Cell <span class="ansi-green-fg">In[10], line 1</span>
 <section id="basic-statistics" class="level1">
 <h1>Basic statistics</h1>
 <p>First we need to import some things</p>
-<div id="73ad217a" class="cell" data-execution_count="11">
+<div id="8078bd4e" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Window</span>
@@ -561,7 +574,7 @@ Cell <span class="ansi-green-fg">In[10], line 1</span>
 </div>
 <section id="compute-the-total-number-of-unique-users" class="level2">
 <h2 class="anchored" data-anchor-id="compute-the-total-number-of-unique-users">Compute the total number of unique users</h2>
-<div id="8aa0504b" class="cell" data-execution_count="12">
+<div id="853b54b4" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df.select(<span class="st">'xid'</span>).distinct().count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -580,7 +593,7 @@ Cell <span class="ansi-green-fg">In[12], line 1</span>
 </section>
 <section id="construct-a-column-containing-the-total-number-of-actions-per-user" class="level2">
 <h2 class="anchored" data-anchor-id="construct-a-column-containing-the-total-number-of-actions-per-user">Construct a column containing the total number of actions per user</h2>
-<div id="cbda8fad" class="cell" data-execution_count="13">
+<div id="3872ba86" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
@@ -602,7 +615,7 @@ Cell <span class="ansi-green-fg">In[13], line 3</span>
 </div>
 </div>
 </div>
-<div id="44936a2b" class="cell" data-execution_count="14">
+<div id="81003da4" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df.groupBy(<span class="st">'xid'</span>).agg(func.count(<span class="st">'action'</span>)).head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -621,7 +634,7 @@ Cell <span class="ansi-green-fg">In[14], line 1</span>
 </section>
 <section id="construct-a-column-containing-the-number-of-days-since-the-last-action-of-the-user" class="level2">
 <h2 class="anchored" data-anchor-id="construct-a-column-containing-the-number-of-days-since-the-last-action-of-the-user">Construct a column containing the number of days since the last action of the user</h2>
-<div id="6a2aa3dc" class="cell" data-execution_count="15">
+<div id="c81abb1f" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
@@ -649,7 +662,7 @@ Cell <span class="ansi-green-fg">In[15], line 4</span>
 </section>
 <section id="construct-a-column-containing-the-number-of-actions-of-each-user-for-each-modality-of-device" class="level2">
 <h2 class="anchored" data-anchor-id="construct-a-column-containing-the-number-of-actions-of-each-user-for-each-modality-of-device">Construct a column containing the number of actions of each user for each modality of device</h2>
-<div id="dd7e5f55" class="cell" data-execution_count="16">
+<div id="5c553ce7" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>xid_device_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'device'</span>)</span>
@@ -674,7 +687,7 @@ Cell <span class="ansi-green-fg">In[16], line 3</span>
 </section>
 <section id="number-of-device-per-user-some-mental-gymnastics" class="level2">
 <h2 class="anchored" data-anchor-id="number-of-device-per-user-some-mental-gymnastics">Number of device per user: some mental gymnastics</h2>
-<div id="a126fc9a" class="cell" data-execution_count="17">
+<div id="e6fb6b7f" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
@@ -697,7 +710,7 @@ Cell <span class="ansi-green-fg">In[17], line 4</span>
 </div>
 </div>
 </div>
-<div id="e581ff22" class="cell" data-execution_count="18">
+<div id="b11c3a37" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df<span class="op">\</span></span>
@@ -727,7 +740,7 @@ Cell <span class="ansi-green-fg">In[18], line 1</span>
 <section id="extraction" class="level2">
 <h2 class="anchored" data-anchor-id="extraction">Extraction</h2>
 <p>Extraction is easy here, it’s just about reading the data</p>
-<div id="31780ee1" class="cell" data-execution_count="19">
+<div id="1b6312c0" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.read.parquet(input_file)</span>
@@ -779,7 +792,7 @@ File <span class="ansi-green-fg">~/Documents/IFEBY310/.venv/lib/python3.12/site-
 <section id="transformation-of-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="transformation-of-the-data">Transformation of the data</h2>
 <p>At this step we compute a lot of extra things from the data. The aim is to build features that describe users.</p>
-<div id="1bd6a5a2" class="cell" data-execution_count="20">
+<div id="705ee702" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_transformer(df):</span>
@@ -893,7 +906,7 @@ File <span class="ansi-green-fg">~/Documents/IFEBY310/.venv/lib/python3.12/site-
 <span id="cb23-109"><a href="#cb23-109" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="619207fa" class="cell" data-execution_count="21">
+<div id="a2598b89" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>transformers <span class="op">=</span> [</span>
@@ -936,7 +949,7 @@ Cell <span class="ansi-green-fg">In[21], line 18</span>
 </div>
 </div>
 </div>
-<div id="94f5ca31" class="cell" data-execution_count="22">
+<div id="e8cc494e" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>(df.columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -956,7 +969,7 @@ Cell <span class="ansi-green-fg">In[22], line 1</span>
 <section id="load-step" class="level2">
 <h2 class="anchored" data-anchor-id="load-step">Load step</h2>
 <p>Here, we use all the previous computations (saved in the columns of the dataframe) to compute aggregated informations about each user.</p>
-<div id="1cecd97a" class="cell" data-execution_count="23">
+<div id="517fd780" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_per_hour_loader(df):</span>
@@ -1096,7 +1109,7 @@ Cell <span class="ansi-green-fg">In[22], line 1</span>
 <span id="cb26-135"><a href="#cb26-135" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> csr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cb11625b" class="cell" data-execution_count="24">
+<div id="1310b24b" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
@@ -1144,7 +1157,7 @@ Cell <span class="ansi-green-fg">In[24], line 24</span>
 </div>
 </div>
 </div>
-<div id="c84bcd10" class="cell" data-execution_count="25">
+<div id="1692d0f4" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>csr.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1160,7 +1173,7 @@ Cell <span class="ansi-green-fg">In[25], line 1</span>
 </div>
 </div>
 </div>
-<div id="4969e51a" class="cell" data-execution_count="26">
+<div id="1d7eee5b" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>csr.count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1176,7 +1189,7 @@ Cell <span class="ansi-green-fg">In[26], line 1</span>
 </div>
 </div>
 </div>
-<div id="a4d9b14e" class="cell" data-execution_count="27">
+<div id="74140b98" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace features names and xid by a unique number</span></span>
@@ -1209,7 +1222,7 @@ Cell <span class="ansi-green-fg">In[27], line 8</span>
 </div>
 </div>
 </div>
-<div id="ace0f36c" class="cell" data-execution_count="28">
+<div id="b176f8d7" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's save the result of our hard work into a new parquet file</span></span>
@@ -1234,7 +1247,7 @@ Cell <span class="ansi-green-fg">In[28], line 4</span>
 </section>
 <section id="preparation-of-the-training-dataset" class="level1">
 <h1>Preparation of the training dataset</h1>
-<div id="d1309bd0" class="cell" data-execution_count="29">
+<div id="0e919041" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>csr_path <span class="op">=</span> <span class="st">'./'</span></span>
@@ -1287,7 +1300,7 @@ File <span class="ansi-green-fg">~/Documents/IFEBY310/.venv/lib/python3.12/site-
 </div>
 </div>
 </div>
-<div id="c9d503aa" class="cell" data-execution_count="30">
+<div id="de0316e6" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df.count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1303,7 +1316,7 @@ Cell <span class="ansi-green-fg">In[30], line 1</span>
 </div>
 </div>
 </div>
-<div id="36ebd81e" class="cell" data-execution_count="31">
+<div id="603f0d94" class="cell" data-execution_count="31">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What are the features related to campaign_id 1204 ?</span></span>
@@ -1327,7 +1340,7 @@ Cell <span class="ansi-green-fg">In[31], line 3</span>
 </div>
 </div>
 </div>
-<div id="dbe238e9" class="cell" data-execution_count="32">
+<div id="a9f6d908" class="cell" data-execution_count="32">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>features_names</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1343,7 +1356,7 @@ Cell <span class="ansi-green-fg">In[32], line 1</span>
 </div>
 </div>
 </div>
-<div id="99d3fe59" class="cell" data-execution_count="33">
+<div id="56b0e156" class="cell" data-execution_count="33">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>[feature_name <span class="cf">for</span> feature_name <span class="kw">in</span> features_names <span class="cf">if</span> <span class="st">'1204'</span> <span class="kw">in</span> feature_name]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1359,7 +1372,7 @@ Cell <span class="ansi-green-fg">In[33], line 1</span>
 </div>
 </div>
 </div>
-<div id="355fd599" class="cell" data-execution_count="34">
+<div id="d71f1761" class="cell" data-execution_count="34">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look for the xid that have at least one exposure to campaign 1204</span></span>
@@ -1388,7 +1401,7 @@ Cell <span class="ansi-green-fg">In[34], line 6</span>
 </div>
 </div>
 </div>
-<div id="bf21c054" class="cell" data-execution_count="35">
+<div id="80cd0d9d" class="cell" data-execution_count="35">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sum of the keeps :)</span></span>
@@ -1409,7 +1422,7 @@ Cell <span class="ansi-green-fg">In[35], line 4</span>
 </div>
 </div>
 </div>
-<div id="ed5b3398" class="cell" data-execution_count="36">
+<div id="b78bae14" class="cell" data-execution_count="36">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's keep the xid exposed to 1204</span></span>
@@ -1427,7 +1440,7 @@ Cell <span class="ansi-green-fg">In[36], line 2</span>
 </div>
 </div>
 </div>
-<div id="a7d3a1c0" class="cell" data-execution_count="37">
+<div id="46b5a9e7" class="cell" data-execution_count="37">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df.count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1443,7 +1456,7 @@ Cell <span class="ansi-green-fg">In[37], line 1</span>
 </div>
 </div>
 </div>
-<div id="9be6a3ef" class="cell" data-execution_count="38">
+<div id="b7ebd295" class="cell" data-execution_count="38">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df.select(<span class="st">'xid'</span>).distinct().count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1459,7 +1472,7 @@ Cell <span class="ansi-green-fg">In[38], line 1</span>
 </div>
 </div>
 </div>
-<div id="7aaac9f3" class="cell" data-execution_count="39">
+<div id="3f6da86f" class="cell" data-execution_count="39">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>row_partition <span class="op">=</span> Window().orderBy(<span class="st">'row'</span>)</span>
@@ -1485,7 +1498,7 @@ Cell <span class="ansi-green-fg">In[39], line 5</span>
 </div>
 </div>
 </div>
-<div id="83bc750e" class="cell" data-execution_count="40">
+<div id="d0b0adea" class="cell" data-execution_count="40">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>csr_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1501,7 +1514,7 @@ Cell <span class="ansi-green-fg">In[40], line 1</span>
 </div>
 </div>
 </div>
-<div id="69a4b0e2" class="cell" data-execution_count="41">
+<div id="603841a4" class="cell" data-execution_count="41">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>features_names <span class="op">=</span> df.select(<span class="st">'feature_name'</span>, <span class="st">'col_new'</span>).distinct()</span>
@@ -1519,7 +1532,7 @@ Cell <span class="ansi-green-fg">In[41], line 1</span>
 </div>
 </div>
 </div>
-<div id="cd0235fb" class="cell" data-execution_count="42">
+<div id="8a5f5b46" class="cell" data-execution_count="42">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>features_names.where(col(<span class="st">'feature_name'</span>) <span class="op">==</span> <span class="st">'n_actions_per_category_id#O#1204.0'</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1535,7 +1548,7 @@ Cell <span class="ansi-green-fg">In[42], line 1</span>
 </div>
 </div>
 </div>
-<div id="babdf500" class="cell" data-execution_count="43">
+<div id="61b546ac" class="cell" data-execution_count="43">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.sparse <span class="im">import</span> csr_matrix</span>
@@ -1562,7 +1575,7 @@ Cell <span class="ansi-green-fg">In[43], line 4</span>
 </div>
 </div>
 </div>
-<div id="f739cc95" class="cell" data-execution_count="44">
+<div id="652b0951" class="cell" data-execution_count="44">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>X_csr.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1578,7 +1591,7 @@ Cell <span class="ansi-green-fg">In[44], line 1</span>
 </div>
 </div>
 </div>
-<div id="5ae3c02f" class="cell" data-execution_count="45">
+<div id="0d6d9f62" class="cell" data-execution_count="45">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>X_csr.shape, X_csr.nnz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1594,7 +1607,7 @@ Cell <span class="ansi-green-fg">In[45], line 1</span>
 </div>
 </div>
 </div>
-<div id="a646eaa7" class="cell" data-execution_count="46">
+<div id="19f8d38c" class="cell" data-execution_count="46">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>X_csr.nnz <span class="op">/</span> (<span class="dv">152347</span> <span class="op">*</span> <span class="dv">92</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1610,7 +1623,7 @@ Cell <span class="ansi-green-fg">In[46], line 1</span>
 </div>
 </div>
 </div>
-<div id="3fe7ff7e" class="cell" data-execution_count="47">
+<div id="d2e7685f" class="cell" data-execution_count="47">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The label vector. Let's make it dense, flat and binary</span></span>
@@ -1630,7 +1643,7 @@ Cell <span class="ansi-green-fg">In[47], line 2</span>
 </div>
 </div>
 </div>
-<div id="1501339b" class="cell" data-execution_count="48">
+<div id="fc1405a6" class="cell" data-execution_count="48">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>X_csr.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1646,7 +1659,7 @@ Cell <span class="ansi-green-fg">In[48], line 1</span>
 </div>
 </div>
 </div>
-<div id="f17d64d9" class="cell" data-execution_count="49">
+<div id="9c41a191" class="cell" data-execution_count="49">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We remove the second and fourth column. </span></span>
@@ -1669,7 +1682,7 @@ Cell <span class="ansi-green-fg">In[49], line 6</span>
 </div>
 </div>
 </div>
-<div id="6556008e" class="cell" data-execution_count="50">
+<div id="e001acba" class="cell" data-execution_count="50">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>X_csr.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1688,7 +1701,7 @@ Cell <span class="ansi-green-fg">In[50], line 1</span>
 <section id="finally" class="level2">
 <h2 class="anchored" data-anchor-id="finally">Finally !!</h2>
 <p>Wow ! That was a lot of work. Now we have a features matrix <span class="math inline">\(X\)</span> and a vector of labels <span class="math inline">\(y\)</span>.</p>
-<div id="a37dde1d" class="cell" data-execution_count="51">
+<div id="b6e21d84" class="cell" data-execution_count="51">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>X.indices</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1704,7 +1717,7 @@ Cell <span class="ansi-green-fg">In[51], line 1</span>
 </div>
 </div>
 </div>
-<div id="7839d10a" class="cell" data-execution_count="52">
+<div id="f134c282" class="cell" data-execution_count="52">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>X.indptr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1720,7 +1733,7 @@ Cell <span class="ansi-green-fg">In[52], line 1</span>
 </div>
 </div>
 </div>
-<div id="6d92ca64" class="cell" data-execution_count="53">
+<div id="e48901e6" class="cell" data-execution_count="53">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>X.shape, X.nnz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1736,7 +1749,7 @@ Cell <span class="ansi-green-fg">In[53], line 1</span>
 </div>
 </div>
 </div>
-<div id="3995d3ee" class="cell" data-execution_count="54">
+<div id="38920e08" class="cell" data-execution_count="54">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>y.shape, y.<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1756,7 +1769,7 @@ Cell <span class="ansi-green-fg">In[54], line 1</span>
 </section>
 <section id="some-learning-for-this-data" class="level1">
 <h1>Some learning for this data</h1>
-<div id="82b15627" class="cell" data-execution_count="55">
+<div id="150d2510" class="cell" data-execution_count="55">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MaxAbsScaler</span>
@@ -1788,7 +1801,7 @@ Cell <span class="ansi-green-fg">In[55], line 1</span>
 </div>
 </div>
 </div>
-<div id="027394af" class="cell" data-execution_count="56">
+<div id="4637b062" class="cell" data-execution_count="56">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>features_names <span class="op">=</span> features_names.toPandas()[<span class="st">'feature_name'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1804,7 +1817,7 @@ Cell <span class="ansi-green-fg">In[56], line 1</span>
 </div>
 </div>
 </div>
-<div id="43b33fa5" class="cell" data-execution_count="57">
+<div id="93c7deb2" class="cell" data-execution_count="57">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1836,7 +1849,7 @@ Cell <span class="ansi-green-fg">In[57], line 5</span>
 <pre><code>&lt;Figure size 1536x480 with 0 Axes&gt;</code></pre>
 </div>
 </div>
-<div id="d426ba14" class="cell" data-execution_count="58">
+<div id="652a9367" class="cell" data-execution_count="58">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> precision_recall_curve, f1_score</span>

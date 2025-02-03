@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html lang="fr-FR"><head>
+<html lang="en-US"><head>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e25cc82807363e79c52e96bc8b7855f1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f8dc6eab18fde03278982b0b35885446.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/grid-no-htext-1.0.0/grid_no_htext.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
-<meta name="author" content="Équipe de Statistique">
-<meta name="dcterms.date" content="2025-01-17">
-<title>IFEBY310 - Spring 2025 – Apache and RDD</title>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-<link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
-<link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
-<style>
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
+
+  <meta name="author" content="Équipe de Statistique">
+  <meta name="dcterms.date" content="2025-01-17">
+  <title>IFEBY310 - Spring 2025 – Apache and RDD</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -102,12 +102,12 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-<link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f00bdec2bb0b3a8ee3ef557964359ddb.css">
-<link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-<link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-<link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-<link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-<style type="text/css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-9b209231abe29c972310dc692ecec836.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
       overflow: auto;
@@ -195,7 +195,7 @@
       margin-right: 0; 
     }
   </style>
-<script>
+  <script>
   MathJax = {
     loader: {
       load: ['[tex]/boldsymbol']
@@ -211,7 +211,8 @@
       }
     }
   };
-  </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 <meta property="og:title" content="Apache and RDD – IFEBY310 - Spring 2025">
 <meta property="og:description" content="Technologies Big Data Master MIDS/MFA/LOGOIS">
 <meta property="og:site_name" content="IFEBY310 - Spring 2025">
@@ -220,7 +221,8 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-color="#1c191c" class="quarto-title-block center"><h1 class="title">Apache and RDD</h1>
+<section id="title-slide" data-background-color="#1c191c" class="quarto-title-block center">
+  <h1 class="title">Apache and RDD</h1>
   <p class="subtitle"><a href="https://s-v-b.github.io/IFEBY030/">Technologies Big Data Master MIDS/MFA/LOGOIS</a></p>
 
 <div class="quarto-title-authors">
@@ -235,7 +237,9 @@
 </div>
 
   <p class="date">2025-01-17</p>
-</section><section id="TOC"><nav role="doc-toc"><h2 id="toc-title">Roadmap</h2>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Roadmap</h2>
 <ul>
 <li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
 <li><a href="#/sparksession-and-sparkcontext" id="/toc-sparksession-and-sparkcontext">SparkSession and SparkContext</a></li>
@@ -243,10 +247,18 @@
 <li><a href="#/actions" id="/toc-actions">Actions</a></li>
 <li><a href="#/persistence" id="/toc-persistence">Persistence</a></li>
 <li><a href="#/pair-rdd-key-value-pairs" id="/toc-pair-rdd-key-value-pairs">Pair RDD: key-value pairs</a></li>
+<li><a href="#/questions" id="/toc-questions"><i class="fa-solid fa-brain" aria-label="brain"></i> Questions</a></li>
 <li><a href="#/thank-you" id="/toc-thank-you">Thank you !</a></li>
-</ul></nav></section><section><section id="introduction" class="title-slide slide level1 center" data-background-color="#1c191c"><h1>Introduction</h1>
+</ul>
+</nav>
+</section>
+<section>
+<section id="introduction" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>Introduction</h1>
 
-</section><section id="principles" class="slide level2 center"><h2>Principles</h2>
+</section>
+<section id="principles" class="slide level2 center">
+<h2>Principles</h2>
 <p><code>Spark</code> computing framework deals with many complex issues: fault tolerance, slow machines, big datasets, etc.</p>
 <div class="fragment">
 <p>It follows the next guideline</p>
@@ -288,14 +300,22 @@
 </div>
 </div>
 </div>
-</section><section id="job" class="slide level2 center"><h2>Job</h2>
+</section>
+<section id="a-picture" class="slide level2 center">
+<h2>A picture</h2>
+
+<img data-src="../../images/cluster-overview.png" class="r-stretch quarto-figure-center"><p class="caption">Spark Cluster Overview</p></section>
+<section id="job" class="slide level2 center">
+<h2>Job</h2>
 <p>A <em>job</em> in Spark represents a complete computation triggered by an <em>action</em> in the application code.</p>
 <p>When you invoke an <em>action</em> (such as <code>collect()</code>, <code>saveAsTextFile()</code>, etc.) on a Spark RDD, DataFrame, or Dataset, it triggers the execution of one or more <em>jobs</em>.</p>
 <div class="fragment">
 <p>Each <em>job</em> consists of one or more <em>stages</em>, where each stage represents a set of <em>tasks</em> that can be executed in parallel.</p>
 <p><em>Jobs</em> in Spark are created by <em>transformations</em> that have no dependency on each other, meaning each <em>stage</em> can execute independently.</p>
 </div>
-</section><section id="task" class="slide level2 center"><h2>Task</h2>
+</section>
+<section id="task" class="slide level2 center">
+<h2>Task</h2>
 <p>A <em>task</em> is the smallest unit of work in Spark and represents the execution of a computation on a single <em>partition</em> of data.</p>
 <div class="fragment">
 <p><em>Tasks</em> are created for each <em>partition</em> of the RDD, DataFrame, or Dataset involved in the computation.</p>
@@ -315,79 +335,89 @@
 <div class="fragment">
 <p><em>Tasks</em> operate on individual <em>partitions</em> of the data in parallel to achieve efficient and scalable distributed computation in <code>Spark</code>.</p>
 </div>
-</section><section id="api" class="slide level2 center"><h2>API</h2>
+</section>
+<section id="api" class="slide level2 center">
+<h2>API</h2>
 <p>An <em>API</em> allows a user to interact with the software</p>
-<p><code>Spark</code> is implemented in <a href="https://www.scala-lang.org">Scala</a>, runs on the <em>JVM</em> (Java Virtual Machine)</p>
+<p><code>Spark</code> is implemented in <a href="https://www.scala-lang.org">Scala</a> and runs on the <em>JVM</em> (Java Virtual Machine)</p>
 <div class="fragment">
 <p><em>Multiple</em> Application Programming Interfaces (APIs):</p>
 <ul>
-<li>
-<code>Scala</code> (JVM)</li>
-<li>
-<code>Java</code> (JVM)</li>
-<li>
-<i class="fa-brands fa-python" aria-label="python"></i> <code>Python</code>
-</li>
-<li>
-<i class="fa-brands fa-r-project" aria-label="r-project"></i> <code>R</code>
-</li>
+<li><code>Scala</code> (JVM)</li>
+<li><code>Java</code> (JVM)</li>
+<li><i class="fa-brands fa-python" aria-label="python"></i> <code>Python</code></li>
+<li><i class="fa-brands fa-r-project" aria-label="r-project"></i> <code>R</code></li>
 </ul>
 </div>
 <div class="fragment">
 <p><em>This course uses primarily the <code>Python</code> API</em>. Easier to learn than <code>Scala</code> and <code>Java</code></p>
+<div title="About the `R` APIs">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Astuce</strong></p>
+<p><strong>About the <code>R</code> APIs</strong></p>
 </div>
 <div class="callout-content">
-<p>About the <code>R</code> APIs: See <a href="https://therinspark.com">Mastering Spark in R</a></p>
+<p>See <a href="https://therinspark.com">Mastering Spark in R</a></p>
 </div>
 </div>
 </div>
 </div>
-</section><section id="digression-on-acronym-api-application-programming-interface" class="slide level2 center"><h2>Digression on acronym API (Application Programming Interface)</h2>
+</div>
+</section>
+<section id="digression-on-acronym-api-application-programming-interface" class="slide level2 center">
+<h2>Digression on acronym API (Application Programming Interface)</h2>
 <p>See <a href="https://en.wikipedia.org/wiki/API">https://en.wikipedia.org/wiki/API</a> for more on this acronym</p>
-<p>In <code>Python</code> language, look at <code>interface</code> and corresponding chapter <em>Interfaces, Protocols and ABCs</em> in <a href="https://www.fluentpython.com">Fluent Python</a></p>
+<p><i class="fa-brands fa-python" aria-label="python"></i> In <code>Python</code> language, look at <code>interface</code> and corresponding chapter <em>Interfaces, Protocols and ABCs</em> in <a href="https://www.fluentpython.com">Fluent Python</a></p>
 <div class="fragment">
-<p>For <code>R</code> there are in fact two APIs, or two packages that offer a <code>Spark</code> API</p>
+<p><i class="fa-brands fa-r-project" aria-label="r-project"></i> For <code>R</code> there are in fact two APIs, or two packages that offer a <code>Spark</code> API</p>
 <ul>
 <li><a href="https://spark.rstudio.com"><code>sparklyr</code></a></li>
 <li><a href="https://spark.apache.org/docs/latest/sparkr.html"><code>SparkR</code></a></li>
 </ul>
 <p>See <a href="https://therinspark.com/index.html">Mastering <code>Spark</code> with <code>R</code> by Javier Luraschi, Kevin Kuo, Edgar Ruiz</a></p>
 </div>
-</section><section id="architecture" class="slide level2 center"><h2>Architecture</h2>
+</section>
+<section id="architecture" class="slide level2 smaller center">
+<h2>Architecture</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
 <p>When you interact with <code>Spark</code> through its API, you send instructions to the <em>Driver</em></p>
 <ul>
-<li>The <em>Driver</em> is the <em>central coordinator</em>
-</li>
-<li>It communicates with distributed workers called <em>executors</em>
-</li>
+<li>The <em>Driver</em> is the <em>central coordinator</em></li>
+<li>It communicates with distributed workers called <em>executors</em></li>
 <li>Creates a <em>logical directed acyclic graph</em> (DAG) of operations</li>
-<li>
-<em>Merges operations</em> that can be merged</li>
-<li>
-<em>Splits</em> the operations in <em>tasks</em> (smallest unit of work in Spark)</li>
-<li>
-<em>Schedules</em> the tasks and send them to the <em>executors</em>
-</li>
-<li>
-<em>Tracks</em> data and tasks</li>
+<li><em>Merges operations</em> that can be merged</li>
+<li><em>Splits</em> the operations in <em>tasks</em> (smallest unit of work in Spark)</li>
+<li><em>Schedules</em> the tasks and send them to the <em>executors</em></li>
+<li><em>Tracks</em> data and tasks</li>
 </ul>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:65%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../images/cluster-overview.png"></p>
+<figcaption>Spark Cluster Overview</figcaption>
+</figure>
+</div>
 <h4 id="example">Example</h4>
 <ul>
-<li>Example of DAG: <code>map(f) - map(g) - filter(h) - reduce(l)</code>
-</li>
+<li>Example of DAG: <code>map(f) - map(g) - filter(h) - reduce(l)</code></li>
 <li><code>map(f o g)</code></li>
-</ul></section></section><section><section id="sparksession-and-sparkcontext" class="title-slide slide level1 center" data-background-color="#1c191c"><h1>SparkSession and SparkContext</h1>
+</ul>
+</div></div>
+</section></section>
+<section>
+<section id="sparksession-and-sparkcontext" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>SparkSession and SparkContext</h1>
 
-</section><section id="sparkcontext-versus-sparksession" class="slide level2 center"><h2>
-<code>SparkContext</code> versus <code>SparkSession</code>
-</h2>
+</section>
+<section id="sparkcontext-versus-sparksession" class="slide level2 center">
+<h2><code>SparkContext</code> versus <code>SparkSession</code></h2>
 <p><code>SparkContext</code> and <code>SparkSession</code> serve different purposes</p>
 <div class="fragment">
 <p><code>SparkContext</code> was the main entry point for Spark applications in first versions of Apache Spark.</p>
@@ -395,7 +425,9 @@
 <p><code>SparkContext</code> was responsible for coordinating and managing the execution of <em>jobs</em> and <em>tasks</em>.</p>
 <p><code>SparkContext</code> provided APIs for creating <code>RDDs</code> (Resilient Distributed Datasets), which were the primary abstraction in Spark for representing distributed data.</p>
 </div>
-</section><section id="sparkcontext-object" class="slide level2 center"><h2>SparkContext object</h2>
+</section>
+<section id="sparkcontext-object" class="slide level2 center">
+<h2>SparkContext object</h2>
 <p>Your <code>python</code> session interacts with the <em>driver</em> through a <code>SparkContext</code> object</p>
 <ul>
 <li><p>In the <code>Spark</code> interactive shell <br> An object of class <code>SparkContext</code> is automatically created in the session and named <code>sc</code></p></li>
@@ -408,21 +440,23 @@
 <span id="cb1-5"><a></a>  .setAppName(appName)</span>
 <span id="cb1-6"><a></a>  .setMaster(master)</span>
 <span id="cb1-7"><a></a>)</span>
-<span id="cb1-8"><a></a><span class="op">&gt;&gt;&gt;</span> sc <span class="op">=</span> SparkContext(conf<span class="op">=</span>conf)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section><section id="sparksession" class="slide level2 center"><h2>SparkSession</h2>
+<span id="cb1-8"><a></a><span class="op">&gt;&gt;&gt;</span> sc <span class="op">=</span> SparkContext(conf<span class="op">=</span>conf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sparksession" class="slide level2 center">
+<h2><i class="fa-solid fa-bullhorn" aria-label="bullhorn"></i> SparkSession</h2>
 <p>In Spark 2.0 and later versions, <code>SparkContext</code> is still available but is not the primary entry point.</p>
 <p>Instead, <code>SparkSession</code> is preferred.</p>
 <p><code>SparkSession</code> was introduced in Spark 2.0 as a higher-level abstraction that encapsulates <code>SparkContext</code>, <code>SQLContext</code>, and <code>HiveContext</code>.</p>
 <p><code>SparkSession</code> provides a unified entry point for Spark functionality, integrating Structured APIs:</p>
 <ul>
-<li>
-<code>SQL</code>,</li>
-<li>
-<code>DataFrame</code>,</li>
+<li><code>SQL</code>,</li>
+<li><code>DataFrame</code>,</li>
 <li><code>Dataset</code></li>
 </ul>
 <p>and the traditional RDD-based APIs.</p>
-</section><section id="section-2" class="slide level2 center"><h2></h2>
+</section>
+<section id="what-sparksession" class="slide level2 center">
+<h2>What <code>SparkSession</code>?</h2>
 <p><code>SparkSession</code> is designed to make it easier to work with structured data (like data stored in tables or files with a schema) using Spark’s DataFrame and Dataset APIs.</p>
 <div class="fragment">
 <p><code>SparkSession</code> also provides built-in support for reading data from various sources (like Parquet, JSON, JDBC, etc.) into DataFrames and writing DataFrames back to different formats.</p>
@@ -445,10 +479,14 @@
 </div>
 </div>
 </div>
-</section><section id="section-4" class="slide level2 center"><h2><i class="fa-solid fa-bullhorn" aria-label="bullhorn"></i></h2>
+</section>
+<section id="section-3" class="slide level2 center">
+<h2><i class="fa-solid fa-bullhorn" aria-label="bullhorn"></i></h2>
 <p><code>SparkContext</code> is lower-level and primarily focused on managing the execution of Spark <em>jobs</em> and interacting with the <em>cluster</em></p>
 <p><code>SparkSession</code> provides a higher-level, more user-friendly interface for working with structured data and integrates various Spark functionalities, including SQL, DataFrame, and Dataset APIs.</p>
-</section><section id="rdds-and-running-model" class="slide level2 center"><h2>RDDs and running model</h2>
+</section>
+<section id="rdds-and-running-model" class="slide level2 center">
+<h2>RDDs and running model</h2>
 <p>Spark programs are written in terms of operations on <em>RDDs</em></p>
 <ul>
 <li><p><em>RDD</em> stands for <em>Resilient Distributed Dataset</em> <br></p></li>
@@ -456,11 +494,14 @@
 <li><p><em>RDDs</em> can contain any type of Python, Java, or Scala objects, including user-defined classes</p></li>
 <li><p>Parallel <em>transformations</em> and <em>actions</em> can be applied to RDDs</p></li>
 <li><p><em>RDDs</em> are automatically rebuilt on machine failure</p></li>
-</ul></section><section id="creating-a-rdd" class="slide level2 center"><h2>Creating a RDD</h2>
-<p>From an iterable object <code>iterator</code> (e.g.&nbsp;a Python <code>list</code>, etc.):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>lines <span class="op">=</span> sc.parallelize(iterator)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</ul>
+</section>
+<section id="creating-a-rdd" class="slide level2 center scrollable">
+<h2>Creating a RDD</h2>
+<p>From an iterable object <code>iterator</code><sup>1</sup> (e.g.&nbsp;a Python <code>list</code>, etc.):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>lines <span class="op">=</span> sc.parallelize(iterator)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>From a text file:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>lines <span class="op">=</span> sc.textFile(<span class="st">"/path/to/file.txt"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>lines <span class="op">=</span> sc.textFile(<span class="st">"/path/to/file.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>where <code>lines</code> is the resulting RDD, and <code>sc</code> the spark context</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -472,93 +513,110 @@
 </div>
 <div class="callout-content">
 <ul>
-<li>
-<code>parallelize</code> not really used in practice</li>
-<li>In real life: <em>load data from external storage</em>
-</li>
-<li>External storage is often <em>HDFS</em> (Hadoop Distributed File System)</li>
+<li><code>parallelize</code> not really used in practice</li>
+<li>In real life: <em>load data from external storage</em></li>
+<li>External storage is often <a href="https://www.databricks.com/glossary/hadoop-distributed-file-system-hdfs"><em>HDFS</em> (Hadoop Distributed File System)</a></li>
 <li>Can read most formats (<code>json</code>, <code>csv</code>, <code>xml</code>, <code>parquet</code>, <code>orc</code>, etc.)</li>
 </ul>
 </div>
 </div>
 </div>
-</section><section id="section-5" class="slide level2 center"><h2><i class="fa-solid fa-hand-point-right" aria-label="hand-point-right"></i></h2>
-<p>For iterators look again at <a href="https://www.fluentpython.com">Fluent Python</a>, chapter 17 <em>Iterators, Generators, and Classic Coroutines</em></p>
-</section><section id="operations-on-rdd" class="slide level2 center"><h2>Operations on RDD</h2>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>See Chapter 17 Iterators, Generators, … in <a href="https://www.fluentpython.com">Fluent Python</a></p></li></ol></aside></section>
+<section id="operations-on-rdd" class="slide level2 center">
+<h2>Operations on RDD</h2>
 <p><em>Two families of operations</em> can be performed on RDDs</p>
 <div class="fragment">
 <ul>
-<li>
-<em>Transformations</em> <br> Operations on RDDs which return a new RDD <br><em>Lazy evaluation</em>
-</li>
+<li><em>Transformations</em> <br> Operations on RDDs which return a new RDD <br> <em>Lazy evaluation</em></li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li>
-<em>Actions</em> <br> Operations on RDDs that return some other data type <br><em>Triggers computations</em>
-</li>
+<li><em>Actions</em> <br> Operations on RDDs that return some other data type <br> <em>Triggers computations</em></li>
 </ul>
 </div>
 <div class="fragment">
-<p><i class="fa-solid fa-brain" aria-label="brain"></i> What is <em>lazy evaluation</em> ?</p>
+
 </div>
-</section><section id="section-6" class="slide level2 center"><h2><i class="fa-solid fa-hand-point-right" aria-label="hand-point-right"></i></h2>
+<aside><div>
+<p><i class="fa-solid fa-brain" aria-label="brain"></i> What is <em>lazy evaluation</em> ?</p>
+</div></aside></section>
+<section id="section-4" class="slide level2 center">
+<h2><i class="fa-solid fa-hand-point-right" aria-label="hand-point-right"></i></h2>
 <p>When a <em>transformation</em> is called on a RDD:</p>
 <ul>
-<li>The operation is <em>not immediately performed</em>
-</li>
-<li>Spark internally <em>records that this operation has been requested</em>
-</li>
+<li>The operation is <em>not immediately performed</em></li>
+<li>Spark internally <em>records that this operation has been requested</em></li>
 <li>Computations are triggered only <em>if an action requires the result of this transformation</em> at some point</li>
-</ul></section></section><section><section id="transformations" class="title-slide slide level1 center" data-background-color="#1c191c"><h1>Transformations</h1>
+</ul>
+</section></section>
+<section>
+<section id="transformations" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>Transformations</h1>
 
-</section><section id="transformations-1" class="slide level2 center"><h2>Transformations</h2>
+</section>
+<section id="transformations-1" class="slide level2 center">
+<h2>Transformations</h2>
 <p>The most important transformation is <code>map</code></p>
 <table class="caption-top">
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: center;"><code>map(f)</code></td>
 <td style="text-align: left;">apply a function <code>f</code> to each element of the RDD</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
 <div class="fragment">
 <p>Here is an example:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
-<span id="cb4-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.<span class="bu">map</span>(<span class="kw">lambda</span> x: <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, x))).collect()</span>
-<span id="cb4-3"><a></a>[[<span class="dv">1</span>], [<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a></a><span class="op">&gt;&gt;&gt;</span> (</span>
+<span id="cb4-3"><a></a>  rdd</span>
+<span id="cb4-4"><a></a>    .<span class="bu">map</span>(<span class="kw">lambda</span> x: <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, x)))</span>
+<span id="cb4-5"><a></a>    .collect()</span>
+<span id="cb4-6"><a></a>)</span>
+<span id="cb4-7"><a></a>[[<span class="dv">1</span>], [<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <ul>
-<li>We need to call <code>collect</code> (an <em>action</em>) otherwise <em>nothing happens</em>
-</li>
-<li>Once again, transformation <code>map</code> is lazy-evaluated <svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path></svg>
-</li>
+<li>We have to call <code>collect</code> (an <em>action</em>) otherwise <em>nothing happens</em></li>
+<li>Once again, transformation <code>map</code> is lazily evaluated <i class="fa-solid fa-triangle-exclamation" aria-label="triangle-exclamation"></i></li>
 </ul>
 </div>
 <div class="fragment">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
 <ul>
 <li>In <code>Python</code>, <em>three options for passing functions</em> into <code>Spark</code>
 <ul>
 <li>for short functions: <code>lambda</code> expressions (anonymous functions)</li>
 <li>top-level functions</li>
-<li>
-<em>locally/user defined functions</em> with <code>def</code>
-</li>
-</ul>
-</li>
+<li><em>locally/user</em> defined functions with <code>def</code></li>
+</ul></li>
 </ul>
 </div>
-</section><section id="transformations-2" class="slide level2 center"><h2>Transformations</h2>
-<p>About passing functions to <code>map</code>:</p>
+</div>
+</div>
+</div>
+</section>
+<section id="transformations-2" class="slide level2 center">
+<h2>Transformations</h2>
+<p>Passing functions to <code>map</code>:</p>
 <ul>
-<li>Involves <em>serialization</em> with <code>pickle</code>
-</li>
-<li>
-<code>Spark</code> sends the <em>entire pickled function</em> to worker nodes</li>
+<li>Involves <em>serialization</em> with <code>pickle</code></li>
+<li><code>Spark</code> sends the <em>entire pickled function</em> to worker nodes</li>
 </ul>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
@@ -572,19 +630,27 @@
 <p>If the function is an <em>object method</em>:</p>
 <ul>
 <li>The <em>whole object is pickled</em> since the method contains references to the object (<code>self</code>) and references to attributes of the object</li>
-<li>The whole object can be <em>large</em>
-</li>
-<li>The whole object <em>may not be serializable with <code>pickle</code></em>
-</li>
+<li>The whole object can be <em>large</em></li>
+<li>The whole object <em>may not be serializable with <code>pickle</code></em></li>
 </ul>
 </div>
 </div>
 </div>
 
 <aside><div>
-<p><a href="http://localhost:8888/notebooks/notebooks/notebook05_sparkrdd.ipynb">Let’s go to notebook05_sparkrdd.ipynb</a></p>
-</div></aside></section><section id="serialization" class="slide level2 center"><h2>
-<i class="fa-solid fa-hand-point-right" aria-label="hand-point-right"></i> Serialization</h2>
+<p><a href="../../core/ipynb/notebook05_sparkrdd.ipynb">Go to notebook05_sparkrdd.ipynb</a></p>
+</div></aside></section>
+<section id="pythons-corner" class="slide level2 center">
+<h2>Python’s corner</h2>
+<div id="73ff4f83" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>[it <span class="cf">for</span> it <span class="kw">in</span> <span class="bu">map</span>(<span class="kw">lambda</span> x : <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, x)), [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-execution_count="2">
+
+</div>
+</section>
+<section id="serialization" class="slide level2 center">
+<h2><i class="fa-solid fa-hand-point-right" aria-label="hand-point-right"></i> Serialization</h2>
 <blockquote>
 <p>Converting an object from its in-memory structure to a binary or text-oriented format for storage or transmission, in a way that allows the future reconstruction of a clone of the object on the same system or on a different one.</p>
 </blockquote>
@@ -592,23 +658,32 @@
 <blockquote>
 <p>The <code>pickle</code> module supports serialization of arbitrary <code>Python</code> objects to a binary format</p>
 </blockquote>
-<p>from <a href="">Fluent Python</a> by Ramalho</p>
+<p>from <a href="https://www.fluentpython.com">Fluent Python</a> by Ramalho</p>
+
 </div>
-</section><section id="transformations-continued" class="slide level2 center"><h2>Transformations (continued)</h2>
-<p>Then we have <code>flatMap</code></p>
+<aside><div>
+<p>See also <a href="https://github.com/cloudpipe/cloudpickle"><code>cloudpickle</code></a></p>
+</div></aside></section>
+<section id="transformations-continued" class="slide level2 center">
+<h2>Transformations (continued)</h2>
+<p><code>flatMap</code></p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 30%">
 <col style="width: 69%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: center;"><code>flatMap(f)</code></td>
-<td style="text-align: left;">apply <code>f</code> to each element of the RDD, then flattens the results</td>
-</tr></tbody>
+<td style="text-align: left;">apply <code>f</code> to each element of the RDD, then <em>flattens</em> the results</td>
+</tr>
+</tbody>
 </table>
 <div class="fragment">
 <div class="callout callout-note callout-titled callout-style-default">
@@ -620,29 +695,72 @@
 <p><strong>Example</strong></p>
 </div>
 <div class="callout-content">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
-<span id="cb5-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.flatMap(<span class="kw">lambda</span> x: <span class="bu">range</span>(<span class="dv">1</span>, x)).collect()</span>
-<span id="cb5-3"><a></a>[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
+<span id="cb6-2"><a></a><span class="op">&gt;&gt;&gt;</span> (</span>
+<span id="cb6-3"><a></a>  rdd</span>
+<span id="cb6-4"><a></a>    .flatMap(<span class="kw">lambda</span> x: <span class="bu">range</span>(<span class="dv">1</span>, x))</span>
+<span id="cb6-5"><a></a>    .collect()</span>
+<span id="cb6-6"><a></a>)</span>
+<span id="cb6-7"><a></a>[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-</section><section id="transformations-continued-1" class="slide level2 center"><h2>Transformations (continued)</h2>
+</section>
+<section id="pythons-corner-is-there-any-flatmap-function" class="slide level2 center">
+<h2>Python’s corner: is there any <code>flatMap()</code> function?</h2>
+<p>Nested list comprehensions</p>
+<div id="6e1b9cf5" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>[o <span class="cf">for</span> it <span class="kw">in</span> <span class="bu">map</span>(<span class="kw">lambda</span> x : <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, x)), [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])   <span class="cf">for</span> o <span class="kw">in</span> it]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>[1, 1, 2, 1, 2, 3]</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div id="13ca68f1" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="im">import</span> itertools</span>
+<span id="cb9-2"><a></a></span>
+<span id="cb9-3"><a></a>[o <span class="cf">for</span> o <span class="kw">in</span> itertools.chain.from_iterable(<span class="bu">map</span>(<span class="kw">lambda</span> x : <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, x)), [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>[1, 1, 2, 1, 2, 3]</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div id="3f6d7425" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>flatten <span class="op">=</span> itertools.chain.from_iterable</span>
+<span id="cb11-2"><a></a></span>
+<span id="cb11-3"><a></a>[o <span class="cf">for</span> o <span class="kw">in</span>  flatten(<span class="bu">map</span>(<span class="kw">lambda</span> x : <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, x)), [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>[1, 1, 2, 1, 2, 3]</code></pre>
+</div>
+</div>
+<div class="{aside}">
+<p>From <a href="https://discuss.python.org/t/add-built-in-flatmap-function-to-functools/21137">https://discuss.python.org/t/add-built-in-flatmap-function-to-functools/21137</a></p>
+<p><a href="https://docs.python.org/3/library/itertools.html">https://docs.python.org/3/library/itertools.html</a></p>
+</div>
+</div>
+</section>
+<section id="transformations-continued-1" class="slide level2 center">
+<h2>Transformations (continued)</h2>
 <p><code>filter</code> allows to filter an RDD</p>
 <table class="caption-top">
 <colgroup>
-<col style="width: 32%">
-<col style="width: 67%">
+<col style="width: 34%">
+<col style="width: 65%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: center;"><code>filter(f)</code></td>
-<td style="text-align: left;">Return an RDD consisting of only elements that pass the condition <code>f</code> passed to <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>
-</td>
-</tr></tbody>
+<td style="text-align: left;">Return an RDD consisting of only elements that pass the condition <code>f</code> passed to <code>filter()</code></td>
+</tr>
+</tbody>
 </table>
 <div class="fragment">
 <div class="callout callout-note callout-titled callout-style-default">
@@ -654,24 +772,49 @@
 <p><strong>Example</strong></p>
 </div>
 <div class="callout-content">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize(<span class="bu">range</span>(<span class="dv">10</span>))</span>
-<span id="cb6-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.<span class="bu">filter</span>(<span class="kw">lambda</span> x: x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>).collect()</span>
-<span id="cb6-3"><a></a>[<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize(<span class="bu">range</span>(<span class="dv">10</span>))</span>
+<span id="cb13-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.<span class="bu">filter</span>(<span class="kw">lambda</span> x: x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>).collect()</span>
+<span id="cb13-3"><a></a>[<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-</section><section id="transformations-3" class="slide level2 center"><h2>Transformations</h2>
-<p>About <code>distinct</code> and <code>sample</code></p>
+</section>
+<section id="pythons-corner-1" class="slide level2 center">
+<h2>Python’s corner</h2>
+<p>Using list comprehensions</p>
+<div id="1b304cc6" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>lll <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">10</span>))</span>
+<span id="cb14-2"><a></a>spam <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb14-3"><a></a></span>
+<span id="cb14-4"><a></a>[o  <span class="cf">for</span> o <span class="kw">in</span> lll <span class="cf">if</span> spam(o)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>[0, 2, 4, 6, 8]</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>Tweaking <code>filterfalse</code> from <code>itertools</code></p>
+<div id="4fd4d58d" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a>[o <span class="cf">for</span> o <span class="kw">in</span> itertools.filterfalse(<span class="kw">lambda</span> x : <span class="kw">not</span> x<span class="op">%</span> <span class="dv">2</span><span class="op">==</span><span class="dv">0</span>, lll)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>[0, 2, 4, 6, 8]</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="transformations-distinct-and-sample" class="slide level2 center">
+<h2>Transformations: <code>distinct</code> and <code>sample</code></h2>
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>distinct()</code></td>
@@ -693,34 +836,39 @@
 <p><strong>Example</strong></p>
 </div>
 <div class="callout-content">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>])</span>
-<span id="cb7-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.distinct().collect()</span>
-<span id="cb7-3"><a></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>])</span>
+<span id="cb18-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.distinct().collect()</span>
+<span id="cb18-3"><a></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-</section><section id="transformations-4" class="slide level2 center"><h2>Transformations</h2>
+</section>
+<section id="pythons-corner-2" class="slide level2 center">
+<h2>Python’s corner</h2>
+</section>
+<section id="transformations-3" class="slide level2 center">
+<h2>Transformations</h2>
 <p>We have also pseudo-set-theoretical operations</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>union(otherRdd)</code></td>
-<td style="text-align: left;">Returns union with <code>otherRdd</code>
-</td>
+<td style="text-align: left;">Returns union with <code>otherRdd</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><code>instersection(otherRdd)</code></td>
-<td style="text-align: left;">Returns intersection with <code>otherRdd</code>
-</td>
+<td style="text-align: left;">Returns intersection with <code>otherRdd</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><code>subtract(otherRdd)</code></td>
@@ -739,39 +887,38 @@
 </div>
 <div class="callout-content">
 <ul>
-<li>If there are duplicates in the input RDD, the result of <code><a href="https://rdrr.io/r/base/sets.html">union()</a></code> <em>will</em> contain duplicates (fixed with <code>distinct()</code>)</li>
-<li>
-<code>intersection()</code> removes all duplicates (including duplicates from a single RDD)</li>
-<li>Performance of <code>intersection()</code> is much worse than <code><a href="https://rdrr.io/r/base/sets.html">union()</a></code> since it requires a <em>shuffle</em> to identify common elements</li>
-<li>
-<code>subtract</code> also requires a <em>shuffle</em>
-</li>
+<li>If there are duplicates in the input RDD, the result of <code>union()</code> <em>will</em> contain duplicates (fixed with <code>distinct()</code>)</li>
+<li><code>intersection()</code> removes all duplicates (including duplicates from a single RDD)</li>
+<li>Performance of <code>intersection()</code> is much worse than <code>union()</code> since it requires a <em>shuffle</em> to identify common elements</li>
+<li><code>subtract</code> also requires a <em>shuffle</em></li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-</section><section id="transformations-5" class="slide level2 center"><h2>Transformations</h2>
+</section>
+<section id="transformations-4" class="slide level2 center">
+<h2>Transformations</h2>
 <p>We have also pseudo-set-theoretical operations</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>union(otherRdd)</code></td>
-<td style="text-align: left;">Returns union with <code>otherRdd</code>
-</td>
+<td style="text-align: left;">Returns union with <code>otherRdd</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><code>instersection(otherRdd)</code></td>
-<td style="text-align: left;">Returns intersection with <code>otherRdd</code>
-</td>
+<td style="text-align: left;">Returns intersection with <code>otherRdd</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><code>subtract(otherRdd)</code></td>
@@ -789,64 +936,88 @@
 <p><strong>Example with <code>union</code> and <code>distinct</code></strong></p>
 </div>
 <div class="callout-content">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd1 <span class="op">=</span> sc.parallelize(<span class="bu">range</span>(<span class="dv">5</span>))</span>
-<span id="cb8-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd2 <span class="op">=</span> sc.parallelize(<span class="bu">range</span>(<span class="dv">3</span>, <span class="dv">9</span>))</span>
-<span id="cb8-3"><a></a><span class="op">&gt;&gt;&gt;</span> rdd3 <span class="op">=</span> rdd1.union(rdd2)</span>
-<span id="cb8-4"><a></a><span class="op">&gt;&gt;&gt;</span> rdd3.collect()</span>
-<span id="cb8-5"><a></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd3.distinct().collect()</span>
-<span id="cb9-2"><a></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd1 <span class="op">=</span> sc.parallelize(<span class="bu">range</span>(<span class="dv">5</span>))</span>
+<span id="cb19-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd2 <span class="op">=</span> sc.parallelize(<span class="bu">range</span>(<span class="dv">3</span>, <span class="dv">9</span>))</span>
+<span id="cb19-3"><a></a><span class="op">&gt;&gt;&gt;</span> rdd3 <span class="op">=</span> rdd1.union(rdd2)</span>
+<span id="cb19-4"><a></a><span class="op">&gt;&gt;&gt;</span> rdd3.collect()</span>
+<span id="cb19-5"><a></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd3.distinct().collect()</span>
+<span id="cb20-2"><a></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
+
 </div>
-</section><section id="about-shuffles" class="slide level2 center"><h2>About shuffles</h2>
+<aside><div>
+<p>How does Spark decide whether two RDD items are equal?</p>
+</div></aside></section>
+<section id="pythons-corner-3" class="slide level2 center">
+<h2>Python’s corner</h2>
+<div id="8ccf82e7" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="co"># %%</span></span>
+<span id="cb21-2"><a></a>spam <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">5</span>)) <span class="op">+</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">3</span>, <span class="dv">9</span>))</span>
+<span id="cb21-3"><a></a>[o <span class="cf">for</span> o <span class="kw">in</span> <span class="bu">set</span>(spam)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-execution_count="9">
+
+</div>
+
+<aside><div>
+<p>How does Python decide whether two objects are equal/identical?</p>
+<p>See also <a href="https://more-itertools.readthedocs.io/en/stable/api.html#more_itertools.all_unique"><code>all_unique()</code> from <code>more_itertools</code></a></p>
+</div></aside></section>
+<section id="about-shuffles" class="slide level2 center">
+<h2><i class="fa-solid fa-shuffle" aria-label="shuffle"></i> About shuffles</h2>
 <ul>
-<li>Certain operations trigger a <em>shuffle</em>
-</li>
-<li>It is <code>Spark</code>’s mechanism for <em>redistributing data</em> so as tp modify the partitioning</li>
+<li>Certain operations trigger a <em>shuffle</em></li>
+<li>It is <code>Spark</code>’s mechanism for <em>redistributing data</em> so as to modify the partitioning</li>
 <li>It involves <em>moving data across executors and machines</em>, making <em>shuffle</em> a complex and costly operation</li>
 <li>More on <em>shuffles</em> later</li>
-</ul></section><section id="performance-impact" class="slide level2 center"><h2>Performance Impact</h2>
+</ul>
+</section>
+<section id="performance-impact" class="slide level2 center">
+<h2><i class="fa-solid fa-biohazard" aria-label="biohazard"></i> Performance Impact</h2>
 <ul>
 <li>A <em>shuffle</em> involves
 <ul>
 <li>disk I/O,</li>
 <li>data serialization</li>
 <li>network I/O.</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <div class="fragment">
 <ul>
 <li>To organize data for the shuffle, <code>Spark</code> generates sets of <em>tasks</em>:
 <ul>
-<li>
-<em>map tasks</em> to organize the data and</li>
-<li>
-<em>reduce tasks</em> to aggregate it.</li>
-</ul>
-</li>
+<li><em>map tasks</em> to organize the data and</li>
+<li><em>reduce tasks</em> to aggregate it</li>
+</ul></li>
 </ul>
 
 </div>
 <aside><div>
-<p>This nomenclature comes from MapReduce and does not directly relate to Spark’s map and reduce operations.</p>
-</div></aside></section><section id="transformations-6" class="slide level2 center"><h2>Transformations</h2>
-<p>Another “pseudo set” operation</p>
+<p>This vocabulary comes from MapReduce and does not directly relate to Spark’s map and reduce operations.</p>
+</div></aside></section>
+<section id="transformations-5" class="slide level2 center">
+<h2>Transformations</h2>
+<p>Another <em>pseudo set</em> operation</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: center;"><code>cartesian(otherRdd)</code></td>
 <td style="text-align: left;">Return the Cartesian product of this RDD and another one</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
 <div class="fragment">
 <div class="callout callout-note callout-titled callout-style-default">
@@ -858,10 +1029,10 @@
 <p><strong>Example</strong></p>
 </div>
 <div class="callout-content">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd1 <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>])</span>
-<span id="cb10-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd2 <span class="op">=</span> sc.parallelize([<span class="st">"a"</span>, <span class="st">"b"</span>])</span>
-<span id="cb10-3"><a></a><span class="op">&gt;&gt;&gt;</span> rdd1.cartesian(rdd2).collect()</span>
-<span id="cb10-4"><a></a>[(<span class="dv">1</span>, <span class="st">'a'</span>), (<span class="dv">1</span>, <span class="st">'b'</span>), (<span class="dv">2</span>, <span class="st">'a'</span>), (<span class="dv">2</span>, <span class="st">'b'</span>)]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd1 <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>])</span>
+<span id="cb22-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd2 <span class="op">=</span> sc.parallelize([<span class="st">"a"</span>, <span class="st">"b"</span>])</span>
+<span id="cb22-3"><a></a><span class="op">&gt;&gt;&gt;</span> rdd1.cartesian(rdd2).collect()</span>
+<span id="cb22-4"><a></a>[(<span class="dv">1</span>, <span class="st">'a'</span>), (<span class="dv">1</span>, <span class="st">'b'</span>), (<span class="dv">2</span>, <span class="st">'a'</span>), (<span class="dv">2</span>, <span class="st">'b'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -870,66 +1041,60 @@
 </div>
 <aside><div>
 <p><a href="http://localhost:8888/notebooks/notebooks/notebook05_sparkrdd.ipynb">Let’s go to notebook05_sparkrdd.ipynb</a></p>
-</div></aside></section></section><section><section id="actions" class="title-slide slide level1 center" data-background-color="#1c191c"><h1>Actions</h1>
+</div></aside></section></section>
+<section>
+<section id="actions" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>Actions</h1>
 
-</section><section id="actions-1" class="slide level2 center"><h2>Actions</h2>
-<p><code>collect</code> brings the <code>RDD</code> back to the driver</p>
+</section>
+<section id="actions-1" class="slide level2 center">
+<h2>Actions</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><code>collect()</code> brings the <code>RDD</code> back to the driver</p>
 <table class="caption-top">
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: center;"><code>collect()</code></td>
 <td style="text-align: left;">Return all elements from the RDD</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Example</strong></p>
-</div>
-<div class="callout-content">
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>])</span>
-<span id="cb11-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.collect()</span>
-<span id="cb11-3"><a></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
+<h3 id="example-5">Example</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>])</span>
+<span id="cb23-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.collect()</span>
+<span id="cb23-3"><a></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:60%;">
+<p><img data-src="../../images/cluster-overview.png"></p>
 <ul>
-<li>
-<i class="fa-solid fa-triangle-exclamation" aria-label="triangle-exclamation"></i> Be sure that the <em>retrieved data fits in the driver memory</em> !</li>
+<li><i class="fa-solid fa-triangle-exclamation" aria-label="triangle-exclamation"></i> Be sure that the <em>retrieved data fits in the driver memory</em> !</li>
 <li>Useful when developping and working on small data for testing</li>
-<li>
-<i class="fa-solid fa-hand-point-right" aria-label="hand-point-right"></i> We’ll use it a lot here, but <em>we don’t use it in real-world problems</em>
-</li>
+<li><i class="fa-solid fa-hand-point-right" aria-label="hand-point-right"></i> We’ll use it a lot here, but <em>we don’t use it in real-world problems</em></li>
 </ul>
-</div>
-</div>
-</div>
-</section><section id="actions-2" class="slide level2 center"><h2>Actions</h2>
-<p>It’s important to count!</p>
+</div></div>
+</section>
+<section id="actions-2" class="slide level2 center">
+<h2>Actions</h2>
+<p>Counts matter!</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>count()</code></td>
@@ -950,25 +1115,47 @@
 <p><strong>Example</strong></p>
 </div>
 <div class="callout-content">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>])</span>
-<span id="cb12-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.count()</span>
-<span id="cb12-3"><a></a><span class="dv">6</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.countByValue()</span>
-<span id="cb13-2"><a></a>defaultdict(<span class="bu">int</span>, {<span class="dv">1</span>: <span class="dv">2</span>, <span class="dv">3</span>: <span class="dv">1</span>, <span class="dv">2</span>: <span class="dv">3</span>})</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>])</span>
+<span id="cb24-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.count()</span>
+<span id="cb24-3"><a></a><span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.countByValue()</span>
+<span id="cb25-2"><a></a>defaultdict(<span class="bu">int</span>, {<span class="dv">1</span>: <span class="dv">2</span>, <span class="dv">3</span>: <span class="dv">1</span>, <span class="dv">2</span>: <span class="dv">3</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-</section><section id="actions-cherry-picking" class="slide level2 center"><h2>Actions: cherry-picking</h2>
+</section>
+<section id="pythons-corner-4" class="slide level2 center">
+<h2>Python’s corner</h2>
+<div id="66352d8e" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>spam <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>]</span>
+<span id="cb26-2"><a></a></span>
+<span id="cb26-3"><a></a><span class="bu">len</span>(spam)</span>
+<span id="cb26-4"><a></a></span>
+<span id="cb26-5"><a></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb26-6"><a></a></span>
+<span id="cb26-7"><a></a>Counter(spam)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>Counter({2: 3, 1: 2, 3: 1})</code></pre>
+</div>
+</div>
+
+<aside><div>
+<p><a href="https://docs.python.org/3/library/collections.html#collections.Counter">https://docs.python.org/3/library/collections.html#collections.Counter</a></p>
+</div></aside></section>
+<section id="actions-cherry-picking" class="slide level2 center">
+<h2>Actions: cherry-picking</h2>
 <p>How to get some (but not all) values in an RDD ?</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">action</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>take(n)</code></td>
@@ -995,29 +1182,38 @@
 </div>
 <div class="callout-content">
 <ul>
-<li>
-<code>take(n)</code> returns n elements from the RDD and attempts to <strong>minimize the number of partitions it accesses</strong>
-</li>
-<li>
-<i class="fa-solid fa-triangle-exclamation" aria-label="triangle-exclamation"></i> the result may be a <em>biased</em> collection</li>
-<li>
-<code>collect</code> and <code>take</code> may return the elements in an order you don’t expect</li>
+<li><code>take(n)</code> returns n elements from the RDD and attempts to <strong>minimize the number of partitions it accesses</strong></li>
+<li><i class="fa-solid fa-triangle-exclamation" aria-label="triangle-exclamation"></i> the result may be a <em>biased</em> collection</li>
+<li><code>collect</code> and <code>take</code> may return the elements in an order you don’t expect</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-</section><section id="actions-3" class="slide level2 center"><h2>Actions</h2>
-<p>How to get some values in an RDD ?</p>
+</section>
+<section id="pythons-corner-5" class="slide level2 center">
+<h2>Python’s corner</h2>
+<div id="91deb5ac" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="bu">list</span>(itertools.islice(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">10</span>)), <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>[0, 1, 2]</code></pre>
+</div>
+</div>
+</section>
+<section id="actions-3" class="slide level2 center">
+<h2>Actions</h2>
+<p>How to get some values in an RDD?</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">action</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>take(n)</code></td>
@@ -1043,26 +1239,30 @@
 <p><strong>Example</strong></p>
 </div>
 <div class="callout-content">
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([(<span class="dv">3</span>, <span class="st">'a'</span>), (<span class="dv">1</span>, <span class="st">'b'</span>), (<span class="dv">2</span>, <span class="st">'d'</span>)])</span>
-<span id="cb14-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.takeOrdered(<span class="dv">2</span>)</span>
-<span id="cb14-3"><a></a>[(<span class="dv">1</span>, <span class="st">'b'</span>), (<span class="dv">2</span>, <span class="st">'d'</span>)]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.takeOrdered(<span class="dv">2</span>, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])</span>
-<span id="cb15-2"><a></a>[(<span class="dv">3</span>, <span class="st">'a'</span>), (<span class="dv">1</span>, <span class="st">'b'</span>)]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([(<span class="dv">3</span>, <span class="st">'a'</span>), (<span class="dv">1</span>, <span class="st">'b'</span>), (<span class="dv">2</span>, <span class="st">'d'</span>)])</span>
+<span id="cb30-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.takeOrdered(<span class="dv">2</span>)</span>
+<span id="cb30-3"><a></a>[(<span class="dv">1</span>, <span class="st">'b'</span>), (<span class="dv">2</span>, <span class="st">'d'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.takeOrdered(<span class="dv">2</span>, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>])</span>
+<span id="cb31-2"><a></a>[(<span class="dv">3</span>, <span class="st">'a'</span>), (<span class="dv">1</span>, <span class="st">'b'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-</section><section id="actions-reductions" class="slide level2 center"><h2>Actions: reduction(s)</h2>
+</section>
+<section id="actions-reductions" class="slide level2 center">
+<h2>Actions: reduction(s)</h2>
 <div id="reductions-preamble">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">action</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>reduce(f)</code></td>
@@ -1077,25 +1277,26 @@
 </div>
 <div class="fragment">
 <ul>
-<li>
-<code>op(x, y)</code> is allowed to modify x and return it as its result value to avoid object allocation; however, it should not modify y.</li>
-<li>
-<code>reduce</code> applies some operation to pairs of elements until there is just one left. Throws an exception for empty collections.</li>
-<li>
-<code>fold</code> has initial zero-value: defined for empty collections.</li>
+<li><code>op(x, y)</code> is allowed to modify x and return it as its result value to avoid object allocation; however, it should not modify y.</li>
+<li><code>reduce</code> applies some operation to pairs of elements until there is just one left. Throws an exception for empty collections.</li>
+<li><code>fold</code> has initial zero-value: defined for empty collections.</li>
 </ul>
 </div>
-</section><section id="actions-reductions-1" class="slide level2 center"><h2>Actions: reduction(s)</h2>
+</section>
+<section id="actions-reductions-1" class="slide level2 center">
+<h2>Actions: reduction(s)</h2>
 <div id="reductions-preamble">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">action</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>reduce(f)</code></td>
@@ -1118,26 +1319,30 @@
 <p><strong>Example</strong></p>
 </div>
 <div class="callout-content">
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb16-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.<span class="bu">reduce</span>(<span class="kw">lambda</span> a, b: a <span class="op">+</span> b)</span>
-<span id="cb16-3"><a></a><span class="dv">6</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.fold(<span class="dv">0</span>, <span class="kw">lambda</span> a, b: a <span class="op">+</span> b)</span>
-<span id="cb17-2"><a></a><span class="dv">6</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb32-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.<span class="bu">reduce</span>(<span class="kw">lambda</span> a, b: a <span class="op">+</span> b)</span>
+<span id="cb32-3"><a></a><span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.fold(<span class="dv">0</span>, <span class="kw">lambda</span> a, b: a <span class="op">+</span> b)</span>
+<span id="cb33-2"><a></a><span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-</section><section id="actions-reductions-2" class="slide level2 center"><h2>Actions: reduction(s)</h2>
+</section>
+<section id="actions-reductions-2" class="slide level2 center">
+<h2>Actions: reduction(s)</h2>
 <div id="reductions-preamble">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">action</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>reduce(f)</code></td>
@@ -1161,9 +1366,9 @@
 </div>
 <div class="callout-content">
 <p>With <code>fold</code>, solutions can depend on the number of partitions</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>], <span class="dv">2</span>) <span class="co"># RDD with 2 partitions</span></span>
-<span id="cb18-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.fold(<span class="fl">2.5</span>, <span class="kw">lambda</span> a, b: a <span class="op">+</span> b)</span>
-<span id="cb18-3"><a></a><span class="fl">14.5</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>], <span class="dv">2</span>) <span class="co"># RDD with 2 partitions</span></span>
+<span id="cb34-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.fold(<span class="fl">2.5</span>, <span class="kw">lambda</span> a, b: a <span class="op">+</span> b)</span>
+<span id="cb34-3"><a></a><span class="fl">14.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>RDD has 2 partition: say [1, 2] and [4]</li>
 <li>Sum in the partitions: 2.5 + (1 + 2) = 5.5 and 2.5 + (4) = 6.5</li>
@@ -1173,17 +1378,21 @@
 </div>
 </div>
 </div>
-</section><section id="actions-reductions-3" class="slide level2 center"><h2>Actions: reduction(s)</h2>
+</section>
+<section id="actions-reductions-3" class="slide level2 center">
+<h2>Actions: reduction(s)</h2>
 <div id="reductions-preamble">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">action</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>reduce(f)</code></td>
@@ -1207,8 +1416,8 @@
 </div>
 <div class="callout-content">
 <p>Solutions can depend on the number of partitions</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], <span class="dv">5</span>) <span class="co"># RDD with 5 partitions</span></span>
-<span id="cb19-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.fold(<span class="dv">2</span>, <span class="kw">lambda</span> a, b: a <span class="op">+</span> b)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], <span class="dv">5</span>) <span class="co"># RDD with 5 partitions</span></span>
+<span id="cb35-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.fold(<span class="dv">2</span>, <span class="kw">lambda</span> a, b: a <span class="op">+</span> b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1221,22 +1430,26 @@
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p><a href="http://localhost:8888/notebooks/notebooks/notebook05_sparkrdd.ipynb">Let’s go to notebook05_sparkrdd.ipynb</a>]</p>
+<p><a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook05_sparkrdd.ipynb" download="">Back to Jupyter notebook V : Spark RDD</a></p>
 </div>
 </div>
 </div>
 </div>
-</section><section id="actions-reductions-4" class="slide level2 center"><h2>Actions: reduction(s)</h2>
+</section>
+<section id="actions-reductions-4" class="slide level2 center">
+<h2>Actions: reduction(s)</h2>
 <div id="reductions-preamble">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">action</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>reduce(f)</code></td>
@@ -1260,9 +1473,9 @@
 </div>
 <div class="callout-content">
 <p>Solutions can depend on the number of partitions</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], <span class="dv">5</span>) <span class="co"># RDD with 5 partitions</span></span>
-<span id="cb20-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.fold(<span class="dv">2</span>, <span class="kw">lambda</span> a, b: a <span class="op">+</span> b)</span>
-<span id="cb20-3"><a></a><span class="dv">18</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], <span class="dv">5</span>) <span class="co"># RDD with 5 partitions</span></span>
+<span id="cb36-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.fold(<span class="dv">2</span>, <span class="kw">lambda</span> a, b: a <span class="op">+</span> b)</span>
+<span id="cb36-3"><a></a><span class="dv">18</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Yes, even if there is less partitions than elements !</li>
 <li>18 = 2 * 5 + (1+2+3) + 2</li>
@@ -1271,49 +1484,78 @@
 </div>
 </div>
 </div>
-</section><section id="actions-aggregate" class="slide level2 center"><h2>Actions : aggregate</h2>
+</section>
+<section id="pythons-corner-6" class="slide level2 center">
+<h2>Python’s corner</h2>
+<div id="0db582a3" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
+<span id="annotated-cell-14-2"><a href="#annotated-cell-14-2"></a></span>
+<span id="annotated-cell-14-3"><a href="#annotated-cell-14-3"></a><span class="bu">reduce</span>(<span class="kw">lambda</span> a, b: a <span class="op">+</span> b,  [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1">1</button><span id="annotated-cell-14-4" class="code-annotation-target"><a href="#annotated-cell-14-4"></a><span class="bu">reduce</span>(<span class="kw">lambda</span> a, b: a <span class="op">+</span> b,  [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], <span class="dv">2</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="4" data-code-annotation="1"><code>initial</code> argument used to initialize the accumulator. The default is <code>0</code></span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>8</code></pre>
+</div>
+</div>
+</section>
+<section id="actions-aggregate" class="slide level2 center">
+<h2>Actions : aggregate</h2>
 <div id="action-aggregate">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">action</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: center;"><code>aggregate(zero, seqOp, combOp)</code></td>
-<td style="text-align: left;">Similar to <code>reduce()</code> but used to return a different type.</td>
-</tr></tbody>
+<td style="text-align: left;">Similar to <code>reduce()</code> but used to return a different type</td>
+</tr>
+</tbody>
 </table>
 </div>
 <div class="fragment">
 <p>Aggregates the elements of each partition, and then the results for all the partitions, given aggregation functions and zero value.</p>
 <ul>
-<li>
-<code>seqOp(acc, val)</code>: function to combine the elements of a partition from the RDD (<code>val</code>) with an accumulator (<code>acc</code>). <br> It can return a different result type than the type of this <code>RDD</code>
-</li>
-<li>
-<code>combOp</code>: function that merges the accumulators of two partitions</li>
+<li><code>seqOp(acc, val)</code>: function to combine the elements of a partition from the RDD (<code>val</code>) with an accumulator (<code>acc</code>). <br> The result type may differ from the <code>RDD</code> type (if any)</li>
+<li><code>combOp</code>: function that merges the accumulators of two partitions</li>
 <li>In both functions, the first argument can be modified while the second cannot</li>
 </ul>
 </div>
-</section><section id="actions-aggregate-1" class="slide level2 center"><h2>Actions : aggregate</h2>
+</section>
+<section id="actions-aggregate-1" class="slide level2 center">
+<h2>Actions : aggregate</h2>
 <div id="action-aggregate">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">action</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: center;"><code>aggregate(zero, seqOp, combOp)</code></td>
-<td style="text-align: left;">Similar to <code>reduce()</code> but used to return a different type.</td>
-</tr></tbody>
+<td style="text-align: left;">Similar to <code>reduce()</code> but used to return a different type</td>
+</tr>
+</tbody>
 </table>
 </div>
 <div class="fragment">
@@ -1326,33 +1568,39 @@
 <p><strong>Example</strong></p>
 </div>
 <div class="callout-content">
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="op">&gt;&gt;&gt;</span> seqOp <span class="op">=</span> <span class="kw">lambda</span> x, y: (x[<span class="dv">0</span>] <span class="op">+</span> y, x[<span class="dv">1</span>] <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb21-2"><a></a><span class="op">&gt;&gt;&gt;</span> combOp <span class="op">=</span> <span class="kw">lambda</span> x, y: (x[<span class="dv">0</span>] <span class="op">+</span> y[<span class="dv">0</span>], x[<span class="dv">1</span>] <span class="op">+</span> y[<span class="dv">1</span>])</span>
-<span id="cb21-3"><a></a><span class="op">&gt;&gt;&gt;</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]).aggregate((<span class="dv">0</span>, <span class="dv">0</span>), seqOp, combOp)</span>
-<span id="cb21-4"><a></a>(<span class="dv">10</span>, <span class="dv">4</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a><span class="op">&gt;&gt;&gt;</span> ( </span>
-<span id="cb22-2"><a></a>      sc.parallelize([])</span>
-<span id="cb22-3"><a></a>        .aggregate((<span class="dv">0</span>, <span class="dv">0</span>), seqOp, combOp)</span>
-<span id="cb22-4"><a></a>)</span>
-<span id="cb22-5"><a></a>(<span class="dv">0</span>, <span class="dv">0</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a></a><span class="op">&gt;&gt;&gt;</span> seqOp <span class="op">=</span> <span class="kw">lambda</span> x, y: (x[<span class="dv">0</span>] <span class="op">+</span> y, x[<span class="dv">1</span>] <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb38-2"><a></a><span class="op">&gt;&gt;&gt;</span> combOp <span class="op">=</span> <span class="kw">lambda</span> x, y: (x[<span class="dv">0</span>] <span class="op">+</span> y[<span class="dv">0</span>], x[<span class="dv">1</span>] <span class="op">+</span> y[<span class="dv">1</span>])</span>
+<span id="cb38-3"><a></a><span class="op">&gt;&gt;&gt;</span> sc.parallelize([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]).aggregate((<span class="dv">0</span>, <span class="dv">0</span>), seqOp, combOp)</span>
+<span id="cb38-4"><a></a>(<span class="dv">10</span>, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a></a><span class="op">&gt;&gt;&gt;</span> ( </span>
+<span id="cb39-2"><a></a>      sc.parallelize([])</span>
+<span id="cb39-3"><a></a>        .aggregate((<span class="dv">0</span>, <span class="dv">0</span>), seqOp, combOp)</span>
+<span id="cb39-4"><a></a>)</span>
+<span id="cb39-5"><a></a>(<span class="dv">0</span>, <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 
 </div>
 <aside><div>
-<p>[Let’s go to notebook05_sparkrdd.ipynb]](http://localhost:8888/notebooks/notebooks/notebook05_sparkrdd.ipynb)]</p>
-</div></aside></section><section id="actions-4" class="slide level2 center"><h2>Actions</h2>
+<p><a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook05_sparkrdd.ipynb" download="">Back to Jupyter notebook V : Spark RDD</a></p>
+</div></aside></section>
+<section id="actions-4" class="slide level2 center">
+<h2>Actions</h2>
 <p>The <code>foreach</code> action</p>
 <table class="caption-top">
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">action</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: center;"><code>foreach(f)</code></td>
 <td style="text-align: left;">Apply a function <code>f</code> to each element of a RDD</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
 <div class="fragment">
 <ul>
@@ -1361,11 +1609,16 @@
 </ul>
 </div>
 <div class="fragment">
-<p><i class="fa-solid fa-hand-point-right" aria-label="hand-point-right"></i> The <code>foreach()</code> action lets us perform computations on each element in the RDD without bringing it back locally</p>
+<p><i class="fa-solid fa-hand-point-right" aria-label="hand-point-right"></i> The <code>foreach()</code> action performs computations on each element of the RDD without bringing it back to the driver</p>
 </div>
-</section></section><section><section id="persistence" class="title-slide slide level1 center" data-background-color="#1c191c"><h1>Persistence</h1>
+</section></section>
+<section>
+<section id="persistence" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>Persistence</h1>
 
-</section><section id="lazy-evaluation-and-persistence" class="slide level2 center"><h2>Lazy evaluation and persistence</h2>
+</section>
+<section id="lazy-evaluation-and-persistence" class="slide level2 center">
+<h2>Lazy evaluation and persistence</h2>
 <ul>
 <li><p>Spark RDDs are <em>lazily evaluated</em></p></li>
 <li><p>Each time an action is called on a RDD, this RDD and all its dependencies are <em>recomputed</em></p></li>
@@ -1383,23 +1636,26 @@
 <ul>
 <li>Lazy evaluation helps <code>spark</code> to <strong>reduce the number of passes</strong> over the data it has to make by grouping operations together</li>
 <li>No substantial benefit to writing a single complex map instead of chaining together many simple operations</li>
-<li>Users are free to organize their program into <strong>smaller</strong>, more <strong>manageable operations</strong>
-</li>
+<li>Users are free to organize their program into <strong>smaller</strong>, more <strong>manageable operations</strong></li>
 </ul>
 </div>
 </div>
 </div>
-</section><section id="persistence-1" class="slide level2 center"><h2>Persistence</h2>
+</section>
+<section id="persistence-1" class="slide level2 center">
+<h2>Persistence</h2>
 <p>How to use persistence ?</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 39%">
 <col style="width: 60%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">method</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>cache()</code></td>
@@ -1407,26 +1663,31 @@
 </tr>
 <tr class="even">
 <td style="text-align: center;"><code>persist(storageLevel)</code></td>
-<td style="text-align: left;">Persist the RDD according to <code>storageLevel</code>
-</td>
+<td style="text-align: left;">Persist the RDD according to <code>storageLevel</code></td>
 </tr>
 </tbody>
 </table>
 <div class="fragment">
-<p><i class="fa-solid fa-hand-point-right" aria-label="hand-point-right"></i> These methods must be called <em>before</em> the action, and do not trigger the computation</p>
+<p><i class="fa-solid fa-hand-point-right" aria-label="hand-point-right"></i> These methods must be called <em>before</em> the action, and do not trigger the actual computation</p>
 </div>
-</section><section id="usage-of-storagelevel" class="slide level2 center"><h2>Usage of <code>storageLevel</code>
-</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>pyspark.StorageLevel(</span>
-<span id="cb23-2"><a></a>  useDisk, useMemory, useOffHeap, deserialized, replication<span class="op">=</span><span class="dv">1</span></span>
-<span id="cb23-3"><a></a>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section><section id="shades-of-persistence" class="slide level2 incremental center"><h2>Shades of persistence</h2>
+</section>
+<section id="usage-of-storagelevel" class="slide level2 center">
+<h2>Usage of <code>storageLevel</code></h2>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a></a>pyspark.StorageLevel(</span>
+<span id="cb40-2"><a></a>  useDisk, useMemory, useOffHeap, deserialized, replication<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb40-3"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="shades-of-persistence" class="slide level2 incremental center">
+<h2>Shades of persistence</h2>
 <ul>
 <li>What does persistence <em>in memory</em> mean?</li>
-<li>Make <code>storageLevel</code> explicit</li>
+<li>Make <code>StorageLevel</code> explicit</li>
 <li>Any difference between <code>cache()</code> and <code>persist()</code> with <code>useMemory</code>?</li>
 <li>Why do we call persistence caching?</li>
-</ul></section><section id="options-for-persistence" class="slide level2 center"><h2>Options for persistence</h2>
+</ul>
+</section>
+<section id="options-for-persistence" class="slide level2 center">
+<h2>Options for persistence</h2>
 <div id="options-persistence">
 <p>Options for persistence</p>
 <table class="caption-top">
@@ -1434,20 +1695,20 @@
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">argument</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>useDisk</code></td>
-<td style="text-align: left;">Allow caching to use disk if <code>True</code>
-</td>
+<td style="text-align: left;">Allow caching to use disk if <code>True</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><code>useMemory</code></td>
-<td style="text-align: left;">Allow caching to use memory if <code>True</code>
-</td>
+<td style="text-align: left;">Allow caching to use memory if <code>True</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><code>useOffHeap</code></td>
@@ -1455,8 +1716,7 @@
 </tr>
 <tr class="even">
 <td style="text-align: center;"><code>deserialized</code></td>
-<td style="text-align: left;">Cache data without serialization if <code>True</code>
-</td>
+<td style="text-align: left;">Cache data without serialization if <code>True</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><code>replication</code></td>
@@ -1465,8 +1725,10 @@
 </tbody>
 </table>
 </div>
-<p><code>replication</code>: If you cache data that is quite slow to be recomputed, you can use replications. If a machine fails, data will not have to be recomputed.</p>
-</section><section id="options-for-persistence-1" class="slide level2 center"><h2>Options for persistence</h2>
+<p><code>replication</code>: If you are caching data that is expensive to compute, you can use replication. If one machine fails, data does not need to be recomputed.</p>
+</section>
+<section id="options-for-persistence-1" class="slide level2 center">
+<h2>Options for persistence</h2>
 <div id="options-persistence">
 <p>Options for persistence</p>
 <table class="caption-top">
@@ -1474,20 +1736,20 @@
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">argument</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>useDisk</code></td>
-<td style="text-align: left;">Allow caching to use disk if <code>True</code>
-</td>
+<td style="text-align: left;">Allow caching to use disk if <code>True</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><code>useMemory</code></td>
-<td style="text-align: left;">Allow caching to use memory if <code>True</code>
-</td>
+<td style="text-align: left;">Allow caching to use memory if <code>True</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><code>useOffHeap</code></td>
@@ -1495,8 +1757,7 @@
 </tr>
 <tr class="even">
 <td style="text-align: center;"><code>deserialized</code></td>
-<td style="text-align: left;">Cache data without serialization if <code>True</code>
-</td>
+<td style="text-align: left;">Cache data without serialization if <code>True</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><code>replication</code></td>
@@ -1507,9 +1768,12 @@
 </div>
 <p><code>deserialized</code> :</p>
 <ul>
-<li>Serialization is conversion of the data to a binary format</li>
+<li>Serialization consists in converting data to some binary format</li>
 <li>To the best of our knowledge, <code>PySpark</code> only support serialized caching (using <code>pickle</code>)</li>
-</ul></section><section id="options-for-persistence-2" class="slide level2 center"><h2>Options for persistence</h2>
+</ul>
+</section>
+<section id="options-for-persistence-2" class="slide level2 center">
+<h2>Options for persistence</h2>
 <div id="options-persistence">
 <p>Options for persistence</p>
 <table class="caption-top">
@@ -1517,20 +1781,20 @@
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">argument</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>useDisk</code></td>
-<td style="text-align: left;">Allow caching to use disk if <code>True</code>
-</td>
+<td style="text-align: left;">Allow caching to use disk if <code>True</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><code>useMemory</code></td>
-<td style="text-align: left;">Allow caching to use memory if <code>True</code>
-</td>
+<td style="text-align: left;">Allow caching to use memory if <code>True</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><code>useOffHeap</code></td>
@@ -1538,8 +1802,7 @@
 </tr>
 <tr class="even">
 <td style="text-align: center;"><code>deserialized</code></td>
-<td style="text-align: left;">Cache data without serialization if <code>True</code>
-</td>
+<td style="text-align: left;">Cache data without serialization if <code>True</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><code>replication</code></td>
@@ -1556,26 +1819,30 @@
 </dl>
 <ul>
 <li>Data cached in the JVM heap by default</li>
-<li>Very interesting alternative in-memory solutions such as <code>tachyon</code>
-</li>
+<li>Very interesting alternative in-memory solutions such as <code>tachyon</code></li>
 <li>Don’t forget that <code>spark</code> is <code>scala</code> running on the JVM</li>
-</ul></section><section id="back-to-options-for-persistence" class="slide level2 smaller center"><h2>Back to options for persistence</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a>StorageLevel(useDisk, useMemory, useOffHeap, deserialized, replication)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</ul>
+</section>
+<section id="back-to-options-for-persistence" class="slide level2 smaller center">
+<h2>Back to options for persistence</h2>
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a></a>StorageLevel(useDisk, useMemory, useOffHeap, deserialized, replication)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can use these constants:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>DISK_ONLY <span class="op">=</span> StorageLevel(<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="dv">1</span>)</span>
-<span id="cb25-2"><a></a>DISK_ONLY_2 <span class="op">=</span> StorageLevel(<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="dv">2</span>)</span>
-<span id="cb25-3"><a></a>MEMORY_AND_DISK <span class="op">=</span> StorageLevel(<span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="dv">1</span>)</span>
-<span id="cb25-4"><a></a>MEMORY_AND_DISK_2 <span class="op">=</span> StorageLevel(<span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="dv">2</span>)</span>
-<span id="cb25-5"><a></a>MEMORY_AND_DISK_SER <span class="op">=</span> StorageLevel(<span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="dv">1</span>)</span>
-<span id="cb25-6"><a></a>MEMORY_AND_DISK_SER_2 <span class="op">=</span> StorageLevel(<span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="dv">2</span>)</span>
-<span id="cb25-7"><a></a>MEMORY_ONLY <span class="op">=</span> StorageLevel(<span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="dv">1</span>)</span>
-<span id="cb25-8"><a></a>MEMORY_ONLY_2 <span class="op">=</span> StorageLevel(<span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="dv">2</span>)</span>
-<span id="cb25-9"><a></a>MEMORY_ONLY_SER <span class="op">=</span> StorageLevel(<span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="dv">1</span>)</span>
-<span id="cb25-10"><a></a>MEMORY_ONLY_SER_2 <span class="op">=</span> StorageLevel(<span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="dv">2</span>)</span>
-<span id="cb25-11"><a></a>OFF_HEAP <span class="op">=</span> StorageLevel(<span class="va">False</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="dv">1</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a></a>DISK_ONLY <span class="op">=</span> StorageLevel(<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="dv">1</span>)</span>
+<span id="cb42-2"><a></a>DISK_ONLY_2 <span class="op">=</span> StorageLevel(<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="dv">2</span>)</span>
+<span id="cb42-3"><a></a>MEMORY_AND_DISK <span class="op">=</span> StorageLevel(<span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="dv">1</span>)</span>
+<span id="cb42-4"><a></a>MEMORY_AND_DISK_2 <span class="op">=</span> StorageLevel(<span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="dv">2</span>)</span>
+<span id="cb42-5"><a></a>MEMORY_AND_DISK_SER <span class="op">=</span> StorageLevel(<span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="dv">1</span>)</span>
+<span id="cb42-6"><a></a>MEMORY_AND_DISK_SER_2 <span class="op">=</span> StorageLevel(<span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="dv">2</span>)</span>
+<span id="cb42-7"><a></a>MEMORY_ONLY <span class="op">=</span> StorageLevel(<span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="dv">1</span>)</span>
+<span id="cb42-8"><a></a>MEMORY_ONLY_2 <span class="op">=</span> StorageLevel(<span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="dv">2</span>)</span>
+<span id="cb42-9"><a></a>MEMORY_ONLY_SER <span class="op">=</span> StorageLevel(<span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="dv">1</span>)</span>
+<span id="cb42-10"><a></a>MEMORY_ONLY_SER_2 <span class="op">=</span> StorageLevel(<span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="dv">2</span>)</span>
+<span id="cb42-11"><a></a>OFF_HEAP <span class="op">=</span> StorageLevel(<span class="va">False</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and simply call for instance</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>rdd.persist(MEMORY_AND_DISK)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section><section id="persistence-2" class="slide level2 center"><h2>Persistence</h2>
+<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a></a>rdd.persist(MEMORY_AND_DISK)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="persistence-2" class="slide level2 center">
+<h2>Persistence</h2>
 <p>What if you attempt to <em>cache too much data to fit in memory ?</em></p>
 <p>Spark will automatically evict old partitions using a <em>Least Recently Used</em> (LRU) cache policy:</p>
 <ul>
@@ -1583,8 +1850,10 @@
 <li><p>For the <em>memory-and-disk</em> ones, it will write them out to disk</p></li>
 </ul>
 <p>Use <code>unpersist()</code> to RDDs to <strong>manually remove them</strong> from the cache</p>
-</section><section id="reminder-about-passing-functions" class="slide level2 center"><h2>Reminder: about passing functions <i class="fa-solid fa-syringe" aria-label="syringe"></i>
-</h2>
+</section>
+<section id="reminder-about-passing-functions" class="slide level2 smaller center">
+<h2>Reminder: about passing functions <i class="fa-solid fa-syringe" aria-label="syringe"></i></h2>
+<div data-smaller="true">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1595,6 +1864,7 @@
 </div>
 <div class="callout-content">
 <p>When passing functions, you can <em>inadvertently serialize the object containing the function</em>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1617,23 +1887,25 @@
 </div>
 </div>
 </div>
-</section><section id="about-passing-functions" class="slide level2 center"><h2>About passing functions</h2>
+</section>
+<section id="about-passing-functions" class="slide level2 smaller center">
+<h2>About passing functions</h2>
 <p>Passing a function with field references (don’t do this ! <i class="fa-solid fa-hammer" aria-label="hammer"></i> <i class="fa-solid fa-skull-crossbones" aria-label="skull-crossbones"></i>)</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a><span class="kw">class</span> SearchFunctions(<span class="bu">object</span>):</span>
-<span id="cb27-2"><a></a>  </span>
-<span id="cb27-3"><a></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, query):</span>
-<span id="cb27-4"><a></a>      <span class="va">self</span>.query <span class="op">=</span> query</span>
-<span id="cb27-5"><a></a></span>
-<span id="cb27-6"><a></a>  <span class="kw">def</span> isMatch(<span class="va">self</span>, s):</span>
-<span id="cb27-7"><a></a>      <span class="cf">return</span> <span class="va">self</span>.query <span class="kw">in</span> s</span>
-<span id="cb27-8"><a></a></span>
-<span id="cb27-9"><a></a>  <span class="kw">def</span> getMatchesFunctionReference(<span class="va">self</span>, rdd):</span>
-<span id="cb27-10"><a></a>      <span class="co"># Problem: references all of "self" in "self.isMatch"</span></span>
-<span id="cb27-11"><a></a>      <span class="cf">return</span> rdd.<span class="bu">filter</span>(<span class="va">self</span>.isMatch)</span>
-<span id="cb27-12"><a></a></span>
-<span id="cb27-13"><a></a>  <span class="kw">def</span> getMatchesMemberReference(<span class="va">self</span>, rdd):</span>
-<span id="cb27-14"><a></a>      <span class="co"># Problem: references all of "self" in "self.query"</span></span>
-<span id="cb27-15"><a></a>      <span class="cf">return</span> rdd.<span class="bu">filter</span>(<span class="kw">lambda</span> x: <span class="va">self</span>.query <span class="kw">in</span> x)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a></a><span class="kw">class</span> SearchFunctions(<span class="bu">object</span>):</span>
+<span id="cb44-2"><a></a>  </span>
+<span id="cb44-3"><a></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, query):</span>
+<span id="cb44-4"><a></a>      <span class="va">self</span>.query <span class="op">=</span> query</span>
+<span id="cb44-5"><a></a></span>
+<span id="cb44-6"><a></a>  <span class="kw">def</span> isMatch(<span class="va">self</span>, s):</span>
+<span id="cb44-7"><a></a>      <span class="cf">return</span> <span class="va">self</span>.query <span class="kw">in</span> s</span>
+<span id="cb44-8"><a></a></span>
+<span id="cb44-9"><a></a>  <span class="kw">def</span> getMatchesFunctionReference(<span class="va">self</span>, rdd):</span>
+<span id="cb44-10"><a></a>      <span class="co"># Problem: references all of "self" in "self.isMatch"</span></span>
+<span id="cb44-11"><a></a>      <span class="cf">return</span> rdd.<span class="bu">filter</span>(<span class="va">self</span>.isMatch)</span>
+<span id="cb44-12"><a></a></span>
+<span id="cb44-13"><a></a>  <span class="kw">def</span> getMatchesMemberReference(<span class="va">self</span>, rdd):</span>
+<span id="cb44-14"><a></a>      <span class="co"># Problem: references all of "self" in "self.query"</span></span>
+<span id="cb44-15"><a></a>      <span class="cf">return</span> rdd.<span class="bu">filter</span>(<span class="kw">lambda</span> x: <span class="va">self</span>.query <span class="kw">in</span> x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1647,66 +1919,77 @@
 </div>
 </div>
 </div>
-</section><section id="about-passing-functions-1" class="slide level2 center"><h2>About passing functions</h2>
+</section>
+<section id="about-passing-functions-1" class="slide level2 center">
+<h2>About passing functions</h2>
 <p><code>Python</code> function passing without field references</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="kw">class</span> WordFunctions(<span class="bu">object</span>):</span>
-<span id="cb28-2"><a></a>  ...</span>
-<span id="cb28-3"><a></a></span>
-<span id="cb28-4"><a></a><span class="kw">def</span> getMatchesNoReference(<span class="va">self</span>, rdd):</span>
-<span id="cb28-5"><a></a>  <span class="co"># Safe: extract only the field we need into a local variable</span></span>
-<span id="cb28-6"><a></a>  query <span class="op">=</span> <span class="va">self</span>.query</span>
-<span id="cb28-7"><a></a>  <span class="cf">return</span> rdd.<span class="bu">filter</span>(<span class="kw">lambda</span> x: query <span class="kw">in</span> x)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a></a><span class="kw">class</span> WordFunctions(<span class="bu">object</span>):</span>
+<span id="cb45-2"><a></a>  ...</span>
+<span id="cb45-3"><a></a></span>
+<span id="cb45-4"><a></a><span class="kw">def</span> getMatchesNoReference(<span class="va">self</span>, rdd):</span>
+<span id="cb45-5"><a></a>  <span class="co"># Safe: extract only the field we need into a local variable</span></span>
+<span id="cb45-6"><a></a>  query <span class="op">=</span> <span class="va">self</span>.query</span>
+<span id="cb45-7"><a></a>  <span class="cf">return</span> rdd.<span class="bu">filter</span>(<span class="kw">lambda</span> x: query <span class="kw">in</span> x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="fragment">
-<p>Much better to do this instead <i class="fa-solid fa-champagne-glasses" aria-label="champagne-glasses"></i></p>
+<p>Much better! <i class="fa-solid fa-champagne-glasses" aria-label="champagne-glasses"></i></p>
 </div>
-</section></section><section><section id="pair-rdd-key-value-pairs" class="title-slide slide level1 center" data-background-color="#1c191c"><h1>Pair RDD: key-value pairs</h1>
+</section></section>
+<section>
+<section id="pair-rdd-key-value-pairs" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>Pair RDD: key-value pairs</h1>
 
-</section><section id="pair-rdd-key-value-pairs-1" class="slide level2 center"><h2>Pair RDD: key-value pairs</h2>
+</section>
+<section id="pair-rdd-key-value-pairs-1" class="slide level2 center">
+<h2>Pair RDD: key-value pairs</h2>
 <p>It’s roughly a RDD where each element is a <em>tuple</em> with two elements: a <em>key</em> and a <em>value</em></p>
 <div class="fragment">
 <ul>
 <li>For numerous tasks, such as aggregations tasks, storing information as <code>(key, value)</code> pairs into RDD is very convenient</li>
-<li>Such RDDs are called <code>PairRDD</code>
-</li>
-<li>Pair RDDs expose <em>new operations</em> such as <em>grouping together</em> data with the same <em>key</em>, and <em>grouping together two different RDDs</em>
-</li>
+<li>Such RDDs are called <code>PairRDD</code></li>
+<li>Pair RDDs expose <em>new operations</em> such as <em>grouping together</em> data with the same <em>key</em>, and <em>grouping together two different RDDs</em></li>
 </ul>
 </div>
-</section><section id="creating-a-pair-rdd" class="slide level2 center"><h2>Creating a pair RDD</h2>
+</section>
+<section id="creating-a-pair-rdd" class="slide level2 center">
+<h2>Creating a pair RDD</h2>
 <p>Calling <code>map</code> with a function returning a <code>tuple</code> with two elements</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([[<span class="dv">1</span>, <span class="st">"a"</span>, <span class="dv">7</span>], [<span class="dv">2</span>, <span class="st">"b"</span>, <span class="dv">13</span>], [<span class="dv">2</span>, <span class="st">"c"</span>, <span class="dv">17</span>]])</span>
-<span id="cb29-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> rdd.<span class="bu">map</span>(<span class="kw">lambda</span> x: (x[<span class="dv">0</span>], x[<span class="dv">1</span>:]))</span>
-<span id="cb29-3"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.collect()</span>
-<span id="cb29-4"><a></a>[(<span class="dv">1</span>, [<span class="st">'a'</span>, <span class="dv">7</span>]), (<span class="dv">2</span>, [<span class="st">'b'</span>, <span class="dv">13</span>]), (<span class="dv">2</span>, [<span class="st">'c'</span>, <span class="dv">17</span>])]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section><section id="warning-5" class="slide level2 center"><h2>
-<i class="fa-solid fa-triangle-exclamation" aria-label="triangle-exclamation"></i> Warning</h2>
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([[<span class="dv">1</span>, <span class="st">"a"</span>, <span class="dv">7</span>], [<span class="dv">2</span>, <span class="st">"b"</span>, <span class="dv">13</span>], [<span class="dv">2</span>, <span class="st">"c"</span>, <span class="dv">17</span>]])</span>
+<span id="cb46-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> rdd.<span class="bu">map</span>(<span class="kw">lambda</span> x: (x[<span class="dv">0</span>], x[<span class="dv">1</span>:]))</span>
+<span id="cb46-3"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.collect()</span>
+<span id="cb46-4"><a></a>[(<span class="dv">1</span>, [<span class="st">'a'</span>, <span class="dv">7</span>]), (<span class="dv">2</span>, [<span class="st">'b'</span>, <span class="dv">13</span>]), (<span class="dv">2</span>, [<span class="st">'c'</span>, <span class="dv">17</span>])]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="warning-5" class="slide level2 center">
+<h2><i class="fa-solid fa-triangle-exclamation" aria-label="triangle-exclamation"></i> Warning</h2>
 <p>All elements of a <code>PairRDD</code> must be tuples with two elements (the key and the value)</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([[<span class="dv">1</span>, <span class="st">"a"</span>, <span class="dv">7</span>], [<span class="dv">2</span>, <span class="st">"b"</span>, <span class="dv">13</span>], [<span class="dv">2</span>, <span class="st">"c"</span>, <span class="dv">17</span>]])</span>
-<span id="cb30-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.keys().collect()</span>
-<span id="cb30-3"><a></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>]</span>
-<span id="cb30-4"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.values().collect()</span>
-<span id="cb30-5"><a></a>[<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([[<span class="dv">1</span>, <span class="st">"a"</span>, <span class="dv">7</span>], [<span class="dv">2</span>, <span class="st">"b"</span>, <span class="dv">13</span>], [<span class="dv">2</span>, <span class="st">"c"</span>, <span class="dv">17</span>]])</span>
+<span id="cb47-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.keys().collect()</span>
+<span id="cb47-3"><a></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>]</span>
+<span id="cb47-4"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.values().collect()</span>
+<span id="cb47-5"><a></a>[<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="fragment">
 <p>For things to work as expected you <em>must</em> do</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([[<span class="dv">1</span>, <span class="st">"a"</span>, <span class="dv">7</span>], [<span class="dv">2</span>, <span class="st">"b"</span>, <span class="dv">13</span>], [<span class="dv">2</span>, <span class="st">"c"</span>, <span class="dv">17</span>]])<span class="op">\</span></span>
-<span id="cb31-2"><a></a>      .<span class="bu">map</span>(<span class="kw">lambda</span> x: (x[<span class="dv">0</span>], x[<span class="dv">1</span>:]))</span>
-<span id="cb31-3"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.keys().collect()</span>
-<span id="cb31-4"><a></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>]</span>
-<span id="cb31-5"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.values().collect()</span>
-<span id="cb31-6"><a></a>[[<span class="st">'a'</span>, <span class="dv">7</span>], [<span class="st">'b'</span>, <span class="dv">13</span>], [<span class="st">'c'</span>, <span class="dv">17</span>]]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([[<span class="dv">1</span>, <span class="st">"a"</span>, <span class="dv">7</span>], [<span class="dv">2</span>, <span class="st">"b"</span>, <span class="dv">13</span>], [<span class="dv">2</span>, <span class="st">"c"</span>, <span class="dv">17</span>]])<span class="op">\</span></span>
+<span id="cb48-2"><a></a>      .<span class="bu">map</span>(<span class="kw">lambda</span> x: (x[<span class="dv">0</span>], x[<span class="dv">1</span>:]))</span>
+<span id="cb48-3"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.keys().collect()</span>
+<span id="cb48-4"><a></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>]</span>
+<span id="cb48-5"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.values().collect()</span>
+<span id="cb48-6"><a></a>[[<span class="st">'a'</span>, <span class="dv">7</span>], [<span class="st">'b'</span>, <span class="dv">13</span>], [<span class="st">'c'</span>, <span class="dv">17</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="transformations-for-a-single-pairrdd" class="slide level2 center"><h2>Transformations for a single <code>PairRDD</code>
-</h2>
+</section>
+<section id="transformations-for-a-single-pairrdd" class="slide level2 center">
+<h2>Transformations for a single <code>PairRDD</code></h2>
 <div id="transformations-for-a-single-PairRDD">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>keys()</code></td>
@@ -1731,18 +2014,21 @@
 </tbody>
 </table>
 </div>
-</section><section id="transformations-for-a-single-pairrdd-1" class="slide level2 center"><h2>Transformations for a single <code>PairRDD</code>
-</h2>
+</section>
+<section id="transformations-for-a-single-pairrdd-1" class="slide level2 smaller center">
+<h2>Transformations for a single <code>PairRDD</code></h2>
 <div id="transformations-for-a-single-PairRDD">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>keys()</code></td>
@@ -1769,22 +2055,25 @@
 </div>
 <div class="fragment">
 <p>Example with <code>mapValues</code></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([(<span class="st">"a"</span>, <span class="st">"x y z"</span>), (<span class="st">"b"</span>, <span class="st">"p r"</span>)])</span>
-<span id="cb32-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.mapValues(<span class="kw">lambda</span> v: v.split(<span class="st">' '</span>)).collect()</span>
-<span id="cb32-3"><a></a>[(<span class="st">'a'</span>, [<span class="st">'x'</span>, <span class="st">'y'</span>, <span class="st">'z'</span>]), (<span class="st">'b'</span>, [<span class="st">'p'</span>, <span class="st">'r'</span>])]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([(<span class="st">"a"</span>, <span class="st">"x y z"</span>), (<span class="st">"b"</span>, <span class="st">"p r"</span>)])</span>
+<span id="cb49-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.mapValues(<span class="kw">lambda</span> v: v.split(<span class="st">' '</span>)).collect()</span>
+<span id="cb49-3"><a></a>[(<span class="st">'a'</span>, [<span class="st">'x'</span>, <span class="st">'y'</span>, <span class="st">'z'</span>]), (<span class="st">'b'</span>, [<span class="st">'p'</span>, <span class="st">'r'</span>])]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="transformations-for-a-single-pairrdd-2" class="slide level2 center"><h2>Transformations for a single <code>PairRDD</code>
-</h2>
+</section>
+<section id="transformations-for-a-single-pairrdd-2" class="slide level2 smaller center">
+<h2>Transformations for a single <code>PairRDD</code></h2>
 <div id="transformations-for-a-single-PairRDD">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>keys()</code></td>
@@ -1811,22 +2100,26 @@
 </div>
 <div class="fragment">
 <p>Example with <code>flatMapValues</code></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a></a><span class="op">&gt;&gt;&gt;</span> texts <span class="op">=</span> sc.parallelize([(<span class="st">"a"</span>, <span class="st">"x y z"</span>), (<span class="st">"b"</span>, <span class="st">"p r"</span>)])</span>
-<span id="cb33-2"><a></a><span class="op">&gt;&gt;&gt;</span> tokenize <span class="op">=</span> <span class="kw">lambda</span> x: x.split(<span class="st">" "</span>)</span>
-<span id="cb33-3"><a></a><span class="op">&gt;&gt;&gt;</span> texts.flatMapValues(tokenize).collect()</span>
-<span id="cb33-4"><a></a>[(<span class="st">'a'</span>, <span class="st">'x'</span>), (<span class="st">'a'</span>, <span class="st">'y'</span>), (<span class="st">'a'</span>, <span class="st">'z'</span>), (<span class="st">'b'</span>, <span class="st">'p'</span>), (<span class="st">'b'</span>, <span class="st">'r'</span>)]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a></a><span class="op">&gt;&gt;&gt;</span> texts <span class="op">=</span> sc.parallelize([(<span class="st">"a"</span>, <span class="st">"x y z"</span>), (<span class="st">"b"</span>, <span class="st">"p r"</span>)])</span>
+<span id="cb50-2"><a></a><span class="op">&gt;&gt;&gt;</span> tokenize <span class="op">=</span> <span class="kw">lambda</span> x: x.split(<span class="st">" "</span>)</span>
+<span id="cb50-3"><a></a><span class="op">&gt;&gt;&gt;</span> texts.flatMapValues(tokenize).collect()</span>
+<span id="cb50-4"><a></a>[(<span class="st">'a'</span>, <span class="st">'x'</span>), (<span class="st">'a'</span>, <span class="st">'y'</span>), (<span class="st">'a'</span>, <span class="st">'z'</span>), (<span class="st">'b'</span>, <span class="st">'p'</span>), (<span class="st">'b'</span>, <span class="st">'r'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="transformations-for-a-single-pairrdd-keyed" class="slide level2 center"><h2>Transformations for a single <code>PairRDD</code> (keyed)</h2>
+</section>
+<section id="transformations-for-a-single-pairrdd-keyed" class="slide level2 center">
+<h2>Transformations for a single <code>PairRDD</code> (keyed)</h2>
 <div id="transformations-for-a-single-PairRDD-keyed">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>groupByKey()</code></td>
@@ -1847,17 +2140,21 @@
 </tbody>
 </table>
 </div>
-</section><section id="transformations-for-a-single-pairrdd-keyed-1" class="slide level2 center"><h2>Transformations for a single <code>PairRDD</code> (keyed)</h2>
+</section>
+<section id="transformations-for-a-single-pairrdd-keyed-1" class="slide level2 smaller center">
+<h2>Transformations for a single <code>PairRDD</code> (keyed)</h2>
 <div id="transformations-for-a-single-PairRDD-keyed">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>groupByKey()</code></td>
@@ -1880,28 +2177,43 @@
 </div>
 <div class="fragment">
 <p>Example with <code>groupByKey</code></p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([</span>
-<span id="cb34-2"><a></a>        (<span class="st">"a"</span>, <span class="dv">1</span>), (<span class="st">"b"</span>, <span class="dv">1</span>), (<span class="st">"a"</span>, <span class="dv">1</span>), </span>
-<span id="cb34-3"><a></a>        (<span class="st">"b"</span>, <span class="dv">3</span>), (<span class="st">"c"</span>, <span class="dv">42</span>)</span>
-<span id="cb34-4"><a></a>        ])</span>
-<span id="cb34-5"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.groupByKey().mapValues(<span class="bu">list</span>).collect()</span>
-<span id="cb34-6"><a></a>[(<span class="st">'c'</span>, [<span class="dv">42</span>]), (<span class="st">'b'</span>, [<span class="dv">1</span>, <span class="dv">3</span>]), (<span class="st">'a'</span>, [<span class="dv">1</span>, <span class="dv">1</span>])]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([</span>
+<span id="cb51-2"><a></a>        (<span class="st">"a"</span>, <span class="dv">1</span>), (<span class="st">"b"</span>, <span class="dv">1</span>), (<span class="st">"a"</span>, <span class="dv">1</span>), </span>
+<span id="cb51-3"><a></a>        (<span class="st">"b"</span>, <span class="dv">3</span>), (<span class="st">"c"</span>, <span class="dv">42</span>)</span>
+<span id="cb51-4"><a></a>        ])</span>
+<span id="cb51-5"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.groupByKey().mapValues(<span class="bu">list</span>).collect()</span>
+<span id="cb51-6"><a></a>[(<span class="st">'c'</span>, [<span class="dv">42</span>]), (<span class="st">'b'</span>, [<span class="dv">1</span>, <span class="dv">3</span>]), (<span class="st">'a'</span>, [<span class="dv">1</span>, <span class="dv">1</span>])]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="section-8" class="slide level2 center"><h2></h2>
+</section>
+<section id="section-6" class="slide level2 center">
+<h2></h2>
 <center>
 <img data-src="../../images/group_by.png">
 </center>
-</section><section id="transformations-for-a-single-pairrdd-keyed-2" class="slide level2 center"><h2>Transformations for a single <code>PairRDD</code> (keyed)</h2>
+</section>
+<section id="groupbykey-internals" class="slide level2 center">
+<h2><code>groupByKey()</code> internals</h2>
+<ul>
+<li>Grouping locally</li>
+<li><i class="fa-solid fa-shuffle" aria-label="shuffle"></i> Shuffling</li>
+<li>Partitionning</li>
+<li>Relation to <code>reduceByKey()</code></li>
+</ul>
+</section>
+<section id="transformations-for-a-single-pairrdd-keyed-2" class="slide level2 smaller center">
+<h2>Transformations for a single <code>PairRDD</code> (keyed)</h2>
 <div id="transformations-for-a-single-PairRDD-keyed">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>groupByKey()</code></td>
@@ -1924,29 +2236,35 @@
 </div>
 <div class="fragment">
 <p>Example with <code>reduceByKey</code></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([(<span class="st">"a"</span>, <span class="dv">1</span>), (<span class="st">"b"</span>, <span class="dv">1</span>), (<span class="st">"a"</span>, <span class="dv">1</span>)])</span>
-<span id="cb35-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.reduceByKey(<span class="kw">lambda</span> a, b: a <span class="op">+</span> b).collect()</span>
-<span id="cb35-3"><a></a>[(<span class="st">'a'</span>, <span class="dv">2</span>), (<span class="st">'b'</span>, <span class="dv">1</span>)]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([(<span class="st">"a"</span>, <span class="dv">1</span>), (<span class="st">"b"</span>, <span class="dv">1</span>), (<span class="st">"a"</span>, <span class="dv">1</span>)])</span>
+<span id="cb52-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.reduceByKey(<span class="kw">lambda</span> a, b: a <span class="op">+</span> b).collect()</span>
+<span id="cb52-3"><a></a>[(<span class="st">'a'</span>, <span class="dv">2</span>), (<span class="st">'b'</span>, <span class="dv">1</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>The reducing occurs first <strong>locally</strong> (within partitions)</li>
 <li>Then, a shuffle is performed with the local results to reduce globally</li>
 </ul>
 </div>
-</section><section id="section-9" class="slide level2 center"><h2></h2>
+</section>
+<section id="reducebykey-in-picture" class="slide level2 center">
+<h2><code>ReduceByKey</code> in picture</h2>
 <center>
 <img data-src="../../images/reduce_by.png">
 </center>
-</section><section id="transformations-for-a-single-pairrdd-keyed-3" class="slide level2 center"><h2>Transformations for a single <code>PairRDD</code> (keyed)</h2>
+</section>
+<section id="transformations-for-a-single-pairrdd-keyed-3" class="slide level2 smaller center">
+<h2>Transformations for a single <code>PairRDD</code> (keyed)</h2>
 <div id="transformations-for-a-single-PairRDD-keyed">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>groupByKey()</code></td>
@@ -1973,27 +2291,26 @@
 <div class="fragment">
 <p>The user must define</p>
 <ul>
-<li>
-<code>createCombiner</code> : which turns a <code>V</code> into a <code>C</code>
-</li>
-<li>
-<code>mergeValue</code> : to merge a <code>V</code> into a <code>C</code>
-</li>
-<li>
-<code>mergeCombiners</code> : to combine two <code>C</code>’s into a single one</li>
+<li><code>createCombiner</code> : which turns a <code>V</code> into a <code>C</code></li>
+<li><code>mergeValue</code> : to merge a <code>V</code> into a <code>C</code></li>
+<li><code>mergeCombiners</code> : to combine two <code>C</code>’s into a single one</li>
 </ul>
 </div>
-</section><section id="transformations-for-a-single-pairrdd-keyed-4" class="slide level2 center"><h2>Transformations for a single <code>PairRDD</code> (keyed)</h2>
+</section>
+<section id="transformations-for-a-single-pairrdd-keyed-4" class="slide level2 smaller center">
+<h2>Transformations for a single <code>PairRDD</code> (keyed)</h2>
 <div id="transformations-for-a-single-PairRDD-keyed">
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>groupByKey()</code></td>
@@ -2017,33 +2334,30 @@
 <div class="fragment">
 <p>In this example</p>
 <ul>
-<li>
-<code>createCombiner</code> : converts the value to <code>str</code>
-</li>
-<li>
-<code>mergeValue</code> : concatenates two <code>str</code>
-</li>
-<li>
-<code>mergeCombiners</code> : concatenates two <code>str</code>
-</li>
+<li><code>createCombiner</code> : converts the value to <code>str</code></li>
+<li><code>mergeValue</code> : concatenates two <code>str</code></li>
+<li><code>mergeCombiners</code> : concatenates two <code>str</code></li>
 </ul>
-<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([(<span class="st">'a'</span>, <span class="dv">1</span>), (<span class="st">'b'</span>, <span class="dv">2</span>), (<span class="st">'a'</span>, <span class="dv">13</span>)])</span>
-<span id="cb36-2"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> add(a, b):</span>
-<span id="cb36-3"><a></a>        <span class="cf">return</span> a <span class="op">+</span> <span class="bu">str</span>(b)</span>
-<span id="cb36-4"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.combineByKey(<span class="bu">str</span>, add, add).collect()</span>
-<span id="cb36-5"><a></a>[(<span class="st">'a'</span>, <span class="st">'113'</span>), (<span class="st">'b'</span>, <span class="st">'2'</span>)]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([(<span class="st">'a'</span>, <span class="dv">1</span>), (<span class="st">'b'</span>, <span class="dv">2</span>), (<span class="st">'a'</span>, <span class="dv">13</span>)])</span>
+<span id="cb53-2"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> add(a, b):</span>
+<span id="cb53-3"><a></a>        <span class="cf">return</span> a <span class="op">+</span> <span class="bu">str</span>(b)</span>
+<span id="cb53-4"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.combineByKey(<span class="bu">str</span>, add, add).collect()</span>
+<span id="cb53-5"><a></a>[(<span class="st">'a'</span>, <span class="st">'113'</span>), (<span class="st">'b'</span>, <span class="st">'2'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="transformations-for-two-pairrdd" class="slide level2 center"><h2>Transformations for two <code>PairRDD</code>
-</h2>
+</section>
+<section id="transformations-for-two-pairrdd" class="slide level2 center">
+<h2>Transformations for two <code>PairRDD</code></h2>
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">transformation</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>subtractByKey(other)</code></td>
@@ -2070,26 +2384,30 @@
 <center>
 <img data-src="../../images/join-types.png" width="600">
 </center>
-</section><section id="transformations-for-two-pairrdd-1" class="slide level2 center"><h2>Transformations for two <code>PairRDD</code>
-</h2>
+</section>
+<section id="transformations-for-two-pairrdd-1" class="slide level2 center">
+<h2>Transformations for two <code>PairRDD</code></h2>
 <ul>
 <li><p>Join operations are mainly used through the high-level API: <code>DataFrame</code> objects and the <code>spark.sql</code> API</p></li>
 <li><p>We will use them a lot with the high-level API (<code>DataFrame</code> from <code>spark.sql</code>)</p></li>
 </ul>
 
 <aside><div>
-<p><a href="http://localhost:8888/notebooks/notebooks/notebook05_sparkrdd.ipynb">Let’s go to notebook05_sparkrdd.ipynb</a></p>
-</div></aside></section><section id="actions-for-a-single-pairrdd" class="slide level2 center"><h2>Actions for a single <code>PairRDD</code>
-</h2>
+<p><a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook05_sparkrdd.ipynb" download="">Back to Jupyter notebook V : Spark RDD</a></p>
+</div></aside></section>
+<section id="actions-for-a-single-pairrdd" class="slide level2 center">
+<h2>Actions for a single <code>PairRDD</code></h2>
 <table class="caption-top">
 <colgroup>
 <col style="width: 31%">
 <col style="width: 68%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">action</th>
 <th style="text-align: left;">description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><code>countByKey()</code></td>
@@ -2107,29 +2425,47 @@
 </table>
 
 <aside><div>
-<p><a href="http://localhost:8888/notebooks/notebooks/notebook05_sparkrdd.ipynb">Let’s go to notebook05_sparkrdd.ipynb</a></p>
-</div></aside></section><section id="data-partitionning" class="slide level2 center"><h2>Data partitionning</h2>
+<p><a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook05_sparkrdd.ipynb" download="">Back to Jupyter notebook V : Spark RDD</a></p>
+</div></aside></section>
+<section id="data-partitionning" class="slide level2 center">
+<h2>Data partitionning</h2>
 <ul>
-<li>Some operations on <code>PairRDD</code>s, such as <code>join</code>, require to scan the data <strong>more than once</strong>
-</li>
+<li>Some operations on <code>PairRDD</code>s, such as <code>join</code>, require to scan the data <strong>more than once</strong></li>
 <li>Partitionning the RDDs <strong>in advance</strong> can reduce network communications</li>
 <li>When a key-oriented dataset is reused several times, partitionning can improve performance</li>
 <li>In <code>Spark</code>: you can <em>choose which keys will appear on the same node</em>, but no explicit control of which worker node each key goes to.</li>
-</ul></section><section id="data-partitionning-1" class="slide level2 center"><h2>Data partitionning</h2>
+</ul>
+</section>
+<section id="data-partitionning-1" class="slide level2 center">
+<h2>Data partitionning</h2>
 <p>In practice, you can specify the number of partitions with</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a></a>rdd.partitionBy(<span class="dv">100</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a></a>rdd.partitionBy(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="fragment">
 <p>You can also use a custom partition function <code>hash</code> such that <code>hash(key)</code> returns a hash value</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a></a><span class="im">import</span> urlparse</span>
-<span id="cb38-2"><a></a></span>
-<span id="cb38-3"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> hash_domain(url):</span>
-<span id="cb38-4"><a></a>        <span class="co"># Returns a hash associated to the domain of a website</span></span>
-<span id="cb38-5"><a></a>        <span class="cf">return</span> <span class="bu">hash</span>(urlparse.urlparse(url).netloc)</span>
-<span id="cb38-6"><a></a></span>
-<span id="cb38-7"><a></a>rdd.partitionBy(<span class="dv">20</span>, hash_domain) <span class="co"># Create 20 partitions</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a></a><span class="im">import</span> urlparse</span>
+<span id="cb55-2"><a></a></span>
+<span id="cb55-3"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> hash_domain(url):</span>
+<span id="cb55-4"><a></a>        <span class="co"># Returns a hash associated to the domain of a website</span></span>
+<span id="cb55-5"><a></a>        <span class="cf">return</span> <span class="bu">hash</span>(urlparse.urlparse(url).netloc)</span>
+<span id="cb55-6"><a></a></span>
+<span id="cb55-7"><a></a>rdd.partitionBy(<span class="dv">20</span>, hash_domain) <span class="co"># Create 20 partitions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To have finer control on partitionning, you must use the Scala API.</p>
 </div>
-</section></section><section id="thank-you" class="title-slide slide level1 center" data-background-color="#1c191c"><h1>Thank you !</h1>
+</section></section>
+<section>
+<section id="questions" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1><i class="fa-solid fa-brain" aria-label="brain"></i> Questions</h1>
+
+</section>
+<section id="section-7" class="slide level2 center">
+<h2></h2>
+<ul>
+<li>Partitionning tweaking</li>
+<li>Shuffles monitoring</li>
+</ul>
+</section></section>
+<section id="thank-you" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>Thank you !</h1>
 
 
 <div class="reveal-header">
@@ -2147,14 +2483,32 @@
 </div>
 </div>
 </section>
-</div>
+
+
+    </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
 <p><a href="http://s-v-b.github.io/IFEBY030">IFEBY030</a> – Technos Big Data – M1 MIDS/MFA/LOGOS – UParis Cité</p>
 </div>
 </div></div>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../../site_libs/revealjs/plugin/search/search.js"></script><script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
 
       // Full list of configuration options available at:
       // https://revealjs.com/config/
@@ -2345,42 +2699,8 @@
           RevealZoom
         ]
       });
-    </script><script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script><script id="quarto-html-after-body" type="application/javascript">
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
         const mode = bsSheetEl.getAttribute("data-mode");
@@ -2420,12 +2740,12 @@
         // flash "checked"
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copié");
+        button.setAttribute("title", "Copied!");
         let tooltip;
         if (window.bootstrap) {
           button.setAttribute("data-bs-toggle", "tooltip");
           button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copié");
+          button.setAttribute("data-bs-title", "Copied!");
           tooltip = new bootstrap.Tooltip(button, 
             { trigger: "manual", 
               customClass: "code-copy-button-tooltip",
@@ -2723,7 +3043,8 @@
         }
       }
     });
-    </script><script type="text/javascript">
+    </script>
+        <script type="text/javascript">
         (function(d) {
           d.querySelectorAll(".pseudocode-container").forEach(function(el) {
             let pseudocodeOptions = {
@@ -2754,6 +3075,7 @@
           });
         })(document);
         </script>
-
+      
+    
 
 </body></html>
