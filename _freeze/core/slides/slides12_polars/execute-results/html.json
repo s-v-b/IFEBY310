@@ -1,0 +1,12 @@
+{
+  "hash": "ba1fcb666de7a7b75ee9c8b88ddfa10e",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Polars\"\nengine: jupyter\ndate: \"2025-01-17\"\n\nexecute: \n  eval: true\n  echo: true\n---\n\n",
+    "supporting": [
+      "slides12_polars_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
