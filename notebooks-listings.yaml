@@ -1,39 +1,52 @@
 - title: "Python Stack for Data Science"
   author: "Master I MIDS UParis Cité"
-  date: "2025-01-15"
+  date: "2025-01-17"
   path: "core/notebooks/notebook01_python.html"
   categories: [Python]
   href: "[<i class='fa-solid fa-download'></i>](core/ipynb/notebook01_python.ipynb)"
 - title: "Numpy and Scipy"
   author: "Master I MIDS UParis Cité"
-  date: "2025-01-15"
+  date: "2025-01-17"
   path: "core/notebooks/notebook02_numpy.html"
   categories: [Python, Numpy, Scipy, Plotly]
   href: '<a href="core/ipynb/notebook02_numpy.ipynb" download="notebook02_numpy.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Table wranglig with Pandas"
   author: "Master I MIDS UParis Cité"
-  date: "2025-01-22"
+  date: "2025-01-24"
   path: "core/notebooks/notebook03_pandas.html"
   categories: [Python, Pandas]
   href: '<a href="core/ipynb/notebook03_pandas.ipynb" download="notebook03_pandas.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
+- title: "Table wranglig with Dask"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-01-31"
+  # path: ""
+  categories: [Python, Dask]
+  # href: '<a href="core/ipynb/notebook03_pandas.ipynb" download="notebook03_pandas.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Spark Resilient Distributed Datasets"
   author: "Master I MIDS UParis Cité"
-  date: "2025-01-22"
+  date: "2025-02-06"
   path: "core/notebooks/notebook05_sparkrdd.html"
   categories: [PySpark, Spark, RDD]
+  href: '<a href="core/ipynb/notebook02_numpy.ipynb" download="notebook05_sparkrdd.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Spark SQL"
   path: "core/notebooks/notebook06_sparksql.html"
-  date: "2025-01-22"
+  date: "2025-02-07"
   categories: [PySpark, Spark, SQL]
+  href: '<a href="core/ipynb/notebook02_numpy.ipynb" download="notebook06_sparksql.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
+- title: "Pandas on Spark and SparklyR"
+#  path: "core/notebooks/notebook06_sparksql.html"
+  date: "2025-02-21"
+  categories: [PySpark, Spark, Pandas, R]
+#  href: '<a href="core/ipynb/notebook02_numpy.ipynb" download="notebook06_sparksql.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "JSON format"
   path: "core/notebooks/notebook07_json-format.html"
-  date: "2025-01-22"
+  date: "2025-03-07"
   categorie: [JSON, serialization]
 - title: "Web data"
   path: "core/notebooks/notebook08_webdata-II.html"
-  date: "2025-01-22"
+  date: "2025-03-14"
   categorie: []
 - title: "Spark again"
-  date: "2025-01-22"
+  date: "2025-03-21"
   categorie: [Spark, tips]
   path: "core/notebooks/notebook11_dive.html"

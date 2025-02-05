@@ -5,7 +5,7 @@ format:
   revealjs:
     theme: [default, "custom-rladies.scss"]
     # logo: /images/logo.png
-    footer: "[IFEBY030](http://s-v-b.github.io/IFEBY030) -- Technos Big Data -- M1 MIDS/MFA/LOGOS -- UParis Cité"
+    footer: "[IFEBY030](http://s-v-b.github.io/IFEBY310) -- Technos Big Data -- M1 MIDS/MFA/LOGOS -- UParis Cité"
 
     smaller: false
     highlight-style: github-dark
