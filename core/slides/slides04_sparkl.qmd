@@ -1,7 +1,13 @@
 ---
 title: "Spark SQL"
-engine: knitr
+engine: jupyter
 date: "2025-01-17"
+
+execute: 
+  eval: true
+  echo: true
+  # code-fold: true
+  # output-location: column
 ---
 
  
@@ -13,7 +19,7 @@ date: "2025-01-17"
 
 ## [PySpark overview](https://spark.apache.org/docs/latest/api/python/)
 
-![](./IMG/pyspark-apis.png)
+![](/images/pyspark-apis.png)
 
 [Official documentation](https://spark.apache.org/docs/latest/sql-programming-guide.html)
 
@@ -1125,7 +1131,7 @@ new_purchases.join(products, join_rule, 'left').show()
 
 ::: {.center}
 
-<img width="700px" src="./IMG/join-types.png"/>
+<img width="700px" src="/images/join-types.png"/>
 
 :::
 
@@ -1334,7 +1340,7 @@ Section *“How Spark Performs Joins”
 > When you join a big table to another big table, you end up with a *shuffle* join
 
 
-![](./IMG/spark_shuffle_join.jpg)
+![](/images/spark_shuffle_join.jpg)
 
 
 ---
@@ -1342,7 +1348,7 @@ Section *“How Spark Performs Joins”
 
 > When you join a big table to a small table, you end up with a *broadcast* join
 
-![](./IMG/spark_broadcast_join.jpg)
+![](/images/spark_broadcast_join.jpg)
 
 
 ---
@@ -1671,7 +1677,7 @@ The query goes through the following **exectution stages**:
 
 ::: {.center}
   
-![](./IMG/QueryExecution-execution-pipeline.png)
+![](/images/QueryExecution-execution-pipeline.png)
 
 :::
 

@@ -94,7 +94,12 @@ rows = [
     ["James", 25, "female"],
     ["Albert", 46, "male"]
 ]
-df = spark.createDataFrame(rows, column_names)
+
+df = spark.createDataFrame(
+    rows, 
+    column_names
+)
+
 df.show()
 ```
 
@@ -119,6 +124,9 @@ df.show()
 
 ## Schema
 
+There is special type schemata. A object of class `StructType` is made of a list of objects of type `StructField`. 
+
+
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:19.850578Z', start_time: '2022-01-26T10:58:19.843835Z'}
 df.schema
@@ -129,23 +137,33 @@ df.schema
 type(df.schema)
 ```
 
+A object of type `StructField` has a name, a PySpark type, an d a boolean parameter.
+
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:20.199419Z', start_time: '2022-01-26T10:58:19.863528Z'}
 from pyspark.sql.types import *
 
-schema = StructType([
-    StructField("name", StringType(), True),
-    StructField("age", IntegerType(), True),
-    StructField("gender", StringType(), True)
-])
+schema = StructType(
+    [
+        StructField("name", StringType(), True),
+        StructField("age", IntegerType(), True),
+        StructField("gender", StringType(), True)
+    ]
+)
+
 rows = [("John", 21, "male")]
 df = spark.createDataFrame(rows, schema)
 df.printSchema()
 df.show()
 ```
 
-# Queries
+# Queries  (single table $σ$, $π$)
 
+PySpark offers two ways to query a datafrane:
+
+- An ad hod API with methods for the DataFrame class.
+- The possibility to post SQL queries (provided a temporary view has been created).
+  
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:20.882311Z', start_time: '2022-01-26T10:58:20.201993Z'}
 column_names = ["name", "age", "gender"]
@@ -153,71 +171,135 @@ rows = [
     ["John", 21, "male"],
     ["Jane", 25, "female"]
 ]
+# 
 df = spark.createDataFrame(rows, column_names)
 
 # Create a temporary view from the DataFrame
 df.createOrReplaceTempView("new_view")
 
 # Apply the query
-query = "SELECT name, age FROM new_view WHERE gender='male'"
+query = """
+    SELECT 
+        name, age 
+    FROM 
+        new_view 
+    WHERE 
+        gender='male'
+"""
+
 men_df = spark.sql(query)
 men_df.show()
 ```
 
-## `SELECT`
+## `SELECT`  (projection $π$)
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:21.162623Z', start_time: '2022-01-26T10:58:20.884802Z'}
 df.createOrReplaceTempView("table")    
-query = "SELECT name, age FROM table"
+
+query = """
+    SELECT 
+        name, age 
+    FROM 
+        table
+"""
+
 spark.sql(query).show()
 ```
 
+Using the API:
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:21.388097Z', start_time: '2022-01-26T10:58:21.164840Z'}
-df.select("name", "age").show()
+(
+    df
+        .select("name", "age")
+        .show()
+)
 ```
 
-## `WHERE`
+`π(df, "name", "age")`
+
+## `WHERE`  (filter, selection, $σ$)
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:21.704402Z', start_time: '2022-01-26T10:58:21.402155Z'}
 df.createOrReplaceTempView("table")
-query = "SELECT * FROM table WHERE age > 21"
+
+query = """
+    SELECT 
+        * 
+    FROM 
+        table
+    WHERE 
+        age > 21
+"""
+
 spark.sql(query).show()
 ```
 
+Using the API 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:21.924501Z', start_time: '2022-01-26T10:58:21.706741Z'}
-df.where("age > 21").show()
+( 
+    df
+        .where("age > 21")
+        .show()
+)
 ```
+
+This implements `σ(df, "age > 21")`
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:22.377417Z', start_time: '2022-01-26T10:58:21.926708Z'}
 # Alternatively:
-df.where(df['age'] > 21).show()
+( 
+    df
+      .where(df['age'] > 21)
+      .show()
+)
 ```
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:22.566385Z', start_time: '2022-01-26T10:58:22.380036Z'}
-df.where(df.age > 21).show()
+( 
+    df
+      .where(df.age > 21)
+      .show()
+)
 ```
 
+Method chaining allows to construct complex queries 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:22.837136Z', start_time: '2022-01-26T10:58:22.569324Z'}
 ( 
-    df.where("age > 21")
+    df
+      .where("age > 21")
       .select(["name", "age"])
       .show()
 )
 ```
 
-## `LIMIT`
+This implements 
+
+```
+    σ(df, "age > 21") |>
+    π(["name", "age"])
+```
+
+## `LIMIT`  
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:23.315363Z', start_time: '2022-01-26T10:58:22.842106Z'}
 df.createOrReplaceTempView("table")
-query = query = "SELECT * FROM table LIMIT 1"
+
+query = """
+    SELECT 
+        * 
+    FROM 
+        table 
+    LIMIT 1
+"""
+
 spark.sql(query).show()
 ```
 
@@ -237,7 +319,14 @@ df.select("*").limit(1).show()
 #| ExecuteTime: {end_time: '2022-01-26T10:58:24.190838Z', start_time: '2022-01-26T10:58:23.781166Z'}
 df.createOrReplaceTempView("table")
 
-query = "SELECT * FROM table ORDER BY name ASC"
+query = """
+    SELECT 
+        * 
+    FROM 
+        table
+    ORDER BY 
+        name ASC
+"""
 
 spark.sql(query).show()
 ```
@@ -247,7 +336,7 @@ spark.sql(query).show()
 df.orderBy(df.name.asc()).show()
 ```
 
-## `ALIAS`
+## `ALIAS`  (rename)
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:24.643668Z', start_time: '2022-01-26T10:58:24.370758Z'}
@@ -294,19 +383,37 @@ df.select(df.name, new_age_col).show()
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:25.931495Z', start_time: '2022-01-26T10:58:25.651283Z'}
 df.createOrReplaceTempView("table")
-query = "SELECT *, 12*age AS age_months FROM table"
+
+query = """
+    SELECT 
+        *, 
+        12*age AS age_months 
+    FROM 
+        table
+"""
+
 spark.sql(query).show()
 ```
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:26.195480Z', start_time: '2022-01-26T10:58:25.933620Z'}
-df.withColumn("age_months", df.age * 12).show()
+( 
+    df
+        .withColumn("age_months", df.age * 12)
+        .show()
+)
 ```
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:26.422122Z', start_time: '2022-01-26T10:58:26.197759Z'}
 #| scrolled: true
-df.select("*", (df.age * 12).alias("age_months")).show()
+
+(
+    df
+        .select("*", 
+                (df.age * 12).alias("age_months"))
+        .show()
+)
 ```
 
 ```{python}
@@ -454,7 +561,7 @@ my_udf = fn.udf(my_func, StringType())
 df.withColumn("udf", my_udf(df['first'], df['second'])).show()
 ```
 
-# Joins
+# Joins  ($⋈$)
 
 ## Using the `spark.sql` API
 
@@ -562,7 +669,7 @@ for join_type in join_types:
         .show()
 ```
 
-# Agregations
+# Agregations    (summarize)
 
 ## Examples using the API
 
@@ -578,43 +685,76 @@ products = spark.createDataFrame([
     ('5', 'mouse', 'logitech', 29.99),
 ], ['prod_id', 'prod_cat', 'prod_brand', 'prod_value'])
 
-products.groupBy('prod_cat').avg('prod_value').show()
+( 
+    products
+        .groupBy('prod_cat')
+        .avg('prod_value')
+        .show()
+)
 ```
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:35.782623Z', start_time: '2022-01-26T10:58:35.400724Z'}
-products.groupBy('prod_cat').agg(fn.avg('prod_value')).show()
+
+(
+    products
+        .groupBy('prod_cat')
+        .agg(fn.avg('prod_value'))
+        .show()
+)
 ```
 
 ```{python}
 (
     products
         .groupBy('prod_cat')
-        .agg(fn.mean('prod_value'), fn.stddev('prod_value'))
+        .agg(
+            fn.mean('prod_value'), 
+            fn.stddev('prod_value')
+        )
         .show()
 )
 ```
+
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:36.195471Z', start_time: '2022-01-26T10:58:35.784780Z'}
 from pyspark.sql import functions as fn
 
-products.groupBy('prod_brand', 'prod_cat')\
-    .agg(fn.avg('prod_value')).show()
+(
+    products
+        .groupBy('prod_brand', 'prod_cat')\
+        .agg(
+            fn.avg('prod_value')
+        )
+        .show()
+)
 ```
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:36.650354Z', start_time: '2022-01-26T10:58:36.207985Z'}
 from pyspark.sql import functions as fn
 
-products.groupBy('prod_brand').agg(
-    fn.round(fn.avg('prod_value'), 1).alias('average'),
-    fn.ceil(fn.sum('prod_value')).alias('sum'),
-    fn.min('prod_value').alias('min')
-).show()
+(
+    products
+        .groupBy('prod_brand')
+        .agg(
+            fn.round(
+                fn.avg('prod_value'), 1)
+                .alias('average'),
+            fn.ceil(
+                fn.sum('prod_value'))
+                .alias('sum'),
+            fn.min('prod_value')
+                .alias('min')
+        )
+        .show()
+)
 ```
 
 ## Example using a query
+
+
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:37.089099Z', start_time: '2022-01-26T10:58:36.652842Z'}
@@ -625,11 +765,13 @@ products.createOrReplaceTempView("products")
 
 query = """
 SELECT
-prod_brand,
-round(avg(prod_value), 1) AS average,
-min(prod_value) AS min
-FROM products
-GROUP BY prod_brand
+    prod_brand,
+    round(avg(prod_value), 1) AS average,
+    min(prod_value) AS min
+FROM 
+    products
+GROUP BY 
+    prod_brand
 """
 
 spark.sql(query).show()
@@ -649,27 +791,32 @@ window = Window.partitionBy('prod_brand')
 
 print(type(window))
 ```
-
+Then, we can use `over` to aggregate on this window
 
 ```{python}
-
-# Then, we can use "over" to aggregate on this window
 avg = fn.avg('prod_value').over(window)
 
 # Finally, we can it as a classical column
-products.withColumn('avg_brand_value', fn.round(avg, 2)).show()
+(
+    products
+        .withColumn('avg_brand_value', fn.round(avg, 2))
+        .show()
+)
 ```
 
 With SQL queries, using multiple windows is not a problem
 
 ```{python}
 query = """
-SELECT *, 
-    ROUND(AVG(prod_value) OVER w1, 2)  AS avg_brand_value,
-    ROUND(AVG(prod_value) OVER w2, 1)  AS avg_prod_value
-FROM products
-WINDOW w1 AS (PARTITION BY prod_brand),
-       w2 AS (PARTITION BY prod_cat)
+    SELECT 
+        *, 
+        ROUND(AVG(prod_value) OVER w1, 2)  AS avg_brand_value,
+        ROUND(AVG(prod_value) OVER w2, 1)  AS avg_prod_value
+    FROM 
+        products
+    WINDOW 
+        w1 AS (PARTITION BY prod_brand),
+        w2 AS (PARTITION BY prod_cat)
 """
 
 spark.sql(query).show()
@@ -689,6 +836,8 @@ avg2 = fn.avg('prod_value').over(window2)
 )
 ```
 
+Now we can compare the physical plans associated with the  two jobs.
+
 ```{python}
 ( 
     products
@@ -702,17 +851,23 @@ avg2 = fn.avg('prod_value').over(window2)
 spark.sql(query).explain()
 ```
 
+# Windows can be defined on multiple columns
+
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:38.261379Z', start_time: '2022-01-26T10:58:37.753256Z'}
 from pyspark.sql import Window
 from pyspark.sql import functions as fn
 
-# The window can be defined on multiple columns
 window = Window.partitionBy('prod_brand', 'prod_cat')
 
 avg = fn.avg('prod_value').over(window)
 
-products.withColumn('avg_value', fn.round(avg, 2)).show()
+
+(
+    products    
+        .withColumn('avg_value', fn.round(avg, 2))
+        .show()
+)
 ```
 
 
@@ -720,15 +875,19 @@ products.withColumn('avg_value', fn.round(avg, 2)).show()
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:39.785452Z', start_time: '2022-01-26T10:58:39.084502Z'}
-purchases = spark.createDataFrame([
-    (date(2017, 11, 1), 'mouse'),
-    (date(2017, 11, 2), 'mouse'),
-    (date(2017, 11, 4), 'keyboard'),
-    (date(2017, 11, 6), 'keyboard'),
-    (date(2017, 11, 9), 'keyboard'),
-    (date(2017, 11, 12), 'mouse'),
-    (date(2017, 11, 18), 'keyboard')
-], ['date', 'prod_cat'])
+purchases = spark.createDataFrame(
+    [
+        (date(2017, 11, 1), 'mouse'),
+        (date(2017, 11, 2), 'mouse'),
+        (date(2017, 11, 4), 'keyboard'),
+        (date(2017, 11, 6), 'keyboard'),
+        (date(2017, 11, 9), 'keyboard'),
+        (date(2017, 11, 12), 'mouse'),
+        (date(2017, 11, 18), 'keyboard')
+    ], 
+    ['date', 'prod_cat']
+)
+
 purchases.show()
 
 window = Window.partitionBy('prod_cat').orderBy('date')
@@ -747,23 +906,29 @@ purchases\
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:40.005845Z', start_time: '2022-01-26T10:58:39.787433Z'}
-contestants = spark.createDataFrame([
-    ('veterans', 'John', 3000),
-    ('veterans', 'Bob', 3200),
-    ('veterans', 'Mary', 4000),
-    ('young', 'Jane', 4000),
-    ('young', 'April', 3100),
-    ('young', 'Alice', 3700),
-    ('young', 'Micheal', 4000),
-], ['category', 'name', 'points'])
+contestants = spark.createDataFrame(
+    [   
+        ('veterans', 'John', 3000),
+        ('veterans', 'Bob', 3200),
+        ('veterans', 'Mary', 4000),
+        ('young', 'Jane', 4000),
+        ('young', 'April', 3100),
+        ('young', 'Alice', 3700),
+        ('young', 'Micheal', 4000),
+    ], 
+    ['category', 'name', 'points']
+)
 
 contestants.show()
 ```
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:40.653650Z', start_time: '2022-01-26T10:58:40.009618Z'}
-window = Window.partitionBy('category')\
-    .orderBy(contestants.points.desc())
+window = (
+    Window
+        .partitionBy('category')
+        .orderBy(contestants.points.desc())
+)
 
 rank = fn.rank().over(window)
 dense_rank = fn.dense_rank().over(window)
@@ -777,20 +942,63 @@ contestants\
     .show()
 ```
 
-# Connection to a database
+# Connection to a database {{< fa database >}}
+
+The postgres server runs locally on my laptop, it is equiped with a
+number of training schemata, including `nycflights` (see [https://s-v-b.github.io/MA15Y030/schemas/schema-nycflights.html](https://s-v-b.github.io/MA15Y030/schemas/schema-nycflights.html))
 
 ```{python}
-# df = spark.read \
-#     .format("jdbc") \
-#     .option("url", "jdbc:postgresql://localhost:5432/postgres") \
-#     .option("dbschema", "imdb")\
-#     .option("dbtable", "title_basics") \
-#     .option("user", "postgres") \
-#     .option("password", "postgres") \
-#     .option("driver", "org.postgresql.Driver") \
-#     .load()
+df_flights = spark.read \
+    .format("jdbc") \
+    .option("url", "jdbc:postgresql://localhost:5434/bd_2023-24") \
+    .option("dbschema", "nycflights")\
+    .option("dbtable", "flights") \
+    .option("user", "postgres") \
+    .option("password", "postgres") \
+    .option("driver", "org.postgresql.Driver") \
+    .load()
 
-# df.printSchema()
+df_flights.printSchema()
+```
+
+To load the five tables, we avoid cut and paste, and abide to the DRY principle.
+
+We package the options in a dictionnary
+
+```{python}
+db_con_settings = {
+    'url': "jdbc:postgresql://localhost:5434/bd_2023-24",
+    'dbschema':  "nycflights",
+    'user':  "postgres",
+    'password':  "postgres",
+    'driver':  "org.postgresql.Driver"
+}
+```
+
+We prepare a Python object using dictionnary unpacking. 
+
+```{python}
+o  = spark.read \
+    .format("jdbc")\
+    .options(**db_con_settings)
+```
+
+We use the object to load the different tables in a `for` loop.
+
+```{python}
+tbl_names = ['flights', 'airports', 'airlines', 'planes', 'weather']
+
+dic_df = {}
+
+for tn in tbl_names:
+    dic_df[tn] = o.option('dbtable', tn).load()
+
 ```
 
 
+```{python}
+for k, v in dic_df.items():
+    v.printSchema()
+```
+
+We can now query the tables. 
