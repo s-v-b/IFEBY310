@@ -27,12 +27,12 @@
   date: "2025-02-06"
   path: "core/notebooks/notebook05_sparkrdd.html"
   categories: [PySpark, Spark, RDD]
-  href: '<a href="core/ipynb/notebook02_numpy.ipynb" download="notebook05_sparkrdd.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
+  href: '<a href="core/ipynb/notebook05_sparkrdd.ipynb" download="notebook05_sparkrdd.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Spark SQL"
   path: "core/notebooks/notebook06_sparksql.html"
   date: "2025-02-07"
   categories: [PySpark, Spark, SQL]
-  href: '<a href="core/ipynb/notebook02_numpy.ipynb" download="notebook06_sparksql.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
+  href: '<a href="core/ipynb/notebook06_sparksql.ipynb" download="notebook06_sparksql.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Pandas on Spark and SparklyR"
 #  path: "core/notebooks/notebook06_sparksql.html"
   date: "2025-02-21"
