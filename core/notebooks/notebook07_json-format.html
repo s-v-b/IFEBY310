@@ -212,7 +212,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../jupyter.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../computing-virtualenv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Virtual environments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../computing-jupyter.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Jupyter</span></a>
   </div>
 </li>
@@ -253,14 +259,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 1</span></a>
+  <a href="../../weeks/week-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 2</span></a>
+  <a href="../../weeks/week-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -271,8 +277,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 4</span></a>
+  <a href="../../weeks/week-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
   </div>
 </li>
       </ul>
@@ -334,7 +346,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <section id="serialization-and-deserialization-of-built-in-types" class="level2">
 <h2 class="anchored" data-anchor-id="serialization-and-deserialization-of-built-in-types">Serialization and deserialization of built-in types</h2>
-<div id="f53bc367" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:25.759874Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:25.726787Z&quot;}" data-execution_count="1">
+<div id="9601fc8e" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:25.759874Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:25.726787Z&quot;}" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
@@ -369,26 +381,26 @@ Note
 </ul>
 </div>
 </div>
-<div id="44f3b99d" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:26.039839Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:26.027858Z&quot;}" data-execution_count="2">
+<div id="1cacd936" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:26.039839Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:26.027858Z&quot;}" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'user.json'</span>,<span class="st">'w'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    json.dump(obj, <span class="bu">file</span>, sort_keys<span class="op">=</span><span class="va">True</span>, indent<span class="op">=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="85cea5d3" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:27.110218Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:26.479550Z&quot;}" data-execution_count="3">
+<div id="ea01d0c7" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:27.110218Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:26.479550Z&quot;}" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>cat user.json</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="c6011543" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:27.137307Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:27.114179Z&quot;}" data-execution_count="4">
+<div id="348e68b1" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:27.137307Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:27.114179Z&quot;}" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>json.loads(<span class="st">'{"active": true, "age": 78, "balance": 345.8, "friends": ["Jane","John"], "name": "Foo Bar", "other_names": ["Doe","Joe"],"spouse":null}'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="d8f11c9b" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:27.149816Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:27.140548Z&quot;}" data-execution_count="5">
+<div id="f73450db" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:27.149816Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:27.140548Z&quot;}" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'user.json'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
@@ -410,7 +422,7 @@ Note
 </section>
 <section id="serialization-and-deserialization-of-custom-objects" class="level2">
 <h2 class="anchored" data-anchor-id="serialization-and-deserialization-of-custom-objects">Serialization and deserialization of custom objects</h2>
-<div id="c4a413b6" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:27.733203Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:27.718399Z&quot;}" data-execution_count="6">
+<div id="4452f2bf" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:27.733203Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:27.718399Z&quot;}" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> User(<span class="bu">object</span>):</span>
@@ -437,7 +449,7 @@ Note
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="0cc2fc23" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:27.733203Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:27.718399Z&quot;}" data-execution_count="7">
+<div id="9a3882a4" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:27.733203Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:27.718399Z&quot;}" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>new_user <span class="op">=</span> User(</span>
@@ -453,7 +465,7 @@ Note
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>new_user</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="c2a81a6c" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:49.613442Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:49.601102Z&quot;}" data-execution_count="8">
+<div id="a72b5f8b" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:49.613442Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:49.601102Z&quot;}" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This will raise a TypeError</span></span>
@@ -467,13 +479,13 @@ Note
 <li><p>A simple solution would be to convert our custom type into a serializable type that is a built-in type. We can conveniently define a method <code>convert_to_dict()</code> that returns a dictionary representation of our object. <code>json.dumps()</code> takes in a optional argument, <code>default</code>, which specifies a function to be called if the object is not serializable. This function returns a JSON encodable version of the object.</p></li>
 </ul>
 <p>Recall that class <code>obj</code> has a dunder method <code>__dict__</code> that provides a basis for obtaining a dictionary with the attributes of any object:</p>
-<div id="d71c34dc" class="cell" data-execution_count="9">
+<div id="76692109" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>new_user.__dict__</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="3f658111" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:52.854067Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:52.847015Z&quot;}" data-execution_count="10">
+<div id="3f74bba4" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:52.854067Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:52.847015Z&quot;}" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> obj_to_dict(obj):</span>
@@ -499,7 +511,7 @@ Note
 <span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> obj_dict <span class="op">|</span> obj.__dict__</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="67d1aecb" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:52.854067Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:52.847015Z&quot;}" data-execution_count="11">
+<div id="a3944c1b" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:52.854067Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:52.847015Z&quot;}" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>obj_to_dict(new_user)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -526,14 +538,14 @@ Note
 <p>Obviously this fails if one of the attributes is not <code>JSON</code> serializable</p>
 </div>
 </div>
-<div id="b09071fd" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:53.566068Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:53.560201Z&quot;}" data-execution_count="12">
+<div id="42d39833" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:53.566068Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:53.560201Z&quot;}" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(json.dumps(new_user, default<span class="op">=</span>obj_to_dict, indent<span class="op">=</span><span class="dv">4</span>, sort_keys<span class="op">=</span><span class="va">True</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Now, if we want to decode (deserialiaze) a custom object, and create the correct object type, we need a function that does the opposite of convert_to_dict, since <code>json.loads</code> simply returns a <code>dict</code>:</p>
-<div id="7996d5bd" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:54.413286Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:54.408660Z&quot;}" data-execution_count="13">
+<div id="64813f4c" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:54.413286Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:54.408660Z&quot;}" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>user_data <span class="op">=</span> json.loads(json.dumps(new_user, default<span class="op">=</span>obj_to_dict))</span>
@@ -541,7 +553,7 @@ Note
 </details>
 </div>
 <p>We need <code>json.loads()</code> to reconstruct a <code>User</code> object from this dictionary: <code>json.loads()</code> takes an optional argument <code>object_hook</code> which specifies a function that returns the desired custom object, given the decoded output (which in this case is a <code>dict</code>).</p>
-<div id="ff7e5c74" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:55.257839Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:55.253496Z&quot;}" data-execution_count="14">
+<div id="b3715c86" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:55.257839Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:55.253496Z&quot;}" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dict_to_obj(input_dict):</span>
@@ -574,7 +586,7 @@ Note
 <li><p>Imports the module and get the class</p></li>
 <li><p>Instantiate the class by giving to the class constructor all the instance arguments through dictionary unpacking</p></li>
 </ul>
-<div id="523c346f" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:57.102787Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:57.097553Z&quot;}" data-execution_count="15">
+<div id="ca728fab" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:57.102787Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:57.097553Z&quot;}" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>obj_data <span class="op">=</span> json.dumps(new_user, default<span class="op">=</span>obj_to_dict)</span>
@@ -582,13 +594,13 @@ Note
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>new_object</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="5eba8714" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:57.944835Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:57.939581Z&quot;}" data-execution_count="16">
+<div id="fadc2e8c" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:57.944835Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:57.939581Z&quot;}" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(new_object)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="338642f7" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:58.679143Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:58.673617Z&quot;}" data-execution_count="17">
+<div id="6526be6e" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T14:29:58.679143Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T14:29:58.673617Z&quot;}" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>new_object.age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -608,13 +620,13 @@ Note
 <p>In the definition of class <code>User</code>, two special methods were explicitly defined: <code>__init__</code> and <code>__repr__</code>. But many more are available, including <code>__dir__()</code>.</p>
 </div>
 </div>
-<div id="4faa5517" class="cell" data-execution_count="18">
+<div id="81df90e8" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>[dude <span class="cf">for</span> dude <span class="kw">in</span> <span class="bu">dir</span>(new_object) <span class="cf">if</span> dude.startswith(<span class="st">'__'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="1fe980f9" class="cell" data-execution_count="19">
+<div id="c037fb8c" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>new_object.<span class="fu">__getattribute__</span>(<span class="st">'age'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -633,7 +645,7 @@ Note
 <p>Class <code>User</code> could have been implemented as a <code>dataclass</code></p>
 </div>
 </div>
-<div id="5ce93549" class="cell" data-execution_count="20">
+<div id="d801e763" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
@@ -651,19 +663,19 @@ Note
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    spouse: <span class="bu">str</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="f7ac2d45" class="cell" data-execution_count="21">
+<div id="17cafff7" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>other_user <span class="op">=</span> UserBis(<span class="op">**</span>(new_user.__dict__))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="9af9ef32" class="cell" data-execution_count="22">
+<div id="babcf984" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">repr</span>(other_user)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="ab0133ae" class="cell" data-execution_count="23">
+<div id="55e0b579" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>{dude <span class="cf">for</span> dude <span class="kw">in</span> <span class="bu">dir</span>(other_user) <span class="cf">if</span> dude.startswith(<span class="st">'__'</span>)} <span class="op">-</span>  {dude <span class="cf">for</span> dude <span class="kw">in</span> <span class="bu">dir</span>(new_user) <span class="cf">if</span> dude.startswith(<span class="st">'__'</span>)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -673,7 +685,7 @@ Note
 <section id="using-json-with-spark" class="level1">
 <h1>Using <code>JSON</code> with Spark</h1>
 <p>First, we download the data if it’s not there yet</p>
-<div id="63484f90" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T16:19:34.238130Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T16:19:34.163729Z&quot;}" data-execution_count="24">
+<div id="fbcd313f" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T16:19:34.238130Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T16:19:34.163729Z&quot;}" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests, zipfile, io</span>
@@ -687,7 +699,7 @@ Note
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    z.extractall(path<span class="op">=</span><span class="st">'./'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="bec49ff5" class="cell" data-execution_count="25">
+<div id="da1dec32" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ls drug<span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -695,7 +707,7 @@ Note
 </div>
 <section id="reading-a-json-dataset-with-spark" class="level2">
 <h2 class="anchored" data-anchor-id="reading-a-json-dataset-with-spark">Reading a <code>JSON</code> dataset with <code>Spark</code></h2>
-<div id="0504cc4f" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:13:47.583384Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:13:43.123090Z&quot;}" data-execution_count="26">
+<div id="45a8afeb" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:13:47.583384Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:13:43.123090Z&quot;}" data-execution_count="26">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark <span class="im">import</span> SparkConf, SparkContext</span>
@@ -712,33 +724,33 @@ Note
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> spark._sc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="e225b8fe" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:13:47.590453Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:13:47.585590Z&quot;}" data-execution_count="27">
+<div id="fa34114a" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:13:47.590453Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:13:47.585590Z&quot;}" data-execution_count="27">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>filename <span class="op">=</span> <span class="st">"drug-enforcement.json"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>First, lets look at the data. It’s a large set of JSON records about drugs enforcement.</p>
-<div id="f9a9b2e9" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:13:48.148481Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:13:47.594201Z&quot;}" data-execution_count="28">
+<div id="76f0c876" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:13:48.148481Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:13:47.594201Z&quot;}" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>head <span class="op">-</span>n <span class="dv">1000</span> drug<span class="op">-</span>enforcement.json</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>We need to tell spark that rows span on several lines with the <code>multLine</code> option</p>
-<div id="6ae2e6a5" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:13:52.259661Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:13:48.152192Z&quot;}" data-execution_count="29">
+<div id="32a58f81" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:13:52.259661Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:13:48.152192Z&quot;}" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.read.json(filename, multiLine<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="7a5f076c" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:13:52.294898Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:13:52.261550Z&quot;}" data-execution_count="30">
+<div id="d3b72b0f" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:13:52.294898Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:13:52.261550Z&quot;}" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="c290db61" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:13:52.355556Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:13:52.297210Z&quot;}" data-execution_count="31">
+<div id="d004cee7" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:13:52.355556Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:13:52.297210Z&quot;}" data-execution_count="31">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df.schema</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -768,38 +780,38 @@ Note
 <section id="flattening-of-the-schema" class="level2">
 <h2 class="anchored" data-anchor-id="flattening-of-the-schema">Flattening of the schema</h2>
 <p>All the columns in the nested structure <code>openfda</code> are put up in the schema. These columns nested in the openfda are as follows:</p>
-<div id="58d2e40a" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:14:00.472548Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:14:00.352058Z&quot;}" data-execution_count="32">
+<div id="d90b7114" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:14:00.472548Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:14:00.352058Z&quot;}" data-execution_count="32">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df.select(<span class="st">'openfda.*'</span>).columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="5284ba04" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:14:01.904242Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:14:00.646360Z&quot;}" data-execution_count="33">
+<div id="d6e48921" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:14:01.904242Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:14:00.646360Z&quot;}" data-execution_count="33">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df.select(<span class="st">"openfda.*"</span>).head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="c754101e" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:14:02.230811Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:14:01.906641Z&quot;}" data-execution_count="34">
+<div id="41d9609a" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:14:02.230811Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:14:01.906641Z&quot;}" data-execution_count="34">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> df.select(<span class="st">"openfda.*"</span>).columns:</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">"openfda_"</span> <span class="op">+</span> c, col(<span class="st">"openfda."</span> <span class="op">+</span> c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cfe753ab" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:14:07.644985Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:14:07.501380Z&quot;}" data-execution_count="35">
+<div id="e0921654" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:14:07.644985Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:14:07.501380Z&quot;}" data-execution_count="35">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.select([c <span class="cf">for</span> c <span class="kw">in</span> df.columns <span class="cf">if</span> c <span class="op">!=</span> <span class="st">"openfda"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="3941ccaa" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:14:09.871658Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:14:09.865537Z&quot;}" data-execution_count="36">
+<div id="ab71121b" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:14:09.871658Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:14:09.865537Z&quot;}" data-execution_count="36">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="4369ac5f" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:14:19.204515Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:14:18.651165Z&quot;}" data-execution_count="37">
+<div id="e8709d5d" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:14:19.204515Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:14:18.651165Z&quot;}" data-execution_count="37">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -810,14 +822,14 @@ Note
 <section id="missing-data" class="level2">
 <h2 class="anchored" data-anchor-id="missing-data">Missing data</h2>
 <p>A strategy can be to remove rows with missing data. <code>dropna</code> has several options, explained below.</p>
-<div id="4d8d3612" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:17.413952Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:16.898211Z&quot;}" data-execution_count="38">
+<div id="01fc5ecd" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:17.413952Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:16.898211Z&quot;}" data-execution_count="38">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df.dropna().count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>If we remove all lines with at least one missing value, we end up with an empty dataframe !</p>
-<div id="88903e16" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:17.895108Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:17.416108Z&quot;}" data-execution_count="39">
+<div id="e53659a4" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:17.895108Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:17.416108Z&quot;}" data-execution_count="39">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df.dropna(how<span class="op">=</span><span class="st">'all'</span>).count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -829,31 +841,31 @@ Note
 <li><p><code>thresh</code>: accepts an integer representing the “threshold” for how many empty cells a row must have before being dropped. <code>tresh</code> is a middle ground between <code>how='any'</code> and <code>how='all'</code>. As a result, the presence of <code>thresh</code> will override <code>how</code></p></li>
 <li><p><code>subset</code>: accepts a list of column names. When a subset is present, N/A values will only be checked against the columns whose names are provided.</p></li>
 </ul>
-<div id="6dac3c89" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:17.901172Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:17.897860Z&quot;}" data-execution_count="40">
+<div id="e9f29639" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:17.901172Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:17.897860Z&quot;}" data-execution_count="40">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>n_columns <span class="op">=</span> <span class="bu">len</span>(df.columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="02dc4271" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:18.415066Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:17.904093Z&quot;}" data-execution_count="41">
+<div id="a9dfee54" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:18.415066Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:17.904093Z&quot;}" data-execution_count="41">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df.dropna(thresh<span class="op">=</span>n_columns).count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="40f7bbf1" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:18.931320Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:18.417317Z&quot;}" data-execution_count="42">
+<div id="8cd739e2" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:18.931320Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:18.417317Z&quot;}" data-execution_count="42">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df.dropna(thresh<span class="op">=</span>n_columns<span class="op">-</span><span class="dv">1</span>).count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="de2de8c9" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:19.439726Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:18.934217Z&quot;}" data-execution_count="43">
+<div id="900ee455" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:19.439726Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:18.934217Z&quot;}" data-execution_count="43">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>df.dropna(thresh<span class="op">=</span>n_columns<span class="op">-</span><span class="dv">10</span>).count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="b63af512" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:19.752318Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:19.441809Z&quot;}" data-execution_count="44">
+<div id="d22ba8e1" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:19.752318Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:19.441809Z&quot;}" data-execution_count="44">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">'postal_code'</span>, <span class="st">'city'</span>, <span class="st">'country'</span>, <span class="st">'address_1'</span>])</span>
@@ -861,7 +873,7 @@ Note
 </details>
 </div>
 <p>But before this, let’s count the number of missing value for each column</p>
-<div id="f543308f" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:20.424178Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:19.754255Z&quot;}" data-execution_count="45">
+<div id="691de5f9" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:20.424178Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:19.754255Z&quot;}" data-execution_count="45">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For each column we create a new column containing 1 if the value is null and 0 otherwise.</span></span>
@@ -872,13 +884,13 @@ Note
 <span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> df.withColumn(c <span class="op">+</span> <span class="st">"_isnull"</span>, fn.isnull(col(c)).cast(<span class="st">'int'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="bcbcaacf" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:20.925299Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:20.426204Z&quot;}" data-execution_count="46">
+<div id="39297fba" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:20.925299Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:20.426204Z&quot;}" data-execution_count="46">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="1f0e618f" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:22.053794Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:20.927796Z&quot;}" data-execution_count="47">
+<div id="e2833a2b" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:22.053794Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:20.927796Z&quot;}" data-execution_count="47">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the list of _isnull columns</span></span>
@@ -898,7 +910,7 @@ Note
 </div>
 <p>We see that <code>more_code_info</code> is always null and that <code>termination_date</code> if often null. Most of the <code>openfda*</code> columns are also almost always empty.</p>
 <p>We can keep only the columns with no missing values</p>
-<div id="5390c726" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:24.802336Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:24.797411Z&quot;}" data-execution_count="48">
+<div id="36fb2118" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:24.802336Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:24.797411Z&quot;}" data-execution_count="48">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This line can seem complicated, run pieces of each to understand</span></span>
@@ -907,25 +919,25 @@ Note
 <span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="38d23171" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:27.488388Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:27.398503Z&quot;}" data-execution_count="49">
+<div id="75f339c9" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:27.488388Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:27.398503Z&quot;}" data-execution_count="49">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>df_kept <span class="op">=</span> df.select(kept_columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="f7258d32" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:27.948018Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:27.539797Z&quot;}" data-execution_count="50">
+<div id="15aee724" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:27.948018Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:27.539797Z&quot;}" data-execution_count="50">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>df_kept.head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="bd5e8776" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:41.419929Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:41.413784Z&quot;}" data-execution_count="51">
+<div id="d897ecd2" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:41:41.419929Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:41:41.413784Z&quot;}" data-execution_count="51">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>df_kept.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="fa3aa5ea" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:43:23.207185Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:43:22.829140Z&quot;}" data-execution_count="52">
+<div id="f4dcc6cc" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:43:23.207185Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:43:22.829140Z&quot;}" data-execution_count="52">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>df_kept.count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -935,7 +947,7 @@ Note
 <section id="filtering-by-string-values" class="level2">
 <h2 class="anchored" data-anchor-id="filtering-by-string-values">Filtering by string values</h2>
 <p>Cases from South San Francisco</p>
-<div id="bf8d2f3c" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:43:54.396689Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:43:53.465012Z&quot;}" data-execution_count="53">
+<div id="e2f79e83" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:43:54.396689Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:43:53.465012Z&quot;}" data-execution_count="53">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">filter</span>(df.city <span class="op">==</span> <span class="st">"South San Francisco"</span>)<span class="op">\</span></span>
@@ -955,14 +967,14 @@ Note
 <li><p><code>df.filter(df.city.isin('San Francisco', 'Los Angeles'))</code>: Looks for rows where the string value of a column matches any of the provided strings exactly.</p></li>
 </ul>
 <p>You can try some of these to understand</p>
-<div id="338d419a" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:48:19.328007Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:48:18.572570Z&quot;}" data-execution_count="54">
+<div id="d4ead91b" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:48:19.328007Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:48:18.572570Z&quot;}" data-execution_count="54">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">filter</span>(df.city.contains(<span class="st">'San Francisco'</span>))<span class="op">\</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    .toPandas()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="6218a49c" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:48:10.490019Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:48:09.784496Z&quot;}" data-execution_count="55">
+<div id="b9ec97a2" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:48:10.490019Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:48:09.784496Z&quot;}" data-execution_count="55">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">filter</span>(df.city.isin(<span class="st">'San Francisco'</span>, <span class="st">'Los Angeles'</span>)).toPandas()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -972,7 +984,7 @@ Note
 <section id="filtering-by-date-values" class="level2">
 <h2 class="anchored" data-anchor-id="filtering-by-date-values">Filtering by Date Values</h2>
 <p>In addition to filtering by strings, we can also filter by columns where the values are stored as dates or datetimes (or strings that can be inferred as dates). Perhaps the most useful way to filter dates is by using the <code>between()</code> method, which allows us to find results within a certain date range. Here we find all the results which were reported in the years 2013 and 2014:</p>
-<div id="3fba941b" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:50:34.344304Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:50:33.638867Z&quot;}" data-execution_count="56">
+<div id="8c8e9f57" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2020-03-17T17:50:34.344304Z&quot;,&quot;start_time&quot;:&quot;2020-03-17T17:50:33.638867Z&quot;}" data-execution_count="56">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">filter</span>(df.city <span class="op">==</span> <span class="st">"South San Francisco"</span>)<span class="op">\</span></span>
@@ -993,7 +1005,7 @@ Caution
 <p>Is Spark smart enough to understand that the string in column <code>report_date</code> contains a date?</p>
 </div>
 </div>
-<div id="ba09ded4" class="cell" data-execution_count="57">
+<div id="8a20cc54" class="cell" data-execution_count="57">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">filter</span>(df.city <span class="op">==</span> <span class="st">"South San Francisco"</span>)<span class="op">\</span></span>
@@ -1001,7 +1013,7 @@ Caution
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    .toPandas()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="317ed86b" class="cell" data-execution_count="58">
+<div id="2091fdb1" class="cell" data-execution_count="58">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>df_dates <span class="op">=</span> df.select([c <span class="cf">for</span> c <span class="kw">in</span> df.columns <span class="cf">if</span> c.endswith(<span class="st">"date"</span>)])</span>
@@ -1009,7 +1021,7 @@ Caution
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>df_dates.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="ccb041e8" class="cell" data-execution_count="59">
+<div id="bdc8042c" class="cell" data-execution_count="59">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>df_dates.show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1048,21 +1060,21 @@ Note
 </div>
 </div>
 <p><code>struct</code>, <code>array</code>, <code>map</code></p>
-<div id="35519635" class="cell" data-execution_count="60">
+<div id="939a08d4" class="cell" data-execution_count="60">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># struct</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>The problems we faced after loading data from the json file pertained to the fact that column <code>fda</code> was of complex <code>StrucType()</code> type. We shall revisit this dataframe.</p>
-<div id="e083530a" class="cell" data-execution_count="61">
+<div id="6027a99b" class="cell" data-execution_count="61">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.read.json(filename, multiLine<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>The dataframe schema <code>df.schema</code> which is of type <code>StructType</code> (defined in <code>pyspark.sql.types</code>) can be converted to a json string which in turn can be converted into a Python dictionary.</p>
-<div id="c0af8da5" class="cell" data-execution_count="62">
+<div id="90780afe" class="cell" data-execution_count="62">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.read.json(filename, multiLine<span class="op">=</span><span class="va">True</span>)</span>
@@ -1071,7 +1083,7 @@ Note
 </details>
 </div>
 <p>We equip the dataframe with a primary key</p>
-<div id="53e4affe" class="cell" data-execution_count="63">
+<div id="f9e35fd5" class="cell" data-execution_count="63">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Window</span>
@@ -1085,7 +1097,7 @@ Note
 <span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="aca4d765" class="cell" data-execution_count="64">
+<div id="8358c823" class="cell" data-execution_count="64">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>[(f[<span class="st">'name'</span>], f[<span class="st">'type'</span>]) </span>
@@ -1093,7 +1105,7 @@ Note
 </details>
 </div>
 <p>Column <code>openfda</code> has type <code>StrucType()</code> with fields with composite type.</p>
-<div id="8f166e0b" class="cell" data-execution_count="65">
+<div id="57510667" class="cell" data-execution_count="65">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>{f[<span class="st">'type'</span>][<span class="st">'type'</span>]</span>
@@ -1101,7 +1113,7 @@ Note
 </details>
 </div>
 <p>Projecting on <code>row_id</code> and <code>openfda.*</code> leads to a (partially) flattened datafame, that, thanks to the <code>row_id</code> column can be joined with the original dataframe.</p>
-<div id="4aab219c" class="cell" data-execution_count="66">
+<div id="7925b305" class="cell" data-execution_count="66">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>df_proj <span class="op">=</span> df.select(<span class="st">'row_id'</span>, <span class="st">'openfda.*'</span>)</span>
@@ -1110,7 +1122,7 @@ Note
 </details>
 </div>
 <p>We can inspect the length of the arrays.</p>
-<div id="e214e544" class="cell" data-execution_count="67">
+<div id="fbf30751" class="cell" data-execution_count="67">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># array</span></span>
@@ -1121,7 +1133,7 @@ Note
 </details>
 </div>
 <p>In some rows, the <em>size</em> of the array is <code>-1</code> because the field is <code>NULL</code>.</p>
-<div id="0bd7e57b" class="cell" data-execution_count="68">
+<div id="cd2888f5" class="cell" data-execution_count="68">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>(</span>
@@ -1133,7 +1145,7 @@ Note
 </details>
 </div>
 <p>An <code>array</code> column can be <em>exploded</em>. This is like pivoting into long form. The result contains one row per item in the array.</p>
-<div id="e9d495a5" class="cell" data-execution_count="69">
+<div id="63b252e7" class="cell" data-execution_count="69">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>(</span>

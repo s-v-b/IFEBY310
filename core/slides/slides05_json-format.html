@@ -13,18 +13,18 @@
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
-<meta name="author" content="Équipe de Statistique">
-<meta name="dcterms.date" content="2024-02-19">
-<title>IFEBY310 - Spring 2025 – SPARK &amp; JSON</title>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-<link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
-<link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
-<style>
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
+
+  <meta name="author" content="Équipe de Statistique">
+  <meta name="dcterms.date" content="2025-02-21">
+  <title>IFEBY310 - Spring 2025 – SPARK &amp; JSON</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -102,12 +102,12 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-<link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-9b209231abe29c972310dc692ecec836.css">
-<link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-<link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-<link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-<link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-<style type="text/css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-9b209231abe29c972310dc692ecec836.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
       overflow: auto;
@@ -195,7 +195,7 @@
       margin-right: 0; 
     }
   </style>
-<script>
+  <script>
   MathJax = {
     loader: {
       load: ['[tex]/boldsymbol']
@@ -211,7 +211,8 @@
       }
     }
   };
-  </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 <meta property="og:title" content="SPARK &amp; JSON – IFEBY310 - Spring 2025">
 <meta property="og:description" content="Technologies Big Data Master MIDS/MFA/LOGOIS">
 <meta property="og:site_name" content="IFEBY310 - Spring 2025">
@@ -220,7 +221,8 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-color="#1c191c" class="quarto-title-block center"><h1 class="title">SPARK &amp; JSON</h1>
+<section id="title-slide" data-background-color="#1c191c" class="quarto-title-block center">
+  <h1 class="title">SPARK &amp; JSON</h1>
   <p class="subtitle"><a href="https://s-v-b.github.io/IFEBY030/">Technologies Big Data Master MIDS/MFA/LOGOIS</a></p>
 
 <div class="quarto-title-authors">
@@ -234,8 +236,10 @@
     </div>
 </div>
 
-  <p class="date">2024-02-19</p>
-</section><section id="TOC"><nav role="doc-toc"><h2 id="toc-title">Roadmap</h2>
+  <p class="date">2025-02-21</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Roadmap</h2>
 <ul>
 <li><a href="#/json-data-format" id="/toc-json-data-format">JSON data format</a></li>
 <li><a href="#/using-json-with-python" id="/toc-using-json-with-python">Using JSON with Python</a></li>
@@ -244,9 +248,16 @@
 <li><a href="#/querying-json-strings" id="/toc-querying-json-strings">Querying JSON strings</a></li>
 <li><a href="#/references" id="/toc-references">References</a></li>
 <li><a href="#/thank-you" id="/toc-thank-you">Thank you !</a></li>
-</ul></nav></section><section><section id="json-data-format" class="title-slide slide level1 center"><h1>JSON data format</h1>
+</ul>
+</nav>
+</section>
+<section>
+<section id="json-data-format" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>JSON data format</h1>
 
-</section><section id="what-is-json" class="slide level2 center"><h2>What is <code>JSON</code> ?</h2>
+</section>
+<section id="what-is-json" class="slide level2 center">
+<h2>What is <code>JSON</code> ?</h2>
 <ul>
 <li><p>JavaScript Object Notation (JSON) is a <em>lightweight data-interchange format</em> based on the syntax of JavaScript objects</p></li>
 <li><p>It is a text-based, human-readable, language-independent format for <strong>representing structured object data</strong> for <strong>easy transmission</strong> or <strong>saving</strong></p></li>
@@ -254,7 +265,8 @@
 <li><p><code>JSON</code> is used for <strong>two-way data transmission</strong> between a web-server and a client, but it is also often used as a <em>semi-structured data format</em></p></li>
 <li><p>Its syntax <strong>closely resembles JavaScript</strong> objects, but <code>JSON</code> can be used independently of <code>JavaScript</code></p></li>
 </ul>
-<aside class="notes"><p>https://career.guru99.com/top-19-json-interview-questions/</p>
+<aside class="notes">
+<p>https://career.guru99.com/top-19-json-interview-questions/</p>
 <blockquote>
 <p>JSON is a data exchange format. JSON means JavaScript Object Notation; it is language and platform independent.</p>
 </blockquote>
@@ -268,49 +280,51 @@
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside></section><section id="handling-json" class="slide level2 center"><h2>Handling <code>JSON</code>?</h2>
+      }</style></aside>
+</section>
+<section id="handling-json" class="slide level2 center">
+<h2>Handling <code>JSON</code>?</h2>
 <ul>
 <li><p>Most languages have libraries to manipulate <code>JSON</code></p></li>
 <li><p>In <i class="fa-brands fa-python" aria-label="python"></i> we shall use <code>JSON</code> data in <code>python</code> using the <code>json</code> module from the standard library</p></li>
 <li><p><i class="fa-brands fa-r-project" aria-label="r-project"></i> has several <code>JSON</code> packages to handle <code>JSON</code>. For example <code>jsonlite</code></p></li>
-</ul></section><section id="lexikon" class="slide level2 center"><h2>Lexikon</h2>
+</ul>
+</section>
+<section id="lexikon" class="slide level2 center">
+<h2>Lexikon</h2>
 <ul>
-<li>
-<code>JSON</code> objects should be thought of as <em>strings</em> or a <em>sequences</em> (or series) of <em>bytes</em> complying with the JSON syntax</li>
+<li><code>JSON</code> objects should be thought of as <em>strings</em> or a <em>sequences</em> (or series) of <em>bytes</em> complying with the JSON syntax</li>
 </ul>
 <div class="fragment">
 <ul>
-<li>
-<em>Serialization</em>: convert an object (for example a <code>dict</code>) to a <code>JSON</code> representation. The object is <em>encoded</em> for easy storage and/or transmission</li>
+<li><em>Serialization</em>: convert an object (for example a <code>dict</code>) to a <code>JSON</code> representation. The object is <em>encoded</em> for easy storage and/or transmission</li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li>
-<em>Deserialization</em>: the reverse transformation of serialization. Involves <em>decoding</em> data in <code>JSON</code> format to <em>native data types</em> that can be manipulated</li>
+<li><em>Deserialization</em>: the reverse transformation of serialization. Involves <em>decoding</em> data in <code>JSON</code> format to <em>native data types</em> that can be manipulated</li>
 </ul>
-<aside class="notes"><p>Strings and Bytes</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+
 </div>
-</section><section id="why-json" class="slide level2 center"><h2>Why <code>JSON</code> ?</h2>
+<aside><div>
+<p>Strings and Bytes</p>
+</div></aside></section>
+<section id="why-json" class="slide level2 center">
+<h2>Why <code>JSON</code> ?</h2>
 <ul>
 <li><p>.stress[Much smaller representation than <code>XML</code>] (its predecessor) in client-server communication: <em>faster data transfers</em></p></li>
 <li><p><code>JSON</code> exists as a <em>sequence of bytes</em>: very useful to transmit (stream) data over a network</p></li>
 <li><p><code>JSON</code> is <em>reader-friendly</em> since it is ultimately <em>text</em> and simultaneously <em>machine-friendly</em></p></li>
 <li><p><code>JSON</code> has an <em>expressive syntax</em> for representing arrays, objects, numbers and booleans/logicals</p></li>
-</ul></section></section><section><section id="using-json-with-python" class="title-slide slide level1 center" data-background-color="#1c191c"><h1>Using JSON with Python</h1>
+</ul>
+</section></section>
+<section>
+<section id="using-json-with-python" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>Using JSON with Python</h1>
 
-</section><section id="working-with-built-in-datatypes" class="slide level2 center"><h2>Working with built-in datatypes</h2>
+</section>
+<section id="working-with-built-in-datatypes" class="slide level2 center">
+<h2>Working with built-in datatypes</h2>
 <p>The <code>json</code> module (<i class="fa-brands fa-python" aria-label="python"></i>)</p>
 <ul>
 <li><p>encodes <code>Python</code> objects as <code>JSON</code> strings using instances of class <code>json.JSONEncoder</code></p></li>
@@ -329,37 +343,45 @@
 </div>
 </div>
 </div>
-</section><section id="dumps-and-dump" class="slide level2 center"><h2>Dumps() and Dump()</h2>
+</section>
+<section id="dumps-and-dump" class="slide level2 center">
+<h2><code>Dumps()</code> and <code>Dump()</code></h2>
 <p>The <code>json</code> module provides two very handy methods for <em>serialization</em> :</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 62%">
 <col style="width: 37%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Function</th>
 <th style="text-align: left;">Description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>dumps()</code></td>
-<td style="text-align: left;">serializes an object to a <code>JSON</code> <em>formatted string</em>
-</td>
+<td style="text-align: left;">serializes an object to a <code>JSON</code> <em>formatted string</em></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code><a href="https://rdrr.io/r/base/dump.html">dump()</a></code></td>
+<td style="text-align: left;"><code>dump()</code></td>
 <td style="text-align: left;">serializes an object to a <code>JSON</code> <em>formatted stream</em> (which supports writing to a file).</td>
 </tr>
 </tbody>
-</table></section><section id="serialization-of-built-in-datatypes" class="slide level2 center"><h2>Serialization of built-in datatypes</h2>
+</table>
+</section>
+<section id="serialization-of-built-in-datatypes" class="slide level2 center">
+<h2>Serialization of built-in datatypes</h2>
 <p><code>json.dumps()</code> and <code>json.dump()</code> use the following mapping conventions for built-in datatypes :</p>
 <div class="columns">
 <div class="column">
 <table class="caption-top">
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Python</th>
 <th style="text-align: right;"><code>JSON</code></th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">dict</td>
@@ -391,8 +413,7 @@
 </tr>
 </tbody>
 </table>
-</div><p>. . .</p>
-<div class="column">
+</div><p>. . .</p><div class="column">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -408,11 +429,13 @@
 </div>
 </div>
 </div></div>
-</section><section id="serialization-example" class="slide level2 center"><h2>Serialization example</h2>
+</section>
+<section id="serialization-example" class="slide level2 center">
+<h2>Serialization example</h2>
 <div class="columns">
 <div class="column">
 <p>Serialize a <code>Python</code> object into a <code>JSON</code> formatted string using <code>json.dumps()</code></p>
-<div class="cell">
+<div id="1496ff14" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> json</span>
 <span id="cb1-2"><a></a></span>
 <span id="cb1-3"><a></a>spam <span class="op">=</span> json.dumps({</span>
@@ -428,15 +451,15 @@
 <span id="cb1-13"><a></a>  indent<span class="op">=</span><span class="dv">4</span></span>
 <span id="cb1-14"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+<div class="cell fragment" data-execution_count="2">
 
 </div>
-<div class="cell">
+<div id="b5853908" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="bu">type</span>(spam)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;class 'str'&gt;</code></pre>
+<div class="cell fragment" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>str</code></pre>
 </div>
 </div>
 <div title="Remember:">
@@ -455,10 +478,10 @@
 </div>
 </div>
 </div><div class="column">
-<div class="cell">
+<div id="20bf0a62" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="bu">print</span>(spam)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+<div class="cell fragment" data-execution_count="4">
 <div class="cell-output cell-output-stdout">
 <pre><code>{
     "active": true,
@@ -479,46 +502,48 @@
 </div>
 <p>Pretty printing options</p>
 <ul>
-<li>
-<code>sort_keys=True</code>: sort the keys of the JSON object</li>
-<li>
-<code>indent=4</code>: indent using 4 spaces</li>
+<li><code>sort_keys=True</code>: sort the keys of the JSON object</li>
+<li><code>indent=4</code>: indent using 4 spaces</li>
 </ul>
 </div></div>
-</section><section id="dumping-a-date" class="slide level2 center"><h2>Dumping a date</h2>
+</section>
+<section id="dumping-a-date" class="slide level2 center">
+<h2>Dumping a date</h2>
 <p>A Python <code>date</code> object is not serializable.</p>
-<div class="cell">
+<div id="35873113" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
 <span id="cb6-2"><a></a>td <span class="op">=</span> date.today()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+<div class="cell fragment" data-execution_count="5">
 
 </div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="op">&gt;&gt;&gt;</span> js.dumps(td)</span>
 <span id="cb7-2"><a></a>...</span>
 <span id="cb7-3"><a></a><span class="pp">TypeError</span>: Object of <span class="bu">type</span> date <span class="kw">is</span> <span class="kw">not</span> JSON serializable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>But it can be converted into serializable types.</p>
-<div class="cell">
+<div id="81b82aa0" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>json.dumps(td.isoformat())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+<div class="cell fragment" data-execution_count="6">
 
 </div>
-<div class="cell">
+<div id="802c6ff3" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>json.dumps(td.isocalendar())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+<div class="cell fragment" data-execution_count="7">
 
 </div>
-<div class="cell">
+<div id="df3b5e41" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>json.dumps(td.timetuple())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+<div class="cell fragment" data-execution_count="8">
 
 </div>
-</section><section id="serialization-example-1" class="slide level2 center"><h2>Serialization example</h2>
+</section>
+<section id="serialization-example-1" class="slide level2 center">
+<h2>Serialization example</h2>
 <p><code>json.dump()</code> allows to write the output stream to a file</p>
-<div class="cell">
+<div id="c5d5fd9b" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'user.json'</span>,<span class="st">'w'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb11-2"><a></a>        json.dump({</span>
 <span id="cb11-3"><a></a>            <span class="st">"name"</span>: <span class="st">"Foo Bar"</span>,</span>
@@ -533,46 +558,55 @@
 <span id="cb11-12"><a></a>          sort_keys<span class="op">=</span><span class="va">True</span>, indent<span class="op">=</span><span class="dv">4</span></span>
 <span id="cb11-13"><a></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+<div class="cell fragment" data-execution_count="9">
 
 </div>
 <div class="fragment">
 <p>This writes a <code>user.json</code> file to disk with similar content as in the previous example</p>
-<div class="cell">
+<div id="3c2c02db" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="op">!</span>ls <span class="op">-</span>l <span class="op">*</span>.json</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+<div class="cell fragment" data-execution_count="10">
 
 </div>
 </div>
-</section><section id="deserializing-built-in-datatypes" class="slide level2 center"><h2>Deserializing built-in datatypes</h2>
+</section>
+<section id="deserializing-built-in-datatypes" class="slide level2 center">
+<h2>Deserializing built-in datatypes</h2>
 <p>Similarly to serialization, the <code>json</code> module exposes two methods for deserialization:</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 62%">
 <col style="width: 37%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Function</th>
 <th style="text-align: left;">Description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>loads()</code></td>
 <td style="text-align: left;">deserializes a <code>JSON</code> document to a Python object</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code><a href="https://rdrr.io/r/base/load.html">load()</a></code></td>
+<td style="text-align: left;"><code>load()</code></td>
 <td style="text-align: left;">deserializes a <code>JSON</code> formatted stream (which supports reading from a file) to a Python object</td>
 </tr>
 </tbody>
-</table></section><section id="deserializing-built-in-datatypes-1" class="slide level2 center"><h2>Deserializing built-in datatypes</h2>
+</table>
+</section>
+<section id="deserializing-built-in-datatypes-1" class="slide level2 center">
+<h2>Deserializing built-in datatypes</h2>
 <p>The decoder converts <code>JSON</code> encoded data into native Python data types as in the table below:</p>
 <table class="caption-top">
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;"><code>JSON</code></th>
 <th style="text-align: right;">Python</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">object</td>
@@ -607,46 +641,58 @@
 <td style="text-align: right;">None</td>
 </tr>
 </tbody>
-</table></section><section id="deserialization-example" class="slide level2 center"><h2>Deserialization example</h2>
+</table>
+</section>
+<section id="deserialization-example" class="slide level2 center">
+<h2>Deserialization example</h2>
 <p>Pass a <code>JSON</code> string to the <code>json.loads()</code> method :</p>
-<div class="cell">
+<div id="f7765d06" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>spam <span class="op">=</span> json.loads(<span class="st">'{"active": true, "age": 78, "balance": 345.8, "friends": ["Jane","John"], "name": "Foo Bar", "other_names": ["Doe","Joe"],"spouse":null}'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+<div class="cell fragment" data-execution_count="11">
 
 </div>
 <div class="fragment">
 <p>we obtain a dictionary as output:</p>
-<div class="cell">
+<div id="255d1753" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>spam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+<div class="cell fragment" data-execution_count="12">
 
 </div>
 </div>
-</section><section id="deserialization-example-1" class="slide level2 center"><h2>Deserialization example</h2>
+</section>
+<section id="deserialization-example-1" class="slide level2 center">
+<h2>Deserialization example</h2>
 <p>We can also read from the <code>user.json</code> file we created before:</p>
-<div class="cell">
+<div id="f69a6c81" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'user.json'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb15-2"><a></a>  user_data <span class="op">=</span> json.load(<span class="bu">file</span>)</span>
 <span id="cb15-3"><a></a></span>
 <span id="cb15-4"><a></a>user_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+<div class="cell fragment" data-execution_count="13">
 
 </div>
 <div class="fragment">
 <p>We obtain the same <code>dict</code>. This is <em>simple</em> and fast.</p>
 </div>
-</section><section id="serialize-and-deserialize-custom-objects" class="slide level2 center"><h2>Serialize and deserialize custom objects</h2>
+</section>
+<section id="serialize-and-deserialize-custom-objects" class="slide level2 center">
+<h2>Serialize and deserialize custom objects</h2>
 <ul>
 <li><p>Using <code>JSON</code>, we serialized and deserialized objects containing only <em>encapsulated built-in types</em></p></li>
 <li><p>We can also work a little bit to serialize <em>custom objects</em></p></li>
-<li><p>Let’s go to <a href="../../labs/grosses-data/_ipynbs/notebook07_json-format.ipynb">notebook07_json-format.ipynb</a></p></li>
-</ul></section></section><section><section id="using-json-data-with-spark" class="title-slide slide level1 center" data-background-color="#1c191c"><h1>Using JSON data with Spark</h1>
+<li><p>Let’s go to <a href="../../core/ipynb/notebook07_json-format.ipynb">notebook07_json-format.ipynb</a></p></li>
+</ul>
+</section></section>
+<section>
+<section id="using-json-data-with-spark" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>Using JSON data with Spark</h1>
 
-</section><section id="using-json-data-with-spark-1" class="slide level2 center"><h2>Using <code>JSON</code> data with <code>Spark</code>
-</h2>
+</section>
+<section id="using-json-data-with-spark-1" class="slide level2 center">
+<h2>Using <code>JSON</code> data with <code>Spark</code></h2>
 <p>Typically achieved using</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a>spark.read.json(filepath, multiLine<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="fragment">
@@ -656,37 +702,42 @@
 </ul>
 <p>(Almost) Everything is explained in the notebook :</p>
 <div class="center">
-<p><a href="../../labs/grosses-data/_ipynbs/notebook07_json-format.ipynb">notebook07_json-format.ipynb</a></p>
+<p><a href="../../core/ipynb/notebook07_json-format.ipynb">notebook07_json-format.ipynb</a></p>
 </div>
 </div>
 <div class="fragment">
 <p><code>JSON</code> reader and writer allows us save and read Spark dataframes with composite types.</p>
 </div>
-</section><section id="obtaininig-json-objects-from-an-api" class="slide level2 center"><h2>Obtaininig JSON objects from an API</h2>
+</section>
+<section id="obtaininig-json-objects-from-an-api" class="slide level2 center">
+<h2>Obtaininig JSON objects from an API</h2>
 <blockquote>
 <p>A common use of JSON is to collect JSON data from a web server as a file or HTTP request, and convert the JSON data to a Python/R/Spark object.</p>
 </blockquote>
-</section></section><section><section id="recap-json-objects" class="title-slide slide level1 center" data-background-color="#1c191c"><h1>Recap JSON objects</h1>
+</section></section>
+<section>
+<section id="recap-json-objects" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>Recap JSON objects</h1>
 
-</section><section id="what-is-a-json-object" class="slide level2 center"><h2>
-<i class="fa-solid fa-syringe" aria-label="syringe"></i> What is a JSON object?</h2>
+</section>
+<section id="what-is-a-json-object" class="slide level2 center">
+<h2><i class="fa-solid fa-syringe" aria-label="syringe"></i> What is a JSON object?</h2>
 <blockquote>
 <p>An object can be defined as an unordered set of name/value pairs. An object in JSON starts with <strong>{</strong>left brace} and finish or ends with {right brace<strong>}</strong>. Every name is followed by<strong>:</strong> (colon) and the name/value pairs are parted by<strong>,</strong> (comma).</p>
 </blockquote>
-</section><section id="json-syntax" class="slide level2 center"><h2>
-<i class="fa-solid fa-syringe" aria-label="syringe"></i> JSON syntax</h2>
+</section>
+<section id="json-syntax" class="slide level2 center">
+<h2><i class="fa-solid fa-syringe" aria-label="syringe"></i> JSON syntax</h2>
 <p>JSON syntax is a subset of the JavaScript object notation syntax.</p>
 <ul>
-<li>Data is in <em>name/value pairs</em>
-</li>
-<li>Data is separated by comma <strong>,</strong>
-</li>
-<li>Curly brackets <strong>{}</strong> hold <code>objects</code>
-</li>
-<li>Square bracket <strong>[]</strong> holds <code>arrays</code>
-</li>
-</ul></section><section id="json-and-types" class="slide level2 center"><h2>
-<i class="fa-solid fa-syringe" aria-label="syringe"></i> JSON and types</h2>
+<li>Data is in <em>name/value pairs</em></li>
+<li>Data is separated by comma <strong>,</strong></li>
+<li>Curly brackets <strong>{}</strong> hold <code>objects</code></li>
+<li>Square bracket <strong>[]</strong> holds <code>arrays</code></li>
+</ul>
+</section>
+<section id="json-and-types" class="slide level2 center">
+<h2><i class="fa-solid fa-syringe" aria-label="syringe"></i> JSON and types</h2>
 <p>JSON types:</p>
 <ul>
 <li>Number,</li>
@@ -695,38 +746,35 @@
 <li>String</li>
 <li>Object</li>
 <li>Null</li>
-</ul></section><section id="json-versus-pickle" class="slide level2 center"><h2>
-<code>json</code> versus <code>pickle</code>
-</h2>
+</ul>
+</section>
+<section id="json-versus-pickle" class="slide level2 center">
+<h2><code>json</code> versus <code>pickle</code></h2>
 <p>Two competing serialization modules?</p>
 <div class="fragment">
 <ul>
-<li>
-<code>Pickle</code> is Python bound</li>
-<li>
-<code>Pickle</code> handles (almost) everything that can be defined in <code>Python</code>
-</li>
+<li><code>Pickle</code> is Python bound</li>
+<li><code>Pickle</code> handles (almost) everything that can be defined in <code>Python</code></li>
 <li>Other computing environments have to develop bypasses to handle <code>pickle</code> dumps.</li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li>
-<code>json</code> is used by widely different languages and systems</li>
-<li>
-<code>json</code> is readable</li>
-<li>
-<code>json</code> is less prone to malicious code injection</li>
+<li><code>json</code> is used by widely different languages and systems</li>
+<li><code>json</code> is readable</li>
+<li><code>json</code> is less prone to malicious code injection</li>
 </ul>
 </div>
-</section><section id="json-dialects-spatial-data" class="slide level2 smaller center"><h2>Json dialects : spatial data</h2>
+</section>
+<section id="json-dialects-spatial-data" class="slide level2 smaller center">
+<h2>Json dialects : spatial data</h2>
 <p>JSON objects are used extensively to handle spatial or textual data.</p>
 <p>JSON objects are used by spatial extensions of Pandas and Spark.</p>
 <div class="fragment">
 <p><a href="https://geojson.org">GeoJSON</a> is a format for encoding a variety of geographic data structures. GeoJSON supports the following geometry types: <code>Point</code>, <code>LineString</code>, <code>Polygon</code>, <code>MultiPoint</code>, <code>MultiLineString</code>, and <code>MultiPolygon</code>. Geometric objects with additional properties are <code>Feature</code> objects. Sets of features are contained by <code>FeatureCollection</code> objects.</p>
 </div>
 <div class="fragment">
-<div class="cell">
+<div id="b356ae19" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>{</span>
 <span id="cb17-2"><a></a>  <span class="st">"type"</span>: <span class="st">"FeatureCollection"</span>,</span>
 <span id="cb17-3"><a></a>  <span class="st">"features"</span>: [</span>
@@ -744,16 +792,20 @@
 <span id="cb17-15"><a></a>  ]</span>
 <span id="cb17-16"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
+<div class="cell fragment" data-execution_count="14">
 
 </div>
 <p>See <a href="https://sedona.apache.org/1.5.1/tutorial/sql/?h=json#load-geojson-using-spark-json-data-source">Loading GeoJSON using Spark</a></p>
 </div>
-</section><section id="semi-structured-data-and-nlp" class="slide level2 smaller center"><h2>Semi-structured data and NLP</h2>
+</section>
+<section id="semi-structured-data-and-nlp" class="slide level2 smaller center">
+<h2>Semi-structured data and NLP</h2>
 <p>Natural Language Processing (NLP) handles corpora of texts (called documents), annotates the documents, parses the documents into sentences and tokens, performs syntactic analysis (POS tagging), and eventually enables <em>topic modeling</em>, <em>sentiment analysis</em>, automatic translation, and other machine learning tasks.</p>
 <p>Corpus annotation can be performed using <a href="https://www.johnsnowlabs.com/spark-nlp/"><code>spark-nlp</code></a> a package developped by the <a href="https://www.johnsnowlabs.com">John Snow Labs</a> to offer NLP above <code>Spark SQL</code> and <code>Spark MLLib</code>.</p>
 <p>Annotation starts by applying a <code>DocumentAssembler()</code> transformation to a corpus. This introduces columns with composite types</p>
-</section><section id="document-assembling" class="slide level2 smaller center"><h2>Document Assembling</h2>
+</section>
+<section id="document-assembling" class="slide level2 smaller center">
+<h2>Document Assembling</h2>
 <div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a></span>
 <span id="cb18-2"><a></a><span class="op">&gt;&gt;&gt;</span> result <span class="op">=</span> documentAssembler.transform(data)</span>
 <span id="cb18-3"><a></a><span class="op">&gt;&gt;&gt;</span> result.select(<span class="st">"document"</span>).show(truncate<span class="op">=</span><span class="va">False</span>)</span>
@@ -776,9 +828,14 @@
 <span id="cb18-20"><a></a><span class="op">|</span>    <span class="op">|</span>    <span class="op">|--</span> embeddings: array (nullable <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb18-21"><a></a><span class="op">|</span>    <span class="op">|</span>    <span class="op">|</span>    <span class="op">|--</span> element: <span class="bu">float</span> (containsNull <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Column <code>document</code> is of type <code>ArrayType()</code>. The basetype of <code>document</code> column is of <code>StructType()</code> (<code>element</code>), the <code>element</code> contains subfields of primitive type, but alo a field of type <code>map</code> (<code>MapType()</code>) and a field of type <code>StructType()</code>.</p>
-</section></section><section><section id="querying-json-strings" class="title-slide slide level1 center" data-background-color="#1c191c"><h1>Querying JSON strings</h1>
+</section></section>
+<section>
+<section id="querying-json-strings" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>Querying JSON strings</h1>
 
-</section><section id="json-path" class="slide level2 center"><h2>JSON path</h2>
+</section>
+<section id="json-path" class="slide level2 center">
+<h2>JSON path</h2>
 <p>The SQL/JSON path language: specify the items to be retrieved from JSON data</p>
 <ul>
 <li>Path expressions</li>
@@ -787,19 +844,21 @@
 </ul>
 <p>Different dialects</p>
 <ul>
-<li>
-<code>jsonpath</code> see <a href="">PostgreSQL</a>
-</li>
-<li>
-<code>jmespath</code> see <a href="https://jmespath.org">JMES Path</a>
-</li>
+<li><code>jsonpath</code> see <a href="">PostgreSQL</a></li>
+<li><code>jmespath</code> see <a href="https://jmespath.org">JMES Path</a></li>
 <li><code>...</code></li>
-</ul></section><section id="examples" class="slide level2 center"><h2>Examples</h2>
+</ul>
+</section>
+<section id="examples" class="slide level2 center">
+<h2>Examples</h2>
 <ul>
 <li>…</li>
 <li>…</li>
 <li>…</li>
-</ul></section></section><section id="references" class="title-slide slide level1 center" data-background-color="#1c191c"><h1>References</h1>
+</ul>
+</section></section>
+<section id="references" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>References</h1>
 <ul>
 <li><p><a href="https://docs.python.org/3/library/json.html">Documentation Python json</a></p></li>
 <li><p><a href="https://www.postgresql.org/docs/current/datatype-json.html">PostgreSQL json types</a></p></li>
@@ -808,7 +867,11 @@
 <li><p><a href="https://geopandas.org/en/stable/">GeoPandas</a></p></li>
 <li><p><a href="https://sparknlp.org/api/python/index.html">Spark NLP</a></p></li>
 <li><p><a href="https://www.postgresql.org/docs/current/functions-json.html#FUNCTIONS-SQLJSON-PATH">SQL JSON Path language</a></p></li>
-</ul></section><section id="thank-you" class="title-slide slide level1 center" data-background-color="#1c191c"><h1>Thank you !</h1>
+</ul>
+</section>
+
+<section id="thank-you" class="title-slide slide level1 center" data-background-color="#1c191c">
+<h1>Thank you !</h1>
 
 
 <div class="reveal-header">
@@ -826,14 +889,30 @@
 </div>
 </div>
 </section>
-</div>
+    </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p><a href="http://s-v-b.github.io/IFEBY030">IFEBY030</a> – Technos Big Data – M1 MIDS/MFA/LOGOS – UParis Cité</p>
+<p><a href="http://s-v-b.github.io/IFEBY310">IFEBY030</a> – Technos Big Data – M1 MIDS/MFA/LOGOS – UParis Cité</p>
 </div>
 </div></div>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../../site_libs/revealjs/plugin/search/search.js"></script><script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
 
       // Full list of configuration options available at:
       // https://revealjs.com/config/
@@ -1024,42 +1103,8 @@
           RevealZoom
         ]
       });
-    </script><script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script><script id="quarto-html-after-body" type="application/javascript">
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
         const mode = bsSheetEl.getAttribute("data-mode");
@@ -1402,7 +1447,8 @@
         }
       }
     });
-    </script><script type="text/javascript">
+    </script>
+        <script type="text/javascript">
         (function(d) {
           d.querySelectorAll(".pseudocode-container").forEach(function(el) {
             let pseudocodeOptions = {
@@ -1433,6 +1479,7 @@
           });
         })(document);
         </script>
-
+      
+    
 
 </body></html>
