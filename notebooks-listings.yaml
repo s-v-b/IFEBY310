@@ -24,13 +24,13 @@
   # href: '<a href="core/ipynb/notebook03_pandas.ipynb" download="notebook03_pandas.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Spark Resilient Distributed Datasets"
   author: "Master I MIDS UParis Cité"
-  date: "2025-02-06"
+  date: "2025-02-07"
   path: "core/notebooks/notebook05_sparkrdd.html"
   categories: [PySpark, Spark, RDD]
   href: '<a href="core/ipynb/notebook05_sparkrdd.ipynb" download="notebook05_sparkrdd.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Spark SQL"
   path: "core/notebooks/notebook06_sparksql.html"
-  date: "2025-02-07"
+  date: "2025-02-20"
   categories: [PySpark, Spark, SQL]
   href: '<a href="core/ipynb/notebook06_sparksql.ipynb" download="notebook06_sparksql.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Pandas on Spark and SparklyR"
