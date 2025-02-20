@@ -1,0 +1,12 @@
+{
+  "hash": "be993be9253e4b704b4b1d9172a4afde",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Arrow\"\nengine: jupyter\ndate: \"2025-01-17\"\n\nexecute: \n  eval: true\n  echo: true\n---\n\n",
+    "supporting": [
+      "slides10_arrow_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
