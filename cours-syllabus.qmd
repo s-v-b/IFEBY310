@@ -15,7 +15,8 @@ We will have one weeky lecture. Each lecture is organized around [Slides](slides
 
 |           | Day       | Hour              | Room                       |  Start |
 |:---------:|:-----------:|:-------------------:|:--------------------------------|:--------|
-| Lecture     | Friday  | 15:45  - 17:46  | Sophie Germain 014 | 2025-01-17 |
+| Lecture     | Friday  | 15:45  - 17:46  | Sophie Germain 014 | 2025-01-17 --2025-02-21 |
+| Lecture     | Friday  | **13:30  - 15:30**  | Sophie Germain 1005 | 2025-03-07-...  |
 
 ### [{{< fa cal >}}](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
 
@@ -179,3 +180,4 @@ Useful links:
 - [Relais handicap](https://u-paris.fr/etudes-et-handicap/)
 
 :::
+
