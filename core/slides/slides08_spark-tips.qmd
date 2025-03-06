@@ -1,6 +1,6 @@
 ---
 title: "Spark tips"
-engine: knitr
+engine: jupyter
 date: "2025-01-17"
 --- 
 
@@ -8,16 +8,18 @@ date: "2025-01-17"
 # Spark tips  {background-color="#1c191c"}
 
 
----
+
 
 ##  Tip 1. Use DataFrames instead of RDDs
 
 - Instead of using the `RDD` API
+ 
 ```{.python}
 rdd = sc.textFile("/path/to/file.txt")
 ```
 
 - Use the `DataFrame` API
+  
 ```{.python}
 df = spark.read.textFile("/path/to/file.txt")
 ```
@@ -28,7 +30,7 @@ df = spark.read.textFile("/path/to/file.txt")
 
 - Most of the **recent Spark advances** are towards an improvement of the `SQL`
 
----
+
 
 ##  Tip 2. Avoid using regular expressions
 
@@ -50,7 +52,7 @@ df = spark.read.textFile("/path/to/file.txt")
 
 :::
 
----
+
 
 ##  Tip 3. Joins: largest dataset on the left
 
@@ -70,7 +72,7 @@ joinedDF = smallDF.join(largeDF, on="id")
 ```
 can be *much longer* or even *fail* if `largeDF` is large
 
----
+
 
 ##  Tip 4. Joins: use broadcast joining
 
@@ -87,7 +89,7 @@ joinedDF = largeDF.join(broadcast(smallDF), on="id")
 
 - Usually leads to **much faster joins** since is allows to *avoid shuffles*
 
----
+
 
 ##  Tip 5. Use caching when repeating queries
 
@@ -108,7 +110,7 @@ df = (
 
 - Caching can **cost more** than reading the DataFrame (e.g. only few columns are useful, predictate pushdown)
 
----
+
 
 ##  Tip 6. COMPUTE STATISTICS of tables
 
@@ -121,7 +123,7 @@ spark.sql(query)
 
 - However, Spark **does not always get everything** it needs just from the above broad `COMPUTE STATISTICS` call
 
----
+
 
 ##  Tip 6. COMPUTE STATISTICS of tables
 
@@ -136,7 +138,7 @@ query = "ANALYZE TABLE db.table COMPUTE STATISTICS"
 spark.sql(query)
 ```
 
----
+
 
 ##  Tip 7. Shuffles: know your data
 
@@ -148,7 +150,7 @@ spark.sql(query)
 
 - To use Spark well, you *need to know what you shuffle*, and for this it’s **essential that you know your data**
 
----
+
 
 ##  Tip 8. Shuffles: beware of skews
 
@@ -179,7 +181,7 @@ spark.sql(query)
 )
 ```
 
----
+
 
 ##  Tip 10. Partitions: well-distributed columns
 
@@ -189,7 +191,7 @@ spark.sql(query)
 
 - Partitioning on a **unique ID** is generally a good strategy, but **don't partition** on **sparsely filled columns** (with many NAs) or columns that **over-represent particular values**
 
----
+
 
 ##  Tip 11. Joins again: highly flammable
 
@@ -203,7 +205,6 @@ spark.sql(query)
 
 - A solution is to *pre-fill empty cells* to **arbitrary balanced values** (e.g. uniform random values) before running a join
 
----
 
 ##  Tip 12. Is your data real yet?
 
@@ -213,7 +214,7 @@ spark.sql(query)
 
 - This can result in **surprising results:** imagine that you create an id column using `monotonically_increasing_id`, and then join on that column. If you do not place an **action** in between, your values **have not been materialized**. The result will be **non-deterministic!**
 
----
+
 
 ##  Tip 13. Checkpointing is your friend
 
@@ -227,7 +228,7 @@ spark.sql(query)
 
 - Checkpointed data is also a valuable source for **data-debugging**.
 
----
+
 
 ##  Tip 14. Check your runtime with monitoring
 
@@ -237,7 +238,7 @@ spark.sql(query)
 
 - Such a monitoring tool allowing to view your **total memory** and **CPU usage** across executors is essential for **resource planning** and "autopsies" on **failed jobs**.
 
----
+
 
 ##  Tip 15. CSV reading is brittle
 
@@ -254,7 +255,7 @@ df = spark.read.csv("quote-happy.csv")
 - To be safe, you can include `escape` and `quote` options in your reads. Even better: *use `Parquet`* instead of CSV files!
 
 
----
+
 
 ##  Tip 16. Parquet is your friend
 
@@ -268,7 +269,7 @@ df = spark.read.csv("quote-happy.csv")
 
 - If you are generating Parquet files from another format (using `PyArrow`, `Pandas`, etc.) be conscious that creating a **single** parquet file gives up a *major benefit of the format*: you need to **partition it**!
 
----
+
 
 ##  Tip 17. Problems with UDFs  {.smaller}
 
@@ -297,7 +298,7 @@ df = spark.read.csv("quote-happy.csv")
 +---+---+---------------+
 ```
 
----
+
 
 ##  Tip 17. Problems with UDFs
 
@@ -327,7 +328,6 @@ UDF are *Excruciatingly slow* with `pyspark` and spark *won't complain* if the *
 +---+---+---------------+-------------+--------------+
 ```
 
----
 
 ##  Tip 18. Use all of the resources
 
@@ -343,7 +343,7 @@ https://spark.apache.org/docs/latest/configuration.html
 
 - When running on a **cluster**, you might also want to tweak the `spark.executor.memory` (though it depends on your cluster and its configuration).
 
----
+
 
 ##  Tip 18. Use all of the resources
 
@@ -365,7 +365,7 @@ spark_session = SparkSession.builder \
 
 # Interpret error messages  {background-color="#1c191c"}
 
----
+
 
 ## Interpret error messages 
 
@@ -377,7 +377,7 @@ spark_session = SparkSession.builder \
 
 - `"java.net.SocketTimeoutException: Write timed out"` can mean that the *number of partitions too high*, so that the filesystem is too slow to handle the **number of simultaneous writes** attempted by Spark
 
----
+
 
 ## Interpret error messages 
 
@@ -387,14 +387,14 @@ spark_session = SparkSession.builder \
 
 - Sometimes you get a true `"out of memory"` error. You can **increase the size of individual workers**, but before you do that, ask yourself, *is the data well distributed* ?
 
----
+
 
 ## Interpret error messages 
 
 - `"ClassNotFoundException"`: usually when you are trying to **connect** your application to an external a database. Here is an example
 
 
-![](IMG/classnotfounderror.png)
+![](/images/classnotfounderror.png)
 
 
 ## Interpret error messages  {.smaller}
@@ -426,7 +426,7 @@ or
 spark-submit --jars /full/path/to/postgres.jar,/full/path/to/other/jar ...
 ```
 
----
+
 
 ## Interpret error messages 
 
@@ -436,13 +436,13 @@ spark-submit --jars /full/path/to/postgres.jar,/full/path/to/other/jar ...
 
 - Make sure there is **no space** between the commas in the list of jars.
 
----
+
 
 ## Interpret error messages 
 
 Trying to connect to a database: `"java.sql.SQLException: No suitable driver"`
 
-![](./IMG/sqlerror.png)
+![](/images/sqlerror.png)
 
 
 
@@ -450,7 +450,7 @@ Trying to connect to a database: `"java.sql.SQLException: No suitable driver"`
 
 Error happens while trying to save to a database: `"java.lang.NullPointerException"`
 
-![](./IMG/nullpointer.png)
+![](/images/nullpointer.png)
 
 
 ## Interpret error messages 
@@ -469,17 +469,17 @@ df = spark.read.format('jdbc').options(
 
 and also make sure that the drivers' jars are set.
 
----
+
 
 ## Interpret error messages 
 
 Horrible error : `'NoneType' object has no attribute '_jvm'`
 
-![](./IMG/nonetypeerror.png)
+![](/images/nonetypeerror.png)
 
 ...mainly comes from two mistakes
 
----
+
 
 ## Interpret error messages 
 
@@ -497,7 +497,7 @@ class A(object):
 a = A()
 ```
 
----
+
 
 ## Interpret error messages 
 
@@ -520,7 +520,7 @@ df = df.withColumn('a_b_max', udf_max_calculation('a', 'b'))
 df.show()
 ```
 
-We CANNOT use pyspark functions inside a udf: a UDF operates on a row per row basis while pyspark functions on a column basis.
+We CANNOT use `pyspark` functions inside a udf: a UDF operates on a row per row basis while pyspark functions on a column basis.
 
 
 

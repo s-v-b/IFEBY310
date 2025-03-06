@@ -1,7 +1,7 @@
 ---
 title: "Apache Arrow"
 date: "2024-02-19"
-engine: knitr
+engine: jupyter
 ---
 
 #  Apache Arrow  {background-color="#1c191c"}
@@ -80,7 +80,7 @@ Uses {{< fa brands google >}} Flatbuffers
 
 # Python `pyarrow` module  {background-color="#1c191c"}
  
-##
+##  Importing `pyarrow`
 
 ```{python}
 import pyarrow as pa
@@ -116,7 +116,7 @@ df_new = table.to_pandas()
 schema = pa.Schema.from_pandas(df)
 ```
 
-::: {.notes}
+::: {.aside}
 
 - [Arrow doc](https://arrow.apache.org/docs/python/pandas.html)
 - [Pandas doc]()

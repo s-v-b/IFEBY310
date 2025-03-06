@@ -1,19 +1,5 @@
 ---
-title: "Quarto"
+title: "Quarto format"
 
-format:
-  html:
-    highlight-style: zenburn
+format    highlight-style: zenburn
 ---
-
-
-## A format
-
-## A translator
-
-## Quarto and rstudio
-
-## Quarto and vs code
-
-## Command Line Tool 
-

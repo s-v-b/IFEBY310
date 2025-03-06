@@ -1,13 +1,12 @@
 ---
 title: "File formats"
-engine: knitr
+engine: jupyter
 date: "2025-01-17"
 ---
 
 #  File formats  {background-color="#1c191c"}
 
 
----
 
 ## File formats
 
@@ -61,13 +60,14 @@ What is the meaning of *Schema*? May depend on format.
 ::: {.center}
 
 
+
+<img src="/images/parquet.png" style="width: 30%;" />
+<img src="" style="width: 5%;" />
+<img src="/images/orc.png" style="width: 23%;" />
+<img src="" style="width: 5%;" />
+<img src="/images/avro.png" style="width: 25%;" />
+
 :::
-<img src="IMG/parquet.png" style="width: 30%;" />
-<img src="" style="width: 5%;" />
-<img src="IMG/orc.png" style="width: 23%;" />
-<img src="" style="width: 5%;" />
-<img src="IMG/avro.png" style="width: 25%;" />
-]
 
 We shall talk about the *core concepts* and *use-cases* for the following popular data formats:
 
@@ -77,7 +77,6 @@ We shall talk about the *core concepts* and *use-cases* for the following popula
 
 - `Parquet` : [https://orc.apache.org](https://orc.apache.org)
 
----
 
 
 
@@ -102,13 +101,12 @@ We shall talk about the *core concepts* and *use-cases* for the following popula
 
 ::: {.column}
 
-![](IMG/avro.png)
+![](/images/avro.png)
 
 :::
 ::: 
 
 
-<!-- end columns -->
 
 
 ::: {.notes}
@@ -143,7 +141,7 @@ In the old days, Avro used to be an aircraft manufacturer
 
 
 
----
+
 
 ## `Avro`: rationale
 
@@ -158,7 +156,7 @@ Ideal candidate to *store data in a data lake* since:
 3. Any source *schema change is easily handled*
 
 
-::: {.notes}
+::: {.aside}
 
 - data lake 
 - data warehouse
@@ -174,7 +172,7 @@ Spot the differences
 
 ::: {.center}
 
-<img src="IMG/avro-file.png" style="width: 100%;" />
+<img src="/images/avro-file.png" style="width: 100%;" />
 
 :::
 
@@ -201,7 +199,7 @@ Spot the differences
 
 ::: {.column}
 
-![](IMG/parquet.png)
+![](/images/parquet.png)
 
 :::
 
@@ -275,12 +273,12 @@ Examples of nested fields
 
 ::: {.center}
 
-<img src="IMG/parquet-format.gif" style="width: 80%;" />
+<img src="/images/parquet-format.gif" style="width: 80%;" />
 
 :::
 
 
----
+
 
 ## `Parquet`: organization (lexikon)
 
@@ -295,13 +293,13 @@ Column chunk
 Page
 : column chunks are divided up into pages written back to back. The pages share a common header and readers can skip the page they are not interested in
 
----
+
 
 ## About `Parquet`
 
 ::: {.center}
 
-<img src="IMG/parquet-dive.png" style="width: 80%;" />
+<img src="/images/parquet-dive.png" style="width: 80%;" />
 
 :::
 
@@ -342,7 +340,7 @@ The footer contains:
 
 ::: {.center}
 
-![](IMG/orc.png)
+![](/images/orc.png)
 
 :::
 
@@ -350,7 +348,6 @@ The footer contains:
 
 ::: 
 
-<!-- end columns -->
 
 
 ::: {.notes}
@@ -388,7 +385,7 @@ At the end of the file a postscript holds compression parameters and the size of
 
 ::: {.column width="50%"}
 
-![ORC file structure](IMG/orc-file-structure.png)
+![ORC file structure](/images/orc-file-structure.png)
 
 :::
 
@@ -425,7 +422,7 @@ At the end of the file a postscript holds compression parameters and the size of
 
 - `Parquet` is ideal for *querying a subset of columns* in a multi-column table. `Avro` is ideal for **operations where all the columns are needed** (such as in a ETL workflow)
 
----
+
 
 ## `ORC` vs `Parquet`
 
@@ -435,13 +432,13 @@ At the end of the file a postscript holds compression parameters and the size of
 
 - `ORC` is more *compression efficient*
 
----
+
 
 ## In summary...
 
 ::: {.center}
 
-<img src="IMG/file-formats.png" style="width: 80%;" />
+<img src="/images/file-formats.png" style="width: 80%;" />
 
 :::
 

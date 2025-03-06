@@ -1,6 +1,6 @@
 ---
 title: "Spark deeper dive"
-engine: knitr
+engine: jupyter
 date: "2025-01-17"
 --- 
 
@@ -30,7 +30,7 @@ Let's have a look at the *Spark UI* available at :
 
 http://localhost:4040/jobs/]
 
-<img src="IMG/sparkui.png" style="width: 100%;" />
+<img src="/images/sparkui.png" style="width: 100%;" />
 
 ::: {.notes} 
 
@@ -52,9 +52,9 @@ Shuffles correspond to wide transformations.
 
 
 
-<img src="IMG/dag_reducebykey1.png" style="width: 30%;" />
+<img src="/images/dag_reducebykey1.png" style="width: 30%;" />
 <img src="" style="width: 10%;" />
-<img src="IMG/dag_reducebykey2.png" style="width: 30%;" />
+<img src="/images/dag_reducebykey2.png" style="width: 30%;" />
 
 
 - Spark has to **move data from one node to another** to be "grouped" with its "key"
@@ -143,7 +143,7 @@ How would this **looks on a cluster?** (imagine that the dataset has millions of
 - Lets say we have **3 worker nodes** and our data is **evenly distributed on it**, so the operations above look like this:
 
 
-<img src="IMG/shuffline.png" style="width: 95%;" />
+<img src="/images/shuffline.png" style="width: 95%;" />
 
 - This shuffling is very expensive because of *latency*
 
@@ -166,7 +166,7 @@ Perhaps we can *reduce before we shuffle* in order to greatly reduce the amount 
 This looks like on the cluster:
  
 
-<img src="IMG/shuffline_2.png" style="width: 80%;" />
+<img src="/images/shuffline_2.png" style="width: 80%;" />
 
 
  
@@ -177,8 +177,8 @@ This looks like on the cluster:
 
 
 
-<img src="IMG/shuffline.png" style="width: 49%;" />
-<img src="IMG/shuffline_2.png" style="width: 49%;" />
+<img src="/images/shuffline.png" style="width: 49%;" />
+<img src="/images/shuffline_2.png" style="width: 49%;" />
 
 
 - With `reduceByKey` we shuffle considerably less amount of data
@@ -635,7 +635,7 @@ reduced = filtered.reduce()
 
 ::: {.column width="50%"}
 
-<img src="IMG/lineage_graph.png" />
+<img src="/images/lineage_graph.png" />
 
 :::
 ::: 
@@ -674,7 +674,7 @@ RDDs are made up of **4 parts**:
 
 ::: {.column width="30%"}
 
-<img src="IMG/rdd_anatomy_1.png" />
+<img src="/images/rdd_anatomy_1.png" />
 
 :::
 
@@ -685,7 +685,7 @@ RDDs are made up of **4 parts**:
 
 ::: {.column width="30%"}
 
-<img src="IMG/rdd_anatomy_2.png"  />
+<img src="/images/rdd_anatomy_2.png"  />
 
 
 :::
@@ -741,7 +741,7 @@ Transformations cause shuffles, and can have **2 kinds of dependencies**:
 
 
 
-<img src="IMG/narrow_vs_wide_dependencies.png" style="width: 100%;" />
+<img src="/images/narrow_vs_wide_dependencies.png" style="width: 100%;" />
 
 
  
@@ -751,7 +751,7 @@ Transformations cause shuffles, and can have **2 kinds of dependencies**:
 Assume that we have a following DAG: 
 
 
-<img src="IMG/visual_dag.png" style="width: 55%;" />]
+<img src="/images/visual_dag.png" style="width: 55%;" />]
 
  
 
@@ -761,7 +761,7 @@ What do the dependencies look like? Which is **wide** and which is **narrow?**
 
 
 
-<img src="IMG/visual_dag_resolved.png" style="width: 85%;" />
+<img src="/images/visual_dag_resolved.png" style="width: 85%;" />
 
 
 - The B to G `join` is *narrow* because `groupByKey` **already partitions** the keys and places them appropriately in B.
@@ -941,7 +941,7 @@ Catalyst helps to move from **an unoptimized logical query plan** to an **optimi
 
 
 
-<img src="IMG/catalyst01.png" style="width: 90%;" />
+<img src="/images/catalyst01.png" style="width: 90%;" />
 
 
  
@@ -980,77 +980,77 @@ Catalyst helps to move from **an unoptimized logical query plan** to an **optimi
 Let’s understand how Catalyst optimizer works for a given query
 
 
-<img src="IMG/catalyst02.png" style="width: 80%;" />
+<img src="/images/catalyst02.png" style="width: 80%;" />
 
  
 
 ## Catalyst optimizer
 
 
-<img src="IMG/catalyst03.png" style="width: 100%;" />
+<img src="/images/catalyst03.png" style="width: 100%;" />
 
  
 
 ## Catalyst optimizer
 
 
-<img src="IMG/catalyst04.png" style="width: 100%;" />
+<img src="/images/catalyst04.png" style="width: 100%;" />
 
  
 
 ## Catalyst optimizer
 
 
-<img src="IMG/catalyst05.png" style="width: 100%;" />
+<img src="/images/catalyst05.png" style="width: 100%;" />
 
  
 
 ## Catalyst optimizer
 
 
-<img src="IMG/catalyst06.png" style="width: 100%;" />
+<img src="/images/catalyst06.png" style="width: 100%;" />
 
  
 
 ## Catalyst optimizer
 
 
-<img src="IMG/catalyst07.png" style="width: 100%;" />
+<img src="/images/catalyst07.png" style="width: 100%;" />
 
  
 
 ## Catalyst optimizer
 
 
-<img src="IMG/catalyst08.png" style="width: 100%;" />
+<img src="/images/catalyst08.png" style="width: 100%;" />
 
  
 
 ## Catalyst optimizer
 
 
-<img src="IMG/catalyst09.png" style="width: 100%;" />
+<img src="/images/catalyst09.png" style="width: 100%;" />
 
  
 
 ## Catalyst optimizer
 
 
-<img src="IMG/catalyst10.png" style="width: 100%;" />
+<img src="/images/catalyst10.png" style="width: 100%;" />
 
  
 
 ## Catalyst optimizer
 
 
-<img src="IMG/catalyst11.png" style="width: 100%;" />
+<img src="/images/catalyst11.png" style="width: 100%;" />
 
  
 
 ## Catalyst optimizer
 
 
-<img src="IMG/catalyst12.png" style="width: 100%;" />
+<img src="/images/catalyst12.png" style="width: 100%;" />
 
  
 

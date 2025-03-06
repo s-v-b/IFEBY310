@@ -165,3 +165,10 @@ cython_debug/
 /core/slides/*_cache/
 /core/slides/*_files/
 /_site/
+/core/notebooks/.jupyter_cache/
+/core/labs/*_cache/
+/core/notebooks/.ipynb_checkpoints/
+/core/notebooks/970101f4-6bc5-4932-ad58-30477664f5ed
+
+
+/_*.local
