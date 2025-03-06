@@ -2,7 +2,7 @@
 title: Using `JSON` data with `Python`
 jupyter: python3
 execute: 
-  eval: false
+  eval: true
 ---
 
 

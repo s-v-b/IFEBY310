@@ -1,10 +1,11 @@
 ---
-date: "2024-02-19"
+date: "2025-02-21"
 title: "SPARK & JSON"
-engine: knitr
+engine: jupyter
 ---
 
-#  JSON data format
+#  JSON data format  {background-color="#1c191c"}
+
 
 
 
@@ -27,7 +28,7 @@ https://career.guru99.com/top-19-json-interview-questions/
 > JSON is a  data exchange format.  JSON means JavaScript Object Notation; it is language and platform independent.
 
 :::
----
+
 
 ## Handling `JSON`?
 
@@ -52,14 +53,14 @@ https://career.guru99.com/top-19-json-interview-questions/
 - *Deserialization*: the reverse transformation of serialization. Involves *decoding* data in `JSON` format to *native data types* that can be manipulated
 
 
-::: {.notes}
+::: {.aside}
 
 Strings and Bytes 
 
 :::
 
 
----
+
 
 ## Why `JSON` ?
 
@@ -90,7 +91,7 @@ The `JSON` encoder only handles native `Python` data types (`str`, `int`, `float
 
 :::
 
-## Dumps() and Dump()
+## `Dumps()` and `Dump()`
 
 The `json` module provides two very handy methods for *serialization* :
 
@@ -136,7 +137,7 @@ The `json` module provides two very handy methods for *serialization* :
 
 :::
 
----
+
 
 ## Serialization example
 
@@ -260,7 +261,7 @@ This writes a `user.json` file to disk with similar content as in the previous e
 !ls -l *.json
 ```
 
----
+
 
 ## Deserializing built-in datatypes
 
@@ -272,7 +273,7 @@ Similarly to serialization, the `json` module exposes two methods for deserializ
 | `load()`  | deserializes a `JSON` formatted stream (which supports reading from a file) to a Python object |
 
 
----
+
 
 ## Deserializing built-in datatypes
 
@@ -308,7 +309,7 @@ we obtain a dictionary as  output:
 spam
 ```
 
----
+
 
 ## Deserialization example
 
@@ -326,7 +327,6 @@ user_data
 We obtain the same `dict`. This is *simple* and  fast.
 
 
----
 
 ## Serialize and deserialize custom objects
 
@@ -334,7 +334,7 @@ We obtain the same `dict`. This is *simple* and  fast.
 
 - We can also work a little bit to serialize *custom objects*
 
-- Let's go to [notebook07_json-format.ipynb](/labs/grosses-data/_ipynbs/notebook07_json-format.ipynb)
+- Let's go to [notebook07_json-format.ipynb](/core/ipynb/notebook07_json-format.ipynb)
 
 
 
@@ -360,7 +360,7 @@ spark.read.json(filepath, multiLine=True)
 
 ::: {.center}
   
-[notebook07_json-format.ipynb](/labs/grosses-data/_ipynbs/notebook07_json-format.ipynb)
+[notebook07_json-format.ipynb](/core/ipynb/notebook07_json-format.ipynb)
 
 :::
 

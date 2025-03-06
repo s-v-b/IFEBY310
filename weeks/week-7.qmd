@@ -1,0 +1,108 @@
+---
+title: "Weeks 7"
+subtitle: "JSON and serialization"
+editor: source
+draft: false
+---
+
+
+::: callout-important
+
+**1 Session**
+
+-   Friday 7 March 2025 Sophie Germain 1005 **13h30-15h30**
+-   {{< fa cal >}} [Calendar](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
+
+:::
+
+
+## Lecture : slides
+
+
+- {{< fa display >}} [Spark high level APIs: SQL](/core/slides/slides07_sparkl.html){target="_blank"}
+
+We may come back to several parts of 
+
+- {{< fa display >}} [Spark low level APIs: RDD](/core/slides/slides03_sparkrdd.html){target="_blank"} 
+- {{< fa display >}} [Python Data Science Stack](/core/slides/slides02_python_ds_stack.html){target="_blank"} 
+- {{< fa display >}} [Dask](/core/slides/slides09_dask.html){target="_blank"}
+
+
+## Notebooks
+
+We shall spend most of the lectures on 
+
+
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook07_json-format.ipynb" download>Jupyter notebook VII : JSON</a> 
+- {{< fa globe >}} [html: JSON](/core/notebooks/notebook07_json-format.html)  
+
+
+
+
+You shall have gone through (on your own)
+
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook06_sparksql.ipynb" download>Jupyter notebook VI : Spark SQL</a> 
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook05_sparkrdd.ipynb" download>Jupyter notebook V : Spark RDD</a> 
+- {{< fa globe >}} [html: Spark RDD](/core/notebooks/notebook05_sparkrdd.html)  
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook01_python.ipynb" download>Jupyter notebook I : tour of Python</a> 
+- {{< fa globe >}} [html: tour of Python](/core/notebooks/notebook01_python.html)  
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook02_numpy.ipynb" download>Jupyter notebook II : tour of numpy</a>
+- {{< fa globe >}} [html: tour of numpy](/core/notebooks/notebook02_numpy.html)  
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook03_pandas.ipynb" download>Jupyter notebook III: tour of pandas</a>
+- {{< fa globe >}} [html: tour of Pandas](/core/notebooks/notebook03_pandas.html)  
+
+
+
+
+## References 
+
+::: {.columns}
+::: {.column}
+
+- [Spark Definitive Guide](https://www.oreilly.com/library/view/spark-the-definitive/9781491912201/)
+- [Spark project](https://spark.apache.org)
+- [Spark documentation](https://spark.apache.org/docs/latest/index.html)
+- [Data pipelines](https://www.oreilly.com/library/view/data-pipelines-pocket/9781492087823/)
+- [Next Generation Databases NoSQLand Big Data, Guy Harrison ](https://link.springer.com/book/10.1007/978-1-4842-1329-2)
+- [Mastering Spark on R]()
+  
+:::
+::: {.column}
+
+- [`Parquet`](https://parquet.apache.org)
+- ['Arrow'](https://arrow.apache.org)
+- [Dask Docs](https://dask.org/)
+- [Dask Examples](https://examples.dask.org/)
+- [Dask Code](https://github.com/dask/dask/)
+- [Dask Blog](https://blog.dask.org/)
+- [Pandas cheatsheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf)
+
+
+:::
+::: 
+
+ 
+
+## Logistics
+
+{{< fa bullhorn >}}  `pyspark`
+
+{{< fa bullhorn >}} To work the `jupyter` notebooks, install `python 3`, 
+and modules related to `jupyter`: `jupyter-cache`, `jupyter_client`,
+`jupyter_core`, `jupyterlab_widgets` (this induces the installation of dependencies).
+
+<https://jupyter.org>
+
+Download the jupyter notebooks from  [notebooks listings](/notebooks-listings.qmd). 
+
+{{< fa bullhorn >}} If you do not already have an ENT account, follow instructions on  [Moodle](https://moodle.u-paris.fr/course/view.php?id=28534) to get  one. You shall need this account to connect to  PostGres cluster.
+
+
+
+
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [Agenda](/slides-listings.qmd) ⏎
+:::

@@ -1,0 +1,16 @@
+---
+title: "Journal"
+listing:
+  id: "weeks"
+  contents: 
+    - weeks-listings.yaml
+  fields: [date, title, categories] 
+  field-display-names: 
+    title: "Title"
+    categories: "Tags"
+  type: table  
+  table-striped: true
+  table-hover: true
+  sort: date
+
+---

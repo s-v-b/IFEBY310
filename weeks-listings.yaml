@@ -1,0 +1,35 @@
+- title: "Week 1"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-01-17"
+  path: /weeks/week-1.html
+  categories: [Big data, Python data stack]
+- title: "Week 2"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-01-24"
+  path: /weeks/week-2.html
+  categories: [Pandas]
+- title: "Week 3"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-01-31"
+  path: /weeks/week-3.html
+  categories: [Dask]
+- title: "week 4"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-02-07"
+  path: /weeks/week-4.html
+  categories: [Spark RDD]
+- title: "Week 6"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-02-21"
+  path: /weeks/week-6.html
+  categories: [Spark SQL]
+- title: "Week 7"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-03-07"
+  path: /weeks/week-7.html
+  categories: [Json, serialization]
+# - title: "Week 8"
+#   author: "Master I MIDS UParis Cité"
+#   date: "2025-03-14"
+#   path: /weeks/week-8.html
+#   categories: [PCA, SVD]
