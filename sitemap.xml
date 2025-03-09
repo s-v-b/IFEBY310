@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/weeks/week-7.html</loc>
-    <lastmod>2025-03-05T22:30:47.999Z</lastmod>
+    <lastmod>2025-03-09T22:06:31.550Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/weeks/week-3.html</loc>
@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook07_json-format.html</loc>
-    <lastmod>2025-03-05T22:11:40.633Z</lastmod>
+    <lastmod>2025-03-09T21:52:30.702Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook05_sparkrdd.html</loc>
@@ -255,5 +255,9 @@
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-catalyst.html</loc>
     <lastmod>2025-02-07T20:04:10.964Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/weeks/week-8.html</loc>
+    <lastmod>2025-03-09T22:10:40.878Z</lastmod>
   </url>
 </urlset>
