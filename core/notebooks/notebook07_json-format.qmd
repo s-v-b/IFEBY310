@@ -41,9 +41,7 @@ print(json.dumps(obj, sort_keys=True, indent=4))
 
 `json.dumps()` outputs a `JSON` formatted string. 
 
-Not every type of object can be fed to `json.dumps()`. Licit types are:
-
-- 
+Not every type of object can be fed to `json.dumps()`. 
 
 :::
 
@@ -73,11 +71,18 @@ with open('user.json', 'r') as file:
 print(user_data)
 ```
 
-::: {.callout}
+::: {.callout-note  title="Question"}
 
 What happens if we feed `json.dumps()` with a `numpy` array? 
 
 :::
+
+::: {.callout-note  title="Question"}
+
+What happens if we feed `json.dumps()` with a `datatime` object? 
+
+:::
+
 
 ## Serialization and deserialization of custom objects
 
@@ -107,6 +112,12 @@ class User(object):
         return s
 ```
 
+
+::: {.callout-tip}
+
+Brush up your dunder/magic methods, for example in *Fluent Python* by Ramalho (Chapter I: *The Python data model*, Section *Overview of Special Methods*)
+
+:::
 ```{python}
 #| ExecuteTime: {end_time: '2020-03-17T14:29:27.733203Z', start_time: '2020-03-17T14:29:27.718399Z'}
 new_user = User(
@@ -122,6 +133,11 @@ new_user = User(
 new_user
 ```
 
+::: {.callout-note}
+
+Uncomment to see what happens
+
+:::
 ```{python}
 #| ExecuteTime: {end_time: '2020-03-17T14:29:49.613442Z', start_time: '2020-03-17T14:29:49.601102Z'}
 # This will raise a TypeError
@@ -141,11 +157,12 @@ type that is a built-in type. We can conveniently define a method `convert_to_di
 that returns a dictionary representation of our object. `json.dumps()` 
 takes in a optional argument, `default`, which specifies a function to be called if the object is not serializable. This function returns a JSON encodable version of the object.
 
-Recall that class `obj` has a dunder method `__dict__` that provides a basis for obtaining a dictionary with the attributes of any object:
+Recall that class `obj` has a dunder attribute `__dict__` that provides a basis for obtaining a dictionary with the attributes of any object:
 
 ```{python}
 new_user.__dict__
 ```
+
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-03-17T14:29:52.854067Z', start_time: '2020-03-17T14:29:52.847015Z'}
@@ -181,11 +198,11 @@ The function `convert_to_dict` does the following:
 
 - create a dictionary named `obj_dict` to act as the dict representation of our object.
 
-- magic methods `__class__.__name__` and `__module__` provide crucial metadata on the object: the class name and the module name
+- dunder attributes `__class__.__name__` and `__module__` provide crucial metadata on the object: the class name and the module name
 
-  add the instance attributes of the object using `obj.__dict__` (`Python` stores instance attributes in a dictionary under the hood)
+- add the instance attributes of the object using `obj.__dict__` (`Python` stores instance attributes in a dictionary)
 
-- The resulting `obj_dict` is now serializable (provided all attributes of our object are).
+The resulting `obj_dict` is now serializable (provided all attributes of our object are).
 
 Now we can comfortably call `json.dumps()` on the object and pass `default=convert_to_dict`
 
@@ -200,7 +217,7 @@ Obviously this fails if one of the attributes is not `JSON` serializable
 print(json.dumps(new_user, default=obj_to_dict, indent=4, sort_keys=True))
 ```
 
-Now, if we want to decode (deserialiaze) a custom object, and create the correct object type, we need a function that does the opposite of convert_to_dict, since `json.loads` simply returns a `dict`:
+Now, if we want to decode (deserialiaze) a custom object, and create the correct object type, we need a function that does the inverse of `obj_to_dict`, since `json.loads` simply returns a `dict`:
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-03-17T14:29:54.413286Z', start_time: '2020-03-17T14:29:54.408660Z'}
@@ -209,8 +226,11 @@ user_data = json.loads(json.dumps(new_user, default=obj_to_dict))
 print(user_data)
 ```
 
-We need `json.loads()` to reconstruct a `User` object from this dictionary: `json.loads()`
-takes an optional argument `object_hook` which specifies a function that returns the desired custom object, given the decoded output (which in this case is a `dict`).
+::: {.callout-note}
+
+We need `json.loads()` to reconstruct a `User` object from this dictionary: `json.loads()` takes an optional argument `object_hook` which specifies a function that returns the desired custom object, given the decoded output (which in this case, is a `dict`).
+
+:::
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-03-17T14:29:55.257839Z', start_time: '2020-03-17T14:29:55.253496Z'}
@@ -269,16 +289,24 @@ new_object.age
 
 Functions `obj_to_dict()` and `dict_to_obj()`  are showcases for special/magic/dunder methods.
 
-In the definition of class `User`, two special methods were explicitly defined: `__init__` and `__repr__`. But many more are available, including `__dir__()`. 
+In the definition of class `User`, two special methods were explicitly defined: `__init__()` and `__repr__()`. But many more are available, including `__dir__()`. 
+
+Remember that some dunder members of the object are not callable.
 
 :::
 
 ```{python}
-[dude for dude in dir(new_object) if dude.startswith('__')]
+[dude for dude in dir(new_object) if dude.startswith('__') and callable(getattr(new_object, dude))]
+```
+
+```{python}
+[dude for dude in dir(new_object) if dude.startswith('__') and not callable(getattr(new_object, dude))]
 ```
 
 ```{python}
 new_object.__getattribute__('age')
+
+getattr(new_object, 'age')
 ```
 
 ::: {.callout-note}
@@ -303,6 +331,13 @@ class UserBis(object):
     spouse: str
 ```
 
+::: {.callout-note}
+
+`@dataclass`  is a *decorator*.  Have a look at the chapter on decorators in [Fluent Python] by Ramalho
+
+
+:::
+
 ```{python}
 other_user = UserBis(**(new_user.__dict__))
 ```
@@ -311,13 +346,24 @@ other_user = UserBis(**(new_user.__dict__))
 repr(other_user)
 ```
 
+
+
 ```{python}
 {dude for dude in dir(other_user) if dude.startswith('__')} -  {dude for dude in dir(new_user) if dude.startswith('__')}
 ```
 
+::: {.callout-note}
+
+Have a look at [`dataclasses` documentation](https://docs.python.org/3/library/dataclasses.html). 
+
+See also [Chapter 5: Data class builders]() in [Fluent Python]()
+
+:::
+
 # Using `JSON` with Spark
 
 First, we download the data if it's not there yet
+
 
 
 ```{python}
@@ -325,9 +371,9 @@ First, we download the data if it's not there yet
 import requests, zipfile, io
 from pathlib import Path
 
-path = Path('drug-enforcement.json')
+path = Path('drug-enforcement.json.zip')
 if not path.exists():
-    url = "https://stephanegaiffas.github.io/big_data_course/data/drug-enforcement.json.zip"
+    url = "https://s-v-b.github.io/IFEBY310/data/drug-enforcement.json.zip"
     r = requests.get(url)
     z = zipfile.ZipFile(io.BytesIO(r.content))
     z.extractall(path='./')
@@ -365,10 +411,14 @@ First, lets look at the data. It's a large set of JSON records about drugs enfor
 ```{python}
 #| ExecuteTime: {end_time: '2020-03-17T17:13:48.148481Z', start_time: '2020-03-17T17:13:47.594201Z'}
 #| scrolled: true
-!head -n 1000 drug-enforcement.json
+!head -n 100 drug-enforcement.json
 ```
 
+::: {.callout-note}
+
 We need to tell spark that rows span on several lines with the `multLine` option
+
+:::
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-03-17T17:13:52.259661Z', start_time: '2020-03-17T17:13:48.152192Z'}
@@ -379,6 +429,12 @@ df = spark.read.json(filename, multiLine=True)
 #| ExecuteTime: {end_time: '2020-03-17T17:13:52.294898Z', start_time: '2020-03-17T17:13:52.261550Z'}
 df.printSchema()
 ```
+
+::: {.callout-note}
+
+In a less user-friendly format:
+
+:::
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-03-17T17:13:52.355556Z', start_time: '2020-03-17T17:13:52.297210Z'}
@@ -395,16 +451,18 @@ This should not be surprising. The data used to populate the Spark dataframe are
 
 In the classical age of tabular data (according to Codd's principles), a table cell could only hold a scalar value (numeric, logical, text, date, timestamp, ...), nowadays Relational Database Management Systems handle Arrays, Composite Types, Range Types, ..., and Json (see [PostgreSQL](https://www.postgresql.org/docs/current/datatype-json.html)). 
 
-Spark, `R`, and `Pandas` also allow us to work with complex types. 
+Spark, `R`, and `Pandas`, and modern relational databases also allow us to work with complex types. 
+
+Modern column oriented file format like `parquet` also work with nested structures. 
 
 :::
 
 - First, there is a nested `opendfa` dictionary. Each element of the dictionary is an array
-- A first good idea is to **"flatten" the schema of the DataFrame**, so that there is no nested types
+- A first good idea is to **"flatten" the schema of the DataFrame**, so that there are no nested types any  more.
 
-## Flattening of the schema
+## Flattening the schema
 
-All the columns in the nested structure `openfda` are put up in the schema. These columns nested in the openfda are as follows:
+All the columns in the *nested* structure `openfda` are put up in the schema. These columns nested in the `openfda` are as follows:
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-03-17T17:14:00.472548Z', start_time: '2020-03-17T17:14:00.352058Z'}
@@ -440,10 +498,108 @@ df.head(2)
 
 Note that the display of the `DataFrame` is not as usual... it displays the dataframe like a list of `Row`, since the columns "openfda*" contain arrays of varying length
 
+::: {.callout-note}
+
+A principled approach to schema flattening is embodied in the next chunk.
+
+`df.schema` allows us to perform flattening in a programmatic way. 
+
+:::
+
+```{python}
+from pyspark.sql.types import StructType
+from pyspark.sql.functions import col
+
+def flatten_schema(df):
+    # Get fields and their data types
+    fields = df.schema.fields
+    
+    # Flatten array of column names
+    flat_cols = []
+    
+    for field in fields:
+        # Handle nested structures
+        if isinstance(field.dataType, StructType):
+            nested = df.select(field.name + ".*").columns
+            flat_cols.extend([field.name + "." + x for x in nested])
+        else:
+            flat_cols.append(field.name)
+    
+    # Select all flattened columns
+    df_flattened = df.select([col(x).alias(x.replace(".","_")) for x in flat_cols])
+    
+    return df_flattened
+```
+
+::: {.callout-note}
+
+This function definition is from `copilot` under the following prompt:
+
+    How can I flatten the schema of a spark dataframe?
+
+:::
+
+```{python}
+df = spark.read.json(filename, multiLine=True)
+
+df_flat = flatten_schema(df)
+
+df_flat.printSchema()
+```
+
+
+
+```{python}
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+
+messy_schema = StructType([
+    StructField("id", IntegerType()),
+    StructField("info", StructType([
+        StructField("name", StringType()),
+        StructField("age", IntegerType()),
+        StructField("zoo", StructType([
+            StructField("cat", StringType()),
+            StructField("dog", StringType())
+        ]))
+    ]))
+])
+```
+
+::: {.callout-note}
+
+This principled approach is not the end of the story. If the schema exhibits hierarchical nesting, `flatten_schema()` only removes one level of nesting.
+
+:::
+
+```{python}
+data = [(1, ("John", 30, ("Fritz", "Medor"))), (2, ("Jane", 25, ("Grominet", "Goofy")))]
+
+very_nested_df = spark.createDataFrame(data, messy_schema)
+
+```
+
+```{python}
+flatten_schema(very_nested_df).show()
+```
+
+```{python}
+flatten_schema(very_nested_df).printSchema()
+```
+
+::: {.callout-warning}
+
+copilot pretends that the flattening function above handles nested structure recursively. This is not the case. 
+
+Fix this
+
+:::
+
+
+
 ## Missing data
 
 A strategy can be to remove rows with missing data. 
-`dropna` has several options, explained below.
+`dropna()` has several options, explained below.
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-03-17T17:41:17.413952Z', start_time: '2020-03-17T17:41:16.898211Z'}
@@ -457,7 +613,7 @@ If we remove all lines with at least one missing value, we end up with an empty 
 df.dropna(how='all').count()
 ```
 
-`dropna` accepts the following arguments
+`dropna()` accepts the following arguments
 
 - `how`: can be `'any'` or `'all'`. If `'any'`, rows containing any null values will be dropped entirely (this is the default). If `'all'`, only rows which are entirely empty will be dropped.
 
@@ -499,7 +655,7 @@ But before this, let's count the number of missing value for each column
 # For each column we create a new column containing 1 if the value is null and 0 otherwise.
 # We need to bast Boolean to Int so that we can use fn.sum after
 for c in df.columns:
-    # Do not do this for _isnull columns (ince case you run this cell twice...)
+    # Do not do this for _isnull columns (just in case you run this cell twice...)
     if not c.endswith("_isnull"):
         df = df.withColumn(c + "_isnull", fn.isnull(col(c)).cast('int'))
 ```
@@ -569,8 +725,13 @@ df.filter(df.city == "South San Francisco")\
     .toPandas()
 ```
 
-**Remark.** Once again, we use `.toPandas()` to pretty format the results in the notebook. 
+::: {.callout-caution}
+
+Once again, we use `.toPandas()` to pretty format the results in the notebook. 
+
 But it's a BAD idea to do this if the spark DataFrame is large, since it requires a `collect()`
+
+:::
 
 Aside from filtering strings by a perfect match, there are plenty of other powerful ways to filter by strings in `pyspark` :
 
@@ -600,7 +761,10 @@ df.filter(df.city.contains('San Francisco'))\
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-03-17T17:48:10.490019Z', start_time: '2020-03-17T17:48:09.784496Z'}
-df.filter(df.city.isin('San Francisco', 'Los Angeles')).toPandas()
+(
+    df.filter(df.city.isin('San Francisco', 'Los Angeles'))
+      .toPandas()
+)
 ```
 
 ## Filtering by Date Values
@@ -609,9 +773,12 @@ In addition to filtering by strings, we can also filter by columns where the val
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-03-17T17:50:34.344304Z', start_time: '2020-03-17T17:50:33.638867Z'}
-df.filter(df.city == "South San Francisco")\
-    .filter(df.report_date.between('2013-01-01 00:00:00','2015-03-11 00:00:00'))\
-    .toPandas()
+( 
+    df
+        .filter(df.city == "South San Francisco")
+        .filter(df.report_date.between('2013-01-01 00:00:00','2015-03-11 00:00:00'))
+        .toPandas()
+)
 ```
 
 ::: {.callout-caution}
@@ -642,11 +809,64 @@ with `'2013-01-01 00:00:00'` and `'2015-03-11 00:00:00'`, we are comparing strin
 
 ::: {.callout-caution}
 
-If some field in a Jason string is meant to represent a date or a datetime object, spark should be given a hint. 
+If some field in a Json string is meant to represent a date or a datetime object, spark should be given a hint. 
 
 Json loaders (from `Python`) as well as the Spark Json reader have optional arguments that can be used to indicate the date parser to be used. 
 
 :::
+
+
+::: {.callout-note}
+
+We have to tell the json loader about two things: 
+
+1. which columns should be read as dates
+2. which format should be used for those columns
+
+The first point can be settled using the `schema` argument of `.json()` method (see [Documentation](https://spark.apache.org/docs/3.5.3/api/python/reference/pyspark.sql/api/pyspark.sql.DataFrameReader.json.html))
+
+:::
+
+
+```{python}
+ze_schema = df.schema 
+
+list_fields = []
+
+for f in ze_schema.fields:
+  if f.name.endswith('date'):
+    list_fields.append(StructField(f.name, DateType(), True))
+  else:
+    list_fields.append(f)
+
+ze_schema = StructType(list_fields)
+```
+
+```{python}
+# Alternative syntax using a dictionary of options
+options = {
+    "dateFormat": "yyyyMMdd",
+    "multiLine": "true"
+}
+
+df = (
+    spark.read
+        .options(**options)
+        .json(filename, ze_schema)
+)
+```
+
+```{python}
+df.select([c for c in df.columns if c.endswith("date")]).printSchema()
+```
+
+```{python}
+(
+df.filter(df.city == "South San Francisco")
+  .filter(df.center_classification_date.between('2013-01-01 00:00:00','2013-12-31 00:00:00'))
+  .toPandas()
+)
+```
 
 
 ## Handling complex types 
@@ -693,22 +913,24 @@ w = Window.orderBy(col("center_classification_date"))
 
 df = (
   df
-    .withColumn("row_id", fn.row_number()
-    .over(w))
+    .withColumn("row_id", fn.row_number().over(w))
 )
 ```
 
 ```{python}
-[(f['name'], f['type']) 
- for f in sj['fields'] if not isinstance(f['type'], str)]
+[(f['name'], f['type'])  
+    for f in sj['fields'] if not isinstance(f['type'], str)]
 ```
 
 Column `openfda` has type `StrucType()` with fields with composite type.
 
+```{python}
+{f.dataType  for f in df.schema.fields if not f.dataType==StringType()}
+```
 
 ```{python}
 {f['type']['type']
- for f in sj['fields'] if not isinstance(f['type'], str)}
+    for f in sj['fields'] if not isinstance(f['type'], str)}
 ```
 
 Projecting on `row_id`  and `openfda.*` leads to a (partially) flattened datafame, that, thanks to the `row_id` column can be joined with the original dataframe. 
@@ -746,7 +968,8 @@ An `array` column can be *exploded*. This is like pivoting into long form. The r
 (
   df_proj
     .select('row_id', 'application_number')
-    .withColumn("exploded", fn.explode(col("application_number")))
+    .withColumn("exploded", 
+                fn.explode(col("application_number")))
     .select('row_id', 'exploded')
     .groupBy('row_id')
     .agg(fn.count('exploded').alias("n_lignes"))

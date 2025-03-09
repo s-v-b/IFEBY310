@@ -136,3 +136,4 @@ images/UniversiteParisCite_logo_horizontal_noir_RVB.jpeg filter=lfs diff=lfs mer
 images/uparis.jpeg filter=lfs diff=lfs merge=lfs -text
 images/WordCountFlow.JPG filter=lfs diff=lfs merge=lfs -text
 images/*.JPEG filter=lfs diff=lfs merge=lfs -text
+data/drug-enforcement.json.zip filter=lfs diff=lfs merge=lfs -text
