@@ -1,6 +1,6 @@
 ---
-title: "Weeks 7"
-subtitle: "JSON and serialization"
+title: "Week 8"
+subtitle: "File formats"
 editor: source
 draft: false
 ---
@@ -10,7 +10,7 @@ draft: false
 
 **1 Session**
 
--   Friday 7 March 2025 Sophie Germain 1005 **13h30-15h30**
+-   Friday 14 March 2025 Sophie Germain 1005 **13h30-15h30**
 -   {{< fa cal >}} [Calendar](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
 
 :::
@@ -18,11 +18,12 @@ draft: false
 
 ## Lecture : slides
 
+- {{< fa display >}} [File formats](/core/slides/slides06_file-formats.html){target="_blank"}
 
-- {{< fa display >}} [Json format](/core/slides/slides05_json-format.html){target="_blank"}
 
 We may come back to several parts of 
 
+- {{< fa display >}} [Json format](/core/slides/slides05_json-format.html){target="_blank"}
 - {{< fa display >}} [Spark high level APIs: SQL](/core/slides/slides04_sparkl.html){target="_blank"} 
 - {{< fa display >}} [Spark low level APIs: RDD](/core/slides/slides03_sparkrdd.html){target="_blank"} 
 - {{< fa display >}} [Python Data Science Stack](/core/slides/slides02_python_ds_stack.html){target="_blank"} 
@@ -33,15 +34,16 @@ We may come back to several parts of
 
 We shall spend most of the lectures on 
 
-
-- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook07_json-format.ipynb" download>Jupyter notebook VII : JSON</a> 
-- {{< fa globe >}} [html: JSON](/core/notebooks/notebook07_json-format.html)  
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook08_webdata-II.ipynb" download>Jupyter notebook VII : JSON</a> 
+- {{< fa globe >}} [html: JSON](/core/notebooks/notebook08_webdata-II.html)  
 
 
 
 
 You shall have gone through (on your own)
 
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook07_json-format.ipynb" download>Jupyter notebook VII : JSON</a> 
+- {{< fa globe >}} [html: JSON](/core/notebooks/notebook07_json-format.html)  
 - {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook06_sparksql.ipynb" download>Jupyter notebook VI : Spark SQL</a> 
 - {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook05_sparkrdd.ipynb" download>Jupyter notebook V : Spark RDD</a> 
 - {{< fa globe >}} [html: Spark RDD](/core/notebooks/notebook05_sparkrdd.html)  

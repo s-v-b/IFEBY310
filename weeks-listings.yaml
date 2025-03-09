@@ -28,8 +28,8 @@
   date: "2025-03-07"
   path: /weeks/week-7.html
   categories: [Json, serialization]
-# - title: "Week 8"
-#   author: "Master I MIDS UParis Cité"
-#   date: "2025-03-14"
-#   path: /weeks/week-8.html
-#   categories: [PCA, SVD]
+- title: "Week 8"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-03-14"
+  path: /weeks/week-8.html
+  categories: [File formats, Parquet, Avro, ORC]
