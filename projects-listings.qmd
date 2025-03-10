@@ -1,0 +1,46 @@
+---
+title: "Projects"
+listing:
+  - id: "projects"
+    contents: 
+     - projects-listings.yaml
+    type: table  
+    table-striped: true
+    table-hover: false
+    sort: date
+    fields: [date, title, categories] 
+    field-links: [title]
+    field-display-names: 
+      date: "Date"
+      title: "Title"
+      categories: "Description"
+---
+
+
+::: {.callout-note}
+
+### Modus operandi
+
+Course evaluation is based on Projects {{< fa hands-holding-circle >}}
+
+- {{< fa hand-holding-hand >}} Find a friend : all work done by *pairs of students*
+- {{< fa brands github >}} Create a single *private* `GitHub` repository  for each project and each pair of students. 
+- {{< fa unlock-keyhole >}} Grant me access to these repositories
+- {{< fa circle-radiation >}} All work is transmitted through your private repository and nowhere else
+- {{< fa paper-plane >}} No emails for project submission
+- {{< fa laptop-file >}} All projects deliverables consist of `Quarto` files
+- {{< fa brands html5 >}} The report should be rendered at least in HTML format, and possibly also in PDF format
+- {{< fa mask >}} Do not forget to disclose your name and first name in the report
+
+
+
+:::
+
+
+
+::: {#projects}
+
+
+:::
+
+

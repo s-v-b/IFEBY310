@@ -1,0 +1,6 @@
+- title: "Table wrangling, visualization"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-03-10"
+  path: "projects/hmw_table_wrangling.html"
+  categories: [Python, NLP, Spacy, Dask]
+  href: '<a href="projects/hmw_table_wrangling.html"> <i class="fa-solid fa-download"> </i> </a>'

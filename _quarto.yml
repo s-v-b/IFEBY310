@@ -8,8 +8,7 @@ project:
     - "!core/labs/"
     - "!core/slides/"
     - "!core/labs-solutions/"
-#    - "!core/projects/"
-    - "!projects-listings.qmd"
+    - "!core/projects/"
     - "!core/technos/"
   output-dir: _site
 
@@ -76,38 +75,13 @@ website:
         text: Slides
       - href: notebooks-listings.qmd
         text: Notebooks
-      # - href: labs-listings.qmd
-      #   text: Labs
-      # - href: labs-solutions-listings.qmd
-      #   text: Solutions  
+      - href: projects-listings.qmd
+        text: Homeworks
       - href: weeks-listings.qmd
         text: Journal
-      # - section: "Journal"
-      #   contents:
-      #     - href: weeks/week-6.qmd
-      #       text: "Week 6"
-      #     - href: weeks/week-4.qmd
-      #       text: "Week 4"
-      #     - href: weeks/week-3.qmd
-      #       text: "Week 3"
-      #     - href: weeks/week-2.qmd
-      #       text: "Week 2"
-      #     - href: weeks/week-1.qmd
-      #       text: "Week 1"
-          # - href: weeks/week-5.qmd
-          #   text: "Week 5"
-          # - href: weeks/week-7.qmd
-          #   text: "Week 7"
-          # - href: weeks/week-8.qmd
-          #   text: "Week 8"
-          # - href: weeks/week-9.qmd
-          #   text: "Week 9"
-          # - href: weeks/week-10.qmd
-          #   text: "Week 10"
-          # - href: weeks/week-11.qmd
-          #   text: "Week 11"
-          # - href: weeks/week-12.qmd
-          #   text: "Week 12"
+
+resources:
+  - "/resources/hmw-table-wrangling.html"      
 
 format:
   html:
