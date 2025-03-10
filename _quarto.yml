@@ -4,7 +4,7 @@ project:
     - "*.qmd"
     - "weeks/"
     - "core/notebooks/"
-    - "core/ipynb/"
+    - "!core/ipynb/"
     - "!core/labs/"
     - "!core/slides/"
     - "!core/labs-solutions/"
