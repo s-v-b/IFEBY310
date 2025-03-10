@@ -47,7 +47,7 @@
   path: "core/notebooks/notebook08_webdata-II.html"
   date: "2025-03-14"
   categories: [Spark, Window functions, Feature engineering]
-  href: '<a href="core/ipynb/notebook08_webdata-II.ipynb" download="notebook07_json-format.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
+  href: '<a href="core/ipynb/notebook08_webdata-II.ipynb" download="notebook08_webdata-II.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Spark again"
   date: "2025-03-21"
   categories: [Spark, tips]
