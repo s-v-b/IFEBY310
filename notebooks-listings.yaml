@@ -41,13 +41,14 @@
 - title: "JSON format"
   path: "core/notebooks/notebook07_json-format.html"
   date: "2025-03-07"
-  categorie: [JSON, serialization]
+  categories: [JSON, serialization]
   href: '<a href="core/ipynb/notebook07_json-format.ipynb" download="notebook07_json-format.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Web data"
   path: "core/notebooks/notebook08_webdata-II.html"
   date: "2025-03-14"
-  categorie: []
+  categories: [Spark, Window functions, Feature engineering]
+  href: '<a href="core/ipynb/notebook08_webdata-II.ipynb" download="notebook07_json-format.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Spark again"
   date: "2025-03-21"
-  categorie: [Spark, tips]
+  categories: [Spark, tips]
   path: "core/notebooks/notebook11_dive.html"

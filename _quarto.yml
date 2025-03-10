@@ -4,7 +4,7 @@ project:
     - "*.qmd"
     - "weeks/"
     - "core/notebooks/"
-    - "!core/ipynb/"
+    - "core/ipynb/"
     - "!core/labs/"
     - "!core/slides/"
     - "!core/labs-solutions/"
@@ -81,7 +81,7 @@ website:
         text: Journal
 
 resources:
-  - "/projects/hmw-table-wrangling.html"  
+  - "/projectsls _s/hmw-table-wrangling.html"  
   - "/data/drug-enforcement.json.zip"
   - "/data/webdata.parquet.zip"    
 

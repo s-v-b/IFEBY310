@@ -70,7 +70,7 @@ from pathlib import Path
 
 path = Path('webdata.parquet')
 if not path.exists():
-    url = "https://stephanegaiffas.github.io/big_data_course/data/webdata.parquet.zip"
+    url = "https://s-v-b.github.io/IFEBY310/data/webdata.parquet.zip"
     r = requests.get(url)
     z = zipfile.ZipFile(io.BytesIO(r.content))
     z.extractall(path='./')
