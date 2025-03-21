@@ -1,7 +1,9 @@
 ---
 title: "Spark deeper dive"
-engine: jupyter
 date: "2025-01-17"
+
+engine: jupyter
+jupyter: python3
 --- 
 
 
@@ -265,7 +267,8 @@ p = k.hashCode() % numPartitions
   = k % 4
 ``` 
 
-leads to
+leads to:
+
 - Partition 0: `[8, 96, 240, 400, 800]`
 - Partition 1: `[401]`
 - Partition 2: `[]`
@@ -879,7 +882,7 @@ Aren't you amazed by this ?!?
 
 If a partition **fails**:
 
-![](IMG/fault_tol_1.png){height="400"}
+![](/images/fault_tol_1.png){height="400"}
 
 :::
 
@@ -888,7 +891,7 @@ If a partition **fails**:
 
 Spark **recomputes it** to get back on track:
 
-![](IMG/fault_tol_2.png){height="400"}
+![](/images/fault_tol_2.png){height="400"}
 
 :::
 

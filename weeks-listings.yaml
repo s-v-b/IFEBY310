@@ -33,3 +33,8 @@
   date: "2025-03-14"
   path: /weeks/week-8.html
   categories: [File formats, Parquet, Avro, ORC]
+- title: "Week 9"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-03-21"
+  path: /weeks/week-9.html
+  categories: [Spark, Shuffle, Joins, Dependencies, Lineage graph, Catalyst]
