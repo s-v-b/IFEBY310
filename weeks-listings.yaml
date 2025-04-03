@@ -38,3 +38,13 @@
   date: "2025-03-21"
   path: /weeks/week-9.html
   categories: [Spark, Shuffle, Joins, Dependencies, Lineage graph, Catalyst]
+- title: "Week 10"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-03-28"
+  path: /weeks/week-10.html
+  categories: [Spark, Shuffle, Joins, Dependencies, Lineage graph, Catalyst]  
+- title: "Week 11"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-04-03"
+  path: /weeks/week-11.html
+  categories: [Spark, Shuffle, Joins, Dependencies, Lineage graph, Catalyst]  

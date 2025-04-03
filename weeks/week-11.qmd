@@ -1,6 +1,6 @@
 ---
-title: "Week 9"
-subtitle: "A deeper dive into Spark"
+title: "Week 11"
+subtitle: "More on A deeper dive into Spark/Spark tips"
 editor: source
 draft: false
 engine: jupyter
@@ -10,15 +10,15 @@ engine: jupyter
 ::: {.callout-important}
 
 
--   Friday 21 March 2025 Sophie Germain 1005 **13h30-15h30**
+-   April the 4th 2025 Sophie Germain 1005 **13h30-15h30**
 -   {{< fa cal >}} [Calendar](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
 
 :::
 
 ## Lecture : slides
 
-- {{< fa display >}} [Deeper dive](/core/slides/slides07-spark_deeper-dive.html){target="_blank"}
-
+- {{< fa display >}} [Spark tips](/core/slides/slides08_spark-tips){target="_blank"}
+- {{< fa display >}} [Deeper dive](/core/slides/slides07_spark-deeper-dive.html){target="_blank"}
 
 We may come back to several parts of 
 
@@ -30,12 +30,12 @@ We may come back to several parts of
 - {{< fa display >}} [File formats](/core/slides/slides06_file-formats.html){target="_blank"}
 
 
-## [Notebooks](/notebooks-listings.qmd)
+## Notebooks
 
-If time allows, we shall go back to 
 
-- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook08_webdata-II.ipynb" download>Jupyter notebook VII : JSON</a> 
-- {{< fa globe >}} [html: JSON](/core/notebooks/notebook08_webdata-II.html)  
+
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook08_webdata-II.ipynb" download>Jupyter notebook VIII : wrangling</a> 
+- {{< fa globe >}} [webdata](/core/notebooks/notebook08_webdata-II.html)  
 
 
 
