@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -68,8 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-65bb2660d2added026bc737f6d61009c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -211,13 +211,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../computing-virtualenv.html" class="sidebar-item-text sidebar-link">
+  <a href="../../computing-virtualenv.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Virtual environments</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../computing-jupyter.html" class="sidebar-item-text sidebar-link">
+  <a href="../../computing-jupyter.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Jupyter</span></a>
   </div>
 </li>
@@ -289,7 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="47477e28" class="cell" data-execution_count="2">
+<div id="5a7fb148" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -298,21 +298,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> comet <span class="im">as</span> co</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyarrow.parquet <span class="im">as</span> pq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[1], line 4</span>
-<span class="ansi-green-fg ansi-bold">      2</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">sys</span>
-<span class="ansi-green-fg ansi-bold">      3</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">pyarrow</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> <span style="font-weight:bold;color:rgb(0,0,255)">pa</span>
-<span class="ansi-green-fg">----&gt; 4</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">comet</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> <span style="font-weight:bold;color:rgb(0,0,255)">co</span>
-<span class="ansi-green-fg ansi-bold">      5</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">pyarrow</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">parquet</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> <span style="font-weight:bold;color:rgb(0,0,255)">pq</span>
-
-<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named 'comet'</pre>
 </div>
-</div>
-</div>
-<div id="a47b651d" class="cell" data-execution_count="3">
+<div id="4c7240a7" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Window</span>
@@ -321,20 +308,20 @@ Cell <span class="ansi-green-fg">In[1], line 4</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> col, lit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="400dd1da" class="cell" data-execution_count="4">
+<div id="90c140fc" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="d7f2a24a" class="cell" data-execution_count="5">
+<div id="005ac98b" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">'PYSPARK_PYTHON'</span>] <span class="op">=</span> sys.executable</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">'PYSPARK_DRIVER_PYTHON'</span>] <span class="op">=</span> sys.executable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="a2f3b2f0" class="cell" data-execution_count="6">
+<div id="98373998" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
@@ -346,14 +333,14 @@ Cell <span class="ansi-green-fg">In[1], line 4</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>25/01/15 06:08:46 WARN Utils: Your hostname, boucheron-Precision-5480 resolves to a loopback address: 127.0.1.1; using 192.168.10.120 instead (on interface wlp0s20f3)
-25/01/15 06:08:47 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+<pre><code>25/04/03 15:11:17 WARN Utils: Your hostname, boucheron-Precision-5480 resolves to a loopback address: 127.0.1.1; using 172.23.32.10 instead (on interface eth0)
+25/04/03 15:11:17 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-25/01/15 06:08:47 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</code></pre>
+25/04/03 15:11:17 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</code></pre>
 </div>
 </div>
-<div id="dd748306" class="cell" data-execution_count="7">
+<div id="bc91eef7" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit</span>
@@ -363,555 +350,404 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.read.parquet(input_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">AnalysisException</span>                         Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[6], line 6</span>
-<span class="ansi-green-fg ansi-bold">      2</span> input_path <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">./</span><span style="color:rgb(175,0,0)">'</span>
-<span class="ansi-green-fg ansi-bold">      4</span> input_file <span style="color:rgb(98,98,98)">=</span> os<span style="color:rgb(98,98,98)">.</span>path<span style="color:rgb(98,98,98)">.</span>join(input_path, <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">webdata.parquet</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg">----&gt; 6</span> df <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">spark</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">read</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">parquet</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">input_file</span><span class="ansi-yellow-bg">)</span>
-
-File <span class="ansi-green-fg">~/Documents/IFEBY310/.venv/lib/python3.12/site-packages/pyspark/sql/readwriter.py:544</span>, in <span class="ansi-cyan-fg">DataFrameReader.parquet</span><span class="ansi-blue-fg">(self, *paths, **options)</span>
-<span class="ansi-green-fg ansi-bold">    533</span> int96RebaseMode <span style="color:rgb(98,98,98)">=</span> options<span style="color:rgb(98,98,98)">.</span>get(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">int96RebaseMode</span><span style="color:rgb(175,0,0)">"</span>, <span style="font-weight:bold;color:rgb(0,135,0)">None</span>)
-<span class="ansi-green-fg ansi-bold">    534</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_set_opts(
-<span class="ansi-green-fg ansi-bold">    535</span>     mergeSchema<span style="color:rgb(98,98,98)">=</span>mergeSchema,
-<span class="ansi-green-fg ansi-bold">    536</span>     pathGlobFilter<span style="color:rgb(98,98,98)">=</span>pathGlobFilter,
-<span class="ansi-green-fg">   (...)</span>
-<span class="ansi-green-fg ansi-bold">    541</span>     int96RebaseMode<span style="color:rgb(98,98,98)">=</span>int96RebaseMode,
-<span class="ansi-green-fg ansi-bold">    542</span> )
-<span class="ansi-green-fg">--&gt; 544</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_df(<span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_jreader</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">parquet</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">_to_seq</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_spark</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_sc</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">paths</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">)</span>)
-
-File <span class="ansi-green-fg">~/Documents/IFEBY310/.venv/lib/python3.12/site-packages/py4j/java_gateway.py:1322</span>, in <span class="ansi-cyan-fg">JavaMember.__call__</span><span class="ansi-blue-fg">(self, *args)</span>
-<span class="ansi-green-fg ansi-bold">   1316</span> command <span style="color:rgb(98,98,98)">=</span> proto<span style="color:rgb(98,98,98)">.</span>CALL_COMMAND_NAME <span style="color:rgb(98,98,98)">+</span>\
-<span class="ansi-green-fg ansi-bold">   1317</span>     <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>command_header <span style="color:rgb(98,98,98)">+</span>\
-<span class="ansi-green-fg ansi-bold">   1318</span>     args_command <span style="color:rgb(98,98,98)">+</span>\
-<span class="ansi-green-fg ansi-bold">   1319</span>     proto<span style="color:rgb(98,98,98)">.</span>END_COMMAND_PART
-<span class="ansi-green-fg ansi-bold">   1321</span> answer <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>gateway_client<span style="color:rgb(98,98,98)">.</span>send_command(command)
-<span class="ansi-green-fg">-&gt; 1322</span> return_value <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">get_return_value</span><span class="ansi-yellow-bg">(</span>
-<span class="ansi-green-fg ansi-bold">   1323</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">answer</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">gateway_client</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">target_id</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">name</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">   1325</span> <span style="font-weight:bold;color:rgb(0,135,0)">for</span> temp_arg <span style="font-weight:bold;color:rgb(175,0,255)">in</span> temp_args:
-<span class="ansi-green-fg ansi-bold">   1326</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">hasattr</span>(temp_arg, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">_detach</span><span style="color:rgb(175,0,0)">"</span>):
-
-File <span class="ansi-green-fg">~/Documents/IFEBY310/.venv/lib/python3.12/site-packages/pyspark/errors/exceptions/captured.py:185</span>, in <span class="ansi-cyan-fg">capture_sql_exception.&lt;locals&gt;.deco</span><span class="ansi-blue-fg">(*a, **kw)</span>
-<span class="ansi-green-fg ansi-bold">    181</span> converted <span style="color:rgb(98,98,98)">=</span> convert_exception(e<span style="color:rgb(98,98,98)">.</span>java_exception)
-<span class="ansi-green-fg ansi-bold">    182</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="color:rgb(0,135,0)">isinstance</span>(converted, UnknownException):
-<span class="ansi-green-fg ansi-bold">    183</span>     <span style="font-style:italic;color:rgb(95,135,135)"># Hide where the exception came from that shows a non-Pythonic</span>
-<span class="ansi-green-fg ansi-bold">    184</span>     <span style="font-style:italic;color:rgb(95,135,135)"># JVM exception message.</span>
-<span class="ansi-green-fg">--&gt; 185</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> converted <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>
-<span class="ansi-green-fg ansi-bold">    186</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
-<span class="ansi-green-fg ansi-bold">    187</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span>
-
-<span class="ansi-red-fg">AnalysisException</span>: [PATH_NOT_FOUND] Path does not exist: file:/home/boucheron/Documents/IFEBY310/core/notebooks/webdata.parquet.</pre>
 </div>
-</div>
-</div>
-<div id="deda0fc7" class="cell" data-execution_count="8">
+<div id="1c5fa2ff" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[7], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">df</span><span style="color:rgb(98,98,98)">.</span>printSchema()
-
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>root
+ |-- xid: string (nullable = true)
+ |-- action: string (nullable = true)
+ |-- date: timestamp (nullable = true)
+ |-- website_id: string (nullable = true)
+ |-- url: string (nullable = true)
+ |-- category_id: float (nullable = true)
+ |-- zipcode: string (nullable = true)
+ |-- device: string (nullable = true)
+</code></pre>
 </div>
 </div>
-</div>
-<div id="aedcef85" class="cell" data-execution_count="9">
+<div id="6ab38871" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.rdd.getNumPartitions()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df.rdd.getNumPartitions()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[8], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">df</span><span style="color:rgb(98,98,98)">.</span>rdd<span style="color:rgb(98,98,98)">.</span>getNumPartitions()
-
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>12</code></pre>
 </div>
 </div>
-</div>
-<div id="95862aab" class="cell" data-execution_count="10">
+<div id="c39c610d" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dfa <span class="op">=</span> pq.read_table(input_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dfa <span class="op">=</span> pq.read_table(input_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[9], line 2</span>
-<span class="ansi-green-fg ansi-bold">      1</span> get_ipython()<span style="color:rgb(98,98,98)">.</span>run_line_magic(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">timeit</span><span style="color:rgb(175,0,0)">'</span>, <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg">----&gt; 2</span> dfa <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">pq</span><span style="color:rgb(98,98,98)">.</span>read_table(input_file)
-
-<span class="ansi-red-fg">NameError</span>: name 'pq' is not defined</pre>
 </div>
-</div>
-</div>
-<div id="04280dfb" class="cell" data-execution_count="11">
+<div id="e4b84b9f" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dfa.schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dfa.schema)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[10], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span style="color:rgb(0,135,0)">print</span>(<span class="ansi-yellow-bg">dfa</span><span style="color:rgb(98,98,98)">.</span>schema)
-
-<span class="ansi-red-fg">NameError</span>: name 'dfa' is not defined</pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>xid: string
+action: string
+date: timestamp[ns]
+website_id: string
+url: string
+category_id: float
+zipcode: string
+device: string
+-- schema metadata --
+org.apache.spark.sql.parquet.row.metadata: '{"type":"struct","fields":[{"' + 515</code></pre>
 </div>
 </div>
-</div>
-<div id="a9a50e1e" class="cell" data-execution_count="12">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>( </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    df.select(<span class="st">'xid'</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>      .distinct()</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      .explain()</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[11], line 2</span>
-<span class="ansi-green-fg ansi-bold">      1</span> ( 
-<span class="ansi-green-fg">----&gt; 2</span>     <span class="ansi-yellow-bg">df</span><span style="color:rgb(98,98,98)">.</span>select(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">xid</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">      3</span>       <span style="color:rgb(98,98,98)">.</span>distinct()
-<span class="ansi-green-fg ansi-bold">      4</span>       <span style="color:rgb(98,98,98)">.</span>explain()
-<span class="ansi-green-fg ansi-bold">      5</span> )
-
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
-</div>
-</div>
-</div>
-<div id="2aec6f1b" class="cell" data-execution_count="13">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>( </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    df.select(<span class="st">'xid'</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>      .distinct()</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      .count()</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[12], line 3</span>
-<span class="ansi-green-fg ansi-bold">      1</span> <span style="font-style:italic;color:rgb(95,135,135)"># </span>
-<span class="ansi-green-fg ansi-bold">      2</span> ( 
-<span class="ansi-green-fg">----&gt; 3</span>     <span class="ansi-yellow-bg">df</span><span style="color:rgb(98,98,98)">.</span>select(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">xid</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">      4</span>       <span style="color:rgb(98,98,98)">.</span>distinct()
-<span class="ansi-green-fg ansi-bold">      5</span>       <span style="color:rgb(98,98,98)">.</span>count()
-<span class="ansi-green-fg ansi-bold">      6</span> )
-
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
-</div>
-</div>
-</div>
-<div id="095c460a" class="cell" data-execution_count="14">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n_events <span class="op">=</span> func.count(col(<span class="st">'action'</span>)).over(xid_partition)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.withColumn(<span class="st">'n_events'</span>, n_events)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>df.head(n<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[13], line 3</span>
-<span class="ansi-green-fg ansi-bold">      1</span> xid_partition <span style="color:rgb(98,98,98)">=</span> Window<span style="color:rgb(98,98,98)">.</span>partitionBy(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">xid</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">      2</span> n_events <span style="color:rgb(98,98,98)">=</span> func<span style="color:rgb(98,98,98)">.</span>count(col(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">action</span><span style="color:rgb(175,0,0)">'</span>))<span style="color:rgb(98,98,98)">.</span>over(xid_partition)
-<span class="ansi-green-fg">----&gt; 3</span> df <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">df</span><span style="color:rgb(98,98,98)">.</span>withColumn(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">n_events</span><span style="color:rgb(175,0,0)">'</span>, n_events)
-<span class="ansi-green-fg ansi-bold">      4</span> df<span style="color:rgb(98,98,98)">.</span>head(n<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">2</span>)
-
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
-</div>
-</div>
-</div>
-<div id="3cc5da80" class="cell" data-execution_count="15">
+<div id="c9dd843a" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>( </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  df</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    .groupBy(<span class="st">'xid'</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    .agg(func.count(<span class="st">'action'</span>))</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    .head(<span class="dv">5</span>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    df.select(<span class="st">'xid'</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>      .distinct()</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>      .explain()</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[14], line 2</span>
-<span class="ansi-green-fg ansi-bold">      1</span> ( 
-<span class="ansi-green-fg">----&gt; 2</span>   <span class="ansi-yellow-bg">df</span>
-<span class="ansi-green-fg ansi-bold">      3</span>     <span style="color:rgb(98,98,98)">.</span>groupBy(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">xid</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">      4</span>     <span style="color:rgb(98,98,98)">.</span>agg(func<span style="color:rgb(98,98,98)">.</span>count(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">action</span><span style="color:rgb(175,0,0)">'</span>))
-<span class="ansi-green-fg ansi-bold">      5</span>     <span style="color:rgb(98,98,98)">.</span>head(<span style="color:rgb(98,98,98)">5</span>)
-<span class="ansi-green-fg ansi-bold">      6</span> )
+<div class="cell-output cell-output-stdout">
+<pre><code>== Physical Plan ==
+AdaptiveSparkPlan isFinalPlan=false
++- HashAggregate(keys=[xid#0], functions=[])
+   +- Exchange hashpartitioning(xid#0, 200), ENSURE_REQUIREMENTS, [plan_id=18]
+      +- HashAggregate(keys=[xid#0], functions=[])
+         +- FileScan parquet [xid#0] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:/home/boucheron/sandbox/IFEBY310/core/notebooks/webdata.parquet], PartitionFilters: [], PushedFilters: [], ReadSchema: struct&lt;xid:string&gt;
 
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
+</code></pre>
 </div>
 </div>
-</div>
-<div id="254e176b" class="cell" data-execution_count="16">
+<div id="65290d28" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.repartitionByRange(<span class="dv">20</span>, <span class="st">'xid'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>( </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    df.select(<span class="st">'xid'</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>      .distinct()</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>      .count()</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[15], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> df <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">df</span><span style="color:rgb(98,98,98)">.</span>repartitionByRange(<span style="color:rgb(98,98,98)">20</span>, <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">xid</span><span style="color:rgb(175,0,0)">'</span>)
-
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>473761</code></pre>
 </div>
 </div>
-</div>
-<div id="d338f558" class="cell" data-execution_count="17">
+<div id="8408b6f8" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df.persist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[16], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">df</span><span style="color:rgb(98,98,98)">.</span>persist()
-
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
-</div>
-</div>
-</div>
-<div id="3569e3da" class="cell" data-execution_count="18">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>max_date <span class="op">=</span> (</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  func</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">max</span>(col(<span class="st">'date'</span>))</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    .over(xid_partition)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>n_days_since_last_event <span class="op">=</span> func.datediff(func.current_date(), max_date)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.withColumn(<span class="st">'n_days_since_last_event'</span>,</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                   n_days_since_last_event)</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>df.head(n<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[17], line 11</span>
-<span class="ansi-green-fg ansi-bold">      3</span> max_date <span style="color:rgb(98,98,98)">=</span> (
-<span class="ansi-green-fg ansi-bold">      4</span>   func
-<span class="ansi-green-fg ansi-bold">      5</span>     <span style="color:rgb(98,98,98)">.</span>max(col(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">date</span><span style="color:rgb(175,0,0)">'</span>))
-<span class="ansi-green-fg ansi-bold">      6</span>     <span style="color:rgb(98,98,98)">.</span>over(xid_partition)
-<span class="ansi-green-fg ansi-bold">      7</span> )
-<span class="ansi-green-fg ansi-bold">      9</span> n_days_since_last_event <span style="color:rgb(98,98,98)">=</span> func<span style="color:rgb(98,98,98)">.</span>datediff(func<span style="color:rgb(98,98,98)">.</span>current_date(), max_date)
-<span class="ansi-green-fg">---&gt; 11</span> df <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">df</span><span style="color:rgb(98,98,98)">.</span>withColumn(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">n_days_since_last_event</span><span style="color:rgb(175,0,0)">'</span>,
-<span class="ansi-green-fg ansi-bold">     12</span>                    n_days_since_last_event)
-<span class="ansi-green-fg ansi-bold">     14</span> df<span style="color:rgb(98,98,98)">.</span>head(n<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">2</span>)
-
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
-</div>
-</div>
-</div>
-<div id="0394bcdc" class="cell" data-execution_count="19">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>n_events <span class="op">=</span> func.count(col(<span class="st">'action'</span>)).over(xid_partition)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>n_events <span class="op">=</span> func.count(col(<span class="st">'action'</span>)).over(xid_partition)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.withColumn(<span class="st">'n_events'</span>, n_events)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>df.head(n<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>df.head(n<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[18], line 3</span>
-<span class="ansi-green-fg ansi-bold">      1</span> n_events <span style="color:rgb(98,98,98)">=</span> func<span style="color:rgb(98,98,98)">.</span>count(col(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">action</span><span style="color:rgb(175,0,0)">'</span>))<span style="color:rgb(98,98,98)">.</span>over(xid_partition)
-<span class="ansi-green-fg">----&gt; 3</span> df <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">df</span><span style="color:rgb(98,98,98)">.</span>withColumn(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">n_events</span><span style="color:rgb(175,0,0)">'</span>, n_events)
-<span class="ansi-green-fg ansi-bold">      5</span> df<span style="color:rgb(98,98,98)">.</span>head(n<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">2</span>)
-
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>[Row(xid='0006cea7-1679-4264-bdef-0cd089749ede', action='O', date=datetime.datetime(2016, 12, 26, 13, 41, 8), website_id='51', url='https://www.footlegende.fr/mercato-psg-coutinho-10166', category_id=1002.0, zipcode='34290', device='TAB', n_events=1),
+ Row(xid='000893c8-a14b-4f33-858f-210440f37def', action='O', date=datetime.datetime(2016, 12, 23, 16, 18, 37), website_id='56', url='http://blague.dumatin.fr/', category_id=1002.0, zipcode=None, device='DSK', n_events=1)]</code></pre>
 </div>
 </div>
-</div>
-<div id="2a9148b1" class="cell" data-execution_count="20">
+<div id="a35133da" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>xid_device_partition <span class="op">=</span> xid_partition.partitionBy(<span class="st">'device'</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>n_events_per_device <span class="op">=</span> (</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    func.count(col(<span class="st">'action'</span>))</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        .over(xid_device_partition)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.withColumn(<span class="st">'n_events_per_device'</span>, n_events_per_device)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>df.head(n<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>( </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  df</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    .groupBy(<span class="st">'xid'</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    .agg(func.count(<span class="st">'action'</span>))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    .head(<span class="dv">5</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[19], line 8</span>
-<span class="ansi-green-fg ansi-bold">      1</span> xid_device_partition <span style="color:rgb(98,98,98)">=</span> xid_partition<span style="color:rgb(98,98,98)">.</span>partitionBy(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">device</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">      3</span> n_events_per_device <span style="color:rgb(98,98,98)">=</span> (
-<span class="ansi-green-fg ansi-bold">      4</span>     func<span style="color:rgb(98,98,98)">.</span>count(col(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">action</span><span style="color:rgb(175,0,0)">'</span>))
-<span class="ansi-green-fg ansi-bold">      5</span>         <span style="color:rgb(98,98,98)">.</span>over(xid_device_partition)
-<span class="ansi-green-fg ansi-bold">      6</span> )
-<span class="ansi-green-fg">----&gt; 8</span> df <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">df</span><span style="color:rgb(98,98,98)">.</span>withColumn(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">n_events_per_device</span><span style="color:rgb(175,0,0)">'</span>, n_events_per_device)
-<span class="ansi-green-fg ansi-bold">      9</span> df<span style="color:rgb(98,98,98)">.</span>head(n<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">2</span>)
-
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>[Row(xid='001c4a21-52c6-4890-b6ce-2b9d4ba06a56', count(action)=1),
+ Row(xid='0024344b-7ee2-4fcd-a0b4-bec26d8c8b0e', count(action)=4),
+ Row(xid='004564e3-87c1-4e16-ad2c-0e96afc3d617', count(action)=1),
+ Row(xid='006d807f-91c3-415a-bb5e-6b9f7e6517a1', count(action)=1),
+ Row(xid='006e0463-b24c-4996-84ab-d6d0d65a52aa', count(action)=1)]</code></pre>
 </div>
 </div>
-</div>
-<div id="18248cd6" class="cell" data-execution_count="21">
+<div id="c45a9ae4" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>rank_device <span class="op">=</span> (</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  func</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    .dense_rank()</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    .over(xid_partition.orderBy(<span class="st">'device'</span>))</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>n_unique_device <span class="op">=</span> (</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    func</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>      .last(rank_device)</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>      .over(xid_partition)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.withColumn(<span class="st">'n_device'</span>, n_unique_device)</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>df.head(n<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[20], line 13</span>
-<span class="ansi-green-fg ansi-bold">      1</span> rank_device <span style="color:rgb(98,98,98)">=</span> (
-<span class="ansi-green-fg ansi-bold">      2</span>   func
-<span class="ansi-green-fg ansi-bold">      3</span>     <span style="color:rgb(98,98,98)">.</span>dense_rank()
-<span class="ansi-green-fg ansi-bold">      4</span>     <span style="color:rgb(98,98,98)">.</span>over(xid_partition<span style="color:rgb(98,98,98)">.</span>orderBy(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">device</span><span style="color:rgb(175,0,0)">'</span>))
-<span class="ansi-green-fg ansi-bold">      5</span> )
-<span class="ansi-green-fg ansi-bold">      7</span> n_unique_device <span style="color:rgb(98,98,98)">=</span> (
-<span class="ansi-green-fg ansi-bold">      8</span>     func
-<span class="ansi-green-fg ansi-bold">      9</span>       <span style="color:rgb(98,98,98)">.</span>last(rank_device)
-<span class="ansi-green-fg ansi-bold">     10</span>       <span style="color:rgb(98,98,98)">.</span>over(xid_partition)
-<span class="ansi-green-fg ansi-bold">     11</span> )
-<span class="ansi-green-fg">---&gt; 13</span> df <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">df</span><span style="color:rgb(98,98,98)">.</span>withColumn(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">n_device</span><span style="color:rgb(175,0,0)">'</span>, n_unique_device)
-<span class="ansi-green-fg ansi-bold">     15</span> df<span style="color:rgb(98,98,98)">.</span>head(n<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">2</span>)
-
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
-</div>
-</div>
-</div>
-<div id="69d22590" class="cell" data-execution_count="22">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[21], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">df</span><span style="color:rgb(98,98,98)">.</span>printSchema()
-
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
-</div>
-</div>
-</div>
-<div id="b987d7e8" class="cell" data-execution_count="23">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  df</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    .where(col(<span class="st">'n_device'</span>) <span class="op">&gt;</span> <span class="dv">1</span>)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    .select(<span class="st">'xid'</span>, </span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'device'</span>, </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'n_events'</span>, </span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">'n_device'</span>, </span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">'n_events_per_device'</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    .head(n<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[22], line 2</span>
-<span class="ansi-green-fg ansi-bold">      1</span> (
-<span class="ansi-green-fg">----&gt; 2</span>   <span class="ansi-yellow-bg">df</span>
-<span class="ansi-green-fg ansi-bold">      3</span>     <span style="color:rgb(98,98,98)">.</span>where(col(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">n_device</span><span style="color:rgb(175,0,0)">'</span>) <span style="color:rgb(98,98,98)">&gt;</span> <span style="color:rgb(98,98,98)">1</span>)
-<span class="ansi-green-fg ansi-bold">      4</span>     <span style="color:rgb(98,98,98)">.</span>select(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">xid</span><span style="color:rgb(175,0,0)">'</span>, 
-<span class="ansi-green-fg ansi-bold">      5</span>             <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">device</span><span style="color:rgb(175,0,0)">'</span>, 
-<span class="ansi-green-fg ansi-bold">      6</span>             <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">n_events</span><span style="color:rgb(175,0,0)">'</span>, 
-<span class="ansi-green-fg ansi-bold">      7</span>             <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">n_device</span><span style="color:rgb(175,0,0)">'</span>, 
-<span class="ansi-green-fg ansi-bold">      8</span>             <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">n_events_per_device</span><span style="color:rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg ansi-bold">      9</span>     <span style="color:rgb(98,98,98)">.</span>head(n<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">8</span>)
-<span class="ansi-green-fg ansi-bold">     10</span> )
-
-<span class="ansi-red-fg">NameError</span>: name 'df' is not defined</pre>
-</div>
-</div>
-</div>
-<div id="304bd2d4" class="cell" data-execution_count="24">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_transformer(df):</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    n_events <span class="op">=</span> func.count(col(<span class="st">'action'</span>)).over(xid_partition)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_events'</span>, n_events)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.repartitionByRange(<span class="dv">20</span>, <span class="st">'xid'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="6df7e440" class="cell" data-execution_count="25">
+<div id="fd64e34d" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_count_window_transform(df, input_col, output_col, part_col):</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> Window.partitionBy(part_col)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    out_col <span class="op">=</span> func.count(col(input_col)).over(w)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df.withColumn(output_col, out_col)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df.persist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>DataFrame[xid: string, action: string, date: timestamp, website_id: string, url: string, category_id: float, zipcode: string, device: string, n_events: bigint]</code></pre>
+</div>
+</div>
+<div id="ac60b6c3" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>max_date <span class="op">=</span> (</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  func</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">max</span>(col(<span class="st">'date'</span>))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    .over(xid_partition)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>n_days_since_last_event <span class="op">=</span> func.datediff(func.current_date(), max_date)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.withColumn(<span class="st">'n_days_since_last_event'</span>,</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>                   n_days_since_last_event)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>df.head(n<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>[Stage 20:===============================================&gt;        (17 + 3) / 20]                                                                                </code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>[Row(xid='00008f69-9f2f-4453-80ec-98b4ae8a3085', action='O', date=datetime.datetime(2017, 1, 26, 17, 8, 30), website_id='3', url='http://www.8chances.com/grille/?from=mr', category_id=1002.0, zipcode='16400', device='DSK', n_events=1, n_days_since_last_event=2989),
+ Row(xid='000095cc-9a61-49b5-8ad5-83442daa93d6', action='O', date=datetime.datetime(2017, 1, 25, 21, 43, 12), website_id='74', url='http://www.realite-virtuelle.com/guide-comparatif-casque-realite-virtuelle', category_id=1002.0, zipcode='24500', device='DSK', n_events=2, n_days_since_last_event=2990)]</code></pre>
+</div>
+</div>
+<div id="a26565d2" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>n_events <span class="op">=</span> func.count(col(<span class="st">'action'</span>)).over(xid_partition)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.withColumn(<span class="st">'n_events'</span>, n_events)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>df.head(n<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>[Row(xid='00008f69-9f2f-4453-80ec-98b4ae8a3085', action='O', date=datetime.datetime(2017, 1, 26, 17, 8, 30), website_id='3', url='http://www.8chances.com/grille/?from=mr', category_id=1002.0, zipcode='16400', device='DSK', n_events=1, n_days_since_last_event=2989),
+ Row(xid='000095cc-9a61-49b5-8ad5-83442daa93d6', action='O', date=datetime.datetime(2017, 1, 25, 21, 43, 12), website_id='74', url='http://www.realite-virtuelle.com/guide-comparatif-casque-realite-virtuelle', category_id=1002.0, zipcode='24500', device='DSK', n_events=2, n_days_since_last_event=2990)]</code></pre>
+</div>
+</div>
+<div id="4c250ccc" class="cell" data-execution_count="19">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>xid_device_partition <span class="op">=</span> xid_partition.partitionBy(<span class="st">'device'</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>n_events_per_device <span class="op">=</span> (</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    func.count(col(<span class="st">'action'</span>))</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>        .over(xid_device_partition)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.withColumn(<span class="st">'n_events_per_device'</span>, n_events_per_device)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>df.head(n<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>[Stage 33:&gt;                                                         (0 + 1) / 1]                                                                                </code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>[Row(xid='00008f69-9f2f-4453-80ec-98b4ae8a3085', action='O', date=datetime.datetime(2017, 1, 26, 17, 8, 30), website_id='3', url='http://www.8chances.com/grille/?from=mr', category_id=1002.0, zipcode='16400', device='DSK', n_events=1, n_days_since_last_event=2989, n_events_per_device=1021837),
+ Row(xid='000095cc-9a61-49b5-8ad5-83442daa93d6', action='O', date=datetime.datetime(2017, 1, 25, 21, 43, 12), website_id='74', url='http://www.realite-virtuelle.com/guide-comparatif-casque-realite-virtuelle', category_id=1002.0, zipcode='24500', device='DSK', n_events=2, n_days_since_last_event=2990, n_events_per_device=1021837)]</code></pre>
+</div>
+</div>
+<div id="2523531a" class="cell" data-execution_count="20">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>rank_device <span class="op">=</span> (</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  func</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    .dense_rank()</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    .over(xid_partition.orderBy(<span class="st">'device'</span>))</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>n_unique_device <span class="op">=</span> (</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    func</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>      .last(rank_device)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>      .over(xid_partition)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.withColumn(<span class="st">'n_device'</span>, n_unique_device)</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>df.head(n<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>[Stage 40:======================================&gt;                   (2 + 1) / 3]                                                                                </code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>[Row(xid='0006cea7-1679-4264-bdef-0cd089749ede', action='O', date=datetime.datetime(2016, 12, 26, 13, 41, 8), website_id='51', url='https://www.footlegende.fr/mercato-psg-coutinho-10166', category_id=1002.0, zipcode='34290', device='TAB', n_events=1, n_days_since_last_event=3020, n_events_per_device=132013, n_device=1),
+ Row(xid='000893c8-a14b-4f33-858f-210440f37def', action='O', date=datetime.datetime(2016, 12, 23, 16, 18, 37), website_id='56', url='http://blague.dumatin.fr/', category_id=1002.0, zipcode=None, device='DSK', n_events=1, n_days_since_last_event=3023, n_events_per_device=1021837, n_device=1)]</code></pre>
+</div>
+</div>
+<div id="dcc06792" class="cell" data-execution_count="21">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>root
+ |-- xid: string (nullable = true)
+ |-- action: string (nullable = true)
+ |-- date: timestamp (nullable = true)
+ |-- website_id: string (nullable = true)
+ |-- url: string (nullable = true)
+ |-- category_id: float (nullable = true)
+ |-- zipcode: string (nullable = true)
+ |-- device: string (nullable = true)
+ |-- n_events: long (nullable = false)
+ |-- n_days_since_last_event: integer (nullable = true)
+ |-- n_events_per_device: long (nullable = false)
+ |-- n_device: integer (nullable = true)
+</code></pre>
+</div>
+</div>
+<div id="922b1470" class="cell" data-execution_count="22">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  df</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    .where(col(<span class="st">'n_device'</span>) <span class="op">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    .select(<span class="st">'xid'</span>, </span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'device'</span>, </span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'n_events'</span>, </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">'n_device'</span>, </span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">'n_events_per_device'</span>)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    .head(n<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>[Row(xid='4c1dc79d-a140-4da9-ae28-540b4503c3b8', device='DSK', n_events=6, n_device=2, n_events_per_device=1021837),
+ Row(xid='4c1dc79d-a140-4da9-ae28-540b4503c3b8', device='DSK', n_events=6, n_device=2, n_events_per_device=1021837),
+ Row(xid='4c1dc79d-a140-4da9-ae28-540b4503c3b8', device='DSK', n_events=6, n_device=2, n_events_per_device=1021837),
+ Row(xid='4c1dc79d-a140-4da9-ae28-540b4503c3b8', device='DSK', n_events=6, n_device=2, n_events_per_device=1021837),
+ Row(xid='4c1dc79d-a140-4da9-ae28-540b4503c3b8', device='DSK', n_events=6, n_device=2, n_events_per_device=1021837),
+ Row(xid='4c1dc79d-a140-4da9-ae28-540b4503c3b8', device='MOB', n_events=6, n_device=2, n_events_per_device=1564),
+ Row(xid='78156cdf-7229-46eb-bb6b-92d384f9a6fa', device='DSK', n_events=6, n_device=2, n_events_per_device=1021837),
+ Row(xid='78156cdf-7229-46eb-bb6b-92d384f9a6fa', device='DSK', n_events=6, n_device=2, n_events_per_device=1021837)]</code></pre>
+</div>
+</div>
+<div id="994a1338" class="cell" data-execution_count="23">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_transformer(df):</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    n_events <span class="op">=</span> func.count(col(<span class="st">'action'</span>)).over(xid_partition)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_events'</span>, n_events)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="7cdbb55f" class="cell" data-execution_count="26">
+<div id="322ea226" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hour_transformer(df):</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    hour <span class="op">=</span> func.hour(col(<span class="st">'date'</span>))</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'hour'</span>, hour)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> weekday_transformer(df):</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    weekday <span class="op">=</span> func.date_format(col(<span class="st">'date'</span>), <span class="st">'EEEE'</span>)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'weekday'</span>, weekday)</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_count_window_transform(df, input_col, output_col, part_col):</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> Window.partitionBy(part_col)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    out_col <span class="op">=</span> func.count(col(input_col)).over(w)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df.withColumn(output_col, out_col)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="f44e52b7" class="cell" data-execution_count="27">
+<div id="ef856bbb" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_per_hour_transformer(df):</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    xid_hour_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'hour'</span>)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    n_events_per_hour <span class="op">=</span> func.count(col(<span class="st">'action'</span>)).over(xid_hour_partition)</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_events_per_hour'</span>, n_events_per_hour)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hour_transformer(df):</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    hour <span class="op">=</span> func.hour(col(<span class="st">'date'</span>))</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'hour'</span>, hour)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> weekday_transformer(df):</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    weekday <span class="op">=</span> func.date_format(col(<span class="st">'date'</span>), <span class="st">'EEEE'</span>)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'weekday'</span>, weekday)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="2759bae3" class="cell" data-execution_count="28">
+<div id="69adbcf8" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_per_weekday_transformer(df):</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    xid_weekday_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'weekday'</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    n_events_per_weekday <span class="op">=</span> func.count(col(<span class="st">'action'</span>)).over(xid_weekday_partition)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_events_per_weekday'</span>, n_events_per_weekday)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_days_since_last_event_transformer(df):</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    max_date <span class="op">=</span> func.<span class="bu">max</span>(col(<span class="st">'date'</span>)).over(xid_partition)</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    n_days_since_last_event <span class="op">=</span> func.datediff(func.current_date(), max_date)</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_days_since_last_event'</span>,</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>                       n_days_since_last_event <span class="op">+</span> lit(<span class="fl">0.1</span>))</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_days_since_last_action_transformer(df):</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    xid_partition_action <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'action'</span>)</span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    max_date <span class="op">=</span> func.<span class="bu">max</span>(col(<span class="st">'date'</span>)).over(xid_partition_action)</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    n_days_since_last_action <span class="op">=</span> func.datediff(func.current_date(),</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>                                                        max_date)</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_days_since_last_action'</span>,</span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>                       n_days_since_last_action <span class="op">+</span> lit(<span class="fl">0.1</span>))</span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_unique_day_transformer(df):</span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>    dayofyear <span class="op">=</span> func.dayofyear(col(<span class="st">'date'</span>))</span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>    rank_day <span class="op">=</span> func.dense_rank().over(xid_partition.orderBy(dayofyear))</span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>    n_unique_day <span class="op">=</span> func.last(rank_day).over(xid_partition)</span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_unique_day'</span>, n_unique_day)</span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_unique_hour_transformer(df):</span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>    xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
-<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>    rank_hour <span class="op">=</span> func.dense_rank().over(xid_partition.orderBy(<span class="st">'hour'</span>))</span>
-<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>    n_unique_hour <span class="op">=</span> func.last(rank_hour).over(xid_partition)</span>
-<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_unique_hour'</span>, n_unique_hour)</span>
-<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_per_device_transformer(df):</span>
-<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>    xid_device_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'device'</span>)</span>
-<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a>    n_events_per_device <span class="op">=</span> func.count(func.col(<span class="st">'device'</span>)) <span class="op">\</span></span>
-<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a>        .over(xid_device_partition)</span>
-<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_events_per_device'</span>, n_events_per_device)</span>
-<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_unique_device_transformer(df):</span>
-<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a>    xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
-<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>    rank_device <span class="op">=</span> func.dense_rank().over(xid_partition.orderBy(<span class="st">'device'</span>))</span>
-<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a>    n_unique_device <span class="op">=</span> func.last(rank_device).over(xid_partition)</span>
-<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_device'</span>, n_unique_device)</span>
-<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-53"><a href="#cb28-53" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_actions_per_category_id_transformer(df):</span>
-<span id="cb28-54"><a href="#cb28-54" aria-hidden="true" tabindex="-1"></a>    xid_category_id_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'category_id'</span>,</span>
-<span id="cb28-55"><a href="#cb28-55" aria-hidden="true" tabindex="-1"></a>                                                   <span class="st">'action'</span>)</span>
-<span id="cb28-56"><a href="#cb28-56" aria-hidden="true" tabindex="-1"></a>    n_actions_per_category_id <span class="op">=</span> func.count(func.col(<span class="st">'action'</span>)) <span class="op">\</span></span>
-<span id="cb28-57"><a href="#cb28-57" aria-hidden="true" tabindex="-1"></a>        .over(xid_category_id_partition)</span>
-<span id="cb28-58"><a href="#cb28-58" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_actions_per_category_id'</span>, n_actions_per_category_id)</span>
-<span id="cb28-59"><a href="#cb28-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb28-60"><a href="#cb28-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-61"><a href="#cb28-61" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_unique_category_id_transformer(df):</span>
-<span id="cb28-62"><a href="#cb28-62" aria-hidden="true" tabindex="-1"></a>    xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
-<span id="cb28-63"><a href="#cb28-63" aria-hidden="true" tabindex="-1"></a>    rank_category_id <span class="op">=</span> func.dense_rank().over(xid_partition<span class="op">\</span></span>
-<span id="cb28-64"><a href="#cb28-64" aria-hidden="true" tabindex="-1"></a>                                              .orderBy(<span class="st">'category_id'</span>))</span>
-<span id="cb28-65"><a href="#cb28-65" aria-hidden="true" tabindex="-1"></a>    n_unique_category_id <span class="op">=</span> func.last(rank_category_id).over(xid_partition)</span>
-<span id="cb28-66"><a href="#cb28-66" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_unique_category_id'</span>, n_unique_category_id)</span>
-<span id="cb28-67"><a href="#cb28-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb28-68"><a href="#cb28-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-69"><a href="#cb28-69" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_per_category_id_transformer(df):</span>
-<span id="cb28-70"><a href="#cb28-70" aria-hidden="true" tabindex="-1"></a>    xid_category_id_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'category_id'</span>)</span>
-<span id="cb28-71"><a href="#cb28-71" aria-hidden="true" tabindex="-1"></a>    n_events_per_category_id <span class="op">=</span> func.count(func.col(<span class="st">'action'</span>)) <span class="op">\</span></span>
-<span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a>        .over(xid_category_id_partition)</span>
-<span id="cb28-73"><a href="#cb28-73" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_events_per_category_id'</span>, n_events_per_category_id)</span>
-<span id="cb28-74"><a href="#cb28-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb28-75"><a href="#cb28-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-76"><a href="#cb28-76" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_per_website_id_transformer(df):</span>
-<span id="cb28-77"><a href="#cb28-77" aria-hidden="true" tabindex="-1"></a>    xid_website_id_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'website_id'</span>)</span>
-<span id="cb28-78"><a href="#cb28-78" aria-hidden="true" tabindex="-1"></a>    n_events_per_website_id <span class="op">=</span> func.count(col(<span class="st">'action'</span>))<span class="op">\</span></span>
-<span id="cb28-79"><a href="#cb28-79" aria-hidden="true" tabindex="-1"></a>        .over(xid_website_id_partition)</span>
-<span id="cb28-80"><a href="#cb28-80" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_events_per_website_id'</span>, n_events_per_website_id)</span>
-<span id="cb28-81"><a href="#cb28-81" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_per_hour_transformer(df):</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    xid_hour_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'hour'</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    n_events_per_hour <span class="op">=</span> func.count(col(<span class="st">'action'</span>)).over(xid_hour_partition)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_events_per_hour'</span>, n_events_per_hour)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="d05dbc89" class="cell" data-execution_count="27">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_per_weekday_transformer(df):</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    xid_weekday_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'weekday'</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    n_events_per_weekday <span class="op">=</span> func.count(col(<span class="st">'action'</span>)).over(xid_weekday_partition)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_events_per_weekday'</span>, n_events_per_weekday)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_days_since_last_event_transformer(df):</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>    max_date <span class="op">=</span> func.<span class="bu">max</span>(col(<span class="st">'date'</span>)).over(xid_partition)</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>    n_days_since_last_event <span class="op">=</span> func.datediff(func.current_date(), max_date)</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_days_since_last_event'</span>,</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>                       n_days_since_last_event <span class="op">+</span> lit(<span class="fl">0.1</span>))</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_days_since_last_action_transformer(df):</span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>    xid_partition_action <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'action'</span>)</span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>    max_date <span class="op">=</span> func.<span class="bu">max</span>(col(<span class="st">'date'</span>)).over(xid_partition_action)</span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>    n_days_since_last_action <span class="op">=</span> func.datediff(func.current_date(),</span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>                                                        max_date)</span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_days_since_last_action'</span>,</span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>                       n_days_since_last_action <span class="op">+</span> lit(<span class="fl">0.1</span>))</span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_unique_day_transformer(df):</span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>    xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a>    dayofyear <span class="op">=</span> func.dayofyear(col(<span class="st">'date'</span>))</span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a>    rank_day <span class="op">=</span> func.dense_rank().over(xid_partition.orderBy(dayofyear))</span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a>    n_unique_day <span class="op">=</span> func.last(rank_day).over(xid_partition)</span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_unique_day'</span>, n_unique_day)</span>
+<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_unique_hour_transformer(df):</span>
+<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a>    xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
+<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a>    rank_hour <span class="op">=</span> func.dense_rank().over(xid_partition.orderBy(<span class="st">'hour'</span>))</span>
+<span id="cb45-35"><a href="#cb45-35" aria-hidden="true" tabindex="-1"></a>    n_unique_hour <span class="op">=</span> func.last(rank_hour).over(xid_partition)</span>
+<span id="cb45-36"><a href="#cb45-36" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_unique_hour'</span>, n_unique_hour)</span>
+<span id="cb45-37"><a href="#cb45-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb45-38"><a href="#cb45-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-39"><a href="#cb45-39" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_per_device_transformer(df):</span>
+<span id="cb45-40"><a href="#cb45-40" aria-hidden="true" tabindex="-1"></a>    xid_device_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'device'</span>)</span>
+<span id="cb45-41"><a href="#cb45-41" aria-hidden="true" tabindex="-1"></a>    n_events_per_device <span class="op">=</span> func.count(func.col(<span class="st">'device'</span>)) <span class="op">\</span></span>
+<span id="cb45-42"><a href="#cb45-42" aria-hidden="true" tabindex="-1"></a>        .over(xid_device_partition)</span>
+<span id="cb45-43"><a href="#cb45-43" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_events_per_device'</span>, n_events_per_device)</span>
+<span id="cb45-44"><a href="#cb45-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb45-45"><a href="#cb45-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-46"><a href="#cb45-46" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_unique_device_transformer(df):</span>
+<span id="cb45-47"><a href="#cb45-47" aria-hidden="true" tabindex="-1"></a>    xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
+<span id="cb45-48"><a href="#cb45-48" aria-hidden="true" tabindex="-1"></a>    rank_device <span class="op">=</span> func.dense_rank().over(xid_partition.orderBy(<span class="st">'device'</span>))</span>
+<span id="cb45-49"><a href="#cb45-49" aria-hidden="true" tabindex="-1"></a>    n_unique_device <span class="op">=</span> func.last(rank_device).over(xid_partition)</span>
+<span id="cb45-50"><a href="#cb45-50" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_device'</span>, n_unique_device)</span>
+<span id="cb45-51"><a href="#cb45-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb45-52"><a href="#cb45-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-53"><a href="#cb45-53" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_actions_per_category_id_transformer(df):</span>
+<span id="cb45-54"><a href="#cb45-54" aria-hidden="true" tabindex="-1"></a>    xid_category_id_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'category_id'</span>,</span>
+<span id="cb45-55"><a href="#cb45-55" aria-hidden="true" tabindex="-1"></a>                                                   <span class="st">'action'</span>)</span>
+<span id="cb45-56"><a href="#cb45-56" aria-hidden="true" tabindex="-1"></a>    n_actions_per_category_id <span class="op">=</span> func.count(func.col(<span class="st">'action'</span>)) <span class="op">\</span></span>
+<span id="cb45-57"><a href="#cb45-57" aria-hidden="true" tabindex="-1"></a>        .over(xid_category_id_partition)</span>
+<span id="cb45-58"><a href="#cb45-58" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_actions_per_category_id'</span>, n_actions_per_category_id)</span>
+<span id="cb45-59"><a href="#cb45-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb45-60"><a href="#cb45-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-61"><a href="#cb45-61" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_unique_category_id_transformer(df):</span>
+<span id="cb45-62"><a href="#cb45-62" aria-hidden="true" tabindex="-1"></a>    xid_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>)</span>
+<span id="cb45-63"><a href="#cb45-63" aria-hidden="true" tabindex="-1"></a>    rank_category_id <span class="op">=</span> func.dense_rank().over(xid_partition<span class="op">\</span></span>
+<span id="cb45-64"><a href="#cb45-64" aria-hidden="true" tabindex="-1"></a>                                              .orderBy(<span class="st">'category_id'</span>))</span>
+<span id="cb45-65"><a href="#cb45-65" aria-hidden="true" tabindex="-1"></a>    n_unique_category_id <span class="op">=</span> func.last(rank_category_id).over(xid_partition)</span>
+<span id="cb45-66"><a href="#cb45-66" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_unique_category_id'</span>, n_unique_category_id)</span>
+<span id="cb45-67"><a href="#cb45-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb45-68"><a href="#cb45-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-69"><a href="#cb45-69" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_per_category_id_transformer(df):</span>
+<span id="cb45-70"><a href="#cb45-70" aria-hidden="true" tabindex="-1"></a>    xid_category_id_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'category_id'</span>)</span>
+<span id="cb45-71"><a href="#cb45-71" aria-hidden="true" tabindex="-1"></a>    n_events_per_category_id <span class="op">=</span> func.count(func.col(<span class="st">'action'</span>)) <span class="op">\</span></span>
+<span id="cb45-72"><a href="#cb45-72" aria-hidden="true" tabindex="-1"></a>        .over(xid_category_id_partition)</span>
+<span id="cb45-73"><a href="#cb45-73" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_events_per_category_id'</span>, n_events_per_category_id)</span>
+<span id="cb45-74"><a href="#cb45-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb45-75"><a href="#cb45-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-76"><a href="#cb45-76" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_events_per_website_id_transformer(df):</span>
+<span id="cb45-77"><a href="#cb45-77" aria-hidden="true" tabindex="-1"></a>    xid_website_id_partition <span class="op">=</span> Window.partitionBy(<span class="st">'xid'</span>, <span class="st">'website_id'</span>)</span>
+<span id="cb45-78"><a href="#cb45-78" aria-hidden="true" tabindex="-1"></a>    n_events_per_website_id <span class="op">=</span> func.count(col(<span class="st">'action'</span>))<span class="op">\</span></span>
+<span id="cb45-79"><a href="#cb45-79" aria-hidden="true" tabindex="-1"></a>        .over(xid_website_id_partition)</span>
+<span id="cb45-80"><a href="#cb45-80" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.withColumn(<span class="st">'n_events_per_website_id'</span>, n_events_per_website_id)</span>
+<span id="cb45-81"><a href="#cb45-81" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 

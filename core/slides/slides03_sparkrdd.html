@@ -6,7 +6,7 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f8dc6eab18fde03278982b0b35885446.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9a023c9ade86a60361e96e3e3f11bc54.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/grid-no-htext-1.0.0/grid_no_htext.css" rel="stylesheet">
@@ -14,7 +14,7 @@
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.40">
+  <meta name="generator" content="quarto-1.6.42">
 
   <meta name="author" content="Équipe de Statistique">
   <meta name="dcterms.date" content="2025-01-17">
@@ -102,7 +102,7 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-9b209231abe29c972310dc692ecec836.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-4261b23fa083684dd74643306b934958.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -642,10 +642,10 @@
 </div></aside></section>
 <section id="pythons-corner" class="slide level2 center">
 <h2>Python’s corner</h2>
-<div id="73ff4f83" class="cell" data-execution_count="2">
+<div id="a359833c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>[it <span class="cf">for</span> it <span class="kw">in</span> <span class="bu">map</span>(<span class="kw">lambda</span> x : <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, x)), [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="2">
+<div class="cell fragment" data-execution_count="1">
 
 </div>
 </section>
@@ -710,14 +710,14 @@
 <section id="pythons-corner-is-there-any-flatmap-function" class="slide level2 center">
 <h2>Python’s corner: is there any <code>flatMap()</code> function?</h2>
 <p>Nested list comprehensions</p>
-<div id="6e1b9cf5" class="cell" data-execution_count="3">
+<div id="6c278647" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>[o <span class="cf">for</span> it <span class="kw">in</span> <span class="bu">map</span>(<span class="kw">lambda</span> x : <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, x)), [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])   <span class="cf">for</span> o <span class="kw">in</span> it]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>[1, 1, 2, 1, 2, 3]</code></pre>
 </div>
 </div>
 <div class="fragment">
-<div id="13ca68f1" class="cell" data-execution_count="4">
+<div id="a4723779" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="im">import</span> itertools</span>
 <span id="cb9-2"><a></a></span>
 <span id="cb9-3"><a></a>[o <span class="cf">for</span> o <span class="kw">in</span> itertools.chain.from_iterable(<span class="bu">map</span>(<span class="kw">lambda</span> x : <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, x)), [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -727,7 +727,7 @@
 </div>
 </div>
 <div class="fragment">
-<div id="3f6d7425" class="cell" data-execution_count="5">
+<div id="6af49440" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>flatten <span class="op">=</span> itertools.chain.from_iterable</span>
 <span id="cb11-2"><a></a></span>
 <span id="cb11-3"><a></a>[o <span class="cf">for</span> o <span class="kw">in</span>  flatten(<span class="bu">map</span>(<span class="kw">lambda</span> x : <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, x)), [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -783,7 +783,7 @@
 <section id="pythons-corner-1" class="slide level2 center">
 <h2>Python’s corner</h2>
 <p>Using list comprehensions</p>
-<div id="1b304cc6" class="cell" data-execution_count="6">
+<div id="e54b5b17" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>lll <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">10</span>))</span>
 <span id="cb14-2"><a></a>spam <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span></span>
 <span id="cb14-3"><a></a></span>
@@ -794,7 +794,7 @@
 </div>
 <div class="fragment">
 <p>Tweaking <code>filterfalse</code> from <code>itertools</code></p>
-<div id="4fd4d58d" class="cell" data-execution_count="7">
+<div id="90337cc0" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a>[o <span class="cf">for</span> o <span class="kw">in</span> itertools.filterfalse(<span class="kw">lambda</span> x : <span class="kw">not</span> x<span class="op">%</span> <span class="dv">2</span><span class="op">==</span><span class="dv">0</span>, lll)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>[0, 2, 4, 6, 8]</code></pre>
@@ -953,12 +953,12 @@
 </div></aside></section>
 <section id="pythons-corner-3" class="slide level2 center">
 <h2>Python’s corner</h2>
-<div id="8ccf82e7" class="cell" data-execution_count="9">
+<div id="8d37bdd4" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="co"># %%</span></span>
 <span id="cb21-2"><a></a>spam <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">5</span>)) <span class="op">+</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">3</span>, <span class="dv">9</span>))</span>
 <span id="cb21-3"><a></a>[o <span class="cf">for</span> o <span class="kw">in</span> <span class="bu">set</span>(spam)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="9">
+<div class="cell fragment" data-execution_count="8">
 
 </div>
 
@@ -1126,7 +1126,7 @@
 </section>
 <section id="pythons-corner-4" class="slide level2 center">
 <h2>Python’s corner</h2>
-<div id="66352d8e" class="cell" data-execution_count="10">
+<div id="969daf29" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>spam <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>]</span>
 <span id="cb26-2"><a></a></span>
 <span id="cb26-3"><a></a><span class="bu">len</span>(spam)</span>
@@ -1193,7 +1193,7 @@
 </section>
 <section id="pythons-corner-5" class="slide level2 center">
 <h2>Python’s corner</h2>
-<div id="91deb5ac" class="cell" data-execution_count="11">
+<div id="68eb1be4" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="bu">list</span>(itertools.islice(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">10</span>)), <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>[0, 1, 2]</code></pre>
@@ -1487,7 +1487,7 @@
 </section>
 <section id="pythons-corner-6" class="slide level2 center">
 <h2>Python’s corner</h2>
-<div id="0db582a3" class="cell" data-execution_count="12">
+<div id="d3295e3f" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
 <span id="annotated-cell-14-2"><a href="#annotated-cell-14-2"></a></span>
 <span id="annotated-cell-14-3"><a href="#annotated-cell-14-3"></a><span class="bu">reduce</span>(<span class="kw">lambda</span> a, b: a <span class="op">+</span> b,  [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>

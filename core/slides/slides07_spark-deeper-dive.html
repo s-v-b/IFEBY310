@@ -6,13 +6,13 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f8dc6eab18fde03278982b0b35885446.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9a023c9ade86a60361e96e3e3f11bc54.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/grid-no-htext-1.0.0/grid_no_htext.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.40">
+  <meta name="generator" content="quarto-1.6.42">
 
   <meta name="author" content="Équipe de Statistique">
   <meta name="dcterms.date" content="2025-01-17">
@@ -100,7 +100,7 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-9b209231abe29c972310dc692ecec836.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-4261b23fa083684dd74643306b934958.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -463,7 +463,13 @@
 <p>With <strong>hash partitioning</strong></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>p <span class="op">=</span> k.hashCode() <span class="op">%</span> numPartitions</span>
 <span id="cb7-2"><a></a>  <span class="op">=</span> k <span class="op">%</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>leads to - Partition 0: <code>[8, 96, 240, 400, 800]</code> - Partition 1: <code>[401]</code> - Partition 2: <code>[]</code> - Partition 3: <code>[]</code></p>
+<p>leads to:</p>
+<ul>
+<li>Partition 0: <code>[8, 96, 240, 400, 800]</code></li>
+<li>Partition 1: <code>[401]</code></li>
+<li>Partition 2: <code>[]</code></li>
+<li>Partition 3: <code>[]</code></li>
+</ul>
 <p>This results in a <em>very unbalanced distribution</em> which <strong>hurts performance</strong>, since the data is <strong>spread mostly on 1 node</strong>, so not very parallel.</p>
 </section>
 <section id="partitioning-4" class="slide level2 center">
@@ -954,10 +960,10 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>If a partition <strong>fails</strong>:</p>
-<p><img data-src="IMG/fault_tol_1.png" height="400"></p>
+<p><img data-src="../../images/fault_tol_1.png" height="400"></p>
 </div><div class="column" style="width:50%;">
 <p>Spark <strong>recomputes it</strong> to get back on track:</p>
-<p><img data-src="IMG/fault_tol_2.png" height="400"></p>
+<p><img data-src="../../images/fault_tol_2.png" height="400"></p>
 </div></div>
 </section></section>
 <section>

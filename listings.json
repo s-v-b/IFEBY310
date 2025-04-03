@@ -1,10 +1,6 @@
 [
   {
-    "listing": "/slides-listings.html",
-    "items": []
-  },
-  {
-    "listing": "/projects-listings.html",
+    "listing": "/weeks-listings.html",
     "items": []
   },
   {
@@ -12,7 +8,11 @@
     "items": []
   },
   {
-    "listing": "/weeks-listings.html",
+    "listing": "/projects-listings.html",
+    "items": []
+  },
+  {
+    "listing": "/slides-listings.html",
     "items": []
   }
 ]

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -68,8 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-65bb2660d2added026bc737f6d61009c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -212,13 +212,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../computing-virtualenv.html" class="sidebar-item-text sidebar-link">
+  <a href="../../computing-virtualenv.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Virtual environments</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../computing-jupyter.html" class="sidebar-item-text sidebar-link">
+  <a href="../../computing-jupyter.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Jupyter</span></a>
   </div>
 </li>
@@ -301,7 +301,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><a href="https://spark.apache.org/docs/latest/sql-data-sources-jdbc.html">Reading and sriting Spark Dataframes from and to Databases</a></p>
-<div id="31fa9d9e" class="cell" data-execution_count="2">
+<div id="d0ba166e" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyspark</span>
@@ -314,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="connect-to-pg-server" class="level2">
 <h2 class="anchored" data-anchor-id="connect-to-pg-server">Connect to Pg server</h2>
-<div id="6129f066" class="cell" data-execution_count="3">
+<div id="02ea1dcd" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ulogin <span class="op">=</span> getpass.getuser()</span>
@@ -328,7 +328,7 @@ Cell <span class="ansi-green-fg">In[2], line 2</span>
 <span class="ansi-green-fg ansi-bold">      1</span> ulogin <span style="color:rgb(98,98,98)">=</span> getpass<span style="color:rgb(98,98,98)">.</span>getuser()
 <span class="ansi-green-fg">----&gt; 2</span> pw <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">getpass</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">getpass</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
 
-File <span class="ansi-green-fg">~/Documents/IFEBY310/.venv/lib/python3.12/site-packages/ipykernel/kernelbase.py:1256</span>, in <span class="ansi-cyan-fg">Kernel.getpass</span><span class="ansi-blue-fg">(self, prompt, stream)</span>
+File <span class="ansi-green-fg">~/sandbox/IFEBY310/.venv/lib/python3.12/site-packages/ipykernel/kernelbase.py:1256</span>, in <span class="ansi-cyan-fg">Kernel.getpass</span><span class="ansi-blue-fg">(self, prompt, stream)</span>
 <span class="ansi-green-fg ansi-bold">   1254</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_allow_stdin:
 <span class="ansi-green-fg ansi-bold">   1255</span>     msg <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">getpass was called, but this frontend does not support input requests.</span><span style="color:rgb(175,0,0)">"</span>
 <span class="ansi-green-fg">-&gt; 1256</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> StdinNotImplementedError(msg)
@@ -340,7 +340,7 @@ File <span class="ansi-green-fg">~/Documents/IFEBY310/.venv/lib/python3.12/site-
 </div>
 </div>
 <p>Spark <code>jdbc</code> readers and writers rely on a collection of options. Some options are used repeatedly. In order to avoid cut and paste, we pack them in a dictionary.</p>
-<div id="f3552fa4" class="cell" data-execution_count="4">
+<div id="0824cf86" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dico_jdbc_pg <span class="op">=</span> {</span>
@@ -366,7 +366,7 @@ Cell <span class="ansi-green-fg">In[3], line 4</span>
 </div>
 </div>
 </div>
-<div id="e64c43e3" class="cell" data-execution_count="5">
+<div id="99f384d9" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dbschema <span class="op">=</span> <span class="st">'nycflights'</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -375,7 +375,7 @@ Cell <span class="ansi-green-fg">In[3], line 4</span>
 </section>
 <section id="reading-spark-dataframes-from-a-postgresql-database" class="level2">
 <h2 class="anchored" data-anchor-id="reading-spark-dataframes-from-a-postgresql-database">Reading Spark Dataframes from a PostgreSQL database</h2>
-<div id="cc96c6cd" class="cell" data-execution_count="6">
+<div id="6a67ca61" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>spark_home <span class="op">=</span> <span class="st">"/home/boucheron/.local/share/spark-3.5.0-bin-hadoop3"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -384,7 +384,7 @@ Cell <span class="ansi-green-fg">In[3], line 4</span>
 <blockquote class="blockquote">
 <p>To get started you will need to include the JDBC driver for your particular database on the spark classpath.</p>
 </blockquote>
-<div id="55831ceb" class="cell" data-execution_count="7">
+<div id="7a78cc1d" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> (</span>
@@ -397,9 +397,9 @@ Cell <span class="ansi-green-fg">In[3], line 4</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>25/01/14 22:39:39 WARN Utils: Your hostname, boucheron-Precision-5480 resolves to a loopback address: 127.0.1.1; using 192.168.10.120 instead (on interface wlp0s20f3)
-25/01/14 22:39:39 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
-25/01/14 22:39:39 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+<pre><code>25/04/03 15:11:34 WARN Utils: Your hostname, boucheron-Precision-5480 resolves to a loopback address: 127.0.1.1; using 172.23.32.10 instead (on interface eth0)
+25/04/03 15:11:34 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+25/04/03 15:11:34 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).</code></pre>
 </div>
@@ -408,7 +408,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 <section id="downloading-a-table-to-spark" class="level2">
 <h2 class="anchored" data-anchor-id="downloading-a-table-to-spark">Downloading a table to Spark</h2>
 <p>We rely on dictionary union and dictionary unpacking to set the options.</p>
-<div id="e32403ed" class="cell" data-execution_count="8">
+<div id="c13b7807" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_airlines <span class="op">=</span> (</span>
@@ -436,7 +436,7 @@ Cell <span class="ansi-green-fg">In[7], line 5</span>
 </div>
 </div>
 </div>
-<div id="42d222d4" class="cell" data-execution_count="9">
+<div id="113c0470" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_airlines.show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -455,7 +455,7 @@ Cell <span class="ansi-green-fg">In[8], line 1</span>
 </section>
 <section id="querying-the-database" class="level2">
 <h2 class="anchored" data-anchor-id="querying-the-database">Querying the database</h2>
-<div id="c94cbd8a" class="cell" data-execution_count="10">
+<div id="a0ee71b3" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
@@ -465,7 +465,7 @@ Cell <span class="ansi-green-fg">In[8], line 1</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="c94fbce0" class="cell" data-execution_count="11">
+<div id="4e6dad26" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_query <span class="op">=</span> (</span>
@@ -493,7 +493,7 @@ Cell <span class="ansi-green-fg">In[10], line 5</span>
 </div>
 </div>
 </div>
-<div id="2a0ccbbd" class="cell" data-execution_count="12">
+<div id="6f02f5ba" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_query.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -512,7 +512,7 @@ Cell <span class="ansi-green-fg">In[11], line 1</span>
 </section>
 <section id="the-end" class="level2">
 <h2 class="anchored" data-anchor-id="the-end">The end</h2>
-<div id="f6f24ccb" class="cell" data-execution_count="13">
+<div id="94aea426" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>spark.stop()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

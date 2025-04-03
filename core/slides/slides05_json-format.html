@@ -6,7 +6,7 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f8dc6eab18fde03278982b0b35885446.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9a023c9ade86a60361e96e3e3f11bc54.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/grid-no-htext-1.0.0/grid_no_htext.css" rel="stylesheet">
@@ -14,7 +14,7 @@
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.40">
+  <meta name="generator" content="quarto-1.6.42">
 
   <meta name="author" content="Équipe de Statistique">
   <meta name="dcterms.date" content="2025-02-21">
@@ -102,7 +102,7 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-9b209231abe29c972310dc692ecec836.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-4261b23fa083684dd74643306b934958.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -435,7 +435,7 @@
 <div class="columns">
 <div class="column">
 <p>Serialize a <code>Python</code> object into a <code>JSON</code> formatted string using <code>json.dumps()</code></p>
-<div id="1496ff14" class="cell" data-execution_count="2">
+<div id="8d1725df" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> json</span>
 <span id="cb1-2"><a></a></span>
 <span id="cb1-3"><a></a>spam <span class="op">=</span> json.dumps({</span>
@@ -451,13 +451,13 @@
 <span id="cb1-13"><a></a>  indent<span class="op">=</span><span class="dv">4</span></span>
 <span id="cb1-14"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="2">
+<div class="cell fragment" data-execution_count="1">
 
 </div>
-<div id="b5853908" class="cell" data-execution_count="3">
+<div id="57303027" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="bu">type</span>(spam)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="3">
+<div class="cell fragment" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>str</code></pre>
 </div>
@@ -478,10 +478,10 @@
 </div>
 </div>
 </div><div class="column">
-<div id="20bf0a62" class="cell" data-execution_count="4">
+<div id="4200590d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="bu">print</span>(spam)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="4">
+<div class="cell fragment" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
 <pre><code>{
     "active": true,
@@ -510,40 +510,40 @@
 <section id="dumping-a-date" class="slide level2 center">
 <h2>Dumping a date</h2>
 <p>A Python <code>date</code> object is not serializable.</p>
-<div id="35873113" class="cell" data-execution_count="5">
+<div id="dee51e1a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
 <span id="cb6-2"><a></a>td <span class="op">=</span> date.today()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="5">
+<div class="cell fragment" data-execution_count="4">
 
 </div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="op">&gt;&gt;&gt;</span> js.dumps(td)</span>
 <span id="cb7-2"><a></a>...</span>
 <span id="cb7-3"><a></a><span class="pp">TypeError</span>: Object of <span class="bu">type</span> date <span class="kw">is</span> <span class="kw">not</span> JSON serializable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>But it can be converted into serializable types.</p>
-<div id="81b82aa0" class="cell" data-execution_count="6">
+<div id="27cee95b" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>json.dumps(td.isoformat())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-execution_count="5">
+
+</div>
+<div id="02e70574" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>json.dumps(td.isocalendar())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="6">
 
 </div>
-<div id="802c6ff3" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>json.dumps(td.isocalendar())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment" data-execution_count="7">
-
-</div>
-<div id="df3b5e41" class="cell" data-execution_count="8">
+<div id="ad4e5068" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>json.dumps(td.timetuple())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="8">
+<div class="cell fragment" data-execution_count="7">
 
 </div>
 </section>
 <section id="serialization-example-1" class="slide level2 center">
 <h2>Serialization example</h2>
 <p><code>json.dump()</code> allows to write the output stream to a file</p>
-<div id="c5d5fd9b" class="cell" data-execution_count="9">
+<div id="5c32e429" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'user.json'</span>,<span class="st">'w'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb11-2"><a></a>        json.dump({</span>
 <span id="cb11-3"><a></a>            <span class="st">"name"</span>: <span class="st">"Foo Bar"</span>,</span>
@@ -558,15 +558,15 @@
 <span id="cb11-12"><a></a>          sort_keys<span class="op">=</span><span class="va">True</span>, indent<span class="op">=</span><span class="dv">4</span></span>
 <span id="cb11-13"><a></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="9">
+<div class="cell fragment" data-execution_count="8">
 
 </div>
 <div class="fragment">
 <p>This writes a <code>user.json</code> file to disk with similar content as in the previous example</p>
-<div id="3c2c02db" class="cell" data-execution_count="10">
+<div id="798dd928" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="op">!</span>ls <span class="op">-</span>l <span class="op">*</span>.json</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="10">
+<div class="cell fragment" data-execution_count="9">
 
 </div>
 </div>
@@ -646,18 +646,18 @@
 <section id="deserialization-example" class="slide level2 center">
 <h2>Deserialization example</h2>
 <p>Pass a <code>JSON</code> string to the <code>json.loads()</code> method :</p>
-<div id="f7765d06" class="cell" data-execution_count="11">
+<div id="1c24c7c4" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>spam <span class="op">=</span> json.loads(<span class="st">'{"active": true, "age": 78, "balance": 345.8, "friends": ["Jane","John"], "name": "Foo Bar", "other_names": ["Doe","Joe"],"spouse":null}'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="11">
+<div class="cell fragment" data-execution_count="10">
 
 </div>
 <div class="fragment">
 <p>we obtain a dictionary as output:</p>
-<div id="255d1753" class="cell" data-execution_count="12">
+<div id="dd904356" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>spam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="12">
+<div class="cell fragment" data-execution_count="11">
 
 </div>
 </div>
@@ -665,13 +665,13 @@
 <section id="deserialization-example-1" class="slide level2 center">
 <h2>Deserialization example</h2>
 <p>We can also read from the <code>user.json</code> file we created before:</p>
-<div id="f69a6c81" class="cell" data-execution_count="13">
+<div id="f8e87957" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'user.json'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb15-2"><a></a>  user_data <span class="op">=</span> json.load(<span class="bu">file</span>)</span>
 <span id="cb15-3"><a></a></span>
 <span id="cb15-4"><a></a>user_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="13">
+<div class="cell fragment" data-execution_count="12">
 
 </div>
 <div class="fragment">
@@ -774,7 +774,7 @@
 <p><a href="https://geojson.org">GeoJSON</a> is a format for encoding a variety of geographic data structures. GeoJSON supports the following geometry types: <code>Point</code>, <code>LineString</code>, <code>Polygon</code>, <code>MultiPoint</code>, <code>MultiLineString</code>, and <code>MultiPolygon</code>. Geometric objects with additional properties are <code>Feature</code> objects. Sets of features are contained by <code>FeatureCollection</code> objects.</p>
 </div>
 <div class="fragment">
-<div id="b356ae19" class="cell" data-execution_count="14">
+<div id="1274be37" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>{</span>
 <span id="cb17-2"><a></a>  <span class="st">"type"</span>: <span class="st">"FeatureCollection"</span>,</span>
 <span id="cb17-3"><a></a>  <span class="st">"features"</span>: [</span>
@@ -792,7 +792,7 @@
 <span id="cb17-15"><a></a>  ]</span>
 <span id="cb17-16"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="14">
+<div class="cell fragment" data-execution_count="13">
 
 </div>
 <p>See <a href="https://sedona.apache.org/1.5.1/tutorial/sql/?h=json#load-geojson-using-spark-json-data-source">Loading GeoJSON using Spark</a></p>
