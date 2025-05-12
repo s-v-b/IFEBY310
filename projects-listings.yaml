@@ -4,3 +4,9 @@
   path: "projects/hmw_table_wrangling.html"
   categories: [Python, NLP, Spacy, Dask]
   href: '<a href="projects/hmw_table_wrangling.html"> <i class="fa-solid fa-download"> </i> </a>'
+- title: "Spark, NLP, Table wrangling, visualization"
+  author: "Master I MIDS UParis Cité"
+  date: "2025-05-12"
+  path: "projects/hmw-II.html"
+  categories: [Python, NLP, Spark, Spacy]
+  href: '<a href="projects/hmw-II.html"> <i class="fa-solid fa-download"> </i> </a>'

@@ -81,7 +81,9 @@ website:
         text: Journal
 
 resources:
-  - "/projects/hmw-table-wrangling.html"  
+  - "/projects/hmw-table-wrangling.html" 
+  - "/projects/hmw-II.html"
+  - "/projects/hmw-II.pdf"
   - "/data/drug-enforcement.json.zip"
   - "/data/webdata.parquet.zip"    
 
