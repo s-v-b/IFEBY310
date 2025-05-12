@@ -6,7 +6,7 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9a023c9ade86a60361e96e3e3f11bc54.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e2182856f2c32102dd26b05a5ef16cb5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/grid-no-htext-1.0.0/grid_no_htext.css" rel="stylesheet">
@@ -14,7 +14,7 @@
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+  <meta name="generator" content="quarto-1.7.30">
 
   <meta name="author" content="Équipe de Statistique">
   <meta name="dcterms.date" content="2025-01-17">
@@ -37,8 +37,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -49,7 +50,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -102,7 +103,7 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-4261b23fa083684dd74643306b934958.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-cea8bd4d0ffd43e334db3cf8b0e9d7b6.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -347,7 +348,7 @@
 </section>
 <section id="imports" class="slide level2 center">
 <h2>Imports</h2>
-<div id="f3936a5f" class="cell" data-execution_count="1">
+<div id="7b7f1789" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> dask</span>
 <span id="cb1-2"><a></a></span>
 <span id="cb1-3"><a></a>dask.config.<span class="bu">set</span>(scheduler<span class="op">=</span><span class="st">'threads'</span>)</span>
@@ -355,17 +356,17 @@
 </div>
 <div class="cell fragment" data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>&lt;dask.config.set at 0x768f0d1a4d40&gt;</code></pre>
+<pre><code>&lt;dask.config.set at 0x78c88f3cb770&gt;</code></pre>
 </div>
 </div>
-<div id="c5bbca87" class="cell" data-execution_count="2">
+<div id="0c22ccf8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> dask.dataframe <span class="im">as</span> dd</span>
 <span id="cb3-2"><a></a><span class="im">import</span> dask.bag <span class="im">as</span> db</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="2">
 
 </div>
-<div id="0ef01ecc" class="cell" data-execution_count="3">
+<div id="fa856e26" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">from</span> dask <span class="im">import</span> delayed</span>
 <span id="cb4-2"><a></a><span class="im">import</span> dask.threaded</span>
 <span id="cb4-3"><a></a></span>
@@ -380,7 +381,7 @@
 <section id="localcluster" class="slide level2 center">
 <h2><code>LocalCluster</code></h2>
 <p>Dask can set itself up easily in your Python session if you create a <code>LocalCluster</code> object, which sets everything up for you.</p>
-<div id="22747804" class="cell" data-execution_count="4">
+<div id="33ee149c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># from dask.distributed import LocalCluster</span></span>
 <span id="cb5-2"><a></a></span>
 <span id="cb5-3"><a></a><span class="co"># cluster = LocalCluster()</span></span>
@@ -402,7 +403,7 @@
 </section>
 <section id="a-job-i" class="slide level2 center">
 <h2>A job (I)</h2>
-<div id="df749f2c" class="cell" data-execution_count="5">
+<div id="5183959e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="kw">def</span> inc(x):</span>
 <span id="cb6-2"><a></a>  <span class="cf">return</span> x <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb6-3"><a></a></span>
@@ -418,7 +419,7 @@
 </section>
 <section id="a-job-ii-piecing-elements-together" class="slide level2 center">
 <h2>A job (II): piecing elements together</h2>
-<div id="e62e0fe6" class="cell" data-execution_count="6">
+<div id="8a9f97af" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1"></a>data <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
 <span id="annotated-cell-6-2"><a href="#annotated-cell-6-2"></a></span>
 <span id="annotated-cell-6-3"><a href="#annotated-cell-6-3"></a>output <span class="op">=</span> []</span>
@@ -457,7 +458,7 @@
 </section>
 <section id="delaying-existing-functions" class="slide level2 center">
 <h2>Delaying existing functions</h2>
-<div id="a858b502" class="cell" data-execution_count="7">
+<div id="4915367b" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a>output <span class="op">=</span> []</span>
 <span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a></span>
 <span id="annotated-cell-7-3"><a href="#annotated-cell-7-3"></a><span class="cf">for</span> x <span class="kw">in</span> data:</span>
@@ -484,10 +485,10 @@
 </div>
 <div class="cell fragment" data-execution_count="7">
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>Delayed('sum-0e2e3c70-0734-43ab-b5b0-b48d4bb5d8eb')</code></pre>
+<pre><code>Delayed('sum-a311ec5e-4dc8-4b75-ae0a-f455f0558e22')</code></pre>
 </div>
 </div>
-<div id="7d60a27d" class="cell" data-execution_count="8">
+<div id="bd2b9338" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1"></a>total.compute()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
@@ -506,7 +507,7 @@
 </section>
 <section id="another-way-of-using-decorators" class="slide level2 smaller center">
 <h2>Another way of using decorators</h2>
-<div id="be5430b0" class="cell" data-execution_count="9">
+<div id="14083de1" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1"></a><span class="at">@dask.delayed</span></span>
 <span id="annotated-cell-9-2"><a href="#annotated-cell-9-2"></a><span class="kw">def</span> inc(x):</span>
 <span id="annotated-cell-9-3"><a href="#annotated-cell-9-3"></a>  <span class="cf">return</span> x <span class="op">+</span> <span class="dv">1</span></span>
@@ -556,7 +557,7 @@
 </section>
 <section id="visualizing-the-task-graph" class="slide level2 center">
 <h2>Visualizing the task graph</h2>
-<div id="ca8bb1ce" class="cell columns column-output-location" data-execution_count="10">
+<div id="a546e719" class="cell columns column-output-location" data-execution_count="10">
 <div class="column">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>total.visualize()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
@@ -576,7 +577,7 @@
 </section>
 <section id="another-job" class="slide level2 smaller center">
 <h2>Another job</h2>
-<div id="2edd278a" class="cell" data-execution_count="11">
+<div id="8132fd71" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>DATA <span class="op">=</span> []</span>
 <span id="cb12-2"><a></a></span>
 <span id="cb12-3"><a></a><span class="at">@dask.delayed</span></span>
@@ -607,7 +608,7 @@
 </section>
 <section id="a-flawed-task-graph" class="slide level2 center">
 <h2>A flawed task graph</h2>
-<div id="ed580076" class="cell columns column-output-location" data-execution_count="12">
+<div id="bd06aa2e" class="cell columns column-output-location" data-execution_count="12">
 <div class="column">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>f.visualize()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
@@ -624,7 +625,7 @@
 <h2>Fixing</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div id="635f0dc7" class="cell" data-execution_count="13">
+<div id="0590063b" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="im">from</span> dask.graph_manipulation <span class="im">import</span> bind</span>
 <span id="cb15-2"><a></a></span>
 <span id="cb15-3"><a></a>g <span class="op">=</span> bind(sum_data, [b, d])(e)</span>
@@ -642,7 +643,7 @@
 </div>
 </div><div class="column" style="width:60%;">
 <div class="smaller">
-<div id="382d2ca1" class="cell" data-execution_count="14">
+<div id="1dda7ab6" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>g.visualize()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="14">
@@ -673,7 +674,7 @@
 </section>
 <section id="importing-the-usual-suspects" class="slide level2 center">
 <h2>Importing the usual suspects</h2>
-<div id="327b4342" class="cell" data-execution_count="15">
+<div id="743ef106" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-2" class="code-annotation-target"><a href="#annotated-cell-13-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="annotated-cell-13-3"><a href="#annotated-cell-13-3"></a></span>
@@ -769,7 +770,7 @@
 <aside><ol class="aside-footnotes"><li id="fn1"><p>The Dask Dataframe API is a subset of the Pandas API</p></li></ol></aside></section>
 <section id="creating-a-dask-dataframe" class="slide level2 center">
 <h2>Creating a dask dataframe</h2>
-<div id="617108e5" class="cell columns column-output-location" data-execution_count="16">
+<div id="e5eb463b" class="cell columns column-output-location" data-execution_count="16">
 <div class="column">
 <div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1"></a>index <span class="op">=</span> pd.date_range(<span class="st">"2021-09-01"</span>, </span>
 <span id="annotated-cell-14-2"><a href="#annotated-cell-14-2"></a>                      periods<span class="op">=</span><span class="dv">2400</span>, </span>
@@ -864,7 +865,7 @@
 <div class="column" style="width:50%;">
 <div class="smaller">
 <h3 id="a-sketch-of-the-interplay-between-index-and-partitioning">A sketch of the interplay between index and partitioning</h3>
-<div id="30505b59" class="cell columns column-output-location" data-execution_count="17">
+<div id="272287fb" class="cell columns column-output-location" data-execution_count="17">
 <div class="column">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a>ddf.divisions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
@@ -893,7 +894,7 @@
 </div>
 </div></div>
 <h3 id="a-dataframe-has-a-task-graph">A dataframe has a task graph</h3>
-<div id="bb4032fc" class="cell" data-execution_count="18">
+<div id="150137da" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>ddf.visualize()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="18">
@@ -910,7 +911,7 @@
 </div><div class="column" style="width:50%;">
 <div class="smaller">
 <h3 id="whats-in-a-partition">What’s in a partition?</h3>
-<div id="3317a5cc" class="cell" data-execution_count="19">
+<div id="59525250" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="annotated-cell-51"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-51" data-target-annotation="1">1</button><span id="annotated-cell-51-1" class="code-annotation-target"><a href="#annotated-cell-51-1"></a>ddf.partitions[<span class="dv">1</span>]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
@@ -956,7 +957,7 @@
 </div>
 </div>
 <h3 id="slicing">Slicing</h3>
-<div id="1fe1a0c4" class="cell" data-execution_count="20">
+<div id="fb24d94a" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="annotated-cell-52"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-52" data-target-annotation="1">1</button><span id="annotated-cell-52-1" class="code-annotation-target"><a href="#annotated-cell-52-1"></a>ddf[<span class="st">"2021-10-01"</span>:<span class="st">"2021-10-09 5:00"</span>]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
@@ -1050,7 +1051,7 @@
 <h2>Methods</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="32b69691" class="cell" data-execution_count="21">
+<div id="3f71f34c" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>( </span>
 <span id="cb21-2"><a></a>  ddf.a</span>
 <span id="cb21-3"><a></a>    .mean()</span>
@@ -1061,7 +1062,7 @@
 <pre><code>&lt;dask_expr.expr.Scalar: expr=df['a'].mean(), dtype=float64&gt;</code></pre>
 </div>
 </div>
-<div id="5ea54910" class="cell" data-execution_count="22">
+<div id="52910caf" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>( </span>
 <span id="cb23-2"><a></a>  ddf.a</span>
 <span id="cb23-3"><a></a>    .mean()</span>
@@ -1073,7 +1074,7 @@
 <pre><code>np.float64(1199.5)</code></pre>
 </div>
 </div>
-<div id="da2b2f38" class="cell" data-execution_count="23">
+<div id="e9b0e51c" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>(</span>
 <span id="cb25-2"><a></a>  ddf</span>
 <span id="cb25-3"><a></a>    .b</span>
@@ -1107,7 +1108,7 @@ Expr=Unique(frame=df['b'])</code></pre>
 <span id="cb27-4"><a></a>globpath <span class="op">=</span> <span class="st">'fhvhv_tripdata_20*-*.parquet'</span></span>
 <span id="cb27-5"><a></a></span>
 <span id="cb27-6"><a></a><span class="op">!</span>ls <span class="op">-</span>l ..<span class="op">/</span>..<span class="op">/</span>..<span class="op">/</span>..<span class="op">/</span>Downloads<span class="op">/</span>fhvhv_tripdata_20<span class="op">*-*</span>.parquet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="7cad3a81" class="cell" data-execution_count="24">
+<div id="27906de9" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="im">import</span> os</span>
 <span id="cb28-2"><a></a></span>
 <span id="cb28-3"><a></a>os.path.expanduser(<span class="st">'~'</span> <span class="op">+</span> <span class="st">'/Documents'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1128,7 +1129,7 @@ Expr=Unique(frame=df['b'])</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a><span class="bu">type</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a></a><span class="co">#| eval: false</span></span>
 <span id="cb32-2"><a></a>df <span class="op">=</span> data.to_dask_dataframe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="e32ca4e9" class="cell" data-execution_count="25">
+<div id="aa1ce1bc" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a></a>df.info()</span>
 <span id="cb33-2"><a></a>df._meta.dtypes</span>
 <span id="cb33-3"><a></a></span>
@@ -1137,43 +1138,43 @@ Expr=Unique(frame=df['b'])</code></pre>
 <div class="cell fragment" data-execution_count="25">
 
 </div>
-<div id="5fae0413" class="cell" data-execution_count="26">
+<div id="4af064ed" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="26">
 
 </div>
-<div id="44714c6c" class="cell" data-execution_count="27">
+<div id="4a003311" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a></a><span class="bu">type</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="27">
 
 </div>
-<div id="47dd46ef" class="cell" data-execution_count="28">
+<div id="b74be621" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a></a>df._meta.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="28">
 
 </div>
-<div id="b7ff2164" class="cell" data-execution_count="29">
+<div id="b202c740" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a></a>df._meta_nonempty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="29">
 
 </div>
-<div id="8f618c88" class="cell" data-execution_count="30">
+<div id="5003e3c7" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="30">
 
 </div>
-<div id="17c754dd" class="cell" data-execution_count="31">
+<div id="36bf04f9" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a></a>df.divisions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="31">
 
 </div>
-<div id="228efe0b" class="cell" data-execution_count="32">
+<div id="07e177f5" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a></a>df.describe(include<span class="op">=</span><span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="32">
@@ -1182,7 +1183,7 @@ Expr=Unique(frame=df['b'])</code></pre>
 </section>
 <section id="partitioning-and-saving-to-parquet" class="slide level2 center">
 <h2>Partitioning and saving to parquet</h2>
-<div id="82cc90f8" class="cell" data-execution_count="33">
+<div id="80defdc0" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a></a><span class="im">import</span> pyarrow <span class="im">as</span> pa</span>
 <span id="cb41-2"><a></a></span>
 <span id="cb41-3"><a></a>schm <span class="op">=</span> pa.Schema.from_pandas(df._meta)</span>
@@ -1192,13 +1193,13 @@ Expr=Unique(frame=df['b'])</code></pre>
 <div class="cell fragment" data-execution_count="33">
 
 </div>
-<div id="9577f36f" class="cell" data-execution_count="34">
+<div id="e386e96f" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a></a>df.PULocationID.unique().compute()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="34">
 
 </div>
-<div id="75f02fe0" class="cell" data-execution_count="35">
+<div id="7e06587b" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a></a>df.to_parquet( </span>
 <span id="cb43-2"><a></a>  <span class="st">'fhvhv_tripdata_2022-11'</span>,</span>
 <span id="cb43-3"><a></a>  partition_on<span class="op">=</span> [<span class="st">'PULocationID'</span>],</span>
@@ -1209,7 +1210,7 @@ Expr=Unique(frame=df['b'])</code></pre>
 <div class="cell fragment" data-execution_count="35">
 
 </div>
-<div id="6f640eb5" class="cell" data-execution_count="36">
+<div id="5c56c6c6" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a></a>df.info(memory_usage<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="36">
@@ -1314,7 +1315,7 @@ Expr=Unique(frame=df['b'])</code></pre>
 </section>
 <section id="loading-a-parquet-file" class="slide level2 center">
 <h2>Loading a Parquet file</h2>
-<div id="66753619" class="cell" data-execution_count="37">
+<div id="055c7f2a" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a></a>dpath <span class="op">=</span> <span class="st">'/home/boucheron/Dropbox/MMD-2021/DATA/ny_corpus_prq/'</span></span>
 <span id="cb45-2"><a></a></span>
 <span id="cb45-3"><a></a>globpath <span class="op">=</span> <span class="st">'*/*.parquet'</span></span>
@@ -1327,7 +1328,7 @@ Expr=Unique(frame=df['b'])</code></pre>
 <div class="cell fragment" data-execution_count="37">
 
 </div>
-<div id="7bd58383" class="cell columns column-output-location" data-execution_count="38">
+<div id="b818a7ed" class="cell columns column-output-location" data-execution_count="38">
 <div class="column">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a></a>data.info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
@@ -1347,7 +1348,7 @@ Expr=ReadParquetFSSpec(92994fd)&gt;</code></pre>
 </section>
 <section id="section-6" class="slide level2 center">
 <h2></h2>
-<div id="720ba5ec" class="cell" data-execution_count="39">
+<div id="767344ff" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a></a>( </span>
 <span id="cb48-2"><a></a>  data</span>
 <span id="cb48-3"><a></a>    .groupby(<span class="st">"topic"</span>)</span>
@@ -1395,7 +1396,7 @@ Expr=ReadParquetFSSpec(92994fd)&gt;</code></pre>
 </section>
 <section id="section-7" class="slide level2 center">
 <h2></h2>
-<div id="af43cced" class="cell" data-execution_count="40">
+<div id="9c22b1c4" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a></a>ddf <span class="op">=</span> dd.read_parquet(</span>
 <span id="cb49-2"><a></a>    <span class="st">"s3://dask-data/nyc-taxi/nyc-2015.parquet/part.*.parquet"</span>,</span>
 <span id="cb49-3"><a></a>    columns<span class="op">=</span>[</span>
@@ -1407,7 +1408,7 @@ Expr=ReadParquetFSSpec(92994fd)&gt;</code></pre>
 <div class="cell fragment" data-execution_count="40">
 
 </div>
-<div id="61ba40ba" class="cell" data-execution_count="41">
+<div id="fee837ad" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a></a>result <span class="op">=</span> (</span>
 <span id="cb50-2"><a></a>  ddf</span>
 <span id="cb50-3"><a></a>    .groupby(<span class="st">"passenger_count"</span>)</span>
@@ -1428,14 +1429,14 @@ Dask Name: getitem, 4 expressions
 Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(observed=False, chunk_kwargs={'numeric_only': False}, aggregate_kwargs={'numeric_only': False}, _slice='tip_amount'))['tip_amount']</code></pre>
 </div>
 </div>
-<div id="9dee0e91" class="cell" data-execution_count="42">
+<div id="39497b33" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a></a><span class="im">import</span> dask.dataframe <span class="im">as</span> dd</span>
 <span id="cb52-2"><a></a><span class="im">from</span> dask.distributed <span class="im">import</span> Client</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="42">
 
 </div>
-<div id="c4be1d52" class="cell" data-execution_count="43">
+<div id="39a115c8" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a></a>client <span class="op">=</span> Client()</span>
 <span id="cb53-2"><a></a>client</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1445,7 +1446,7 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-16edf3bb-108c-11f0-83c2-ac91a1bd3e89</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-e594632d-2ea1-11f0-bb25-300505fc3398</p>
         
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
@@ -1471,7 +1472,7 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">f05f977d</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">f53f80c6</p>
         
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
@@ -1501,12 +1502,12 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-718a693b-252a-46c1-8c52-f3bf40392248</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-7a7e20ae-680f-413f-8349-5ef74ab66d41</p>
             
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:42119</td>
+<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:36451</td>
 <td style="text-align: left;"><strong>Workers:</strong> 5</td>
 </tr>
 <tr class="even">
@@ -1540,19 +1541,19 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:43811</td>
+<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:38695</td>
 <td style="text-align: left;"><strong>Total threads:</strong> 4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:41563/status" target="_blank">http://127.0.0.1:41563/status</a></td>
+<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:42037/status" target="_blank">http://127.0.0.1:42037/status</a></td>
 <td style="text-align: left;"><strong>Memory:</strong> 6.19 GiB</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:35935</td>
+<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:36639</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-_gb6juxy</td>
+<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-v192hinx</td>
 </tr>
 </tbody>
 </table>
@@ -1572,19 +1573,19 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:44137</td>
+<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:38607</td>
 <td style="text-align: left;"><strong>Total threads:</strong> 4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:33397/status" target="_blank">http://127.0.0.1:33397/status</a></td>
+<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:36703/status" target="_blank">http://127.0.0.1:36703/status</a></td>
 <td style="text-align: left;"><strong>Memory:</strong> 6.19 GiB</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:37185</td>
+<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:44205</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-cgaj78q6</td>
+<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-6vl6qmav</td>
 </tr>
 </tbody>
 </table>
@@ -1604,19 +1605,19 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:44955</td>
+<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:46393</td>
 <td style="text-align: left;"><strong>Total threads:</strong> 4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:35973/status" target="_blank">http://127.0.0.1:35973/status</a></td>
+<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:45617/status" target="_blank">http://127.0.0.1:45617/status</a></td>
 <td style="text-align: left;"><strong>Memory:</strong> 6.19 GiB</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:39909</td>
+<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:43189</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-4d4y_kdh</td>
+<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-0fb4s5of</td>
 </tr>
 </tbody>
 </table>
@@ -1636,19 +1637,19 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:38251</td>
+<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:35543</td>
 <td style="text-align: left;"><strong>Total threads:</strong> 4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:41813/status" target="_blank">http://127.0.0.1:41813/status</a></td>
+<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:44503/status" target="_blank">http://127.0.0.1:44503/status</a></td>
 <td style="text-align: left;"><strong>Memory:</strong> 6.19 GiB</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:33301</td>
+<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:34849</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-qv2wm_g6</td>
+<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-wg65skaf</td>
 </tr>
 </tbody>
 </table>
@@ -1668,19 +1669,19 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:36207</td>
+<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:38367</td>
 <td style="text-align: left;"><strong>Total threads:</strong> 4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:39999/status" target="_blank">http://127.0.0.1:39999/status</a></td>
+<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:46265/status" target="_blank">http://127.0.0.1:46265/status</a></td>
 <td style="text-align: left;"><strong>Memory:</strong> 6.19 GiB</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:35947</td>
+<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:42089</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-4z5v9mw3</td>
+<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-dv2lna_x</td>
 </tr>
 </tbody>
 </table>
@@ -1937,349 +1938,331 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
       });
     </script>
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
-          }
-        }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
         });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/s-v-b\.github\.io\/IFEBY310\/");
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-        }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
             }
-              // target, if specified
-              link.setAttribute("target", "_blank");
-              if (link.getAttribute("rel") === null) {
-                link.setAttribute("rel", "noopener");
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
               }
-              // default icon
-              link.classList.add("external");
-          }
+            }
+            return codeEl.innerText;
         }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
-          }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
         });
-      }
-          let selectedAnnoteEl;
-          const selectorForAnnotation = ( cell, annotation) => {
-            let cellAttr = 'data-code-cell="' + cell + '"';
-            let lineAttr = 'data-code-annotation="' +  annotation + '"';
-            const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-            return selector;
-          }
-          const selectCodeLines = (annoteEl) => {
-            const doc = window.document;
-            const targetCell = annoteEl.getAttribute("data-target-cell");
-            const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-            const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-            const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-            const lineIds = lines.map((line) => {
-              return targetCell + "-" + line;
-            })
-            let top = null;
-            let height = null;
-            let parent = null;
-            if (lineIds.length > 0) {
-                //compute the position of the single el (top and bottom and make a div)
-                const el = window.document.getElementById(lineIds[0]);
-                top = el.offsetTop;
-                height = el.offsetHeight;
-                parent = el.parentElement.parentElement;
-              if (lineIds.length > 1) {
-                const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-                const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-                height = bottom - top;
-              }
-              if (top !== null && height !== null && parent !== null) {
-                // cook up a div (if necessary) and position it 
-                let div = window.document.getElementById("code-annotation-line-highlight");
-                if (div === null) {
-                  div = window.document.createElement("div");
-                  div.setAttribute("id", "code-annotation-line-highlight");
-                  div.style.position = 'absolute';
-                  parent.appendChild(div);
-                }
-                div.style.top = top - 2 + "px";
-                div.style.height = height + 4 + "px";
-                div.style.left = 0;
-                let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-                if (gutterDiv === null) {
-                  gutterDiv = window.document.createElement("div");
-                  gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                  gutterDiv.style.position = 'absolute';
-                  const codeCell = window.document.getElementById(targetCell);
-                  const gutter = codeCell.querySelector('.code-annotation-gutter');
-                  gutter.appendChild(gutterDiv);
-                }
-                gutterDiv.style.top = top - 2 + "px";
-                gutterDiv.style.height = height + 4 + "px";
-              }
-              selectedAnnoteEl = annoteEl;
-            }
-          };
-          const unselectCodeLines = () => {
-            const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-            elementsIds.forEach((elId) => {
-              const div = window.document.getElementById(elId);
-              if (div) {
-                div.remove();
-              }
-            });
-            selectedAnnoteEl = undefined;
-          };
-            // Handle positioning of the toggle
-        window.addEventListener(
-          "resize",
-          throttle(() => {
-            elRect = undefined;
-            if (selectedAnnoteEl) {
-              selectCodeLines(selectedAnnoteEl);
-            }
-          }, 10)
-        );
-        function throttle(fn, ms) {
-        let throttle = false;
-        let timer;
-          return (...args) => {
-            if(!throttle) { // first call gets through
-                fn.apply(this, args);
-                throttle = true;
-            } else { // all the others get throttled
-                if(timer) clearTimeout(timer); // cancel #2
-                timer = setTimeout(() => {
-                  fn.apply(this, args);
-                  timer = throttle = false;
-                }, ms);
-            }
-          };
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
         }
-          const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
-          for (let i=0; i<annoteTargets.length; i++) {
-            const annoteTarget = annoteTargets[i];
-            const targetCell = annoteTarget.getAttribute("data-target-cell");
-            const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
-            const contentFn = () => {
-              const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-              if (content) {
-                const tipContent = content.cloneNode(true);
-                tipContent.classList.add("code-annotation-tip-content");
-                return tipContent.outerHTML;
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/s-v-b\.github\.io\/IFEBY310\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
               }
-            }
-            const config = {
-              allowHTML: true,
-              content: contentFn,
-              onShow: (instance) => {
-                selectCodeLines(instance.reference);
-                instance.reference.classList.add('code-annotation-active');
-                window.tippy.hideAll();
-              },
-              onHide: (instance) => {
-                unselectCodeLines();
-                instance.reference.classList.remove('code-annotation-active');
-              },
-              maxWidth: 300,
-              delay: [50, 0],
-              duration: [200, 0],
-              offset: [5, 10],
-              arrow: true,
-              appendTo: function(el) {
-                return el.parentElement.parentElement.parentElement;
-              },
-              interactive: true,
-              interactiveBorder: 10,
-              theme: 'light-border',
-              placement: 'right',
-              popperOptions: {
-                modifiers: [
-                {
-                  name: 'flip',
-                  options: {
-                    flipVariations: false, // true by default
-                    allowedAutoPlacements: ['right'],
-                    fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
-                  },
-                },
-                {
-                  name: 'preventOverflow',
-                  options: {
-                    mainAxis: false,
-                    altAxis: false
-                  }
+                // target, if specified
+                link.setAttribute("target", "_blank");
+                if (link.getAttribute("rel") === null) {
+                  link.setAttribute("rel", "noopener");
                 }
-                ]        
-              }      
-            };
-            window.tippy(annoteTarget, config); 
+                // default icon
+                link.classList.add("external");
+            }
           }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        } else {
-          return undefined;
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+            let selectedAnnoteEl;
+            const selectorForAnnotation = ( cell, annotation) => {
+              let cellAttr = 'data-code-cell="' + cell + '"';
+              let lineAttr = 'data-code-annotation="' +  annotation + '"';
+              const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+              return selector;
+            }
+            const selectCodeLines = (annoteEl) => {
+              const doc = window.document;
+              const targetCell = annoteEl.getAttribute("data-target-cell");
+              const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+              const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+              const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+              const lineIds = lines.map((line) => {
+                return targetCell + "-" + line;
+              })
+              let top = null;
+              let height = null;
+              let parent = null;
+              if (lineIds.length > 0) {
+                  //compute the position of the single el (top and bottom and make a div)
+                  const el = window.document.getElementById(lineIds[0]);
+                  top = el.offsetTop;
+                  height = el.offsetHeight;
+                  parent = el.parentElement.parentElement;
+                if (lineIds.length > 1) {
+                  const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+                  const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+                  height = bottom - top;
+                }
+                if (top !== null && height !== null && parent !== null) {
+                  // cook up a div (if necessary) and position it 
+                  let div = window.document.getElementById("code-annotation-line-highlight");
+                  if (div === null) {
+                    div = window.document.createElement("div");
+                    div.setAttribute("id", "code-annotation-line-highlight");
+                    div.style.position = 'absolute';
+                    parent.appendChild(div);
+                  }
+                  div.style.top = top - 2 + "px";
+                  div.style.height = height + 4 + "px";
+                  div.style.left = 0;
+                  let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+                  if (gutterDiv === null) {
+                    gutterDiv = window.document.createElement("div");
+                    gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                    gutterDiv.style.position = 'absolute';
+                    const codeCell = window.document.getElementById(targetCell);
+                    const gutter = codeCell.querySelector('.code-annotation-gutter');
+                    gutter.appendChild(gutterDiv);
+                  }
+                  gutterDiv.style.top = top - 2 + "px";
+                  gutterDiv.style.height = height + 4 + "px";
+                }
+                selectedAnnoteEl = annoteEl;
+              }
+            };
+            const unselectCodeLines = () => {
+              const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+              elementsIds.forEach((elId) => {
+                const div = window.document.getElementById(elId);
+                if (div) {
+                  div.remove();
+                }
+              });
+              selectedAnnoteEl = undefined;
+            };
+              // Handle positioning of the toggle
+          window.addEventListener(
+            "resize",
+            throttle(() => {
+              elRect = undefined;
+              if (selectedAnnoteEl) {
+                selectCodeLines(selectedAnnoteEl);
+              }
+            }, 10)
+          );
+          function throttle(fn, ms) {
+          let throttle = false;
+          let timer;
+            return (...args) => {
+              if(!throttle) { // first call gets through
+                  fn.apply(this, args);
+                  throttle = true;
+              } else { // all the others get throttled
+                  if(timer) clearTimeout(timer); // cancel #2
+                  timer = setTimeout(() => {
+                    fn.apply(this, args);
+                    timer = throttle = false;
+                  }, ms);
+              }
+            };
+          }
+            const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+            for (let i=0; i<annoteTargets.length; i++) {
+              const annoteTarget = annoteTargets[i];
+              const targetCell = annoteTarget.getAttribute("data-target-cell");
+              const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+              const contentFn = () => {
+                const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+                if (content) {
+                  const tipContent = content.cloneNode(true);
+                  tipContent.classList.add("code-annotation-tip-content");
+                  return tipContent.outerHTML;
+                }
+              }
+              const config = {
+                allowHTML: true,
+                content: contentFn,
+                onShow: (instance) => {
+                  selectCodeLines(instance.reference);
+                  instance.reference.classList.add('code-annotation-active');
+                  window.tippy.hideAll();
+                },
+                onHide: (instance) => {
+                  unselectCodeLines();
+                  instance.reference.classList.remove('code-annotation-active');
+                },
+                maxWidth: 300,
+                delay: [50, 0],
+                duration: [200, 0],
+                offset: [5, 10],
+                arrow: true,
+                appendTo: function(el) {
+                  return el.parentElement.parentElement.parentElement;
+                },
+                interactive: true,
+                interactiveBorder: 10,
+                theme: 'light-border',
+                placement: 'right',
+                popperOptions: {
+                  modifiers: [
+                  {
+                    name: 'flip',
+                    options: {
+                      flipVariations: false, // true by default
+                      allowedAutoPlacements: ['right'],
+                      fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                    },
+                  },
+                  {
+                    name: 'preventOverflow',
+                    options: {
+                      mainAxis: false,
+                      altAxis: false
+                    }
+                  }
+                  ]        
+                }      
+              };
+              window.tippy(annoteTarget, config); 
+            }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
         <script type="text/javascript">
         (function(d) {
           d.querySelectorAll(".pseudocode-container").forEach(function(el) {
