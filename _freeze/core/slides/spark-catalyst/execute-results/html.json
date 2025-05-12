@@ -2,7 +2,7 @@
   "hash": "0ad6161c0b2e85946194c233e898d074",
   "result": {
     "engine": "jupyter",
-    "markdown": "---\ntitle: \"Spark catalyst\"\nengine: jupyter\ndate: \"2025-01-17\"\n---\n\n        \n\n\n\n# Catalyst overview  {background-color=\"#1c191c\"}\n\n\n# SQL query planning {background-color=\"#1c191c\"}\n\n\n# Dataframes {background-color=\"#1c191c\"}\n\n\n# Managed tables {background-color=\"#1c191c\"}\n\n\n# Unmanaged tables {background-color=\"#1c191c\"}\n\n\n# References {background-color=\"#1c191c\"}\n\n",
+    "markdown": "---\ntitle: \"Spark catalyst\"\nengine: jupyter\ndate: \"2025-01-17\"\n---\n        \n\n\n\n# Catalyst overview  {background-color=\"#1c191c\"}\n\n\n# SQL query planning {background-color=\"#1c191c\"}\n\n\n# Dataframes {background-color=\"#1c191c\"}\n\n\n# Managed tables {background-color=\"#1c191c\"}\n\n\n# Unmanaged tables {background-color=\"#1c191c\"}\n\n\n# References {background-color=\"#1c191c\"}\n\n",
     "supporting": [
       "spark-catalyst_files"
     ],

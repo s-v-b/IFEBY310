@@ -2,7 +2,7 @@
   "hash": "1ccb543d07102faaf1c901b1356c7d0d",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Spark multicore\"\nengine: knitr\ndate: \"2025-01-17\"\n---\n\n\n\n\n\n\n[Official documentation](https://spark.apache.org/docs/latest/spark-standalone.html#installing-spark-standalone-to-a-cluster)",
+    "markdown": "---\ntitle: \"Spark multicore\"\nengine: knitr\ndate: \"2025-01-17\"\n---\n\n\n\n\n[Official documentation](https://spark.apache.org/docs/latest/spark-standalone.html#installing-spark-standalone-to-a-cluster)",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
