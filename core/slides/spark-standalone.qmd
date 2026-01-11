@@ -1,7 +1,14 @@
 ---
 title: "Spark standalone"
-engine: knitr
-date: "2025-01-17"
+
+format:
+  revealjs: 
+    footer: |
+      [Spark Standalone](https://stephane-v-boucheron.fr/slides/spark-standalone.html)
+        
+execute:
+  eval: false
+  echo: true
 ---
 
 

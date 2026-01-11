@@ -1,5 +1,5 @@
 ---
-date: "2025/01/17 (updated: `r Sys.Date()`)"
+date: "`r Sys.Date()`"
 title: "Big data technologies"
 
 engine: knitr

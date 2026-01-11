@@ -1,6 +1,6 @@
 ---
 title: "Apache and RDD"
-date: "2025/01/17 (updated: `r Sys.Date()`)"
+date: "2025-01-17 (updated: `r Sys.Date()`)"
 engine: jupyter
 ---
 

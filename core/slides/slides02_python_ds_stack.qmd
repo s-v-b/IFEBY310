@@ -1,5 +1,5 @@
 ---
-date: "2025/01/17 (updated: `r Sys.Date()`)"
+date: "`r Sys.Date()`"
 title: "Python Data Science Stack"
 engine: knitr
 ---
@@ -51,18 +51,24 @@ engine: knitr
 
 # Trends  {background-color="#1c191c"}
 
-## The [`stackoverflow` 2023 survey](https://survey.stackoverflow.co/2023/)
+## Monitoring trends in software developments
+
+
+[Stackoverflow Developer Survey](https://survey.stackoverflow.co/2025/#overview)
 
 
 
-<iframe width="780" height="500" src="https://survey.stackoverflow.co/2023/#section-most-popular-technologies-programming-scripting-and-markup-languages" title="Stackoverflow survey"></iframe>
+## The [`stackoverflow` 2025 survey](https://survey.stackoverflow.co/2025/)
 
 
-## `Python` popularity growth
+
+<iframe width="780" height="500" src="https://survey.stackoverflow.co/2025/#most-popular-technologies-language-prof" title="Stackoverflow 2025 survey"></iframe>
+
+<!-- ## `Python` popularity growth
 
 <center>
 ![](/images/python_growth_major_languages.png){width="60%"}
-</center>
+</center> -->
 
 
 ## `Python` popularity growth
@@ -80,7 +86,7 @@ Besides these features, `Python` has:
 
 - large communities for data science, analytics, etc.
 - many, well-established, well-documented libraries
-- *huge* demand from the industry
+- demand from the industry
 
 
 
@@ -433,8 +439,16 @@ Ways to use all these tools
 ## Interfaces/IDE : VS Code (and other editors)
 
 
+[introducing-vs-code-insiders-podcast](https://code.visualstudio.com/blogs/2025/12/03/introducing-vs-code-insiders-podcast)
+
+
+[![vs code blog](/images/snapshot_code.visualstudio.com.png)](https://code.visualstudio.com/blogs/2025/12/03/introducing-vs-code-insiders-podcast)
+
+
+## Interface/IDE : Positron
+
 ```{=html}
-<iframe width="780" height="500" src="https://code.visualstudio.com/docs/languages/python" title="VS Code & Python"></iframe>
+<iframe width="780" height="500" src="https://positron.posit.co" title="Positron homepage"></iframe>
 ```
 
 

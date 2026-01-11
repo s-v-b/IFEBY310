@@ -9,7 +9,7 @@ draft: false
 ::: callout-important
 
 - {{< fa circle-exclamation >}} 1 session during Week 4/**0 session during Week 5**
--   Friday 4 February 2025 Sophie Germain 0014 15h45-17h45
+-   Monday 02 February 2026 Halle 166E 10h45-12h45
 -   {{< fa cal >}} [Calendar](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
 
 :::

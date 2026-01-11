@@ -8,8 +8,8 @@ draft: false
 
 ::: callout-important
 
--   Room: Sophie Germain 0014 
--   Friday 31 January 2025  15h45-17h45
+-   Room: Halle 166E 
+-   Monday 26 January 2026  10h45-12h45
 -   {{< fa cal >}} [Calendar](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
 
 :::

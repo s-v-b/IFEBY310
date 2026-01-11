@@ -1,6 +1,6 @@
 ---
 title: "Spark deeper dive"
-date: "2025-01-17"
+date: "2025-01-17 (updated: `r Sys.Date()`)"
 
 engine: jupyter
 jupyter: python3

@@ -3,11 +3,13 @@ execute:
   error: true
   eval: true
 
-code-fold: true
+code-fold: show
+
 code-tools: 
   source: repo
 
 jupyter: python3
 
 lang: en-US
+
 

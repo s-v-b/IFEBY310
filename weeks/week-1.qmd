@@ -7,8 +7,8 @@ draft: false
 
 ::: callout-important
 
--   Room: Sophie Germain 0014 
--   Friday 17 January 2025  15h45-17h45
+-   Room: Halle 166E 
+-   Monday 12 January 2026  10h45-12h45
 -   {{< fa cal >}} [Calendar](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
 
 :::
@@ -32,8 +32,12 @@ During the next two weeks, we shall explore the Python Data Stack.
 - {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook01_python.ipynb" download>Jupyter notebook I : tour of Python</a> 
 - {{< fa globe >}} [html: tour of Python](/core/notebooks/notebook01_python.html)  
 
-- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook02_numpy.ipynb" download>Jupyter notebook II : tour of numpy</a> 
-- {{< fa globe >}} [html: tour of numpy](/core/notebooks/notebook02_numpy.html)  
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook02_numpy.ipynb" download>Jupyter notebook II : tour of NumPy</a> 
+- {{< fa globe >}} [html: tour of NumPy](/core/notebooks/notebook02_numpy.html) 
+
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook02-2_numpy.ipynb" download>Jupyter notebook II bis: NumPy Broadcasting</a> 
+- {{< fa globe >}} [html: NumPy Broadcasting](/core/notebooks/notebook02-2_numpy.html) 
+
 
 ## References 
 

@@ -1,5 +1,7 @@
 ---
-title: Introduction to `numpy`
+title: "Introduction to `numpy`"
+date: "`r Sys.Date()"
+
 jupyter: python3
 
 engine: jupyter
@@ -21,7 +23,6 @@ Library documentation: <a>http://numpy.org/</a>
 ## The base `numpy.array` object
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:03:56.772810Z', start_time: '2022-01-19T10:03:56.767960Z'}
 #| slideshow: {slide_type: subslide}
 #| label:  setup
 import numpy as np
@@ -40,18 +41,15 @@ type(v)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:04:14.635335Z', start_time: '2022-01-19T10:04:14.631049Z'}
 #| scrolled: true
 v.shape
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:04:21.792284Z', start_time: '2022-01-19T10:04:21.788055Z'}
 v.ndim
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:04:25.288962Z', start_time: '2022-01-19T10:04:25.284105Z'}
 #| scrolled: true
 v.dtype is float
 ```
@@ -61,46 +59,44 @@ v.dtype
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:04:40.960057Z', start_time: '2022-01-19T10:04:40.955004Z'}
+
 np.uint8 is int
 ```
 
 ::: {.callout-tip collapse="true"} 
 
-Use copilot *explain* to understand the chunks:
+Use copilot or any AI to *explain* to understand the chunks:
 
->  The np.uint8 is a data type in NumPy, representing an unsigned 8-bit integer, which can store values from 0 to 255. The int type is the built-in integer type in Python, which can represent any integer value without a fixed size limit.
+>  The `np.uint8` is a data type in NumPy, representing an unsigned 8-bit integer, which can store values from 0 to 255. The `int` type is the built-in integer type in Python, which can represent any integer value without a fixed size limit.
 
 :::
 
 ```{python}
-np.array([2**120, 2**40], dtype=np.int64)
+try:
+    np.array([2**120, 2**40], dtype=np.int64)
+except OverflowError:
+    print('OverflowError: Python int too large to convert to C long')
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:04:43.844304Z', start_time: '2022-01-19T10:04:43.838964Z'}
 np.uint16 is int 
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:04:45.206350Z', start_time: '2022-01-19T10:04:45.201261Z'}
 np.uint32  is int
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:04:48.250324Z', start_time: '2022-01-19T10:04:48.244917Z'}
 #| slideshow: {slide_type: subslide}
 w = np.array([1.3, 2, 3, 4], dtype=np.int64)
 w
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:05:00.151747Z', start_time: '2022-01-19T10:05:00.146141Z'}
 w.dtype
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:08:25.417588Z', start_time: '2022-01-19T10:08:25.414352Z'}
 #| slideshow: {slide_type: subslide}
 a = np.arange(100)
 ```
@@ -118,63 +114,50 @@ a
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:08:30.650242Z', start_time: '2022-01-19T10:08:30.645228Z'}
 a.dtype
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:08:34.906164Z', start_time: '2022-01-19T10:08:34.899997Z'}
-#| scrolled: true
-#| slideshow: {slide_type: subslide}
 -3 * a ** 2
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:08:37.560386Z', start_time: '2022-01-19T10:08:37.557072Z'}
 #| scrolled: true
 #| slideshow: {slide_type: subslide}
 a[42] = 13
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:08:38.581351Z', start_time: '2022-01-19T10:08:38.578031Z'}
 a[42] = 1025
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:09:34.115461Z', start_time: '2022-01-19T10:09:34.109542Z'}
 np.info(np.int16)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:09:20.037776Z', start_time: '2022-01-19T10:09:20.031216Z'}
 np.int16
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:08:39.686116Z', start_time: '2022-01-19T10:08:39.678619Z'}
 #| scrolled: true
 dict(enumerate(a))
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:09:47.067438Z', start_time: '2022-01-19T10:09:47.061548Z'}
 a + 1
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:10:02.092179Z', start_time: '2022-01-19T10:10:02.086622Z'}
 b = a + 1
 b
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:10:12.761835Z', start_time: '2022-01-19T10:10:12.756736Z'}
 a is b
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:10:22.189001Z', start_time: '2022-01-19T10:10:22.185209Z'}
 #| slideshow: {slide_type: subslide}
 f = id(a)
 a += 1
@@ -182,12 +165,10 @@ f, id(a)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:10:23.392681Z', start_time: '2022-01-19T10:10:23.387466Z'}
 a
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:10:27.087595Z', start_time: '2022-01-19T10:10:27.081763Z'}
 b
 ```
 
@@ -200,14 +181,12 @@ Beware of the dimensions: a 1D array is not the same as a 2D array with 1 column
 
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:10:30.211477Z', start_time: '2022-01-19T10:10:30.204724Z'}
 #| slideshow: {slide_type: '-'}
 a1 = np.array([1, 2, 3])
 print(a1, a1.shape, a1.ndim)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:11:39.470253Z', start_time: '2022-01-19T10:11:39.465331Z'}
 a2 = np.array([1, 2, 3])
 print(a2, a2.shape, a2.ndim)
 ```
@@ -215,9 +194,9 @@ print(a2, a2.shape, a2.ndim)
 
 [More on NumPy quickstart](https://numpy.org/devdocs/user/quickstart.html)
 
-::: {.callout-note}
+::: {.callout-note title="Question" collapse="true"}
 
-List the attributes and methods of class `numpy.ndarray`. 
+List the data attributes and methods (the attributes) of class `numpy.ndarray`. 
 You may use function `dir()` and filter the result using 
 methods for objects of class `string`. 
 
@@ -226,7 +205,6 @@ methods for objects of class `string`.
 ## Matrix multiplication
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:11:41.023400Z', start_time: '2022-01-19T10:11:41.018032Z'}
 #| scrolled: true
 a2.dot(a1) # inner product 
 ```
@@ -254,7 +232,6 @@ a2.dot(a1) # inner product
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:11:55.636179Z', start_time: '2022-01-19T10:11:55.630699Z'}
 #| slideshow: {slide_type: subslide}
 # Declare a 2D array using a nested list as the constructor argument
 M = np.array([[1,2], 
@@ -264,18 +241,15 @@ M
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:11:55.792686Z', start_time: '2022-01-19T10:11:55.787196Z'}
 M.shape, M.size
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:12:05.624781Z', start_time: '2022-01-19T10:12:05.619551Z'}
 #| scrolled: true
 M.ravel(), M.ndim, M.ravel().shape
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:12:32.331344Z', start_time: '2022-01-19T10:12:32.325181Z'}
 #| slideshow: {slide_type: subslide}
 # arguments: start, stop, step
 x = (
@@ -303,18 +277,15 @@ x @ y, x.dot(y)
 ## Generating arrays
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:12:34.268059Z', start_time: '2022-01-19T10:12:34.260897Z'}
 np.linspace(0, 10, 51)  # meaning of the 3 positional parameters ? 
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:13:05.893229Z', start_time: '2022-01-19T10:13:05.887241Z'}
 #| slideshow: {slide_type: '-'}
 np.logspace(0, 10, 11, base=np.e), np.e**(np.arange(11))
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:14:43.385320Z', start_time: '2022-01-19T10:14:43.273674Z'}
 #| slideshow: {slide_type: subslide}
 import matplotlib.pyplot as plt
 
@@ -327,40 +298,40 @@ plt.plot(bm, lw=3)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:14:46.379228Z', start_time: '2022-01-19T10:14:46.373157Z'}
 #| slideshow: {slide_type: subslide}
 np.diag(np.arange(10))
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:15:19.746421Z', start_time: '2022-01-19T10:15:19.740184Z'}
 #| slideshow: {slide_type: '-'}
 zozo = np.zeros((10, 10), dtype=np.float32)
 zozo
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:15:25.983891Z', start_time: '2022-01-19T10:15:25.979180Z'}
 #| scrolled: true
 #| slideshow: {slide_type: '-'}
 zozo.shape
 ```
 
+Coercing to another `numpy` type
+
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:15:28.982811Z', start_time: '2022-01-19T10:15:28.978770Z'}
+zozo.astype(np.short)[:5, :**5**]
+```
+
+```{python}
 #| scrolled: true
 #| slideshow: {slide_type: subslide}
 print(M)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:15:29.424077Z', start_time: '2022-01-19T10:15:29.418759Z'}
 #| scrolled: true
 M[1, 1]
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:16:19.133869Z', start_time: '2022-01-19T10:16:19.128542Z'}
 #| slideshow: {slide_type: '-'}
 # assign new value
 M[0, 0] = 7
@@ -369,12 +340,10 @@ M
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:16:56.907063Z', start_time: '2022-01-19T10:16:56.901415Z'}
 M
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:16:44.838732Z', start_time: '2022-01-19T10:16:44.832758Z'}
 #| scrolled: true
 # Warning: the next m is a **view** on M. 
 # One again, no copies unless you ask for one!
@@ -383,7 +352,6 @@ m
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:17:45.614910Z', start_time: '2022-01-19T10:17:45.609735Z'}
 m[:] = 3.14
 M
 ```
@@ -396,7 +364,6 @@ M
 # Slicing
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:19:44.021962Z', start_time: '2022-01-19T10:19:44.015749Z'}
 #| slideshow: {slide_type: subslide}
 # slicing works just like with anything else (lists, etc.)
 A = np.array([1, 2, 3, 4, 5])
@@ -407,66 +374,54 @@ print(A[:-1:2])
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:20:08.103594Z', start_time: '2022-01-19T10:20:08.097276Z'}
 [[n + m * 10 for n in range(5)] for m in range(5)]
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:20:28.427508Z', start_time: '2022-01-19T10:20:28.422319Z'}
 A = np.array([[n + m * 10 for n in range(5)] for m in range(5)])
 A
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:20:57.347620Z', start_time: '2022-01-19T10:20:57.343219Z'}
 #| slideshow: {slide_type: subslide}
 print(A[1:4])
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:21:15.952179Z', start_time: '2022-01-19T10:21:15.948641Z'}
 m = A[:, 1:4]
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:21:22.878446Z', start_time: '2022-01-19T10:21:22.874600Z'}
 m[1, 1] = 123
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:21:24.877152Z', start_time: '2022-01-19T10:21:24.871364Z'}
 A
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:21:35.679054Z', start_time: '2022-01-19T10:21:35.674159Z'}
 A[1]
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:21:36.493496Z', start_time: '2022-01-19T10:21:36.487589Z'}
 A[:, 1]
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:22:13.690836Z', start_time: '2022-01-19T10:22:13.685191Z'}
 A[:, ::-1]
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:22:13.893926Z', start_time: '2022-01-19T10:22:13.890163Z'}
 #| slideshow: {slide_type: subslide}
 print(A)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:22:59.881914Z', start_time: '2022-01-19T10:22:59.877820Z'}
 row_indices = np.array([1, 2, 4])
 print(A[row_indices])
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:23:06.495460Z', start_time: '2022-01-19T10:23:06.490235Z'}
 A[:, row_indices]
 ```
 
@@ -474,7 +429,6 @@ Another way is through masking with an array of `bool`s
 
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:23:28.237730Z', start_time: '2022-01-19T10:23:28.230508Z'}
 #| slideshow: {slide_type: '-'}
 # index masking
 B = np.arange(5)
@@ -494,7 +448,6 @@ Don't forget that `python` *does not make copies unless told to do so* (same as 
 If you are not careful enough, this typically leads to a *lot of errors* and to being fired !!
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:23:51.294522Z', start_time: '2022-01-19T10:23:51.288358Z'}
 #| slideshow: {slide_type: '-'}
 y = x = np.arange(6)
 x[2] = 123
@@ -502,12 +455,10 @@ y
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:24:34.145203Z', start_time: '2022-01-19T10:24:34.140801Z'}
 x is y
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:24:38.815817Z', start_time: '2022-01-19T10:24:38.811878Z'}
 #| slideshow: {slide_type: subslide}
 # A real copy
 y = x.copy()
@@ -515,13 +466,11 @@ x is y
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:24:57.551439Z', start_time: '2022-01-19T10:24:57.548073Z'}
 # Or equivalently (but the one above is better...)
 y = np.copy(x)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:24:57.733643Z', start_time: '2022-01-19T10:24:57.727390Z'}
 x[0] = -12
 print(x, y, x is y)
 ```
@@ -529,31 +478,26 @@ print(x, y, x is y)
 To put values of x in y (copy values into an **existing** array) use  
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:27:00.707987Z', start_time: '2022-01-19T10:27:00.703474Z'}
 x = np.random.randn(10)
 x, id(x)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:27:35.874585Z', start_time: '2022-01-19T10:27:35.871235Z'}
 x.fill(2.78)   # in place. 
 x, id(x)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:27:39.785341Z', start_time: '2022-01-19T10:27:39.782357Z'}
 x[:] = 3.14  # x.fill(3.14)  can. be chained ...
 x, id(x)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:29:03.422782Z', start_time: '2022-01-19T10:29:03.418965Z'}
 x[:] = np.random.randn(x.shape[0])
 x, id(x)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:29:05.933501Z', start_time: '2022-01-19T10:29:05.929790Z'}
 y = np.empty(x.shape)  # how does empty() work ?
 y, id(y)
 ```
@@ -572,7 +516,6 @@ y, id(y), id(x), y is x
 In the next line you copy the values of `x` into an existing array `y` (of same size...)
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:29:26.993302Z', start_time: '2022-01-19T10:29:26.989487Z'}
 #| slideshow: {slide_type: '-'}
 y = np.zeros(x.shape)
 y[:] = x
@@ -582,7 +525,6 @@ y, y is x, np.all(y==x)
 While in the next line, you are aliasing, you are giving a new name `y` to the object named `x` (you should **never, ever** write something like this)
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:30:11.677048Z', start_time: '2022-01-19T10:30:11.673812Z'}
 #| slideshow: {slide_type: '-'}
 y = x
 y is x
@@ -596,14 +538,12 @@ y is x
 A `numpy` array can contain other things than numeric types
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:30:12.402445Z', start_time: '2022-01-19T10:30:12.399156Z'}
 #| slideshow: {slide_type: '-'}
 arr = np.array(['Labore', 'neque', 'ipsum', 'ut', 'non', 'quiquia', 'dolore.'])
 arr, arr.shape, arr.dtype
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:30:14.073657Z', start_time: '2022-01-19T10:30:14.062255Z'}
 #| scrolled: true
 #| slideshow: {slide_type: subslide}
 # arr.sum()
@@ -615,7 +555,6 @@ arr, arr.shape, arr.dtype
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:30:46.274448Z', start_time: '2022-01-19T10:30:46.269678Z'}
 #| slideshow: {slide_type: fragment}
 arr.dtype
 ```
@@ -629,7 +568,6 @@ The is another type: the `matrix` type
 In words: **don't use it** (IMhO) and stick with arrays
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:31:48.972264Z', start_time: '2022-01-19T10:31:48.968244Z'}
 #| slideshow: {slide_type: '-'}
 # Matrix VS array objects in numpy
 m1 = np.matrix(np.arange(3))
@@ -643,7 +581,6 @@ m1.transpose() @ m2, m1.shape, m1.transpose() * m2
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:31:50.070823Z', start_time: '2022-01-19T10:31:50.067191Z'}
 #| slideshow: {slide_type: fragment}
 a1 = np.arange(3)
 a2 = np.arange(3)
@@ -651,24 +588,20 @@ a1, a2
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:33:12.726005Z', start_time: '2022-01-19T10:33:12.719514Z'}
 #| scrolled: true
 #| slideshow: {slide_type: subslide}
 m1 * m2.T, m1.dot(m2.T)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:33:27.178091Z', start_time: '2022-01-19T10:33:27.172613Z'}
 a1 * a2
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:33:36.836024Z', start_time: '2022-01-19T10:33:36.830383Z'}
 a1.dot(a2)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:33:48.138130Z', start_time: '2022-01-19T10:33:48.132664Z'}
 np.outer(a1, a2)
 ```
 
@@ -681,7 +614,6 @@ Visit <https://numpy.org/doc/stable/reference/arrays.ndarray.html#arrays-ndarray
 ## Sparse matrices
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:37:31.887375Z', start_time: '2022-01-19T10:37:31.882051Z'}
 #| slideshow: {slide_type: '-'}
 from scipy.sparse import csc_matrix, csr_matrix, coo_matrix
 ```
@@ -698,12 +630,10 @@ X
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:37:48.232516Z', start_time: '2022-01-19T10:37:48.228484Z'}
 probs
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:37:48.397749Z', start_time: '2022-01-19T10:37:48.392611Z'}
 #| scrolled: true
 X_coo = coo_matrix(X)  ## coordinate format
 ```
@@ -714,13 +644,11 @@ X_coo
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:38:09.049157Z', start_time: '2022-01-19T10:38:09.044598Z'}
 #| slideshow: {slide_type: subslide}
 X_coo.nnz    # number pf non-zero coordinates 
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:38:14.258127Z', start_time: '2022-01-19T10:38:14.251407Z'}
 print(X, end='\n----\n')
 print(X_coo.data, end='\n----\n')
 print(X_coo.row, end='\n----\n')
@@ -739,13 +667,11 @@ But sparse column format useful as well (e.g. coordinate gradient descent)
 ## Bored with decimals?
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:39:04.467972Z', start_time: '2022-01-19T10:39:04.461304Z'}
 X = np.random.randn(5, 5)
 X
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:39:09.241253Z', start_time: '2022-01-19T10:39:09.235736Z'}
 # All number displayed by numpy (in the current kernel) are with 3 decimals max
 np.set_printoptions(precision=3)
 print(X)
@@ -757,18 +683,15 @@ np.set_printoptions(precision=8)
 `numpy` arrays can have any number of dimension (hence the name `ndarray`)
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:39:46.037716Z', start_time: '2022-01-19T10:39:46.032228Z'}
 X = np.arange(18).reshape(3, 2, 3)
 X
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:39:46.370909Z', start_time: '2022-01-19T10:39:46.366101Z'}
 X.shape
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:39:51.793204Z', start_time: '2022-01-19T10:39:51.787910Z'}
 X.ndim
 ```
 
@@ -777,7 +700,6 @@ Visit <https://numpy.org/doc/stable/reference/arrays.ndarray.html#arrays-ndarray
 # Aggregations and statistics
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:40:09.476064Z', start_time: '2022-01-19T10:40:09.470504Z'}
 #| scrolled: true
 #| slideshow: {slide_type: subslide}
 A = np.arange(42).reshape(7, 6)
@@ -785,49 +707,40 @@ A
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:40:15.486454Z', start_time: '2022-01-19T10:40:15.480429Z'}
 A.sum(), 42 * 41 //2
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:40:30.552043Z', start_time: '2022-01-19T10:40:30.545833Z'}
 A[:, 3].mean(), np.mean (3 + np.arange(0, 42, 6))
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:40:35.563769Z', start_time: '2022-01-19T10:40:35.558458Z'}
 A.mean(axis=0)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:41:32.219284Z', start_time: '2022-01-19T10:41:32.213546Z'}
 A.mean(axis=1)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:41:36.654691Z', start_time: '2022-01-19T10:41:36.649712Z'}
 #| scrolled: true
 #| slideshow: {slide_type: subslide}
 A[:,3].std(), A[:,3].var()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:41:41.843358Z', start_time: '2022-01-19T10:41:41.837835Z'}
 A[:,3].min(), A[:,3].max()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:42:19.023192Z', start_time: '2022-01-19T10:42:19.017379Z'}
 A.cumsum(axis=0)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:41:49.658126Z', start_time: '2022-01-19T10:41:49.652337Z'}
 A
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:42:28.725423Z', start_time: '2022-01-19T10:42:28.720388Z'}
 #| scrolled: true
 # sum of diagonal
 A.trace()
@@ -836,7 +749,6 @@ A.trace()
 # Linear Algebra
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:43:28.663538Z', start_time: '2022-01-19T10:43:28.659546Z'}
 #| slideshow: {slide_type: subslide}
 A = np.arange(30).reshape(6, 5)
 v1 = np.arange(0, 5)
@@ -844,17 +756,14 @@ v2 = np.arange(5, 10)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:43:28.871370Z', start_time: '2022-01-19T10:43:28.866058Z'}
 A
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:43:29.041390Z', start_time: '2022-01-19T10:43:29.035397Z'}
 v1, v2
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:43:30.302802Z', start_time: '2022-01-19T10:43:30.297408Z'}
 #| slideshow: {slide_type: '-'}
 v1 * v2
 ```
@@ -870,7 +779,6 @@ v1.reshape(5,1) @ v2.reshape(1,5)
 ## Inner products
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:43:39.940939Z', start_time: '2022-01-19T10:43:39.935975Z'}
 #| slideshow: {slide_type: '-'}
 # Inner product between vectors
 print(v1.dot(v2))
@@ -880,25 +788,21 @@ print(np.dot(v1, v2))
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:43:41.034492Z', start_time: '2022-01-19T10:43:41.028651Z'}
 #| scrolled: true
 #| slideshow: {slide_type: '-'}
 A, v1
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:43:45.633853Z', start_time: '2022-01-19T10:43:45.628678Z'}
 A.shape, v1.shape
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:43:55.770813Z', start_time: '2022-01-19T10:43:55.766693Z'}
 # Matrix-vector inner product
 A.dot(v1)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:44:01.146695Z', start_time: '2022-01-19T10:44:01.138719Z'}
 #| scrolled: true
 #| slideshow: {slide_type: subslide}
 # Transpose
@@ -906,7 +810,6 @@ A.T
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:44:05.408599Z', start_time: '2022-01-19T10:44:05.403379Z'}
 #| scrolled: true
 #| slideshow: {slide_type: '-'}
 print(v1)
@@ -917,7 +820,6 @@ v1 += 2
 ## Linear systems
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:44:47.947222Z', start_time: '2022-01-19T10:44:47.942465Z'}
 #| slideshow: {slide_type: '-'}
 A = np.array([[42,2,3], [4,5,6], [7,8,9]])
 b = np.array([1,2,3])
@@ -925,14 +827,12 @@ print(A, b, sep=2 * '\n')
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:44:48.103750Z', start_time: '2022-01-19T10:44:48.096615Z'}
 # solve a system of linear equations
 x = np.linalg.solve(A, b)
 x
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:44:49.896958Z', start_time: '2022-01-19T10:44:49.890609Z'}
 #| slideshow: {slide_type: '-'}
 A.dot(x)
 ```
@@ -940,7 +840,6 @@ A.dot(x)
 ## Eigenvalues and eigenvectors
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:45:14.757150Z', start_time: '2022-01-19T10:45:14.750149Z'}
 #| slideshow: {slide_type: '-'}
 A = np.random.rand(3,3)
 B = np.random.rand(3,3)
@@ -950,9 +849,11 @@ evals
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:45:16.164688Z', start_time: '2022-01-19T10:45:16.159112Z'}
 evecs
 ```
+
+
+
 
 ## Singular value decomposition (SVD)
 
@@ -965,14 +866,12 @@ where
 - $S$ is a diagonal matrix that contains the *singular* values in non-increasing order
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:47:54.504658Z', start_time: '2022-01-19T10:47:54.500097Z'}
 #| scrolled: true
 print(A)
 U, S, V = np.linalg.svd(A)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:48:52.598626Z', start_time: '2022-01-19T10:48:52.592465Z'}
 U.dot(np.diag(S)).dot(V)
 ```
 
@@ -981,7 +880,6 @@ A - U @ np.diag(S) @ V
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:49:07.814713Z', start_time: '2022-01-19T10:49:07.809269Z'}
 #| slideshow: {slide_type: subslide}
 # U and V are indeed orthonormal
 np.set_printoptions(precision=2)
@@ -1001,7 +899,6 @@ np.set_printoptions(precision=8)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:49:33.476362Z', start_time: '2022-01-19T10:49:33.198685Z'}
 #| slideshow: {slide_type: subslide}
 import numpy as np
 from scipy.datasets import face
@@ -1016,7 +913,6 @@ type(X)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:49:33.476362Z', start_time: '2022-01-19T10:49:33.198685Z'}
 #| scrolled: true
 #| slideshow: {slide_type: subslide}
 plt.imshow(X)
@@ -1025,34 +921,29 @@ _ = plt.axis('off')
 
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:53:29.332090Z', start_time: '2022-01-19T10:53:28.069519Z'}
 n_rows, n_cols, n_channels = X.shape
 X_reshaped = X.reshape(n_rows, n_cols * n_channels)
 U, S, V = np.linalg.svd(X_reshaped, full_matrices=False)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:54:28.825206Z', start_time: '2022-01-19T10:54:28.819913Z'}
 X_reshaped.shape
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:53:58.531955Z', start_time: '2022-01-19T10:53:58.526383Z'}
 X.shape
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:53:43.697818Z', start_time: '2022-01-19T10:53:43.259439Z'}
 plt.plot(S**2)  ## a kind of screeplot
 plt.yscale("log")
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:56:57.594009Z', start_time: '2022-01-19T10:56:57.588737Z'}
 #| slideshow: {slide_type: subslide}
 def compute_approx(X: np.ndarray, r: int):
     """Computes the best rank-r approximation of X using SVD.
-    We expect X to the 3D array corresponding to a color image, that we 
+    We expect X to be the 3D array corresponding to a color image, that we 
     reduce to a 2D one to apply SVD (no broadcasting).
     
     Parameters
@@ -1078,12 +969,15 @@ def compute_approx(X: np.ndarray, r: int):
     # Compute the approximation
     X_reshape_r = U.dot(np.diag(S)).dot(V)
     # Put it between 0 and 255 again and cast to integer type
-    return X_reshape_r.clip(min=0, max=255).astype('int')\
-        .reshape(n_rows, n_cols, n_channels)
+    return (
+        X_reshape_r
+            .clip(min=0, max=255)
+            .astype('int')
+            .reshape(n_rows, n_cols, n_channels)
+    )
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-19T10:57:57.381214Z', start_time: '2022-01-19T10:57:52.533636Z'}
 #| slideshow: {slide_type: subslide}
 ranks = [100, 70, 50, 30, 10, 5]
 n_ranks = len(ranks)
@@ -1098,14 +992,12 @@ for i, r in enumerate(ranks):
 ```
 
 
-::: {.callout-tip}
+::: {.callout-tip appearance="simple"}
 
 ### Variations
 
 In the code above, we recompute the SVD of `X` for every element in list `rank`.    
-In the next chunk, we compute the SVD once, and define a *generator* to generate the low rank approximations of matrix `X`. We take advantage of the fact that the SVD defines 
-an orthonormal basis for the space of matrices. In this adapted orthonormal basis 
-the optimal  low rank approximations of $X$ have  a sparse expansion.
+In the next chunk, we compute the SVD once, and define a *generator* to generate the low rank approximations of matrix `X`. We take advantage of the fact that the SVD defines an orthonormal basis for the space of matrices. In this adapted orthonormal basis the optimal  low rank approximations of $X$ have  a sparse expansion.
 
 :::
 
@@ -1127,7 +1019,7 @@ def gen_rank_k_approx(X):
     r = 0
     Y = np.zeros_like(X, dtype='float64')
     while (r<len(S)):
-      Y = Y + S[r] * (U[:,r,np.newaxis] @ V[r,:, np.newaxis].T)
+      Y = Y + S[r] * (U[:, r, np.newaxis] @ V[r, :, np.newaxis].T)
       r += 1
       yield r, Y
 ```
@@ -1155,3 +1047,8 @@ for i in range(100):
 
 
 Visit <https://numpy.org/numpy-tutorials/content/tutorial-svd.html>
+
+
+# Broadcasting
+
+

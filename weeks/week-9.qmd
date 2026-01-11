@@ -10,7 +10,7 @@ engine: jupyter
 ::: {.callout-important}
 
 
--   Friday 21 March 2025 Sophie Germain 1005 **13h30-15h30**
+-   Monday 16 March 2026 Halle 166E 10h45-12h45
 -   {{< fa cal >}} [Calendar](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
 
 :::

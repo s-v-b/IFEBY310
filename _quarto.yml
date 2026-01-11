@@ -105,3 +105,9 @@ execute:
 editor: source
 lang: en-US
 
+bibliography: "My Library.bib"
+
+
+csl: style/apa.csl
+
+

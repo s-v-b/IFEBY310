@@ -1,0 +1,48 @@
+---
+title: "Week 5"
+subtitle: "Définition de Données"
+editor: source
+draft: true
+---
+
+::: callout-important
+
+-   Room: TBA 14h-15h30
+-   TD/TP Ingémaths/METIS salle 2006 Etage 2 Sophie Germain Jeudi 13h30-16h00
+-   TD/TP MIASHS salles 2004-2005-2006 Étage 2 Sophie Germain Friday 15h45-18h15
+-   {{< fa cal >}} [Calendar MIASHS](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
+-   {{< fa cal >}} [Calendar Ingémaths/METIS](https://edt.math.univ-paris-diderot.fr/#/parcours/ingemath/l3)
+
+:::
+
+## Préparer
+
+Finir requêtes du [TD 2](/core/notebooks/td2.html) 
+
+## Lecture : slides
+
+[SQL Définition de données](/core/slides/LDD_0.html)
+
+[Modélisation des contraintes](/core/slides/LDD_1.html)
+
+
+## Notebooks : TD 3
+
+[html](/core/notebooks/td3.html)  [pdf](/core/notebooks/td3.pdf)
+
+{{< fa hand-point-right >}} Construisez des *vues* à partir de vos requêtes  
+
+## Solutions du  TD 2  (Week 4)
+
+[html](/solutions/td2.html)  [pdf](/solutions/td2.pdf)
+
+
+## Travail personnel
+
+[CC 1 2023-24](/exams/cc1-2023-10-27.html)
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [Agenda](/slides-listings.qmd) ⏎
+:::

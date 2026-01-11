@@ -15,8 +15,8 @@ We will have one weeky lecture. Each lecture is organized around [Slides](slides
 
 |           | Day       | Hour              | Room                       |  Start |
 |:---------:|:-----------:|:-------------------:|:--------------------------------|:--------|
-| Lecture     | Friday  | 15:45  - 17:46  | Sophie Germain 014 | 2025-01-17 --2025-02-21 |
-| Lecture     | Friday  | **13:30  - 15:30**  | Sophie Germain 1005 | 2025-03-07-...  |
+| Lecture     | Monday  | 10:45  - 12:45  | Halle aux Farines 166 E | 2026-01-12--2026-04-13 |
+
 
 ### [{{< fa cal >}}](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
 
@@ -77,6 +77,7 @@ Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=28534) 
 - [`R`](https://www.r-project.org)
 - [`psql`](https://www.postgresql.org/docs/current/app-psql.html)
 - [`VS Code`](https://code.visualstudio.com)
+- [`Positron`](https://positron.posit.co)
 
 :::
 
@@ -98,6 +99,7 @@ Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=28534) 
 - [Guy Harrison Blog](https://www.guyharrison.net)
 - [Databases trends and applications](https://www.dbta.com)
 - [Upcoming book “Principles of Databases”, by Marcelo Arenas, Pablo Barcelo, Leonid Libkin, Wim Martens, and Andreas Pieris.](https://github.com/pdm-book/community)
+- 
 - 
 :::
 
@@ -151,15 +153,11 @@ Register at [Moodle portal](https://moodle.u-paris.fr/course/view.php?id=28534) 
 
 ### Save the dates !  {{< fa calendar >}}
 
--   **January 17:** Course kick-off
--   **February 14:** *No session* 
--   **February 28:** Winter Holidays
--   **March 7:** Session 6
--   **April 4:** Room 2017
--   **April 18:** Eastern Holidays
--   **April 25:** Eastern Holidays
--   **May 2:** Session 12
-   
+-   **January 12:** Course kick-off
+-   **March 2nd:** Winter Holidays
+-   **April 6:** Eastern Monday 
+-   **April 13:** Last session
+  
 
 [Université Paris Cité calendar](https://u-paris.fr/calendrier-universitaire/) 
 

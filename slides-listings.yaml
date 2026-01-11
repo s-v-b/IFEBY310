@@ -1,66 +1,66 @@
 - title: "Introduction to Big Data"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-01-17"
+  date: "2026-01-12"
   path: "core/slides/slides01_introduction.html"
   categories: []
 - title: "Python data stack : Numpy et Scipy"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-01-17"
+  date: "2026-01-12"
   path: "core/slides/slides02_python_ds_stack.html"
   categories: []
 - title: "Python data stack : Pandas "
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-01-24"
+  date: "2026-01-19"
   path: "core01/slides/slides02_python_ds_stack.html"
   categories: []
 - title: "Python data stack : Dask"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-01-31"
+  date: "2026-01-26"
   path: "core/slides/slides09_dask.html"
   categories: []
 - title: "Spark : RDDs"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-02-07"
+  date: "2026-02-02"
   path: "core/slides/slides03_sparkrdd.html"
   categories: []
 - title: "Spark : SQL"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-02-20"
+  date: "2026-02-09"
   path: "core/slides/slides04_sparkl.html"
   categories: []
 - title: "Pandas on Spark and sparklyr"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-02-21"
+  date: "2026-02-16"
   path: "core/slides/spark-pandas-on-spark.html"
   categories: []
 - title: "JSON"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-03-07"
+  date: "2026-02-16"
   path: "core/slides/slides05_json-format.html"
   categories: []
 - title: "File formats for Big Data"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-03-14"
+  date: "2026-02-23"
   path: "core/slides/slides06_file-formats.html"
   categories: []
 - title: "Spark: a deeper dive"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-03-21"
+  date: "2026-03-09"
   path: "core/slides/slides07_spark-deeper-dive.html"
   categories: []
 - title: "Spark: tips"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-03-28"
+  date: "2026-03-16"
   path: "core/slides/slides08_spark-tips.html"
   categories: []
 - title: "Spark: Applications"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-04-04"
+  date: "2026-03-23"
   path: "core/slides/spark-nlp.html"
-  categories: []
+  categories: [Spark, NLP]
 - title: "Spark: Applications"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2025-04-11"
+  date: "2026-03-30"
   path: "core/slides/spark-geo.html"
-  categories: []
+  categories: [Spark, Spatial data]
 

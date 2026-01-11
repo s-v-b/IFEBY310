@@ -1,0 +1,41 @@
+---
+title: "Week 13"
+subtitle: "Fin TD/TP et CC3"
+editor: source
+draft: true
+---
+
+::: callout-important
+
+-   TD/TP 2004-2005-2006 Étage 2 Sophie Germain 15h45-16h45
+-   {{< fa mug-hot >}} {{< fa mug-hot >}} {{< fa mug-hot >}} **Contrôle continu III** 17h-18h15 Amphi A2 Halle aux Farines
+-   {{< fa cal >}} [Calendar MIASHS](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
+-   {{< fa cal >}} [Calendar Ingémaths/METIS](https://edt.math.univ-paris-diderot.fr/#/parcours/ingemath/l3)
+
+
+:::
+
+
+
+## Notebooks : TD 12
+
+[html](/core/notebooks/td12.html)  [pdf](/core/notebooks/td12.pdf)
+
+## Solutions du  TD 11  (Week 12)
+
+[html](/solutions/td11.html)  [pdf](/solutions/td11.pdf)
+
+
+## Contrôle Continu 3
+
+- Requêtes 
+- Contraintes 
+- Modélisation (EA et pattes de corbeau)
+- [Normalisation I](/core/slides/DF_norm_1.qmd) (pas FN3 ni décomposition sans pertes de DFs)
+- TDs jusqu'au TD 9 
+  
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [Agenda](/schemas-listings.qmd) ⏎
+:::

@@ -1,6 +1,6 @@
 ---
 title: "Apache Arrow"
-date: "2024-02-19"
+date: "2026-01-08  (updated: `r Sys.Date()`)"
 engine: jupyter
 ---
 
