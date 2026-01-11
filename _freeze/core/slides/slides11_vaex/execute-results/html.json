@@ -1,8 +1,8 @@
 {
-  "hash": "0cf1e6bbc3c4e2f5069f376ff545b93b",
+  "hash": "9bee8977307c5cbed145eddb38e5c5ec",
   "result": {
     "engine": "jupyter",
-    "markdown": "---\ntitle: \"Vaex\"\nengine: jupyter\ndate: \"2025-01-17\"\n\nexecute: \n  eval: true\n  echo: true\n---\n\n",
+    "markdown": "---\ntitle: \"Vaex\"\nengine: jupyter\ndate: \"2025-01-17\"\n\nexecute: \n  eval: true\n  echo: true\ndraft: true\n---\n\n",
     "supporting": [
       "slides11_vaex_files"
     ],

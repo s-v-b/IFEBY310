@@ -1,0 +1,15 @@
+{
+  "hash": "da9cfe000f91a3ea3661f4876b2f70f0",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Fiche individuelle\"\nsubtitle: \"Technologies Big Data et Analyse de Données 2026-01-10\"\nengine: knitr\ncallout-appearance: minimal\n---\n::: {.callout-note title=\"Nom\"}\n\n:::\n\n::: {.callout-note title=\"Prénom (prénom d'usage)\"}\n\n:::\n\n::: {.callout-note title=\"Cursus\"}\n\n- [ ] Double Master MIDS\n- [ ] Simple Master MIDS\n- [ ] Master Logos\n- [ ] Master 1 MFA \n- [ ] Autre \n  \n:::\n\n\n::: {.callout-note title=\"Formation antérieure\"}\n\n- [ ] Licence Mathématique-Informatique\n- [ ] Licence Mathématique\n- [ ] Licence MIASHS\n- [ ] Autre\n\nÉtablissement \n\n:::\n\n\n::: {.callout-note title=\"Éditeurs habituels (plusieurs possibles)\"}\n\n- [ ] VS Code (et parents : Positron, VS Codium, Cursor)\n- [ ] Emacs \n- [ ] Sublime Text\n- [ ] Vim\n- [ ] Pycharm\n- [ ] Autre\n\n:::\n\n::: {.callout-note title=\"Familiarité  avec Python\"} \n\n- [ ] Usage scolaire\n- [ ] Usage personnel\n- [ ] Usage professionnel\n  \nLibrairies habituelles  \n\n:::\n\n::: {.callout-note title=\"Familiarité  avec R\"} \n\n- [ ] Usage scolaire\n- [ ] Usage personnel\n- [ ] Usage professionnel\n  \nLibrairies habituelles  \n\n:::\n\n::: {.callout-note title=\"Familiarité  avec SQL\"} \n\n- [ ] Usage scolaire\n- [ ] Usage personnel\n- [ ] Usage professionnel\n  \nLibrairies habituelles  \n\n:::\n\n::: {.callout-note title=\"Familiarité  avec Git\"} \n\n- [ ] Usage scolaire\n- [ ] Usage personnel\n- [ ] Usage professionnel\n\n:::\n\n::: {.callout-note title=\"Usage des outils IA (pour coder)\"} \n\n- [ ] Chat-GPT Version:\n- [ ] Copilot\n- [ ] Gemini\n- [ ] Anthropic Claude Sonnet\n- [ ] DeepSeek\n- [ ] Llama\n- [ ] Autre(s)\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": null,
+    "postProcess": false
+  }
+}
