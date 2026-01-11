@@ -6,7 +6,7 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e2182856f2c32102dd26b05a5ef16cb5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4a17e18fdf56099d4f6da1e105f33a53.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/grid-no-htext-1.0.0/grid_no_htext.css" rel="stylesheet">
@@ -15,9 +15,9 @@
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.30">
+<meta name="generator" content="quarto-1.8.24">
 <meta name="author" content="Équipe de Statistique">
-<meta name="dcterms.date" content="2025-01-17">
+<meta name="dcterms.date" content="2026-01-08">
 <title>IFEBY310 - Spring 2025 – Big data technologies</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -103,7 +103,7 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-<link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-cea8bd4d0ffd43e334db3cf8b0e9d7b6.css">
+<link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2dea105675ef174e229fdc0796ca115f.css">
 <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
 <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
 <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -235,7 +235,7 @@
     </div>
 </div>
 
-  <p class="date">2025-01-17</p>
+  <p class="date">2026-01-08</p>
 </section><section id="TOC"><nav role="doc-toc"><h2 id="toc-title">Roadmap</h2>
 <ul>
 <li><a href="#/course-logistics" id="/toc-course-logistics">Course logistics</a></li>
@@ -574,7 +574,7 @@
 </tr>
 </tbody>
 </table></section><section id="section-2" class="slide level2 center"><h2></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="ex">traceroute</span> to mathscinet.ams.org <span class="er">(</span><span class="ex">104.238.176.204</span><span class="kw">)</span><span class="ex">,</span> 64 hops max</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="ex">traceroute</span> to mathscinet.ams.org <span class="er">(</span><span class="ex">104.238.176.204</span><span class="kw">)</span><span class="ex">,</span> 64 hops max</span>
 <span id="cb1-2"><a></a>  <span class="ex">1</span>   192.168.10.1  3,149ms  1,532ms  1,216ms </span>
 <span id="cb1-3"><a></a>  <span class="ex">2</span>   192.168.0.254  1,623ms  1,397ms  1,309ms </span>
 <span id="cb1-4"><a></a>  <span class="ex">3</span>   78.196.1.254  2,571ms  2,120ms  2,371ms </span>
@@ -586,7 +586,7 @@
 <span id="cb1-10"><a></a>  <span class="ex">9</span>   195.66.224.191  12,231ms  11,718ms  12,486ms </span>
 <span id="cb1-11"><a></a> <span class="ex">10</span>   <span class="pp">*</span>  <span class="pp">*</span>  <span class="pp">*</span> </span>
 <span id="cb1-12"><a></a> <span class="ex">11</span>   63.218.14.58  26,213ms  19,264ms  18,949ms </span>
-<span id="cb1-13"><a></a> <span class="ex">12</span>   63.218.231.106  29,135ms  22,078ms  17,954ms</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-13"><a></a> <span class="ex">12</span>   63.218.231.106  29,135ms  22,078ms  17,954ms</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section><section id="latency-numbers-1" class="slide level2 center"><h2>Latency numbers</h2>
 <ul>
 <li><p>Reading 1MB from <strong>disk</strong> = <strong>100 x</strong> reading 1MB from <strong>memory</strong></p></li>
@@ -695,7 +695,7 @@ How to <em>split the work across machines</em>? Must exploit and optimize data l
 </dd>
 <dt>Reliability</dt>
 <dd>
-How to <em>handle failures</em>? Commodity (cheap) hardware fails more often. <span class="citation" data-cites="Google">@Google [1%, 5%]</span> HD failure/year and 0.2% <a href="https://en.wikipedia.org/wiki/DIMM">DIMM</a> failure/year
+How to <em>handle failures</em>? Commodity (cheap) hardware fails more often. <span class="citation" data-cites="Google">(<a href="" role="doc-biblioref" onclick="return false;"><strong>Google?</strong></a>%, 5%)</span> HD failure/year and 0.2% <a href="https://en.wikipedia.org/wiki/DIMM">DIMM</a> failure/year
 </dd>
 <dt>Uneven performance of machines</dt>
 <dd>
@@ -1187,7 +1187,7 @@ some nodes are slower than others
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1295,13 +1295,14 @@ some nodes are slower than others
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

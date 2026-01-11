@@ -6,13 +6,13 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e2182856f2c32102dd26b05a5ef16cb5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4a17e18fdf56099d4f6da1e105f33a53.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/grid-no-htext-1.0.0/grid_no_htext.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.30">
+  <meta name="generator" content="quarto-1.8.24">
 
   <meta name="author" content="Équipe de Statistique">
   <meta name="dcterms.date" content="2025-01-17">
@@ -101,7 +101,7 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-cea8bd4d0ffd43e334db3cf8b0e9d7b6.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2dea105675ef174e229fdc0796ca115f.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -255,11 +255,11 @@
 <ul>
 <li>Instead of using the <code>RDD</code> API</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>rdd <span class="op">=</span> sc.textFile(<span class="st">"/path/to/file.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>rdd <span class="op">=</span> sc.textFile(<span class="st">"/path/to/file.txt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Use the <code>DataFrame</code> API</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>df <span class="op">=</span> spark.read.textFile(<span class="st">"/path/to/file.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>df <span class="op">=</span> spark.read.textFile(<span class="st">"/path/to/file.txt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><p>The DataFrame API uses the * <code>Catalyst</code>* optimizer to <strong>improve</strong> the execution plan of your Spark Job</p></li>
 <li><p>The low-level <code>RDD</code> API does not</p></li>
@@ -294,12 +294,12 @@
 <ul>
 <li>When joining two datasets where <strong>one is smaller than the other</strong>, you <strong>must</strong> put the <em>largest on the left</em></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>joinedDF <span class="op">=</span> largeDF.join(smallDF, on<span class="op">=</span><span class="st">"id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>joinedDF <span class="op">=</span> largeDF.join(smallDF, on<span class="op">=</span><span class="st">"id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><p>The data specified <em>on the left</em> is <strong>static on the executors</strong> while the data <em>on the right</em> is <strong>transfered</strong> between the executors</p></li>
 <li><p>Something like</p></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>joinedDF <span class="op">=</span> smallDF.join(largeDF, on<span class="op">=</span><span class="st">"id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>joinedDF <span class="op">=</span> smallDF.join(largeDF, on<span class="op">=</span><span class="st">"id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>can be <em>much longer</em> or even <em>fail</em> if <code>largeDF</code> is large</p>
 </section>
 <section id="tip-4.-joins-use-broadcast-joining" class="slide level2 center">
@@ -308,9 +308,9 @@
 <li><p>Often, we need to join a <strong>huge</strong> dataframe with a <strong>small</strong> one</p></li>
 <li><p>Use <em>broadcast joins</em> for joining small datasets to larger ones</p></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> broadcast</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> broadcast</span>
 <span id="cb5-2"><a></a></span>
-<span id="cb5-3"><a></a>joinedDF <span class="op">=</span> largeDF.join(broadcast(smallDF), on<span class="op">=</span><span class="st">"id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a></a>joinedDF <span class="op">=</span> largeDF.join(broadcast(smallDF), on<span class="op">=</span><span class="st">"id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Usually leads to <strong>much faster joins</strong> since is allows to <em>avoid shuffles</em></li>
 </ul>
@@ -320,12 +320,12 @@
 <ul>
 <li>If you are constantly using the same DataFrame on multiple queries, you can use <em>caching</em> or <em>persistence</em>:</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>df <span class="op">=</span> (</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>df <span class="op">=</span> (</span>
 <span id="cb6-2"><a></a>  spark</span>
 <span id="cb6-3"><a></a>    .read</span>
 <span id="cb6-4"><a></a>    .textFile(<span class="st">"/path/to/file.txt"</span>)</span>
 <span id="cb6-5"><a></a>    .cache()</span>
-<span id="cb6-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><p>But <em>avoid overusing</em> this. Depending on caching strategy (in-memory then swap to disk), cache can <strong>end up being slower</strong> than reading</p></li>
 <li><p>Storage space used for caching means <strong>less space</strong> for processing</p></li>
@@ -337,8 +337,8 @@
 <ul>
 <li><strong>Before querying</strong> a table, it can be helpful to <em>compute the statistics</em> of those tables so that Catalyst can <strong>find a better plan</strong> to process it:</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>query <span class="op">=</span> <span class="st">"ANALYZE TABLE db.table COMPUTE STATISTICS"</span></span>
-<span id="cb7-2"><a></a>spark.sql(query)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>query <span class="op">=</span> <span class="st">"ANALYZE TABLE db.table COMPUTE STATISTICS"</span></span>
+<span id="cb7-2"><a></a>spark.sql(query)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>However, Spark <strong>does not always get everything</strong> it needs just from the above broad <code>COMPUTE STATISTICS</code> call</li>
 </ul>
@@ -349,10 +349,10 @@
 <li><p>Also helps to <em>check specific columns</em> so that <strong>Catalyst</strong> can better check those columns</p></li>
 <li><p>It’s recommended to <strong>COMPUTE STATISTICS</strong> for any <em>columns involved in filtering and joining</em> :</p></li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>query <span class="op">=</span> <span class="st">"ANALYZE TABLE db.table COMPUTE STATISTICS"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>query <span class="op">=</span> <span class="st">"ANALYZE TABLE db.table COMPUTE STATISTICS"</span></span>
 <span id="cb8-2"><a></a>            <span class="co">" FOR COLUMNS joinColumn, filterColumn"</span></span>
 <span id="cb8-3"><a></a></span>
-<span id="cb8-4"><a></a>spark.sql(query)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a></a>spark.sql(query)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="tip-7.-shuffles-know-your-data" class="slide level2 center">
 <h2>Tip 7. Shuffles: know your data</h2>
@@ -380,11 +380,11 @@
 <li><p>Number of shuffle partitions <em>does not change</em> with <strong>different data size</strong>. For <strong>small</strong> data, 200 is <strong>overkill</strong>, for <strong>large</strong> data, it does not <strong>effectively use the all resources</strong>.</p></li>
 <li><p><strong>Rule of thumb</strong>: set this configuration to the <em>number of cores</em> you have available <em>across all your executors</em></p></li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>(</span>
 <span id="cb9-2"><a></a>  spark</span>
 <span id="cb9-3"><a></a>    .conf</span>
 <span id="cb9-4"><a></a>    .<span class="bu">set</span>(<span class="st">"spark.sql.shuffle.partitions"</span>, <span class="dv">42</span>)</span>
-<span id="cb9-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-5"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="tip-10.-partitions-well-distributed-columns" class="slide level2 center">
 <h2>Tip 10. Partitions: well-distributed columns</h2>
@@ -435,7 +435,7 @@
 <ul>
 <li>Naively reading CSVs in Spark can result in <strong>silent</strong> <em>escape-character errors</em></li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>df <span class="op">=</span> spark.read.csv(<span class="st">"quote-happy.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>df <span class="op">=</span> spark.read.csv(<span class="st">"quote-happy.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><p>Your DataFrame <strong>seems happy</strong>: no runtime exceptions, and you can execute operations on the DataFrame</p></li>
 <li><p>But after careful debugging, you realize that at some point in the data, <strong>everything has shifted</strong> over one or several columns!</p></li>
@@ -455,7 +455,7 @@
 <section id="tip-17.-problems-with-udfs" class="slide level2 smaller center">
 <h2>Tip 17. Problems with UDFs</h2>
 <p><em>UDF</em> = User Defined Function = something <strong>very convenient</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> F, types <span class="im">as</span> T</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> F, types <span class="im">as</span> T</span>
 <span id="cb11-2"><a></a></span>
 <span id="cb11-3"><a></a><span class="op">&gt;&gt;&gt;</span> data <span class="op">=</span> [{<span class="st">'a'</span>: <span class="dv">1</span>, <span class="st">'b'</span>: <span class="dv">0</span>}, {<span class="st">'a'</span>: <span class="dv">10</span>, <span class="st">'b'</span>: <span class="dv">3</span>}]</span>
 <span id="cb11-4"><a></a><span class="op">&gt;&gt;&gt;</span> df <span class="op">=</span> spark.createDataFrame(data)</span>
@@ -474,12 +474,12 @@
 <span id="cb11-17"><a></a><span class="op">+---+---+---------------+</span></span>
 <span id="cb11-18"><a></a><span class="op">|</span>  <span class="dv">1</span><span class="op">|</span>  <span class="dv">0</span><span class="op">|</span>            <span class="fl">0.0</span><span class="op">|</span></span>
 <span id="cb11-19"><a></a><span class="op">|</span> <span class="dv">10</span><span class="op">|</span>  <span class="dv">3</span><span class="op">|</span>      <span class="fl">3.3333333</span><span class="op">|</span></span>
-<span id="cb11-20"><a></a><span class="op">+---+---+---------------+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-20"><a></a><span class="op">+---+---+---------------+</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="tip-17.-problems-with-udfs-1" class="slide level2 center">
 <h2>Tip 17. Problems with UDFs</h2>
 <p>UDF are <em>Excruciatingly slow</em> with <code>pyspark</code> and spark <em>won’t complain</em> if the <strong>return type is incorrect</strong> and just return <code>nulls</code></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="op">&gt;&gt;&gt;</span> udf_ratio_calculation <span class="op">=</span> F.udf(calculate_a_b_ratio, T.DecimalType())</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="op">&gt;&gt;&gt;</span> udf_ratio_calculation <span class="op">=</span> F.udf(calculate_a_b_ratio, T.DecimalType())</span>
 <span id="cb12-2"><a></a><span class="op">&gt;&gt;&gt;</span> df <span class="op">=</span> df.withColumn(<span class="st">'a_b_ratio_dec'</span>, udf_ratio_calculation(<span class="st">'a'</span>, <span class="st">'b'</span>))</span>
 <span id="cb12-3"><a></a><span class="op">&gt;&gt;&gt;</span> df.show()</span>
 <span id="cb12-4"><a></a><span class="op">+---+---+---------------+-------------+</span></span>
@@ -487,8 +487,8 @@
 <span id="cb12-6"><a></a><span class="op">+---+---+---------------+-------------+</span></span>
 <span id="cb12-7"><a></a><span class="op">|</span>  <span class="dv">1</span><span class="op">|</span>  <span class="dv">0</span><span class="op">|</span>            <span class="fl">0.0</span><span class="op">|</span>         null<span class="op">|</span></span>
 <span id="cb12-8"><a></a><span class="op">|</span> <span class="dv">10</span><span class="op">|</span>  <span class="dv">3</span><span class="op">|</span>      <span class="fl">3.3333333</span><span class="op">|</span>         null<span class="op">|</span></span>
-<span id="cb12-9"><a></a><span class="op">+---+---+---------------+-------------+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="op">&gt;&gt;&gt;</span> udf_ratio_calculation <span class="op">=</span> F.udf(calculate_a_b_ratio, T.BooleanType())</span>
+<span id="cb12-9"><a></a><span class="op">+---+---+---------------+-------------+</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="op">&gt;&gt;&gt;</span> udf_ratio_calculation <span class="op">=</span> F.udf(calculate_a_b_ratio, T.BooleanType())</span>
 <span id="cb13-2"><a></a><span class="op">&gt;&gt;&gt;</span> df <span class="op">=</span> df.withColumn(<span class="st">'a_b_ratio_bool'</span>, udf_ratio_calculation(<span class="st">'a'</span>, <span class="st">'b'</span>))</span>
 <span id="cb13-3"><a></a><span class="op">&gt;&gt;&gt;</span> df.show()</span>
 <span id="cb13-4"><a></a><span class="op">+---+---+---------------+-------------+--------------+</span></span>
@@ -496,7 +496,7 @@
 <span id="cb13-6"><a></a><span class="op">+---+---+---------------+-------------+--------------+</span></span>
 <span id="cb13-7"><a></a><span class="op">|</span>  <span class="dv">1</span><span class="op">|</span>  <span class="dv">0</span><span class="op">|</span>            <span class="fl">0.0</span><span class="op">|</span>         null<span class="op">|</span>          null<span class="op">|</span></span>
 <span id="cb13-8"><a></a><span class="op">|</span> <span class="dv">10</span><span class="op">|</span>  <span class="dv">3</span><span class="op">|</span>      <span class="fl">3.3333333</span><span class="op">|</span>         null<span class="op">|</span>          null<span class="op">|</span></span>
-<span id="cb13-9"><a></a><span class="op">+---+---+---------------+-------------+--------------+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-9"><a></a><span class="op">+---+---+---------------+-------------+--------------+</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="tip-18.-use-all-of-the-resources" class="slide level2 center">
 <h2>Tip 18. Use all of the resources</h2>
@@ -513,7 +513,7 @@
 </section>
 <section id="tip-18.-use-all-of-the-resources-1" class="slide level2 center">
 <h2>Tip 18. Use all of the resources</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="im">from</span> pyspark <span class="im">import</span> SparkConf</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="im">from</span> pyspark <span class="im">import</span> SparkConf</span>
 <span id="cb14-2"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
 <span id="cb14-3"><a></a></span>
 <span id="cb14-4"><a></a>conf <span class="op">=</span> SparkConf()</span>
@@ -523,7 +523,7 @@
 <span id="cb14-8"><a></a>spark_session <span class="op">=</span> SparkSession.builder <span class="op">\</span></span>
 <span id="cb14-9"><a></a>        .config(conf<span class="op">=</span>conf) <span class="op">\</span></span>
 <span id="cb14-10"><a></a>        .appName(<span class="st">'Name'</span>) <span class="op">\</span></span>
-<span id="cb14-11"><a></a>        .getOrCreate()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-11"><a></a>        .getOrCreate()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section></section>
 <section>
 <section id="interpret-error-messages" class="title-slide slide level1 center" data-background-color="#1c191c">
@@ -560,7 +560,7 @@
 <li><p>Means that Spark <strong>cannot find the necessary jar driver</strong> to connect to the database</p></li>
 <li><p>Need to <strong>provide the correct jars</strong> to your application using the spark configuration or as a command line argument</p></li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="im">from</span> pyspark <span class="im">import</span> SparkConf</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="im">from</span> pyspark <span class="im">import</span> SparkConf</span>
 <span id="cb15-2"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
 <span id="cb15-3"><a></a></span>
 <span id="cb15-4"><a></a>jars <span class="op">=</span> <span class="st">"/full/path/to/postgres.jar,/full/path/to/other/jar"</span></span>
@@ -573,9 +573,9 @@
 <span id="cb15-11"><a></a>    .config(conf<span class="op">=</span>conf)</span>
 <span id="cb15-12"><a></a>    .appName(<span class="st">'test'</span>)</span>
 <span id="cb15-13"><a></a>    .getOrCreate()</span>
-<span id="cb15-14"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-14"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>or</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a></a><span class="ex">spark-submit</span> <span class="at">--jars</span> /full/path/to/postgres.jar,/full/path/to/other/jar ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a></a><span class="ex">spark-submit</span> <span class="at">--jars</span> /full/path/to/postgres.jar,/full/path/to/other/jar ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="interpret-error-messages-5" class="slide level2 center">
 <h2>Interpret error messages</h2>
@@ -598,13 +598,13 @@
 <section id="interpret-error-messages-8" class="slide level2 center">
 <h2>Interpret error messages</h2>
 <p>This errors usually mean that we forgot to set the driver, <code>"org.postgresql.Driver"</code> for <code>Postgres</code>:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>df <span class="op">=</span> spark.read.<span class="bu">format</span>(<span class="st">'jdbc'</span>).options(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>df <span class="op">=</span> spark.read.<span class="bu">format</span>(<span class="st">'jdbc'</span>).options(</span>
 <span id="cb17-2"><a></a>    url<span class="op">=</span> <span class="st">'db_url'</span>,</span>
 <span id="cb17-3"><a></a>    driver<span class="op">=</span><span class="st">'org.postgresql.Driver'</span>,  <span class="co"># &lt;-- here</span></span>
 <span id="cb17-4"><a></a>    dbtable<span class="op">=</span><span class="st">'table_name'</span>,</span>
 <span id="cb17-5"><a></a>    user<span class="op">=</span><span class="st">'user'</span>,</span>
 <span id="cb17-6"><a></a>    password<span class="op">=</span><span class="st">'password'</span></span>
-<span id="cb17-7"><a></a>).load()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-7"><a></a>).load()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>and also make sure that the drivers’ jars are set.</p>
 </section>
 <section id="interpret-error-messages-9" class="slide level2 center">
@@ -618,7 +618,7 @@
 <ol type="1">
 <li>You are using pyspark functions without having an active spark session</li>
 </ol>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession, functions <span class="im">as</span> fn</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession, functions <span class="im">as</span> fn</span>
 <span id="cb18-2"><a></a></span>
 <span id="cb18-3"><a></a><span class="kw">class</span> A(<span class="bu">object</span>):</span>
 <span id="cb18-4"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
@@ -626,14 +626,14 @@
 <span id="cb18-6"><a></a>...</span>
 <span id="cb18-7"><a></a><span class="co"># Instantiating A without an active spark session </span></span>
 <span id="cb18-8"><a></a><span class="co"># will give you this error</span></span>
-<span id="cb18-9"><a></a>a <span class="op">=</span> A()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-9"><a></a>a <span class="op">=</span> A()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="interpret-error-messages-11" class="slide level2 center scrollable">
 <h2>Interpret error messages</h2>
 <ol start="2" type="1">
 <li>You are using pyspark functions within a UDF:</li>
 </ol>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="co"># Create a dataframe</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="co"># Create a dataframe</span></span>
 <span id="cb19-2"><a></a>data <span class="op">=</span> [{<span class="st">'a'</span>: <span class="dv">1</span>, <span class="st">'b'</span>: <span class="dv">0</span>}, {<span class="st">'a'</span>: <span class="dv">10</span>, <span class="st">'b'</span>: <span class="dv">3</span>}]</span>
 <span id="cb19-3"><a></a>df <span class="op">=</span> spark.createDataFrame(data)</span>
 <span id="cb19-4"><a></a></span>
@@ -646,7 +646,7 @@
 <span id="cb19-11"><a></a></span>
 <span id="cb19-12"><a></a>df <span class="op">=</span> df.withColumn(<span class="st">'a_b_max'</span>, udf_max_calculation(<span class="st">'a'</span>, <span class="st">'b'</span>))</span>
 <span id="cb19-13"><a></a></span>
-<span id="cb19-14"><a></a>df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-14"><a></a>df.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>We CANNOT use <code>pyspark</code> functions inside a udf: a UDF operates on a row per row basis while pyspark functions on a column basis.</p>
 </section></section>
 <section id="thank-you" class="title-slide slide level1 unlisted center" data-background-color="#1c191c">
@@ -857,7 +857,7 @@
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -931,13 +931,14 @@
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

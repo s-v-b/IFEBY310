@@ -348,25 +348,25 @@
 </section>
 <section id="imports" class="slide level2 center">
 <h2>Imports</h2>
-<div id="7b7f1789" class="cell" data-execution_count="1">
+<div id="44c5c17a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> dask</span>
 <span id="cb1-2"><a></a></span>
 <span id="cb1-3"><a></a>dask.config.<span class="bu">set</span>(scheduler<span class="op">=</span><span class="st">'threads'</span>)</span>
 <span id="cb1-4"><a></a>dask.config.<span class="bu">set</span>({<span class="st">'dataframe.query-planning'</span>: <span class="va">True</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="1">
+<div class="cell fragment" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>&lt;dask.config.set at 0x78c88f3cb770&gt;</code></pre>
+<pre><code>&lt;dask.config.set at 0x7756d013e900&gt;</code></pre>
 </div>
 </div>
-<div id="0c22ccf8" class="cell" data-execution_count="2">
+<div id="05fc339f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> dask.dataframe <span class="im">as</span> dd</span>
 <span id="cb3-2"><a></a><span class="im">import</span> dask.bag <span class="im">as</span> db</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="2">
+<div class="cell fragment" data-execution_count="3">
 
 </div>
-<div id="fa856e26" class="cell" data-execution_count="3">
+<div id="88507bea" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">from</span> dask <span class="im">import</span> delayed</span>
 <span id="cb4-2"><a></a><span class="im">import</span> dask.threaded</span>
 <span id="cb4-3"><a></a></span>
@@ -374,20 +374,20 @@
 <span id="cb4-5"><a></a><span class="im">from</span> dask.diagnostics <span class="im">import</span> ProgressBar</span>
 <span id="cb4-6"><a></a><span class="im">from</span> dask.diagnostics <span class="im">import</span> Profiler, ResourceProfiler, CacheProfiler</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="3">
+<div class="cell fragment" data-execution_count="4">
 
 </div>
 </section>
 <section id="localcluster" class="slide level2 center">
 <h2><code>LocalCluster</code></h2>
 <p>Dask can set itself up easily in your Python session if you create a <code>LocalCluster</code> object, which sets everything up for you.</p>
-<div id="33ee149c" class="cell" data-execution_count="4">
+<div id="e3ebc8be" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># from dask.distributed import LocalCluster</span></span>
 <span id="cb5-2"><a></a></span>
 <span id="cb5-3"><a></a><span class="co"># cluster = LocalCluster()</span></span>
 <span id="cb5-4"><a></a><span class="co"># client = cluster.get_client()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="4">
+<div class="cell fragment" data-execution_count="5">
 
 </div>
 </section>
@@ -403,7 +403,7 @@
 </section>
 <section id="a-job-i" class="slide level2 center">
 <h2>A job (I)</h2>
-<div id="5183959e" class="cell" data-execution_count="5">
+<div id="eef28377" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="kw">def</span> inc(x):</span>
 <span id="cb6-2"><a></a>  <span class="cf">return</span> x <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb6-3"><a></a></span>
@@ -413,13 +413,13 @@
 <span id="cb6-7"><a></a><span class="kw">def</span> add(x, y):</span>
 <span id="cb6-8"><a></a>  <span class="cf">return</span> x <span class="op">+</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="5">
+<div class="cell fragment" data-execution_count="6">
 
 </div>
 </section>
 <section id="a-job-ii-piecing-elements-together" class="slide level2 center">
 <h2>A job (II): piecing elements together</h2>
-<div id="8a9f97af" class="cell" data-execution_count="6">
+<div id="7bc6a2a8" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1"></a>data <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
 <span id="annotated-cell-6-2"><a href="#annotated-cell-6-2"></a></span>
 <span id="annotated-cell-6-3"><a href="#annotated-cell-6-3"></a>output <span class="op">=</span> []</span>
@@ -450,7 +450,7 @@
 </dl>
 </div>
 </div>
-<div class="cell fragment" data-execution_count="6">
+<div class="cell fragment" data-execution_count="7">
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>50</code></pre>
 </div>
@@ -458,7 +458,7 @@
 </section>
 <section id="delaying-existing-functions" class="slide level2 center">
 <h2>Delaying existing functions</h2>
-<div id="4915367b" class="cell" data-execution_count="7">
+<div id="a0a5c039" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a>output <span class="op">=</span> []</span>
 <span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a></span>
 <span id="annotated-cell-7-3"><a href="#annotated-cell-7-3"></a><span class="cf">for</span> x <span class="kw">in</span> data:</span>
@@ -483,12 +483,12 @@
 </dl>
 </div>
 </div>
-<div class="cell fragment" data-execution_count="7">
+<div class="cell fragment" data-execution_count="8">
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>Delayed('sum-a311ec5e-4dc8-4b75-ae0a-f455f0558e22')</code></pre>
+<pre><code>Delayed('sum-b042864a-ca75-4d5d-9921-92cf16c401d2')</code></pre>
 </div>
 </div>
-<div id="bd2b9338" class="cell" data-execution_count="8">
+<div id="2faecb39" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1"></a>total.compute()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
@@ -499,7 +499,7 @@
 </dl>
 </div>
 </div>
-<div class="cell fragment" data-execution_count="8">
+<div class="cell fragment" data-execution_count="9">
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>50</code></pre>
 </div>
@@ -507,7 +507,7 @@
 </section>
 <section id="another-way-of-using-decorators" class="slide level2 smaller center">
 <h2>Another way of using decorators</h2>
-<div id="14083de1" class="cell" data-execution_count="9">
+<div id="b3aa9c4f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1"></a><span class="at">@dask.delayed</span></span>
 <span id="annotated-cell-9-2"><a href="#annotated-cell-9-2"></a><span class="kw">def</span> inc(x):</span>
 <span id="annotated-cell-9-3"><a href="#annotated-cell-9-3"></a>  <span class="cf">return</span> x <span class="op">+</span> <span class="dv">1</span></span>
@@ -549,7 +549,7 @@
 </dl>
 </div>
 </div>
-<div class="cell fragment" data-execution_count="9">
+<div class="cell fragment" data-execution_count="10">
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>50</code></pre>
 </div>
@@ -557,7 +557,7 @@
 </section>
 <section id="visualizing-the-task-graph" class="slide level2 center">
 <h2>Visualizing the task graph</h2>
-<div id="a546e719" class="cell columns column-output-location" data-execution_count="10">
+<div id="d5c9a12f" class="cell columns column-output-location" data-execution_count="11">
 <div class="column">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>total.visualize()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
@@ -577,7 +577,7 @@
 </section>
 <section id="another-job" class="slide level2 smaller center">
 <h2>Another job</h2>
-<div id="8132fd71" class="cell" data-execution_count="11">
+<div id="c9162c04" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>DATA <span class="op">=</span> []</span>
 <span id="cb12-2"><a></a></span>
 <span id="cb12-3"><a></a><span class="at">@dask.delayed</span></span>
@@ -600,7 +600,7 @@
 <span id="cb12-20"><a></a>f <span class="op">=</span> sum_data(e)</span>
 <span id="cb12-21"><a></a>f.compute()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="11">
+<div class="cell fragment" data-execution_count="12">
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>6</code></pre>
 </div>
@@ -608,7 +608,7 @@
 </section>
 <section id="a-flawed-task-graph" class="slide level2 center">
 <h2>A flawed task graph</h2>
-<div id="bd06aa2e" class="cell columns column-output-location" data-execution_count="12">
+<div id="355c5fa3" class="cell columns column-output-location" data-execution_count="13">
 <div class="column">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>f.visualize()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
@@ -625,14 +625,14 @@
 <h2>Fixing</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div id="0590063b" class="cell" data-execution_count="13">
+<div id="0cbcd034" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="im">from</span> dask.graph_manipulation <span class="im">import</span> bind</span>
 <span id="cb15-2"><a></a></span>
 <span id="cb15-3"><a></a>g <span class="op">=</span> bind(sum_data, [b, d])(e)</span>
 <span id="cb15-4"><a></a></span>
 <span id="cb15-5"><a></a>g.compute()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="13">
+<div class="cell fragment" data-execution_count="14">
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>12</code></pre>
 </div>
@@ -643,10 +643,10 @@
 </div>
 </div><div class="column" style="width:60%;">
 <div class="smaller">
-<div id="1dda7ab6" class="cell" data-execution_count="14">
+<div id="3c8bc1da" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>g.visualize()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="14">
+<div class="cell fragment" data-execution_count="15">
 <div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 <figure>
@@ -674,7 +674,7 @@
 </section>
 <section id="importing-the-usual-suspects" class="slide level2 center">
 <h2>Importing the usual suspects</h2>
-<div id="743ef106" class="cell" data-execution_count="15">
+<div id="cef50f6d" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-2" class="code-annotation-target"><a href="#annotated-cell-13-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="annotated-cell-13-3"><a href="#annotated-cell-13-3"></a></span>
@@ -694,7 +694,7 @@
 </dl>
 </div>
 </div>
-<div class="cell fragment" data-execution_count="15">
+<div class="cell fragment" data-execution_count="16">
 
 </div>
 </section>
@@ -770,7 +770,7 @@
 <aside><ol class="aside-footnotes"><li id="fn1"><p>The Dask Dataframe API is a subset of the Pandas API</p></li></ol></aside></section>
 <section id="creating-a-dask-dataframe" class="slide level2 center">
 <h2>Creating a dask dataframe</h2>
-<div id="e5eb463b" class="cell columns column-output-location" data-execution_count="16">
+<div id="3290e0df" class="cell columns column-output-location" data-execution_count="17">
 <div class="column">
 <div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1"></a>index <span class="op">=</span> pd.date_range(<span class="st">"2021-09-01"</span>, </span>
 <span id="annotated-cell-14-2"><a href="#annotated-cell-14-2"></a>                      periods<span class="op">=</span><span class="dv">2400</span>, </span>
@@ -865,7 +865,7 @@
 <div class="column" style="width:50%;">
 <div class="smaller">
 <h3 id="a-sketch-of-the-interplay-between-index-and-partitioning">A sketch of the interplay between index and partitioning</h3>
-<div id="272287fb" class="cell columns column-output-location" data-execution_count="17">
+<div id="b67984a9" class="cell columns column-output-location" data-execution_count="18">
 <div class="column">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a>ddf.divisions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
@@ -894,10 +894,10 @@
 </div>
 </div></div>
 <h3 id="a-dataframe-has-a-task-graph">A dataframe has a task graph</h3>
-<div id="150137da" class="cell" data-execution_count="18">
+<div id="ac63a946" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>ddf.visualize()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="18">
+<div class="cell fragment" data-execution_count="19">
 <div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 <figure>
@@ -911,7 +911,7 @@
 </div><div class="column" style="width:50%;">
 <div class="smaller">
 <h3 id="whats-in-a-partition">What’s in a partition?</h3>
-<div id="59525250" class="cell" data-execution_count="19">
+<div id="a9ed6e48" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="annotated-cell-51"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-51" data-target-annotation="1">1</button><span id="annotated-cell-51-1" class="code-annotation-target"><a href="#annotated-cell-51-1"></a>ddf.partitions[<span class="dv">1</span>]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
@@ -922,7 +922,7 @@
 </dl>
 </div>
 </div>
-<div class="cell fragment" data-execution_count="19">
+<div class="cell fragment" data-execution_count="20">
 <div class="cell-output cell-output-display" data-execution_count="18">
 <div><strong>Dask DataFrame Structure:</strong></div>
 
@@ -957,7 +957,7 @@
 </div>
 </div>
 <h3 id="slicing">Slicing</h3>
-<div id="fb24d94a" class="cell" data-execution_count="20">
+<div id="e129d7ae" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="annotated-cell-52"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-52" data-target-annotation="1">1</button><span id="annotated-cell-52-1" class="code-annotation-target"><a href="#annotated-cell-52-1"></a>ddf[<span class="st">"2021-10-01"</span>:<span class="st">"2021-10-09 5:00"</span>]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
@@ -968,7 +968,7 @@
 </dl>
 </div>
 </div>
-<div class="cell fragment" data-execution_count="20">
+<div class="cell fragment" data-execution_count="21">
 <div class="cell-output cell-output-display" data-execution_count="19">
 <div><strong>Dask DataFrame Structure:</strong></div>
 
@@ -1051,37 +1051,37 @@
 <h2>Methods</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="3f71f34c" class="cell" data-execution_count="21">
+<div id="164d2334" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>( </span>
 <span id="cb21-2"><a></a>  ddf.a</span>
 <span id="cb21-3"><a></a>    .mean()</span>
 <span id="cb21-4"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="21">
+<div class="cell fragment" data-execution_count="22">
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>&lt;dask_expr.expr.Scalar: expr=df['a'].mean(), dtype=float64&gt;</code></pre>
 </div>
 </div>
-<div id="52910caf" class="cell" data-execution_count="22">
+<div id="dab3aada" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>( </span>
 <span id="cb23-2"><a></a>  ddf.a</span>
 <span id="cb23-3"><a></a>    .mean()</span>
 <span id="cb23-4"><a></a>    .compute()</span>
 <span id="cb23-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="22">
+<div class="cell fragment" data-execution_count="23">
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>np.float64(1199.5)</code></pre>
 </div>
 </div>
-<div id="e9b0e51c" class="cell" data-execution_count="23">
+<div id="031b4d6e" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>(</span>
 <span id="cb25-2"><a></a>  ddf</span>
 <span id="cb25-3"><a></a>    .b</span>
 <span id="cb25-4"><a></a>    .unique()</span>
 <span id="cb25-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="23">
+<div class="cell fragment" data-execution_count="24">
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>Dask Series Structure:
 npartitions=20
@@ -1108,12 +1108,12 @@ Expr=Unique(frame=df['b'])</code></pre>
 <span id="cb27-4"><a></a>globpath <span class="op">=</span> <span class="st">'fhvhv_tripdata_20*-*.parquet'</span></span>
 <span id="cb27-5"><a></a></span>
 <span id="cb27-6"><a></a><span class="op">!</span>ls <span class="op">-</span>l ..<span class="op">/</span>..<span class="op">/</span>..<span class="op">/</span>..<span class="op">/</span>Downloads<span class="op">/</span>fhvhv_tripdata_20<span class="op">*-*</span>.parquet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="27906de9" class="cell" data-execution_count="24">
+<div id="a06f8496" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="im">import</span> os</span>
 <span id="cb28-2"><a></a></span>
 <span id="cb28-3"><a></a>os.path.expanduser(<span class="st">'~'</span> <span class="op">+</span> <span class="st">'/Documents'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="24">
+<div class="cell fragment" data-execution_count="25">
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>'/home/boucheron/Documents'</code></pre>
 </div>
@@ -1129,77 +1129,77 @@ Expr=Unique(frame=df['b'])</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a><span class="bu">type</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a></a><span class="co">#| eval: false</span></span>
 <span id="cb32-2"><a></a>df <span class="op">=</span> data.to_dask_dataframe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="aa1ce1bc" class="cell" data-execution_count="25">
+<div id="f8e4627e" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a></a>df.info()</span>
 <span id="cb33-2"><a></a>df._meta.dtypes</span>
 <span id="cb33-3"><a></a></span>
 <span id="cb33-4"><a></a>df.npartitions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="25">
-
-</div>
-<div id="4af064ed" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <div class="cell fragment" data-execution_count="26">
 
 </div>
-<div id="4a003311" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a></a><span class="bu">type</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="59b85f64" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="27">
 
 </div>
-<div id="b74be621" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a></a>df._meta.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e0a27b22" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a></a><span class="bu">type</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="28">
 
 </div>
-<div id="b202c740" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a></a>df._meta_nonempty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cf3fa469" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a></a>df._meta.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="29">
 
 </div>
-<div id="5003e3c7" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="18cfedb0" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a></a>df._meta_nonempty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="30">
 
 </div>
-<div id="36bf04f9" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a></a>df.divisions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b3115973" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="31">
 
 </div>
-<div id="07e177f5" class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a></a>df.describe(include<span class="op">=</span><span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5138f0e6" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a></a>df.divisions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment" data-execution_count="32">
+
+</div>
+<div id="4146d6ef" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a></a>df.describe(include<span class="op">=</span><span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-execution_count="33">
 
 </div>
 </section>
 <section id="partitioning-and-saving-to-parquet" class="slide level2 center">
 <h2>Partitioning and saving to parquet</h2>
-<div id="80defdc0" class="cell" data-execution_count="33">
+<div id="422cb7c2" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a></a><span class="im">import</span> pyarrow <span class="im">as</span> pa</span>
 <span id="cb41-2"><a></a></span>
 <span id="cb41-3"><a></a>schm <span class="op">=</span> pa.Schema.from_pandas(df._meta)</span>
 <span id="cb41-4"><a></a></span>
 <span id="cb41-5"><a></a>schm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="33">
-
-</div>
-<div id="e386e96f" class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a></a>df.PULocationID.unique().compute()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <div class="cell fragment" data-execution_count="34">
 
 </div>
-<div id="7e06587b" class="cell" data-execution_count="35">
+<div id="d47435d6" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a></a>df.PULocationID.unique().compute()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-execution_count="35">
+
+</div>
+<div id="e7a279f0" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a></a>df.to_parquet( </span>
 <span id="cb43-2"><a></a>  <span class="st">'fhvhv_tripdata_2022-11'</span>,</span>
 <span id="cb43-3"><a></a>  partition_on<span class="op">=</span> [<span class="st">'PULocationID'</span>],</span>
@@ -1207,13 +1207,13 @@ Expr=Unique(frame=df['b'])</code></pre>
 <span id="cb43-5"><a></a>  schema <span class="op">=</span> schm</span>
 <span id="cb43-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="35">
+<div class="cell fragment" data-execution_count="36">
 
 </div>
-<div id="5c56c6c6" class="cell" data-execution_count="36">
+<div id="bdd83b5e" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a></a>df.info(memory_usage<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="36">
+<div class="cell fragment" data-execution_count="37">
 
 </div>
 </section></section>
@@ -1315,7 +1315,7 @@ Expr=Unique(frame=df['b'])</code></pre>
 </section>
 <section id="loading-a-parquet-file" class="slide level2 center">
 <h2>Loading a Parquet file</h2>
-<div id="055c7f2a" class="cell" data-execution_count="37">
+<div id="043e9bcd" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a></a>dpath <span class="op">=</span> <span class="st">'/home/boucheron/Dropbox/MMD-2021/DATA/ny_corpus_prq/'</span></span>
 <span id="cb45-2"><a></a></span>
 <span id="cb45-3"><a></a>globpath <span class="op">=</span> <span class="st">'*/*.parquet'</span></span>
@@ -1325,10 +1325,10 @@ Expr=Unique(frame=df['b'])</code></pre>
 <span id="cb45-7"><a></a>  engine<span class="op">=</span><span class="st">'auto'</span></span>
 <span id="cb45-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="37">
+<div class="cell fragment" data-execution_count="38">
 
 </div>
-<div id="b818a7ed" class="cell columns column-output-location" data-execution_count="38">
+<div id="dbcbaccb" class="cell columns column-output-location" data-execution_count="39">
 <div class="column">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a></a>data.info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
@@ -1348,14 +1348,14 @@ Expr=ReadParquetFSSpec(92994fd)&gt;</code></pre>
 </section>
 <section id="section-6" class="slide level2 center">
 <h2></h2>
-<div id="767344ff" class="cell" data-execution_count="39">
+<div id="b2a54763" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a></a>( </span>
 <span id="cb48-2"><a></a>  data</span>
 <span id="cb48-3"><a></a>    .groupby(<span class="st">"topic"</span>)</span>
 <span id="cb48-4"><a></a>    .count()</span>
 <span id="cb48-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="39">
+<div class="cell fragment" data-execution_count="40">
 <div class="cell-output cell-output-display" data-execution_count="26">
 <div><strong>Dask DataFrame Structure:</strong></div>
 
@@ -1396,7 +1396,7 @@ Expr=ReadParquetFSSpec(92994fd)&gt;</code></pre>
 </section>
 <section id="section-7" class="slide level2 center">
 <h2></h2>
-<div id="9c22b1c4" class="cell" data-execution_count="40">
+<div id="82f2fa4b" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a></a>ddf <span class="op">=</span> dd.read_parquet(</span>
 <span id="cb49-2"><a></a>    <span class="st">"s3://dask-data/nyc-taxi/nyc-2015.parquet/part.*.parquet"</span>,</span>
 <span id="cb49-3"><a></a>    columns<span class="op">=</span>[</span>
@@ -1405,10 +1405,10 @@ Expr=ReadParquetFSSpec(92994fd)&gt;</code></pre>
 <span id="cb49-6"><a></a>    storage_options<span class="op">=</span>{<span class="st">"anon"</span>: <span class="va">True</span>},</span>
 <span id="cb49-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="40">
+<div class="cell fragment" data-execution_count="41">
 
 </div>
-<div id="fee837ad" class="cell" data-execution_count="41">
+<div id="a21dae93" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a></a>result <span class="op">=</span> (</span>
 <span id="cb50-2"><a></a>  ddf</span>
 <span id="cb50-3"><a></a>    .groupby(<span class="st">"passenger_count"</span>)</span>
@@ -1419,7 +1419,7 @@ Expr=ReadParquetFSSpec(92994fd)&gt;</code></pre>
 <span id="cb50-8"><a></a></span>
 <span id="cb50-9"><a></a>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="41">
+<div class="cell fragment" data-execution_count="42">
 <div class="cell-output cell-output-display" data-execution_count="28">
 <pre><code>Dask Series Structure:
 npartitions=1
@@ -1429,24 +1429,24 @@ Dask Name: getitem, 4 expressions
 Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(observed=False, chunk_kwargs={'numeric_only': False}, aggregate_kwargs={'numeric_only': False}, _slice='tip_amount'))['tip_amount']</code></pre>
 </div>
 </div>
-<div id="39497b33" class="cell" data-execution_count="42">
+<div id="733a4697" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a></a><span class="im">import</span> dask.dataframe <span class="im">as</span> dd</span>
 <span id="cb52-2"><a></a><span class="im">from</span> dask.distributed <span class="im">import</span> Client</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="42">
+<div class="cell fragment" data-execution_count="43">
 
 </div>
-<div id="39a115c8" class="cell" data-execution_count="43">
+<div id="04ad8386" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a></a>client <span class="op">=</span> Client()</span>
 <span id="cb53-2"><a></a>client</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment" data-execution_count="43">
+<div class="cell fragment" data-execution_count="44">
 <div class="cell-output cell-output-display" data-execution_count="30">
 <div>
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-e594632d-2ea1-11f0-bb25-300505fc3398</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-23ac4916-e27e-11ef-a64c-300505fc3398</p>
         
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
@@ -1472,7 +1472,7 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">f53f80c6</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">62d0ccd4</p>
         
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
@@ -1502,12 +1502,12 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-7a7e20ae-680f-413f-8349-5ef74ab66d41</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-4a341215-7814-4fde-a35c-f90f4492536c</p>
             
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:36451</td>
+<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:45181</td>
 <td style="text-align: left;"><strong>Workers:</strong> 5</td>
 </tr>
 <tr class="even">
@@ -1541,19 +1541,19 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:38695</td>
+<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:34133</td>
 <td style="text-align: left;"><strong>Total threads:</strong> 4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:42037/status" target="_blank">http://127.0.0.1:42037/status</a></td>
+<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:39875/status" target="_blank">http://127.0.0.1:39875/status</a></td>
 <td style="text-align: left;"><strong>Memory:</strong> 6.19 GiB</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:36639</td>
+<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:46805</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-v192hinx</td>
+<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-31p6doxl</td>
 </tr>
 </tbody>
 </table>
@@ -1573,19 +1573,19 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:38607</td>
+<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:41389</td>
 <td style="text-align: left;"><strong>Total threads:</strong> 4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:36703/status" target="_blank">http://127.0.0.1:36703/status</a></td>
+<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:37229/status" target="_blank">http://127.0.0.1:37229/status</a></td>
 <td style="text-align: left;"><strong>Memory:</strong> 6.19 GiB</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:44205</td>
+<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:43601</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-6vl6qmav</td>
+<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-m9q13h76</td>
 </tr>
 </tbody>
 </table>
@@ -1605,19 +1605,19 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:46393</td>
+<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:34985</td>
 <td style="text-align: left;"><strong>Total threads:</strong> 4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:45617/status" target="_blank">http://127.0.0.1:45617/status</a></td>
+<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:41965/status" target="_blank">http://127.0.0.1:41965/status</a></td>
 <td style="text-align: left;"><strong>Memory:</strong> 6.19 GiB</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:43189</td>
+<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:34219</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-0fb4s5of</td>
+<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-1yjf2_ei</td>
 </tr>
 </tbody>
 </table>
@@ -1637,19 +1637,19 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:35543</td>
+<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:35209</td>
 <td style="text-align: left;"><strong>Total threads:</strong> 4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:44503/status" target="_blank">http://127.0.0.1:44503/status</a></td>
+<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:33913/status" target="_blank">http://127.0.0.1:33913/status</a></td>
 <td style="text-align: left;"><strong>Memory:</strong> 6.19 GiB</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:34849</td>
+<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:42609</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-wg65skaf</td>
+<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-_sj1rvoz</td>
 </tr>
 </tbody>
 </table>
@@ -1669,19 +1669,19 @@ Expr=((ReadParquetFSSpec(117185e)[['passenger_count', 'tip_amount']]).mean(obser
 <table class="caption-top" data-quarto-postprocess="true" style="width: 100%; text-align: left;">
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:38367</td>
+<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:42041</td>
 <td style="text-align: left;"><strong>Total threads:</strong> 4</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:46265/status" target="_blank">http://127.0.0.1:46265/status</a></td>
+<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:45571/status" target="_blank">http://127.0.0.1:45571/status</a></td>
 <td style="text-align: left;"><strong>Memory:</strong> 6.19 GiB</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:42089</td>
+<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:35539</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-dv2lna_x</td>
+<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-tgi7deul</td>
 </tr>
 </tbody>
 </table>

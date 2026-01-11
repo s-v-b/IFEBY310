@@ -2,242 +2,274 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/weeks/week-9.html</loc>
-    <lastmod>2025-05-11T19:31:41.742Z</lastmod>
+    <lastmod>2025-12-19T16:12:39.991Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/weeks/week-7.html</loc>
-    <lastmod>2025-05-11T19:31:41.742Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/weeks/week-4.html</loc>
-    <lastmod>2025-05-11T19:31:41.742Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/weeks/week-2.html</loc>
-    <lastmod>2025-05-11T19:31:41.742Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/weeks/week-10.html</loc>
-    <lastmod>2025-05-11T19:31:41.742Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/weeks-listings.html</loc>
-    <lastmod>2025-05-11T19:31:41.742Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/quarto-format.html</loc>
-    <lastmod>2025-05-11T19:31:41.742Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/notebooks-listings.html</loc>
-    <lastmod>2025-05-11T19:31:41.714Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/course-team.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/cours-equipe.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/xciti_pandas.html</loc>
-    <lastmod>2025-05-11T19:31:41.608Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook14.html</loc>
-    <lastmod>2025-05-11T19:31:41.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook10_graphx.html</loc>
-    <lastmod>2025-05-11T19:31:41.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook08_webdata-II.html</loc>
-    <lastmod>2025-05-11T19:31:41.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook06_sparksql.html</loc>
-    <lastmod>2025-05-11T19:31:41.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook04_pandas_spark.html</loc>
-    <lastmod>2025-05-11T19:31:41.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook02_numpy.html</loc>
-    <lastmod>2025-05-11T19:31:41.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook-0.html</loc>
-    <lastmod>2025-05-11T19:31:41.606Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/computing-pipelines.html</loc>
-    <lastmod>2025-05-11T19:31:41.606Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/computing-access.html</loc>
-    <lastmod>2025-05-11T19:31:41.606Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/computing-docker.html</loc>
-    <lastmod>2025-05-11T19:31:41.606Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/computing-psql.html</loc>
-    <lastmod>2025-05-11T19:31:41.606Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/checking_parquet_citibike.html</loc>
-    <lastmod>2025-05-11T19:31:41.606Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook01_python.html</loc>
-    <lastmod>2025-05-11T19:31:41.606Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook03_pandas.html</loc>
-    <lastmod>2025-05-11T19:31:41.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook05_sparkrdd.html</loc>
-    <lastmod>2025-05-11T19:31:41.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook07_json-format.html</loc>
-    <lastmod>2025-05-11T19:31:41.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook08_webdata.html</loc>
-    <lastmod>2025-05-11T19:31:41.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook11_dive.html</loc>
-    <lastmod>2025-05-11T19:31:41.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebookxx_pg_pandas_spark.html</loc>
-    <lastmod>2025-05-11T19:31:41.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/xcitibike_spark.html</loc>
-    <lastmod>2025-05-11T19:31:41.608Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/cours-syllabus.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/index.html</loc>
-    <lastmod>2025-05-11T19:31:41.714Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/projects-listings.html</loc>
-    <lastmod>2025-05-11T19:31:41.714Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/slides-listings.html</loc>
-    <lastmod>2025-05-11T19:31:41.742Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/weeks/week-1.html</loc>
-    <lastmod>2025-05-11T19:31:41.742Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/weeks/week-11.html</loc>
-    <lastmod>2025-05-11T19:31:41.742Z</lastmod>
+    <lastmod>2025-12-19T16:11:35.022Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/weeks/week-3.html</loc>
-    <lastmod>2025-05-11T19:31:41.742Z</lastmod>
+    <lastmod>2025-12-19T16:06:04.667Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/weeks/week-11.html</loc>
+    <lastmod>2025-12-19T16:14:17.951Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/weeks/week-1.html</loc>
+    <lastmod>2026-01-11T17:35:02.573Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/slides-listings.html</loc>
+    <lastmod>2025-01-15T21:44:14.384Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/projects-listings.html</loc>
+    <lastmod>2025-03-10T14:25:33.457Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/index.html</loc>
+    <lastmod>2025-04-03T14:47:18.777Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/cours-syllabus.html</loc>
+    <lastmod>2025-12-20T15:24:41.058Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/xcitibike_spark.html</loc>
+    <lastmod>2025-02-03T22:40:51.052Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebookxx_pg_pandas_spark.html</loc>
+    <lastmod>2025-02-03T22:40:44.784Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook14.html</loc>
+    <lastmod>2025-01-15T21:44:14.288Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook10_graphx.html</loc>
+    <lastmod>2025-01-15T21:44:14.288Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook08_webdata-II.html</loc>
+    <lastmod>2025-04-03T14:47:18.776Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook06_sparksql.html</loc>
+    <lastmod>2025-02-05T20:52:27.706Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook04_pandas_spark.html</loc>
+    <lastmod>2025-01-15T21:44:14.288Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook02_numpy.html</loc>
+    <lastmod>2025-01-17T21:18:28.531Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook-0.html</loc>
+    <lastmod>2025-01-15T21:44:14.287Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/computing-psql.html</loc>
+    <lastmod>2025-01-15T21:44:14.287Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/computing-jupyter.html</loc>
+    <lastmod>2025-02-07T22:13:29.449Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/computing-docker.html</loc>
+    <lastmod>2025-01-15T21:44:14.287Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/computing-access.html</loc>
+    <lastmod>2025-01-15T21:44:14.287Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/computing-git.html</loc>
+    <lastmod>2025-02-09T17:19:00.376Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/computing-pipelines.html</loc>
+    <lastmod>2025-01-15T21:44:14.287Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/computing-virtualenv.html</loc>
+    <lastmod>2025-02-09T14:36:23.046Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/checking_parquet_citibike.html</loc>
+    <lastmod>2025-01-15T21:44:14.287Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook01_python.html</loc>
+    <lastmod>2026-01-09T20:31:49.589Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook03_pandas.html</loc>
+    <lastmod>2025-01-24T20:27:24.064Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook05_sparkrdd.html</loc>
+    <lastmod>2025-02-03T22:10:48.340Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook07_json-format.html</loc>
+    <lastmod>2025-03-09T21:52:30.702Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook08_webdata.html</loc>
+    <lastmod>2025-03-10T15:38:51.136Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook11_dive.html</loc>
+    <lastmod>2025-04-03T14:47:18.777Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook15_polars.html</loc>
+    <lastmod>2025-01-19T22:17:36.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/xciti_pandas.html</loc>
+    <lastmod>2025-01-15T21:44:14.289Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/cours-equipe.html</loc>
+    <lastmod>2025-01-15T21:44:14.290Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/course-team.html</loc>
+    <lastmod>2025-01-15T21:44:14.290Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/notebooks-listings.html</loc>
+    <lastmod>2025-01-15T21:44:14.384Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/quarto-format.html</loc>
+    <lastmod>2025-02-07T20:35:47.920Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/weeks-listings.html</loc>
+    <lastmod>2025-03-21T18:10:00.996Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/weeks/week-10.html</loc>
+    <lastmod>2025-12-19T16:13:05.196Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/weeks/week-2.html</loc>
+    <lastmod>2025-12-19T16:06:04.667Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/weeks/week-4.html</loc>
+    <lastmod>2025-12-19T16:06:04.666Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/weeks/week-6.html</loc>
-    <lastmod>2025-05-11T19:31:41.742Z</lastmod>
+    <lastmod>2025-12-19T16:09:27.352Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/weeks/week-8.html</loc>
-    <lastmod>2025-05-11T19:31:41.742Z</lastmod>
+    <lastmod>2025-12-19T16:10:19.914Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides04_sparkl.html</loc>
-    <lastmod>2025-05-11T19:31:41.608Z</lastmod>
+    <lastmod>2026-01-08T16:18:19.855Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides07_spark-deeper-dive.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
+    <lastmod>2026-01-08T16:19:01.105Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides08_spark-tips.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
+    <lastmod>2025-02-07T19:55:29.440Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-standalone.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
+    <lastmod>2025-04-12T08:53:49.712Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/slides/lec-1.html</loc>
-    <lastmod>2025-05-11T19:31:41.608Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-geo.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-pandas-on-spark.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides02_python_ds_stack.html</loc>
-    <lastmod>2025-05-11T19:31:41.608Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides03_sparkrdd.html</loc>
-    <lastmod>2025-05-11T19:31:41.608Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-multicore.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides05_json-format.html</loc>
-    <lastmod>2025-05-11T19:31:41.608Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides01_introduction.html</loc>
-    <lastmod>2025-05-11T19:31:41.608Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-presentation.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides09_dask.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
-  </url>
-  <url>
-    <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-nlp.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
+    <lastmod>2025-01-15T21:44:14.289Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides06_file-formats.html</loc>
-    <lastmod>2025-05-11T19:31:41.608Z</lastmod>
+    <lastmod>2026-01-08T16:18:46.561Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-geo.html</loc>
+    <lastmod>2025-01-15T21:44:14.290Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-pandas-on-spark.html</loc>
+    <lastmod>2025-01-15T21:44:14.290Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides02_python_ds_stack.html</loc>
+    <lastmod>2026-01-08T21:50:57.189Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides03_sparkrdd.html</loc>
+    <lastmod>2026-01-06T21:50:53.456Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-multicore.html</loc>
+    <lastmod>2025-01-15T21:44:14.290Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides12_polars.html</loc>
+    <lastmod>2025-02-07T20:03:58.395Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides05_json-format.html</loc>
+    <lastmod>2026-01-08T16:18:28.641Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides13_dask_internals.html</loc>
+    <lastmod>2025-02-07T20:02:40.840Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides01_introduction.html</loc>
+    <lastmod>2026-01-08T16:44:48.952Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-presentation.html</loc>
+    <lastmod>2025-01-15T21:44:14.290Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides09_dask.html</loc>
+    <lastmod>2025-03-09T22:19:47.830Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-nlp.html</loc>
+    <lastmod>2025-05-12T08:17:15.202Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides10_arrow.html</loc>
+    <lastmod>2025-02-02T21:08:38.646Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/slides/apache-arrow.html</loc>
-    <lastmod>2025-05-11T19:31:41.608Z</lastmod>
+    <lastmod>2025-01-15T21:44:14.289Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-R.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
+    <lastmod>2025-01-15T21:44:14.290Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides06_arrow.html</loc>
-    <lastmod>2025-05-11T19:31:41.608Z</lastmod>
+    <lastmod>2026-01-08T16:18:39.180Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/slides/spark-catalyst.html</loc>
-    <lastmod>2025-05-11T19:31:41.609Z</lastmod>
+    <lastmod>2025-02-07T20:04:10.964Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook02-2_numpy.html</loc>
+    <lastmod>2026-01-11T17:11:15.781Z</lastmod>
   </url>
 </urlset>

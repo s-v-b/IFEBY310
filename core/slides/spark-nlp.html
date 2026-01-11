@@ -6,14 +6,14 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e2182856f2c32102dd26b05a5ef16cb5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4a17e18fdf56099d4f6da1e105f33a53.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/grid-no-htext-1.0.0/grid_no_htext.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.30">
+<meta name="generator" content="quarto-1.8.24">
 <meta name="author" content="Équipe de Statistique">
 <meta name="dcterms.date" content="2025-01-17">
 <title>IFEBY310 - Spring 2025 – Spark NLP</title>
@@ -101,7 +101,7 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-<link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-cea8bd4d0ffd43e334db3cf8b0e9d7b6.css">
+<link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2dea105675ef174e229fdc0796ca115f.css">
 <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
 <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
 <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -310,11 +310,11 @@
 <li>Building a toy NLP pipeline for detecting dates in a text</li>
 </ul></section><section id="imports-sparknlp-and-others" class="slide level2 center"><h2>Imports sparknlp and others</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Import Spark NLP</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Import Spark NLP</span></span>
 <span id="cb1-2"><a></a><span class="im">from</span> sparknlp.base <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb1-3"><a></a><span class="im">from</span> sparknlp.annotator <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb1-4"><a></a><span class="im">from</span> sparknlp.pretrained <span class="im">import</span> PretrainedPipeline</span>
-<span id="cb1-5"><a></a><span class="im">import</span> sparknlp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a></a><span class="im">import</span> sparknlp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
@@ -322,7 +322,7 @@
 </section><section id="initiate-spark-session" class="slide level2 center"><h2>Initiate Spark session</h2>
 <p>Assuming <code>standalone</code> mode on a laptop. <code>master</code> runs on <code>localhost</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>spark <span class="op">=</span> SparkSession.builder <span class="op">\</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>spark <span class="op">=</span> SparkSession.builder <span class="op">\</span></span>
 <span id="cb2-2"><a></a>            .appName(<span class="st">"Spark NLP"</span>) <span class="op">\</span></span>
 <span id="cb2-3"><a></a><span class="co">#            .master("spark://localhost:7077") \</span></span>
 <span id="cb2-4"><a></a>            .config(<span class="st">"spark.driver.memory"</span>, <span class="st">"16G"</span>) <span class="op">\</span></span>
@@ -330,21 +330,21 @@
 <span id="cb2-6"><a></a>            .config(<span class="st">"spark.kryoserializer.buffer.max"</span>, <span class="st">"2000M"</span>) <span class="op">\</span></span>
 <span id="cb2-7"><a></a>            .config(<span class="st">"spark.driver.maxResultSize"</span>, <span class="st">"0"</span>) <span class="op">\</span></span>
 <span id="cb2-8"><a></a>            .config(<span class="st">"spark.jars.packages"</span>, <span class="st">"com.johnsnowlabs.nlp:spark-nlp_2.12:5.2.3"</span>) <span class="op">\</span></span>
-<span id="cb2-9"><a></a>            .getOrCreate()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-9"><a></a>            .getOrCreate()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>sparknlp.version()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>sparknlp.version()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <p>…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>spark</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>spark</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
@@ -352,25 +352,25 @@
 </div>
 </section><section id="toy-big-data" class="slide level2 center"><h2>Toy (big) data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>fr_articles <span class="op">=</span> [</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>fr_articles <span class="op">=</span> [</span>
 <span id="cb5-2"><a></a>  (<span class="st">"Le dimanche 11 juillet 2021, Chiellini a utilisé le mot Kiricocho lorsque Saka s'est approché du ballon pour le penalty."</span>,),</span>
 <span id="cb5-3"><a></a>  (<span class="st">"La prochaine Coupe du monde aura lieu en novembre 2022."</span>,),</span>
 <span id="cb5-4"><a></a>  (<span class="st">"À Noël 800, Charlemagne se fit couronner empereur à Rome."</span>,),</span>
 <span id="cb5-5"><a></a>  (<span class="st">"Le Marathon de Paris a lieu le premier dimanche d'avril 2024"</span>,)</span>
-<span id="cb5-6"><a></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>articles_cols <span class="op">=</span> [<span class="st">"text"</span>]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>articles_cols <span class="op">=</span> [<span class="st">"text"</span>]</span>
 <span id="cb6-2"><a></a></span>
 <span id="cb6-3"><a></a>df <span class="op">=</span> spark.createDataFrame(</span>
 <span id="cb6-4"><a></a>  data<span class="op">=</span>fr_articles, </span>
 <span id="cb6-5"><a></a>  schema<span class="op">=</span>articles_cols)</span>
 <span id="cb6-6"><a></a></span>
-<span id="cb6-7"><a></a>df.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a></a>df.printSchema()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
@@ -378,9 +378,9 @@
 </div>
 </section><section id="pipelines" class="slide level2 center"><h2>Pipelines</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>document_assembler <span class="op">=</span> DocumentAssembler() <span class="op">\</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>document_assembler <span class="op">=</span> DocumentAssembler() <span class="op">\</span></span>
 <span id="cb7-2"><a></a>            .setInputCol(<span class="st">"text"</span>) <span class="op">\</span></span>
-<span id="cb7-3"><a></a>            .setOutputCol(<span class="st">"document"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a></a>            .setOutputCol(<span class="st">"document"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
@@ -396,11 +396,11 @@
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>date_matcher <span class="op">=</span> DateMatcher() <span class="op">\</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>date_matcher <span class="op">=</span> DateMatcher() <span class="op">\</span></span>
 <span id="cb8-2"><a></a>            .setInputCols([<span class="st">'document'</span>]) <span class="op">\</span></span>
 <span id="cb8-3"><a></a>            .setOutputCol(<span class="st">"date"</span>) <span class="op">\</span></span>
 <span id="cb8-4"><a></a>            .setOutputFormat(<span class="st">"MM/dd/yyyy"</span>) <span class="op">\</span></span>
-<span id="cb8-5"><a></a>            .setSourceLanguage(<span class="st">"fr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-5"><a></a>            .setSourceLanguage(<span class="st">"fr"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
@@ -426,81 +426,81 @@
 </div>
 </section><section id="transformationaction" class="slide level2 center"><h2>Transformation/Action</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>assembled <span class="op">=</span> ( </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>assembled <span class="op">=</span> ( </span>
 <span id="cb9-2"><a></a>  document_assembler.transform(df)</span>
-<span id="cb9-3"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>(</span>
 <span id="cb10-2"><a></a> date_matcher</span>
 <span id="cb10-3"><a></a>  .transform(assembled)</span>
 <span id="cb10-4"><a></a>  .select(<span class="st">'date'</span>)</span>
 <span id="cb10-5"><a></a>  .show(<span class="dv">10</span>, <span class="va">False</span>)</span>
-<span id="cb10-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-6"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 </section><section id="more" class="slide level2 center"><h2>More</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>fr_articles.append((<span class="st">"Nous nous sommes rencontrés le 13/05/2018 puis le 18/05/2020."</span>,))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>fr_articles.append((<span class="st">"Nous nous sommes rencontrés le 13/05/2018 puis le 18/05/2020."</span>,))</span>
 <span id="cb11-2"><a></a></span>
-<span id="cb11-3"><a></a>fr_articles.append((<span class="st">"Nous nous sommes rencontrés il y a 2 jours et il m'a dit qu'il nous rendrait visite la semaine prochaine."</span>,))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a></a>fr_articles.append((<span class="st">"Nous nous sommes rencontrés il y a 2 jours et il m'a dit qu'il nous rendrait visite la semaine prochaine."</span>,))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>df <span class="op">=</span> spark.createDataFrame(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>df <span class="op">=</span> spark.createDataFrame(</span>
 <span id="cb12-2"><a></a>  data<span class="op">=</span>fr_articles, </span>
 <span id="cb12-3"><a></a>  schema<span class="op">=</span>articles_cols)</span>
 <span id="cb12-4"><a></a></span>
 <span id="cb12-5"><a></a>df.printSchema()</span>
-<span id="cb12-6"><a></a>df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-6"><a></a>df.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>assembled <span class="op">=</span> ( </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>assembled <span class="op">=</span> ( </span>
 <span id="cb13-2"><a></a>  document_assembler.transform(df)</span>
-<span id="cb13-3"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-3"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>(</span>
 <span id="cb14-2"><a></a> date_matcher</span>
 <span id="cb14-3"><a></a>  .transform(assembled)</span>
 <span id="cb14-4"><a></a>  .select(<span class="st">'date'</span>)</span>
 <span id="cb14-5"><a></a>  .show(<span class="dv">10</span>, <span class="va">False</span>)</span>
-<span id="cb14-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-6"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 </section><section id="another-annotator" class="slide level2 center"><h2>Another annotator</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a>date_matcher_bis <span class="op">=</span> MultiDateMatcher() <span class="op">\</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a>date_matcher_bis <span class="op">=</span> MultiDateMatcher() <span class="op">\</span></span>
 <span id="cb15-2"><a></a>            .setInputCols([<span class="st">'document'</span>]) <span class="op">\</span></span>
 <span id="cb15-3"><a></a>            .setOutputCol(<span class="st">"date"</span>) <span class="op">\</span></span>
 <span id="cb15-4"><a></a>            .setOutputFormat(<span class="st">"MM/dd/yyyy"</span>) <span class="op">\</span></span>
-<span id="cb15-5"><a></a>            .setSourceLanguage(<span class="st">"fr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-5"><a></a>            .setSourceLanguage(<span class="st">"fr"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a>(</span>
 <span id="cb16-2"><a></a>  date_matcher_bis</span>
 <span id="cb16-3"><a></a>    .transform(assembled)</span>
 <span id="cb16-4"><a></a>    .select(<span class="st">"date"</span>)</span>
 <span id="cb16-5"><a></a>    .show(<span class="dv">10</span>, <span class="va">False</span>)</span>
-<span id="cb16-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-6"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
@@ -513,23 +513,23 @@
 
 </section><section id="getting-a-corpus-etl" class="slide level2 center"><h2>Getting a corpus : ETL</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>pattern <span class="op">=</span> <span class="st">'URL: http://www.nytimes.com/(?P&lt;zedate&gt;[0-9]</span><span class="sc">{4}</span><span class="st">/[0-9]</span><span class="sc">{2}</span><span class="st">/[0-9]</span><span class="sc">{2}</span><span class="st">)/.*'</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>pattern <span class="op">=</span> <span class="st">'URL: http://www.nytimes.com/(?P&lt;zedate&gt;[0-9]</span><span class="sc">{4}</span><span class="st">/[0-9]</span><span class="sc">{2}</span><span class="st">/[0-9]</span><span class="sc">{2}</span><span class="st">)/.*'</span></span>
 <span id="cb17-2"><a></a>title <span class="op">=</span> <span class="st">'URL: http://www.nytimes.com/[0-9]</span><span class="sc">{4}</span><span class="st">/[0-9]</span><span class="sc">{2}</span><span class="st">/[0-9]</span><span class="sc">{2}</span><span class="st">/(.*)'</span></span>
 <span id="cb17-3"><a></a>reg_date <span class="op">=</span> re.<span class="bu">compile</span>(pattern)</span>
-<span id="cb17-4"><a></a>reg_title <span class="op">=</span> re.<span class="bu">compile</span>(title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-4"><a></a>reg_title <span class="op">=</span> re.<span class="bu">compile</span>(title)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a>nypath <span class="op">=</span> Path(<span class="st">'../data/nytimes_news_articles.txt'</span>)</span>
-<span id="cb18-2"><a></a>corpus_list <span class="op">=</span> <span class="bu">list</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a>nypath <span class="op">=</span> Path(<span class="st">'../data/nytimes_news_articles.txt'</span>)</span>
+<span id="cb18-2"><a></a>corpus_list <span class="op">=</span> <span class="bu">list</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="cf">with</span> <span class="bu">open</span>(nypath, encoding<span class="op">=</span><span class="st">'UTF-8'</span>)  <span class="im">as</span> fd:</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="cf">with</span> <span class="bu">open</span>(nypath, encoding<span class="op">=</span><span class="st">'UTF-8'</span>)  <span class="im">as</span> fd:</span>
 <span id="cb19-2"><a></a>    doc, document <span class="op">=</span> <span class="va">None</span>, <span class="va">None</span></span>
 <span id="cb19-3"><a></a>    <span class="cf">while</span> l <span class="op">:=</span> fd.readline():        </span>
 <span id="cb19-4"><a></a>        <span class="cf">if</span> m <span class="op">:=</span> reg_date.match(l):</span>
@@ -547,74 +547,70 @@
 <span id="cb19-16"><a></a>        <span class="cf">else</span>: doc <span class="op">=</span> doc <span class="op">+</span> l</span>
 <span id="cb19-17"><a></a>    <span class="cf">else</span>:</span>
 <span id="cb19-18"><a></a>        <span class="cf">if</span> doc <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb19-19"><a></a>            corpus_list.append((<span class="op">*</span>document, doc))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-19"><a></a>            corpus_list.append((<span class="op">*</span>document, doc))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>df_texts <span class="op">=</span> spark.createDataFrame(corpus_list,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>df_texts <span class="op">=</span> spark.createDataFrame(corpus_list,</span>
 <span id="cb20-2"><a></a>                      schema<span class="op">=</span> StructType([</span>
 <span id="cb20-3"><a></a>    StructField(<span class="st">'date'</span>, DateType(), <span class="va">False</span>),</span>
 <span id="cb20-4"><a></a>    StructField(<span class="st">'title'</span>, StringType(), <span class="va">False</span>),</span>
 <span id="cb20-5"><a></a>    StructField(<span class="st">'topic'</span>, StringType(), <span class="va">False</span>),</span>
 <span id="cb20-6"><a></a>    StructField(<span class="st">'text'</span>, StringType(), <span class="va">True</span>)</span>
-<span id="cb20-7"><a></a>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-7"><a></a>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>df_texts.printSchema()</span>
-<span id="cb21-2"><a></a>df_texts.count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>df_texts.printSchema()</span>
+<span id="cb21-2"><a></a>df_texts.count()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 </section><section id="saving" class="slide level2 center"><h2>Saving</h2>
-<p>Locally</p>
+<p>Locally ::: {.cell}</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a>df_texts.write.parquet(<span class="st">'../data/ny_corpus_pq'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>:::</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a>df_texts.write.parquet(<span class="st">'../data/ny_corpus_pq'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>spam <span class="op">=</span> spark.read.parquet(<span class="st">'../data/ny_corpus_pq'</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>spam <span class="op">=</span> spark.read.parquet(<span class="st">'../data/ny_corpus_pq'</span>)</span>
 <span id="cb23-2"><a></a></span>
-<span id="cb23-3"><a></a>spam.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-3"><a></a>spam.printSchema()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a>spam.rdd.getNumPartitions()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a>spam.rdd.getNumPartitions()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 </section><section id="section" class="slide level2 center"><h2></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>corpus_assembled <span class="op">=</span> ( </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>corpus_assembled <span class="op">=</span> ( </span>
 <span id="cb25-2"><a></a>  document_assembler.transform(df_texts)</span>
-<span id="cb25-3"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-3"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>corpus_assembled.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>corpus_assembled.printSchema()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a>(</span>
 <span id="cb27-2"><a></a>  date_matcher_bis</span>
 <span id="cb27-3"><a></a>    .transform(corpus_assembled)</span>
 <span id="cb27-4"><a></a>    .select(<span class="st">"title"</span>, <span class="st">"date"</span>)</span>
 <span id="cb27-5"><a></a>    .show(<span class="dv">10</span>, <span class="va">False</span>)</span>
-<span id="cb27-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-6"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
@@ -634,72 +630,72 @@
 </div>
 </section><section id="public-pipelines" class="slide level2 center"><h2>Public pipelines</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="im">from</span> sparknlp.pretrained <span class="im">import</span> PretrainedPipeline</span>
-<span id="cb28-2"><a></a>explain_document_pipeline <span class="op">=</span> PretrainedPipeline(<span class="st">"explain_document_ml"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="im">from</span> sparknlp.pretrained <span class="im">import</span> PretrainedPipeline</span>
+<span id="cb28-2"><a></a>explain_document_pipeline <span class="op">=</span> PretrainedPipeline(<span class="st">"explain_document_ml"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 </section><section id="chaining-annotators" class="slide level2 center"><h2>Chaining annotators</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a>sentenceDetector <span class="op">=</span> SentenceDetector() <span class="op">\</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a>sentenceDetector <span class="op">=</span> SentenceDetector() <span class="op">\</span></span>
 <span id="cb29-2"><a></a>    .setInputCols([<span class="st">"document"</span>]) <span class="op">\</span></span>
 <span id="cb29-3"><a></a>    .setOutputCol(<span class="st">"sentence"</span>)</span>
 <span id="cb29-4"><a></a>regexTokenizer <span class="op">=</span> Tokenizer() <span class="op">\</span></span>
 <span id="cb29-5"><a></a>    .setInputCols([<span class="st">"sentence"</span>]) <span class="op">\</span></span>
-<span id="cb29-6"><a></a>    .setOutputCol(<span class="st">"token"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-6"><a></a>    .setOutputCol(<span class="st">"token"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a></a>finisher <span class="op">=</span> Finisher() <span class="op">\</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a></a>finisher <span class="op">=</span> Finisher() <span class="op">\</span></span>
 <span id="cb30-2"><a></a>    .setInputCols([<span class="st">"token"</span>]) <span class="op">\</span></span>
-<span id="cb30-3"><a></a>    .setIncludeMetadata(<span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-3"><a></a>    .setIncludeMetadata(<span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a>pipeline <span class="op">=</span> Pipeline().setStages([</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a>pipeline <span class="op">=</span> Pipeline().setStages([</span>
 <span id="cb31-2"><a></a>    document_assembler,</span>
 <span id="cb31-3"><a></a>    sentenceDetector,</span>
 <span id="cb31-4"><a></a>    regexTokenizer,</span>
 <span id="cb31-5"><a></a>    finisher</span>
-<span id="cb31-6"><a></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-6"><a></a>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 </section><section id="fitting-and-transforming" class="slide level2 center"><h2>Fitting and transforming</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a></a>spam <span class="op">=</span> ( </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a></a>spam <span class="op">=</span> ( </span>
 <span id="cb32-2"><a></a>  pipeline.fit(df_texts)</span>
 <span id="cb32-3"><a></a>    .transform(df_texts)</span>
 <span id="cb32-4"><a></a>    .select(<span class="st">"finished_token"</span>)</span>
 <span id="cb32-5"><a></a>    .collect()</span>
-<span id="cb32-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-6"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 </section><section id="a-customized-pipeline" class="slide level2 center"><h2>A customized pipeline</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a></a>stemmer <span class="op">=</span> (</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a></a>stemmer <span class="op">=</span> (</span>
 <span id="cb33-2"><a></a>  Stemmer()</span>
 <span id="cb33-3"><a></a>    .setInputCols([<span class="st">'token'</span>])</span>
 <span id="cb33-4"><a></a>    .setOutputCol(<span class="st">'stem'</span>)</span>
-<span id="cb33-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-5"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a>lemmatizer <span class="op">=</span> (</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a>lemmatizer <span class="op">=</span> (</span>
 <span id="cb34-2"><a></a>  LemmatizerModel.pretrained()</span>
 <span id="cb34-3"><a></a>    .setInputCols([<span class="st">'token'</span>])</span>
 <span id="cb34-4"><a></a>    .setOutputCol(<span class="st">'lemma'</span>)</span>
-<span id="cb34-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-5"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
@@ -713,21 +709,21 @@
 <p><strong>Warning</strong></p>
 </div>
 <div class="callout-content">
-<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource verbatim number-lines code-with-copy"><code class="sourceCode"><span id="cb35-1"><a></a>lemma_antbnc download started this may take some time.</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource verbatim number-lines code-with-copy"><code class="sourceCode"><span id="cb35-1"><a></a>lemma_antbnc download started this may take some time.</span>
 <span id="cb35-2"><a></a>Approximate size to download 907.6 KB</span>
 <span id="cb35-3"><a></a>[ / ]lemma_antbnc download started this may take some time.</span>
 <span id="cb35-4"><a></a>Approximate size to download 907.6 KB</span>
 <span id="cb35-5"><a></a>[ / ]Download done! Loading the resource.</span>
 <span id="cb35-6"><a></a>[ — ]</span>
 <span id="cb35-7"><a></a></span>
-<span id="cb35-8"><a></a>[OK!]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-8"><a></a>[OK!]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a></a>posTagger <span class="op">=</span> PerceptronModel.pretrained() <span class="op">\</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a></a>posTagger <span class="op">=</span> PerceptronModel.pretrained() <span class="op">\</span></span>
 <span id="cb36-2"><a></a>    .setInputCols([<span class="st">"document"</span>, <span class="st">"token"</span>]) <span class="op">\</span></span>
-<span id="cb36-3"><a></a>    .setOutputCol(<span class="st">"pos"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-3"><a></a>    .setOutputCol(<span class="st">"pos"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
@@ -754,7 +750,7 @@ Approximate size to download 3.9 MB
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a></a>finisher <span class="op">=</span> (</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a></a>finisher <span class="op">=</span> (</span>
 <span id="cb38-2"><a></a>  Finisher()</span>
 <span id="cb38-3"><a></a>    .setInputCols([</span>
 <span id="cb38-4"><a></a>      <span class="st">'token'</span>, </span>
@@ -763,14 +759,14 @@ Approximate size to download 3.9 MB
 <span id="cb38-7"><a></a>      <span class="st">'pos'</span>])</span>
 <span id="cb38-8"><a></a>    .setIncludeMetadata(<span class="va">False</span>)</span>
 <span id="cb38-9"><a></a>    .setOutputAsArray(<span class="va">True</span>)</span>
-<span id="cb38-10"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-10"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 </section><section id="section-1" class="slide level2 center"><h2></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a></a>pipeline <span class="op">=</span> (</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a></a>pipeline <span class="op">=</span> (</span>
 <span id="cb39-2"><a></a>  Pipeline()</span>
 <span id="cb39-3"><a></a>    .setStages([</span>
 <span id="cb39-4"><a></a>      document_assembler,</span>
@@ -779,18 +775,18 @@ Approximate size to download 3.9 MB
 <span id="cb39-7"><a></a>      posTagger, </span>
 <span id="cb39-8"><a></a>      finisher</span>
 <span id="cb39-9"><a></a>    ])</span>
-<span id="cb39-10"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-10"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a></a>spam <span class="op">=</span> ( </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a></a>spam <span class="op">=</span> ( </span>
 <span id="cb40-2"><a></a>  pipeline.fit(df_texts)</span>
 <span id="cb40-3"><a></a>    .transform(df_texts)</span>
 <span id="cb40-4"><a></a>    .selectExpr(<span class="st">"*"</span>)</span>
 <span id="cb40-5"><a></a>    .collect()</span>
-<span id="cb40-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb40-6"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
@@ -809,7 +805,7 @@ Approximate size to download 3.9 MB
 <li>cluster</li>
 <li>
 </li></ul></section></section><section id="spark-nlp-and-composite-types-in-spark-dataframes" class="title-slide slide level1 center"><h1>Spark NLP and composite types in Spark Dataframes</h1>
-<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a></a></span>
 <span id="cb41-2"><a></a><span class="op">&gt;&gt;&gt;</span> result <span class="op">=</span> documentAssembler.transform(data)</span>
 <span id="cb41-3"><a></a><span class="op">&gt;&gt;&gt;</span> result.select(<span class="st">"document"</span>).show(truncate<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb41-4"><a></a><span class="op">+----------------------------------------------------------------------------------------------+</span></span>
@@ -829,7 +825,7 @@ Approximate size to download 3.9 MB
 <span id="cb41-18"><a></a><span class="op">|</span>    <span class="op">|</span>    <span class="op">|</span>    <span class="op">|--</span> key: string</span>
 <span id="cb41-19"><a></a><span class="op">|</span>    <span class="op">|</span>    <span class="op">|</span>    <span class="op">|--</span> value: string (valueContainsNull <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb41-20"><a></a><span class="op">|</span>    <span class="op">|</span>    <span class="op">|--</span> embeddings: array (nullable <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb41-21"><a></a><span class="op">|</span>    <span class="op">|</span>    <span class="op">|</span>    <span class="op">|--</span> element: <span class="bu">float</span> (containsNull <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb41-21"><a></a><span class="op">|</span>    <span class="op">|</span>    <span class="op">|</span>    <span class="op">|--</span> element: <span class="bu">float</span> (containsNull <span class="op">=</span> <span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Column <code>document</code> is of type <code>ArrayType()</code>. The basetype of <code>document</code> column is of <code>StructType()</code> (<code>element</code>), the <code>element</code> contains subfields of primitive type, but alo a field of type <code>map</code> (<code>MapType()</code>) and a field of type <code>StructType()</code>.</p>
 
 
@@ -1021,7 +1017,7 @@ Approximate size to download 3.9 MB
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1129,13 +1125,14 @@ Approximate size to download 3.9 MB
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

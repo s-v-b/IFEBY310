@@ -1,10 +1,6 @@
 [
   {
-    "listing": "/weeks-listings.html",
-    "items": []
-  },
-  {
-    "listing": "/notebooks-listings.html",
+    "listing": "/slides-listings.html",
     "items": []
   },
   {
@@ -12,7 +8,11 @@
     "items": []
   },
   {
-    "listing": "/slides-listings.html",
+    "listing": "/notebooks-listings.html",
+    "items": []
+  },
+  {
+    "listing": "/weeks-listings.html",
     "items": []
   }
 ]

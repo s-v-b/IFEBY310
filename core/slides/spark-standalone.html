@@ -6,23 +6,22 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e2182856f2c32102dd26b05a5ef16cb5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4a17e18fdf56099d4f6da1e105f33a53.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/grid-no-htext-1.0.0/grid_no_htext.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
-<link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.30">
-<meta name="author" content="Équipe de Statistique">
-<meta name="dcterms.date" content="2025-01-17">
-<title>IFEBY310 - Spring 2025 – Spark standalone</title>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-<link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
-<link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
-<style>
+<link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.24">
+
+  <meta name="author" content="Équipe de Statistique">
+  <title>IFEBY310 - Spring 2025 – Spark standalone</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -101,12 +100,12 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-<link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-cea8bd4d0ffd43e334db3cf8b0e9d7b6.css">
-<link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-<link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-<link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-<link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-<style type="text/css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2dea105675ef174e229fdc0796ca115f.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
       overflow: auto;
@@ -194,7 +193,7 @@
       margin-right: 0; 
     }
   </style>
-<script>
+  <script>
   MathJax = {
     loader: {
       load: ['[tex]/boldsymbol']
@@ -210,7 +209,8 @@
       }
     }
   };
-  </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 <meta property="og:title" content="Spark standalone – IFEBY310 - Spring 2025">
 <meta property="og:description" content="Technologies Big Data Master MIDS/MFA/LOGOIS">
 <meta property="og:site_name" content="IFEBY310 - Spring 2025">
@@ -219,7 +219,8 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-color="#1c191c" class="quarto-title-block center"><h1 class="title">Spark standalone</h1>
+<section id="title-slide" data-background-color="#1c191c" class="quarto-title-block center">
+  <h1 class="title">Spark standalone</h1>
   <p class="subtitle"><a href="https://s-v-b.github.io/IFEBY030/">Technologies Big Data Master MIDS/MFA/LOGOIS</a></p>
 
 <div class="quarto-title-authors">
@@ -233,15 +234,23 @@
     </div>
 </div>
 
-  <p class="date">2025-01-17</p>
-</section><section id="TOC"><nav role="doc-toc"><h2 id="toc-title">Roadmap</h2>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Roadmap</h2>
 <ul>
 <li><a href="#/setting-up-manually" id="/toc-setting-up-manually">Setting up manually</a></li>
 <li><a href="#/connecting-an-application-to-the-server" id="/toc-connecting-an-application-to-the-server">Connecting an application to the server</a></li>
 <li><a href="#/launching-spark-applications" id="/toc-launching-spark-applications">Launching Spark Applications</a></li>
-</ul></nav></section><section><section id="setting-up-manually" class="title-slide slide level1 center"><h1>Setting up manually</h1>
+</ul>
+</nav>
+</section>
+<section>
+<section id="setting-up-manually" class="title-slide slide level1 center">
+<h1>Setting up manually</h1>
 
-</section><section id="section" class="slide level2 center"><h2></h2>
+</section>
+<section id="section" class="slide level2 center">
+<h2></h2>
 <div class="callout callout-none no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
@@ -249,7 +258,7 @@
 </div>
 </div>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource verbatim number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>.</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource verbatim number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>.</span>
 <span id="cb1-2"><a></a>├── bin</span>
 <span id="cb1-3"><a></a>├── conf</span>
 <span id="cb1-4"><a></a>├── data</span>
@@ -266,17 +275,14 @@
 <span id="cb1-15"><a></a>├── RELEASE</span>
 <span id="cb1-16"><a></a>├── sbin</span>
 <span id="cb1-17"><a></a>├── work</span>
-<span id="cb1-18"><a></a>└── yarn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section><section id="start-the-standalone-master-server" class="slide level2 center"><h2>Start the standalone master server</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a></a><span class="ex">./sbin/start-master.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-
-</div>
+<span id="cb1-18"><a></a>└── yarn</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="start-the-standalone-master-server" class="slide level2 center">
+<h2>Start the standalone master server</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource {bash} number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a></a>./sbin/start-master.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p>WWW UI</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource verbatin number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a></a>--webui-port 8080</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource verbatin number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a></a>--webui-port 8080</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Monitoring of</p>
 <ul>
 <li>workers</li>
@@ -285,40 +291,49 @@
 </ul>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource verbatim number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a></a>Spark Master at spark://&lt;host&gt;:&lt;port&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource verbatim number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a></a>Spark Master at spark://&lt;host&gt;:&lt;port&gt;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="starting-a-worker" class="slide level2 center"><h2>Starting a worker</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a></a><span class="ex">./sbin/start-worker.sh</span> spark://boucheron-Precision-5480:7077</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
+</section>
+<section id="starting-a-worker" class="slide level2 center">
+<h2>Starting a worker</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource {bash} number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a></a>./sbin/start-worker.sh spark://boucheron-Precision-5480:7077</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="back-to-the-web-ui" class="slide level2 center">
+<h2>Back to the Web UI</h2>
 
-</div>
-</section><section id="back-to-the-web-ui" class="slide level2 center"><h2>Back to the Web UI</h2>
-
-<img data-src="./IMG/webUI-oneworker.png" class="r-stretch"></section><section id="starting-workers" class="slide level2 center"><h2>Starting workers</h2>
-</section><section id="options" class="slide level2 center"><h2>Options</h2>
+<img data-src="./IMG/webUI-oneworker.png" class="r-stretch"></section>
+<section id="starting-workers" class="slide level2 center">
+<h2>Starting workers</h2>
+</section>
+<section id="options" class="slide level2 center">
+<h2>Options</h2>
 <ul>
 <li><code>--host</code></li>
-<li>
-<code>--port</code> default 7077</li>
-<li>
-<code>--wbeui-port</code> default 8080</li>
-</ul></section></section><section><section id="connecting-an-application-to-the-server" class="title-slide slide level1 center"><h1>Connecting an application to the server</h1>
+<li><code>--port</code> default 7077</li>
+<li><code>--wbeui-port</code> default 8080</li>
+</ul>
+</section></section>
+<section>
+<section id="connecting-an-application-to-the-server" class="title-slide slide level1 center">
+<h1>Connecting an application to the server</h1>
 
-</section><section id="connecting-pyspark-to-the-cluster" class="slide level2 center"><h2>Connecting <code>pyspark</code> to the cluster</h2>
+</section>
+<section id="connecting-pyspark-to-the-cluster" class="slide level2 center">
+<h2>Connecting <code>pyspark</code> to the cluster</h2>
 <p>To run an application on the Spark cluster, simply pass the spark://IP:PORT URL of the master as to the SparkContext constructor.</p>
 <p>To run an interactive Spark shell against the cluster, run the following command:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a></a><span class="ex">./bin/pyspark</span> <span class="at">--master</span> spark://boucheron-Precision-5480:7077</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource {bash} number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a></a>./bin/pyspark --master spark://boucheron-Precision-5480:7077</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="xxx" class="slide level2 center">
+<h2>xxx</h2>
+</section></section>
+<section>
+<section id="launching-spark-applications" class="title-slide slide level1 center">
+<h1>Launching Spark Applications</h1>
 
-</div>
-</section><section id="xxx" class="slide level2 center"><h2>xxx</h2>
-</section></section><section><section id="launching-spark-applications" class="title-slide slide level1 center"><h1>Launching Spark Applications</h1>
-
-</section><section id="section-1" class="slide level2 center"><h2></h2>
+</section>
+<section id="section-1" class="slide level2 center">
+<h2></h2>
 
 
 <div class="reveal-header">
@@ -336,14 +351,30 @@
 </div>
 </div>
 </section></section>
-</div>
+    </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p><a href="http://s-v-b.github.io/IFEBY310">IFEBY030</a> – Technos Big Data – M1 MIDS/MFA/LOGOS – UParis Cité</p>
+<p><a href="https://stephane-v-boucheron.fr/slides/spark-standalone.html">Spark Standalone</a></p>
 </div>
 </div></div>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../../site_libs/revealjs/plugin/search/search.js"></script><script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
 
       // Full list of configuration options available at:
       // https://revealjs.com/config/
@@ -509,7 +540,7 @@
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -534,42 +565,8 @@
           RevealZoom
         ]
       });
-    </script><script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script><script id="quarto-html-after-body" type="application/javascript">
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
         tabsets.forEach(function(tabset) {
@@ -617,13 +614,14 @@
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -894,7 +892,8 @@
           }
         }
       });
-      </script><script type="text/javascript">
+      </script>
+        <script type="text/javascript">
         (function(d) {
           d.querySelectorAll(".pseudocode-container").forEach(function(el) {
             let pseudocodeOptions = {
@@ -925,6 +924,7 @@
           });
         })(document);
         </script>
-
+      
+    
 
 </body></html>

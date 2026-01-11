@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
@@ -105,9 +105,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <meta property="og:title" content="Imports – IFEBY310 - Spring 2025">
@@ -381,13 +378,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../computing-virtualenv.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../computing-virtualenv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Virtual environments</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../computing-jupyter.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../computing-jupyter.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Jupyter</span></a>
   </div>
 </li>
@@ -482,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="f6e374cf" class="cell" data-execution_count="1">
+<div id="e4b0401a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
@@ -533,7 +530,7 @@ Cell <span class="ansi-green-fg">In[1], line 6</span>
 </div>
 </div>
 </div>
-<div id="8b567538" class="cell" data-execution_count="2">
+<div id="73992f35" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dask.distributed <span class="im">import</span> Client</span>
@@ -541,750 +538,42 @@ Cell <span class="ansi-green-fg">In[1], line 6</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> Client(n_workers<span class="op">=</span><span class="dv">20</span>, threads_per_worker<span class="op">=</span><span class="dv">2</span>, memory_limit<span class="op">=</span><span class="st">"2GB"</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>client</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<div>
-    <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
-    <div style="margin-left: 48px;">
-        <h3 style="margin-bottom: 0px;" class="anchored">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-2f14011f-108d-11f0-a00f-ac91a1bd3e89</p>
-        
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Connection method:</strong> Cluster object</td>
-<td style="text-align: left;"><strong>Cluster type:</strong> distributed.LocalCluster</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a></td>
-<td style="text-align: left;"></td>
-</tr>
-</tbody>
-</table>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+File <span class="ansi-green-fg">~/Documents/IFEBY310/.venv/lib/python3.12/site-packages/dask/distributed.py:13</span>
+<span class="ansi-green-fg ansi-bold">     12</span> <span style="font-weight:bold;color:rgb(0,135,0)">try</span>:
+<span class="ansi-green-fg">---&gt; 13</span>     <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">distributed</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="color:rgb(98,98,98)">*</span>
+<span class="ansi-green-fg ansi-bold">     14</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">ImportError</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> e:
 
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named 'distributed'
 
-        
+The above exception was the direct cause of the following exception:
 
-        
-            <details>
-            <summary style="margin-bottom: 20px;"><h3 style="display: inline;" class="anchored">Cluster Info</h3></summary>
-            <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-mod-trusted jp-OutputArea-output">
-    <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;">
-    </div>
-    <div style="margin-left: 48px;">
-        <h3 style="margin-bottom: 0px; margin-top: 0px;" class="anchored">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">8f43b2e9</p>
-        
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a></td>
-<td style="text-align: left;"><strong>Workers:</strong> 20</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Total threads:</strong> 40</td>
-<td style="text-align: left;"><strong>Total memory:</strong> 37.25 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Status:</strong> running</td>
-<td style="text-align: left;"><strong>Using processes:</strong> True</td>
-</tr>
-</tbody>
-</table>
+<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[2], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">dask</span><span style="font-weight:bold;color:rgb(0,0,255)">.</span><span style="font-weight:bold;color:rgb(0,0,255)">distributed</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> Client
+<span class="ansi-green-fg ansi-bold">      3</span> client <span style="color:rgb(98,98,98)">=</span> Client(n_workers<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">20</span>, threads_per_worker<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">2</span>, memory_limit<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">2GB</span><span style="color:rgb(175,0,0)">"</span>)
+<span class="ansi-green-fg ansi-bold">      4</span> client
 
+File <span class="ansi-green-fg">~/Documents/IFEBY310/.venv/lib/python3.12/site-packages/dask/distributed.py:16</span>
+<span class="ansi-green-fg ansi-bold">     14</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">ImportError</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> e:
+<span class="ansi-green-fg ansi-bold">     15</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> e<span style="color:rgb(98,98,98)">.</span>msg <span style="color:rgb(98,98,98)">==</span> <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">No module named </span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">distributed</span><span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">"</span>:
+<span class="ansi-green-fg">---&gt; 16</span>         <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">ImportError</span>(_import_error_message) <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,0,255)">e</span>
+<span class="ansi-green-fg ansi-bold">     17</span>     <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
+<span class="ansi-green-fg ansi-bold">     18</span>         <span style="font-weight:bold;color:rgb(0,135,0)">raise</span>
 
-        <details>
-            <summary style="margin-bottom: 20px;">
-                <h3 style="display: inline;" class="anchored">Scheduler Info</h3>
-            </summary>
+<span class="ansi-red-fg">ImportError</span>: dask.distributed is not installed.
 
-            <div style="">
-    <div>
-        <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
-        <div style="margin-left: 48px;">
-            <h3 style="margin-bottom: 0px;" class="anchored">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-366d5cb6-f3c8-46eb-96af-857815f764ba</p>
-            
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:45971</td>
-<td style="text-align: left;"><strong>Workers:</strong> 20</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a></td>
-<td style="text-align: left;"><strong>Total threads:</strong> 40</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Started:</strong> Just now</td>
-<td style="text-align: left;"><strong>Total memory:</strong> 37.25 GiB</td>
-</tr>
-</tbody>
-</table>
+Please either conda or pip install distributed:
 
-        </div>
-    </div>
-
-    <details style="margin-left: 48px;">
-        <summary style="margin-bottom: 20px;">
-            <h3 style="display: inline;" class="anchored">Workers</h3>
-        </summary>
-
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 0</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:36845</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:44839/status" target="_blank">http://127.0.0.1:44839/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:41431</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-o8f81ir2</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 1</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:45341</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:43575/status" target="_blank">http://127.0.0.1:43575/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:37293</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-sswqfpbn</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 2</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:37523</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:33189/status" target="_blank">http://127.0.0.1:33189/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:41099</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-gj947tlp</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 3</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:42315</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:40491/status" target="_blank">http://127.0.0.1:40491/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:44249</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-7l9bdnbh</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 4</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:35927</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:40743/status" target="_blank">http://127.0.0.1:40743/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:35647</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-_rrp5yai</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 5</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:42877</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:35367/status" target="_blank">http://127.0.0.1:35367/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:39593</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-9ocnuao3</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 6</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:35611</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:36999/status" target="_blank">http://127.0.0.1:36999/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:45113</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-6v198iid</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 7</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:39531</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:38171/status" target="_blank">http://127.0.0.1:38171/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:33651</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-2e0p38oo</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 8</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:41649</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:35337/status" target="_blank">http://127.0.0.1:35337/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:40221</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-qe9ic5bb</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 9</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:38397</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:33565/status" target="_blank">http://127.0.0.1:33565/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:44057</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-6glu35ck</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 10</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:46189</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:32953/status" target="_blank">http://127.0.0.1:32953/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:34913</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-p36vtsl0</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 11</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:42589</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:34365/status" target="_blank">http://127.0.0.1:34365/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:44305</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-0gs2wyzl</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 12</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:45655</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:37385/status" target="_blank">http://127.0.0.1:37385/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:46011</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-pyec8e9x</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 13</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:36835</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:40751/status" target="_blank">http://127.0.0.1:40751/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:43667</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-waflaoji</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 14</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:43599</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:36101/status" target="_blank">http://127.0.0.1:36101/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:44219</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-4z_4gip0</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 15</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:38823</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:41181/status" target="_blank">http://127.0.0.1:41181/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:42207</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-mpxi4w0z</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 16</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:43063</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:35175/status" target="_blank">http://127.0.0.1:35175/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:36171</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-fg39drd1</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 17</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:40425</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:39361/status" target="_blank">http://127.0.0.1:39361/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:34799</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-zzdqp_p4</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 18</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:44039</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:44757/status" target="_blank">http://127.0.0.1:44757/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:45465</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-0qtm78nz</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
-            <div style="margin-left: 48px;">
-            <details>
-                <summary>
-                    <h4 style="margin-bottom: 0px; display: inline;" class="anchored">Worker: 19</h4>
-                </summary>
-                
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Comm:</strong> tcp://127.0.0.1:45865</td>
-<td style="text-align: left;"><strong>Total threads:</strong> 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Dashboard:</strong> <a href="http://127.0.0.1:36217/status" target="_blank">http://127.0.0.1:36217/status</a></td>
-<td style="text-align: left;"><strong>Memory:</strong> 1.86 GiB</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nanny:</strong> tcp://127.0.0.1:42857</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td colspan="2" style="text-align: left;"><strong>Local directory:</strong> /tmp/dask-scratch-space/worker-teyqaqft</td>
-</tr>
-</tbody>
-</table>
-
-            </details>
-            </div>
-        </div>
-        
-
-    </details>
-</div>
-
-        </details>
-    </div>
-</div>
-            </details>
-        
-
-    </div>
+  conda install dask distributed             # either conda install
+  python -m pip install "dask[distributed]" --upgrade    # or pip install</pre>
 </div>
 </div>
 </div>
-<div id="1111df3e" class="cell" data-execution_count="3">
+<div id="415498e6" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>logger <span class="op">=</span> logging.getLogger(<span class="va">__name__</span>)</span>
@@ -1312,7 +601,7 @@ Cell <span class="ansi-green-fg">In[3], line 1</span>
 <p>Downloaded zip archives are in <code>data_dir</code></p>
 <p>Extracted csv files are in <code>extract_dir</code></p>
 <p>Parquet files are in <code>parquet_dir</code></p>
-<div id="ef8365c4" class="cell" data-execution_count="4">
+<div id="3a92103d" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">'../data'</span></span>
@@ -1345,14 +634,14 @@ Cell <span class="ansi-green-fg">In[4], line 6</span>
 <section id="extracting-archives" class="level2">
 <h2 class="anchored" data-anchor-id="extracting-archives">Extracting archives</h2>
 <p>Zip archive files contain directory trees where the <code>csv</code> files are to be found.</p>
-<div id="6a78c66c" class="cell" data-execution_count="5">
+<div id="0d005394" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>citibike_archives_paths <span class="op">=</span> <span class="bu">sorted</span>(glob.glob(data_dir <span class="op">+</span> <span class="st">'/*-citibike-tripdata.zip'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>TODO: - parallelize part of the extraction process - one thread per element in <code>citibike_archives_paths</code> - should be doable with dask</p>
-<div id="61ada26e" class="cell" data-execution_count="6">
+<div id="029b96b8" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ar_path <span class="kw">in</span> tqdm(citibike_archives_paths):</span>
@@ -1380,7 +669,7 @@ Cell <span class="ansi-green-fg">In[6], line 1</span>
 <p>The extracted <code>csv</code> files do not share the same schema and the same datetime encoding format.</p>
 <p>Walking through the <code>csv</code> files in <code>extract_dir</code>, allows to gather the three different column naming patterns.</p>
 <p>TODO: - Save the schemata with inferred types in a <code>json</code> file. Different typing patterns may correspond to the same column naming pattern - For each <code>csv</code> file spot the column naming pattern, the datetime encoding format</p>
-<div id="450fcfc4" class="cell" data-execution_count="7">
+<div id="f1d75f35" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># schemata_names = set()</span></span>
@@ -1396,7 +685,7 @@ Cell <span class="ansi-green-fg">In[6], line 1</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># schemata_names = [s.replace('\n', '').split(',') for s in schemata_names]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="52088fb7" class="cell" data-execution_count="8">
+<div id="54b53521" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>schemata_names <span class="op">=</span> [</span>
@@ -1448,7 +737,7 @@ Cell <span class="ansi-green-fg">In[6], line 1</span>
 </div>
 <p>For each <code>csv</code> file, find the column naming pattern, build a dictionary with this information.</p>
 <p>TODO: - should done during the first walk.</p>
-<div id="00de3e02" class="cell" data-execution_count="9">
+<div id="83be246f" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>schemata_numbers <span class="op">=</span> {}</span>
@@ -1499,7 +788,7 @@ Cell <span class="ansi-green-fg">In[6], line 1</span>
 }
 </code></pre>
 <p>and replace <code></code> with ’_’, use <code>lower()</code>.</p>
-<div id="c63fbacb" class="cell" data-execution_count="10">
+<div id="32cd3ffd" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dicts_rename <span class="op">=</span> {</span>
@@ -1534,7 +823,7 @@ Cell <span class="ansi-green-fg">In[6], line 1</span>
 <h2 class="anchored" data-anchor-id="building-a-parquet-replica">Building a parquet replica</h2>
 <p>TODO: - explain why <code>engine='pyarrow'</code> is useful when using <code>pd.read_csv()</code> - clean up the renaming schemes</p>
 <p>Datetime hand-made parsing for non ISO compliant <code>csv</code> file</p>
-<div id="1a3b906a" class="cell" data-execution_count="11">
+<div id="2021c5bb" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_parse(s):</span>
@@ -1556,7 +845,7 @@ Cell <span class="ansi-green-fg">In[6], line 1</span>
 </details>
 </div>
 <p>TODO: - parallelize this</p>
-<div id="1a2b52ab" class="cell" data-execution_count="12">
+<div id="2ea55b2f" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> csv2pq(root, dirs, files):</span>
@@ -1619,7 +908,7 @@ Cell <span class="ansi-green-fg">In[6], line 1</span>
 <span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> root </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="a4ac5233" class="cell" data-execution_count="13">
+<div id="4a5024dd" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>todo <span class="op">=</span> dask.delayed([dask.delayed(csv2pq)(root, dirs ,files)</span>
@@ -1639,7 +928,7 @@ Cell <span class="ansi-green-fg">In[13], line 1</span>
 </div>
 </div>
 </div>
-<div id="e44737fd" class="cell" data-execution_count="14">
+<div id="d71ccd2b" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>foo <span class="op">=</span> todo.compute()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1655,7 +944,7 @@ Cell <span class="ansi-green-fg">In[14], line 1</span>
 </div>
 </div>
 </div>
-<div id="8f2813f2" class="cell" data-execution_count="15">
+<div id="f72f710c" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>[x  <span class="cf">for</span> x <span class="kw">in</span> foo <span class="cf">if</span> x]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1671,7 +960,7 @@ Cell <span class="ansi-green-fg">In[15], line 1</span>
 </div>
 </div>
 </div>
-<div id="20e8900a" class="cell" data-execution_count="16">
+<div id="b77d6b3a" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(schemata_numbers.keys())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1680,7 +969,7 @@ Cell <span class="ansi-green-fg">In[15], line 1</span>
 <pre><code>[]</code></pre>
 </div>
 </div>
-<div id="ac41517a" class="cell" data-execution_count="17">
+<div id="b9ae1d89" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (root, dirs ,files) <span class="kw">in</span> tqdm(os.walk(extract_dir, topdown<span class="op">=</span><span class="va">True</span>)):</span>
@@ -1752,7 +1041,7 @@ Cell <span class="ansi-green-fg">In[17], line 1</span>
 </div>
 </div>
 </div>
-<div id="c16ee0a6" class="cell" data-execution_count="18">
+<div id="71298b4e" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df.start_station_id.astype(np.dtype(<span class="st">'O'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1923,7 +1212,7 @@ Cell <span class="ansi-green-fg">In[18], line 1</span>
 <p>From 2014-09-01 till 2016-09-.., <code>started_at</code> and <code>ended_at</code> do not abide ISO format, but <code>%m/%d/%Y %H:%M:%S</code>.</p>
 <p>Try to use <code>pd.to_datetime()</code>. If failure, use regular expression to parse the putative date column. Handle the optional field that way.</p>
 <p>Better ask forgiveness than permission.</p>
-<div id="e0ada850" class="cell" data-execution_count="19">
+<div id="0948190d" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>root, dirs, fn <span class="op">=</span> <span class="bu">next</span>(os.walk(os.path.join(parquet_dir, <span class="st">'start_year=2013'</span>, <span class="st">'start_month=9'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1939,7 +1228,7 @@ Cell <span class="ansi-green-fg">In[19], line 1</span>
 </div>
 </div>
 </div>
-<div id="c8093519" class="cell" data-execution_count="20">
+<div id="07dc08aa" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>spam <span class="op">=</span> pq.read_metadata(os.path.join(root, fn[<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1955,16 +1244,27 @@ Cell <span class="ansi-green-fg">In[20], line 1</span>
 </div>
 </div>
 </div>
-<div id="b9bd48f2" class="cell" data-execution_count="21">
+<div id="5e10fb12" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span>  dask <span class="im">import</span> dataframe <span class="im">as</span> dd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/boucheron/Documents/IFEBY310/.venv/lib/python3.12/site-packages/dask/dataframe/__init__.py:49: FutureWarning:
+
+
+Dask dataframe query planning is disabled because dask-expr is not installed.
+
+You can install it with `pip install dask[dataframe]` or `conda install dask`.
+This will raise in a future version.
+
+</code></pre>
 </div>
-<div id="3a9996b0" class="cell" data-execution_count="22">
+</div>
+<div id="4bd20d0e" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>spam <span class="op">=</span> dd.read_parquet(os.path.join(parquet_dir, <span class="st">'start_year=2023'</span> ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>spam <span class="op">=</span> dd.read_parquet(os.path.join(parquet_dir, <span class="st">'start_year=2023'</span> ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -1977,10 +1277,10 @@ Cell <span class="ansi-green-fg">In[22], line 1</span>
 </div>
 </div>
 </div>
-<div id="e39c8a20" class="cell" data-execution_count="23">
+<div id="4582f48e" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>spam.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>spam.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -1993,10 +1293,10 @@ Cell <span class="ansi-green-fg">In[23], line 1</span>
 </div>
 </div>
 </div>
-<div id="0b41251c" class="cell" data-execution_count="24">
+<div id="4918e318" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>foo_path <span class="op">=</span> os.path.join(parquet_dir, <span class="st">'start_year=2023'</span>, <span class="st">'start_month=1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>foo_path <span class="op">=</span> os.path.join(parquet_dir, <span class="st">'start_year=2023'</span>, <span class="st">'start_month=1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -2009,10 +1309,10 @@ Cell <span class="ansi-green-fg">In[24], line 1</span>
 </div>
 </div>
 </div>
-<div id="570cbb97" class="cell" data-execution_count="25">
+<div id="983170f5" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>root, dirs, fn <span class="op">=</span> <span class="bu">next</span>(os.walk(foo_path))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>root, dirs, fn <span class="op">=</span> <span class="bu">next</span>(os.walk(foo_path))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -2025,11 +1325,11 @@ Cell <span class="ansi-green-fg">In[25], line 1</span>
 </div>
 </div>
 </div>
-<div id="73e5b4dd" class="cell" data-execution_count="26">
+<div id="c2903a72" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>parquet_file <span class="op">=</span> pq.ParquetFile(os.path.join(root, fn[<span class="dv">0</span>]))</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>schema <span class="op">=</span> parquet_file.schema</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>parquet_file <span class="op">=</span> pq.ParquetFile(os.path.join(root, fn[<span class="dv">0</span>]))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>schema <span class="op">=</span> parquet_file.schema</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -2043,10 +1343,10 @@ Cell <span class="ansi-green-fg">In[26], line 1</span>
 </div>
 </div>
 </div>
-<div id="8a95a548" class="cell" data-execution_count="27">
+<div id="7f33a185" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>schema</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>schema</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">

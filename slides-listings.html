@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.30">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -35,18 +35,19 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2b3e328b71be8d25427581baeb23079b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3dec761e03a15eeb45f5d6fad7dbf28e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-cf69aba9b2238669425558235384ed1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-3dec761e03a15eeb45f5d6fad7dbf28e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a611943760b203044226a687a7214fb7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-563f26b41fe4db7f62e0e8fceb05db6b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a611943760b203044226a687a7214fb7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -120,7 +121,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -327,7 +328,8 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-center sidebar-header">
       <a href="./index.html" class="sidebar-logo-link">
-      <img src="./images/UniversiteParisCite_logo_horizontal_couleur_RVB.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <img src="./images/UniversiteParisCite_logo_horizontal_couleur_RVB.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/UniversiteParisCite_logo_horizontal_couleur_RVB.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
       <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/s-v-b/IFEBY310" title="GitHub organization" class="quarto-navigation-tool px-1" aria-label="GitHub organization"><i class="bi bi-github"></i></a>
@@ -407,13 +409,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./computing-virtualenv.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./computing-virtualenv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Virtual environments</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./computing-jupyter.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./computing-jupyter.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Jupyter</span></a>
   </div>
 </li>
@@ -534,10 +536,10 @@ window.Quarto = {
 </thead>
 <tbody class="list">
 
-<tr data-index="0" data-categories="" data-listing-date-sort="1737068400000" data-listing-title-sort="Introduction to Big Data" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="0" data-categories="" data-listing-date-sort="1768172400000" data-listing-title-sort="Introduction to Big Data" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<span class="listing-date">Jan 17, 2025</span>
+<span class="listing-date">Jan 12, 2026</span>
 </td>
 <td>
 <a href="core/slides/slides01_introduction.html" class="title listing-title">Introduction to Big Data</a>
@@ -548,10 +550,10 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="1" data-categories="" data-listing-date-sort="1737068400000" data-listing-title-sort="Python data stack : Numpy et Scipy" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="1" data-categories="" data-listing-date-sort="1768172400000" data-listing-title-sort="Python data stack : Numpy et Scipy" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<span class="listing-date">Jan 17, 2025</span>
+<span class="listing-date">Jan 12, 2026</span>
 </td>
 <td>
 <a href="core/slides/slides02_python_ds_stack.html" class="title listing-title">Python data stack : Numpy et Scipy</a>
@@ -562,10 +564,10 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="2" data-categories="" data-listing-date-sort="1737673200000" data-listing-title-sort="Python data stack : Pandas " onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="2" data-categories="" data-listing-date-sort="1768777200000" data-listing-title-sort="Python data stack : Pandas " onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<span class="listing-date">Jan 24, 2025</span>
+<span class="listing-date">Jan 19, 2026</span>
 </td>
 <td>
 <a href="core01/slides/slides02_python_ds_stack.html" class="title listing-title">Python data stack : Pandas </a>
@@ -576,10 +578,10 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="3" data-categories="" data-listing-date-sort="1738278000000" data-listing-title-sort="Python data stack : Dask" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="3" data-categories="" data-listing-date-sort="1769382000000" data-listing-title-sort="Python data stack : Dask" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<span class="listing-date">Jan 31, 2025</span>
+<span class="listing-date">Jan 26, 2026</span>
 </td>
 <td>
 <a href="core/slides/slides09_dask.html" class="title listing-title">Python data stack : Dask</a>
@@ -590,10 +592,10 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="4" data-categories="" data-listing-date-sort="1738882800000" data-listing-title-sort="Spark : RDDs" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="4" data-categories="" data-listing-date-sort="1769986800000" data-listing-title-sort="Spark : RDDs" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<span class="listing-date">Feb 7, 2025</span>
+<span class="listing-date">Feb 2, 2026</span>
 </td>
 <td>
 <a href="core/slides/slides03_sparkrdd.html" class="title listing-title">Spark : RDDs</a>
@@ -604,10 +606,10 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="5" data-categories="" data-listing-date-sort="1740006000000" data-listing-title-sort="Spark : SQL" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="5" data-categories="" data-listing-date-sort="1770591600000" data-listing-title-sort="Spark : SQL" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<span class="listing-date">Feb 20, 2025</span>
+<span class="listing-date">Feb 9, 2026</span>
 </td>
 <td>
 <a href="core/slides/slides04_sparkl.html" class="title listing-title">Spark : SQL</a>
@@ -618,10 +620,10 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="6" data-categories="" data-listing-date-sort="1740092400000" data-listing-title-sort="Pandas on Spark and sparklyr" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="6" data-categories="" data-listing-date-sort="1771196400000" data-listing-title-sort="Pandas on Spark and sparklyr" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<span class="listing-date">Feb 21, 2025</span>
+<span class="listing-date">Feb 16, 2026</span>
 </td>
 <td>
 <a href="core/slides/spark-pandas-on-spark.html" class="title listing-title">Pandas on Spark and sparklyr</a>
@@ -632,10 +634,10 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="7" data-categories="" data-listing-date-sort="1741302000000" data-listing-title-sort="JSON" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="7" data-categories="" data-listing-date-sort="1771196400000" data-listing-title-sort="JSON" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<span class="listing-date">Mar 7, 2025</span>
+<span class="listing-date">Feb 16, 2026</span>
 </td>
 <td>
 <a href="core/slides/slides05_json-format.html" class="title listing-title">JSON</a>
@@ -646,10 +648,10 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="8" data-categories="" data-listing-date-sort="1741906800000" data-listing-title-sort="File formats for Big Data" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="8" data-categories="" data-listing-date-sort="1771801200000" data-listing-title-sort="File formats for Big Data" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<span class="listing-date">Mar 14, 2025</span>
+<span class="listing-date">Feb 23, 2026</span>
 </td>
 <td>
 <a href="core/slides/slides06_file-formats.html" class="title listing-title">File formats for Big Data</a>
@@ -660,10 +662,10 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="9" data-categories="" data-listing-date-sort="1742511600000" data-listing-title-sort="Spark: a deeper dive" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="9" data-categories="" data-listing-date-sort="1773010800000" data-listing-title-sort="Spark: a deeper dive" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<span class="listing-date">Mar 21, 2025</span>
+<span class="listing-date">Mar 9, 2026</span>
 </td>
 <td>
 <a href="core/slides/slides07_spark-deeper-dive.html" class="title listing-title">Spark: a deeper dive</a>
@@ -674,10 +676,10 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="10" data-categories="" data-listing-date-sort="1743116400000" data-listing-title-sort="Spark: tips" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="10" data-categories="" data-listing-date-sort="1773615600000" data-listing-title-sort="Spark: tips" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<span class="listing-date">Mar 28, 2025</span>
+<span class="listing-date">Mar 16, 2026</span>
 </td>
 <td>
 <a href="core/slides/slides08_spark-tips.html" class="title listing-title">Spark: tips</a>
@@ -688,30 +690,30 @@ window.Quarto = {
 
 </tr>
 
-<tr data-index="11" data-categories="" data-listing-date-sort="1743717600000" data-listing-title-sort="Spark: Applications" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="11" data-categories="U3BhcmslMkNOTFA=" data-listing-date-sort="1774220400000" data-listing-title-sort="Spark: Applications" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<span class="listing-date">Apr 4, 2025</span>
+<span class="listing-date">Mar 23, 2026</span>
 </td>
 <td>
 <a href="core/slides/spark-nlp.html" class="title listing-title">Spark: Applications</a>
 </td>
 <td>
-<span class="listing-categories"></span>
+<span class="listing-categories">Spark, NLP</span>
 </td>
 
 </tr>
 
-<tr data-index="12" data-categories="" data-listing-date-sort="1744322400000" data-listing-title-sort="Spark: Applications" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="12" data-categories="U3BhcmslMkNTcGF0aWFsJTIwZGF0YQ==" data-listing-date-sort="1774821600000" data-listing-title-sort="Spark: Applications" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<span class="listing-date">Apr 11, 2025</span>
+<span class="listing-date">Mar 30, 2026</span>
 </td>
 <td>
 <a href="core/slides/spark-geo.html" class="title listing-title">Spark: Applications</a>
 </td>
 <td>
-<span class="listing-categories"></span>
+<span class="listing-categories">Spark, Spatial data</span>
 </td>
 
 </tr>
@@ -726,7 +728,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Mode d’emploi
+<span class="screen-reader-only">Note</span>Mode d’emploi
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -803,13 +805,14 @@ Mode d’emploi
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

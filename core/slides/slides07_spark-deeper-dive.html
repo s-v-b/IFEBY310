@@ -6,13 +6,13 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e2182856f2c32102dd26b05a5ef16cb5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4a17e18fdf56099d4f6da1e105f33a53.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/grid-no-htext-1.0.0/grid_no_htext.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.30">
+  <meta name="generator" content="quarto-1.8.24">
 
   <meta name="author" content="Équipe de Statistique">
   <meta name="dcterms.date" content="2025-01-17">
@@ -101,7 +101,7 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-cea8bd4d0ffd43e334db3cf8b0e9d7b6.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2dea105675ef174e229fdc0796ca115f.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -264,8 +264,8 @@
 <section id="shuffles-1" class="slide level2 center">
 <h2>Shuffles</h2>
 <p>What happens when we do a <code>reduceByKey</code> on a RDD?</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([(<span class="st">"a"</span>, <span class="dv">1</span>), (<span class="st">"b"</span>, <span class="dv">1</span>), (<span class="st">"a"</span>, <span class="dv">1</span>)])</span>
-<span id="cb1-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.reduceByKey(<span class="kw">lambda</span> a, b: a <span class="op">+</span> b).collect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="op">&gt;&gt;&gt;</span> rdd <span class="op">=</span> sc.parallelize([(<span class="st">"a"</span>, <span class="dv">1</span>), (<span class="st">"b"</span>, <span class="dv">1</span>), (<span class="st">"a"</span>, <span class="dv">1</span>)])</span>
+<span id="cb1-2"><a></a><span class="op">&gt;&gt;&gt;</span> rdd.reduceByKey(<span class="kw">lambda</span> a, b: a <span class="op">+</span> b).collect()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Let’s have a look at the <em>Spark UI</em> available at :</p>
 <p>http://localhost:4040/jobs/]</p>
 
@@ -317,16 +317,16 @@
 </section>
 <section id="example" class="slide level2 center">
 <h2>Example</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> collections <span class="im">import</span> namedtuple</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> collections <span class="im">import</span> namedtuple</span>
 <span id="cb2-2"><a></a><span class="op">&gt;&gt;&gt;</span> columns <span class="op">=</span> [<span class="st">"client_id"</span>, <span class="st">"destination"</span>, <span class="st">"price"</span>]</span>
 <span id="cb2-3"><a></a><span class="op">&gt;&gt;&gt;</span> CFFPurchase <span class="op">=</span> namedtuple(<span class="st">"CFFPurchase"</span>, columns)</span>
 <span id="cb2-4"><a></a><span class="op">&gt;&gt;&gt;</span> CFFPurchase(<span class="dv">100</span>, <span class="st">"Geneva"</span>, <span class="fl">22.25</span>)</span>
-<span id="cb2-5"><a></a>CFFPurchase(client_id<span class="op">=</span><span class="dv">100</span>, destination<span class="op">=</span><span class="st">'Geneva'</span>, price<span class="op">=</span><span class="fl">22.25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a></a>CFFPurchase(client_id<span class="op">=</span><span class="dv">100</span>, destination<span class="op">=</span><span class="st">'Geneva'</span>, price<span class="op">=</span><span class="fl">22.25</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Goal</strong>: calculate <em>how many trips and how much money was spent by each client</em></p>
 </section>
 <section id="example-cont." class="slide level2 center">
 <h2>Example (cont.)</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="op">&gt;&gt;&gt;</span> purchases <span class="op">=</span> [</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="op">&gt;&gt;&gt;</span> purchases <span class="op">=</span> [</span>
 <span id="cb3-2"><a></a>        CFFPurchase(<span class="dv">100</span>, <span class="st">"Geneva"</span>, <span class="fl">22.25</span>),</span>
 <span id="cb3-3"><a></a>        CFFPurchase(<span class="dv">100</span>, <span class="st">"Zurich"</span>, <span class="fl">42.10</span>),</span>
 <span id="cb3-4"><a></a>        CFFPurchase(<span class="dv">100</span>, <span class="st">"Fribourg"</span>, <span class="fl">12.40</span>),</span>
@@ -341,7 +341,7 @@
 <span id="cb3-13"><a></a> CFFPurchase(client_id<span class="op">=</span><span class="dv">100</span>, destination<span class="op">=</span><span class="st">'Fribourg'</span>, price<span class="op">=</span><span class="fl">12.4</span>),</span>
 <span id="cb3-14"><a></a> CFFPurchase(client_id<span class="op">=</span><span class="dv">101</span>, destination<span class="op">=</span><span class="st">'St.Gallen'</span>, price<span class="op">=</span><span class="fl">8.2</span>),</span>
 <span id="cb3-15"><a></a> CFFPurchase(client_id<span class="op">=</span><span class="dv">101</span>, destination<span class="op">=</span><span class="st">'Lucerne'</span>, price<span class="op">=</span><span class="fl">31.6</span>),</span>
-<span id="cb3-16"><a></a> CFFPurchase(client_id<span class="op">=</span><span class="dv">100</span>, destination<span class="op">=</span><span class="st">'Basel'</span>, price<span class="op">=</span><span class="fl">16.2</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-16"><a></a> CFFPurchase(client_id<span class="op">=</span><span class="dv">100</span>, destination<span class="op">=</span><span class="st">'Basel'</span>, price<span class="op">=</span><span class="fl">16.2</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>How are <code>namedtuple</code> translated into Spark types?</p>
 <style type="text/css">
@@ -358,7 +358,7 @@
 </section>
 <section id="example-cont.-1" class="slide level2 center">
 <h2>Example (cont.)</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="op">&gt;&gt;&gt;</span> purchases_per_client <span class="op">=</span> (purchases</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="op">&gt;&gt;&gt;</span> purchases_per_client <span class="op">=</span> (purchases</span>
 <span id="cb4-2"><a></a>        <span class="co"># Pair RDD</span></span>
 <span id="cb4-3"><a></a>        .<span class="bu">map</span>(<span class="kw">lambda</span> p: (p.client_id, p.price))</span>
 <span id="cb4-4"><a></a>        <span class="co"># RDD[p.customerId, List[p.price]]</span></span>
@@ -367,7 +367,7 @@
 <span id="cb4-7"><a></a>        .collect()</span>
 <span id="cb4-8"><a></a>    )</span>
 <span id="cb4-9"><a></a><span class="op">&gt;&gt;&gt;</span> purchases_per_client</span>
-<span id="cb4-10"><a></a>[(<span class="dv">100</span>, (<span class="dv">4</span>, <span class="fl">92.95</span>)), (<span class="dv">101</span>, (<span class="dv">2</span>, <span class="fl">39.8</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-10"><a></a>[(<span class="dv">100</span>, (<span class="dv">4</span>, <span class="fl">92.95</span>)), (<span class="dv">101</span>, (<span class="dv">2</span>, <span class="fl">39.8</span>))]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>How would this <strong>looks on a cluster?</strong> (imagine that the dataset has millions of purchases)</p>
 </section>
 <section id="shuffles-4" class="slide level2 center">
@@ -384,11 +384,11 @@
 <section id="shuffles-5" class="slide level2 center">
 <h2>Shuffles</h2>
 <p>Perhaps we can <em>reduce before we shuffle</em> in order to greatly reduce the amount of data sent over network. We use <code>reduceByKey</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="op">&gt;&gt;&gt;</span> purchases_per_client <span class="op">=</span> (purchases</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="op">&gt;&gt;&gt;</span> purchases_per_client <span class="op">=</span> (purchases</span>
 <span id="cb5-2"><a></a>        .<span class="bu">map</span>(<span class="kw">lambda</span> p: (p.client_id, (<span class="dv">1</span>, p.price)))</span>
 <span id="cb5-3"><a></a>        .reduceByKey(<span class="kw">lambda</span> v1, v2: (v1[<span class="dv">0</span>] <span class="op">+</span> v2[<span class="dv">0</span>], v1[<span class="dv">1</span>] <span class="op">+</span> v2[<span class="dv">1</span>]))</span>
 <span id="cb5-4"><a></a>        .collect()</span>
-<span id="cb5-5"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This looks like on the cluster:</p>
 
 <img src="../../images/shuffline_2.png" style="width: 80%;" class="r-stretch"></section>
@@ -437,7 +437,7 @@
 <section id="hash-partitioning" class="slide level2 center">
 <h2>Hash Partitioning</h2>
 <p>Given a Pair RDD that should be grouped, <code>groupByKey</code> first computes per tuple <code>(k,v)</code> its partition <code>p</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>p <span class="op">=</span> k.hashCode() <span class="op">%</span> numPartitions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>p <span class="op">=</span> k.hashCode() <span class="op">%</span> numPartitions</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Then, all tuples in the same partition <code>p</code> are sent to the machine hosting <code>p</code>.</p>
 </section>
 <section id="partitioning-2" class="slide level2 center">
@@ -462,8 +462,8 @@
 <h2>Partitioning</h2>
 <p>Consider a Pair RDD with keys: <code>[8, 96, 240, 400, 401, 800]</code>, and a desired number of partitions of 4.</p>
 <p>With <strong>hash partitioning</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>p <span class="op">=</span> k.hashCode() <span class="op">%</span> numPartitions</span>
-<span id="cb7-2"><a></a>  <span class="op">=</span> k <span class="op">%</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>p <span class="op">=</span> k.hashCode() <span class="op">%</span> numPartitions</span>
+<span id="cb7-2"><a></a>  <span class="op">=</span> k <span class="op">%</span> <span class="dv">4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>leads to:</p>
 <ul>
 <li>Partition 0: <code>[8, 96, 240, 400, 800]</code></li>
@@ -500,10 +500,10 @@
 </section>
 <section id="partitioning-a-rdd-using-partitionby" class="slide level2 center">
 <h2>Partitioning a <code>RDD</code> using <code>partitionBy</code></h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="op">&gt;&gt;&gt;</span> pairs <span class="op">=</span> purchases.<span class="bu">map</span>(<span class="kw">lambda</span> p: (p.client_id, p.price))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="op">&gt;&gt;&gt;</span> pairs <span class="op">=</span> purchases.<span class="bu">map</span>(<span class="kw">lambda</span> p: (p.client_id, p.price))</span>
 <span id="cb8-2"><a></a><span class="op">&gt;&gt;&gt;</span> pairs <span class="op">=</span> pairs.partitionBy(<span class="dv">3</span>, <span class="st">"client_id"</span>)</span>
 <span id="cb8-3"><a></a><span class="op">&gt;&gt;&gt;</span> pairs.getNumPartitions()</span>
-<span id="cb8-4"><a></a><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a></a><span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="partitioning-6" class="slide level2 center scrollable">
 <h2>Partitioning</h2>
@@ -512,10 +512,10 @@
 <li><p>Specifying the desired number of partitions</p></li>
 <li><p>Providing a DataFrame with <strong>orderable keys</strong></p></li>
 </ol>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>pairs <span class="op">=</span> purchases.<span class="bu">map</span>(<span class="kw">lambda</span> p: (p.client_id, p.price))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>pairs <span class="op">=</span> purchases.<span class="bu">map</span>(<span class="kw">lambda</span> p: (p.client_id, p.price))</span>
 <span id="cb9-2"><a></a>pairs <span class="op">=</span> spark.createDataFrame(pairs, [<span class="st">"id"</span>, <span class="st">"price"</span>])</span>
 <span id="cb9-3"><a></a>pairs.repartitionByRange(<span class="dv">3</span>, <span class="st">"price"</span>).persist()</span>
-<span id="cb9-4"><a></a>pairs.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a></a>pairs.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -582,7 +582,7 @@
 <h2>Partitioning</h2>
 <p>Consider the <code>map</code> transformation. Given that we have a hash-partitioned Pair RDD, <em>why loosing the partitioner</em> in the returned RDD?</p>
 <p>Because its possible for <code>map</code> or <code>flatMap</code> to <em>change</em> the key:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>hashPartitionedRdd.<span class="bu">map</span>(<span class="kw">lambda</span> k, v: (<span class="st">"ooooops"</span>, v))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>hashPartitionedRdd.<span class="bu">map</span>(<span class="kw">lambda</span> k, v: (<span class="st">"ooooops"</span>, v))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If the <code>map</code> transformation preserved the previous partitioner, it would no longer makes sense: the keys are all same after this <code>map</code></p>
 <p>Hence, use <code>mapValues</code>, since it enables to do <code>map</code> transformations <strong>without changing the keys</strong>, thereby preserving the partitioner.</p>
 </section></section>
@@ -604,11 +604,11 @@
 <section id="optimizing-with-partitioning-1" class="slide level2 center">
 <h2>Optimizing with partitioning</h2>
 <p>Compared to what we did previously, we use <code>sortByKey</code> to produce a range partitioner for the RDD that we immediately persist.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="op">&gt;&gt;&gt;</span> pairs <span class="op">=</span> purchases.<span class="bu">map</span>(<span class="kw">lambda</span> p: (p.client_id, (<span class="dv">1</span>, p.price)))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="op">&gt;&gt;&gt;</span> pairs <span class="op">=</span> purchases.<span class="bu">map</span>(<span class="kw">lambda</span> p: (p.client_id, (<span class="dv">1</span>, p.price)))</span>
 <span id="cb11-2"><a></a><span class="op">&gt;&gt;&gt;</span> pairs <span class="op">=</span> pairs.sortByKey().persist()</span>
 <span id="cb11-3"><a></a><span class="op">&gt;&gt;&gt;</span> pairs.reduceByKey(</span>
 <span id="cb11-4"><a></a>       <span class="kw">lambda</span> v1, v2: (v1[<span class="dv">0</span>] <span class="op">+</span> v2[<span class="dv">0</span>], v1[<span class="dv">1</span>] <span class="op">+</span> v2[<span class="dv">1</span>])</span>
-<span id="cb11-5"><a></a>    ).collect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-5"><a></a>    ).collect()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This typically leads to <em>much faster computations</em> in this case (for large RDD, not the small toy example from before).</p>
 </section></section>
 <section>
@@ -625,19 +625,19 @@
 </ul>
 <p>There is therefore <em>no shuffling</em> involved and this can be <strong>much faster</strong> than a regular join.</p>
 <p>The default threshold for broadcasting is</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="op">&gt;&gt;&gt;</span> spark.conf.get(<span class="st">"spark.sql.autoBroadcastJoinThreshold"</span>)</span>
-<span id="cb12-2"><a></a><span class="co">'10485760'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="op">&gt;&gt;&gt;</span> spark.conf.get(<span class="st">"spark.sql.autoBroadcastJoinThreshold"</span>)</span>
+<span id="cb12-2"><a></a><span class="co">'10485760'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>meaning 10MB</p>
 </section>
 <section id="optimizing-with-broadcasting-1" class="slide level2 center">
 <h2>Optimizing with broadcasting</h2>
 <p>Can be changed using</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="op">&gt;&gt;&gt;</span> spark.conf.<span class="bu">set</span>(<span class="st">"spark.sql.autoBroadcastJoinThreshold"</span>, <span class="st">"20971520"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="op">&gt;&gt;&gt;</span> spark.conf.<span class="bu">set</span>(<span class="st">"spark.sql.autoBroadcastJoinThreshold"</span>, <span class="st">"20971520"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>"spark.broadcast.compress"</code> can be used to configure whether to compress the data before sending it (<code>True</code> by default).</p>
 <p>It uses the compression specified in <code>"spark.io.compression.codec config"</code> and the default is <code>"lz4"</code>. We can use other compression codecs but what the hell.</p>
 <p>More important: even though a DataFrame is small, sometimes Spark can’t estimate the size of it. We can <strong>enforce</strong> using a <em>broadcast hint</em>:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> pyspark.sql.functions <span class="im">import</span> broadcast</span>
-<span id="cb14-2"><a></a><span class="op">&gt;&gt;&gt;</span> largeDF.join(broadcast(smallDF))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> pyspark.sql.functions <span class="im">import</span> broadcast</span>
+<span id="cb14-2"><a></a><span class="op">&gt;&gt;&gt;</span> largeDF.join(broadcast(smallDF))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="optimizing-with-broadcasting-2" class="slide level2 center">
 <h2>Optimizing with broadcasting</h2>
@@ -747,14 +747,14 @@
 <li>By looking at the <em>Spark UI</em></li>
 <li>Using <code>toDebugString</code> on a RDD to see its execution plan:</li>
 </ol>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(pairs.toDebugString().decode(<span class="st">"utf-8"</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(pairs.toDebugString().decode(<span class="st">"utf-8"</span>))</span>
 <span id="cb15-2"><a></a>(<span class="dv">3</span>) PythonRDD[<span class="dv">157</span>] at RDD at PythonRDD.scala:<span class="dv">53</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span>
 <span id="cb15-3"><a></a> <span class="op">|</span>       CachedPartitions: <span class="dv">3</span><span class="op">;</span> MemorySize: <span class="fl">233.0</span> B<span class="op">;</span> ExternalBlockStoreSize: <span class="fl">0.0</span> B<span class="op">;</span> DiskSize: <span class="fl">0.0</span> B</span>
 <span id="cb15-4"><a></a> <span class="op">|</span>  MapPartitionsRDD[<span class="dv">156</span>] at mapPartitions at PythonRDD.scala:<span class="dv">133</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span>
 <span id="cb15-5"><a></a> <span class="op">|</span>  ShuffledRDD[<span class="dv">155</span>] at partitionBy at <span class="op">&lt;</span>unknown<span class="op">&gt;</span>:<span class="dv">0</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span>
 <span id="cb15-6"><a></a> <span class="op">+-</span>(<span class="dv">8</span>) PairwiseRDD[<span class="dv">154</span>] at sortByKey at <span class="op">&lt;</span>ipython<span class="op">-</span><span class="bu">input</span><span class="op">-</span><span class="dv">35</span><span class="op">-</span><span class="dv">112008</span><span class="er">c310ec</span><span class="op">&gt;</span>:<span class="dv">2</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span>
 <span id="cb15-7"><a></a>    <span class="op">|</span>  PythonRDD[<span class="dv">153</span>] at sortByKey at <span class="op">&lt;</span>ipython<span class="op">-</span><span class="bu">input</span><span class="op">-</span><span class="dv">35</span><span class="op">-</span><span class="dv">112008</span><span class="er">c310ec</span><span class="op">&gt;</span>:<span class="dv">2</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span>
-<span id="cb15-8"><a></a>    <span class="op">|</span>  ParallelCollectionRDD[<span class="dv">0</span>] at parallelize at PythonRDD.scala:<span class="dv">195</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-8"><a></a>    <span class="op">|</span>  ParallelCollectionRDD[<span class="dv">0</span>] at parallelize at PythonRDD.scala:<span class="dv">195</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="how-do-i-know-when-a-shuffle-will-occur-1" class="slide level2 center scrollable">
 <h2>How do I know when a shuffle will occur?</h2>
@@ -792,7 +792,7 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Example</strong></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a>rdd <span class="op">=</span> sc.textFile(...)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a>rdd <span class="op">=</span> sc.textFile(...)</span>
 <span id="cb16-2"><a></a></span>
 <span id="cb16-3"><a></a>filtered <span class="op">=</span> (</span>
 <span id="cb16-4"><a></a>  rdd.<span class="bu">map</span>(...)</span>
@@ -801,7 +801,7 @@
 <span id="cb16-7"><a></a>)</span>
 <span id="cb16-8"><a></a></span>
 <span id="cb16-9"><a></a>count <span class="op">=</span> filtered.count()</span>
-<span id="cb16-10"><a></a>reduced <span class="op">=</span> filtered.<span class="bu">reduce</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-10"><a></a>reduced <span class="op">=</span> filtered.<span class="bu">reduce</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <p><img src="../../images/lineage_graph.png"></p>
 </div></div>
@@ -840,7 +840,7 @@
 <ul>
 <li><strong>Narrow dependencies:</strong> each partition of the parent RDD is used by <em>at most</em> one partition of the child RDD.</li>
 </ul>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>[parent RDD partition] <span class="op">--&gt;</span> [child RDD partition]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>[parent RDD partition] <span class="op">--&gt;</span> [child RDD partition]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Fast!</strong> <em>No shuffle</em> necessary. Optimizations like <strong>pipelining</strong> possible.</p>
 <p><strong>Transformations with narrow dependencies are fast</strong>.</p>
 </section>
@@ -849,9 +849,9 @@
 <ul>
 <li><strong>Wide dependencies:</strong> each partition of the parent RDD may be used by <em>multiple</em> child partitions</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource {verbatim} number-lines code-with-copy"><code class="sourceCode"><span id="cb18-1"><a></a>                           ---&gt; [child RDD partition 1]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource {verbatim} number-lines code-with-copy"><code class="sourceCode"><span id="cb18-1"><a></a>                           ---&gt; [child RDD partition 1]</span>
 <span id="cb18-2"><a></a>[parent RDD partition] ---&gt; [child RDD partition 2]</span>
-<span id="cb18-3"><a></a>                           ---&gt; [child RDD partition 3]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-3"><a></a>                           ---&gt; [child RDD partition 3]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Slow!</strong> <em>Shuffle necessary</em> for <strong>all</strong> or <strong>some</strong> data over the network.</p>
 <p><strong>Transformations with wide dependencies are slow.</strong></p>
 </section>
@@ -892,14 +892,14 @@
 <li><p>Monitor the job with the <em>Spark UI</em> and check if <strong>ShuffleRDD</strong> are used.</p></li>
 <li><p>Use the <code>toDebugString</code> method. It prints the <strong>RDD lineage</strong> along with other information relevant to scheduling. Indentations separate <strong>groups of narrow transformations</strong> that may be <strong>pipelined</strong> together with wide transformations that require shuffles. These groupings are called <strong>stages</strong>.</p></li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(pairs.toDebugString().decode(<span class="st">"utf-8"</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(pairs.toDebugString().decode(<span class="st">"utf-8"</span>))</span>
 <span id="cb19-2"><a></a>(<span class="dv">3</span>) PythonRDD[<span class="dv">157</span>] at RDD at PythonRDD.scala:<span class="dv">53</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span>
 <span id="cb19-3"><a></a> <span class="op">|</span>       CachedPartitions: <span class="dv">3</span><span class="op">;</span> MemorySize: <span class="fl">233.0</span> B<span class="op">;</span> ExternalBlockStoreSize: <span class="fl">0.0</span> B<span class="op">;</span> DiskSize: <span class="fl">0.0</span> B</span>
 <span id="cb19-4"><a></a> <span class="op">|</span>  MapPartitionsRDD[<span class="dv">156</span>] at mapPartitions at PythonRDD.scala:<span class="dv">133</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span>
 <span id="cb19-5"><a></a> <span class="op">|</span>  ShuffledRDD[<span class="dv">155</span>] at partitionBy at <span class="op">&lt;</span>unknown<span class="op">&gt;</span>:<span class="dv">0</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span>
 <span id="cb19-6"><a></a> <span class="op">+-</span>(<span class="dv">8</span>) PairwiseRDD[<span class="dv">154</span>] at sortByKey at <span class="op">&lt;</span>ipython<span class="op">-</span><span class="bu">input</span><span class="op">-</span><span class="dv">35</span><span class="op">-</span><span class="dv">112008</span><span class="er">c310ec</span><span class="op">&gt;</span>:<span class="dv">2</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span>
 <span id="cb19-7"><a></a>    <span class="op">|</span>  PythonRDD[<span class="dv">153</span>] at sortByKey at <span class="op">&lt;</span>ipython<span class="op">-</span><span class="bu">input</span><span class="op">-</span><span class="dv">35</span><span class="op">-</span><span class="dv">112008</span><span class="er">c310ec</span><span class="op">&gt;</span>:<span class="dv">2</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span>
-<span id="cb19-8"><a></a>    <span class="op">|</span>  ParallelCollectionRDD[<span class="dv">0</span>] at parallelize at PythonRDD.scala:<span class="dv">195</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-8"><a></a>    <span class="op">|</span>  ParallelCollectionRDD[<span class="dv">0</span>] at parallelize at PythonRDD.scala:<span class="dv">195</span> [Memory Serialized <span class="dv">1</span><span class="er">x</span> Replicated]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="wide-versus-narrow-dependencies-11" class="slide level2 smaller center">
 <h2>Wide versus narrow dependencies</h2>
@@ -912,23 +912,23 @@
 <li><strong>Wide</strong> dependency objects: <code>ShuffleDependency</code></li>
 </ul>
 <p>Example in <code>scala</code>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource scala number-lines code-with-copy"><code class="sourceCode scala"><span id="cb20-1"><a></a><span class="kw">val</span> wordsRDD <span class="op">=</span> sc<span class="op">.</span><span class="fu">parallelize</span><span class="op">(</span>largeList<span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource scala number-lines code-with-copy"><code class="sourceCode scala"><span id="cb20-1"><a></a><span class="kw">val</span> wordsRDD <span class="op">=</span> sc<span class="op">.</span><span class="fu">parallelize</span><span class="op">(</span>largeList<span class="op">)</span></span>
 <span id="cb20-2"><a></a><span class="kw">val</span> pairs <span class="op">=</span> wordsRdd<span class="op">.</span><span class="fu">map</span><span class="op">(</span>c<span class="op">=&gt;(</span>c<span class="op">,</span><span class="dv">1</span><span class="op">))</span></span>
 <span id="cb20-3"><a></a>                    <span class="op">.</span>groupByKey</span>
 <span id="cb20-4"><a></a>                    <span class="op">.</span>dependencies</span>
 <span id="cb20-5"><a></a><span class="co">// pairs: Seq[org.apache.spark.Dependency[_]] </span></span>
-<span id="cb20-6"><a></a><span class="co">//   = List(org.apache.spark.ShuffleDependency@4294a23d)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-6"><a></a><span class="co">//   = List(org.apache.spark.ShuffleDependency@4294a23d)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="wide-versus-narrow-dependencies-12" class="slide level2 center">
 <h2>Wide versus narrow dependencies</h2>
 <p>Also, <code>toDebugString</code> is more precise with the <code>scala</code> API:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource scala number-lines code-with-copy"><code class="sourceCode scala"><span id="cb21-1"><a></a><span class="kw">val</span> pairs <span class="op">=</span> wordsRdd<span class="op">.</span><span class="fu">map</span><span class="op">(</span>c<span class="op">=&gt;(</span>c<span class="op">,</span><span class="dv">1</span><span class="op">))</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource scala number-lines code-with-copy"><code class="sourceCode scala"><span id="cb21-1"><a></a><span class="kw">val</span> pairs <span class="op">=</span> wordsRdd<span class="op">.</span><span class="fu">map</span><span class="op">(</span>c<span class="op">=&gt;(</span>c<span class="op">,</span><span class="dv">1</span><span class="op">))</span></span>
 <span id="cb21-2"><a></a>                    <span class="op">.</span>groupByKey</span>
 <span id="cb21-3"><a></a>                    <span class="op">.</span>toDebugString</span>
 <span id="cb21-4"><a></a><span class="co">// pairs: String =</span></span>
 <span id="cb21-5"><a></a><span class="co">// (8) ShuffledRDD[219] at groupByKey at &lt;console&gt;:38 []</span></span>
 <span id="cb21-6"><a></a><span class="co">//  +-(8) MapPartitionsRDD[218] at map at &lt;console&gt;:37 []</span></span>
-<span id="cb21-7"><a></a><span class="co">//     | ParallelCollectionRDD[217] at parallelize at &lt;console&gt;:36 []</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-7"><a></a><span class="co">//     | ParallelCollectionRDD[217] at parallelize at &lt;console&gt;:36 []</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>We can see immediately that a <code>ShuffledRDD</code> is used</p>
 </section></section>
 <section>
@@ -1279,7 +1279,7 @@
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1353,13 +1353,14 @@
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

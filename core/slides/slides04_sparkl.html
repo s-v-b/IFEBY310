@@ -6,7 +6,7 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e2182856f2c32102dd26b05a5ef16cb5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4a17e18fdf56099d4f6da1e105f33a53.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.js" defer="true"></script>
 <link href="../../site_libs/quarto-contrib/reveal-header-1.0.0/add_header.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/grid-no-htext-1.0.0/grid_no_htext.css" rel="stylesheet">
@@ -14,7 +14,7 @@
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.30">
+  <meta name="generator" content="quarto-1.8.24">
 
   <meta name="author" content="Équipe de Statistique">
   <meta name="dcterms.date" content="2025-01-17">
@@ -103,7 +103,7 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-cea8bd4d0ffd43e334db3cf8b0e9d7b6.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2dea105675ef174e229fdc0796ca115f.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -306,16 +306,16 @@
 <section id="sparkcontext-and-sparksession-1" class="slide level2 center">
 <h2><code>SparkContext</code> and <code>SparkSession</code></h2>
 <p>Before <code>Spark 2</code></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> pyspark <span class="im">import</span> SparkConf, SparkContext</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> pyspark <span class="im">import</span> SparkConf, SparkContext</span>
 <span id="cb1-2"><a></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> pyspark.sql <span class="im">import</span> SQLContext</span>
 <span id="cb1-3"><a></a></span>
 <span id="cb1-4"><a></a><span class="op">&gt;&gt;&gt;</span> conf <span class="op">=</span> SparkConf().setAppName(appName).setMaster(master)</span>
 <span id="cb1-5"><a></a><span class="op">&gt;&gt;&gt;</span> sc <span class="op">=</span> SparkContext(conf <span class="op">=</span> conf)</span>
-<span id="cb1-6"><a></a><span class="op">&gt;&gt;&gt;</span> sql_context <span class="op">=</span> new SQLContext(sc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a></a><span class="op">&gt;&gt;&gt;</span> sql_context <span class="op">=</span> new SQLContext(sc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p>Since <code>Spark 2</code></p>
-<div id="22a54b5a" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
+<div id="f2f09fb0" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
 <span id="cb2-2"><a></a></span>
 <span id="cb2-3"><a></a>app_name <span class="op">=</span> <span class="st">"Spark Dataframes"</span></span>
 <span id="cb2-4"><a></a></span>
@@ -326,7 +326,7 @@
 <span id="cb2-9"><a></a><span class="co">#        .master(master) </span></span>
 <span id="cb2-10"><a></a><span class="co">#        .config("spark.some.config.option", "some-value") \</span></span>
 <span id="cb2-11"><a></a>    .getOrCreate()</span>
-<span id="cb2-12"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-12"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="1">
 
@@ -366,30 +366,30 @@
 </section>
 <section id="dataframe-2" class="slide level2 center">
 <h2><code>DataFrame</code></h2>
-<div id="bca874c6" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Row</span>
+<div id="a6002ff6" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Row</span>
 <span id="cb3-2"><a></a></span>
 <span id="cb3-3"><a></a>row1 <span class="op">=</span> Row(name<span class="op">=</span><span class="st">"John"</span>, age<span class="op">=</span><span class="dv">21</span>)</span>
 <span id="cb3-4"><a></a>row2 <span class="op">=</span> Row(name<span class="op">=</span><span class="st">"James"</span>, age<span class="op">=</span><span class="dv">32</span>)</span>
 <span id="cb3-5"><a></a>row3 <span class="op">=</span> Row(name<span class="op">=</span><span class="st">"Jane"</span>, age<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb3-6"><a></a>row1[<span class="st">'name'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a></a>row1[<span class="st">'name'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>'John'</code></pre>
 </div>
 </div>
-<div id="d8e63f5b" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>df <span class="op">=</span> spark.createDataFrame([row1, row2, row3])</span>
-<span id="cb5-2"><a></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f5916ab8" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>df <span class="op">=</span> spark.createDataFrame([row1, row2, row3])</span>
+<span id="cb5-2"><a></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="3">
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>DataFrame[name: string, age: bigint]</code></pre>
 </div>
 </div>
-<div id="6666a8a5" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fcaa869c" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>df.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="4">
 <div class="cell-output cell-output-stdout">
@@ -420,8 +420,8 @@
 </section>
 <section id="dataframe-3" class="slide level2 center">
 <h2><code>DataFrame</code></h2>
-<div id="fcb5265d" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>df.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e0d23b8e" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>df.printSchema()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
@@ -432,8 +432,8 @@
 </div>
 </div>
 <p>You can access the underlying <code>RDD</code> object using <code>.rdd</code></p>
-<div id="f2f7b082" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="bu">print</span>(df.rdd.toDebugString().decode(<span class="st">"utf-8"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="988a6a5b" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="bu">print</span>(df.rdd.toDebugString().decode(<span class="st">"utf-8"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="6">
 <div class="cell-output cell-output-stdout">
@@ -448,8 +448,8 @@
  |   ParallelCollectionRDD[0] at readRDDFromFile at PythonRDD.scala:289 []</code></pre>
 </div>
 </div>
-<div id="1d3a52d7" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>df.rdd.getNumPartitions()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4f8349af" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>df.rdd.getNumPartitions()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="7">
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -485,14 +485,14 @@
 </section>
 <section id="creating-dataframes-1" class="slide level2 center">
 <h2>Creating DataFrames</h2>
-<div id="1105723f" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a>rows <span class="op">=</span> [</span>
+<div id="a22655a0" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a>rows <span class="op">=</span> [</span>
 <span id="cb15-2"><a></a>        Row(name<span class="op">=</span><span class="st">"John"</span>, age<span class="op">=</span><span class="dv">21</span>, gender<span class="op">=</span><span class="st">"male"</span>),</span>
 <span id="cb15-3"><a></a>        Row(name<span class="op">=</span><span class="st">"Jane"</span>, age<span class="op">=</span><span class="dv">25</span>, gender<span class="op">=</span><span class="st">"female"</span>),</span>
 <span id="cb15-4"><a></a>        Row(name<span class="op">=</span><span class="st">"Albert"</span>, age<span class="op">=</span><span class="dv">46</span>, gender<span class="op">=</span><span class="st">"male"</span>)</span>
 <span id="cb15-5"><a></a>    ]</span>
 <span id="cb15-6"><a></a>df <span class="op">=</span> spark.createDataFrame(rows)</span>
-<span id="cb15-7"><a></a>df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-7"><a></a>df.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="8">
 <div class="cell-output cell-output-stdout">
@@ -509,15 +509,15 @@
 </section>
 <section id="creating-dataframes-2" class="slide level2 center">
 <h2>Creating DataFrames</h2>
-<div id="92ff1e5c" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>column_names <span class="op">=</span> [<span class="st">"name"</span>, <span class="st">"age"</span>, <span class="st">"gender"</span>]</span>
+<div id="3c9121cf" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>column_names <span class="op">=</span> [<span class="st">"name"</span>, <span class="st">"age"</span>, <span class="st">"gender"</span>]</span>
 <span id="cb17-2"><a></a>rows <span class="op">=</span> [</span>
 <span id="cb17-3"><a></a>        [<span class="st">"John"</span>, <span class="dv">21</span>, <span class="st">"male"</span>],</span>
 <span id="cb17-4"><a></a>        [<span class="st">"James"</span>, <span class="dv">25</span>, <span class="st">"female"</span>],</span>
 <span id="cb17-5"><a></a>        [<span class="st">"Albert"</span>, <span class="dv">46</span>, <span class="st">"male"</span>]</span>
 <span id="cb17-6"><a></a>    ]</span>
 <span id="cb17-7"><a></a>df <span class="op">=</span> spark.createDataFrame(rows, column_names)</span>
-<span id="cb17-8"><a></a>df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-8"><a></a>df.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="9">
 <div class="cell-output cell-output-stdout">
@@ -534,8 +534,8 @@
 </section>
 <section id="creating-dataframes-3" class="slide level2 center">
 <h2>Creating DataFrames</h2>
-<div id="8102c150" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a>column_names <span class="op">=</span> [<span class="st">"name"</span>, <span class="st">"age"</span>, <span class="st">"gender"</span>]</span>
+<div id="624de076" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a>column_names <span class="op">=</span> [<span class="st">"name"</span>, <span class="st">"age"</span>, <span class="st">"gender"</span>]</span>
 <span id="cb19-2"><a></a></span>
 <span id="cb19-3"><a></a>sc <span class="op">=</span> spark._sc</span>
 <span id="cb19-4"><a></a></span>
@@ -546,7 +546,7 @@
 <span id="cb19-9"><a></a>    ])</span>
 <span id="cb19-10"><a></a></span>
 <span id="cb19-11"><a></a>df <span class="op">=</span> spark.createDataFrame(rdd, column_names)</span>
-<span id="cb19-12"><a></a>df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-12"><a></a>df.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="10">
 <div class="cell-output cell-output-stdout">
@@ -575,13 +575,13 @@
 <li><p>The schema of a <code>DataFrame</code> is represented by the class <code>types.StructType</code> <a href="http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.types.StructType">[API doc]</a></p></li>
 <li><p>When creating a <code>DataFrame</code>, the schema can be either <strong>inferred</strong> or <strong>defined by the user</strong></p></li>
 </ul>
-<div id="24c69b57" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> <span class="op">*</span></span>
+<div id="02b7493b" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb21-2"><a></a></span>
 <span id="cb21-3"><a></a>df.schema</span>
 <span id="cb21-4"><a></a><span class="co"># StructType(List(StructField(name,StringType,true),</span></span>
 <span id="cb21-5"><a></a><span class="co">#                 StructField(age,IntegerType,true),</span></span>
-<span id="cb21-6"><a></a><span class="co">#                 StructField(gender,StringType,true)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-6"><a></a><span class="co">#                 StructField(gender,StringType,true)))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="11">
 <div class="cell-output cell-output-display" data-execution_count="11">
@@ -605,8 +605,8 @@
 </section>
 <section id="creating-a-custom-schema" class="slide level2 center">
 <h2>Creating a custom Schema</h2>
-<div id="c3ddecda" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> <span class="op">*</span></span>
+<div id="d50f0a5d" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb23-2"><a></a></span>
 <span id="cb23-3"><a></a>schema <span class="op">=</span> StructType([</span>
 <span id="cb23-4"><a></a>    StructField(<span class="st">"name"</span>, StringType(), <span class="va">True</span>),</span>
@@ -617,7 +617,7 @@
 <span id="cb23-9"><a></a>rows <span class="op">=</span> [(<span class="st">"John"</span>, <span class="dv">21</span>, <span class="st">"male"</span>)]</span>
 <span id="cb23-10"><a></a>df <span class="op">=</span> spark.createDataFrame(rows, schema)</span>
 <span id="cb23-11"><a></a>df.printSchema()</span>
-<span id="cb23-12"><a></a>df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-12"><a></a>df.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="12">
 <div class="cell-output cell-output-stdout">
@@ -688,7 +688,7 @@
 <ul>
 <li>In all cases, the syntax is similar:</li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>spark.read.{source}(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>spark.read.{source}(path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><p>Spark supports different <em>file systems</em> to look at the data:</p>
 <ul>
@@ -700,27 +700,27 @@
 </section>
 <section id="reading-from-a-csv-file" class="slide level2 center">
 <h2>Reading from a <code>CSV</code> file</h2>
-<div id="c60f087e" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>path_to_csv <span class="op">=</span> <span class="st">"../../../../Downloads/tips.csv"</span></span>
-<span id="cb26-2"><a></a>df <span class="op">=</span> spark.read.csv(path_to_csv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="34a0c1b7" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>path_to_csv <span class="op">=</span> <span class="st">"../../../../Downloads/tips.csv"</span></span>
+<span id="cb26-2"><a></a>df <span class="op">=</span> spark.read.csv(path_to_csv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="13">
 
 </div>
-<div id="890ffcd2" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a>df <span class="op">=</span> (</span>
+<div id="887676bb" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a>df <span class="op">=</span> (</span>
 <span id="cb27-2"><a></a>  spark.read</span>
 <span id="cb27-3"><a></a>    .<span class="bu">format</span>(<span class="st">'csv'</span>)</span>
 <span id="cb27-4"><a></a>    .option(<span class="st">'header'</span>, <span class="st">'true'</span>)</span>
 <span id="cb27-5"><a></a>    .option(<span class="st">'sep'</span>, <span class="st">","</span>)</span>
 <span id="cb27-6"><a></a>    .load(path_to_csv)</span>
-<span id="cb27-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-7"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="14">
 
 </div>
-<div id="beec860d" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a>my_csv_options <span class="op">=</span> {</span>
+<div id="d9bbc313" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a>my_csv_options <span class="op">=</span> {</span>
 <span id="cb28-2"><a></a>  <span class="st">'header'</span>: <span class="va">True</span>,</span>
 <span id="cb28-3"><a></a>  <span class="st">'sep'</span>: <span class="st">';'</span>,</span>
 <span id="cb28-4"><a></a>}</span>
@@ -729,7 +729,7 @@
 <span id="cb28-7"><a></a>  spark</span>
 <span id="cb28-8"><a></a>    .read</span>
 <span id="cb28-9"><a></a>    .csv(path_to_csv, <span class="op">**</span>my_csv_options)</span>
-<span id="cb28-10"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-10"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="15">
 
@@ -786,15 +786,15 @@
 </section>
 <section id="reading-from-other-file-types" class="slide level2 center">
 <h2>Reading from other file types</h2>
-<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a><span class="co">## JSON file</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a><span class="co">## JSON file</span></span>
 <span id="cb29-2"><a></a>df <span class="op">=</span> spark.read.json(<span class="st">"/path/to/file.json"</span>)</span>
-<span id="cb29-3"><a></a>df <span class="op">=</span> spark.read.<span class="bu">format</span>(<span class="st">"json"</span>).load(<span class="st">"/path/to/file.json"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a></a><span class="co">## Parquet file (distributed tabular data)</span></span>
+<span id="cb29-3"><a></a>df <span class="op">=</span> spark.read.<span class="bu">format</span>(<span class="st">"json"</span>).load(<span class="st">"/path/to/file.json"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a></a><span class="co">## Parquet file (distributed tabular data)</span></span>
 <span id="cb30-2"><a></a>df <span class="op">=</span> spark.read.parquet(<span class="st">"hdfs://path/to/file.parquet"</span>)</span>
-<span id="cb30-3"><a></a>df <span class="op">=</span> spark.read.<span class="bu">format</span>(<span class="st">"parquet"</span>).load(<span class="st">"hdfs://path/to/file.parquet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a><span class="co">## ORC file (distributed tabular data)</span></span>
+<span id="cb30-3"><a></a>df <span class="op">=</span> spark.read.<span class="bu">format</span>(<span class="st">"parquet"</span>).load(<span class="st">"hdfs://path/to/file.parquet"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a><span class="co">## ORC file (distributed tabular data)</span></span>
 <span id="cb31-2"><a></a>df <span class="op">=</span> spark.read.orc(<span class="st">"hdfs://path/to/file.orc"</span>)</span>
-<span id="cb31-3"><a></a>df <span class="op">=</span> spark.read.<span class="bu">format</span>(<span class="st">"orc"</span>).load(<span class="st">"hdfs://path/to/file.orc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-3"><a></a>df <span class="op">=</span> spark.read.<span class="bu">format</span>(<span class="st">"orc"</span>).load(<span class="st">"hdfs://path/to/file.orc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="reading-from-external-databases" class="slide level2 center">
 <h2>Reading from external databases</h2>
@@ -808,21 +808,21 @@
 </section>
 <section id="reading-from-external-databases-1" class="slide level2 center">
 <h2>Reading from external databases</h2>
-<div id="7bfe81fd" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a></a>spark <span class="op">=</span> (</span>
+<div id="854c2c11" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a></a>spark <span class="op">=</span> (</span>
 <span id="cb32-2"><a></a>  SparkSession </span>
 <span id="cb32-3"><a></a>    .builder </span>
 <span id="cb32-4"><a></a>    .appName(<span class="st">"Python Spark SQL basic example"</span>) </span>
 <span id="cb32-5"><a></a>    .config(<span class="st">"spark.jars"</span>, </span>
 <span id="cb32-6"><a></a>            spark_home <span class="op">+</span> <span class="st">"/jars/"</span> <span class="op">+</span> <span class="st">"postgresql-42.7.2.jar"</span>) </span>
 <span id="cb32-7"><a></a>    .getOrCreate()</span>
-<span id="cb32-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-8"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="16">
 
 </div>
-<div id="1931cc14" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a></a>df <span class="op">=</span> (</span>
+<div id="31394848" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a></a>df <span class="op">=</span> (</span>
 <span id="cb33-2"><a></a>  spark</span>
 <span id="cb33-3"><a></a>    .read.<span class="bu">format</span>(<span class="st">"jdbc"</span>) </span>
 <span id="cb33-4"><a></a>    .option(<span class="st">"url"</span>, <span class="st">"jdbc:postgresql:dbserver"</span>) </span>
@@ -830,28 +830,28 @@
 <span id="cb33-6"><a></a>    .option(<span class="st">"user"</span>, usrnm) </span>
 <span id="cb33-7"><a></a>    .option(<span class="st">"password"</span>, pwd) </span>
 <span id="cb33-8"><a></a>    .load()</span>
-<span id="cb33-9"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-9"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="17">
 
 </div>
 <p>or</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a>df <span class="op">=</span> spark.read.jdbc(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a>df <span class="op">=</span> spark.read.jdbc(</span>
 <span id="cb34-2"><a></a>      url<span class="op">=</span><span class="st">"jdbc:postgresql:dbserver"</span>,</span>
 <span id="cb34-3"><a></a>      table<span class="op">=</span><span class="st">"schema.tablename"</span></span>
 <span id="cb34-4"><a></a>      properties<span class="op">=</span>{</span>
 <span id="cb34-5"><a></a>          <span class="st">"user"</span>: <span class="st">"username"</span>,</span>
 <span id="cb34-6"><a></a>          <span class="st">"password"</span>: <span class="st">"p4ssw0rd"</span></span>
 <span id="cb34-7"><a></a>      }</span>
-<span id="cb34-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="0008eede" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a></a>df_airlines <span class="op">=</span> (</span>
+<span id="cb34-8"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="f7c9632a" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a></a>df_airlines <span class="op">=</span> (</span>
 <span id="cb35-2"><a></a>  spark</span>
 <span id="cb35-3"><a></a>    .read</span>
 <span id="cb35-4"><a></a>    .<span class="bu">format</span>(<span class="st">"jdbc"</span>)</span>
 <span id="cb35-5"><a></a>    .options(<span class="op">**</span>(dico_jdbc_pg <span class="op">|</span> {<span class="st">'dbtable'</span>: <span class="st">'nycflights.airlines'</span>}))</span>
 <span id="cb35-6"><a></a>    .load()</span>
-<span id="cb35-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-7"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="18">
 
@@ -904,15 +904,15 @@
 </section>
 <section id="performing-queries-1" class="slide level2 center">
 <h2>Performing queries</h2>
-<div id="eb90955f" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a></a>column_names <span class="op">=</span> [<span class="st">"name"</span>, <span class="st">"age"</span>, <span class="st">"gender"</span>]</span>
+<div id="0afdc835" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a></a>column_names <span class="op">=</span> [<span class="st">"name"</span>, <span class="st">"age"</span>, <span class="st">"gender"</span>]</span>
 <span id="cb36-2"><a></a>rows <span class="op">=</span> [</span>
 <span id="cb36-3"><a></a>        [<span class="st">"John"</span>, <span class="dv">21</span>, <span class="st">"male"</span>],</span>
 <span id="cb36-4"><a></a>        [<span class="st">"Jane"</span>, <span class="dv">25</span>, <span class="st">"female"</span>]</span>
 <span id="cb36-5"><a></a>    ]</span>
 <span id="cb36-6"><a></a>df <span class="op">=</span> spark.createDataFrame(rows, column_names)</span>
 <span id="cb36-7"><a></a></span>
-<span id="cb36-8"><a></a>df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-8"><a></a>df.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="19">
 <div class="cell-output cell-output-stdout">
@@ -926,8 +926,8 @@
 </div>
 </div>
 <div class="fragment">
-<div id="fb5a6544" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a></a><span class="co">## Create a temporary view from the DataFrame</span></span>
+<div id="45077200" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a></a><span class="co">## Create a temporary view from the DataFrame</span></span>
 <span id="cb38-2"><a></a>df.createOrReplaceTempView(<span class="st">"new_view"</span>)</span>
 <span id="cb38-3"><a></a></span>
 <span id="cb38-4"><a></a><span class="co">## Define the query</span></span>
@@ -938,7 +938,7 @@
 <span id="cb38-9"><a></a><span class="st">"""</span></span>
 <span id="cb38-10"><a></a></span>
 <span id="cb38-11"><a></a>men_df <span class="op">=</span> spark.sql(query)</span>
-<span id="cb38-12"><a></a>men_df.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-12"><a></a>men_df.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="20">
 <div class="cell-output cell-output-stdout">
@@ -1038,8 +1038,8 @@
 </section>
 <section id="select" class="slide level2 center">
 <h2><code>SELECT</code></h2>
-<div id="44d3b309" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a></a><span class="co">## SQL query:</span></span>
+<div id="d8b89416" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a></a><span class="co">## SQL query:</span></span>
 <span id="cb40-2"><a></a>query <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb40-3"><a></a><span class="st">  SELECT name, age </span></span>
 <span id="cb40-4"><a></a><span class="st">  FROM table</span></span>
@@ -1049,7 +1049,7 @@
 <span id="cb40-8"><a></a>( </span>
 <span id="cb40-9"><a></a>  df.select(<span class="st">"name"</span>, <span class="st">"age"</span>)</span>
 <span id="cb40-10"><a></a>    .show()</span>
-<span id="cb40-11"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb40-11"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="21">
 <div class="cell-output cell-output-stdout">
@@ -1066,8 +1066,8 @@
 <section id="select-continued" class="slide level2 center">
 <h2><code>SELECT</code> (continued)</h2>
 <p>The argument of <code>select()</code> is <code>*cols</code> where <code>cols</code> can be built from column names (strings), column expressions like <code>df.age + 10</code>, lists</p>
-<div id="b41adeb1" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a></a>df.select( df.name.alias(<span class="st">"nom"</span>), df.age<span class="op">+</span><span class="dv">10</span> ).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="96346139" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a></a>df.select( df.name.alias(<span class="st">"nom"</span>), df.age<span class="op">+</span><span class="dv">10</span> ).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="22">
 <div class="cell-output cell-output-stdout">
@@ -1080,8 +1080,8 @@
 </code></pre>
 </div>
 </div>
-<div id="49f21d95" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a></a>df.select([c <span class="cf">for</span> c <span class="kw">in</span> df.columns <span class="cf">if</span> <span class="st">"a"</span> <span class="kw">in</span> c]).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b1288170" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a></a>df.select([c <span class="cf">for</span> c <span class="kw">in</span> df.columns <span class="cf">if</span> <span class="st">"a"</span> <span class="kw">in</span> c]).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="23">
 <div class="cell-output cell-output-stdout">
@@ -1097,13 +1097,13 @@
 </section>
 <section id="selectexpr" class="slide level2 center">
 <h2><code>selectExpr</code></h2>
-<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a></a><span class="co">###  A variant of select() that accepts SQL expressions.</span></span>
-<span id="cb46-2"><a></a><span class="op">&gt;&gt;&gt;</span> df.selectExpr(<span class="st">"age * 2"</span>, <span class="st">"abs(age)"</span>).collect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a></a><span class="co">###  A variant of select() that accepts SQL expressions.</span></span>
+<span id="cb46-2"><a></a><span class="op">&gt;&gt;&gt;</span> df.selectExpr(<span class="st">"age * 2"</span>, <span class="st">"abs(age)"</span>).collect()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="where" class="slide level2 center">
 <h2><code>WHERE</code></h2>
-<div id="cfd2ab76" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a></a><span class="co">## In a SQL query:</span></span>
+<div id="733223e1" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a></a><span class="co">## In a SQL query:</span></span>
 <span id="cb47-2"><a></a>query <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb47-3"><a></a><span class="st">  SELECT * </span></span>
 <span id="cb47-4"><a></a><span class="st">  FROM table </span></span>
@@ -1116,7 +1116,7 @@
 <span id="cb47-11"><a></a><span class="co">## Alternatively:</span></span>
 <span id="cb47-12"><a></a><span class="co"># df.where(df['age'] &gt; 21).show()</span></span>
 <span id="cb47-13"><a></a><span class="co"># df.where(df.age &gt; 21).show()</span></span>
-<span id="cb47-14"><a></a><span class="co"># df.select("*").where("age &gt; 21").show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb47-14"><a></a><span class="co"># df.select("*").where("age &gt; 21").show()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="24">
 <div class="cell-output cell-output-stdout">
@@ -1131,8 +1131,8 @@
 </section>
 <section id="limit" class="slide level2 center">
 <h2><code>LIMIT</code></h2>
-<div id="834add44" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a></a><span class="co">## In a SQL query:</span></span>
+<div id="7ad8d3b5" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a></a><span class="co">## In a SQL query:</span></span>
 <span id="cb49-2"><a></a>query <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb49-3"><a></a><span class="st">  SELECT * </span></span>
 <span id="cb49-4"><a></a><span class="st">  FROM table </span></span>
@@ -1146,7 +1146,7 @@
 <span id="cb49-12"><a></a>)</span>
 <span id="cb49-13"><a></a></span>
 <span id="cb49-14"><a></a><span class="co">## Or even</span></span>
-<span id="cb49-15"><a></a>df.select(<span class="st">"*"</span>).limit(<span class="dv">1</span>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb49-15"><a></a>df.select(<span class="st">"*"</span>).limit(<span class="dv">1</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="25">
 <div class="cell-output cell-output-stdout">
@@ -1167,8 +1167,8 @@
 </section>
 <section id="order-by" class="slide level2 center">
 <h2><code>ORDER BY</code></h2>
-<div id="041d2017" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a></a><span class="co">## In a SQL query:</span></span>
+<div id="ac25a587" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a></a><span class="co">## In a SQL query:</span></span>
 <span id="cb51-2"><a></a>query <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb51-3"><a></a><span class="st">  SELECT * </span></span>
 <span id="cb51-4"><a></a><span class="st">  FROM table </span></span>
@@ -1176,7 +1176,7 @@
 <span id="cb51-6"><a></a><span class="st">"""</span></span>
 <span id="cb51-7"><a></a></span>
 <span id="cb51-8"><a></a><span class="co">## Using Spark SQL API:</span></span>
-<span id="cb51-9"><a></a>df.orderBy(df.name.asc()).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb51-9"><a></a>df.orderBy(df.name.asc()).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="26">
 <div class="cell-output cell-output-stdout">
@@ -1192,8 +1192,8 @@
 </section>
 <section id="alias-name-change" class="slide level2 center">
 <h2><code>ALIAS</code> (name change)</h2>
-<div id="3f743b8a" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a></a><span class="co">## In a SQL query:</span></span>
+<div id="298a179e" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a></a><span class="co">## In a SQL query:</span></span>
 <span id="cb53-2"><a></a>query <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb53-3"><a></a><span class="st">  SELECT name, age, gender AS sex </span></span>
 <span id="cb53-4"><a></a><span class="st">  FROM table</span></span>
@@ -1204,7 +1204,7 @@
 <span id="cb53-9"><a></a>    df.name, </span>
 <span id="cb53-10"><a></a>    df.age, </span>
 <span id="cb53-11"><a></a>    df.gender.alias(<span class="st">'sex'</span>)</span>
-<span id="cb53-12"><a></a>  ).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb53-12"><a></a>  ).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="27">
 <div class="cell-output cell-output-stdout">
@@ -1220,8 +1220,8 @@
 </section>
 <section id="cast-type-change" class="slide level2 center">
 <h2><code>CAST</code> (type change)</h2>
-<div id="bb1fdd2c" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a></a><span class="co">## In a SQL query:</span></span>
+<div id="e7dabdb9" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a></a><span class="co">## In a SQL query:</span></span>
 <span id="cb55-2"><a></a>query <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb55-3"><a></a><span class="st">  SELECT name, cast(age AS float) AS age_f </span></span>
 <span id="cb55-4"><a></a><span class="st">  FROM table</span></span>
@@ -1236,7 +1236,7 @@
 <span id="cb55-13"><a></a><span class="co">## Or</span></span>
 <span id="cb55-14"><a></a>new_age_col <span class="op">=</span> df.age.cast(<span class="st">"float"</span>).alias(<span class="st">"age_f"</span>)</span>
 <span id="cb55-15"><a></a></span>
-<span id="cb55-16"><a></a>df.select(df.name, new_age_col).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb55-16"><a></a>df.select(df.name, new_age_col).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="28">
 <div class="cell-output cell-output-stdout">
@@ -1259,8 +1259,8 @@
 </section>
 <section id="adding-new-columns" class="slide level2 center">
 <h2>Adding new columns</h2>
-<div id="23079fba" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a></a><span class="co">## In a SQL query:</span></span>
+<div id="47604e64" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a></a><span class="co">## In a SQL query:</span></span>
 <span id="cb57-2"><a></a>query <span class="op">=</span> <span class="st">"SELECT *, 12*age AS age_months FROM table"</span></span>
 <span id="cb57-3"><a></a></span>
 <span id="cb57-4"><a></a><span class="co">## Using Spark SQL API:</span></span>
@@ -1269,7 +1269,7 @@
 <span id="cb57-7"><a></a><span class="co">## Or</span></span>
 <span id="cb57-8"><a></a>df.select(<span class="st">"*"</span>, </span>
 <span id="cb57-9"><a></a>          (df.age <span class="op">*</span> <span class="dv">12</span>).alias(<span class="st">"age_months"</span>)</span>
-<span id="cb57-10"><a></a>  ).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb57-10"><a></a>  ).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="29">
 <div class="cell-output cell-output-stdout">
@@ -1323,8 +1323,8 @@
 <section id="column-functions-2" class="slide level2 center">
 <h2>Column functions</h2>
 <p>To use these functions, we first need to import them:</p>
-<div id="5035d25f" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="df42aae1" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="30">
 
@@ -1333,8 +1333,8 @@
 </section>
 <section id="numeric-functions-examples" class="slide level2 center">
 <h2>Numeric functions examples</h2>
-<div id="79067b37" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
+<div id="26075bc2" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
 <span id="cb60-2"><a></a></span>
 <span id="cb60-3"><a></a>columns <span class="op">=</span> [<span class="st">"brand"</span>, <span class="st">"cost"</span>]</span>
 <span id="cb60-4"><a></a>df <span class="op">=</span> spark.createDataFrame([</span>
@@ -1349,7 +1349,7 @@
 <span id="cb60-13"><a></a>df.withColumn(<span class="st">'round'</span>, round_cost)<span class="op">\</span></span>
 <span id="cb60-14"><a></a>        .withColumn(<span class="st">'floor'</span>, floor_cost)<span class="op">\</span></span>
 <span id="cb60-15"><a></a>        .withColumn(<span class="st">'ceil'</span>, ceil_cost)<span class="op">\</span></span>
-<span id="cb60-16"><a></a>        .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb60-16"><a></a>        .show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="31">
 <div class="cell-output cell-output-stdout">
@@ -1365,8 +1365,8 @@
 </section>
 <section id="string-functions-examples" class="slide level2 center">
 <h2>String functions examples</h2>
-<div id="74aacfa2" class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
+<div id="b9a6b4d3" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
 <span id="cb62-2"><a></a></span>
 <span id="cb62-3"><a></a>columns <span class="op">=</span> [<span class="st">"first_name"</span>, <span class="st">"last_name"</span>]</span>
 <span id="cb62-4"><a></a></span>
@@ -1379,7 +1379,7 @@
 <span id="cb62-11"><a></a></span>
 <span id="cb62-12"><a></a>last_name_initial <span class="op">=</span> fn.substring(df.last_name, <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb62-13"><a></a>name <span class="op">=</span> fn.concat_ws(<span class="st">" "</span>, df.first_name, last_name_initial)</span>
-<span id="cb62-14"><a></a>df.withColumn(<span class="st">"name"</span>, name).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb62-14"><a></a>df.withColumn(<span class="st">"name"</span>, name).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="32">
 <div class="cell-output cell-output-stdout">
@@ -1395,8 +1395,8 @@
 </section>
 <section id="date-functions-examples" class="slide level2 center">
 <h2>Date functions examples</h2>
-<div id="ee611894" class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
+<div id="e5add993" class="cell" data-execution_count="33">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
 <span id="cb64-2"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
 <span id="cb64-3"><a></a></span>
 <span id="cb64-4"><a></a>df <span class="op">=</span> spark.createDataFrame([</span>
@@ -1409,7 +1409,7 @@
 <span id="cb64-11"><a></a></span>
 <span id="cb64-12"><a></a>df.withColumn(<span class="st">'days_between'</span>, days_between)<span class="op">\</span></span>
 <span id="cb64-13"><a></a>        .withColumn(<span class="st">'start_month'</span>, start_month)<span class="op">\</span></span>
-<span id="cb64-14"><a></a>        .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb64-14"><a></a>        .show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="33">
 <div class="cell-output cell-output-stdout">
@@ -1434,8 +1434,8 @@
 </section>
 <section id="examples" class="slide level2 center">
 <h2>Examples</h2>
-<div id="4303cdea" class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a></a>df <span class="op">=</span> spark.createDataFrame([</span>
+<div id="1b662fb9" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a></a>df <span class="op">=</span> spark.createDataFrame([</span>
 <span id="cb66-2"><a></a>        (<span class="st">"John"</span>, <span class="dv">21</span>, <span class="st">"male"</span>),</span>
 <span id="cb66-3"><a></a>        (<span class="st">"Jane"</span>, <span class="dv">25</span>, <span class="st">"female"</span>),</span>
 <span id="cb66-4"><a></a>        (<span class="st">"Albert"</span>, <span class="dv">46</span>, <span class="st">"male"</span>),</span>
@@ -1446,7 +1446,7 @@
 <span id="cb66-9"><a></a>        .when(df.gender <span class="op">==</span> <span class="st">'female'</span>, <span class="st">'Miss Jones'</span>)<span class="op">\</span></span>
 <span id="cb66-10"><a></a>        .otherwise(<span class="st">'NA'</span>)</span>
 <span id="cb66-11"><a></a></span>
-<span id="cb66-12"><a></a>df.withColumn(<span class="st">"supervisor"</span>, supervisor).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb66-12"><a></a>df.withColumn(<span class="st">"supervisor"</span>, supervisor).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="34">
 <div class="cell-output cell-output-stdout">
@@ -1493,8 +1493,8 @@
 </section>
 <section id="example" class="slide level2 center">
 <h2>Example</h2>
-<div id="e438fb1d" class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
+<div id="e94fcabe" class="cell" data-execution_count="35">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
 <span id="cb68-2"><a></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> StringType</span>
 <span id="cb68-3"><a></a></span>
 <span id="cb68-4"><a></a>df <span class="op">=</span> spark.createDataFrame([(<span class="dv">1</span>, <span class="dv">3</span>), (<span class="dv">4</span>, <span class="dv">2</span>)], [<span class="st">"first"</span>, <span class="st">"second"</span>])</span>
@@ -1507,7 +1507,7 @@
 <span id="cb68-11"><a></a></span>
 <span id="cb68-12"><a></a>my_udf <span class="op">=</span> fn.udf(my_func, StringType())</span>
 <span id="cb68-13"><a></a></span>
-<span id="cb68-14"><a></a>df.withColumn(<span class="st">"udf"</span>, my_udf(df[<span class="st">'first'</span>], df[<span class="st">'second'</span>])).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb68-14"><a></a>df.withColumn(<span class="st">"udf"</span>, my_udf(df[<span class="st">'first'</span>], df[<span class="st">'second'</span>])).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="35">
 <div class="cell-output cell-output-stdout">
@@ -1539,11 +1539,11 @@
 <li><p><strong>Several types of joins</strong> are available, default is <code>inner</code></p></li>
 </ul>
 <p>Syntax for <span class="math inline">\(\texttt{left_df} \bowtie_{\texttt{cols}} \texttt{right_df}\)</span> is simple:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a></a>left_df.join(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a></a>left_df.join(</span>
 <span id="cb70-2"><a></a>  other<span class="op">=</span>right_df, </span>
 <span id="cb70-3"><a></a>  on<span class="op">=</span>cols, </span>
 <span id="cb70-4"><a></a>  how<span class="op">=</span>join_type</span>
-<span id="cb70-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb70-5"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><code>cols</code> contains a column name or a list of column names</li>
 <li><code>join_type</code> is the type of join</li>
@@ -1551,8 +1551,8 @@
 </section>
 <section id="examples-1" class="slide level2 center">
 <h2>Examples</h2>
-<div id="99b348e0" class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb71" data-code-line-numbers="1-12|14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
+<div id="c5a79c99" class="cell" data-execution_count="36">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71" data-code-line-numbers="1-12|14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
 <span id="cb71-2"><a></a></span>
 <span id="cb71-3"><a></a>products <span class="op">=</span> spark.createDataFrame([</span>
 <span id="cb71-4"><a></a>        (<span class="st">'1'</span>, <span class="st">'mouse'</span>, <span class="st">'microsoft'</span>, <span class="fl">39.99</span>),</span>
@@ -1566,7 +1566,7 @@
 <span id="cb71-12"><a></a>    ], [<span class="st">'date'</span>, <span class="st">'quantity'</span>, <span class="st">'prod_id'</span>])</span>
 <span id="cb71-13"><a></a></span>
 <span id="cb71-14"><a></a><span class="co"># The default join type is the "INNER" join</span></span>
-<span id="cb71-15"><a></a>purchases.join(products, <span class="st">'prod_id'</span>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb71-15"><a></a>purchases.join(products, <span class="st">'prod_id'</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="36">
 <div class="cell-output cell-output-stdout">
@@ -1583,8 +1583,8 @@
 </section>
 <section id="examples-2" class="slide level2 center">
 <h2>Examples</h2>
-<div id="581e01e8" class="cell" data-execution_count="37">
-<div class="sourceCode cell-code" id="cb73" data-code-line-numbers="4-9|11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a></a><span class="co"># We can also use a query string (not recommended)</span></span>
+<div id="4af7c9ba" class="cell" data-execution_count="37">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73" data-code-line-numbers="4-9|11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a></a><span class="co"># We can also use a query string (not recommended)</span></span>
 <span id="cb73-2"><a></a>products.createOrReplaceTempView(<span class="st">"products"</span>)</span>
 <span id="cb73-3"><a></a>purchases.createOrReplaceTempView(<span class="st">"purchases"</span>)</span>
 <span id="cb73-4"><a></a></span>
@@ -1595,7 +1595,7 @@
 <span id="cb73-9"><a></a><span class="st">    ON (prc.prod_id = prd.prod_id)</span></span>
 <span id="cb73-10"><a></a><span class="st">"""</span></span>
 <span id="cb73-11"><a></a></span>
-<span id="cb73-12"><a></a>spark.sql(query).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb73-12"><a></a>spark.sql(query).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="37">
 <div class="cell-output cell-output-stdout">
@@ -1612,8 +1612,8 @@
 </section>
 <section id="examples-3" class="slide level2 center">
 <h2>Examples</h2>
-<div id="dfa92430" class="cell" data-execution_count="38">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a></a>new_purchases <span class="op">=</span> spark.createDataFrame([</span>
+<div id="d3937d1e" class="cell" data-execution_count="38">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a></a>new_purchases <span class="op">=</span> spark.createDataFrame([</span>
 <span id="cb75-2"><a></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">1</span>), <span class="dv">2</span>, <span class="st">'1'</span>),</span>
 <span id="cb75-3"><a></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="st">'3'</span>),</span>
 <span id="cb75-4"><a></a>    ], [<span class="st">'date'</span>, <span class="st">'quantity'</span>, <span class="st">'prod_id_x'</span>]</span>
@@ -1621,7 +1621,7 @@
 <span id="cb75-6"><a></a></span>
 <span id="cb75-7"><a></a>join_rule <span class="op">=</span> new_purchases.prod_id_x <span class="op">==</span> products.prod_id</span>
 <span id="cb75-8"><a></a></span>
-<span id="cb75-9"><a></a>new_purchases.join(products, join_rule, <span class="st">'left'</span>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb75-9"><a></a>new_purchases.join(products, join_rule, <span class="st">'left'</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="38">
 <div class="cell-output cell-output-stdout">
@@ -1641,7 +1641,7 @@
 <li><p>Spark <em>removes the duplicated column</em> in the <code>DataFrame</code> it outputs after a join operation</p></li>
 <li><p>When joining using columns <em>with nulls</em>, <code>Spark</code> just skips those</p></li>
 </ul>
-<div class="sourceCode" id="cb77"><pre class="sourceCode numberSource scala number-lines code-with-copy"><code class="sourceCode scala"><span id="cb77-1"><a></a><span class="op">&gt;&gt;&gt;</span> df1<span class="op">.</span><span class="fu">show</span><span class="op">()</span>               <span class="op">&gt;&gt;&gt;</span> df2<span class="op">.</span><span class="fu">show</span><span class="op">()</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb77"><pre class="sourceCode numberSource scala number-lines code-with-copy"><code class="sourceCode scala"><span id="cb77-1"><a></a><span class="op">&gt;&gt;&gt;</span> df1<span class="op">.</span><span class="fu">show</span><span class="op">()</span>               <span class="op">&gt;&gt;&gt;</span> df2<span class="op">.</span><span class="fu">show</span><span class="op">()</span></span>
 <span id="cb77-2"><a></a><span class="op">+----+-----+</span>                 <span class="op">+----+-----+</span></span>
 <span id="cb77-3"><a></a><span class="op">|</span>  id<span class="op">|</span> name<span class="op">|</span>                 <span class="op">|</span>  id<span class="op">|</span> dept<span class="op">|</span></span>
 <span id="cb77-4"><a></a><span class="op">+----+-----+</span>                 <span class="op">+----+-----+</span></span>
@@ -1656,7 +1656,7 @@
 <span id="cb77-13"><a></a><span class="op">+---+-----+-----+</span></span>
 <span id="cb77-14"><a></a><span class="op">|</span><span class="dv">123</span><span class="op">|</span>name1<span class="op">|</span>sales<span class="op">|</span></span>
 <span id="cb77-15"><a></a><span class="op">|</span><span class="dv">456</span><span class="op">|</span>name3<span class="op">|</span>   IT<span class="op">|</span></span>
-<span id="cb77-16"><a></a><span class="op">+---+-----+-----+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb77-16"><a></a><span class="op">+---+-----+-----+</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="join-types" class="slide level2 smaller center">
 <h2>Join types</h2>
@@ -1720,7 +1720,7 @@
 </section>
 <section id="inner-join-inner" class="slide level2 center">
 <h2>Inner join (“inner”)</h2>
-<div class="sourceCode" id="cb78"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a></a><span class="op">&gt;&gt;&gt;</span> inner <span class="op">=</span> df_left.join(df_right, <span class="st">"id"</span>, <span class="st">"inner"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb78"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a></a><span class="op">&gt;&gt;&gt;</span> inner <span class="op">=</span> df_left.join(df_right, <span class="st">"id"</span>, <span class="st">"inner"</span>)</span>
 <span id="cb78-2"><a></a></span>
 <span id="cb78-3"><a></a>df_left                df_right             </span>
 <span id="cb78-4"><a></a><span class="op">+---+-----+</span>            <span class="op">+---+-----+</span></span>
@@ -1739,11 +1739,11 @@
 <span id="cb78-17"><a></a><span class="op">|</span>  <span class="dv">3</span><span class="op">|</span>   A3<span class="op">|</span>   A3<span class="op">|</span></span>
 <span id="cb78-18"><a></a><span class="op">|</span>  <span class="dv">4</span><span class="op">|</span>   A4<span class="op">|</span>   A4<span class="op">|</span></span>
 <span id="cb78-19"><a></a><span class="op">|</span>  <span class="dv">4</span><span class="op">|</span>   A4<span class="op">|</span> A4_1<span class="op">|</span></span>
-<span id="cb78-20"><a></a><span class="op">+---+-----+-----+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb78-20"><a></a><span class="op">+---+-----+-----+</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="outer-join-outer-full-or-fullouter" class="slide level2 center">
 <h2>Outer join (“outer”, “full” or “fullouter”)</h2>
-<div class="sourceCode" id="cb79"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a></a><span class="op">&gt;&gt;&gt;</span> outer <span class="op">=</span> df_left.join(df_right, <span class="st">"id"</span>, <span class="st">"outer"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb79"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a></a><span class="op">&gt;&gt;&gt;</span> outer <span class="op">=</span> df_left.join(df_right, <span class="st">"id"</span>, <span class="st">"outer"</span>)</span>
 <span id="cb79-2"><a></a>df_left                df_right             </span>
 <span id="cb79-3"><a></a><span class="op">+---+-----+</span>            <span class="op">+---+-----+</span></span>
 <span id="cb79-4"><a></a><span class="op">|</span> <span class="bu">id</span><span class="op">|</span>value<span class="op">|</span>            <span class="op">|</span> <span class="bu">id</span><span class="op">|</span>value<span class="op">|</span></span>
@@ -1765,11 +1765,11 @@
 <span id="cb79-20"><a></a><span class="op">|</span>  <span class="dv">4</span><span class="op">|</span>   A4<span class="op">|</span> A4_1<span class="op">|</span></span>
 <span id="cb79-21"><a></a><span class="op">|</span>  <span class="dv">5</span><span class="op">|</span> null<span class="op">|</span>   A5<span class="op">|</span></span>
 <span id="cb79-22"><a></a><span class="op">|</span>  <span class="dv">6</span><span class="op">|</span> null<span class="op">|</span>   A6<span class="op">|</span></span>
-<span id="cb79-23"><a></a><span class="op">+---+-----+-----+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb79-23"><a></a><span class="op">+---+-----+-----+</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="left-join-leftouter-or-left" class="slide level2 center">
 <h2>Left join (“leftouter” or “left” )</h2>
-<div class="sourceCode" id="cb80"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a></a><span class="op">&gt;&gt;&gt;</span> left <span class="op">=</span> df_left.join(df_right, <span class="st">"id"</span>, <span class="st">"left"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb80"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a></a><span class="op">&gt;&gt;&gt;</span> left <span class="op">=</span> df_left.join(df_right, <span class="st">"id"</span>, <span class="st">"left"</span>)</span>
 <span id="cb80-2"><a></a></span>
 <span id="cb80-3"><a></a>df_left                df_right             </span>
 <span id="cb80-4"><a></a><span class="op">+---+-----+</span>            <span class="op">+---+-----+</span></span>
@@ -1790,11 +1790,11 @@
 <span id="cb80-19"><a></a><span class="op">|</span>  <span class="dv">3</span><span class="op">|</span>   A3<span class="op">|</span>   A3<span class="op">|</span></span>
 <span id="cb80-20"><a></a><span class="op">|</span>  <span class="dv">4</span><span class="op">|</span>   A4<span class="op">|</span>   A4<span class="op">|</span></span>
 <span id="cb80-21"><a></a><span class="op">|</span>  <span class="dv">4</span><span class="op">|</span>   A4<span class="op">|</span> A4_1<span class="op">|</span></span>
-<span id="cb80-22"><a></a><span class="op">+---+-----+-----+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb80-22"><a></a><span class="op">+---+-----+-----+</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="right-rightouter-or-right" class="slide level2 center">
 <h2>Right (“rightouter” or “right”)</h2>
-<div class="sourceCode" id="cb81"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a></a><span class="op">&gt;&gt;&gt;</span> right <span class="op">=</span> df_left.join(df_right, <span class="st">"id"</span>, <span class="st">"right"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb81"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a></a><span class="op">&gt;&gt;&gt;</span> right <span class="op">=</span> df_left.join(df_right, <span class="st">"id"</span>, <span class="st">"right"</span>)</span>
 <span id="cb81-2"><a></a></span>
 <span id="cb81-3"><a></a>df_left                df_right             </span>
 <span id="cb81-4"><a></a><span class="op">+---+-----+</span>            <span class="op">+---+-----+</span></span>
@@ -1815,11 +1815,11 @@
 <span id="cb81-19"><a></a><span class="op">|</span>  <span class="dv">4</span><span class="op">|</span>   A4<span class="op">|</span> A4_1<span class="op">|</span></span>
 <span id="cb81-20"><a></a><span class="op">|</span>  <span class="dv">5</span><span class="op">|</span> null<span class="op">|</span>   A5<span class="op">|</span></span>
 <span id="cb81-21"><a></a><span class="op">|</span>  <span class="dv">6</span><span class="op">|</span> null<span class="op">|</span>   A6<span class="op">|</span></span>
-<span id="cb81-22"><a></a><span class="op">+---+-----+-----+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb81-22"><a></a><span class="op">+---+-----+-----+</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="left-semi-join-leftsemi" class="slide level2 center">
 <h2>Left semi join (“leftsemi”)</h2>
-<div class="sourceCode" id="cb82"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a></a><span class="op">&gt;&gt;&gt;</span> left_semi <span class="op">=</span> df_left.join(df_right, <span class="st">"id"</span>, <span class="st">"leftsemi"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb82"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a></a><span class="op">&gt;&gt;&gt;</span> left_semi <span class="op">=</span> df_left.join(df_right, <span class="st">"id"</span>, <span class="st">"leftsemi"</span>)</span>
 <span id="cb82-2"><a></a></span>
 <span id="cb82-3"><a></a>df_left                df_right             </span>
 <span id="cb82-4"><a></a><span class="op">+---+-----+</span>            <span class="op">+---+-----+</span></span>
@@ -1837,11 +1837,11 @@
 <span id="cb82-16"><a></a><span class="op">+---+-----+</span></span>
 <span id="cb82-17"><a></a><span class="op">|</span>  <span class="dv">3</span><span class="op">|</span>   A3<span class="op">|</span></span>
 <span id="cb82-18"><a></a><span class="op">|</span>  <span class="dv">4</span><span class="op">|</span>   A4<span class="op">|</span></span>
-<span id="cb82-19"><a></a><span class="op">+---+-----+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb82-19"><a></a><span class="op">+---+-----+</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="left-anti-joint-leftanti" class="slide level2 center">
 <h2>Left anti joint (“leftanti”)</h2>
-<div class="sourceCode" id="cb83"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a></a><span class="op">&gt;&gt;&gt;</span> left_anti <span class="op">=</span> df_left.join(df_right, <span class="st">"id"</span>, <span class="st">"leftanti"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb83"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a></a><span class="op">&gt;&gt;&gt;</span> left_anti <span class="op">=</span> df_left.join(df_right, <span class="st">"id"</span>, <span class="st">"leftanti"</span>)</span>
 <span id="cb83-2"><a></a></span>
 <span id="cb83-3"><a></a>df_left                df_right             </span>
 <span id="cb83-4"><a></a><span class="op">+---+-----+</span>            <span class="op">+---+-----+</span></span>
@@ -1859,7 +1859,7 @@
 <span id="cb83-16"><a></a><span class="op">+---+-----+</span></span>
 <span id="cb83-17"><a></a><span class="op">|</span>  <span class="dv">1</span><span class="op">|</span>   A1<span class="op">|</span></span>
 <span id="cb83-18"><a></a><span class="op">|</span>  <span class="dv">2</span><span class="op">|</span>   A2<span class="op">|</span></span>
-<span id="cb83-19"><a></a><span class="op">+---+-----+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb83-19"><a></a><span class="op">+---+-----+</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="performing-joins-1" class="slide level2 center">
 <h2>Performing joins</h2>
@@ -1935,8 +1935,8 @@
 </section>
 <section id="examples-4" class="slide level2 center">
 <h2>Examples</h2>
-<div id="468e3e2c" class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
+<div id="a849ac61" class="cell" data-execution_count="39">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
 <span id="cb84-2"><a></a></span>
 <span id="cb84-3"><a></a>products <span class="op">=</span> spark.createDataFrame([</span>
 <span id="cb84-4"><a></a>        (<span class="st">'1'</span>, <span class="st">'mouse'</span>, <span class="st">'microsoft'</span>, <span class="fl">39.99</span>),</span>
@@ -1949,7 +1949,7 @@
 <span id="cb84-11"><a></a>products.groupBy(<span class="st">'prod_cat'</span>).avg(<span class="st">'prod_value'</span>).show()</span>
 <span id="cb84-12"><a></a></span>
 <span id="cb84-13"><a></a><span class="co"># Or</span></span>
-<span id="cb84-14"><a></a>products.groupBy(<span class="st">'prod_cat'</span>).agg(fn.avg(<span class="st">'prod_value'</span>)).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb84-14"><a></a>products.groupBy(<span class="st">'prod_cat'</span>).agg(fn.avg(<span class="st">'prod_value'</span>)).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="39">
 <div class="cell-output cell-output-stdout">
@@ -1972,11 +1972,11 @@
 </section>
 <section id="examples-5" class="slide level2 center">
 <h2>Examples</h2>
-<div id="2d0b5318" class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
+<div id="21a0ee45" class="cell" data-execution_count="40">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
 <span id="cb86-2"><a></a></span>
 <span id="cb86-3"><a></a>products.groupBy(<span class="st">'prod_brand'</span>, <span class="st">'prod_cat'</span>)<span class="op">\</span></span>
-<span id="cb86-4"><a></a>        .agg(fn.avg(<span class="st">'prod_value'</span>)).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb86-4"><a></a>        .agg(fn.avg(<span class="st">'prod_value'</span>)).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="40">
 <div class="cell-output cell-output-stdout">
@@ -1994,14 +1994,14 @@
 </section>
 <section id="examples-6" class="slide level2 center">
 <h2>Examples</h2>
-<div id="e194ec2f" class="cell" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
+<div id="924bd803" class="cell" data-execution_count="41">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
 <span id="cb88-2"><a></a></span>
 <span id="cb88-3"><a></a>products.groupBy(<span class="st">'prod_brand'</span>).agg(</span>
 <span id="cb88-4"><a></a>    fn.<span class="bu">round</span>(fn.avg(<span class="st">'prod_value'</span>), <span class="dv">1</span>).alias(<span class="st">'average'</span>),</span>
 <span id="cb88-5"><a></a>    fn.ceil(fn.<span class="bu">sum</span>(<span class="st">'prod_value'</span>)).alias(<span class="st">'sum'</span>),</span>
 <span id="cb88-6"><a></a>    fn.<span class="bu">min</span>(<span class="st">'prod_value'</span>).alias(<span class="st">'min'</span>)</span>
-<span id="cb88-7"><a></a>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb88-7"><a></a>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="41">
 <div class="cell-output cell-output-stdout">
@@ -2017,8 +2017,8 @@
 </section>
 <section id="examples-7" class="slide level2 center">
 <h2>Examples</h2>
-<div id="d9a3359a" class="cell" data-execution_count="42">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a></a><span class="co"># Using an SQL query</span></span>
+<div id="2b28e64c" class="cell" data-execution_count="42">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a></a><span class="co"># Using an SQL query</span></span>
 <span id="cb90-2"><a></a>products.createOrReplaceTempView(<span class="st">"products"</span>)</span>
 <span id="cb90-3"><a></a></span>
 <span id="cb90-4"><a></a>query <span class="op">=</span> <span class="st">"""</span></span>
@@ -2030,7 +2030,7 @@
 <span id="cb90-10"><a></a><span class="st">  GROUP BY prod_brand</span></span>
 <span id="cb90-11"><a></a><span class="st">"""</span></span>
 <span id="cb90-12"><a></a></span>
-<span id="cb90-13"><a></a>spark.sql(query).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb90-13"><a></a>spark.sql(query).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="42">
 <div class="cell-output cell-output-stdout">
@@ -2089,8 +2089,8 @@
 </section>
 <section id="numerical-window-functions" class="slide level2 center">
 <h2>Numerical window functions</h2>
-<div id="42ee3d6f" class="cell" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Window</span>
+<div id="7548b9a9" class="cell" data-execution_count="43">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Window</span>
 <span id="cb92-2"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
 <span id="cb92-3"><a></a></span>
 <span id="cb92-4"><a></a><span class="co"># First, we create the Window definition</span></span>
@@ -2100,7 +2100,7 @@
 <span id="cb92-8"><a></a>avg <span class="op">=</span> fn.avg(<span class="st">'prod_value'</span>).over(window)</span>
 <span id="cb92-9"><a></a></span>
 <span id="cb92-10"><a></a><span class="co"># Finally, we can it as a classical column</span></span>
-<span id="cb92-11"><a></a>products.withColumn(<span class="st">'avg_brand_value'</span>, fn.<span class="bu">round</span>(avg, <span class="dv">2</span>)).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb92-11"><a></a>products.withColumn(<span class="st">'avg_brand_value'</span>, fn.<span class="bu">round</span>(avg, <span class="dv">2</span>)).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="43">
 <div class="cell-output cell-output-stdout">
@@ -2119,8 +2119,8 @@
 </section>
 <section id="numerical-window-functions-1" class="slide level2 center">
 <h2>Numerical window functions</h2>
-<div id="c38ab06c" class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Window</span>
+<div id="848dad87" class="cell" data-execution_count="44">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Window</span>
 <span id="cb94-2"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
 <span id="cb94-3"><a></a></span>
 <span id="cb94-4"><a></a><span class="co"># The window can be defined on multiple columns</span></span>
@@ -2128,7 +2128,7 @@
 <span id="cb94-6"><a></a></span>
 <span id="cb94-7"><a></a>avg <span class="op">=</span> fn.avg(<span class="st">'prod_value'</span>).over(window)</span>
 <span id="cb94-8"><a></a></span>
-<span id="cb94-9"><a></a>products.withColumn(<span class="st">'avg_value'</span>, fn.<span class="bu">round</span>(avg, <span class="dv">2</span>)).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb94-9"><a></a>products.withColumn(<span class="st">'avg_value'</span>, fn.<span class="bu">round</span>(avg, <span class="dv">2</span>)).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="44">
 <div class="cell-output cell-output-stdout">
@@ -2147,8 +2147,8 @@
 </section>
 <section id="numerical-window-functions-2" class="slide level2 center">
 <h2>Numerical window functions</h2>
-<div id="d43395d5" class="cell" data-execution_count="45">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Window</span>
+<div id="b2b6393b" class="cell" data-execution_count="45">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Window</span>
 <span id="cb96-2"><a></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
 <span id="cb96-3"><a></a></span>
 <span id="cb96-4"><a></a><span class="co"># Multiple windows can be defined</span></span>
@@ -2161,7 +2161,7 @@
 <span id="cb96-11"><a></a>products <span class="op">\</span></span>
 <span id="cb96-12"><a></a>  .withColumn(<span class="st">'avg_by_brand'</span>, fn.<span class="bu">round</span>(avg_brand, <span class="dv">2</span>)) <span class="op">\</span></span>
 <span id="cb96-13"><a></a>  .withColumn(<span class="st">'avg_by_cat'</span>, fn.<span class="bu">round</span>(avg_cat, <span class="dv">2</span>)) <span class="op">\</span></span>
-<span id="cb96-14"><a></a>  .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb96-14"><a></a>  .show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="45">
 <div class="cell-output cell-output-stdout">
@@ -2188,8 +2188,8 @@
 </section>
 <section id="lag-and-lead-1" class="slide level2 center">
 <h2>Lag and Lead</h2>
-<div id="fb04b11f" class="cell" data-execution_count="46">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb98-1"><a></a>purchases <span class="op">=</span> spark.createDataFrame([</span>
+<div id="a635cdee" class="cell" data-execution_count="46">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb98-1"><a></a>purchases <span class="op">=</span> spark.createDataFrame([</span>
 <span id="cb98-2"><a></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">1</span>), <span class="st">'mouse'</span>),</span>
 <span id="cb98-3"><a></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">2</span>), <span class="st">'mouse'</span>),</span>
 <span id="cb98-4"><a></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">4</span>), <span class="st">'keyboard'</span>),</span>
@@ -2198,7 +2198,7 @@
 <span id="cb98-7"><a></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">12</span>), <span class="st">'mouse'</span>),</span>
 <span id="cb98-8"><a></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">18</span>), <span class="st">'keyboard'</span>)</span>
 <span id="cb98-9"><a></a>    ], [<span class="st">'date'</span>, <span class="st">'prod_cat'</span>])</span>
-<span id="cb98-10"><a></a>purchases.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb98-10"><a></a>purchases.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="46">
 <div class="cell-output cell-output-stdout">
@@ -2219,8 +2219,8 @@
 </section>
 <section id="lag-and-lead-2" class="slide level2 center">
 <h2>Lag and Lead</h2>
-<div id="56a76491" class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a></a>window <span class="op">=</span> Window.partitionBy(<span class="st">'prod_cat'</span>).orderBy(<span class="st">'date'</span>)</span>
+<div id="e3d4fdc0" class="cell" data-execution_count="47">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a></a>window <span class="op">=</span> Window.partitionBy(<span class="st">'prod_cat'</span>).orderBy(<span class="st">'date'</span>)</span>
 <span id="cb100-2"><a></a></span>
 <span id="cb100-3"><a></a>prev_purch <span class="op">=</span> fn.lag(<span class="st">'date'</span>, <span class="dv">1</span>).over(window)</span>
 <span id="cb100-4"><a></a>next_purch <span class="op">=</span> fn.lead(<span class="st">'date'</span>, <span class="dv">1</span>).over(window)</span>
@@ -2229,7 +2229,7 @@
 <span id="cb100-7"><a></a>  .withColumn(<span class="st">'prev'</span>, prev_purch)<span class="op">\</span></span>
 <span id="cb100-8"><a></a>  .withColumn(<span class="st">'next'</span>, next_purch)<span class="op">\</span></span>
 <span id="cb100-9"><a></a>  .orderBy(<span class="st">'prod_cat'</span>, <span class="st">'date'</span>)<span class="op">\</span></span>
-<span id="cb100-10"><a></a>  .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb100-10"><a></a>  .show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="47">
 <div class="cell-output cell-output-stdout">
@@ -2258,8 +2258,8 @@
 </section>
 <section id="rank-and-rownumber" class="slide level2 center">
 <h2>Rank and RowNumber</h2>
-<div id="3497a449" class="cell" data-execution_count="48">
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a></a>contestants <span class="op">=</span> spark.createDataFrame([</span>
+<div id="12943eab" class="cell" data-execution_count="48">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a></a>contestants <span class="op">=</span> spark.createDataFrame([</span>
 <span id="cb102-2"><a></a>    (<span class="st">'veterans'</span>, <span class="st">'John'</span>, <span class="dv">3000</span>),</span>
 <span id="cb102-3"><a></a>    (<span class="st">'veterans'</span>, <span class="st">'Bob'</span>, <span class="dv">3200</span>),</span>
 <span id="cb102-4"><a></a>    (<span class="st">'veterans'</span>, <span class="st">'Mary'</span>, <span class="dv">4000</span>),</span>
@@ -2270,7 +2270,7 @@
 <span id="cb102-9"><a></a>  [<span class="st">'category'</span>, <span class="st">'name'</span>, <span class="st">'points'</span>]</span>
 <span id="cb102-10"><a></a>)</span>
 <span id="cb102-11"><a></a></span>
-<span id="cb102-12"><a></a>contestants.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb102-12"><a></a>contestants.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="48">
 <div class="cell-output cell-output-stdout">
@@ -2291,8 +2291,8 @@
 </section>
 <section id="rank-and-rownumber-1" class="slide level2 center">
 <h2>Rank and RowNumber</h2>
-<div id="81c96c58" class="cell" data-execution_count="49">
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a></a>window <span class="op">=</span> Window.partitionBy(<span class="st">'category'</span>)<span class="op">\</span></span>
+<div id="b4816428" class="cell" data-execution_count="49">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a></a>window <span class="op">=</span> Window.partitionBy(<span class="st">'category'</span>)<span class="op">\</span></span>
 <span id="cb104-2"><a></a>        .orderBy(contestants.points.desc())</span>
 <span id="cb104-3"><a></a></span>
 <span id="cb104-4"><a></a>rank <span class="op">=</span> fn.rank().over(window)</span>
@@ -2304,7 +2304,7 @@
 <span id="cb104-10"><a></a>        .withColumn(<span class="st">'dense_rank'</span>, dense_rank)<span class="op">\</span></span>
 <span id="cb104-11"><a></a>        .withColumn(<span class="st">'row_number'</span>, row_number)<span class="op">\</span></span>
 <span id="cb104-12"><a></a>        .orderBy(<span class="st">'category'</span>, fn.col(<span class="st">'points'</span>).desc())<span class="op">\</span></span>
-<span id="cb104-13"><a></a>        .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb104-13"><a></a>        .show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="49">
 <div class="cell-output cell-output-stdout">
@@ -2342,10 +2342,10 @@
 </ul></li>
 </ul>
 <p>Example</p>
-<div id="ec7e7d78" class="cell" data-execution_count="50">
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a></a>products.write.csv(<span class="st">'./products.csv'</span>)</span>
+<div id="d018ca1b" class="cell" data-execution_count="50">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a></a>products.write.csv(<span class="st">'./products.csv'</span>)</span>
 <span id="cb106-2"><a></a>products.write.mode(<span class="st">'overwrite'</span>).parquet(<span class="st">'./produits.parquet'</span>)</span>
-<span id="cb106-3"><a></a>products.write.<span class="bu">format</span>(<span class="st">'parquet'</span>).save(<span class="st">'./produits_2.parquet'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb106-3"><a></a>products.write.<span class="bu">format</span>(<span class="st">'parquet'</span>).save(<span class="st">'./produits_2.parquet'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="50">
 
@@ -2593,7 +2593,7 @@
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -2667,13 +2667,14 @@
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

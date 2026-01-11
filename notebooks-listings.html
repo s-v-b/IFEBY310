@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.30">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -35,18 +35,19 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2b3e328b71be8d25427581baeb23079b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3dec761e03a15eeb45f5d6fad7dbf28e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-cf69aba9b2238669425558235384ed1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-3dec761e03a15eeb45f5d6fad7dbf28e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a611943760b203044226a687a7214fb7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-563f26b41fe4db7f62e0e8fceb05db6b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a611943760b203044226a687a7214fb7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -120,7 +121,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -327,7 +328,8 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-center sidebar-header">
       <a href="./index.html" class="sidebar-logo-link">
-      <img src="./images/UniversiteParisCite_logo_horizontal_couleur_RVB.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <img src="./images/UniversiteParisCite_logo_horizontal_couleur_RVB.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/UniversiteParisCite_logo_horizontal_couleur_RVB.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
       <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/s-v-b/IFEBY310" title="GitHub organization" class="quarto-navigation-tool px-1" aria-label="GitHub organization"><i class="bi bi-github"></i></a>
@@ -407,13 +409,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./computing-virtualenv.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./computing-virtualenv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Virtual environments</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./computing-jupyter.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./computing-jupyter.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Jupyter</span></a>
   </div>
 </li>
@@ -497,7 +499,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Mode d’emploi
+<span class="screen-reader-only">Note</span>Mode d’emploi
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -562,9 +564,9 @@ Mode d’emploi
 </thead>
 <tbody class="list">
 
-<tr data-index="0" data-categories="UHl0aG9u" data-listing-date-sort="1737068400000" data-listing-title-sort="Python Stack for Data Science">
+<tr data-index="0" data-categories="UHl0aG9u" data-listing-date-sort="1768172400000" data-listing-title-sort="Python Stack for Data Science">
 <td>
-<span class="listing-date">Jan 17, 2025</span>
+<span class="listing-date">Jan 12, 2026</span>
 </td>
 <td>
 <a href="core/notebooks/notebook01_python.html" class="title listing-title">Python Stack for Data Science</a>
@@ -578,9 +580,9 @@ Mode d’emploi
 
 </tr>
 
-<tr data-index="1" data-categories="UHl0aG9uJTJDTnVtcHklMkNTY2lweSUyQ1Bsb3RseQ==" data-listing-date-sort="1737068400000" data-listing-title-sort="Numpy and Scipy">
+<tr data-index="1" data-categories="UHl0aG9uJTJDTnVtcHklMkNTY2lweSUyQ1Bsb3RseQ==" data-listing-date-sort="1768172400000" data-listing-title-sort="Numpy and Scipy">
 <td>
-<span class="listing-date">Jan 17, 2025</span>
+<span class="listing-date">Jan 12, 2026</span>
 </td>
 <td>
 <a href="core/notebooks/notebook02_numpy.html" class="title listing-title">Numpy and Scipy</a>
@@ -594,9 +596,9 @@ Mode d’emploi
 
 </tr>
 
-<tr data-index="2" data-categories="UHl0aG9uJTJDUGFuZGFz" data-listing-date-sort="1737673200000" data-listing-title-sort="Table wranglig with Pandas">
+<tr data-index="2" data-categories="UHl0aG9uJTJDUGFuZGFz" data-listing-date-sort="1768777200000" data-listing-title-sort="Table wranglig with Pandas">
 <td>
-<span class="listing-date">Jan 24, 2025</span>
+<span class="listing-date">Jan 19, 2026</span>
 </td>
 <td>
 <a href="core/notebooks/notebook03_pandas.html" class="title listing-title">Table wranglig with Pandas</a>
@@ -610,9 +612,9 @@ Mode d’emploi
 
 </tr>
 
-<tr data-index="3" data-categories="UHl0aG9uJTJDRGFzaw==" data-listing-date-sort="1738278000000" data-listing-title-sort="Table wranglig with Dask">
+<tr data-index="3" data-categories="UHl0aG9uJTJDRGFzaw==" data-listing-date-sort="1769382000000" data-listing-title-sort="Table wranglig with Dask">
 <td>
-<span class="listing-date">Jan 31, 2025</span>
+<span class="listing-date">Jan 26, 2026</span>
 </td>
 <td>
 <span class="listing-title">Table wranglig with Dask</span>
@@ -626,9 +628,9 @@ Mode d’emploi
 
 </tr>
 
-<tr data-index="4" data-categories="UHlTcGFyayUyQ1NwYXJrJTJDUkRE" data-listing-date-sort="1738882800000" data-listing-title-sort="Spark Resilient Distributed Datasets">
+<tr data-index="4" data-categories="UHlTcGFyayUyQ1NwYXJrJTJDUkRE" data-listing-date-sort="1769986800000" data-listing-title-sort="Spark Resilient Distributed Datasets">
 <td>
-<span class="listing-date">Feb 7, 2025</span>
+<span class="listing-date">Feb 2, 2026</span>
 </td>
 <td>
 <a href="core/notebooks/notebook05_sparkrdd.html" class="title listing-title">Spark Resilient Distributed Datasets</a>
@@ -642,9 +644,9 @@ Mode d’emploi
 
 </tr>
 
-<tr data-index="5" data-categories="UHlTcGFyayUyQ1NwYXJrJTJDU1FM" data-listing-date-sort="1740006000000" data-listing-title-sort="Spark SQL">
+<tr data-index="5" data-categories="UHlTcGFyayUyQ1NwYXJrJTJDU1FM" data-listing-date-sort="1771196400000" data-listing-title-sort="Spark SQL">
 <td>
-<span class="listing-date">Feb 20, 2025</span>
+<span class="listing-date">Feb 16, 2026</span>
 </td>
 <td>
 <a href="core/notebooks/notebook06_sparksql.html" class="title listing-title">Spark SQL</a>
@@ -658,9 +660,9 @@ Mode d’emploi
 
 </tr>
 
-<tr data-index="6" data-categories="UHlTcGFyayUyQ1NwYXJrJTJDUGFuZGFzJTJDUg==" data-listing-date-sort="1740092400000" data-listing-title-sort="Pandas on Spark and SparklyR">
+<tr data-index="6" data-categories="UHlTcGFyayUyQ1NwYXJrJTJDUGFuZGFzJTJDUg==" data-listing-date-sort="1771196400000" data-listing-title-sort="Pandas on Spark and SparklyR">
 <td>
-<span class="listing-date">Feb 21, 2025</span>
+<span class="listing-date">Feb 16, 2026</span>
 </td>
 <td>
 <span class="listing-title">Pandas on Spark and SparklyR</span>
@@ -674,9 +676,9 @@ Mode d’emploi
 
 </tr>
 
-<tr data-index="7" data-categories="SlNPTiUyQ3NlcmlhbGl6YXRpb24=" data-listing-date-sort="1741302000000" data-listing-title-sort="JSON format">
+<tr data-index="7" data-categories="SlNPTiUyQ3NlcmlhbGl6YXRpb24=" data-listing-date-sort="1772406000000" data-listing-title-sort="JSON format">
 <td>
-<span class="listing-date">Mar 7, 2025</span>
+<span class="listing-date">Mar 2, 2026</span>
 </td>
 <td>
 <a href="core/notebooks/notebook07_json-format.html" class="title listing-title">JSON format</a>
@@ -690,9 +692,9 @@ Mode d’emploi
 
 </tr>
 
-<tr data-index="8" data-categories="U3BhcmslMkNXaW5kb3clMjBmdW5jdGlvbnMlMkNGZWF0dXJlJTIwZW5naW5lZXJpbmc=" data-listing-date-sort="1741906800000" data-listing-title-sort="Web data">
+<tr data-index="8" data-categories="U3BhcmslMkNXaW5kb3clMjBmdW5jdGlvbnMlMkNGZWF0dXJlJTIwZW5naW5lZXJpbmc=" data-listing-date-sort="1773010800000" data-listing-title-sort="Web data">
 <td>
-<span class="listing-date">Mar 14, 2025</span>
+<span class="listing-date">Mar 9, 2026</span>
 </td>
 <td>
 <a href="core/notebooks/notebook08_webdata-II.html" class="title listing-title">Web data</a>
@@ -706,9 +708,9 @@ Mode d’emploi
 
 </tr>
 
-<tr data-index="9" data-categories="U3BhcmslMkN0aXBz" data-listing-date-sort="1742511600000" data-listing-title-sort="Spark again">
+<tr data-index="9" data-categories="U3BhcmslMkN0aXBz" data-listing-date-sort="1773615600000" data-listing-title-sort="Spark again">
 <td>
-<span class="listing-date">Mar 21, 2025</span>
+<span class="listing-date">Mar 16, 2026</span>
 </td>
 <td>
 <a href="core/notebooks/notebook11_dive.html" class="title listing-title">Spark again</a>
@@ -790,13 +792,14 @@ Mode d’emploi
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
