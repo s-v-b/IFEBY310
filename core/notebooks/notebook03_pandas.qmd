@@ -24,20 +24,20 @@ you get acquainted with your data by **cleaning** and  **transforming** it
 
 - Removing missing values, filter rows or columns using some criteria
 - Store the cleaned, transformed data back into virtually any format or database
-- Data visualization (when combined `matplotlib` or `seaborn` or others)
+- Data visualization (when combined `matplotlib`, `seaborn`, `plotly` or others)
 
 ## Where ?
 
-`pandas` is a central component of the `python` "stack" for data science
+`pandas` is a central component of the `python` stack for data science
 
-- `pandas` is built on top of `numpy`
+- `Pandas` is built on top of `NumPy`
 - often used in conjunction with other libraries
 - a `DataFrame` is often fed to plotting functions or machine learning algorithms (such as `scikit-learn`)
 - Well-interfaced with `jupyter`, leading to a nice interactive environment for data exploration and modeling
 
 ## Core components of pandas
 
-The two primary components of pandas are the `Series` and `DataFrame`.
+The two primary components of `Pandas` are the `Series` and `DataFrame`.
 
 - A `Series` is essentially a column
 
@@ -46,7 +46,7 @@ The two primary components of pandas are the `Series` and `DataFrame`.
 ## Creating a `DataFrame` from scratch
 
 ```{python}
-#| 
+#| label: df_fruits
 import pandas as pd
 
 fruits = {
@@ -59,18 +59,18 @@ df_fruits
 ```
 
 ```{python}
-#| 
+#| lavel: type_df
 type(df_fruits)
 ```
 
 ```{python}
-#| 
+#| label: display_series_apple
 #| scrolled: true
 df_fruits["apples"]
 ```
 
 ```{python}
-#| 
+#| label: type_apples
 type(df_fruits["apples"])
 ```
 
@@ -80,7 +80,7 @@ type(df_fruits["apples"])
 - But what if we want to say **who** buys the fruits ?
 
 ```{python}
-#| 
+#| label: setting_up_index
 df_fruits = pd.DataFrame(fruits, index=["Daniel", "Sean", "Pierce", "Roger"])
 df_fruits
 ```
@@ -91,17 +91,20 @@ df_fruits
 - `.iloc` **loc**ates by numerical **i**ndex
 
 ```{python}
-#| 
+
 df_fruits
 ```
 
+We can pick rows 
 ```{python}
-#| 
+#| label: locating_information_by_name
 #| scrolled: true
 # What's in Sean's basket ?
 df_fruits.loc['Sean']
 ```
+Note that this returns a `Series`
 
+We can pick slices of rows and columns
 ```{python}
 #| 
 # Who has oranges ?
@@ -114,46 +117,62 @@ df_fruits.loc[:, 'oranges']
 df_fruits.loc['Pierce', 'apples']
 ```
 
+Note that the type of the result depends on the indexing information.
+
+
 ```{python}
 #| 
 #| scrolled: true
 df_fruits
 ```
 
+We may also pick information through positions using `iloc`. 
 ```{python}
 #| 
 df_fruits.iloc[2, 1]
 ```
+
+Note that the DataFrame has two index:
+
+```{python}
+#| label: two-index-in-df
+df_fruits.index 
+df_fruits.columns
+```
+
 
 ## Main attributes and methods of a `DataFrame`
 
 A `DataFrame` has many **attributes**
 
 ```{python}
-#| 
+#| label: column-attribute
 #| scrolled: true
 df_fruits.columns
 ```
 
 ```{python}
-#| 
+#| label: ze-index-attribute
 df_fruits.index
 ```
 
 ```{python}
-#| 
+#| label: dtypes-attribute
 df_fruits.dtypes
 ```
 
 A `DataFrame` has many **methods**
 
+
+Method `info()` provides information on the table schema, name and type columns, whether the cells can contain missing values.
 ```{python}
-#| 
+#| label: info-method
 df_fruits.info()
 ```
 
+Method `describe()` provides with statistical summaries for columns  
 ```{python}
-#| 
+#| label: describe-method
 #| 
 df_fruits.describe()
 ```
@@ -163,14 +182,17 @@ df_fruits.describe()
 What if we don't know how many apples are in Sean's basket ?
 
 ```{python}
-#| 
+#| label: Nulling some cells
 #| scrolled: true
 df_fruits.loc['Sean', 'apples'] = None
 df_fruits
 ```
 
+`None` is a Python keyword. `NaN` belongs to `Pandas`. 
+
+
 ```{python}
-#| 
+#| label: describe-with-nulls
 #| scrolled: true
 df_fruits.describe()
 ```
@@ -180,11 +202,13 @@ Note that `count` is **3** for apples now, since we have 1 missing value among t
 
 ::: {.callout-note}
 
-To review the members of objects of class `pandas.DataFrame`, `dir()` and module `inspect` are convenient. 
+To review the members of objects of class `pandas.DataFrame`, `dir()` and module `inspect` are convenient.
+
 :::
 
 ```{python}
 #| eval: false
+#| label: list-non-dunder-attributes
 [x for x in dir(df_fruits) if not x.startswith('_') and not callable(x)]
 ```
 
@@ -200,12 +224,17 @@ method_names = [m[0] for m in membres
 print(method_names)
 ```
 
+DataFrames have more than $400$ *members*. Among them, almost $200$ are what we call *methods*. 
+See [Dataframe documentation](https://pandas.pydata.org/docs/reference/frame.html)
+
+Among non-callable members, we find genuine data attributes and properties. 
 ```{python}
 others = [x for x in membres
     if not callable(x[1])]
 
 [x[0] for x in others if not x[0].startswith('_')]
 ```
+
 ## Adding a column
 
 Ooooops, we forgot about the bananas !
@@ -216,9 +245,15 @@ df_fruits["bananas"] = [0, 2, 1, 6]
 df_fruits
 ```
 
+This amounts to add an entry in the *columns* index.
+
+```{python}
+df_fruits.columns
+```
+
 ## Adding a column with the date
 
-And we forgot the dates !
+And we forgot the dates!
 
 ```{python}
 #| 
@@ -261,6 +296,9 @@ df_fruits.dtypes
 
 Every data science framework implements some `datetime` handling scheme. For Python see [Python official documentation on `datetime` module](https://docs.python.org/3/library/datetime.html#module-datetime)
 
+Note that `datetime64[ns]`  parallels NumPy `datetime64`.  
+
+
 :::
 
 What if we want to keep only the baskets after (including) October, 9th ?
@@ -270,6 +308,79 @@ What if we want to keep only the baskets after (including) October, 9th ?
 #| scrolled: false
 df_fruits.loc[df_fruits["time"] >= pd.Timestamp("2020/10/09")]
 ```
+
+We can filter rows using a boolean mask and member `loc`. This does not work with `iloc`.
+
+## Casting a Series to another type
+
+
+In many circumstances, we have to cast columns to a different type. 
+To convert a Pandas Series to a different data type, we may use 
+the `.astype()` method:
+
+```{python}
+#| 
+# Create a sample Series
+s = pd.Series([1, 2, 3, 4, 5])
+s
+```
+
+```{python}
+#| 
+# Check the current dtype
+s.dtype
+```
+If we want to move to `float`:
+```{python}
+#| 
+# Cast to float
+s_float = s.astype('float64')
+s_float
+```
+to strings:
+```{python}
+#| 
+# Cast to string
+s_str = s.astype('str')
+s_str
+```
+to a categorical type:
+```{python}
+#| 
+# Cast to category
+s_cat = s.astype('category')
+s_cat
+```
+This also works for `bool`. 
+
+Sometimes, it may go wrong. 
+
+### Handling errors during conversion
+
+When converting types, you may encounter errors if the conversion is not possible:
+
+```{python}
+#| 
+# This will raise an error if conversion fails
+try:
+    pd.Series(['1', '2', 'abc']).astype('int64')
+except ValueError as e:
+    print(f"Error: {e}")
+```
+
+Then method `astype()` may not be the best choice. 
+For more robust conversion, use `pd.to_numeric()` with error handling:
+
+```{python}
+#| 
+# Convert with error handling - invalid values become NaN
+pd.to_numeric(pd.Series(['1', '2', 'abc']), errors='coerce')
+```
+
+For datetime conversions, `pd.to_datetime()` is usually preferred over `.astype('datetime64[ns]')` as it handles various date formats more robustly.
+
+
+
 
 ## Slices and subsets of rows or columns
 
@@ -288,11 +399,28 @@ df_fruits.loc[:, "oranges":"time"]
 df_fruits.loc["Daniel":"Sean", "apples":"bananas"]
 ```
 
+If we want to project over a collection of columns, 
+we have to  
 ```{python}
 #| 
 #| scrolled: true
 df_fruits[["apples", "time"]]
 ```
+
+```{python}
+tropicals = ("apples", "oranges")
+
+df_fruits[[*tropicals]]
+```
+
+We cannot write: 
+
+```{python}
+#| eval: false
+df_fruits["apples", "time"]
+```
+
+Why?
 
 ## Write our data to a CSV file
 
@@ -360,7 +488,7 @@ path_data = './'
 filename = 'tips.csv'
 
 if os.path.exists(os.path.join(path_data, filename)):
-    print('The file %s already exists.' % os.path.join(path_data, filename))
+    print(f'The file {os.path.join(path_data, filename)} already exists.')
 else:
     url = 'https://raw.githubusercontent.com/mwaskom/seaborn-data/refs/heads/master/tips.csv'
     r = requests.get(url)
@@ -391,6 +519,8 @@ sns_ds = sns.get_dataset_names()
 
 df = sns.load_dataset('tips')
 ```
+
+Note that the dataframe loaded from the `csv` file and the dataframe obtained from package `seaborn` differ. This can be checked by examining the representations and properties of column `smoker, sex` (check `df.sex.array` in both cases)
 
 ```{python}
 # `.head()` shows the first rows of the dataframe
@@ -437,6 +567,9 @@ dtypes = {
 df = pd.read_csv("tips.csv", dtype=dtypes)
 ```
 
+Supplemented with this typing information, the dataframe loaded from the `csv` file is more like the dataframe obtained from `seaborn`. 
+
+
 ```{python}
 #| 
 #| scrolled: true
@@ -464,9 +597,103 @@ df.describe(include="all")
 df.corr(numeric_only = True)
 ```
 
+
+In more general settings, to select only numerical columns from a DataFrame, use the `select_dtypes()` method:
+
 ```{python}
-?df.corr
+#| 
+# Select only numerical columns (int, float, etc.)
+(
+    df
+        .select_dtypes(include=['number'])
+        .head()
+)
 ```
+
+
+
+::: {.callout-note}
+
+The `select_dtypes()` method is very flexible:
+- `include=['number']` selects all numeric types (int, float, etc.)
+- `include=['int64', 'float64']` selects specific dtypes
+- `exclude=['object']` excludes string columns
+- You can combine `include` and `exclude` parameters
+
+:::
+
+```{python}
+(
+    df
+        .select_dtypes(include='float64')
+        .corr()
+)
+```
+
+# Plotting backends for Pandas DataFrames
+
+Pandas DataFrames have built-in plotting capabilities through the `.plot` accessor. By default, Pandas uses `matplotlib` as the plotting backend.
+
+## Setting the plotting backend
+
+You can set the plotting backend using `pd.options.plotting.backend`:
+
+```{python}
+#| eval: false
+# Set the backend globally for all DataFrames
+pd.options.plotting.backend = 'matplotlib'  # default
+```
+
+Available backends include:
+
+- `'matplotlib'` (default) 
+- `'plotly'` (requires `plotly` package)
+- `'hvplot'` (requires `hvplot` package)
+
+::: {.callout-caution}
+
+Seaborn is **not** available as a plotting backend for `pd.options.plotting.backend`. Seaborn is a separate visualization library built on top of matplotlib that works directly with pandas DataFrames through its own API (e.g., `sns.scatterplot(data=df, ...)`). While seaborn integrates seamlessly with pandas DataFrames, it doesn't replace the `.plot` accessor's backend system.
+
+:::
+
+## Using different backends
+
+### Matplotlib (default)
+
+```{python}
+#| eval: true
+# Default matplotlib backend
+pd.options.plotting.backend = 'matplotlib'
+df.plot.scatter(x='total_bill', y='tip')
+```
+
+### Plotly backend
+
+```{python}
+#| eval: true
+# Switch to plotly for interactive plots
+pd.options.plotting.backend = 'plotly'
+df.plot.scatter(x='total_bill', y='tip')  # Now creates an interactive plotly plot
+```
+
+### Per-plot backend selection
+
+You can also specify the backend for a specific plot without changing the global setting:
+
+```{python}
+#| eval: true
+# Use a specific backend for one plot only
+df.plot(backend='plotly', kind='scatter', x='total_bill', y='tip')
+```
+
+::: {.callout-important}
+
+- The backend must be installed separately (e.g., `pip install plotly` for plotly backend)
+- Different backends support different plot types and options
+- The `matplotlib` backend is always available and is the default
+- Backend settings are session-wide until changed
+
+:::
 
 # Data visualization with `matplotlib` and `seaborn`
 
@@ -475,7 +702,6 @@ Let's show how we can use `matplotlib` and `seaborn` to visualize data contained
 ```{python}
 #| 
 import matplotlib.pyplot as plt
-
 ```
 
 ## How do the tip depends on the total bill ?
@@ -485,6 +711,8 @@ import matplotlib.pyplot as plt
 sns.jointplot(x="total_bill", y="tip", data=df)
 ```
 
+A `jointplot` (as in seaborn) is an enriched `scatterplot` with histograms on both axes.
+
 ## When do customers go to this restaurant ?
 
 ```{python}
@@ -492,6 +720,8 @@ sns.jointplot(x="total_bill", y="tip", data=df)
 #| scrolled: false
 sns.countplot(x='day', hue="time", data=df)
 ```
+
+This is also called a `barplot`. 
 
 ## When do customers spend the most ?
 
@@ -502,12 +732,17 @@ sns.boxplot(x='day', y='total_bill', hue='time', data=df)
 plt.legend(loc="upper left")
 ```
 
+`boxplot` (box and whiskers plot)  are used to sketch empirical distributions and to display summary statistics (median and quartiles).
+
 ```{python}
 #| 
 plt.figure(figsize=(7, 5))
 sns.violinplot(x='day', y='total_bill', hue='time', split=True, data=df)
 plt.legend(loc="upper left")
 ```
+
+`violinplot` are sketchy variants of kernel density estimates. 
+
 
 ## Who spends the most ?
 
@@ -552,7 +787,9 @@ df.head()
 
 ## Computations using `pandas` : broadcasting
 
-Let's add a column that contains the tip percentage
+Let's add a column that contains the tip percentage. The content 
+of this column is computed by performing elementwise operations between 
+elements of two columns.  This works as if the columns were NumPy arrays (even though they are not). 
 
 ```{python}
 #| 
@@ -566,7 +803,7 @@ The computation
 ```{{python}}
 df["tip"] / df["total_bill"]
 ```
-uses a **broadcast** rule.
+uses a **broadcast** rule (see [NumPy notebook about broadcasting](/core/notebooks/notebook02-2_numpy.qmd)).
 
 - We can multiply, add, subtract, etc. together `numpy` arrays, `Series` or `pandas` dataframes when the computation **makes sense** in view of their respective **shape**
 
@@ -578,6 +815,7 @@ Broadcasting is a key feature of `numpy` `ndarray`, see
 
 - [Numpy User's guide](https://numpy.org/doc/stable/user/basics.broadcasting.html)
 - [Pandas book](https://wesmckinney.com/book/advanced-numpy.html#numpy_broadcasting)
+- [A toy example with broadcasting](/core/notebooks/notebook02-2_numpy.qmd)
 
 :::
 
@@ -591,7 +829,7 @@ The `tip` and `total_bill`columns have the same `shape`, so broadcasting perform
 
 This corresponds to the following "hand-crafted" approach with a `for` loop:
 
-```{python}
+```{.python}
 #| 
 for i in range(df.shape[0]):
     df.loc[i, "tip_percentage"] = df.loc[i, "tip"] / df.loc[i, "total_bill"]
@@ -625,13 +863,13 @@ The `for` loop is $\approx$ **100 times slower** ! (even worse on larger data)
 
 When you want to change a value in a `DataFrame`, never use
 
-```python
+```{.python}
 df["tip_percentage"].loc[i] = 42
 ```
 
 but use
 
-```python
+```{.python}
 df.loc[i, "tip_percentage"] = 42
 ```
 
@@ -657,13 +895,13 @@ where we multiplied **each entry** of the `tip_percentage` column by 100.
 Note the difference between
 
 
-```python
+```{.python}
 df[['tip_percentage']]
 ```
 
 which returns a `DataFrame` containing only the `tip_percentage` column and
 
-```python
+```{.python}
 df['tip_percentage']
 ```
 
@@ -732,8 +970,11 @@ df.head()
 #| scrolled: true
 
 try:
-
-    df.groupby("day", observed=True).mean()
+    (
+        df
+            .groupby("day", observed=True)
+            .mean()
+    )
 except TypeError:
     print('TypeError: category dtype does not support aggregation "mean"')
 ```
@@ -929,7 +1170,7 @@ This might require
 
 ```{python}
 #| 
-# !pip install ipympl
+!pip install ipympl
 ```
 
 ```{python}
@@ -1028,7 +1269,7 @@ df["day"].unique()
 pd.get_dummies(df, prefix_sep='#', drop_first=True).head()
 ```
 
-Now, if a categorical feature has $K$ modalities, we use only $K-1$ dummies.
+Now, if a categorical feature has $K$ modalities/levels, we use only $K-1$ dummies.
 For instance, there is no more `sex#Female` binary column. 
 
 **Question.** So, a linear regression won't fit a weight for `sex#Female`. But, where do the model weights of the dropped binary columns go ?
@@ -1036,9 +1277,8 @@ For instance, there is no more `sex#Female` binary column.
 **Answer.** They just "go" to the **intercept**: interpretation of the population bias depends on the "dropped" one-hot encodings.
 
 So, we actually fit:
-$$\begin{array}{rl} \texttt{tip} \approx b & + w_1 \times \texttt{total_bill} + w_2 \times \texttt{size} \\ & + w_3 \times \texttt{sex#Male} + w_4 \times \texttt{smoker#Yes} \\ & + w_5 \times \texttt{day#Sat} + w_6 \times \texttt{day#Sun} + w_7 \times \texttt{day#Thur} \\ & + w_8 \times \texttt{time#Lunch} \end{array}$$
 
-
-
-
+$$
+\begin{array}{rl} \texttt{tip} \approx b & + w_1 \times \texttt{total\_bill} + w_2 \times \texttt{size} \\ & + w_3 \times \texttt{sex\#Male} + w_4 \times \texttt{smoker\#Yes} \\ & + w_5 \times \texttt{day\#Sat} + w_6 \times \texttt{day\#Sun} + w_7 \times \texttt{day\#Thur} \\ & + w_8 \times \texttt{time\#Lunch} \end{array}
+$$
 

@@ -273,7 +273,8 @@ tuple([1, 2, 3])
 #| scrolled: true
 #| slideshow: {slide_type: '-'}
 # Method 3
-(1, 2, 3)
+toto = (1, 2, 3)
+toto = tuple([1,2,3])
 ```
 
 **Simpler is better in Python**, so usually you want to use Method 2.
@@ -1022,7 +1023,7 @@ you just
 id(1), id(1+1), id(2)
 ```
 
-**A `list` is mutable**
+*A `list` is mutable*
 
 ```{python}
 #| scrolled: true
@@ -1033,9 +1034,9 @@ x[0] += 42; x.append(3.14)
 print(id(x), x)
 ```
 
-**A `str` is immutable**
+*A `str` is immutable*
 
-In order to "change" an **immutable** object, Python creates a new one
+In order to *change* an **immutable** object, Python creates a new one
 
 ```{python}
 s = 'to'
@@ -1044,7 +1045,7 @@ s += 'to'
 print(id(s), s)
 ```
 
-**Once again, a `list` is mutable**
+*Once again, a `list` is mutable*
 
 ```{python}
 #| slideshow: {slide_type: '-'}
@@ -1053,7 +1054,7 @@ other_list = super_list
 id(other_list), id(super_list)
 ```
 
-- `other_list` and `super_list` are the same list
+- `other_list` and `super_list` denote the same list. `other_list` is an *alias* for `super_list`
 - If you change one, you change the other.
 - `id` returns the identity of an object. Two objects with the same idendity are the same (not only the same type, but the same instance)
 

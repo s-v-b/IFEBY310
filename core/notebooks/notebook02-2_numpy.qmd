@@ -1,0 +1,374 @@
+---
+title: "Numpy : broadcasting`"
+date: "`r Sys.Date()"
+
+jupyter: python3
+
+engine: jupyter
+---
+
+
+
+
+# Centering and scaling a data matrix
+
+
+In the sequel  $X$ is a (data) numerical matrix, that is an element of $\mathbb{R}^{n \times p}$. The rows of $X$ (the individuals) are the sample points. Each sample point is a tuple of $p$ elements (the so-called variables). 
+
+The *sample mean* is defined as 
+$$
+\overline{X}= \begin{pmatrix} \frac{1}{n}\sum_{i=1}^n X_{i,j}\end{pmatrix}_{j\leq p}
+$$
+
+In linear algebra, $\overline{X}$ is the result of  vector matrix multiplication:
+$$
+\overline{X} = \frac{1}{n}\begin{pmatrix} 1 & \ldots & 1\end{pmatrix} \times X
+$$
+
+Here, we view $\overline{X}_n$ as a row vector built from column averages.
+
+Centering $X$ consists in subtracting the column average from each matrix element. 
+$$X - \begin{pmatrix}1 \\ \vdots \\ 1\end{pmatrix} \times \overline{X}$$
+
+Note that centering consists on projecting the columns of $X$ 
+on the $n-1$ dimensional subspace of $\mathbb{R}^n$ that is orthogonal to $\begin{pmatrix} 1 & \ldots  &  1\end{pmatrix}^\top$:
+
+\begin{align*}
+X - \begin{pmatrix}1 \\ \vdots \\ 1\end{pmatrix} \times \overline{X}
+  & =
+  \underbrace{ 
+    \left(\text{Id}_n - 
+      \frac{1}{n}
+      \begin{pmatrix} 1 \\ \vdots \\ 1\end{pmatrix} 
+      \begin{pmatrix} 1 & \ldots  &  1\end{pmatrix}\right)}_{\text{projector matrix}} X
+\end{align*}
+
+Let us call $Y$ the matrix obtained from centering the columns of $X$.
+
+Scaling $Y$ consists of dividing each coefficient of $Y$ by $1/\sqrt{n}$ times the (Euclidean) norm of its column. 
+
+Let us call $\sigma_j$ the Euclidean 
+norm of column $j$ of $Y$ ($1\leq j \leq p$) divided by $1/\sqrt{n}$:
+$$
+\sigma_j^2 = \frac{1}{n}\sum_{i=1}^n Y_{i,j}^2 = \frac{1}{n} \sum_{i=1}^n \left(X_{i,j} - \overline{X}_j\right)^2
+$$ 
+
+This is also the standard deviation of the $j^{\text{n}}$ column of $X$.
+
+The standardized matrix $Z$ is obtained from the next multiplication
+$$
+Z = Y \times 
+  \begin{pmatrix} 
+    \sigma_1 & 0        &  \ldots      &     & 0 \\
+    0        & \sigma_2 &   0    &     & \vdots \\
+    \vdots   & 0         & \ddots &     & \vdots  \\
+    0        & \ldots   &        &     & \sigma_d       
+  \end{pmatrix}^{-1}
+$$
+
+Note that for $i\leq n$, $j \leq p$:
+$$Z_{i,j} = \frac{X_{i,j} - \overline{X}_j}{\sigma_j}$$
+
+$Z$ is called the $z$-score matrix. It shows up in many statistical analyses. 
+
+In the statistical computing environment `R`, a function called `scale()` computes the $z$-score matrix. On may ask whether NumPy offers such a function.
+
+
+
+# Scaling in NumPy (standardization)
+
+In NumPy, there is no single function equivalent to R's `scale()` function. However, you can  achieve the same result using *broadcasting*.
+
+
+```{python}
+#| label: import-np
+import numpy as np
+```
+
+Let us first generate a toy data matrix with random (Gaussian) coefficients. This is an opportunity to introduce `np.random`. 
+
+We will work with $n=5$  and $p=3$. 
+
+We first build a (positive definite) covariance matrix. We ensure 
+positive definiteness starting from the Cholesky factorization. 
+```{python}
+# %%
+#| label: build-covariance
+L = np.array([  
+  [1., 0., 0.], 
+  [.5, 1., 0.], 
+  [.5, .5, 1.]])
+C = L @ L.transpose()
+# L is the Cholesky factor of C
+```
+
+```{python}
+#| label: define-expectation
+# Generate a sample of 5 independent normal vectors with mean (1, 2, 3) and covariance C
+mu = np.array([1, 2, 3])
+```
+
+```{python}
+#| label: generate-mulivariate-normal
+X = np.random.randn(5,3) @ L.transpose() + mu
+```
+
+In NumPy, function `mean` with well chosen optional `axis` argument returns a 1D  array filled with column averages
+
+::: {.callout-note}
+
+We just did something strange: we added a matrix with shape $(5,3)$ and a vector with length $3$. In linear algebra, this is not legitimate. We just used the device called *broadcasting*. See below. 
+
+:::
+
+```{python}
+#| label: compute-mean
+# Compute column averages
+# That is compute arithmetic mean along axis `0`
+emp_mean = np.mean(X, axis=0)
+```
+We can magically center the columns using broadcasting. 
+```{python}
+#| label: center-data-broadcast
+X_centered = X - emp_mean
+```
+If broadcasting were note possible, we could still achieve the result by resorting to NumPy  implementation of matrix multiplication
+```{python}
+#| label: center-data-substract
+X - np.ones((5,1), dtype=np.float16) @ emp_mean.reshape(1,3)
+```
+is a centered version of `X`:
+```{python}
+#| label: center-sanity-check
+X_centered - (X - np.ones((5,1), dtype=np.float16) @ emp_mean.reshape(1,3))
+```
+
+We compute now the column standard deviations using function `np.std` with `axis` argument set to `0`
+
+```{python}
+#| label: computer-std
+emp_std = np.std(X, axis=0)
+```
+
+The $z$-score matrix is obtained using another broadcasting operation.
+```{python}
+#| label: standardize-broadcast
+Z = (X - emp_mean) / emp_std  # X_centered / emp_std
+```
+
+Finally,  let us perform the sanity checks :
+```{python}
+# %%
+#| label: sanity-check-z-matrix-mean
+np.mean(Z, axis=0)  # Z is column centered
+```
+
+```{python}
+#| label: sanity-check-z-matrix-std 
+np.std(Z, axis=0)   # Z is standardized
+```
+
+
+::: {.callout-note}
+
+Alternatively, we can use `scipy.stats.zscore` which provides R's `scale()`-like functionality:
+
+```{python}
+#| label: scipy-scale-zscore
+from scipy.stats import zscore
+X_scaled_scipy = zscore(X, axis=0)
+X_scaled_scipy
+```
+
+`scipy.stats.zscore` centers and scales the data by default (equivalent to R's `scale()` with default arguments). 
+
+Centering and standardization are classical preprocessing steps before Principal Component Analysis (and before many Machine Learning procedures).
+
+:::
+
+# How does broadcasting work ?
+
+## Why broadcasting ? (from the documentation)
+
+> The term broadcasting describes how NumPy treats arrays with different shapes during arithmetic operations. Subject to certain constraints, the smaller array is “broadcast” across the larger array so that they have compatible shapes. Broadcasting provides a means of vectorizing array operations so that looping occurs in C instead of Python. It does this without making needless copies of data and usually leads to efficient algorithm implementations. There are, however, cases where broadcasting is a bad idea because it leads to inefficient use of memory that slows computation.
+
+## How ?
+
+> When operating on two arrays, NumPy compares their shapes element-wise. It starts with the trailing (i.e. rightmost) dimension and works its way left. Two dimensions are compatible when
+>
+> - they are equal, or
+> - one of them is 1.
+
+In our setting the shape of `X` and `emp_mean` are `(5,3)` and `(3)`. The rightmost dimensions are equal, hence compatible.
+
+> Input arrays do not need to have the same number of dimensions. The resulting array will have the same number of dimensions as the input array with the greatest number of dimensions, where the size of each dimension is the largest size of the corresponding dimension among the input arrays. Note that missing dimensions are assumed to have size one.
+
+In our setting, `emp_mean` is (virtually) reshaped to `(1,3)` and the two arrays are fully compatible. To match the leading dimension of `X`, we can stack three copies of reshaped `emp_mean`, this is just like multiplying `emp_mean`  by `np.array([1.], shape=(3,1))`.   
+
+> When either of the dimensions compared is one, the other is used. In other words, dimensions with size 1 are stretched or “copied” to match the other.
+
+
+
+# Variations on scaling/centering
+
+## Alternatives to mean/standard deviation
+
+In statistics, it is commonplace to sketch a probability distribution (empirical or not) using a location and a spread/scale parameter. If we add a constant to every outcome, the location parameter is shifted by the constant, the scale/spread parameter is left invariant. If we multiply every outcome by a constant, the location and the spread/scale parameters are multiplied by the constant. 
+
+Choosing the expectation/mean as the location parameter is traditional, it is motivated by the fact the expectation minimizes the mean quadratic error, but it may not be a panacea. The empirical mean is well known for its sensitivity to outliers. In words, it lacks robustness. Picking the standard deviation as the scale/spread parameter leads to the same issues. 
+
+Many alternative location/scale parameters have been proposed aiming to achieve good tradeoffs between robustness and computability. The median is a popular location parameter, and the median absolute deviation around the median is a popular scale/spread parameter. 
+
+TODO: median and median deviation around the median 
+
+## Using functions as objects for a more flexible function
+
+```{python}
+#| label: my_scaling
+
+def my_scaling(X, center=None, scale=None):
+  """
+  Center and scale a data matrix using flexible location and spread functions.
+  
+  This function demonstrates how to use functions as objects in Python to create
+  a flexible scaling function that can work with different location and scale
+  parameters. By default, it performs z-score standardization (centering by mean
+  and scaling by standard deviation), but can be configured to use robust
+  alternatives like median and median absolute deviation.
+  
+  Parameters
+  ----------
+  X : array_like
+      Input data matrix of shape (n, p) where n is the number of observations
+      and p is the number of variables. Each row is an observation, each column
+      is a variable.
+  center : callable, None, or False, optional
+      Function to compute the location parameter along axis=0. 
+      - If None (default), uses `np.mean` for column-wise means.
+      - If a callable (e.g., `np.median`), applies it to compute location.
+      - If False, no centering is performed (location set to zeros).
+  scale : callable, None, or False, optional
+      Function to compute the spread/scale parameter along axis=0.
+      - If None (default), uses `np.std` for column-wise standard deviations.
+      - If a callable (e.g., `median_absdev`), applies it to compute spread.
+      - If False, no scaling is performed (spread set to ones).
+  
+  Returns
+  -------
+  X_scaled : ndarray
+      Centered and scaled data matrix of the same shape as X.
+      Each column is centered by subtracting its location parameter and
+      scaled by dividing by its spread parameter.
+      Formula: (X - location) / spread
+  
+  Notes
+  -----
+  This function illustrates the use of functions as first-class objects in Python.
+  By passing different functions for `center` and `scale`, you can achieve:
+  - Standard z-score: `my_scaling(X)` or `my_scaling(X, np.mean, np.std)`
+  - Robust scaling: `my_scaling(X, np.median, median_absdev)`
+  - Centering only: `my_scaling(X, scale=False)`
+  - Scaling only: `my_scaling(X, center=False)`
+  
+  Examples
+  --------
+  >>> import numpy as np
+  >>> X = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+  >>> # Standard z-score standardization
+  >>> my_scaling(X)
+  array([[-1.22474487, -1.22474487, -1.22474487],
+         [ 0.        ,  0.        ,  0.        ],
+         [ 1.22474487,  1.22474487,  1.22474487]])
+  
+  >>> # Robust scaling using median and MAD
+  >>> my_scaling(X, center=np.median, scale=median_absdev)
+  array([[-1., -1., -1.],
+         [ 0.,  0.,  0.],
+         [ 1.,  1.,  1.]])
+  
+  >>> # Centering only (no scaling)
+  >>> my_scaling(X, scale=False)
+  array([[-3., -3., -3.],
+         [ 0.,  0.,  0.],
+         [ 3.,  3.,  3.]])
+  """
+  if center is None:
+      center = np.mean
+
+  if center:
+      location = center(X, axis=0)
+  else:
+      location = np.zeros(X.shape[1])
+  
+  if scale is None:
+      fscale = np.std
+  
+  if scale:
+      spread = scale(X, axis=0)
+  else:
+      spread = np.ones(X.shape[1])
+
+  return (X - location) / spread
+
+```
+
+```{python}
+#| label: median_absdev
+def median_absdev(X, axis=0):
+  """
+  Compute the median absolute deviation (MAD) around the median.
+  
+  The median absolute deviation is a robust measure of statistical dispersion.
+  It is defined as the median of the absolute deviations from the median of
+  the data. Unlike the standard deviation, it is less sensitive to outliers.
+  
+  Parameters
+  ----------
+  X : array_like
+      Input array or object that can be converted to an array.
+      For a 2D array, rows typically represent observations and columns
+      represent variables.
+  axis : int, optional
+      Axis along which the median and MAD are computed. Default is 0.
+      For a 2D array with axis=0, computes MAD for each column.
+      For axis=1, computes MAD for each row.
+  
+  Returns
+  -------
+  mad : ndarray
+      Median absolute deviation along the specified axis.
+      The shape of the output is the same as the input array with the
+      specified axis removed.
+  
+  Notes
+  -----
+  The MAD is computed as:
+      MAD = median(|X - median(X)|)
+  
+  This function first computes the median along the specified axis, then
+  computes the absolute deviations from that median, and finally returns
+  the median of those absolute deviations.
+  
+  Examples
+  --------
+  >>> import numpy as np
+  >>> X = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+  >>> median_absdev(X, axis=0)
+  array([3., 3., 3.])
+  
+  >>> # For a single column
+  >>> x = np.array([1, 2, 3, 4, 5, 100])  # 100 is an outlier
+  >>> median_absdev(x)
+  1.5  # Robust to the outlier
+  """
+  med = np.median(X, axis=axis)
+  
+  return np.median(np.abs(X - med), axis=axis)
+```
+
+`scipy.stats.median_abs_deviation()` offers a function for computing the MAD. Besides an `axis` parameter, it proposes `nan_policy` parameter. 
+
+# References 
+
+
+[Official Numpy documentation](https://numpy.org/devdocs/user/basics.broadcasting.html#basics-broadcasting)
