@@ -474,6 +474,11 @@ window.Quarto = {
   <li><a href="#why-broadcasting-from-the-documentation" id="toc-why-broadcasting-from-the-documentation" class="nav-link" data-scroll-target="#why-broadcasting-from-the-documentation">Why broadcasting ? (from the documentation)</a></li>
   <li><a href="#how" id="toc-how" class="nav-link" data-scroll-target="#how">How ?</a></li>
   </ul></li>
+  <li><a href="#variations-on-scalingcentering" id="toc-variations-on-scalingcentering" class="nav-link" data-scroll-target="#variations-on-scalingcentering">Variations on scaling/centering</a>
+  <ul class="collapse">
+  <li><a href="#alternatives-to-meanstandard-deviation" id="toc-alternatives-to-meanstandard-deviation" class="nav-link" data-scroll-target="#alternatives-to-meanstandard-deviation">Alternatives to mean/standard deviation</a></li>
+  <li><a href="#using-functions-as-objects-for-a-more-flexible-function" id="toc-using-functions-as-objects-for-a-more-flexible-function" class="nav-link" data-scroll-target="#using-functions-as-objects-for-a-more-flexible-function">Using functions as objects for a more flexible function</a></li>
+  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/s-v-b/IFEBY310/edit/main/core/notebooks/notebook02-2_numpy.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/s-v-b/IFEBY310/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -512,23 +517,28 @@ window.Quarto = {
 <p>In the sequel <span class="math inline">\(X\)</span> is a (data) numerical matrix, that is an element of <span class="math inline">\(\mathbb{R}^{n \times p}\)</span>. The rows of <span class="math inline">\(X\)</span> (the individuals) are the sample points. Each sample point is a tuple of <span class="math inline">\(p\)</span> elements (the so-called variables).</p>
 <p>The <em>sample mean</em> is defined as <span class="math display">\[
 \overline{X}= \begin{pmatrix} \frac{1}{n}\sum_{i=1}^n X_{i,j}\end{pmatrix}_{j\leq p}
-\]</span> In linear algebra, <span class="math inline">\(\overline{X}\)</span> is the result of vector matrix multiplication: <span class="math display">\[
+\]</span></p>
+<p>In linear algebra, <span class="math inline">\(\overline{X}\)</span> is the result of vector matrix multiplication: <span class="math display">\[
 \overline{X} = \frac{1}{n}\begin{pmatrix} 1 &amp; \ldots &amp; 1\end{pmatrix} \times X
-\]</span> Here, we view <span class="math inline">\(\overline{X}_n\)</span> as a row vector built from column averages.</p>
+\]</span></p>
+<p>Here, we view <span class="math inline">\(\overline{X}_n\)</span> as a row vector built from column averages.</p>
 <p>Centering <span class="math inline">\(X\)</span> consists in subtracting the column average from each matrix element. <span class="math display">\[X - \begin{pmatrix}1 \\ \vdots \\ 1\end{pmatrix} \times \overline{X}\]</span></p>
-<p>Note that centering consists on projecting the columns of <span class="math inline">\(X\)</span> on the <span class="math inline">\(n-1\)</span> dimensional subspace of <span class="math inline">\(\mathbb{R}^n\)</span> that is orthogonal to <span class="math inline">\(\begin{pmatrix} 1 &amp; \ldots  &amp;  1\end{pmatrix}^\top\)</span>: <span class="math display">\[\begin{align*}
+<p>Note that centering consists on projecting the columns of <span class="math inline">\(X\)</span> on the <span class="math inline">\(n-1\)</span> dimensional subspace of <span class="math inline">\(\mathbb{R}^n\)</span> that is orthogonal to <span class="math inline">\(\begin{pmatrix} 1 &amp; \ldots  &amp;  1\end{pmatrix}^\top\)</span>:</p>
+<p><span class="math display">\[\begin{align*}
 X - \begin{pmatrix}1 \\ \vdots \\ 1\end{pmatrix} \times \overline{X}
   &amp; =
   \underbrace{
     \left(\text{Id}_n -
       \frac{1}{n}
       \begin{pmatrix} 1 \\ \vdots \\ 1\end{pmatrix}
-      \begin{pmatrix} 1 &amp; \ldots  &amp;  1\end{pmatrix}\right)}_{\text{projectior matrix}} X
-\end{align*}\]</span> Let us call <span class="math inline">\(Y\)</span> the matrix obtained from centering the columns of <span class="math inline">\(X\)</span>.</p>
+      \begin{pmatrix} 1 &amp; \ldots  &amp;  1\end{pmatrix}\right)}_{\text{projector matrix}} X
+\end{align*}\]</span></p>
+<p>Let us call <span class="math inline">\(Y\)</span> the matrix obtained from centering the columns of <span class="math inline">\(X\)</span>.</p>
 <p>Scaling <span class="math inline">\(Y\)</span> consists of dividing each coefficient of <span class="math inline">\(Y\)</span> by <span class="math inline">\(1/\sqrt{n}\)</span> times the (Euclidean) norm of its column.</p>
 <p>Let us call <span class="math inline">\(\sigma_j\)</span> the Euclidean norm of column <span class="math inline">\(j\)</span> of <span class="math inline">\(Y\)</span> (<span class="math inline">\(1\leq j \leq p\)</span>) divided by <span class="math inline">\(1/\sqrt{n}\)</span>: <span class="math display">\[
 \sigma_j^2 = \frac{1}{n}\sum_{i=1}^n Y_{i,j}^2 = \frac{1}{n} \sum_{i=1}^n \left(X_{i,j} - \overline{X}_j\right)^2
-\]</span> This is also the standard deviation of the <span class="math inline">\(j^{\text{n}}\)</span> column of <span class="math inline">\(X\)</span>.</p>
+\]</span></p>
+<p>This is also the standard deviation of the <span class="math inline">\(j^{\text{n}}\)</span> column of <span class="math inline">\(X\)</span>.</p>
 <p>The standardized matrix <span class="math inline">\(Z\)</span> is obtained from the next multiplication <span class="math display">\[
 Z = Y \times
   \begin{pmatrix}
@@ -545,7 +555,7 @@ Z = Y \times
 <section id="scaling-in-numpy-standardization" class="level1">
 <h1>Scaling in NumPy (standardization)</h1>
 <p>In NumPy, there is no single function equivalent to R’s <code>scale()</code> function. However, you can achieve the same result using <em>broadcasting</em>.</p>
-<div id="c4de5a89" class="cell" data-execution_count="1">
+<div id="import-np" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -554,26 +564,27 @@ Z = Y \times
 <p>Let us first generate a toy data matrix with random (Gaussian) coefficients. This is an opportunity to introduce <code>np.random</code>.</p>
 <p>We will work with <span class="math inline">\(n=5\)</span> and <span class="math inline">\(p=3\)</span>.</p>
 <p>We first build a (positive definite) covariance matrix. We ensure positive definiteness starting from the Cholesky factorization.</p>
-<div id="9eaf33cd" class="cell" data-execution_count="2">
+<div id="0b31d612" class="cell" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> np.array([  </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  [<span class="fl">1.</span>, <span class="fl">0.</span>, <span class="fl">0.</span>], </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  [<span class="fl">.5</span>, <span class="fl">1.</span>, <span class="fl">0.</span>], </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  [<span class="fl">.5</span>, <span class="fl">.5</span>, <span class="fl">1.</span>]])</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> L <span class="op">@</span> L.transpose()</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># L is the Cholesky factor of C</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: build-covariance</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> np.array([  </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  [<span class="fl">1.</span>, <span class="fl">0.</span>, <span class="fl">0.</span>], </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  [<span class="fl">.5</span>, <span class="fl">1.</span>, <span class="fl">0.</span>], </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  [<span class="fl">.5</span>, <span class="fl">.5</span>, <span class="fl">1.</span>]])</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> L <span class="op">@</span> L.transpose()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># L is the Cholesky factor of C</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="a95e8a47" class="cell" data-execution_count="3">
+<div id="define-expectation" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a sample of 5 independent normal vectors with mean (1, 2, 3) and covariance C</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="93d82afb" class="cell" data-execution_count="4">
+<div id="generate-mulivariate-normal" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.random.randn(<span class="dv">5</span>,<span class="dv">3</span>) <span class="op">@</span> L.transpose() <span class="op">+</span> mu</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -593,7 +604,7 @@ Note
 <p>We just did something strange: we added a matrix with shape <span class="math inline">\((5,3)\)</span> and a vector with length <span class="math inline">\(3\)</span>. In linear algebra, this is not legitimate. We just used the device called <em>broadcasting</em>. See below.</p>
 </div>
 </div>
-<div id="bb55f130" class="cell" data-execution_count="5">
+<div id="compute-mean" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute column averages</span></span>
@@ -602,33 +613,33 @@ Note
 </details>
 </div>
 <p>We can magically center the columns using broadcasting.</p>
-<div id="7ce41198" class="cell" data-execution_count="6">
+<div id="center-data-broadcast" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>X_centered <span class="op">=</span> X <span class="op">-</span> emp_mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>If broadcasting were note possible, we could still achieve the result by resorting to NumPy implementation of matrix multiplication</p>
-<div id="93d7dad9" class="cell" data-execution_count="7">
+<div id="cell-center-data-substract" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">-</span> np.ones((<span class="dv">5</span>,<span class="dv">1</span>), dtype<span class="op">=</span>np.float16) <span class="op">@</span> emp_mean.reshape(<span class="dv">1</span>,<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="19">
-<pre><code>array([[ 0.29217189, -0.61560995,  0.06531655],
-       [ 0.67773779,  0.47890199, -0.4490209 ],
-       [-1.94985335, -0.97326014, -1.66136559],
-       [ 1.06293708, -0.53083919, -0.47012529],
-       [-0.08299341,  1.64080728,  2.51519522]])</code></pre>
+<div id="center-data-substract" class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>array([[ 0.41846646, -0.72225791, -0.78003353],
+       [-2.50364484, -0.7034133 , -1.21231068],
+       [-0.41703883,  0.21260877, -0.25539926],
+       [ 1.62442711,  1.52986466,  1.19133333],
+       [ 0.8777901 , -0.31680222,  1.05641013]])</code></pre>
 </div>
 </div>
 <p>is a centered version of <code>X</code>:</p>
-<div id="162140e1" class="cell" data-execution_count="8">
+<div id="cell-center-sanity-check" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>X_centered <span class="op">-</span> (X <span class="op">-</span> np.ones((<span class="dv">5</span>,<span class="dv">1</span>), dtype<span class="op">=</span>np.float16) <span class="op">@</span> emp_mean.reshape(<span class="dv">1</span>,<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div id="center-sanity-check" class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>array([[0., 0., 0.],
        [0., 0., 0.],
        [0., 0., 0.],
@@ -637,36 +648,37 @@ Note
 </div>
 </div>
 <p>We compute now the column standard deviations using function <code>np.std</code> with <code>axis</code> argument set to <code>0</code></p>
-<div id="43c39cf8" class="cell" data-execution_count="9">
+<div id="computer-std" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>emp_std <span class="op">=</span> np.std(X, axis<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>The <span class="math inline">\(z\)</span>-score matrix is obtained using another broadcasting operation.</p>
-<div id="be53ec75" class="cell" data-execution_count="10">
+<div id="standardize-broadcast" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> (X <span class="op">-</span> emp_mean) <span class="op">/</span> emp_std  <span class="co"># X_centered / emp_std</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Finally, let us perform the sanity checks :</p>
-<div id="366f5b59" class="cell" data-execution_count="11">
+<div id="cfcab3ad" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %%</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>np.mean(Z, axis<span class="op">=</span><span class="dv">0</span>)  <span class="co"># Z is column centered</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: sanity-check-z-matrix-mean</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>np.mean(Z, axis<span class="op">=</span><span class="dv">0</span>)  <span class="co"># Z is column centered</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="23">
-<pre><code>array([ 1.08246745e-16,  4.44089210e-17, -8.88178420e-17])</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>array([-4.44089210e-17, -3.33066907e-17,  2.22044605e-16])</code></pre>
 </div>
 </div>
-<div id="90b1730e" class="cell" data-execution_count="12">
+<div id="cell-sanity-check-z-matrix-std" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>np.std(Z, axis<span class="op">=</span><span class="dv">0</span>)   <span class="co"># Z is standardized</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div id="sanity-check-z-matrix-std" class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>array([1., 1., 1.])</code></pre>
 </div>
 </div>
@@ -681,19 +693,19 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>Alternatively, we can use <code>scipy.stats.zscore</code> which provides R’s <code>scale()</code>-like functionality:</p>
-<div id="461cc8da" class="cell" data-execution_count="13">
+<div id="cell-scipy-scale-zscore" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> zscore</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>X_scaled_scipy <span class="op">=</span> zscore(X, axis<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>X_scaled_scipy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="25">
-<pre><code>array([[ 0.27899773, -0.64678637,  0.04735261],
-       [ 0.64717831,  0.5031551 , -0.32552713],
-       [-1.86193364, -1.02254909, -1.20444186],
-       [ 1.0150088 , -0.55772255, -0.34082719],
-       [-0.0792512 ,  1.72390291,  1.82344357]])</code></pre>
+<div id="scipy-scale-zscore" class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>array([[ 0.29550841, -0.86295532, -0.80637625],
+       [-1.76799861, -0.84043975, -1.25325195],
+       [-0.29450026,  0.25402542, -0.26402441],
+       [ 1.14712152,  1.82788563,  1.23156617],
+       [ 0.61986894, -0.37851598,  1.09208644]])</code></pre>
 </div>
 </div>
 <p><code>scipy.stats.zscore</code> centers and scales the data by default (equivalent to R’s <code>scale()</code> with default arguments).</p>
@@ -726,6 +738,163 @@ Note
 <blockquote class="blockquote">
 <p>When either of the dimensions compared is one, the other is used. In other words, dimensions with size 1 are stretched or “copied” to match the other.</p>
 </blockquote>
+</section>
+</section>
+<section id="variations-on-scalingcentering" class="level1">
+<h1>Variations on scaling/centering</h1>
+<section id="alternatives-to-meanstandard-deviation" class="level2">
+<h2 class="anchored" data-anchor-id="alternatives-to-meanstandard-deviation">Alternatives to mean/standard deviation</h2>
+<p>In statistics, it is commonplace to sketch a probability distribution (empirical or not) using a location and a spread/scale parameter. If we add a constant to every outcome, the location parameter is shifted by the constant, the scale/spread parameter is left invariant. If we multiply every outcome by a constant, the location and the spread/scale parameters are multiplied by the constant.</p>
+<p>Choosing the expectation/mean as the location parameter is traditional, it is motivated by the fact the expectation minimizes the mean quadratic error, but it may not be a panacea. The empirical mean is well known for its sensitivity to outliers. In words, it lacks robustness. Picking the standard deviation as the scale/spread parameter leads to the same issues.</p>
+<p>Many alternative location/scale parameters have been proposed aiming to achieve good tradeoffs between robustness and computability. The median is a popular location parameter, and the median absolute deviation around the median is a popular scale/spread parameter.</p>
+<p>TODO: median and median deviation around the median</p>
+</section>
+<section id="using-functions-as-objects-for-a-more-flexible-function" class="level2">
+<h2 class="anchored" data-anchor-id="using-functions-as-objects-for-a-more-flexible-function">Using functions as objects for a more flexible function</h2>
+<div id="my_scaling" class="cell" data-execution_count="14">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_scaling(X, center<span class="op">=</span><span class="va">None</span>, scale<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">  Center and scale a data matrix using flexible location and spread functions.</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">  This function demonstrates how to use functions as objects in Python to create</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">  a flexible scaling function that can work with different location and scale</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">  parameters. By default, it performs z-score standardization (centering by mean</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">  and scaling by standard deviation), but can be configured to use robust</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">  alternatives like median and median absolute deviation.</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">  Parameters</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">  ----------</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co">  X : array_like</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">      Input data matrix of shape (n, p) where n is the number of observations</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">      and p is the number of variables. Each row is an observation, each column</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co">      is a variable.</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co">  center : callable, None, or False, optional</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">      Function to compute the location parameter along axis=0. </span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co">      - If None (default), uses `np.mean` for column-wise means.</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co">      - If a callable (e.g., `np.median`), applies it to compute location.</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co">      - If False, no centering is performed (location set to zeros).</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co">  scale : callable, None, or False, optional</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="co">      Function to compute the spread/scale parameter along axis=0.</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="co">      - If None (default), uses `np.std` for column-wise standard deviations.</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="co">      - If a callable (e.g., `median_absdev`), applies it to compute spread.</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="co">      - If False, no scaling is performed (spread set to ones).</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="co">  Returns</span></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="co">  -------</span></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="co">  X_scaled : ndarray</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="co">      Centered and scaled data matrix of the same shape as X.</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="co">      Each column is centered by subtracting its location parameter and</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="co">      scaled by dividing by its spread parameter.</span></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a><span class="co">      Formula: (X - location) / spread</span></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="co">  Notes</span></span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="co">  -----</span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="co">  This function illustrates the use of functions as first-class objects in Python.</span></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="co">  By passing different functions for `center` and `scale`, you can achieve:</span></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a><span class="co">  - Standard z-score: `my_scaling(X)` or `my_scaling(X, np.mean, np.std)`</span></span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a><span class="co">  - Robust scaling: `my_scaling(X, np.median, median_absdev)`</span></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a><span class="co">  - Centering only: `my_scaling(X, scale=False)`</span></span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a><span class="co">  - Scaling only: `my_scaling(X, center=False)`</span></span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="co">  Examples</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a><span class="co">  --------</span></span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; import numpy as np</span></span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; X = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])</span></span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; # Standard z-score standardization</span></span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; my_scaling(X)</span></span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a><span class="co">  array([[-1.22474487, -1.22474487, -1.22474487],</span></span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="co">         [ 0.        ,  0.        ,  0.        ],</span></span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a><span class="co">         [ 1.22474487,  1.22474487,  1.22474487]])</span></span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; # Robust scaling using median and MAD</span></span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; my_scaling(X, center=np.median, scale=median_absdev)</span></span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a><span class="co">  array([[-1., -1., -1.],</span></span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a><span class="co">         [ 0.,  0.,  0.],</span></span>
+<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a><span class="co">         [ 1.,  1.,  1.]])</span></span>
+<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; # Centering only (no scaling)</span></span>
+<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; my_scaling(X, scale=False)</span></span>
+<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a><span class="co">  array([[-3., -3., -3.],</span></span>
+<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a><span class="co">         [ 0.,  0.,  0.],</span></span>
+<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a><span class="co">         [ 3.,  3.,  3.]])</span></span>
+<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> center <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a>      center <span class="op">=</span> np.mean</span>
+<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> center:</span>
+<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a>      location <span class="op">=</span> center(X, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb19-73"><a href="#cb19-73" aria-hidden="true" tabindex="-1"></a>      location <span class="op">=</span> np.zeros(X.shape[<span class="dv">1</span>])</span>
+<span id="cb19-74"><a href="#cb19-74" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-75"><a href="#cb19-75" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> scale <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb19-76"><a href="#cb19-76" aria-hidden="true" tabindex="-1"></a>      fscale <span class="op">=</span> np.std</span>
+<span id="cb19-77"><a href="#cb19-77" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-78"><a href="#cb19-78" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> scale:</span>
+<span id="cb19-79"><a href="#cb19-79" aria-hidden="true" tabindex="-1"></a>      spread <span class="op">=</span> scale(X, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb19-80"><a href="#cb19-80" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb19-81"><a href="#cb19-81" aria-hidden="true" tabindex="-1"></a>      spread <span class="op">=</span> np.ones(X.shape[<span class="dv">1</span>])</span>
+<span id="cb19-82"><a href="#cb19-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-83"><a href="#cb19-83" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (X <span class="op">-</span> location) <span class="op">/</span> spread</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="median_absdev" class="cell" data-execution_count="15">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> median_absdev(X, axis<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">  Compute the median absolute deviation (MAD) around the median.</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">  The median absolute deviation is a robust measure of statistical dispersion.</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">  It is defined as the median of the absolute deviations from the median of</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">  the data. Unlike the standard deviation, it is less sensitive to outliers.</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">  Parameters</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">  ----------</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">  X : array_like</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">      Input array or object that can be converted to an array.</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">      For a 2D array, rows typically represent observations and columns</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">      represent variables.</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">  axis : int, optional</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">      Axis along which the median and MAD are computed. Default is 0.</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">      For a 2D array with axis=0, computes MAD for each column.</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co">      For axis=1, computes MAD for each row.</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co">  Returns</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co">  -------</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co">  mad : ndarray</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co">      Median absolute deviation along the specified axis.</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">      The shape of the output is the same as the input array with the</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co">      specified axis removed.</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="co">  Notes</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="co">  -----</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="co">  The MAD is computed as:</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="co">      MAD = median(|X - median(X)|)</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="co">  This function first computes the median along the specified axis, then</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="co">  computes the absolute deviations from that median, and finally returns</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="co">  the median of those absolute deviations.</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="co">  Examples</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="co">  --------</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; import numpy as np</span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; X = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; median_absdev(X, axis=0)</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="co">  array([3., 3., 3.])</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; # For a single column</span></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; x = np.array([1, 2, 3, 4, 5, 100])  # 100 is an outlier</span></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a><span class="co">  &gt;&gt;&gt; median_absdev(x)</span></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a><span class="co">  1.5  # Robust to the outlier</span></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a><span class="co">  """</span></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>  med <span class="op">=</span> np.median(X, axis<span class="op">=</span>axis)</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> np.median(np.<span class="bu">abs</span>(X <span class="op">-</span> med), axis<span class="op">=</span>axis)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p><code>scipy.stats.median_abs_deviation()</code> offers a function for computing the MAD. Besides an <code>axis</code> parameter, it proposes <code>nan_policy</code> parameter.</p>
 </section>
 </section>
 <section id="references" class="level1">
