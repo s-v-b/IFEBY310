@@ -10,6 +10,12 @@
   path: "core/notebooks/notebook02_numpy.html"
   categories: [Python, Numpy, Scipy, Plotly]
   href: '<a href="core/ipynb/notebook02_numpy.ipynb" download="notebook02_numpy.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
+- title: "Numpy Broadcasting"
+  author: "Master I MIDS UParis Cité"
+  date: "2026-01-19"
+  path: "core/notebooks/notebook02-2_numpy.html"
+  categories: [Python, Numpy, Scipy, Broadcasting]
+  href: '<a href="core/ipynb/notebook02-2_numpy.ipynb" download="notebook02-2_numpy.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Table wranglig with Pandas"
   author: "Master I MIDS UParis Cité"
   date: "2026-01-19"
