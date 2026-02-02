@@ -10,7 +10,7 @@
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/weeks/week-3.html</loc>
-    <lastmod>2025-12-19T16:06:04.667Z</lastmod>
+    <lastmod>2026-02-02T12:50:39.315Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/weeks/week-11.html</loc>
@@ -58,7 +58,7 @@
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook06_sparksql.html</loc>
-    <lastmod>2025-02-05T20:52:27.706Z</lastmod>
+    <lastmod>2026-02-02T08:55:34.373Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook04_pandas_spark.html</loc>
@@ -166,7 +166,7 @@
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/weeks/week-4.html</loc>
-    <lastmod>2025-12-19T16:06:04.666Z</lastmod>
+    <lastmod>2026-02-02T12:39:51.926Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/weeks/week-6.html</loc>
@@ -178,7 +178,7 @@
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides04_sparkl.html</loc>
-    <lastmod>2026-01-08T16:18:19.855Z</lastmod>
+    <lastmod>2026-02-02T08:51:34.731Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/slides/slides07_spark-deeper-dive.html</loc>
@@ -271,5 +271,9 @@
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook02-2_numpy.html</loc>
     <lastmod>2026-01-17T17:17:55.334Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/projects/fake-report.html</loc>
+    <lastmod>2026-01-29T16:29:15.039Z</lastmod>
   </url>
 </urlset>
