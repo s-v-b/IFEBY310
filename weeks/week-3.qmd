@@ -33,12 +33,11 @@ We shall briefly come back to several parts of
 ## Notebooks
 
 
-We shall spend most of the lecture on 
-
-[Dask Tutorial](https://tutorial.dask.org)
 
 
 
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook05_sparkrdd.ipynb" download>Jupyter notebook V : Spark RDD</a> 
+- 
 You shall have gone through (on your own)
 
 - {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook01_python.ipynb" download>Jupyter notebook I : tour of Python</a> 

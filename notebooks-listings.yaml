@@ -22,26 +22,26 @@
   path: "core/notebooks/notebook03_pandas.html"
   categories: [Python, Pandas]
   href: '<a href="core/ipynb/notebook03_pandas.ipynb" download="notebook03_pandas.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
-- title: "Table wranglig with Dask"
-  author: "Master I MIDS UParis Cité"
-  date: "2026-01-26"
-  # path: ""
-  categories: [Python, Dask]
+# - title: "Table wranglig with Dask"
+#   author: "Master I MIDS UParis Cité"
+#   date: "2026-01-26"
+#   # path: ""
+#   categories: [Python, Dask]
   # href: '<a href="core/ipynb/notebook03_pandas.ipynb" download="notebook03_pandas.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Spark Resilient Distributed Datasets"
   author: "Master I MIDS UParis Cité"
-  date: "2026-02-02"
+  date: "2026-01-26"
   path: "core/notebooks/notebook05_sparkrdd.html"
   categories: [PySpark, Spark, RDD]
   href: '<a href="core/ipynb/notebook05_sparkrdd.ipynb" download="notebook05_sparkrdd.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Spark SQL"
   path: "core/notebooks/notebook06_sparksql.html"
-  date: "2026-02-16"
+  date: "2026-02-02"
   categories: [PySpark, Spark, SQL]
   href: '<a href="core/ipynb/notebook06_sparksql.ipynb" download="notebook06_sparksql.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Pandas on Spark and SparklyR"
 #  path: "core/notebooks/notebook06_sparksql.html"
-  date: "2026-02-16"
+  date: "2026-02-09"
   categories: [PySpark, Spark, Pandas, R]
 #  href: '<a href="core/ipynb/notebook02_numpy.ipynb" download="notebook06_sparksql.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "JSON format"

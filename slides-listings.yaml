@@ -20,17 +20,17 @@
   categories: []
 - title: "Spark : RDDs"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2026-02-02"
+  date: "2026-01-26"
   path: "core/slides/slides03_sparkrdd.html"
   categories: []
 - title: "Spark : SQL"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2026-02-09"
+  date: "2026-02-02"
   path: "core/slides/slides04_sparkl.html"
   categories: []
 - title: "Pandas on Spark and sparklyr"
   author: "Master MIDS/MFA/LOGOS UParis Cité"
-  date: "2026-02-16"
+  date: "2026-02-19"
   path: "core/slides/spark-pandas-on-spark.html"
   categories: []
 - title: "JSON"

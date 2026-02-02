@@ -219,9 +219,10 @@ Choosing the expectation/mean as the location parameter is traditional, it is mo
 
 Many alternative location/scale parameters have been proposed aiming to achieve good tradeoffs between robustness and computability. The median is a popular location parameter, and the median absolute deviation around the median is a popular scale/spread parameter. 
 
-TODO: median and median deviation around the median 
+
 
 ## Using functions as objects for a more flexible function
+
 
 ```{python}
 #| label: my_scaling

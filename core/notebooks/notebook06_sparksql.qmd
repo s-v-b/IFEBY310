@@ -289,7 +289,7 @@ query = """
 query = """
     FROM table 
     |> WHERE age > 21 
-    |> SELECT *   
+    |> SELECT *  
 """
 
 spark.sql(query).show()

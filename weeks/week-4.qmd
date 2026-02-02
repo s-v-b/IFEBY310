@@ -16,25 +16,23 @@ draft: false
 
 ## Lecture : slides
 
+We went through the first part (up to Aggregation) of 
 - {{< fa display >}} [Spark high level APIs: SQL](/core/slides/slides04_sparkl.html){target="_blank"} 
 
-We may come back to several parts of 
+We came back to  section `Pair RDD`
 
-- {{< fa display >}} [Python Data Science Stack](/core/slides/slides02_python_ds_stack.html){target="_blank"} 
-- {{< fa display >}} [Dask](/core/slides/slides09_dask.html){target="_blank"}
+- {{< fa display >}} [Spark RDD](/core/slides/slides03_sparkrdd.html){target="_blank"} 
+
 
 
 ## Notebooks
 
 We shall spend most of the lectures on 
 
-- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook06_sparksql.ipynb" download>Jupyter notebook V : Spark RDD</a> 
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook06_sparksql.ipynb" download>Jupyter notebook V : Spark SQL</a> 
 - {{< fa globe >}} [html: Spark SQL](/core/notebooks/notebook06_sparksql.html)  
-<!-- - {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook06_sparksql.ipynb" download>Jupyter notebook VI : Spark SQL</a> 
-- {{< fa globe >}} [html: Spark SQL](/core/notebooks/notebook06_sparksql.html)   -->
 
-
-
+We did not touch Aggregation
 
 You shall have gone through (on your own)
 
