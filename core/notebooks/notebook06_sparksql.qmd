@@ -12,24 +12,28 @@ os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-02-08T20:23:05.867529Z', start_time: '2022-02-08T20:23:01.418071Z'}
+#| label: context_session
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 
-conf = SparkConf().setAppName("Spark SQL Course")
+conf = (
+    SparkConf()
+        .setAppName("Spark SQL Course")
+)
+
 sc = SparkContext(conf=conf)  # no need for Spark 3...
 
-spark = (SparkSession
-    .builder
-    .appName("Spark SQL Course")
-    .getOrCreate()
+spark = (
+    SparkSession
+        .builder
+        .appName("Spark SQL Course")
+        .getOrCreate()
 )
 ```
 
 
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:46.926825Z', start_time: '2022-01-26T10:58:46.920913Z'}
 #| scrolled: true
 from pyspark.sql import Row
 
@@ -49,11 +53,14 @@ df = spark.createDataFrame([row1, row2, row3])
 df.printSchema()
 ```
 
+How does `printSchema` compare with Pandas `info()`?
+
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:59:17.760344Z', start_time: '2022-01-26T10:59:17.597166Z'}
 df.show()
 ```
 
+How does `show` compare with Pandas `head()`
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:59:25.889372Z', start_time: '2022-01-26T10:59:25.866666Z'}
 print(df.rdd.toDebugString().decode("utf-8"))
@@ -132,12 +139,16 @@ There is special type schemata. A object of class `StructType` is made of a list
 df.schema
 ```
 
+How does `df.schema` relate to `df.printSchema()`? Where would you use the outputs of `df.schema` and `df.printSchema()`.
+
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:19.860631Z', start_time: '2022-01-26T10:58:19.854012Z'}
 type(df.schema)
 ```
 
-A object of type `StructField` has a name, a PySpark type, an d a boolean parameter.
+A object of type `StructField` has a *name* like `gender`, a PySpark *type* like `StringType()`, an d a boolean parameter.
+
+What does the boolean parameter stand for?
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:20.199419Z', start_time: '2022-01-26T10:58:19.863528Z'}
@@ -145,13 +156,13 @@ from pyspark.sql.types import *
 
 schema = StructType(
     [
-        StructField("name", StringType(), True),
+        StructField("name", StringType(), False),
         StructField("age", IntegerType(), True),
         StructField("gender", StringType(), True)
     ]
 )
 
-rows = [("John", 21, "male")]
+rows = [("Jane", 21, "female")]
 df = spark.createDataFrame(rows, schema)
 df.printSchema()
 df.show()
@@ -161,10 +172,11 @@ df.show()
 
 PySpark offers two ways to query a datafrane:
 
-- An ad hod API with methods for the DataFrame class.
+- An ad hoc API with methods for the DataFrame class.
 - The possibility to post SQL queries (provided a temporary view has been created).
   
 ```{python}
+#| label: play-it-like-sql
 #| ExecuteTime: {end_time: '2022-01-26T10:58:20.882311Z', start_time: '2022-01-26T10:58:20.201993Z'}
 column_names = ["name", "age", "gender"]
 rows = [
@@ -190,6 +202,46 @@ query = """
 men_df = spark.sql(query)
 men_df.show()
 ```
+
+::: {.callout-important title="New! (with Spark 4)"}
+
+We can now write SQL queries the way we have been writing in the `tidyverse` (`R`) using the SQL pipe `|>`.
+
+:::
+
+```{python}
+#| label: play-it-like-dplyr
+new_age_query = """
+    FROM new_view
+    |> WHERE gender = 'male'
+    |> SELECT name, age
+"""
+```
+
+to be compared with 
+
+```{.r}
+new_df |> 
+    dplyr::filter(gender=='male') |>
+    dplyr::select(name, age)
+```
+
+
+```{python}
+#| label: play-it-like-dplyr-2
+men_df = (
+    spark
+        .sql(new_age_query)
+        .show()
+)
+```
+
+::: {.callout-tip  title="Have a look at "}
+
+[https://www.databricks.com/blog/sql-gets-easier-announcing-new-pipe-syntax](https://www.databricks.com/blog/sql-gets-easier-announcing-new-pipe-syntax)
+
+:::
+
 
 ## `SELECT`  (projection $π$)
 
@@ -234,8 +286,16 @@ query = """
         age > 21
 """
 
+query = """
+    FROM table 
+    |> WHERE age > 21 
+    |> SELECT *   
+"""
+
 spark.sql(query).show()
 ```
+
+Note that you can get rid of `|> SELECT *` 
 
 Using the API 
 ```{python}
@@ -249,6 +309,8 @@ Using the API
 
 This implements `σ(df, "age > 21")`
 
+The `where()` method takes different types of inputs as argument: strings that can be interpreted as SQL conditions, but also boolean masks.
+ 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:22.377417Z', start_time: '2022-01-26T10:58:21.926708Z'}
 # Alternatively:
@@ -259,6 +321,8 @@ This implements `σ(df, "age > 21")`
 )
 ```
 
+or 
+
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:22.566385Z', start_time: '2022-01-26T10:58:22.380036Z'}
 ( 
@@ -267,6 +331,9 @@ This implements `σ(df, "age > 21")`
       .show()
 )
 ```
+
+Where (and how) is the boolean mask built?
+
 
 Method chaining allows to construct complex queries 
 ```{python}
@@ -300,6 +367,11 @@ query = """
     LIMIT 1
 """
 
+query = """
+    FROM table
+    |> LIMIT 1
+"""
+
 spark.sql(query).show()
 ```
 
@@ -328,8 +400,15 @@ query = """
         name ASC
 """
 
+query = """
+    FROM table
+    |> ORDER BY name ASC
+"""
+
 spark.sql(query).show()
 ```
+
+With  the API 
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:24.368069Z', start_time: '2022-01-26T10:58:24.193899Z'}
@@ -341,7 +420,19 @@ df.orderBy(df.name.asc()).show()
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:24.643668Z', start_time: '2022-01-26T10:58:24.370758Z'}
 df.createOrReplaceTempView("table")
-query = "SELECT name, age, gender AS sex FROM table"
+
+query = """
+    SELECT 
+        name, age, gender  AS sex 
+    FROM 
+        table
+"""
+
+query = """
+    FROM table
+    |> SELECT name, age, gender  AS sex
+"""
+
 spark.sql(query).show()
 ```
 
@@ -351,7 +442,14 @@ type(df.age)
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:24.858104Z', start_time: '2022-01-26T10:58:24.646119Z'}
-df.select(df.name, df.age, df.gender.alias('sex')).show()
+
+(
+    df.select(
+        df.name, 
+        df.age, 
+        df.gender.alias('sex'))
+      .show()
+)
 ```
 
 ## `CAST`
@@ -359,13 +457,37 @@ df.select(df.name, df.age, df.gender.alias('sex')).show()
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:25.072286Z', start_time: '2022-01-26T10:58:24.860474Z'}
 df.createOrReplaceTempView("table")
-query = "SELECT name, cast(age AS float) AS age_f FROM table"
+
+query = """
+    SELECT 
+        name, 
+        cast(age AS float) AS age_f 
+    FROM 
+        table
+"""
+
+query = """
+    FROM table |>  
+    SELECT 
+        name, 
+        cast(age AS float) AS age_f 
+"""
+
 spark.sql(query).show()
 ```
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:25.384433Z', start_time: '2022-01-26T10:58:25.074523Z'}
-df.select(df.name, df.age.cast("float").alias("age_f")).show()
+
+(
+    df
+        .select(
+            df.name, 
+            df.age
+                .cast("float")
+                .alias("age_f"))
+        .show()
+)
 ```
 
 ```{python}
@@ -385,11 +507,10 @@ df.select(df.name, new_age_col).show()
 df.createOrReplaceTempView("table")
 
 query = """
+    FROM table |>
     SELECT 
         *, 
         12*age AS age_months 
-    FROM 
-        table
 """
 
 spark.sql(query).show()
@@ -421,13 +542,15 @@ import datetime
 
 hui = datetime.date.today()
 
-hui = hui.replace(year=hui.year-21)
-
 str(hui)
 ```
 
 ```{python}
-# df.select("*", hui.replace(year=hui.year - df.age ).alias("yob")).show()
+( 
+    df
+     .withColumn("yob", datetime.date.today().year - df.age)
+     .show()
+)
 ```
 
 # Column functions
@@ -439,19 +562,24 @@ str(hui)
 from pyspark.sql import functions as fn
 
 columns = ["brand", "cost"]
-df = spark.createDataFrame([
-    ("garnier", 3.49),
-    ("elseve", 2.71)
-], columns)
+
+df = spark.createDataFrame(
+    [("garnier", 3.49),
+     ("elseve", 2.71)], 
+    columns
+)
 
 round_cost = fn.round(df.cost, 1)
 floor_cost = fn.floor(df.cost)
 ceil_cost = fn.ceil(df.cost)
 
-df.withColumn('round', round_cost)\
-    .withColumn('floor', floor_cost)\
-    .withColumn('ceil', ceil_cost)\
+(
+    df
+    .withColumn('round', round_cost)
+    .withColumn('floor', floor_cost)
+    .withColumn('ceil', ceil_cost)
     .show()
+)
 ```
 
 ## String functions examples
@@ -471,6 +599,7 @@ last_name_initial = fn.substring(df.last_name, 0, 1)
 # last_name_initial_dotted = fn.concat(last_name_initial, ".")
 
 name = fn.concat_ws(" ", df.first_name, last_name_initial)
+
 df.withColumn("name", name).show()
 ```
 
@@ -482,6 +611,21 @@ df.withColumn("name", name).show()
 )
 ```
 
+As an SQL query
+
+```{python}
+df.createOrReplaceTempView("table")
+
+query = """
+    FROM table |>
+    SELECT *, substring(last_name, 0, 1) AS lni |>
+    SELECT first_name, last_name, concat(first_name, ' ', lni, '.') AS nname
+"""
+spark.sql(query).show()
+
+```
+
+Spark SQL offers a large  subsets of [SQL functions](https://www.postgresql.org/docs/current/functions.html)
 
 ## Date functions examples
 
@@ -498,10 +642,22 @@ df = spark.createDataFrame([
 days_between = fn.datediff(df.end_date, df.start_date)
 start_month = fn.month(df.start_date)
 
-df.withColumn('days_between', days_between)\
-    .withColumn('start_month', start_month)\
-    .show()
+(
+    df
+        .withColumn('days_between', days_between)
+        .withColumn('start_month', start_month)
+        .show()
+)
 ```
+
+Note that `days_between` is an instance of `Column`, the Spark type for columns in Spark dataframes.
+
+```{python}
+# %%
+type(days_between)
+```
+
+Recall the datetime calculus available in Database systems and in many programming framework.
 
 ```{python}
 str(date(2015, 1, 1) - date(2015, 1, 15))
@@ -556,10 +712,50 @@ def my_func(col_1, col_2):
     else:
         return "{} is bigger than {}".format(col_2, col_1)
 
+# registration
 my_udf = fn.udf(my_func, StringType())
 
-df.withColumn("udf", my_udf(df['first'], df['second'])).show()
+# fn.udf is a decorator
+# it can be used in a a more explicit way
+
+@fn.udf(returnType=StringType())
+def the_same_func(col_1, col_2):
+    if (col_1 > col_2):
+        return "{} is bigger than {}".format(col_1, col_2)
+    else:
+        return "{} is bigger than {}".format(col_2, col_1)
+
+# at work        
+(
+    df
+        .withColumn("udf", my_udf(df['first'], df['second']))
+        .withColumn("udf_too", the_same_func(df['first'], df['second']))
+        .show()
+)
 ```
+
+::: {.callout-tip title="Using UDF in SQL queries"}
+
+The user-defined-function (UDF) can also be used on SQL queries
+provided the decorated function is registered. 
+
+```{python}
+df.createOrReplaceTempView("table")
+
+spark.udf.register("the_same_func", the_same_func)  # the_same_func from @udf above
+spark.sql("SELECT *, the_same_func(first, second) AS udf FROM table").show()
+```
+
+Beware. `spark.udf.register` is not a decorator.
+
+:::
+
+
+::: {.callout-important title="More on UDF in Spark 4"}
+
+See [User-Defined Table Functions (UDTFs) in Python](https://docs.databricks.com/gcp/en/udf/python-udtf)
+
+:::
 
 # Joins  ($⋈$)
 
@@ -569,10 +765,13 @@ df.withColumn("udf", my_udf(df['first'], df['second'])).show()
 #| ExecuteTime: {end_time: '2022-01-26T10:58:29.098957Z', start_time: '2022-01-26T10:58:28.042691Z'}
 from datetime import date
 
-products = spark.createDataFrame([
-    ('1', 'mouse', 'microsoft', 39.99),
-    ('2', 'keyboard', 'logitech', 59.99),
-], ['prod_id', 'prod_cat', 'prod_brand', 'prod_value'])
+products = spark.createDataFrame(
+    [
+        ('1', 'mouse', 'microsoft', 39.99),
+        ('2', 'keyboard', 'logitech', 59.99),
+    ], 
+    ['prod_id', 'prod_cat', 'prod_brand', 'prod_value']
+)
 
 purchases = spark.createDataFrame([
     (date(2017, 11, 1), 2, '1'),
@@ -584,9 +783,14 @@ purchases = spark.createDataFrame([
 purchases.join(products, 'prod_id').show()
 ```
 
+Just as in  RDBMs, we can ask for explanations:
+
 ```{python}
 purchases.join(products, 'prod_id').explain()
 ```
+
+Have a look at the PostgreSQL documentation. What are the different join methods? When is one favored?
+
 
 ## Using a `SQL` query
 
@@ -602,6 +806,12 @@ query = """
         products AS prd 
     ON prc.prod_id = prd.prod_id
 """
+
+query = """
+    FROM purchases |>
+    INNER JOIN products USING(prod_id)    
+"""
+
 spark.sql(query).show()
 ```
 
@@ -624,6 +834,8 @@ print(type(join_rule))
 new_purchases.join(products, join_rule, 'left').show()
 ```
 
+What is the type of `join_rule.info`?
+
 ```{python}
 join_rule.info
 ```
@@ -641,6 +853,21 @@ join_rule = new_purchases.prod_id_x == products.prod_id
 
 new_purchases.join(products, join_rule, 'left').show()
 ```
+
+::: {.callout-note title="Different kinds of joins"}
+
+Just as in RDBMS, there are different kinds of joins. 
+
+They differ in the way tuples from left and the right tables are matched (is it a natural join, an equi-join, a $\theta$ join?). They also differ
+in the way they handle non-matching tuples (inner or outer joins). 
+
+The `join` method has three parameters:
+
+- `other`: the right table
+- `on`: the join rule that defines how tuples are matched. 
+- `how`: defines the way non-matching tuples are handled.
+
+:::
 
 ## Various types of joins
 
@@ -692,6 +919,9 @@ products = spark.createDataFrame([
         .show()
 )
 ```
+
+What is the type of `products
+        .groupBy('prod_cat')`? 
 
 ```{python}
 #| ExecuteTime: {end_time: '2022-01-26T10:58:35.782623Z', start_time: '2022-01-26T10:58:35.400724Z'}
@@ -774,7 +1004,19 @@ GROUP BY
     prod_brand
 """
 
+query = """
+    FROM products 
+    |> AGGREGATE 
+        round(avg(prod_value), 1) AS average,
+        min(prod_value) AS min GROUP BY prod_brand 
+"""
+
 spark.sql(query).show()
+```
+
+
+```{python}
+spark.sql(query).explain()
 ```
 
 # Window functions
@@ -791,6 +1033,7 @@ window = Window.partitionBy('prod_brand')
 
 print(type(window))
 ```
+
 Then, we can use `over` to aggregate on this window
 
 ```{python}
@@ -804,7 +1047,7 @@ avg = fn.avg('prod_value').over(window)
 )
 ```
 
-With SQL queries, using multiple windows is not a problem
+With SQL queries, using windows ?
 
 ```{python}
 query = """
@@ -819,15 +1062,28 @@ query = """
         w2 AS (PARTITION BY prod_cat)
 """
 
-spark.sql(query).show()
+
+query2 = """
+    FROM products |>
+    SELECT
+        *,  
+        ROUND(AVG(prod_value) OVER w1, 2)  AS avg_brand_value,
+        ROUND(AVG(prod_value) OVER w2, 1)  AS avg_prod_value
+        WINDOW 
+            w1 AS (PARTITION BY prod_brand),
+            w2 AS (PARTITION BY prod_cat)
+"""
+
+spark.sql(query2).show()
 ```
+
 
 ```{python}
 window2 = Window.partitionBy('prod_cat')
 
 avg2 = fn.avg('prod_value').over(window2)
 
-# Finally, we can it as a classical column
+# Finally, we can do it as a classical column
 ( 
     products
         .withColumn('avg_brand_value', fn.round(avg, 2))
@@ -934,23 +1190,29 @@ rank = fn.rank().over(window)
 dense_rank = fn.dense_rank().over(window)
 row_number = fn.row_number().over(window)
 
-contestants\
-    .withColumn('rank', rank)\
-    .withColumn('dense_rank', dense_rank)\
-    .withColumn('row_number', row_number)\
-    .orderBy('category', fn.col('points').desc())\
+(
+contestants
+    .withColumn('rank', rank)
+    .withColumn('dense_rank', dense_rank)
+    .withColumn('row_number', row_number)
+    .orderBy('category', fn.col('points').desc())
     .show()
+)
 ```
+
+
+::: {.content-hidden unless-profile="dorenavant"}
+
 
 # Connection to a database {{< fa database >}}
 
 The postgres server runs locally on my laptop, it is equiped with a
 number of training schemata, including `nycflights` (see [https://s-v-b.github.io/MA15Y030/schemas/schema-nycflights.html](https://s-v-b.github.io/MA15Y030/schemas/schema-nycflights.html))
 
-```{python}
+```{.python}
 df_flights = spark.read \
     .format("jdbc") \
-    .option("url", "jdbc:postgresql://localhost:5434/bd_2023-24") \
+    .option("url", "jdbc:postgresql://localhost:5436/bd_2023-24") \
     .option("dbschema", "nycflights")\
     .option("dbtable", "flights") \
     .option("user", "postgres") \
@@ -967,7 +1229,7 @@ We package the options in a dictionnary
 
 ```{python}
 db_con_settings = {
-    'url': "jdbc:postgresql://localhost:5434/bd_2023-24",
+    'url': "jdbc:postgresql://localhost:5436/bd_2023-24",
     'dbschema':  "nycflights",
     'user':  "postgres",
     'password':  "postgres",
@@ -1002,3 +1264,5 @@ for k, v in dic_df.items():
 ```
 
 We can now query the tables. 
+
+:::

@@ -12,17 +12,17 @@
   author: "Master I MIDS UParis Cité"
   date: "2026-01-26"
   path: /weeks/week-3.html
-  categories: [Dask, Arrow]
+  categories: [Spark, RDD]
 - title: "week 4"
   author: "Master I MIDS UParis Cité"
   date: "2026-02-02"
   path: /weeks/week-4.html
-  categories: [Spark RDD]
+  categories: [Spark SQL]
 - title: "Week 5"
   author: "Master I MIDS UParis Cité"
   date: "2026-02-09"
   path: /weeks/week-5.html
-  categories: [Spark SQL]
+  categories: [Spark SQL/Dask]
 - title: "Week 6"
   author: "Master I MIDS UParis Cité"
   date: "2026-02-16"

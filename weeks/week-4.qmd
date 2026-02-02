@@ -1,6 +1,6 @@
 ---
-title: "Weeks 4-5"
-subtitle: "Pandas/Dask"
+title: "Weeks 4"
+subtitle: "Saprk SQL"
 editor: source
 draft: false
 ---
@@ -8,7 +8,6 @@ draft: false
 
 ::: callout-important
 
-- {{< fa circle-exclamation >}} 1 session during Week 4/**0 session during Week 5**
 -   Monday 02 February 2026 Halle 166E 10h45-12h45
 -   {{< fa cal >}} [Calendar](https://edt.math.univ-paris-diderot.fr/#/parcours/mathinfo/m1)
 
@@ -17,9 +16,8 @@ draft: false
 
 ## Lecture : slides
 
-- {{< fa display >}} [Spark low level APIs: RDD](/core/slides/slides03_sparkrdd.html){target="_blank"} 
-<!-- - {{< fa display >}} [Spark high level APIs: SQL](/core/slides/slides04_sparkl.html){target="_blank"}
- -->
+- {{< fa display >}} [Spark high level APIs: SQL](/core/slides/slides04_sparkl.html){target="_blank"} 
+
 We may come back to several parts of 
 
 - {{< fa display >}} [Python Data Science Stack](/core/slides/slides02_python_ds_stack.html){target="_blank"} 
@@ -30,15 +28,11 @@ We may come back to several parts of
 
 We shall spend most of the lectures on 
 
-- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook05_sparkrdd.ipynb" download>Jupyter notebook V : Spark RDD</a> 
-- {{< fa globe >}} [html: Spark RDD](/core/notebooks/notebook05_sparkrdd.html)  
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook06_sparksql.ipynb" download>Jupyter notebook V : Spark RDD</a> 
+- {{< fa globe >}} [html: Spark SQL](/core/notebooks/notebook06_sparksql.html)  
 <!-- - {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook06_sparksql.ipynb" download>Jupyter notebook VI : Spark SQL</a> 
 - {{< fa globe >}} [html: Spark SQL](/core/notebooks/notebook06_sparksql.html)   -->
 
-
-and possibly compare with:  
-
-[Dask Tutorial](https://tutorial.dask.org)
 
 
 

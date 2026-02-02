@@ -1,7 +1,11 @@
 ---
 title: "Spark SQL"
 engine: jupyter
-date: "2025-01-17 (updated: `r Sys.Date()`)"
+date: "2026-01-31 (updated: `r Sys.Date()`)"
+
+resources:
+  - "/core/notebooks.tips.csv"
+
 
 execute: 
   eval: true
@@ -23,25 +27,26 @@ execute:
 
 [Official documentation](https://spark.apache.org/docs/latest/sql-programming-guide.html)
 
+[Novelties in  Spark 4.0](https://www.databricks.com/blog/introducing-apache-spark-40)
 
-
+[Novelties in Spark 4.1](https://www.databricks.com/blog/introducing-apache-sparkr-41)
 
 ## Overview
 
-- `Spark SQL` is a library included in `Spark` since version 1.3
+- `Spark SQL` is a library included in `Spark` since version 1.3 (March 2015)
 
-- `Spark Dataframes` was introduced with version 
+- `Spark Dataframes` was introduced with version 1.3
 
 - It provides an *easier interface to process tabular data*
 
-- Instead of `RDD`s, we deal with `DataFrame`s
+- Instead of `RDD`s, we deal with `DataFrame`s (inspired by Pandas and R, thus by R)
 
 - Since `Spark` 1.6, there is also the concept of `Dataset`s, but only for `Scala` and `Java`
 
+- As of January 2026, we are working with  Spark 4.x ($\texttt{x} \geq 1$)
 
 
-
-## `SparkContext` and `SparkSession`
+## `SparkContext`, `SparkSession`,
 
 - Before `Spark 2`, there was only `SparkContext` and `SQLContext`
 
@@ -51,7 +56,7 @@ execute:
 
 - With `Spark 2` came the `SparkSession` class
 
-- `SparkSession` is the .stress[*global entry-point*] for everything `Spark`-related
+- `SparkSession` is the *global entry-point* for everything `Spark`-related
 
 ::: {.notes}
 
@@ -112,9 +117,9 @@ spark = (
 
 - The main entity of `Spark SQL` is the `DataFrame`
 
-- A DataFrame is actually an `RDD` of `Row`s with a *schema*
+- A DataFrame is actually an `RDD` of `Row`s with a common *schema*
 
-- A schema gives the **names of the columns** and their **types**
+- A schema gives the **names of the columns** and their **types** and ...
 
 - `Row` is a class representing a row of the `DataFrame`.
 
@@ -123,7 +128,9 @@ spark = (
 
 ::: {.notes}
 
-Row-oriented or column-oriented?
+Row-oriented or column-oriented? 
+
+The answer is not one-line. It depends on perspective: API/Type/Caching. 
 
 :::
 
@@ -152,13 +159,13 @@ df.show()
 
 ::: {.notes}
 
-Relate `Row` to named tuple or dictionary 
+Relate `Row` to named tuple or dictionary. 
 
 What does `.show()` ?
 
 :::
 
-
+[See Pyspark user's guide](https://spark.apache.org/docs/latest/api/python/user_guide/index.html)
 
 ## `DataFrame`
 
@@ -190,8 +197,9 @@ df.rdd.getNumPartitions()
   - a `pandas.DataFrame` object
   - a local python list
   - an RDD
+  - ... many other sources
 
-- Full documentation can be found in the [[API docs]](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.SparkSession.createDataFrame)
+- Full documentation can be found in the [API docs](https://spark.apache.org/docs/latest/sql-data-sources.html)
 
 
 
@@ -253,7 +261,7 @@ df.show()
 
 - In all previous examples, the schema was *inferred*
 
-- The schema of a `DataFrame` is represented by the class `types.StructType` [[API doc]](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.types.StructType)
+- The schema of a `DataFrame` is represented by the class `types.StructType` [[API doc]](https://spark.apache.org/docs/latest/api/python/user_guide/touroftypes.html)
 
 - When creating a `DataFrame`, the schema can be either **inferred** or **defined by the user**
 
@@ -310,7 +318,7 @@ df.show()
 - `...`
   
   
-The full list of types can be found in [[API doc]](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#module-pyspark.sql.types)
+The full list of types can be found in [[API doc]](https://spark.apache.org/docs/latest/api/python/user_guide/touroftypes.html)
 
 
 ::: {.notes}
@@ -342,6 +350,8 @@ The full list of types can be found in [[API doc]](https://spark.apache.org/docs
 
   - And you can create your own connector for `Spark` (in `Scala`)
 
+  - [Novelties in Spark 4]()
+
 
 ## Reading data from sources
 
@@ -359,12 +369,15 @@ spark.read.{source}(path)
 
   - `Amazon S3`: `s3://path/to/file`
 
-
+  - ...
 
 ## Reading from a `CSV` file
 
 ```{python}
-path_to_csv = "../../../../Downloads/tips.csv"
+from pathlib import Path
+path_to_csv = Path("../notebooks/fruits.csv")
+path_to_csv.exists()
+path_to_csv = 'file://' + str(path_to_csv.absolute())
 df = spark.read.csv(path_to_csv)
 ```
 
@@ -382,13 +395,15 @@ df = (
 ```{python}
 my_csv_options = {
   'header': True,
-  'sep': ';',
+  'sep': ',',
+  'inferSchema': True
 }
 
 df = (
   spark
     .read
-    .csv(path_to_csv, **my_csv_options)
+    .csv(path_to_csv, 
+         **my_csv_options)
 )
 ```
 
@@ -416,7 +431,7 @@ Some important options of the `CSV` reader are listed here:
 | `dateFormat` | A string representing the format of the date columns |
 
 
-The full list of options can be found in the [API Docs](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html#pyspark.sql.DataFrameReader.csv)
+The full list of options can be found in the [API Docs](https://spark.apache.org/docs/latest/api/python/user_guide/loadandbehold.html#Reading-Data)
 
 ---
 
@@ -424,8 +439,8 @@ The full list of options can be found in the [API Docs](http://spark.apache.org/
 
 ```{.python}
 ## JSON file
-df = spark.read.json("/path/to/file.json")
-df = spark.read.format("json").load("/path/to/file.json")
+df = spark.read.json("file://path/to/file.json")
+df = spark.read.format("json").load("file://path/to/file.json")
 ```
 
 ```{.python}
@@ -453,6 +468,10 @@ df = spark.read.format("orc").load("hdfs://path/to/file.orc")
 - This operation can be **very heavy**. When available, specific connectors should be used
 
 - Specific connectors are often provided by **third-party libraries**
+
+[SQL Data Sources JDBC](https://spark.apache.org/docs/latest/sql-data-sources-jdbc.html)
+
+[]()
 
 ---
 
@@ -1668,7 +1687,7 @@ The query goes through the following **exectution stages**:
 
 ::: {.aside}
 
-[https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql.html](https://jaceklaskowski.gitbooks.io/mastering-spark-sql/spark-sql.html)]
+[https://books.japila.pl/spark-sql-internals/](https://books.japila.pl/spark-sql-internals/)
 
 :::
 

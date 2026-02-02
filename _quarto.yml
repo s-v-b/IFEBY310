@@ -5,10 +5,10 @@ project:
     - "weeks/"
     - "core/notebooks/"
     - "core/ipynb/"
+    - "core/projects/"
     - "!core/labs/"
     - "!core/slides/"
     - "!core/labs-solutions/"
-    - "!core/projects/"
     - "!core/technos/"
   output-dir: _site
 

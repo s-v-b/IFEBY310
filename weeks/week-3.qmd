@@ -1,6 +1,6 @@
 ---
 title: "Week 3"
-subtitle: "Pandas/Dask"
+subtitle: "Spark/Core/RDD"
 editor: source
 draft: false
 ---
@@ -17,7 +17,7 @@ draft: false
 
 ## Lecture : slides
 
-- {{< fa display >}}  [Dask](/core/slides/slides09_dask.html){target="_blank"}
+- {{< fa display >}}  [Spark RDD](/core/slides/slides03_sparkrdd.html){target="_blank"}
 
 
 We shall briefly come back to several parts of 
