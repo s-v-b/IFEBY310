@@ -17,6 +17,15 @@ The notebook is organized in the following way:
 - Advanced `JSON` readers and writers for Spark dataframes
 
 
+::: {.callout-warning}
+
+This notebook is not exhaustive. It does not address several aspects of JSON management in Spark. Spark is not only able to read from and write to JSON files, it also offers tools to manage JSON strings inline (query and construction).  
+
+[See Documentation on SQL functions](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/functions.html)
+
+:::
+
+
 ## Serialization and deserialization of built-in types
 
 ```{python}
@@ -87,7 +96,7 @@ What happens if we feed `json.dumps()` with a `datatime` object?
 ## Serialization and deserialization of custom objects
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T14:29:27.733203Z', start_time: '2020-03-17T14:29:27.718399Z'}
+#| label: user-def-class-User
 class User(object):
     """Custom User Class
     """
@@ -117,9 +126,40 @@ class User(object):
 
 Brush up your dunder/magic methods, for example in *Fluent Python* by Ramalho (Chapter I: *The Python data model*, Section *Overview of Special Methods*)
 
-:::
+See also package `dataclasses`
+
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T14:29:27.733203Z', start_time: '2020-03-17T14:29:27.718399Z'}
+#| label: use-dataclass-deco
+#| eval: true
+
+from dataclasses import dataclass
+
+@dataclass
+class User2:
+    name: str 
+    age: int
+    active: bool
+    balance: float 
+    other_names: str
+    friends: list
+    spouse: str
+
+nobody = User2(
+    name="Doe", 
+    age=21, 
+    active=True,
+    balance= 2.5, 
+    other_names="Roy Bean", 
+    friends=["Joe", "Jack", "William", "Averell"], 
+    spouse="Calamity Jane"
+)
+
+nobody
+```
+
+:::
+
+```{python}
 new_user = User(
     name = "Foo Bar",
     age = 78,
@@ -157,7 +197,7 @@ type that is a built-in type. We can conveniently define a method `convert_to_di
 that returns a dictionary representation of our object. `json.dumps()` 
 takes in a optional argument, `default`, which specifies a function to be called if the object is not serializable. This function returns a JSON encodable version of the object.
 
-Recall that class `obj` has a dunder attribute `__dict__` that provides a basis for obtaining a dictionary with the attributes of any object:
+Recall that class `obj` has a `dunder` attribute `__dict__` that provides a basis for obtaining a dictionary with the attributes of any object:
 
 ```{python}
 new_user.__dict__
@@ -165,7 +205,6 @@ new_user.__dict__
 
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T14:29:52.854067Z', start_time: '2020-03-17T14:29:52.847015Z'}
 def obj_to_dict(obj):
     """Converts an object to a dictionary representation of the object including 
     meta-data information about the object's module and class name.
@@ -190,7 +229,6 @@ def obj_to_dict(obj):
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T14:29:52.854067Z', start_time: '2020-03-17T14:29:52.847015Z'}
 obj_to_dict(new_user)
 ```
 
@@ -213,18 +251,27 @@ Obviously this fails if one of the attributes is not `JSON` serializable
 :::
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T14:29:53.566068Z', start_time: '2020-03-17T14:29:53.560201Z'}
+#| scrolled: true
 print(json.dumps(new_user, default=obj_to_dict, indent=4, sort_keys=True))
 ```
 
 Now, if we want to decode (deserialiaze) a custom object, and create the correct object type, we need a function that does the inverse of `obj_to_dict`, since `json.loads` simply returns a `dict`:
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T14:29:54.413286Z', start_time: '2020-03-17T14:29:54.408660Z'}
 #| scrolled: true
 user_data = json.loads(json.dumps(new_user, default=obj_to_dict))
 print(user_data)
 ```
+
+It also works for sequences of objects!
+
+```{python}
+#| scrolled: true
+users_data = json.loads(json.dumps([new_user, nobody], default=obj_to_dict))
+
+print(users_data)
+```
+
 
 ::: {.callout-note}
 
@@ -233,7 +280,6 @@ We need `json.loads()` to reconstruct a `User` object from this dictionary: `jso
 :::
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T14:29:55.257839Z', start_time: '2020-03-17T14:29:55.253496Z'}
 def dict_to_obj(input_dict):
     """Converts a dictionary representation of an object to an instance of the object.
 
@@ -260,27 +306,21 @@ def dict_to_obj(input_dict):
 This function does the following: 
 
 - Extract the class name from the dictionary under the key `__class__`
-
 - Extract the module name from the dictionary under the key `__module__`
-
 - Imports the module and get the class
-
 - Instantiate the class by giving to the class constructor all the instance arguments through dictionary unpacking
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T14:29:57.102787Z', start_time: '2020-03-17T14:29:57.097553Z'}
 obj_data = json.dumps(new_user, default=obj_to_dict)
 new_object = json.loads(obj_data, object_hook=dict_to_obj)
 new_object
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T14:29:57.944835Z', start_time: '2020-03-17T14:29:57.939581Z'}
 type(new_object)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T14:29:58.679143Z', start_time: '2020-03-17T14:29:58.673617Z'}
 #| scrolled: true
 new_object.age
 ```
@@ -296,11 +336,15 @@ Remember that some dunder members of the object are not callable.
 :::
 
 ```{python}
-[dude for dude in dir(new_object) if dude.startswith('__') and callable(getattr(new_object, dude))]
+[dude for dude in dir(new_object) 
+          if dude.startswith('__') and 
+             callable(getattr(new_object, dude))]
 ```
 
 ```{python}
-[dude for dude in dir(new_object) if dude.startswith('__') and not callable(getattr(new_object, dude))]
+[dude for dude in dir(new_object) 
+          if dude.startswith('__') and 
+             not callable(getattr(new_object, dude))]
 ```
 
 ```{python}
@@ -309,54 +353,13 @@ new_object.__getattribute__('age')
 getattr(new_object, 'age')
 ```
 
-::: {.callout-note}
 
-Class `User` could have been implemented as a `dataclass`
-
-:::
-
-```{python}
-from dataclasses import dataclass
-
-@dataclass
-class UserBis(object):
-    """Custom User Class
-    """
-    name: str 
-    age: int
-    active: bool
-    balance: float
-    other_names: list[str]
-    friends: list[str]
-    spouse: str
-```
-
-::: {.callout-note}
-
-`@dataclass`  is a *decorator*.  Have a look at the chapter on decorators in [Fluent Python] by Ramalho
-
-
-:::
-
-```{python}
-other_user = UserBis(**(new_user.__dict__))
-```
-
-```{python}
-repr(other_user)
-```
-
-
-
-```{python}
-{dude for dude in dir(other_user) if dude.startswith('__')} -  {dude for dude in dir(new_user) if dude.startswith('__')}
-```
 
 ::: {.callout-note}
 
 Have a look at [`dataclasses` documentation](https://docs.python.org/3/library/dataclasses.html). 
 
-See also [Chapter 5: Data class builders]() in [Fluent Python]()
+See also [Chapter 5: Data class builders](https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/ch05.html) in [Fluent Python](https://www.fluentpython.com)
 
 :::
 
@@ -367,11 +370,11 @@ First, we download the data if it's not there yet
 
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T16:19:34.238130Z', start_time: '2020-03-17T16:19:34.163729Z'}
 import requests, zipfile, io
 from pathlib import Path
 
 path = Path('drug-enforcement.json.zip')
+
 if not path.exists():
     url = "https://s-v-b.github.io/IFEBY310/data/drug-enforcement.json.zip"
     r = requests.get(url)
@@ -386,13 +389,13 @@ if not path.exists():
 ## Reading a `JSON` dataset with `Spark`
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:13:47.583384Z', start_time: '2020-03-17T17:13:43.123090Z'}
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as fn
 from pyspark.sql.functions import col
 
-spark = (SparkSession
+spark = (
+    SparkSession
     .builder
     .appName("Spark JSON")
     .getOrCreate()
@@ -402,14 +405,12 @@ sc = spark._sc
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:13:47.590453Z', start_time: '2020-03-17T17:13:47.585590Z'}
 filename = "drug-enforcement.json"
 ```
 
 First, lets look at the data. It's a large set of JSON records about drugs enforcement.
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:13:48.148481Z', start_time: '2020-03-17T17:13:47.594201Z'}
 #| scrolled: true
 !head -n 100 drug-enforcement.json
 ```
@@ -418,15 +419,22 @@ First, lets look at the data. It's a large set of JSON records about drugs enfor
 
 We need to tell spark that rows span on several lines with the `multLine` option
 
+See [Reading from JSON files in Spark documentation](https://spark.apache.org/docs/latest/sql-data-sources-json.html)
+
 :::
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:13:52.259661Z', start_time: '2020-03-17T17:13:48.152192Z'}
-df = spark.read.json(filename, multiLine=True)
+import os 
+
+df = (
+    spark
+        .read
+        .json('file://' + os.path.abspath(filename), 
+               multiLine=True)
+)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:13:52.294898Z', start_time: '2020-03-17T17:13:52.261550Z'}
 df.printSchema()
 ```
 
@@ -437,7 +445,6 @@ In a less user-friendly format:
 :::
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:13:52.355556Z', start_time: '2020-03-17T17:13:52.297210Z'}
 df.schema
 ```
 
@@ -460,39 +467,37 @@ Modern column oriented file format like `parquet` also work with nested structur
 - First, there is a nested `opendfa` dictionary. Each element of the dictionary is an array
 - A first good idea is to **"flatten" the schema of the DataFrame**, so that there are no nested types any  more.
 
-## Flattening the schema
+# Flattening a hierarchical schema
 
 All the columns in the *nested* structure `openfda` are put up in the schema. These columns nested in the `openfda` are as follows:
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:14:00.472548Z', start_time: '2020-03-17T17:14:00.352058Z'}
-df.select('openfda.*').columns
+(
+    df
+        .select('openfda.*')
+        .columns
+)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:14:01.904242Z', start_time: '2020-03-17T17:14:00.646360Z'}
 #| scrolled: true
-df.select("openfda.*").head(2)
+df.select("openfda.*").show(2)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:14:02.230811Z', start_time: '2020-03-17T17:14:01.906641Z'}
 for c in df.select("openfda.*").columns:
     df = df.withColumn("openfda_" + c, col("openfda." + c))
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:14:07.644985Z', start_time: '2020-03-17T17:14:07.501380Z'}
 df = df.select([c for c in df.columns if c != "openfda"])
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:14:09.871658Z', start_time: '2020-03-17T17:14:09.865537Z'}
 df.printSchema()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:14:19.204515Z', start_time: '2020-03-17T17:14:18.651165Z'}
 df.head(2)
 ```
 
@@ -540,7 +545,7 @@ This function definition is from `copilot` under the following prompt:
 :::
 
 ```{python}
-df = spark.read.json(filename, multiLine=True)
+df = spark.read.json('file://' + os.path.abspath(filename), multiLine=True)
 
 df_flat = flatten_schema(df)
 
@@ -550,7 +555,7 @@ df_flat.printSchema()
 
 
 ```{python}
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DateType
 
 messy_schema = StructType([
     StructField("id", IntegerType()),
@@ -596,20 +601,18 @@ Fix this
 
 
 
-## Missing data
+# Missing data
 
 A strategy can be to remove rows with missing data. 
 `dropna()` has several options, explained below.
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:17.413952Z', start_time: '2020-03-17T17:41:16.898211Z'}
 df.dropna().count()
 ```
 
 If we remove all lines with at least one missing value, we end up with an empty dataframe !
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:17.895108Z', start_time: '2020-03-17T17:41:17.416108Z'}
 df.dropna(how='all').count()
 ```
 
@@ -622,28 +625,23 @@ df.dropna(how='all').count()
 - `subset`: accepts a list of column names. When a subset is present, N/A values will only be checked against the columns whose names are provided.
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:17.901172Z', start_time: '2020-03-17T17:41:17.897860Z'}
 n_columns = len(df.columns)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:18.415066Z', start_time: '2020-03-17T17:41:17.904093Z'}
 df.dropna(thresh=n_columns).count()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:18.931320Z', start_time: '2020-03-17T17:41:18.417317Z'}
 #| scrolled: true
 df.dropna(thresh=n_columns-1).count()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:19.439726Z', start_time: '2020-03-17T17:41:18.934217Z'}
 df.dropna(thresh=n_columns-10).count()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:19.752318Z', start_time: '2020-03-17T17:41:19.441809Z'}
 df = df.dropna(subset=['postal_code', 'city', 'country', 'address_1'])
 df.count()
 ```
@@ -651,7 +649,6 @@ df.count()
 But before this, let's count the number of missing value for each column
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:20.424178Z', start_time: '2020-03-17T17:41:19.754255Z'}
 # For each column we create a new column containing 1 if the value is null and 0 otherwise.
 # We need to bast Boolean to Int so that we can use fn.sum after
 for c in df.columns:
@@ -661,12 +658,10 @@ for c in df.columns:
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:20.925299Z', start_time: '2020-03-17T17:41:20.426204Z'}
 df.head()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:22.053794Z', start_time: '2020-03-17T17:41:20.927796Z'}
 # Get the list of _isnull columns
 isnull_columns = [c for c in df.columns if c.endswith("_isnull")]
 
@@ -688,7 +683,6 @@ Most of the `openfda*` columns are also almost always empty.
 We can keep only the columns with no missing values
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:24.802336Z', start_time: '2020-03-17T17:41:24.797411Z'}
 # This line can seem complicated, run pieces of each to understand
 kept_columns = list(
     missing_values.columns[(missing_values.iloc[0] == 0).values]
@@ -696,31 +690,26 @@ kept_columns = list(
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:27.488388Z', start_time: '2020-03-17T17:41:27.398503Z'}
 df_kept = df.select(kept_columns)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:27.948018Z', start_time: '2020-03-17T17:41:27.539797Z'}
 df_kept.head(2)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:41:41.419929Z', start_time: '2020-03-17T17:41:41.413784Z'}
 df_kept.printSchema()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:43:23.207185Z', start_time: '2020-03-17T17:43:22.829140Z'}
 df_kept.count()
 ```
 
-## Filtering by string values 
+# Filtering by string values 
 
 Cases from South San Francisco
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:43:54.396689Z', start_time: '2020-03-17T17:43:53.465012Z'}
 df.filter(df.city == "South San Francisco")\
     .toPandas()
 ```
@@ -754,25 +743,22 @@ Aside from filtering strings by a perfect match, there are plenty of other power
 You can try some of these to understand
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:48:19.328007Z', start_time: '2020-03-17T17:48:18.572570Z'}
 df.filter(df.city.contains('San Francisco'))\
     .toPandas()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:48:10.490019Z', start_time: '2020-03-17T17:48:09.784496Z'}
 (
     df.filter(df.city.isin('San Francisco', 'Los Angeles'))
       .toPandas()
 )
 ```
 
-## Filtering by Date Values
+# Filtering by Date Values
 
 In addition to filtering by strings, we can also filter by columns where the values are stored as dates or datetimes (or strings that can be inferred as dates). Perhaps the most useful way to filter dates is by using the `between()` method, which allows us to find results within a certain date range. Here we find all the results which were reported in the years 2013 and 2014:
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-03-17T17:50:34.344304Z', start_time: '2020-03-17T17:50:33.638867Z'}
 ( 
     df
         .filter(df.city == "South San Francisco")
@@ -852,7 +838,7 @@ options = {
 df = (
     spark.read
         .options(**options)
-        .json(filename, ze_schema)
+        .json('file:///' + os.path.abspath(filename), ze_schema)
 )
 ```
 
@@ -869,7 +855,7 @@ df.filter(df.city == "South San Francisco")
 ```
 
 
-## Handling complex types 
+# Handling complex types 
 
 Bridging the gap between tabular and semi-structured data. 
 
@@ -893,13 +879,13 @@ The problems we faced after loading data from the json file pertained to the fac
 
 
 ```{python}
-df = spark.read.json(filename, multiLine=True)
+df = spark.read.json('file:///' + os.path.abspath(filename), multiLine=True)
 ```
 
 The dataframe schema `df.schema` which is of type `StructType` (defined in `pyspark.sql.types`) can be converted to a json string which in turn can be converted into a Python dictionary. 
 
 ```{python}
-df = spark.read.json(filename, multiLine=True)
+df = spark.read.json('file:///' + os.path.abspath(filename), multiLine=True)
 
 sj = json.loads(df.schema.json())
 ```

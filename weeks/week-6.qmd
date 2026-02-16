@@ -21,10 +21,11 @@ draft: false
 ## Lecture : slides
 
 
-- {{< fa display >}} [Spark high level APIs: SQL](/core/slides/slides04_sparkl.html){target="_blank"}
+- {{< fa display >}} [JSON](/core/slides/slides05_json-format.html){target="_blank"}
 
 We may come back to several parts of 
 
+- {{< fa display >}} [Spark SQL](/core/slides/slides04_sparkl.html){target="_blank"} 
 - {{< fa display >}} [Spark low level APIs: RDD](/core/slides/slides03_sparkrdd.html){target="_blank"} 
 - {{< fa display >}} [Python Data Science Stack](/core/slides/slides02_python_ds_stack.html){target="_blank"} 
 - {{< fa display >}} [Dask](/core/slides/slides09_dask.html){target="_blank"}
@@ -34,6 +35,7 @@ We may come back to several parts of
 
 We shall spend most of the lectures on 
 
+- {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook06_sparksql.ipynb" download>Jupyter notebook VI : Spark SQL</a> 
 - {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook06_sparksql.ipynb" download>Jupyter notebook VI : Spark SQL</a> 
 - {{< fa globe >}} [html: Spark SQL](/core/notebooks/notebook06_sparksql.html)  
 - {{< fa brands python >}} <a href="https://s-v-b.github.io/IFEBY310/core/ipynb/notebook07_json-format.ipynb" download>Jupyter notebook VII : JSON</a> 

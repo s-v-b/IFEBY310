@@ -1,0 +1,1445 @@
+---
+title: Using with `pyspark` for data preprocessing
+jupyter: python3
+execute: 
+  eval: true
+---
+
+We want to use pyspark to preprocess a potentially huge dataset used for web-marketing.
+
+## Data description
+
+The data is a `parquet` file which contains a dataframe with 8 columns:
+
+- `xid`: unique user id
+- `action`: type of action. 'C' is a click, 'O' or 'VSL' is a web-display
+- `date`: date of the action
+- `website_id`: unique id of the website
+- `url`: url of the webpage
+- `category_id`: id of the display
+- `zipcode`: postal zipcode of the user
+- `device`: type of device used by the user
+
+::: {.callout-note title="Questions"}
+
+- According to you, how was that data asset collected?
+- In the likely context (digital marketing), what is a *web display*?
+- What are the different values of `category_id`? What are their respective frequencies?
+- What are the 10 most frequent websites (according to the data)?
+- What are the different devices used across the dataset? 
+- When was the dataset collected?
+:::
+
+
+## Q1. Some statistics / computations
+
+Using `pyspark.sql`,  we want to do the following things:
+
+1. Compute the total number of unique users
+2. Construct a column containing the total number of actions per user
+3. Construct a column containing the number of days since the last action of the user
+4. Construct a column containing the number of actions of each user for each modality of device 
+
+## Q2. Binary classification
+
+Then, we want to construct a *classifier* to predict the click on  category 1204 (`category_id`). 
+
+Here is an agenda for this:
+
+1. Construction of a *feature matrix* where each line gathers information about a single  user (identified by `xid`).
+2. In the *feature matrix*, we need to keep only the rows (users) reporting exposition to the display in category 1204
+3. Using this *training* dataset, *train* a *binary classifier*, and evaluate the classifier using a *precision/recall* curve computed on test data.
+
+::: {.callout-note}
+
+Viewing this dataset and the task at hand, we might be tempted to just filter rows satisfying condition `category_id=='1204'`, and 
+fit a model that predict `action` given the other columns (or given some of them). This is not what the agenda suggests. Why?  
+
+
+:::
+
+
+# Download/read the data and have a look
+
+## Round up the usual suspects
+
+```{python}
+import os
+import sys
+import requests, zipfile, io
+
+from time import perf_counter
+# from pathlib import Path
+```
+
+```{python}
+os.environ['PYSPARK_PYTHON'] = sys.executable
+os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
+```
+
+
+```{python}
+from pyspark import SparkConf, SparkContext
+from pyspark.sql import SparkSession
+```
+
+
+```{python}
+from pyspark.sql import Window
+import pyspark.sql.functions as func
+from pyspark.sql.types import *
+from pyspark.sql.functions import col, lit
+```
+
+
+```{python}
+from functools import reduce
+import numpy as np
+from scipy.sparse import csr_matrix
+```
+
+The next imports are used at the end of the notebook. 
+
+```{python}
+from sklearn.preprocessing import MaxAbsScaler
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+import matplotlib.pyplot as plt
+from sklearn.metrics import precision_recall_curve, f1_score
+```
+
+## Set up the spark client
+
+::: {.callout-note}
+
+As we are not interacting with a preexisting cluster, we actually need to start a server and a client. So far, we used the `local` mode. Even with a laptop/desktop, several modes are available
+
+- `local`
+- `standalone`
+- 
+
+:::
+
+
+::: {.callout-note}
+
+### Spark in standalone mode
+
+
+
+To launch spark in `standalone` mode, assuming the current working directory is `$SPARK_HOME` 
+
+Assume that `hadoop` is running. This can be checked by monitoring java processes running on the local machine 
+
+```{.jps}
+$ jps 
+30033 Jps
+>>> 18898 NodeManager
+>>> 17735 NameNode
+>>> 18216 SecondaryNameNode
+>>> 17965 DataNode
+>>> 18542 ResourceManager
+```
+`NameNode` `DataNode` and `SecondaryNameNode` have been launched by `start-dfs.sh`, while `NodeManager` and  `ResourceManager` have been 
+launched by `start-yarn`.
+
+We can monitor `NameNode` at `http://localhost:9870`
+
+Then we may launch a `master`  and a `worker` process. 
+
+```{.bash}
+$ ./sbin/start-master.sh --ip localhost
+>>> starting org.apache.spark.deploy.master.Master, logging to ...
+$ ./sbin/start-worker.sh spark://localhost:7077
+```
+
+We may now launch the  instance of `SparkSession`, setting explicitly the `master` node and the port to communicate with the `master`.
+
+
+```{python}
+#| eval: false
+
+# spark =  (
+#     SparkSession.builder 
+#             .appName("Spark webdata") 
+#             .master("spark://localhost:7077") 
+#             .config("spark.driver.memory", "16G") 
+#             .config("spark.driver.maxResultSize", "0") 
+#             .getOrCreate()
+# )
+```
+
+
+SparkUI should be reachable at `localhost:4040`. 
+
+The `master` can be monitored at `localhost:8080`
+
+:::
+
+
+
+```{python}
+#| eval: true
+
+spark = (
+    SparkSession
+        .builder
+        .appName("Taming Webdata")
+        .config("spark.driver.memory", "16G") 
+        .config("spark.driver.maxResultSize", "0")
+        .getOrCreate()
+)
+
+sc = spark._sc
+```
+
+### Prepare for `checkpointing`
+
+::: {.callout-note}
+
+Handling this modest dataset will put our Spark server under strain. To make our life easier, we should prepare for caching and 
+checkpointing.
+
+:::
+
+```{python}
+(
+    spark.sparkContext.setCheckpointDir("file://"+ os.getcwd())
+)
+```
+
+
+### Downloading dataset (if needed)
+
+
+```{python}
+path = './data/webdata.parquet'
+```
+
+```{python}
+#| eval: false
+
+if not os.path.exists(path):
+    url = "https://s-v-b.github.io/IFEBY310/data/webdata.parquet.zip"
+    r = requests.get(url)
+    z = zipfile.ZipFile(io.BytesIO(r.content))
+    z.extractall(path='./data/')
+```
+
+The default file system used by the spark object may be the local filesystem or hdfs. We explicitly ask for using the local filesystem.
+
+
+```{python}
+#| scrolled: true
+file_path = 'file://' + os.path.abspath(path)
+
+df = spark.read.parquet(file_path)
+```
+
+
+::: {.callout-note}
+
+Have a look at [Spark UI](http://localhost:4040/jobs/). Did the preceding chunk trigger an action? If yes, how many stages? tasks? 
+
+Try 
+
+```{.python}
+!tree -L 1 data/webdata.parquet/ 
+```
+
+to check  wether the parquet file is partitioned. Check wether the different partitions are read concurrently. 
+
+:::
+
+# Let  us select the correct users and build a training dataset
+
+We construct a ETL (Extract Transform Load) process on this data using the `pyspark.sql` API.
+
+
+::: {.callout-note}
+
+ETL (Extract Transform Load) and ELT (Extract Load Transform). Check that you understand these two acronyms. What do they stand for? What is the difference?
+
+:::
+
+## Extraction
+
+Here *extraction* is just about reading the data.
+
+::: {.callout-note}
+
+What else coud *extraction* be about?
+
+:::
+
+```{python}
+#| scrolled: true
+df.show(n=3)
+```
+
+::: {.callout-note}
+
+How many stages and tasks did action `show()` triggered? 
+
+Look at the plan details in tab SQL/Dataframe on [Spark UI](http://localhost:4040/jobs/). What are the different steps? Is there any shuffle?
+
+:::
+
+Much of our work will consist in computing `window` functions over windows defined by a partition over `xid` (users). This comes from 
+the fact that most of our features will be built by inspecting the events related with a given user (`xid`). 
+Computing window functions over partitions is likely to trigger shuffles. 
+
+
+```{python}
+df = df.repartition(20, 'xid')
+```
+
+
+::: {.callout-note}
+
+Is repartition an action or a transformation?
+
+:::
+
+
+```{python}
+df.cache()
+```
+
+
+```{python}
+
+# sc.setCheckpointDir("file://" + os.path.abspath(os.path.curdir))   
+
+df.checkpoint()
+```
+
+
+::: {.callout-note}
+
+### Questions
+
+- What does `checkpoint()` actually do? 
+- Is it different from `df.cache()`?
+- How many jobs did `checkpoint()` trigger?
+- Did `checkpoint()` trigger writing in checkpoint directory?
+
+:::
+
+The dataframe `df` has been repartitioned in 20 partitions along column `xid`.
+Let us check that the number of distinct values of `xid` is balanced. 
+
+
+```{python}
+#|  eval: false
+df.explain()
+```
+
+
+::: {.callout-note}
+
+Evaluate  the preceding chunk.  How do the final and initial compare? Identify shuffle stages?
+
+:::
+
+
+
+```{python}
+def foo(x): yield len(set(x))
+
+n_xid_per_partitions = ( 
+    df.rdd
+    .map(lambda x : x.xid)
+    .mapPartitions(foo)
+    .collect()
+)
+```
+
+::: {.callout-note}
+
+`yield` is a Python keyword that indicates that `foo` is a function *generator*. Try `foo(range(10))` and then `next(foo(range(10)))` and finally
+
+```{.python}
+bar = foo(range(10))
+next(bar)
+next(bar)
+```
+
+to guess what this means.
+
+- Read the documentation of `mapPartitions()`
+- Read chapter `Iterators, Generators, ...`  in [Fluent Python](https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/)
+
+
+:::
+
+
+In the sequel, we may query dataframe `df`  using `spark.sql()`. To make this possible, we have to register the dataframe as  a temporary view.
+
+```{python}
+#| label: create-webdata-view
+#| 
+spark.sql("SHOW TABLES ;").show()
+
+df.createOrReplaceTempView("webdata")
+
+spark.sql("SHOW TABLES ;").show()
+```
+
+```{python}
+spark.sql("DESC EXTENDED webdata ;").show()
+```
+
+
+::: {.callout-note}
+
+When handling managed tables (not views) and combined with `ANALYZE TABLE`, `DESC EXTENDED` can provide precious information on column statistics. 
+
+:::
+
+
+## Transformation of the data
+
+At this step we compute a lot of extra things from the data. The aim is to build *features* that describe users. The features will eventually be used by ML (Machine Learning) methods.
+
+Each feature is built by feeding a *transformer* with a dataframe. Each  transformer returns a dataframe with one more column.
+
+The prospective list of transformers is:
+
+```
+hour_transformer
+weekday_transformer
+n_actions_per_category_id_transformer
+n_days_since_last_action_transformer
+n_days_since_last_event_transformer
+n_events_per_category_id_transformer
+n_events_per_device_transformer
+n_events_per_hour_transformer
+n_events_per_website_id_transformer
+n_events_per_weekday_transformer
+n_unique_day_transformer
+n_unique_device_transformer
+n_unique_hour_transformer
+```
+
+Each transformer (besides `hour_transformer` and `weekday_transformer`)is defined by 
+
+- a `Window` object (optional, some are used several times), 
+- a column function that defines the added column, and 
+- a name  for the added column. 
+
+The transformer is named after the name  of the added column. All transformers have the same signature. 
+
+```{python}
+def hour_transformer(df):
+    hour = func.hour(col('date'))
+    df = df.withColumn('hour', hour)
+    return df
+
+def weekday_transformer(df):
+    weekday = func.date_format(col('date'), 'EEEE')
+    df = df.withColumn('weekday', weekday)
+    return df
+```
+
+
+```{python}
+def n_events_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    n_events = func.count(col('action')).over(xid_partition)
+    
+    df = df.withColumn('n_events', n_events)
+
+    return df
+
+def n_events_per_action_transformer(df):
+    xid_action_partition = Window.partitionBy('xid', 'action')
+    n_events_per_action = func.count(col('action')).over(xid_action_partition)
+
+    df = df.withColumn('n_events_per_action', n_events_per_action)
+    
+    return df
+
+
+
+def n_events_per_hour_transformer(df):
+    xid_hour_partition = Window.partitionBy('xid', 'hour')
+    n_events_per_hour = (
+        func.count(col('action')).over(xid_hour_partition)
+    )
+    df = df.withColumn('n_events_per_hour', n_events_per_hour)
+    return df
+
+def n_events_per_weekday_transformer(df):
+    xid_weekday_partition = Window.partitionBy('xid', 'weekday')
+    n_events_per_weekday = func.count(col('action')).over(xid_weekday_partition)
+    df = df.withColumn('n_events_per_weekday', n_events_per_weekday)
+    return df
+
+def n_days_since_last_event_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    max_date = func.max(col('date')).over(xid_partition)
+    n_days_since_last_event = func.datediff(func.current_date(), max_date)
+    df = df.withColumn('n_days_since_last_event',
+                       n_days_since_last_event + lit(0.1))
+    return df
+
+def n_days_since_last_action_transformer(df):
+    xid_partition_action = Window.partitionBy('xid', 'action')
+    max_date = func.max(col('date')).over(xid_partition_action)
+    n_days_since_last_action = func.datediff(func.current_date(),
+                                                        max_date)
+    df = df.withColumn('n_days_since_last_action',
+                       n_days_since_last_action + lit(0.1))
+    return df
+
+def n_unique_day_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    dayofyear = func.dayofyear(col('date'))
+    rank_day = func.dense_rank().over(xid_partition.orderBy(dayofyear))
+    n_unique_day = func.last(rank_day).over(xid_partition)
+    df = df.withColumn('n_unique_day', n_unique_day)
+    return df
+
+def n_unique_hour_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    rank_hour = func.dense_rank().over(xid_partition.orderBy('hour'))
+    n_unique_hour = func.last(rank_hour).over(xid_partition)
+    df = df.withColumn('n_unique_hour', n_unique_hour)
+    return df
+
+def n_events_per_device_transformer(df):
+    xid_device_partition = Window.partitionBy('xid', 'device')
+    n_events_per_device = func.count(func.col('device')) \
+        .over(xid_device_partition)
+    df = df.withColumn('n_events_per_device', n_events_per_device)
+    return df
+
+def n_unique_device_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    rank_device = func.dense_rank().over(xid_partition.orderBy('device'))
+    n_unique_device = func.last(rank_device).over(xid_partition)
+    df = df.withColumn('n_device', n_unique_device)
+    return df
+
+def n_actions_per_category_id_transformer(df):
+    xid_category_id_partition = Window.partitionBy('xid', 'category_id',
+                                                   'action')
+    n_actions_per_category_id = func.count(func.col('action')) \
+        .over(xid_category_id_partition)
+    df = df.withColumn('n_actions_per_category_id', n_actions_per_category_id)
+    return df
+
+def n_unique_category_id_transformer(df):
+    xid_partition = Window.partitionBy('xid')
+    rank_category_id = func.dense_rank().over(xid_partition\
+                                              .orderBy('category_id'))
+    n_unique_category_id = func.last(rank_category_id).over(xid_partition)
+    df = df.withColumn('n_unique_category_id', n_unique_category_id)
+    return df
+
+def n_events_per_category_id_transformer(df):
+    xid_category_id_partition = Window.partitionBy('xid', 'category_id')
+    n_events_per_category_id = func.count(func.col('action')) \
+        .over(xid_category_id_partition)
+    df = df.withColumn('n_events_per_category_id', n_events_per_category_id)
+    return df
+
+def n_events_per_website_id_transformer(df):
+    xid_website_id_partition = Window.partitionBy('xid', 'website_id')
+    n_events_per_website_id = func.count(col('action'))\
+        .over(xid_website_id_partition)
+    df = df.withColumn('n_events_per_website_id', n_events_per_website_id)
+    return df
+```
+
+```{python}
+transformers = [
+    hour_transformer,
+    weekday_transformer,
+    n_events_per_hour_transformer,
+    n_events_per_weekday_transformer,
+    n_days_since_last_event_transformer,
+    n_days_since_last_action_transformer,
+    n_unique_day_transformer,
+    n_unique_hour_transformer,
+    n_events_per_device_transformer,
+    n_unique_device_transformer,
+    n_actions_per_category_id_transformer,
+    n_events_per_category_id_transformer,
+    n_events_per_website_id_transformer,
+]
+```
+
+::: {.callout-warning}
+
+### DRY compliance
+
+The code above looks repetitive. Its structure is not transparent. 
+
+The code does not emphasize the fact that transformers can not be applied in an arbitrary order (columns `hour`  and `weekday` should be built before columns `n_events_per_hour`, `n_events_per_weekday`).
+
+Is it possible to take advantage of the fact that the dataframe can be partitioned according to `xid` in advance? 
+
+:::
+
+
+As a warmup  we first apply the two transformers that do not involve computing window functions. 
+
+```{python}
+df = hour_transformer(df)
+df = weekday_transformer(df)
+```
+
+```{python}
+df.cache()
+```
+
+```{python}
+df.checkpoint()
+```
+
+```{python}
+df.explain()
+```
+
+::: {.callout-note}
+
+- Did the two tranformations trigger jobs executions?
+- Did `cache()` trigger a job?  (check on Spark UI)
+- Did `checkpoint()` trigger  job(s)? If yes, could you spot shuffle stages?
+
+:::
+
+
+Next we run the transformers that only involve `partitionBy('xid')`.
+
+```{python}
+df = n_events_transformer(df)
+df = n_days_since_last_event_transformer(df)
+df = n_unique_day_transformer(df)
+df = n_unique_hour_transformer(df)
+df = n_unique_device_transformer(df)
+df = n_unique_category_id_transformer(df)
+```
+
+Run `df.explain()`. 
+
+
+::: {.callout-note}
+
+:::
+
+
+```{python}
+df.checkpoint()
+```
+
+::: {.callout-note}
+
+
+- How many jobs were triggered by `checkpoint()` ?
+- How many stages ? tasks ?
+- Could you spot shuffle reads and writes ?
+- Have a look at detailed plans on Spark UI.  
+
+:::
+
+
+We run now the other transformers. These ones rely on refined partitions.
+
+```{python}
+df = n_events_per_action_transformer(df)
+
+df.checkpoint()
+```
+
+::: {.callout-note}
+
+- How many jobs were triggered by `checkpoint()` ?
+- How many stages ? tasks ?
+- Could you spot shuffle reads and writes ?
+- Have a look at detailed plans on Spark UI.  
+
+:::
+
+
+
+```{python}
+df = n_events_per_hour_transformer(df)
+df = n_events_per_weekday_transformer(df)
+df = n_days_since_last_event_transformer(df)
+df = n_days_since_last_action_transformer(df)
+df = n_events_per_device_transformer(df)
+df = n_actions_per_category_id_transformer(df)
+df = n_events_per_category_id_transformer(df)
+df = n_events_per_website_id_transformer(df)
+```
+
+```{python}
+df.checkpoint()
+
+df.explain(mode="codegen")
+```
+
+
+
+::: {.callout-note}
+
+Again: 
+
+- How many jobs were triggered by `checkpoint()`?
+- How many stages? How many tasks?
+- Could you spot shuffle reads and writes?
+- Have a look at detailed plans on Spark UI.  
+- In the physical plan, can you spot `WholeStageCodegen`? What is it for?
+- In the physical plan, can you spot `ShuffleQueryStage`? What does it stand for?
+   
+:::
+
+```{python}
+N = 10000
+```
+
+```{python}
+sample_df = (
+    df
+      .sample(withReplacement=False, fraction=.05)
+      .repartition('xid')
+)
+```
+
+```{python}
+sample_df.count()
+```
+
+```{python}
+for transformer in transformers:
+    sample_df = transformer(sample_df)
+
+# sample_df.show(n=1)
+```
+
+```{python}
+sample_df.printSchema()
+```
+
+::: {.callout-note}
+
+Call  `explain(mode="codegen")` on the resulting dataframe. 
+
+:::
+
+```{python}
+#| eval: false
+sample_df.explain(mode="codegen")
+```
+
+
+
+
+
+```{python}
+#| label: apply-transformers
+#| 
+
+
+t0 =  perf_counter()
+for transformer in transformers:
+    df = transformer(df)
+
+( 
+    df
+        .sample(withReplacement=False, fraction=.05)
+        .show(n=1)
+)
+
+print(perf_counter() -t0)
+```
+
+```{python}
+# df = df.repartition(20, 'xid')
+df.checkpoint()
+```
+
+```{python}
+df.write.parquet('file:///home/boucheron/Documents/IFEBY310/core/notebooks/data/webdata-transformed.parquet', mode='overwrite')
+```
+
+```{python}
+!ls -l data/webdata-transformed.parquet/
+```
+
+::: {.callout-note}
+
+If things go wrong with the next message 
+
+In Spark SQL `local` mode, the heap size is controlled by the driver JVM, because in local mode the driver and executor run in the same process. 
+
+We can increase Java heap by increasing the driver memory.
+
+```{.python}
+spark = (
+    SparkSession
+        .builder
+        .appName("Taming Webdata")
+        .config("spark.driver.memory", "16G") # The default is 5G
+        .config("spark.driver.maxResultSize", "0")
+        .getOrCreate()
+)
+
+```
+
+:::
+```{python}
+#| scrolled: true
+sorted(df.columns)
+```
+
+
+::: {.callout-note}
+
+- How DRY-compliant is this code? 
+- Should we dry it?
+- Why would we dry it (readability, maintainability, ...)? 
+- Rewrite the construction of the transformed dataframe using SQL. Compare the (final) execution plans. 
+
+:::
+
+
+## Load step
+
+Here, we use all the previous computations (saved in the columns of the dataframe) to compute aggregated informations about each user.
+
+
+```{python}
+#| eval: false
+df = spark.read.parquet(
+    'file:///home/boucheron/Documents/IFEBY310/core/notebooks/data/webdata-transformed.parquet')
+```
+
+::: {.callout-note}
+
+All functions in the next chunk have one argument: a dataframe with schema
+
+```
+root
+ |-- xid: string (nullable = true)
+ |-- action: string (nullable = true)
+ |-- date: timestamp (nullable = true)
+ |-- website_id: string (nullable = true)
+ |-- url: string (nullable = true)
+ |-- category_id: float (nullable = true)
+ |-- zipcode: string (nullable = true)
+ |-- device: string (nullable = true)
+ |-- hour: integer (nullable = true)
+ |-- weekday: string (nullable = true)
+ |-- n_events_per_hour: long (nullable = false)
+ |-- n_events_per_weekday: long (nullable = false)
+ |-- n_days_since_last_event: double (nullable = true)
+ |-- n_days_since_last_action: double (nullable = true)
+ |-- n_unique_day: integer (nullable = true)
+ |-- n_unique_hour: integer (nullable = true)
+ |-- n_events_per_device: long (nullable = false)
+ |-- n_device: integer (nullable = true)
+ |-- n_actions_per_category_id: long (nullable = false)
+ |-- n_events_per_category_id: long (nullable = false)
+ |-- n_events_per_website_id: long (nullable = false)
+```
+
+All functions in the next chunk return a dataframe with three columns: 
+`xid`, `value`, `feature_name`.  Column `value` is obtained by renaming 
+a column `n_...` (built by one of the previous transformers). Column `feature_name`   
+
+
+:::
+
+```{python}
+def n_events_per_hour_loader(df):
+    csr = df\
+        .select('xid', 'hour', 'n_events_per_hour')\
+        .withColumnRenamed('n_events_per_hour', 'value')\
+        .distinct()     # action
+    feature_name = func.concat(lit('n_events_per_hour#'), col('hour'))
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('hour')
+    return csr
+
+def n_events_per_website_id_loader(df):
+    csr = df.select('xid', 'website_id', 'n_events_per_website_id')\
+        .withColumnRenamed('n_events_per_website_id', 'value')\
+        .distinct()
+    feature_name = func.concat(lit('n_events_per_website_id#'),
+                               col('website_id'))
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('website_id')
+    return csr
+
+
+
+def n_events_per_weekday_loader(df):
+    csr = df\
+        .select('xid', 'weekday', 'n_events_per_weekday')\
+        .withColumnRenamed('n_events_per_weekday', 'value')\
+        .distinct()
+    feature_name = func.concat(lit('n_events_per_weekday#'), col('weekday'))
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('weekday')
+    return csr
+
+def n_days_since_last_event_loader(df):
+    csr = df.select('xid',  'n_days_since_last_event')\
+        .withColumnRenamed('n_days_since_last_event#', 'value')\
+        .distinct()
+    feature_name = lit('n_days_since_last_event')
+    csr = csr\
+        .withColumn('feature_name', feature_name)
+    return csr
+
+def n_days_since_last_action_loader(df):
+    csr = df.select('xid', 'action', 'n_days_since_last_action')\
+        .withColumnRenamed('n_days_since_last_action', 'value')\
+        .distinct()
+    feature_name = func.concat(lit('n_days_since_last_action#'), col('action'))
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('action')
+    return csr
+
+def n_unique_day_loader(df):
+    csr = df.select('xid', 'n_unique_day')\
+        .withColumnRenamed('n_unique_day', 'value')\
+        .distinct()
+    feature_name = lit('n_unique_day')
+    csr = csr\
+        .withColumn('feature_name', feature_name)
+    return csr
+
+def n_unique_hour_loader(df):
+    csr = df.select('xid', 'n_unique_hour')\
+        .withColumnRenamed('n_unique_hour', 'value')\
+        .distinct()
+    feature_name = lit('n_unique_hour')
+    csr = csr\
+        .withColumn('feature_name', feature_name)
+    return csr
+
+def n_events_per_device_loader(df):
+    csr = df\
+        .select('xid', 'device', 'n_events_per_device')\
+        .withColumnRenamed('n_events_per_device', 'value')\
+        .distinct()
+    feature_name = func.concat(lit('n_events_per_device#'), col('device'))
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('device')
+    return csr
+
+def n_unique_device_loader(df):
+    csr = df.select('xid', 'n_device')\
+        .withColumnRenamed('n_device', 'value')\
+        .distinct()
+    feature_name = lit('n_device')
+    csr = csr\
+        .withColumn('feature_name', feature_name)
+    return csr
+
+def n_events_per_category_id_loader(df):
+    csr = df.select('xid', 'category_id', 'n_events_per_category_id')\
+        .withColumnRenamed('n_events_per_category_id', 'value')\
+        .distinct()
+    feature_name = func.concat(lit('n_events_per_category_id#'),
+                               col('category_id'))
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('category_id')
+    return csr
+
+def n_actions_per_category_id_loader(df):
+    csr = df.select('xid', 'category_id', 'action', 'n_actions_per_category_id')\
+        .withColumnRenamed('n_actions_per_category_id', 'value')\
+        .distinct()
+    feature_name = func.concat(lit('n_actions_per_category_id#'),
+                               col('action'), lit('#'), 
+                               col('category_id'))
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('category_id')\
+        .drop('action')
+    return csr
+
+def n_events_per_website_id_loader(df):
+    csr = df.select('xid', 'website_id', 'n_events_per_website_id')\
+        .withColumnRenamed('n_events_per_website_id', 'value')\
+        .distinct()
+    feature_name = func.concat(lit('n_events_per_website_id#'),
+                               col('website_id'))
+    csr = csr\
+        .withColumn('feature_name', feature_name)\
+        .drop('website_id')
+    return csr
+```
+
+
+::: {.callout-note}
+
+- How DRY-compliant is this code (bis)? 
+- Should we dry it?
+- Why would we dry it (readability, maintainability, ...)? 
+
+
+:::
+
+```{python}
+(
+    df
+        .select('xid', 
+            'n_unique_day', 
+            'n_unique_hour', 
+            'n_days_since_last_event',
+            'n_device')
+        .distinct()
+        .unpivot(ids='xid', 
+                 values = ['n_unique_day', 
+                           'n_unique_hour', 
+                           'n_days_since_last_event', 
+                           'n_device'],
+                 variableColumnName='feature_name',
+                 valueColumnName='value')
+        .show(20)
+
+)
+```
+
+
+
+```{python}
+(
+
+)
+```
+
+
+```{python}
+loaders = [
+    n_events_per_hour_loader,
+    n_events_per_website_id_loader,
+    n_events_per_weekday_loader,
+    n_days_since_last_event_loader,
+    n_days_since_last_action_loader,
+    n_unique_day_loader,
+    n_unique_hour_loader,
+    n_events_per_device_loader,
+    n_unique_device_loader,
+    n_events_per_category_id_loader,
+    n_actions_per_category_id_loader,
+    n_events_per_website_id_loader,
+]
+```
+
+```{python}
+def union(df, other):
+    return df.union(other)
+```
+
+::: {.callout-caution title="About DataFrame.union()"}
+
+This method performs a SQL-style set union of the rows from both DataFrame objects, with no automatic deduplication of elements.
+
+Use the `distinct()` method to perform deduplication of rows.
+
+The method resolves columns by position (not by name), following the standard behavior in SQL.
+
+:::
+
+```{python}
+t0 = perf_counter()
+spam = [loader(df) for loader in loaders]
+perf_counter() - t0
+```
+
+```{python}
+spam[0].printSchema()
+```
+
+```{python}
+len(spam)
+```
+
+```{python}
+t0 = perf_counter()
+csr = reduce(
+    lambda df1, df2: df1.union(df2),
+    spam
+)
+
+csr.show(n=3)
+perf_counter() - t0
+```
+
+```{python}
+csr.columns
+```
+
+```{python}
+csr.show(5)
+```
+
+```{python}
+csr.rdd.getNumPartitions()
+```
+
+```{python}
+feature_name_partition = Window().orderBy('feature_name')
+
+fn_idx = (
+    csr
+        .select('feature_name')
+        .distinct()
+        .withColumn('col', func.row_number().over(feature_name_partition))
+)
+```
+
+```{python}
+fn_idx.cache()
+```
+
+```{python}
+csr = ( 
+    csr
+        .join(fn_idx, 'feature_name')
+)
+
+csr.show(10)
+```
+
+
+```{python}
+#| eval: false
+# Replace features names and xid by a unique number
+feature_name_partition = Window().orderBy('feature_name')
+col_idx = func.dense_rank().over(feature_name_partition)
+```
+
+```{python}
+xid_partition = Window().orderBy('xid')
+row_idx = func.dense_rank().over(xid_partition)
+```
+
+
+
+
+```{python}
+csr = (
+    csr
+#        .withColumn('col', col_idx)
+        .withColumn('row', row_idx)
+)
+```
+```{python}
+csr = csr.na.drop('any')
+```
+
+```{python}
+csr.show(n=5)
+```
+
+
+```{python}
+# Let's save the result of our hard work into a new parquet file (in the local filesystem)
+output_path = os.path.abspath('./data')
+output_file = 'file://' + output_path + '/' + 'csr.parquet'
+csr.write.parquet(output_file, mode='overwrite')
+```
+
+```{python}
+#| eval: false
+# Save  the result  to hdfs
+csr.write.parquet('csr.parquet', mode='overwrite')
+```
+
+# Preparation of the training dataset
+
+```{python}
+#| scrolled: true
+
+input_path = os.path.abspath('./data')
+csr_file = 'file://' + input_path + '/' + 'csr.parquet'
+
+df = spark.read.parquet(csr_file)
+df.head(n=5)
+```
+
+```{python}
+#| scrolled: true
+df.count()
+```
+
+```{python}
+#| scrolled: true
+# What are the features related to category_id 1204 ?
+features_names = \
+    df.select('feature_name')\
+    .distinct()\
+    .toPandas()['feature_name']
+```
+
+```{python}
+features_names
+```
+
+```{python}
+#| scrolled: true
+[feature_name for feature_name in features_names if '1204' in feature_name]
+```
+
+```{python}
+#| scrolled: true
+# Look for the xid that have at least one exposure to campaign 1204
+keep = func.when(
+    (col('feature_name') == 'n_actions_per_category_id#C#1204.0') |
+    (col('feature_name') == 'n_actions_per_category_id#O#1204.0'),
+    1).otherwise(0)
+df = df.withColumn('keep', keep)
+
+df.where(col('keep') > 0).count()
+```
+
+```{python}
+# Sum of the keeps :)
+xid_partition = Window.partitionBy('xid')
+sum_keep = func.sum(col('keep')).over(xid_partition)
+df = df.withColumn('sum_keep', sum_keep)
+```
+
+```{python}
+# Let's keep the xid exposed to 1204
+df = df.where(col('sum_keep') > 0)
+```
+
+```{python}
+df.count()
+```
+
+```{python}
+#| scrolled: true
+df.select('xid').distinct().count()
+```
+
+```{python}
+row_partition = Window().orderBy('row')
+col_partition = Window().orderBy('col')
+row_new = func.dense_rank().over(row_partition)
+col_new = func.dense_rank().over(col_partition)
+df = df.withColumn('row_new', row_new)
+df = df.withColumn('col_new', col_new)
+csr_data = df.select('row_new', 'col_new', 'value').toPandas()
+```
+
+```{python}
+#| scrolled: true
+csr_data.head()
+```
+
+```{python}
+#| scrolled: true
+features_names = (
+    df
+        .select('feature_name', 'col_new')
+        .distinct()
+)
+
+(
+    features_names
+        .where(col('feature_name') == 'n_actions_per_category_id#C#1204.0')
+        .head()
+)
+```
+
+```{python}
+(
+    features_names
+        .where(col('feature_name') == 'n_actions_per_category_id#O#1204.0')
+        .head()
+)
+```
+
+```{python}
+rows = csr_data['row_new'].values - 1
+cols = csr_data['col_new'].values - 1
+vals = csr_data['value'].values
+
+X_csr = csr_matrix((vals, (rows, cols)))
+```
+
+```{python}
+X_csr.shape
+```
+
+```{python}
+X_csr.shape, X_csr.nnz
+```
+
+```{python}
+X_csr.nnz / (X_csr.shape[0]* X_csr.shape[1])   # 0152347 * 92)
+```
+
+```{python}
+# The label vector. Let's make it dense, flat and binary
+y = np.array(X_csr[:, 1].todense()).ravel()
+y = np.array(y > 0, dtype=np.int64)
+```
+
+```{python}
+#| scrolled: true
+X_csr.shape
+```
+
+```{python}
+# We remove the second and fourth column. 
+# It actually contain the label we'll want to predict.
+kept_cols = list(range(X_csr.shape[1]))
+kept_cols.pop(1)
+kept_cols.pop(2)
+X = X_csr[:, kept_cols]
+```
+
+```{python}
+len(kept_cols)
+```
+
+```{python}
+X_csr.shape, X.shape
+```
+
+## Finally !!
+
+Wow ! That was a lot of work. Now we have a features matrix $X$ and a vector of labels $y$.
+
+```{python}
+#| scrolled: true
+X.indices
+```
+
+
+```{python}
+#| scrolled: true
+X.indptr
+```
+
+```{python}
+X.shape, X.nnz
+```
+
+```{python}
+y.shape, y.sum()
+```
+
+# Some learning for/from this data
+
+```{python}
+# Normalize the features
+X = MaxAbsScaler().fit_transform(X)
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=0.3)
+
+clf = LogisticRegression(
+    penalty='l2',
+    C=1e3,
+    solver='lbfgs',
+    class_weight='balanced'
+)
+
+clf.fit(X_train, y_train)
+```
+
+```{python}
+#| scrolled: true
+features_names = features_names.toPandas()['feature_name']
+```
+
+```{python}
+features_names[range(6)]
+```
+
+```{python}
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+
+```{python}
+plt.figure(figsize=(16, 5))
+plt.stem(clf.coef_[0]) # , use_line_collection=True)
+plt.title('Logistic regression coefficients', fontsize=18)
+```
+
+```{python}
+clf.coef_[0].shape[0]
+```
+
+```{python}
+len(features_names)
+```
+
+```{python}
+# We change the fontsize of minor ticks label
+_ = plt.xticks(np.arange(clf.coef_[0].shape[0]), features_names, 
+           rotation='vertical', fontsize=8)
+```
+
+```{python}
+_ = plt.yticks(fontsize=14)
+```
+
+```{python}
+from sklearn.metrics import precision_recall_curve, f1_score
+
+precision, recall, _ = precision_recall_curve(y_test, clf.predict_proba(X_test)[:, 1])
+    
+plt.figure(figsize=(8, 6))
+plt.plot(recall, precision, label='LR (F1=%.2f)' % f1_score(y_test, clf.predict(X_test)), lw=2)
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('Recall', fontsize=16)
+plt.ylabel('Precision', fontsize=16)
+plt.title('Precision/recall curve', fontsize=18)
+plt.legend(loc="upper right", fontsize=14)
+```
+
+# Analyse the tables 
+
+```{python}
+query = """
+    ANALYZE TABLE db_table 
+    COMPUTE STATISTICS
+    FOR COLUMNS xid
+"""
+```
+
+```{python}
+df.createOrReplaceTempView("db_table")
+```
+
+```{python}
+df.columns
+```
+
+```{python}
+spark.sql("cache table db_table").show()
+```
+
+```{python}
+spark.sql(query).show()
+```
+
+```{python}
+spark.sql("show tables").show()
+```
+
+
+```{python}
+spark.stop()
+```

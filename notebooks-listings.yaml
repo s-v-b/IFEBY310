@@ -39,21 +39,21 @@
   date: "2026-02-02"
   categories: [PySpark, Spark, SQL]
   href: '<a href="core/ipynb/notebook06_sparksql.ipynb" download="notebook06_sparksql.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
-- title: "Pandas on Spark and SparklyR"
+# - title: "Pandas on Spark and SparklyR"
 #  path: "core/notebooks/notebook06_sparksql.html"
-  date: "2026-02-09"
-  categories: [PySpark, Spark, Pandas, R]
+# date: "2026-02-09"
+# categories: [PySpark, Spark, Pandas, R]
 #  href: '<a href="core/ipynb/notebook02_numpy.ipynb" download="notebook06_sparksql.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "JSON format"
   path: "core/notebooks/notebook07_json-format.html"
-  date: "2026-03-02"
+  date: "2026-02-16"
   categories: [JSON, serialization]
   href: '<a href="core/ipynb/notebook07_json-format.ipynb" download="notebook07_json-format.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Web data"
   path: "core/notebooks/notebook08_webdata-II.html"
-  date: "2026-03-09"
+  date: "2026-02-09"
   categories: [Spark, Window functions, Feature engineering]
-  href: '<a href="core/ipynb/notebook08_webdata-II.ipynb" download="notebook08_webdata-II.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
+  href: '<a href="core/ipynb/notebook08_webdata-III.ipynb" download="notebook08_webdata-III.ipynb"> <i class="fa-solid fa-download"> </i> </a>'
 - title: "Spark again"
   date: "2026-03-16"
   categories: [Spark, tips]

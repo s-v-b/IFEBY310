@@ -22,12 +22,12 @@
   author: "Master I MIDS UParis Cité"
   date: "2026-02-09"
   path: /weeks/week-5.html
-  categories: [Spark SQL/Dask]
+  categories: [Spark SQL]
 - title: "Week 6"
   author: "Master I MIDS UParis Cité"
   date: "2026-02-16"
   path: /weeks/week-6.html
-  categories: [Json, serialization, Sparlyr, Pandas on Spark]
+  categories: [Json, serialization]
 - title: "Week 7"
   author: "Master I MIDS UParis Cité"
   date: "2026-02-23"
