@@ -58,7 +58,7 @@
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook06_sparksql.html</loc>
-    <lastmod>2026-02-02T08:55:34.373Z</lastmod>
+    <lastmod>2026-02-08T10:20:39.212Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook04_pandas_spark.html</loc>
@@ -118,7 +118,7 @@
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook07_json-format.html</loc>
-    <lastmod>2025-03-09T21:52:30.702Z</lastmod>
+    <lastmod>2026-02-16T08:53:58.206Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook08_webdata.html</loc>
@@ -170,7 +170,7 @@
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/weeks/week-6.html</loc>
-    <lastmod>2025-12-19T16:09:27.352Z</lastmod>
+    <lastmod>2026-02-16T08:58:02.390Z</lastmod>
   </url>
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/weeks/week-8.html</loc>
@@ -275,5 +275,9 @@
   <url>
     <loc>https://s-v-b.github.io/IFEBY310/core/projects/fake-report.html</loc>
     <lastmod>2026-01-29T16:29:15.039Z</lastmod>
+  </url>
+  <url>
+    <loc>https://s-v-b.github.io/IFEBY310/core/notebooks/notebook08_webdata-III.html</loc>
+    <lastmod>2026-02-14T15:53:19.909Z</lastmod>
   </url>
 </urlset>

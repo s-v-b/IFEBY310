@@ -533,7 +533,7 @@ window.Quarto = {
 </header>
 
 
-<div id="1c419e08" class="cell" data-execution_count="1">
+<div id="f50d782c" class="cell" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -566,16 +566,15 @@ window.Quarto = {
 <div class="cell-output cell-output-stderr">
 <pre><code>WARNING: Using incubator modules: jdk.incubator.vector
 Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
-26/02/02 10:04:31 WARN Utils: Your hostname, boucheron-Precision-5480, resolves to a loopback address: 127.0.1.1; using 172.23.32.10 instead (on interface eth0)
-26/02/02 10:04:31 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+26/02/08 11:21:30 WARN Utils: Your hostname, boucheron-Precision-5480, resolves to a loopback address: 127.0.1.1; using 192.168.0.36 instead (on interface wlp0s20f3)
+26/02/08 11:21:30 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
 Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-26/02/02 10:04:31 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-26/02/02 10:04:32 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.</code></pre>
+26/02/08 11:21:31 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</code></pre>
 </div>
 </div>
-<div id="78bae724" class="cell" data-execution_count="3">
+<div id="e5584f7f" class="cell" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Row</span>
@@ -589,13 +588,13 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 <pre><code>'John'</code></pre>
 </div>
 </div>
-<div id="e44e4bd3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:57.185741Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:57.155181Z&quot;}}" data-execution_count="4">
+<div id="92596efb" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.createDataFrame([row1, row2, row3])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="d6535775" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:59:13.491438Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:59:13.486119Z&quot;}}" data-execution_count="5">
+<div id="a7be5523" class="cell" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.printSchema()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -608,7 +607,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div>
 </div>
 <p>How does <code>printSchema</code> compare with Pandas <code>info()</code>?</p>
-<div id="714443c9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:59:17.760344Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:59:17.597166Z&quot;}}" data-execution_count="6">
+<div id="ff0307de" class="cell" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -628,7 +627,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div>
 </div>
 <p>How does <code>show</code> compare with Pandas <code>head()</code></p>
-<div id="207dd5ed" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:59:25.889372Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:59:25.866666Z&quot;}}" data-execution_count="7">
+<div id="e39fa553" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.rdd.toDebugString().decode(<span class="st">"utf-8"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -645,7 +644,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
  |   ParallelCollectionRDD[0] at readRDDFromFile at PythonRDD.scala:299 []</code></pre>
 </div>
 </div>
-<div id="dd9a55a0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:59:45.432264Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:59:45.426727Z&quot;}}" data-execution_count="8">
+<div id="0694433b" class="cell" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df.rdd.getNumPartitions()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -656,7 +655,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div>
 <section id="creating-dataframes" class="level2">
 <h2 class="anchored" data-anchor-id="creating-dataframes">Creating dataframes</h2>
-<div id="c8f9ecb5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:18.707591Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:18.220608Z&quot;}}" data-execution_count="9">
+<div id="999233a3" class="cell" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> [</span>
@@ -668,7 +667,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.createDataFrame(rows)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="c3734e63" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:18.707591Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:18.220608Z&quot;}}" data-execution_count="10">
+<div id="abf12f27" class="cell" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -684,7 +683,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </code></pre>
 </div>
 </div>
-<div id="01b7ebb1" class="cell" data-execution_count="11">
+<div id="769abf25" class="cell" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(Row)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -874,7 +873,7 @@ class Row(builtins.tuple)
 </code></pre>
 </div>
 </div>
-<div id="e5f77170" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:19.065539Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:18.710711Z&quot;}}" data-execution_count="12">
+<div id="5f8b9580" class="cell" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>column_names <span class="op">=</span> [<span class="st">"name"</span>, <span class="st">"age"</span>, <span class="st">"gender"</span>]</span>
@@ -902,7 +901,7 @@ class Row(builtins.tuple)
 </code></pre>
 </div>
 </div>
-<div id="7d8d9376" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:19.074335Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:19.068088Z&quot;}}" data-execution_count="13">
+<div id="45cb53fc" class="cell" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df.printSchema()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -915,7 +914,7 @@ class Row(builtins.tuple)
 </code></pre>
 </div>
 </div>
-<div id="ac88bb9b" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:19.840178Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:19.077057Z&quot;}}" data-execution_count="14">
+<div id="c726b760" class="cell" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sc = SparkContext(conf=conf)  # no need for Spark 3...</span></span>
@@ -944,7 +943,7 @@ class Row(builtins.tuple)
 <section id="schema" class="level2">
 <h2 class="anchored" data-anchor-id="schema">Schema</h2>
 <p>There is special type schemata. A object of class <code>StructType</code> is made of a list of objects of type <code>StructField</code>.</p>
-<div id="5a0f14c9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:19.850578Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:19.843835Z&quot;}}" data-execution_count="15">
+<div id="f76ba045" class="cell" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df.schema</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -954,7 +953,7 @@ class Row(builtins.tuple)
 </div>
 </div>
 <p>How does <code>df.schema</code> relate to <code>df.printSchema()</code>? Where would you use the outputs of <code>df.schema</code> and <code>df.printSchema()</code>.</p>
-<div id="290ca42f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:19.860631Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:19.854012Z&quot;}}" data-execution_count="16">
+<div id="c5a4b606" class="cell" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(df.schema)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -965,7 +964,7 @@ class Row(builtins.tuple)
 </div>
 <p>A object of type <code>StructField</code> has a <em>name</em> like <code>gender</code>, a PySpark <em>type</em> like <code>StringType()</code>, an d a boolean parameter.</p>
 <p>What does the boolean parameter stand for?</p>
-<div id="52919fd5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:20.199419Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:19.863528Z&quot;}}" data-execution_count="17">
+<div id="baea6d62" class="cell" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> <span class="op">*</span></span>
@@ -1005,7 +1004,7 @@ class Row(builtins.tuple)
 <li>An ad hoc API with methods for the DataFrame class.</li>
 <li>The possibility to post SQL queries (provided a temporary view has been created).</li>
 </ul>
-<div id="play-it-like-sql" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:20.882311Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:20.201993Z&quot;}}" data-execution_count="18">
+<div id="play-it-like-sql" class="cell" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>column_names <span class="op">=</span> [<span class="st">"name"</span>, <span class="st">"age"</span>, <span class="st">"gender"</span>]</span>
@@ -1101,7 +1100,7 @@ class Row(builtins.tuple)
 </div>
 <section id="select-projection-π" class="level2">
 <h2 class="anchored" data-anchor-id="select-projection-π"><code>SELECT</code> (projection <span class="math inline">\(π\)</span>)</h2>
-<div id="cd173ece" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:21.162623Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:20.884802Z&quot;}}" data-execution_count="21">
+<div id="4892b7a1" class="cell" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df.createOrReplaceTempView(<span class="st">"table"</span>)    </span>
@@ -1126,7 +1125,7 @@ class Row(builtins.tuple)
 </div>
 </div>
 <p>Using the API:</p>
-<div id="03d604b9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:21.388097Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:21.164840Z&quot;}}" data-execution_count="22">
+<div id="0f5310d0" class="cell" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>(</span>
@@ -1149,7 +1148,7 @@ class Row(builtins.tuple)
 </section>
 <section id="where-filter-selection-σ" class="level2">
 <h2 class="anchored" data-anchor-id="where-filter-selection-σ"><code>WHERE</code> (filter, selection, <span class="math inline">\(σ\)</span>)</h2>
-<div id="59b1c2b9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:21.704402Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:21.402155Z&quot;}}" data-execution_count="23">
+<div id="8a9d1a37" class="cell" data-execution_count="23">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>df.createOrReplaceTempView(<span class="st">"table"</span>)</span>
@@ -1166,7 +1165,7 @@ class Row(builtins.tuple)
 <span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM table </span></span>
 <span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="st">    |&gt; WHERE age &gt; 21 </span></span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a><span class="st">    |&gt; SELECT *   </span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a><span class="st">    |&gt; SELECT *  </span></span>
 <span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
 <span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>spark.sql(query).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1182,7 +1181,7 @@ class Row(builtins.tuple)
 </div>
 <p>Note that you can get rid of <code>|&gt; SELECT *</code></p>
 <p>Using the API</p>
-<div id="02fe0eec" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:21.924501Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:21.706741Z&quot;}}" data-execution_count="24">
+<div id="99f52cc0" class="cell" data-execution_count="24">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>( </span>
@@ -1202,7 +1201,7 @@ class Row(builtins.tuple)
 </div>
 <p>This implements <code>σ(df, "age &gt; 21")</code></p>
 <p>The <code>where()</code> method takes different types of inputs as argument: strings that can be interpreted as SQL conditions, but also boolean masks.</p>
-<div id="a0f7958f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:22.377417Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:21.926708Z&quot;}}" data-execution_count="25">
+<div id="fc932477" class="cell" data-execution_count="25">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively:</span></span>
@@ -1222,7 +1221,7 @@ class Row(builtins.tuple)
 </div>
 </div>
 <p>or</p>
-<div id="428f5b98" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:22.566385Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:22.380036Z&quot;}}" data-execution_count="26">
+<div id="b17c03b1" class="cell" data-execution_count="26">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>( </span>
@@ -1242,7 +1241,7 @@ class Row(builtins.tuple)
 </div>
 <p>Where (and how) is the boolean mask built?</p>
 <p>Method chaining allows to construct complex queries</p>
-<div id="a8734789" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:22.837136Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:22.569324Z&quot;}}" data-execution_count="27">
+<div id="b7fa7ac1" class="cell" data-execution_count="27">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>( </span>
@@ -1267,7 +1266,7 @@ class Row(builtins.tuple)
 </section>
 <section id="limit" class="level2">
 <h2 class="anchored" data-anchor-id="limit"><code>LIMIT</code></h2>
-<div id="6a001de2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:23.315363Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:22.842106Z&quot;}}" data-execution_count="28">
+<div id="d50ddfb6" class="cell" data-execution_count="28">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>df.createOrReplaceTempView(<span class="st">"table"</span>)</span>
@@ -1296,7 +1295,7 @@ class Row(builtins.tuple)
 </code></pre>
 </div>
 </div>
-<div id="38820586" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:23.522646Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:23.318694Z&quot;}}" data-execution_count="29">
+<div id="16289224" class="cell" data-execution_count="29">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df.limit(<span class="dv">1</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1310,7 +1309,7 @@ class Row(builtins.tuple)
 </code></pre>
 </div>
 </div>
-<div id="bb3b4ffe" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:23.778517Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:23.525281Z&quot;}}" data-execution_count="30">
+<div id="19601cae" class="cell" data-execution_count="30">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>df.select(<span class="st">"*"</span>).limit(<span class="dv">1</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1327,7 +1326,7 @@ class Row(builtins.tuple)
 </section>
 <section id="order-by" class="level2">
 <h2 class="anchored" data-anchor-id="order-by"><code>ORDER BY</code></h2>
-<div id="2bfe3de5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:24.190838Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:23.781166Z&quot;}}" data-execution_count="31">
+<div id="0f94fa01" class="cell" data-execution_count="31">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>df.createOrReplaceTempView(<span class="st">"table"</span>)</span>
@@ -1359,7 +1358,7 @@ class Row(builtins.tuple)
 </div>
 </div>
 <p>With the API</p>
-<div id="ce3887ad" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:24.368069Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:24.193899Z&quot;}}" data-execution_count="32">
+<div id="24c784fd" class="cell" data-execution_count="32">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>df.orderBy(df.name.asc()).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1377,7 +1376,7 @@ class Row(builtins.tuple)
 </section>
 <section id="alias-rename" class="level2">
 <h2 class="anchored" data-anchor-id="alias-rename"><code>ALIAS</code> (rename)</h2>
-<div id="6a772c69" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:24.643668Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:24.370758Z&quot;}}" data-execution_count="33">
+<div id="569c25a3" class="cell" data-execution_count="33">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>df.createOrReplaceTempView(<span class="st">"table"</span>)</span>
@@ -1406,7 +1405,7 @@ class Row(builtins.tuple)
 </code></pre>
 </div>
 </div>
-<div id="de602a7f" class="cell" data-execution_count="34">
+<div id="eb84d24c" class="cell" data-execution_count="34">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(df.age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1415,7 +1414,7 @@ class Row(builtins.tuple)
 <pre><code>pyspark.sql.classic.column.Column</code></pre>
 </div>
 </div>
-<div id="55055600" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:24.858104Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:24.646119Z&quot;}}" data-execution_count="35">
+<div id="02bfef9a" class="cell" data-execution_count="35">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>(</span>
@@ -1439,7 +1438,7 @@ class Row(builtins.tuple)
 </section>
 <section id="cast" class="level2">
 <h2 class="anchored" data-anchor-id="cast"><code>CAST</code></h2>
-<div id="335c47fc" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:25.072286Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:24.860474Z&quot;}}" data-execution_count="36">
+<div id="7498f253" class="cell" data-execution_count="36">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>df.createOrReplaceTempView(<span class="st">"table"</span>)</span>
@@ -1471,7 +1470,7 @@ class Row(builtins.tuple)
 </code></pre>
 </div>
 </div>
-<div id="4c398802" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:25.384433Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:25.074523Z&quot;}}" data-execution_count="37">
+<div id="9d2fc902" class="cell" data-execution_count="37">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>(</span>
@@ -1494,7 +1493,7 @@ class Row(builtins.tuple)
 </code></pre>
 </div>
 </div>
-<div id="7ba0a8eb" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:25.648155Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:25.386952Z&quot;}}" data-execution_count="38">
+<div id="ac019935" class="cell" data-execution_count="38">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>new_age_col <span class="op">=</span> df.age.cast(<span class="st">"float"</span>).alias(<span class="st">"age_f"</span>)</span>
@@ -1504,7 +1503,7 @@ class Row(builtins.tuple)
 <pre><code>(pyspark.sql.classic.column.Column, pyspark.sql.classic.column.Column)</code></pre>
 </div>
 </div>
-<div id="a7326c78" class="cell" data-execution_count="39">
+<div id="6ca308d3" class="cell" data-execution_count="39">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>df.select(df.name, new_age_col).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1522,7 +1521,7 @@ class Row(builtins.tuple)
 </section>
 <section id="adding-new-columns" class="level2">
 <h2 class="anchored" data-anchor-id="adding-new-columns">Adding new columns</h2>
-<div id="7515e340" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:25.931495Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:25.651283Z&quot;}}" data-execution_count="40">
+<div id="4cad8b11" class="cell" data-execution_count="40">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>df.createOrReplaceTempView(<span class="st">"table"</span>)</span>
@@ -1546,7 +1545,7 @@ class Row(builtins.tuple)
 </code></pre>
 </div>
 </div>
-<div id="410b44e7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:26.195480Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:25.933620Z&quot;}}" data-execution_count="41">
+<div id="360e0f0f" class="cell" data-execution_count="41">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>( </span>
@@ -1565,7 +1564,7 @@ class Row(builtins.tuple)
 </code></pre>
 </div>
 </div>
-<div id="e864f8ed" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:26.422122Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:26.197759Z&quot;}}" data-execution_count="42">
+<div id="b77f36e0" class="cell" data-execution_count="42">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>(</span>
@@ -1585,7 +1584,7 @@ class Row(builtins.tuple)
 </code></pre>
 </div>
 </div>
-<div id="6e7f3236" class="cell" data-execution_count="43">
+<div id="b46cfa40" class="cell" data-execution_count="43">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
@@ -1595,10 +1594,10 @@ class Row(builtins.tuple)
 <span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(hui)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="43">
-<pre><code>'2026-02-02'</code></pre>
+<pre><code>'2026-02-08'</code></pre>
 </div>
 </div>
-<div id="239f8993" class="cell" data-execution_count="44">
+<div id="60ca8672" class="cell" data-execution_count="44">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>( </span>
@@ -1623,7 +1622,7 @@ class Row(builtins.tuple)
 <h1>Column functions</h1>
 <section id="numeric-functions-examples" class="level2">
 <h2 class="anchored" data-anchor-id="numeric-functions-examples">Numeric functions examples</h2>
-<div id="f24e3a23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:26.748718Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:26.425451Z&quot;}}" data-execution_count="45">
+<div id="7932a76c" class="cell" data-execution_count="45">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
@@ -1661,7 +1660,7 @@ class Row(builtins.tuple)
 </section>
 <section id="string-functions-examples" class="level2">
 <h2 class="anchored" data-anchor-id="string-functions-examples">String functions examples</h2>
-<div id="45ef8dd4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:27.055563Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:26.751235Z&quot;}}" data-execution_count="46">
+<div id="20fef6b0" class="cell" data-execution_count="46">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
@@ -1690,7 +1689,7 @@ class Row(builtins.tuple)
 </code></pre>
 </div>
 </div>
-<div id="9d7e1924" class="cell" data-execution_count="47">
+<div id="deb5ceb2" class="cell" data-execution_count="47">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>( </span>
@@ -1710,7 +1709,7 @@ class Row(builtins.tuple)
 </div>
 </div>
 <p>As an SQL query</p>
-<div id="385dadcb" class="cell" data-execution_count="48">
+<div id="71693ad2" class="cell" data-execution_count="48">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>df.createOrReplaceTempView(<span class="st">"table"</span>)</span>
@@ -1736,7 +1735,7 @@ class Row(builtins.tuple)
 </section>
 <section id="date-functions-examples" class="level2">
 <h2 class="anchored" data-anchor-id="date-functions-examples">Date functions examples</h2>
-<div id="1ebf240d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:27.373396Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:27.057938Z&quot;}}" data-execution_count="49">
+<div id="a67692a6" class="cell" data-execution_count="49">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
@@ -1768,7 +1767,7 @@ class Row(builtins.tuple)
 </div>
 </div>
 <p>Note that <code>days_between</code> is an instance of <code>Column</code>, the Spark type for columns in Spark dataframes.</p>
-<div id="4fa0faf4" class="cell" data-execution_count="50">
+<div id="1f1b0ec5" class="cell" data-execution_count="50">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %%</span></span>
@@ -1779,7 +1778,7 @@ class Row(builtins.tuple)
 </div>
 </div>
 <p>Recall the datetime calculus available in Database systems and in many programming framework.</p>
-<div id="564395ca" class="cell" data-execution_count="51">
+<div id="21c30ed0" class="cell" data-execution_count="51">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(date(<span class="dv">2015</span>, <span class="dv">1</span>, <span class="dv">1</span>) <span class="op">-</span> date(<span class="dv">2015</span>, <span class="dv">1</span>, <span class="dv">15</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1788,7 +1787,7 @@ class Row(builtins.tuple)
 <pre><code>'-14 days, 0:00:00'</code></pre>
 </div>
 </div>
-<div id="ef2ce29e" class="cell" data-execution_count="52">
+<div id="fe70e792" class="cell" data-execution_count="52">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> timedelta</span>
@@ -1802,7 +1801,7 @@ class Row(builtins.tuple)
 </section>
 <section id="conditional-transformations" class="level2">
 <h2 class="anchored" data-anchor-id="conditional-transformations">Conditional transformations</h2>
-<div id="8659e39a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:27.630822Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:27.375855Z&quot;}}" data-execution_count="53">
+<div id="a0556ee5" class="cell" data-execution_count="53">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.createDataFrame([</span>
@@ -1813,7 +1812,7 @@ class Row(builtins.tuple)
 <span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a>], [<span class="st">"name"</span>, <span class="st">"age"</span>, <span class="st">"gender"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="c35d404b" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:27.630822Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:27.375855Z&quot;}}" data-execution_count="54">
+<div id="fdc87065" class="cell" data-execution_count="54">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb105"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>supervisor <span class="op">=</span> ( </span>
@@ -1828,10 +1827,14 @@ class Row(builtins.tuple)
 <pre><code>(pyspark.sql.classic.column.Column, function)</code></pre>
 </div>
 </div>
-<div id="3d67e9de" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:27.630822Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:27.375855Z&quot;}}" data-execution_count="55">
+<div id="ce077719" class="cell" data-execution_count="55">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb107"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>df.withColumn(<span class="st">"supervisor"</span>, supervisor).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb107"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>    df</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>        .withColumn(<span class="st">"supervisor"</span>, supervisor)</span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>        .show()</span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+------+---+----------+----------+
@@ -1848,7 +1851,7 @@ class Row(builtins.tuple)
 </section>
 <section id="user-defined-functions" class="level2">
 <h2 class="anchored" data-anchor-id="user-defined-functions">User-defined functions</h2>
-<div id="8ed72d93" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:28.037428Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:27.633093Z&quot;}}" data-execution_count="56">
+<div id="abc5188f" class="cell" data-execution_count="56">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb109"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
@@ -1883,6 +1886,9 @@ class Row(builtins.tuple)
 <span id="cb109-30"><a href="#cb109-30" aria-hidden="true" tabindex="-1"></a>        .show()</span>
 <span id="cb109-31"><a href="#cb109-31" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-stderr">
+<pre><code>[Stage 101:&gt;                                                        (0 + 1) / 1]                                                                                </code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>+-----+------+------------------+------------------+
 |first|second|               udf|           udf_too|
@@ -1904,13 +1910,13 @@ class Row(builtins.tuple)
 </div>
 <div class="callout-body-container callout-body">
 <p>The user-defined-function (UDF) can also be used on SQL queries provided the decorated function is registered.</p>
-<div id="c38f52ba" class="cell" data-execution_count="57">
+<div id="f948508c" class="cell" data-execution_count="57">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb111"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>df.createOrReplaceTempView(<span class="st">"table"</span>)</span>
-<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>spark.udf.register(<span class="st">"the_same_func"</span>, the_same_func)  <span class="co"># the_same_func from @udf above</span></span>
-<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"SELECT *, the_same_func(first, second) AS udf FROM table"</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>df.createOrReplaceTempView(<span class="st">"table"</span>)</span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>spark.udf.register(<span class="st">"the_same_func"</span>, the_same_func)  <span class="co"># the_same_func from @udf above</span></span>
+<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"SELECT *, the_same_func(first, second) AS udf FROM table"</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+-----+------+------------------+
@@ -1944,27 +1950,27 @@ class Row(builtins.tuple)
 <h1>Joins (<span class="math inline">\(⋈\)</span>)</h1>
 <section id="using-the-spark.sql-api" class="level2">
 <h2 class="anchored" data-anchor-id="using-the-spark.sql-api">Using the <code>spark.sql</code> API</h2>
-<div id="23145e35" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:29.098957Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:28.042691Z&quot;}}" data-execution_count="58">
+<div id="cc8e593a" class="cell" data-execution_count="58">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb113"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
-<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> spark.createDataFrame(</span>
-<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>    [</span>
-<span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'1'</span>, <span class="st">'mouse'</span>, <span class="st">'microsoft'</span>, <span class="fl">39.99</span>),</span>
-<span id="cb113-6"><a href="#cb113-6" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'2'</span>, <span class="st">'keyboard'</span>, <span class="st">'logitech'</span>, <span class="fl">59.99</span>),</span>
-<span id="cb113-7"><a href="#cb113-7" aria-hidden="true" tabindex="-1"></a>    ], </span>
-<span id="cb113-8"><a href="#cb113-8" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'prod_id'</span>, <span class="st">'prod_cat'</span>, <span class="st">'prod_brand'</span>, <span class="st">'prod_value'</span>]</span>
-<span id="cb113-9"><a href="#cb113-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb113-10"><a href="#cb113-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-11"><a href="#cb113-11" aria-hidden="true" tabindex="-1"></a>purchases <span class="op">=</span> spark.createDataFrame([</span>
-<span id="cb113-12"><a href="#cb113-12" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">1</span>), <span class="dv">2</span>, <span class="st">'1'</span>),</span>
-<span id="cb113-13"><a href="#cb113-13" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="st">'1'</span>),</span>
-<span id="cb113-14"><a href="#cb113-14" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">5</span>), <span class="dv">1</span>, <span class="st">'2'</span>),</span>
-<span id="cb113-15"><a href="#cb113-15" aria-hidden="true" tabindex="-1"></a>], [<span class="st">'date'</span>, <span class="st">'quantity'</span>, <span class="st">'prod_id'</span>])</span>
-<span id="cb113-16"><a href="#cb113-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-17"><a href="#cb113-17" aria-hidden="true" tabindex="-1"></a><span class="co"># The default join type is the "INNER" join</span></span>
-<span id="cb113-18"><a href="#cb113-18" aria-hidden="true" tabindex="-1"></a>purchases.join(products, <span class="st">'prod_id'</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb114"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> spark.createDataFrame(</span>
+<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'1'</span>, <span class="st">'mouse'</span>, <span class="st">'microsoft'</span>, <span class="fl">39.99</span>),</span>
+<span id="cb114-6"><a href="#cb114-6" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'2'</span>, <span class="st">'keyboard'</span>, <span class="st">'logitech'</span>, <span class="fl">59.99</span>),</span>
+<span id="cb114-7"><a href="#cb114-7" aria-hidden="true" tabindex="-1"></a>    ], </span>
+<span id="cb114-8"><a href="#cb114-8" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'prod_id'</span>, <span class="st">'prod_cat'</span>, <span class="st">'prod_brand'</span>, <span class="st">'prod_value'</span>]</span>
+<span id="cb114-9"><a href="#cb114-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb114-10"><a href="#cb114-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-11"><a href="#cb114-11" aria-hidden="true" tabindex="-1"></a>purchases <span class="op">=</span> spark.createDataFrame([</span>
+<span id="cb114-12"><a href="#cb114-12" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">1</span>), <span class="dv">2</span>, <span class="st">'1'</span>),</span>
+<span id="cb114-13"><a href="#cb114-13" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="st">'1'</span>),</span>
+<span id="cb114-14"><a href="#cb114-14" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">5</span>), <span class="dv">1</span>, <span class="st">'2'</span>),</span>
+<span id="cb114-15"><a href="#cb114-15" aria-hidden="true" tabindex="-1"></a>], [<span class="st">'date'</span>, <span class="st">'quantity'</span>, <span class="st">'prod_id'</span>])</span>
+<span id="cb114-16"><a href="#cb114-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-17"><a href="#cb114-17" aria-hidden="true" tabindex="-1"></a><span class="co"># The default join type is the "INNER" join</span></span>
+<span id="cb114-18"><a href="#cb114-18" aria-hidden="true" tabindex="-1"></a>purchases.join(products, <span class="st">'prod_id'</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+-------+----------+--------+--------+----------+----------+
@@ -1978,10 +1984,10 @@ class Row(builtins.tuple)
 </div>
 </div>
 <p>Just as in RDBMs, we can ask for explanations:</p>
-<div id="7e018f58" class="cell" data-execution_count="59">
+<div id="9f68d62b" class="cell" data-execution_count="59">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb115"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>purchases.join(products, <span class="st">'prod_id'</span>).explain()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>purchases.join(products, <span class="st">'prod_id'</span>).explain()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>== Physical Plan ==
@@ -2004,25 +2010,25 @@ AdaptiveSparkPlan isFinalPlan=false
 </section>
 <section id="using-a-sql-query" class="level2">
 <h2 class="anchored" data-anchor-id="using-a-sql-query">Using a <code>SQL</code> query</h2>
-<div id="83b8bc92" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:29.731271Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:29.101559Z&quot;}}" data-execution_count="60">
+<div id="f6adc71c" class="cell" data-execution_count="60">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb117"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>products.createOrReplaceTempView(<span class="st">"products"</span>)</span>
-<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>purchases.createOrReplaceTempView(<span class="st">"purchases"</span>)</span>
-<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-4"><a href="#cb117-4" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb117-5"><a href="#cb117-5" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT * </span></span>
-<span id="cb117-6"><a href="#cb117-6" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM purchases AS prc INNER JOIN </span></span>
-<span id="cb117-7"><a href="#cb117-7" aria-hidden="true" tabindex="-1"></a><span class="st">        products AS prd </span></span>
-<span id="cb117-8"><a href="#cb117-8" aria-hidden="true" tabindex="-1"></a><span class="st">    ON prc.prod_id = prd.prod_id</span></span>
-<span id="cb117-9"><a href="#cb117-9" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb117-10"><a href="#cb117-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-11"><a href="#cb117-11" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb117-12"><a href="#cb117-12" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM purchases |&gt;</span></span>
-<span id="cb117-13"><a href="#cb117-13" aria-hidden="true" tabindex="-1"></a><span class="st">    INNER JOIN products USING(prod_id)    </span></span>
-<span id="cb117-14"><a href="#cb117-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb117-15"><a href="#cb117-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-16"><a href="#cb117-16" aria-hidden="true" tabindex="-1"></a>spark.sql(query).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb118"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>products.createOrReplaceTempView(<span class="st">"products"</span>)</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>purchases.createOrReplaceTempView(<span class="st">"purchases"</span>)</span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT * </span></span>
+<span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM purchases AS prc INNER JOIN </span></span>
+<span id="cb118-7"><a href="#cb118-7" aria-hidden="true" tabindex="-1"></a><span class="st">        products AS prd </span></span>
+<span id="cb118-8"><a href="#cb118-8" aria-hidden="true" tabindex="-1"></a><span class="st">    ON prc.prod_id = prd.prod_id</span></span>
+<span id="cb118-9"><a href="#cb118-9" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb118-10"><a href="#cb118-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-11"><a href="#cb118-11" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb118-12"><a href="#cb118-12" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM purchases |&gt;</span></span>
+<span id="cb118-13"><a href="#cb118-13" aria-hidden="true" tabindex="-1"></a><span class="st">    INNER JOIN products USING(prod_id)    </span></span>
+<span id="cb118-14"><a href="#cb118-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb118-15"><a href="#cb118-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-16"><a href="#cb118-16" aria-hidden="true" tabindex="-1"></a>spark.sql(query).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+-------+----------+--------+--------+----------+----------+
@@ -2035,10 +2041,10 @@ AdaptiveSparkPlan isFinalPlan=false
 </code></pre>
 </div>
 </div>
-<div id="70718d81" class="cell" data-execution_count="61">
+<div id="60f170db" class="cell" data-execution_count="61">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb119"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>spark.sql(query).explain()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb120"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>spark.sql(query).explain()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>== Physical Plan ==
@@ -2057,20 +2063,20 @@ AdaptiveSparkPlan isFinalPlan=false
 </code></pre>
 </div>
 </div>
-<div id="66fc0983" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:30.660419Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:29.734282Z&quot;}}" data-execution_count="62">
+<div id="2832fa9a" class="cell" data-execution_count="62">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb121"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>new_purchases <span class="op">=</span> spark.createDataFrame([</span>
-<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">1</span>), <span class="dv">2</span>, <span class="st">'1'</span>),</span>
-<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="st">'3'</span>),</span>
-<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a>], [<span class="st">'date'</span>, <span class="st">'quantity'</span>, <span class="st">'prod_id_x'</span>])</span>
-<span id="cb121-5"><a href="#cb121-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb121-6"><a href="#cb121-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The default join type is the "INNER" join</span></span>
-<span id="cb121-7"><a href="#cb121-7" aria-hidden="true" tabindex="-1"></a>join_rule <span class="op">=</span> new_purchases.prod_id_x <span class="op">==</span> products.prod_id</span>
-<span id="cb121-8"><a href="#cb121-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb121-9"><a href="#cb121-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(join_rule))</span>
-<span id="cb121-10"><a href="#cb121-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb121-11"><a href="#cb121-11" aria-hidden="true" tabindex="-1"></a>new_purchases.join(products, join_rule, <span class="st">'left'</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb122"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>new_purchases <span class="op">=</span> spark.createDataFrame([</span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">1</span>), <span class="dv">2</span>, <span class="st">'1'</span>),</span>
+<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="st">'3'</span>),</span>
+<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a>], [<span class="st">'date'</span>, <span class="st">'quantity'</span>, <span class="st">'prod_id_x'</span>])</span>
+<span id="cb122-5"><a href="#cb122-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-6"><a href="#cb122-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The default join type is the "INNER" join</span></span>
+<span id="cb122-7"><a href="#cb122-7" aria-hidden="true" tabindex="-1"></a>join_rule <span class="op">=</span> new_purchases.prod_id_x <span class="op">==</span> products.prod_id</span>
+<span id="cb122-8"><a href="#cb122-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-9"><a href="#cb122-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(join_rule))</span>
+<span id="cb122-10"><a href="#cb122-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-11"><a href="#cb122-11" aria-hidden="true" tabindex="-1"></a>new_purchases.join(products, join_rule, <span class="st">'left'</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pyspark.sql.classic.column.Column'&gt;
@@ -2084,27 +2090,27 @@ AdaptiveSparkPlan isFinalPlan=false
 </div>
 </div>
 <p>What is the type of <code>join_rule.info</code>?</p>
-<div id="4c8a5d8c" class="cell" data-execution_count="63">
+<div id="534166b5" class="cell" data-execution_count="63">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb123"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>join_rule.info</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb124"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>join_rule.info</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="63">
 <pre><code>Column&lt;'=(prod_id_x, prod_id)['info']'&gt;</code></pre>
 </div>
 </div>
-<div id="dadb459c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:31.319336Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:30.663809Z&quot;}}" data-execution_count="64">
+<div id="663bf00a" class="cell" data-execution_count="64">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb125"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>new_purchases <span class="op">=</span> spark.createDataFrame([</span>
-<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">1</span>), <span class="dv">2</span>, <span class="st">'1'</span>),</span>
-<span id="cb125-3"><a href="#cb125-3" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="st">'3'</span>),</span>
-<span id="cb125-4"><a href="#cb125-4" aria-hidden="true" tabindex="-1"></a>], [<span class="st">'date'</span>, <span class="st">'quantity'</span>, <span class="st">'prod_id_x'</span>])</span>
-<span id="cb125-5"><a href="#cb125-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb125-6"><a href="#cb125-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The default join type is the "INNER" join</span></span>
-<span id="cb125-7"><a href="#cb125-7" aria-hidden="true" tabindex="-1"></a>join_rule <span class="op">=</span> new_purchases.prod_id_x <span class="op">==</span> products.prod_id</span>
-<span id="cb125-8"><a href="#cb125-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb125-9"><a href="#cb125-9" aria-hidden="true" tabindex="-1"></a>new_purchases.join(products, join_rule, <span class="st">'left'</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb126"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>new_purchases <span class="op">=</span> spark.createDataFrame([</span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">1</span>), <span class="dv">2</span>, <span class="st">'1'</span>),</span>
+<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a>    (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">2</span>), <span class="dv">1</span>, <span class="st">'3'</span>),</span>
+<span id="cb126-4"><a href="#cb126-4" aria-hidden="true" tabindex="-1"></a>], [<span class="st">'date'</span>, <span class="st">'quantity'</span>, <span class="st">'prod_id_x'</span>])</span>
+<span id="cb126-5"><a href="#cb126-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-6"><a href="#cb126-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The default join type is the "INNER" join</span></span>
+<span id="cb126-7"><a href="#cb126-7" aria-hidden="true" tabindex="-1"></a>join_rule <span class="op">=</span> new_purchases.prod_id_x <span class="op">==</span> products.prod_id</span>
+<span id="cb126-8"><a href="#cb126-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-9"><a href="#cb126-9" aria-hidden="true" tabindex="-1"></a>new_purchases.join(products, join_rule, <span class="st">'left'</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+----------+--------+---------+-------+--------+----------+----------+
@@ -2139,31 +2145,31 @@ AdaptiveSparkPlan isFinalPlan=false
 </section>
 <section id="various-types-of-joins" class="level2">
 <h2 class="anchored" data-anchor-id="various-types-of-joins">Various types of joins</h2>
-<div id="9c3a960e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:31.376310Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:31.323600Z&quot;}}" data-execution_count="65">
+<div id="af5e87d7" class="cell" data-execution_count="65">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb127"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> spark.createDataFrame([</span>
-<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="st">"A1"</span>), (<span class="dv">2</span>, <span class="st">"A2"</span>), (<span class="dv">3</span>, <span class="st">"A3"</span>), (<span class="dv">4</span>, <span class="st">"A4"</span>)], </span>
-<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"id"</span>, <span class="st">"value"</span>])</span>
-<span id="cb127-4"><a href="#cb127-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb127-5"><a href="#cb127-5" aria-hidden="true" tabindex="-1"></a>right <span class="op">=</span> spark.createDataFrame([</span>
-<span id="cb127-6"><a href="#cb127-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">3</span>, <span class="st">"A3"</span>), (<span class="dv">4</span>, <span class="st">"A4"</span>), (<span class="dv">4</span>, <span class="st">"A4_1"</span>), (<span class="dv">5</span>, <span class="st">"A5"</span>), (<span class="dv">6</span>, <span class="st">"A6"</span>)], </span>
-<span id="cb127-7"><a href="#cb127-7" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"id"</span>, <span class="st">"value"</span>])</span>
-<span id="cb127-8"><a href="#cb127-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb127-9"><a href="#cb127-9" aria-hidden="true" tabindex="-1"></a>join_types <span class="op">=</span> [</span>
-<span id="cb127-10"><a href="#cb127-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"inner"</span>, <span class="st">"outer"</span>, <span class="st">"left"</span>, <span class="st">"right"</span>,</span>
-<span id="cb127-11"><a href="#cb127-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"leftsemi"</span>, <span class="st">"leftanti"</span></span>
-<span id="cb127-12"><a href="#cb127-12" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb128"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> spark.createDataFrame([</span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="st">"A1"</span>), (<span class="dv">2</span>, <span class="st">"A2"</span>), (<span class="dv">3</span>, <span class="st">"A3"</span>), (<span class="dv">4</span>, <span class="st">"A4"</span>)], </span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"id"</span>, <span class="st">"value"</span>])</span>
+<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a>right <span class="op">=</span> spark.createDataFrame([</span>
+<span id="cb128-6"><a href="#cb128-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">3</span>, <span class="st">"A3"</span>), (<span class="dv">4</span>, <span class="st">"A4"</span>), (<span class="dv">4</span>, <span class="st">"A4_1"</span>), (<span class="dv">5</span>, <span class="st">"A5"</span>), (<span class="dv">6</span>, <span class="st">"A6"</span>)], </span>
+<span id="cb128-7"><a href="#cb128-7" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"id"</span>, <span class="st">"value"</span>])</span>
+<span id="cb128-8"><a href="#cb128-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-9"><a href="#cb128-9" aria-hidden="true" tabindex="-1"></a>join_types <span class="op">=</span> [</span>
+<span id="cb128-10"><a href="#cb128-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"inner"</span>, <span class="st">"outer"</span>, <span class="st">"left"</span>, <span class="st">"right"</span>,</span>
+<span id="cb128-11"><a href="#cb128-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"leftsemi"</span>, <span class="st">"leftanti"</span></span>
+<span id="cb128-12"><a href="#cb128-12" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="b91b0f44" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:34.708236Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:31.380091Z&quot;}}" data-execution_count="66">
+<div id="e4fe9ddf" class="cell" data-execution_count="66">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb128"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> join_type <span class="kw">in</span> join_types:</span>
-<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(join_type)</span>
-<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>    left.join(right, on<span class="op">=</span><span class="st">"id"</span>, how<span class="op">=</span>join_type)<span class="op">\</span></span>
-<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a>        .orderBy(<span class="st">"id"</span>)<span class="op">\</span></span>
-<span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a>        .show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb129"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> join_type <span class="kw">in</span> join_types:</span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(join_type)</span>
+<span id="cb129-3"><a href="#cb129-3" aria-hidden="true" tabindex="-1"></a>    left.join(right, on<span class="op">=</span><span class="st">"id"</span>, how<span class="op">=</span>join_type)<span class="op">\</span></span>
+<span id="cb129-4"><a href="#cb129-4" aria-hidden="true" tabindex="-1"></a>        .orderBy(<span class="st">"id"</span>)<span class="op">\</span></span>
+<span id="cb129-5"><a href="#cb129-5" aria-hidden="true" tabindex="-1"></a>        .show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>inner
@@ -2195,8 +2201,8 @@ left
 |  1|   A1| NULL|
 |  2|   A2| NULL|
 |  3|   A3|   A3|
-|  4|   A4|   A4|
 |  4|   A4| A4_1|
+|  4|   A4|   A4|
 +---+-----+-----+
 
 right
@@ -2234,25 +2240,25 @@ leftanti
 <h1>Agregations (summarize)</h1>
 <section id="examples-using-the-api" class="level2">
 <h2 class="anchored" data-anchor-id="examples-using-the-api">Examples using the API</h2>
-<div id="220a6540" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:35.398306Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:34.710552Z&quot;}}" data-execution_count="67">
+<div id="5eed1d76" class="cell" data-execution_count="67">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb130"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
-<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-3"><a href="#cb130-3" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> spark.createDataFrame([</span>
-<span id="cb130-4"><a href="#cb130-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'1'</span>, <span class="st">'mouse'</span>, <span class="st">'microsoft'</span>, <span class="fl">39.99</span>),</span>
-<span id="cb130-5"><a href="#cb130-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'2'</span>, <span class="st">'mouse'</span>, <span class="st">'microsoft'</span>, <span class="fl">59.99</span>),</span>
-<span id="cb130-6"><a href="#cb130-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'3'</span>, <span class="st">'keyboard'</span>, <span class="st">'microsoft'</span>, <span class="fl">59.99</span>),</span>
-<span id="cb130-7"><a href="#cb130-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'4'</span>, <span class="st">'keyboard'</span>, <span class="st">'logitech'</span>, <span class="fl">59.99</span>),</span>
-<span id="cb130-8"><a href="#cb130-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'5'</span>, <span class="st">'mouse'</span>, <span class="st">'logitech'</span>, <span class="fl">29.99</span>),</span>
-<span id="cb130-9"><a href="#cb130-9" aria-hidden="true" tabindex="-1"></a>], [<span class="st">'prod_id'</span>, <span class="st">'prod_cat'</span>, <span class="st">'prod_brand'</span>, <span class="st">'prod_value'</span>])</span>
-<span id="cb130-10"><a href="#cb130-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-11"><a href="#cb130-11" aria-hidden="true" tabindex="-1"></a>( </span>
-<span id="cb130-12"><a href="#cb130-12" aria-hidden="true" tabindex="-1"></a>    products</span>
-<span id="cb130-13"><a href="#cb130-13" aria-hidden="true" tabindex="-1"></a>        .groupBy(<span class="st">'prod_cat'</span>)</span>
-<span id="cb130-14"><a href="#cb130-14" aria-hidden="true" tabindex="-1"></a>        .avg(<span class="st">'prod_value'</span>)</span>
-<span id="cb130-15"><a href="#cb130-15" aria-hidden="true" tabindex="-1"></a>        .show()</span>
-<span id="cb130-16"><a href="#cb130-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb131"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> spark.createDataFrame([</span>
+<span id="cb131-4"><a href="#cb131-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'1'</span>, <span class="st">'mouse'</span>, <span class="st">'microsoft'</span>, <span class="fl">39.99</span>),</span>
+<span id="cb131-5"><a href="#cb131-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'2'</span>, <span class="st">'mouse'</span>, <span class="st">'microsoft'</span>, <span class="fl">59.99</span>),</span>
+<span id="cb131-6"><a href="#cb131-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'3'</span>, <span class="st">'keyboard'</span>, <span class="st">'microsoft'</span>, <span class="fl">59.99</span>),</span>
+<span id="cb131-7"><a href="#cb131-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'4'</span>, <span class="st">'keyboard'</span>, <span class="st">'logitech'</span>, <span class="fl">59.99</span>),</span>
+<span id="cb131-8"><a href="#cb131-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'5'</span>, <span class="st">'mouse'</span>, <span class="st">'logitech'</span>, <span class="fl">29.99</span>),</span>
+<span id="cb131-9"><a href="#cb131-9" aria-hidden="true" tabindex="-1"></a>], [<span class="st">'prod_id'</span>, <span class="st">'prod_cat'</span>, <span class="st">'prod_brand'</span>, <span class="st">'prod_value'</span>])</span>
+<span id="cb131-10"><a href="#cb131-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-11"><a href="#cb131-11" aria-hidden="true" tabindex="-1"></a>( </span>
+<span id="cb131-12"><a href="#cb131-12" aria-hidden="true" tabindex="-1"></a>    products</span>
+<span id="cb131-13"><a href="#cb131-13" aria-hidden="true" tabindex="-1"></a>        .groupBy(<span class="st">'prod_cat'</span>)</span>
+<span id="cb131-14"><a href="#cb131-14" aria-hidden="true" tabindex="-1"></a>        .avg(<span class="st">'prod_value'</span>)</span>
+<span id="cb131-15"><a href="#cb131-15" aria-hidden="true" tabindex="-1"></a>        .show()</span>
+<span id="cb131-16"><a href="#cb131-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+--------+-----------------+
@@ -2265,15 +2271,15 @@ leftanti
 </div>
 </div>
 <p>What is the type of <code>products         .groupBy('prod_cat')</code>?</p>
-<div id="6161c8ce" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:35.782623Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:35.400724Z&quot;}}" data-execution_count="68">
+<div id="161b9750" class="cell" data-execution_count="68">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb132"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>    products</span>
-<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>        .groupBy(<span class="st">'prod_cat'</span>)</span>
-<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a>        .agg(fn.avg(<span class="st">'prod_value'</span>))</span>
-<span id="cb132-5"><a href="#cb132-5" aria-hidden="true" tabindex="-1"></a>        .show()</span>
-<span id="cb132-6"><a href="#cb132-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb133"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a>    products</span>
+<span id="cb133-3"><a href="#cb133-3" aria-hidden="true" tabindex="-1"></a>        .groupBy(<span class="st">'prod_cat'</span>)</span>
+<span id="cb133-4"><a href="#cb133-4" aria-hidden="true" tabindex="-1"></a>        .agg(fn.avg(<span class="st">'prod_value'</span>))</span>
+<span id="cb133-5"><a href="#cb133-5" aria-hidden="true" tabindex="-1"></a>        .show()</span>
+<span id="cb133-6"><a href="#cb133-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+--------+-----------------+
@@ -2285,18 +2291,18 @@ leftanti
 </code></pre>
 </div>
 </div>
-<div id="e8176c37" class="cell" data-execution_count="69">
+<div id="148a6257" class="cell" data-execution_count="69">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb134"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>    products</span>
-<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>        .groupBy(<span class="st">'prod_cat'</span>)</span>
-<span id="cb134-4"><a href="#cb134-4" aria-hidden="true" tabindex="-1"></a>        .agg(</span>
-<span id="cb134-5"><a href="#cb134-5" aria-hidden="true" tabindex="-1"></a>            fn.mean(<span class="st">'prod_value'</span>), </span>
-<span id="cb134-6"><a href="#cb134-6" aria-hidden="true" tabindex="-1"></a>            fn.stddev(<span class="st">'prod_value'</span>)</span>
-<span id="cb134-7"><a href="#cb134-7" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb134-8"><a href="#cb134-8" aria-hidden="true" tabindex="-1"></a>        .show()</span>
-<span id="cb134-9"><a href="#cb134-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb135"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>    products</span>
+<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>        .groupBy(<span class="st">'prod_cat'</span>)</span>
+<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a>        .agg(</span>
+<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a>            fn.mean(<span class="st">'prod_value'</span>), </span>
+<span id="cb135-6"><a href="#cb135-6" aria-hidden="true" tabindex="-1"></a>            fn.stddev(<span class="st">'prod_value'</span>)</span>
+<span id="cb135-7"><a href="#cb135-7" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb135-8"><a href="#cb135-8" aria-hidden="true" tabindex="-1"></a>        .show()</span>
+<span id="cb135-9"><a href="#cb135-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+--------+-----------------+------------------+
@@ -2308,19 +2314,19 @@ leftanti
 </code></pre>
 </div>
 </div>
-<div id="034fa5f0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:36.195471Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:35.784780Z&quot;}}" data-execution_count="70">
+<div id="43ef7c53" class="cell" data-execution_count="70">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb136"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
-<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb136-4"><a href="#cb136-4" aria-hidden="true" tabindex="-1"></a>    products</span>
-<span id="cb136-5"><a href="#cb136-5" aria-hidden="true" tabindex="-1"></a>        .groupBy(<span class="st">'prod_brand'</span>, <span class="st">'prod_cat'</span>)<span class="op">\</span></span>
-<span id="cb136-6"><a href="#cb136-6" aria-hidden="true" tabindex="-1"></a>        .agg(</span>
-<span id="cb136-7"><a href="#cb136-7" aria-hidden="true" tabindex="-1"></a>            fn.avg(<span class="st">'prod_value'</span>)</span>
-<span id="cb136-8"><a href="#cb136-8" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb136-9"><a href="#cb136-9" aria-hidden="true" tabindex="-1"></a>        .show()</span>
-<span id="cb136-10"><a href="#cb136-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb137"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
+<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb137-4"><a href="#cb137-4" aria-hidden="true" tabindex="-1"></a>    products</span>
+<span id="cb137-5"><a href="#cb137-5" aria-hidden="true" tabindex="-1"></a>        .groupBy(<span class="st">'prod_brand'</span>, <span class="st">'prod_cat'</span>)<span class="op">\</span></span>
+<span id="cb137-6"><a href="#cb137-6" aria-hidden="true" tabindex="-1"></a>        .agg(</span>
+<span id="cb137-7"><a href="#cb137-7" aria-hidden="true" tabindex="-1"></a>            fn.avg(<span class="st">'prod_value'</span>)</span>
+<span id="cb137-8"><a href="#cb137-8" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb137-9"><a href="#cb137-9" aria-hidden="true" tabindex="-1"></a>        .show()</span>
+<span id="cb137-10"><a href="#cb137-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+----------+--------+---------------+
@@ -2334,26 +2340,26 @@ leftanti
 </code></pre>
 </div>
 </div>
-<div id="01774856" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:36.650354Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:36.207985Z&quot;}}" data-execution_count="71">
+<div id="80e9e3c0" class="cell" data-execution_count="71">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb138"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
-<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb138-4"><a href="#cb138-4" aria-hidden="true" tabindex="-1"></a>    products</span>
-<span id="cb138-5"><a href="#cb138-5" aria-hidden="true" tabindex="-1"></a>        .groupBy(<span class="st">'prod_brand'</span>)</span>
-<span id="cb138-6"><a href="#cb138-6" aria-hidden="true" tabindex="-1"></a>        .agg(</span>
-<span id="cb138-7"><a href="#cb138-7" aria-hidden="true" tabindex="-1"></a>            fn.<span class="bu">round</span>(</span>
-<span id="cb138-8"><a href="#cb138-8" aria-hidden="true" tabindex="-1"></a>                fn.avg(<span class="st">'prod_value'</span>), <span class="dv">1</span>)</span>
-<span id="cb138-9"><a href="#cb138-9" aria-hidden="true" tabindex="-1"></a>                .alias(<span class="st">'average'</span>),</span>
-<span id="cb138-10"><a href="#cb138-10" aria-hidden="true" tabindex="-1"></a>            fn.ceil(</span>
-<span id="cb138-11"><a href="#cb138-11" aria-hidden="true" tabindex="-1"></a>                fn.<span class="bu">sum</span>(<span class="st">'prod_value'</span>))</span>
-<span id="cb138-12"><a href="#cb138-12" aria-hidden="true" tabindex="-1"></a>                .alias(<span class="st">'sum'</span>),</span>
-<span id="cb138-13"><a href="#cb138-13" aria-hidden="true" tabindex="-1"></a>            fn.<span class="bu">min</span>(<span class="st">'prod_value'</span>)</span>
-<span id="cb138-14"><a href="#cb138-14" aria-hidden="true" tabindex="-1"></a>                .alias(<span class="st">'min'</span>)</span>
-<span id="cb138-15"><a href="#cb138-15" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb138-16"><a href="#cb138-16" aria-hidden="true" tabindex="-1"></a>        .show()</span>
-<span id="cb138-17"><a href="#cb138-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb139"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
+<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb139-4"><a href="#cb139-4" aria-hidden="true" tabindex="-1"></a>    products</span>
+<span id="cb139-5"><a href="#cb139-5" aria-hidden="true" tabindex="-1"></a>        .groupBy(<span class="st">'prod_brand'</span>)</span>
+<span id="cb139-6"><a href="#cb139-6" aria-hidden="true" tabindex="-1"></a>        .agg(</span>
+<span id="cb139-7"><a href="#cb139-7" aria-hidden="true" tabindex="-1"></a>            fn.<span class="bu">round</span>(</span>
+<span id="cb139-8"><a href="#cb139-8" aria-hidden="true" tabindex="-1"></a>                fn.avg(<span class="st">'prod_value'</span>), <span class="dv">1</span>)</span>
+<span id="cb139-9"><a href="#cb139-9" aria-hidden="true" tabindex="-1"></a>                .alias(<span class="st">'average'</span>),</span>
+<span id="cb139-10"><a href="#cb139-10" aria-hidden="true" tabindex="-1"></a>            fn.ceil(</span>
+<span id="cb139-11"><a href="#cb139-11" aria-hidden="true" tabindex="-1"></a>                fn.<span class="bu">sum</span>(<span class="st">'prod_value'</span>))</span>
+<span id="cb139-12"><a href="#cb139-12" aria-hidden="true" tabindex="-1"></a>                .alias(<span class="st">'sum'</span>),</span>
+<span id="cb139-13"><a href="#cb139-13" aria-hidden="true" tabindex="-1"></a>            fn.<span class="bu">min</span>(<span class="st">'prod_value'</span>)</span>
+<span id="cb139-14"><a href="#cb139-14" aria-hidden="true" tabindex="-1"></a>                .alias(<span class="st">'min'</span>)</span>
+<span id="cb139-15"><a href="#cb139-15" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb139-16"><a href="#cb139-16" aria-hidden="true" tabindex="-1"></a>        .show()</span>
+<span id="cb139-17"><a href="#cb139-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+----------+-------+---+-----+
@@ -2368,34 +2374,34 @@ leftanti
 </section>
 <section id="example-using-a-query" class="level2">
 <h2 class="anchored" data-anchor-id="example-using-a-query">Example using a query</h2>
-<div id="8d7c691e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:37.089099Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:36.652842Z&quot;}}" data-execution_count="72">
+<div id="cb91fe23" class="cell" data-execution_count="72">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb140"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>products.createOrReplaceTempView(<span class="st">"products"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb141"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a>products.createOrReplaceTempView(<span class="st">"products"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="bef20ee9" class="cell" data-execution_count="73">
+<div id="8a29e37c" class="cell" data-execution_count="73">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb141"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
-<span id="cb141-3"><a href="#cb141-3" aria-hidden="true" tabindex="-1"></a><span class="st">    prod_brand,</span></span>
-<span id="cb141-4"><a href="#cb141-4" aria-hidden="true" tabindex="-1"></a><span class="st">    round(avg(prod_value), 1) AS average,</span></span>
-<span id="cb141-5"><a href="#cb141-5" aria-hidden="true" tabindex="-1"></a><span class="st">    min(prod_value) AS min</span></span>
-<span id="cb141-6"><a href="#cb141-6" aria-hidden="true" tabindex="-1"></a><span class="st">FROM </span></span>
-<span id="cb141-7"><a href="#cb141-7" aria-hidden="true" tabindex="-1"></a><span class="st">    products</span></span>
-<span id="cb141-8"><a href="#cb141-8" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY </span></span>
-<span id="cb141-9"><a href="#cb141-9" aria-hidden="true" tabindex="-1"></a><span class="st">    prod_brand</span></span>
-<span id="cb141-10"><a href="#cb141-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb141-11"><a href="#cb141-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb141-12"><a href="#cb141-12" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb141-13"><a href="#cb141-13" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM products </span></span>
-<span id="cb141-14"><a href="#cb141-14" aria-hidden="true" tabindex="-1"></a><span class="st">    |&gt; AGGREGATE </span></span>
-<span id="cb141-15"><a href="#cb141-15" aria-hidden="true" tabindex="-1"></a><span class="st">        round(avg(prod_value), 1) AS average,</span></span>
-<span id="cb141-16"><a href="#cb141-16" aria-hidden="true" tabindex="-1"></a><span class="st">        min(prod_value) AS min GROUP BY prod_brand </span></span>
-<span id="cb141-17"><a href="#cb141-17" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb141-18"><a href="#cb141-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb141-19"><a href="#cb141-19" aria-hidden="true" tabindex="-1"></a>spark.sql(query).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb142"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
+<span id="cb142-3"><a href="#cb142-3" aria-hidden="true" tabindex="-1"></a><span class="st">    prod_brand,</span></span>
+<span id="cb142-4"><a href="#cb142-4" aria-hidden="true" tabindex="-1"></a><span class="st">    round(avg(prod_value), 1) AS average,</span></span>
+<span id="cb142-5"><a href="#cb142-5" aria-hidden="true" tabindex="-1"></a><span class="st">    min(prod_value) AS min</span></span>
+<span id="cb142-6"><a href="#cb142-6" aria-hidden="true" tabindex="-1"></a><span class="st">FROM </span></span>
+<span id="cb142-7"><a href="#cb142-7" aria-hidden="true" tabindex="-1"></a><span class="st">    products</span></span>
+<span id="cb142-8"><a href="#cb142-8" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY </span></span>
+<span id="cb142-9"><a href="#cb142-9" aria-hidden="true" tabindex="-1"></a><span class="st">    prod_brand</span></span>
+<span id="cb142-10"><a href="#cb142-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb142-11"><a href="#cb142-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-12"><a href="#cb142-12" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb142-13"><a href="#cb142-13" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM products </span></span>
+<span id="cb142-14"><a href="#cb142-14" aria-hidden="true" tabindex="-1"></a><span class="st">    |&gt; AGGREGATE </span></span>
+<span id="cb142-15"><a href="#cb142-15" aria-hidden="true" tabindex="-1"></a><span class="st">        round(avg(prod_value), 1) AS average,</span></span>
+<span id="cb142-16"><a href="#cb142-16" aria-hidden="true" tabindex="-1"></a><span class="st">        min(prod_value) AS min GROUP BY prod_brand </span></span>
+<span id="cb142-17"><a href="#cb142-17" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb142-18"><a href="#cb142-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-19"><a href="#cb142-19" aria-hidden="true" tabindex="-1"></a>spark.sql(query).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+----------+-------+-----+
@@ -2407,16 +2413,16 @@ leftanti
 </code></pre>
 </div>
 </div>
-<div id="64bfd241" class="cell" data-execution_count="74">
+<div id="9dde6c0a" class="cell" data-execution_count="74">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb143"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>spark.sql(query).explain()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb144"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>spark.sql(query).explain()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>== Physical Plan ==
 AdaptiveSparkPlan isFinalPlan=false
 +- HashAggregate(keys=[prod_brand#573], functions=[avg(prod_value#574), min(prod_value#574)])
-   +- Exchange hashpartitioning(prod_brand#573, 200), ENSURE_REQUIREMENTS, [plan_id=2044]
+   +- Exchange hashpartitioning(prod_brand#573, 200), ENSURE_REQUIREMENTS, [plan_id=2043]
       +- HashAggregate(keys=[prod_brand#573], functions=[partial_avg(prod_value#574), partial_min(prod_value#574)])
          +- Project [prod_brand#573, prod_value#574]
             +- Scan ExistingRDD[prod_id#571,prod_cat#572,prod_brand#573,prod_value#574]
@@ -2430,33 +2436,33 @@ AdaptiveSparkPlan isFinalPlan=false
 <h1>Window functions</h1>
 <section id="numerical-window-functions" class="level2">
 <h2 class="anchored" data-anchor-id="numerical-window-functions">Numerical window functions</h2>
-<div id="e1dfcbf8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:37.751296Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:37.092075Z&quot;}}" data-execution_count="75">
+<div id="7bd95454" class="cell" data-execution_count="75">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb145"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Window</span>
-<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
-<span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb145-4"><a href="#cb145-4" aria-hidden="true" tabindex="-1"></a><span class="co"># First, we create the Window definition</span></span>
-<span id="cb145-5"><a href="#cb145-5" aria-hidden="true" tabindex="-1"></a>window <span class="op">=</span> Window.partitionBy(<span class="st">'prod_brand'</span>)</span>
-<span id="cb145-6"><a href="#cb145-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb145-7"><a href="#cb145-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(window))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb146"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Window</span>
+<span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
+<span id="cb146-3"><a href="#cb146-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb146-4"><a href="#cb146-4" aria-hidden="true" tabindex="-1"></a><span class="co"># First, we create the Window definition</span></span>
+<span id="cb146-5"><a href="#cb146-5" aria-hidden="true" tabindex="-1"></a>window <span class="op">=</span> Window.partitionBy(<span class="st">'prod_brand'</span>)</span>
+<span id="cb146-6"><a href="#cb146-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb146-7"><a href="#cb146-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(window))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pyspark.sql.classic.window.WindowSpec'&gt;</code></pre>
 </div>
 </div>
 <p>Then, we can use <code>over</code> to aggregate on this window</p>
-<div id="da81a399" class="cell" data-execution_count="76">
+<div id="4f9e3ce7" class="cell" data-execution_count="76">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb147"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a>avg <span class="op">=</span> fn.avg(<span class="st">'prod_value'</span>).over(window)</span>
-<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb147-3"><a href="#cb147-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally, we can it as a classical column</span></span>
-<span id="cb147-4"><a href="#cb147-4" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb147-5"><a href="#cb147-5" aria-hidden="true" tabindex="-1"></a>    products</span>
-<span id="cb147-6"><a href="#cb147-6" aria-hidden="true" tabindex="-1"></a>        .withColumn(<span class="st">'avg_brand_value'</span>, fn.<span class="bu">round</span>(avg, <span class="dv">2</span>))</span>
-<span id="cb147-7"><a href="#cb147-7" aria-hidden="true" tabindex="-1"></a>        .show()</span>
-<span id="cb147-8"><a href="#cb147-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb148"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a>avg <span class="op">=</span> fn.avg(<span class="st">'prod_value'</span>).over(window)</span>
+<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb148-3"><a href="#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally, we can it as a classical column</span></span>
+<span id="cb148-4"><a href="#cb148-4" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb148-5"><a href="#cb148-5" aria-hidden="true" tabindex="-1"></a>    products</span>
+<span id="cb148-6"><a href="#cb148-6" aria-hidden="true" tabindex="-1"></a>        .withColumn(<span class="st">'avg_brand_value'</span>, fn.<span class="bu">round</span>(avg, <span class="dv">2</span>))</span>
+<span id="cb148-7"><a href="#cb148-7" aria-hidden="true" tabindex="-1"></a>        .show()</span>
+<span id="cb148-8"><a href="#cb148-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+-------+--------+----------+----------+---------------+
@@ -2472,34 +2478,34 @@ AdaptiveSparkPlan isFinalPlan=false
 </div>
 </div>
 <p>With SQL queries, using windows ?</p>
-<div id="f63ef53f" class="cell" data-execution_count="77">
+<div id="5c8e9e7a" class="cell" data-execution_count="77">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb149"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT </span></span>
-<span id="cb149-3"><a href="#cb149-3" aria-hidden="true" tabindex="-1"></a><span class="st">        *, </span></span>
-<span id="cb149-4"><a href="#cb149-4" aria-hidden="true" tabindex="-1"></a><span class="st">        ROUND(AVG(prod_value) OVER w1, 2)  AS avg_brand_value,</span></span>
-<span id="cb149-5"><a href="#cb149-5" aria-hidden="true" tabindex="-1"></a><span class="st">        ROUND(AVG(prod_value) OVER w2, 1)  AS avg_prod_value</span></span>
-<span id="cb149-6"><a href="#cb149-6" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM </span></span>
-<span id="cb149-7"><a href="#cb149-7" aria-hidden="true" tabindex="-1"></a><span class="st">        products</span></span>
-<span id="cb149-8"><a href="#cb149-8" aria-hidden="true" tabindex="-1"></a><span class="st">    WINDOW </span></span>
-<span id="cb149-9"><a href="#cb149-9" aria-hidden="true" tabindex="-1"></a><span class="st">        w1 AS (PARTITION BY prod_brand),</span></span>
-<span id="cb149-10"><a href="#cb149-10" aria-hidden="true" tabindex="-1"></a><span class="st">        w2 AS (PARTITION BY prod_cat)</span></span>
-<span id="cb149-11"><a href="#cb149-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb149-12"><a href="#cb149-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb149-13"><a href="#cb149-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb149-14"><a href="#cb149-14" aria-hidden="true" tabindex="-1"></a>query2 <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb149-15"><a href="#cb149-15" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM products |&gt;</span></span>
-<span id="cb149-16"><a href="#cb149-16" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT</span></span>
-<span id="cb149-17"><a href="#cb149-17" aria-hidden="true" tabindex="-1"></a><span class="st">        *,  </span></span>
-<span id="cb149-18"><a href="#cb149-18" aria-hidden="true" tabindex="-1"></a><span class="st">        ROUND(AVG(prod_value) OVER w1, 2)  AS avg_brand_value,</span></span>
-<span id="cb149-19"><a href="#cb149-19" aria-hidden="true" tabindex="-1"></a><span class="st">        ROUND(AVG(prod_value) OVER w2, 1)  AS avg_prod_value</span></span>
-<span id="cb149-20"><a href="#cb149-20" aria-hidden="true" tabindex="-1"></a><span class="st">        WINDOW </span></span>
-<span id="cb149-21"><a href="#cb149-21" aria-hidden="true" tabindex="-1"></a><span class="st">            w1 AS (PARTITION BY prod_brand),</span></span>
-<span id="cb149-22"><a href="#cb149-22" aria-hidden="true" tabindex="-1"></a><span class="st">            w2 AS (PARTITION BY prod_cat)</span></span>
-<span id="cb149-23"><a href="#cb149-23" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb149-24"><a href="#cb149-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb149-25"><a href="#cb149-25" aria-hidden="true" tabindex="-1"></a>spark.sql(query2).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb150"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT </span></span>
+<span id="cb150-3"><a href="#cb150-3" aria-hidden="true" tabindex="-1"></a><span class="st">        *, </span></span>
+<span id="cb150-4"><a href="#cb150-4" aria-hidden="true" tabindex="-1"></a><span class="st">        ROUND(AVG(prod_value) OVER w1, 2)  AS avg_brand_value,</span></span>
+<span id="cb150-5"><a href="#cb150-5" aria-hidden="true" tabindex="-1"></a><span class="st">        ROUND(AVG(prod_value) OVER w2, 1)  AS avg_prod_value</span></span>
+<span id="cb150-6"><a href="#cb150-6" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM </span></span>
+<span id="cb150-7"><a href="#cb150-7" aria-hidden="true" tabindex="-1"></a><span class="st">        products</span></span>
+<span id="cb150-8"><a href="#cb150-8" aria-hidden="true" tabindex="-1"></a><span class="st">    WINDOW </span></span>
+<span id="cb150-9"><a href="#cb150-9" aria-hidden="true" tabindex="-1"></a><span class="st">        w1 AS (PARTITION BY prod_brand),</span></span>
+<span id="cb150-10"><a href="#cb150-10" aria-hidden="true" tabindex="-1"></a><span class="st">        w2 AS (PARTITION BY prod_cat)</span></span>
+<span id="cb150-11"><a href="#cb150-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb150-12"><a href="#cb150-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-13"><a href="#cb150-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-14"><a href="#cb150-14" aria-hidden="true" tabindex="-1"></a>query2 <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb150-15"><a href="#cb150-15" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM products |&gt;</span></span>
+<span id="cb150-16"><a href="#cb150-16" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT</span></span>
+<span id="cb150-17"><a href="#cb150-17" aria-hidden="true" tabindex="-1"></a><span class="st">        *,  </span></span>
+<span id="cb150-18"><a href="#cb150-18" aria-hidden="true" tabindex="-1"></a><span class="st">        ROUND(AVG(prod_value) OVER w1, 2)  AS avg_brand_value,</span></span>
+<span id="cb150-19"><a href="#cb150-19" aria-hidden="true" tabindex="-1"></a><span class="st">        ROUND(AVG(prod_value) OVER w2, 1)  AS avg_prod_value</span></span>
+<span id="cb150-20"><a href="#cb150-20" aria-hidden="true" tabindex="-1"></a><span class="st">        WINDOW </span></span>
+<span id="cb150-21"><a href="#cb150-21" aria-hidden="true" tabindex="-1"></a><span class="st">            w1 AS (PARTITION BY prod_brand),</span></span>
+<span id="cb150-22"><a href="#cb150-22" aria-hidden="true" tabindex="-1"></a><span class="st">            w2 AS (PARTITION BY prod_cat)</span></span>
+<span id="cb150-23"><a href="#cb150-23" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb150-24"><a href="#cb150-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-25"><a href="#cb150-25" aria-hidden="true" tabindex="-1"></a>spark.sql(query2).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+-------+--------+----------+----------+---------------+--------------+
@@ -2514,20 +2520,20 @@ AdaptiveSparkPlan isFinalPlan=false
 </code></pre>
 </div>
 </div>
-<div id="1587e1a6" class="cell" data-execution_count="78">
+<div id="1a050fb2" class="cell" data-execution_count="78">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb151"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>window2 <span class="op">=</span> Window.partitionBy(<span class="st">'prod_cat'</span>)</span>
-<span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb151-3"><a href="#cb151-3" aria-hidden="true" tabindex="-1"></a>avg2 <span class="op">=</span> fn.avg(<span class="st">'prod_value'</span>).over(window2)</span>
-<span id="cb151-4"><a href="#cb151-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb151-5"><a href="#cb151-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally, we can do it as a classical column</span></span>
-<span id="cb151-6"><a href="#cb151-6" aria-hidden="true" tabindex="-1"></a>( </span>
-<span id="cb151-7"><a href="#cb151-7" aria-hidden="true" tabindex="-1"></a>    products</span>
-<span id="cb151-8"><a href="#cb151-8" aria-hidden="true" tabindex="-1"></a>        .withColumn(<span class="st">'avg_brand_value'</span>, fn.<span class="bu">round</span>(avg, <span class="dv">2</span>))</span>
-<span id="cb151-9"><a href="#cb151-9" aria-hidden="true" tabindex="-1"></a>        .withColumn(<span class="st">'avg_prod_value'</span>, fn.<span class="bu">round</span>(avg2, <span class="dv">1</span>))</span>
-<span id="cb151-10"><a href="#cb151-10" aria-hidden="true" tabindex="-1"></a>        .show()</span>
-<span id="cb151-11"><a href="#cb151-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb152"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>window2 <span class="op">=</span> Window.partitionBy(<span class="st">'prod_cat'</span>)</span>
+<span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb152-3"><a href="#cb152-3" aria-hidden="true" tabindex="-1"></a>avg2 <span class="op">=</span> fn.avg(<span class="st">'prod_value'</span>).over(window2)</span>
+<span id="cb152-4"><a href="#cb152-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb152-5"><a href="#cb152-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally, we can do it as a classical column</span></span>
+<span id="cb152-6"><a href="#cb152-6" aria-hidden="true" tabindex="-1"></a>( </span>
+<span id="cb152-7"><a href="#cb152-7" aria-hidden="true" tabindex="-1"></a>    products</span>
+<span id="cb152-8"><a href="#cb152-8" aria-hidden="true" tabindex="-1"></a>        .withColumn(<span class="st">'avg_brand_value'</span>, fn.<span class="bu">round</span>(avg, <span class="dv">2</span>))</span>
+<span id="cb152-9"><a href="#cb152-9" aria-hidden="true" tabindex="-1"></a>        .withColumn(<span class="st">'avg_prod_value'</span>, fn.<span class="bu">round</span>(avg2, <span class="dv">1</span>))</span>
+<span id="cb152-10"><a href="#cb152-10" aria-hidden="true" tabindex="-1"></a>        .show()</span>
+<span id="cb152-11"><a href="#cb152-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+-------+--------+----------+----------+---------------+--------------+
@@ -2543,15 +2549,15 @@ AdaptiveSparkPlan isFinalPlan=false
 </div>
 </div>
 <p>Now we can compare the physical plans associated with the two jobs.</p>
-<div id="92b47b3d" class="cell" data-execution_count="79">
+<div id="88a764fd" class="cell" data-execution_count="79">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb153"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>( </span>
-<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a>    products</span>
-<span id="cb153-3"><a href="#cb153-3" aria-hidden="true" tabindex="-1"></a>        .withColumn(<span class="st">'avg_brand_value'</span>, fn.<span class="bu">round</span>(avg, <span class="dv">2</span>))</span>
-<span id="cb153-4"><a href="#cb153-4" aria-hidden="true" tabindex="-1"></a>        .withColumn(<span class="st">'avg_prod_value'</span>, fn.<span class="bu">round</span>(avg2, <span class="dv">1</span>))</span>
-<span id="cb153-5"><a href="#cb153-5" aria-hidden="true" tabindex="-1"></a>        .explain()</span>
-<span id="cb153-6"><a href="#cb153-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb154"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a>( </span>
+<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a>    products</span>
+<span id="cb154-3"><a href="#cb154-3" aria-hidden="true" tabindex="-1"></a>        .withColumn(<span class="st">'avg_brand_value'</span>, fn.<span class="bu">round</span>(avg, <span class="dv">2</span>))</span>
+<span id="cb154-4"><a href="#cb154-4" aria-hidden="true" tabindex="-1"></a>        .withColumn(<span class="st">'avg_prod_value'</span>, fn.<span class="bu">round</span>(avg2, <span class="dv">1</span>))</span>
+<span id="cb154-5"><a href="#cb154-5" aria-hidden="true" tabindex="-1"></a>        .explain()</span>
+<span id="cb154-6"><a href="#cb154-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>== Physical Plan ==
@@ -2559,20 +2565,20 @@ AdaptiveSparkPlan isFinalPlan=false
 +- Project [prod_id#571, prod_cat#572, prod_brand#573, prod_value#574, avg_brand_value#846, round(_we0#851, 1) AS avg_prod_value#849]
    +- Window [avg(prod_value#574) windowspecdefinition(prod_cat#572, specifiedwindowframe(RowFrame, unboundedpreceding$(), unboundedfollowing$())) AS _we0#851], [prod_cat#572]
       +- Sort [prod_cat#572 ASC NULLS FIRST], false, 0
-         +- Exchange hashpartitioning(prod_cat#572, 200), ENSURE_REQUIREMENTS, [plan_id=2385]
+         +- Exchange hashpartitioning(prod_cat#572, 200), ENSURE_REQUIREMENTS, [plan_id=2384]
             +- Project [prod_id#571, prod_cat#572, prod_brand#573, prod_value#574, round(_we0#848, 2) AS avg_brand_value#846]
                +- Window [avg(prod_value#574) windowspecdefinition(prod_brand#573, specifiedwindowframe(RowFrame, unboundedpreceding$(), unboundedfollowing$())) AS _we0#848], [prod_brand#573]
                   +- Sort [prod_brand#573 ASC NULLS FIRST], false, 0
-                     +- Exchange hashpartitioning(prod_brand#573, 200), ENSURE_REQUIREMENTS, [plan_id=2380]
+                     +- Exchange hashpartitioning(prod_brand#573, 200), ENSURE_REQUIREMENTS, [plan_id=2379]
                         +- Scan ExistingRDD[prod_id#571,prod_cat#572,prod_brand#573,prod_value#574]
 
 </code></pre>
 </div>
 </div>
-<div id="89ac4d53" class="cell" data-execution_count="80">
+<div id="ee8ef631" class="cell" data-execution_count="80">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb155"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a>spark.sql(query).explain()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb156"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a>spark.sql(query).explain()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>== Physical Plan ==
@@ -2580,10 +2586,10 @@ AdaptiveSparkPlan isFinalPlan=false
 +- Project [prod_id#571, prod_cat#572, prod_brand#573, prod_value#574, round(_we0#856, 2) AS avg_brand_value#852, round(_we1#857, 1) AS avg_prod_value#853]
    +- Window [avg(prod_value#574) windowspecdefinition(prod_cat#572, specifiedwindowframe(RowFrame, unboundedpreceding$(), unboundedfollowing$())) AS _we1#857], [prod_cat#572]
       +- Sort [prod_cat#572 ASC NULLS FIRST], false, 0
-         +- Exchange hashpartitioning(prod_cat#572, 200), ENSURE_REQUIREMENTS, [plan_id=2409]
+         +- Exchange hashpartitioning(prod_cat#572, 200), ENSURE_REQUIREMENTS, [plan_id=2408]
             +- Window [avg(prod_value#574) windowspecdefinition(prod_brand#573, specifiedwindowframe(RowFrame, unboundedpreceding$(), unboundedfollowing$())) AS _we0#856], [prod_brand#573]
                +- Sort [prod_brand#573 ASC NULLS FIRST], false, 0
-                  +- Exchange hashpartitioning(prod_brand#573, 200), ENSURE_REQUIREMENTS, [plan_id=2405]
+                  +- Exchange hashpartitioning(prod_brand#573, 200), ENSURE_REQUIREMENTS, [plan_id=2404]
                      +- Scan ExistingRDD[prod_id#571,prod_cat#572,prod_brand#573,prod_value#574]
 
 </code></pre>
@@ -2593,22 +2599,22 @@ AdaptiveSparkPlan isFinalPlan=false
 </section>
 <section id="windows-can-be-defined-on-multiple-columns" class="level1">
 <h1>Windows can be defined on multiple columns</h1>
-<div id="acbda84c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:38.261379Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:37.753256Z&quot;}}" data-execution_count="81">
+<div id="de407fee" class="cell" data-execution_count="81">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb157"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Window</span>
-<span id="cb157-2"><a href="#cb157-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
-<span id="cb157-3"><a href="#cb157-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb157-4"><a href="#cb157-4" aria-hidden="true" tabindex="-1"></a>window <span class="op">=</span> Window.partitionBy(<span class="st">'prod_brand'</span>, <span class="st">'prod_cat'</span>)</span>
-<span id="cb157-5"><a href="#cb157-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb157-6"><a href="#cb157-6" aria-hidden="true" tabindex="-1"></a>avg <span class="op">=</span> fn.avg(<span class="st">'prod_value'</span>).over(window)</span>
-<span id="cb157-7"><a href="#cb157-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb157-8"><a href="#cb157-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb157-9"><a href="#cb157-9" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb157-10"><a href="#cb157-10" aria-hidden="true" tabindex="-1"></a>    products    </span>
-<span id="cb157-11"><a href="#cb157-11" aria-hidden="true" tabindex="-1"></a>        .withColumn(<span class="st">'avg_value'</span>, fn.<span class="bu">round</span>(avg, <span class="dv">2</span>))</span>
-<span id="cb157-12"><a href="#cb157-12" aria-hidden="true" tabindex="-1"></a>        .show()</span>
-<span id="cb157-13"><a href="#cb157-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb158"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> Window</span>
+<span id="cb158-2"><a href="#cb158-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> fn</span>
+<span id="cb158-3"><a href="#cb158-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-4"><a href="#cb158-4" aria-hidden="true" tabindex="-1"></a>window <span class="op">=</span> Window.partitionBy(<span class="st">'prod_brand'</span>, <span class="st">'prod_cat'</span>)</span>
+<span id="cb158-5"><a href="#cb158-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-6"><a href="#cb158-6" aria-hidden="true" tabindex="-1"></a>avg <span class="op">=</span> fn.avg(<span class="st">'prod_value'</span>).over(window)</span>
+<span id="cb158-7"><a href="#cb158-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-8"><a href="#cb158-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-9"><a href="#cb158-9" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb158-10"><a href="#cb158-10" aria-hidden="true" tabindex="-1"></a>    products    </span>
+<span id="cb158-11"><a href="#cb158-11" aria-hidden="true" tabindex="-1"></a>        .withColumn(<span class="st">'avg_value'</span>, fn.<span class="bu">round</span>(avg, <span class="dv">2</span>))</span>
+<span id="cb158-12"><a href="#cb158-12" aria-hidden="true" tabindex="-1"></a>        .show()</span>
+<span id="cb158-13"><a href="#cb158-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+-------+--------+----------+----------+---------+
@@ -2625,34 +2631,34 @@ AdaptiveSparkPlan isFinalPlan=false
 </div>
 <section id="lag-and-lead" class="level2">
 <h2 class="anchored" data-anchor-id="lag-and-lead">Lag and Lead</h2>
-<div id="499ad85d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:39.785452Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:39.084502Z&quot;}}" data-execution_count="82">
+<div id="eabc4587" class="cell" data-execution_count="82">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb159"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a>purchases <span class="op">=</span> spark.createDataFrame(</span>
-<span id="cb159-2"><a href="#cb159-2" aria-hidden="true" tabindex="-1"></a>    [</span>
-<span id="cb159-3"><a href="#cb159-3" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">1</span>), <span class="st">'mouse'</span>),</span>
-<span id="cb159-4"><a href="#cb159-4" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">2</span>), <span class="st">'mouse'</span>),</span>
-<span id="cb159-5"><a href="#cb159-5" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">4</span>), <span class="st">'keyboard'</span>),</span>
-<span id="cb159-6"><a href="#cb159-6" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">6</span>), <span class="st">'keyboard'</span>),</span>
-<span id="cb159-7"><a href="#cb159-7" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">9</span>), <span class="st">'keyboard'</span>),</span>
-<span id="cb159-8"><a href="#cb159-8" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">12</span>), <span class="st">'mouse'</span>),</span>
-<span id="cb159-9"><a href="#cb159-9" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">18</span>), <span class="st">'keyboard'</span>)</span>
-<span id="cb159-10"><a href="#cb159-10" aria-hidden="true" tabindex="-1"></a>    ], </span>
-<span id="cb159-11"><a href="#cb159-11" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'date'</span>, <span class="st">'prod_cat'</span>]</span>
-<span id="cb159-12"><a href="#cb159-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb159-13"><a href="#cb159-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb159-14"><a href="#cb159-14" aria-hidden="true" tabindex="-1"></a>purchases.show()</span>
-<span id="cb159-15"><a href="#cb159-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb159-16"><a href="#cb159-16" aria-hidden="true" tabindex="-1"></a>window <span class="op">=</span> Window.partitionBy(<span class="st">'prod_cat'</span>).orderBy(<span class="st">'date'</span>)</span>
-<span id="cb159-17"><a href="#cb159-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb159-18"><a href="#cb159-18" aria-hidden="true" tabindex="-1"></a>prev_purch <span class="op">=</span> fn.lag(<span class="st">'date'</span>, <span class="dv">1</span>).over(window)</span>
-<span id="cb159-19"><a href="#cb159-19" aria-hidden="true" tabindex="-1"></a>next_purch <span class="op">=</span> fn.lead(<span class="st">'date'</span>, <span class="dv">1</span>).over(window)</span>
-<span id="cb159-20"><a href="#cb159-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb159-21"><a href="#cb159-21" aria-hidden="true" tabindex="-1"></a>purchases<span class="op">\</span></span>
-<span id="cb159-22"><a href="#cb159-22" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">'prev'</span>, prev_purch)<span class="op">\</span></span>
-<span id="cb159-23"><a href="#cb159-23" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">'next'</span>, next_purch)<span class="op">\</span></span>
-<span id="cb159-24"><a href="#cb159-24" aria-hidden="true" tabindex="-1"></a>    .orderBy(<span class="st">'prod_cat'</span>, <span class="st">'date'</span>)<span class="op">\</span></span>
-<span id="cb159-25"><a href="#cb159-25" aria-hidden="true" tabindex="-1"></a>    .show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb160"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a>purchases <span class="op">=</span> spark.createDataFrame(</span>
+<span id="cb160-2"><a href="#cb160-2" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb160-3"><a href="#cb160-3" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">1</span>), <span class="st">'mouse'</span>),</span>
+<span id="cb160-4"><a href="#cb160-4" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">2</span>), <span class="st">'mouse'</span>),</span>
+<span id="cb160-5"><a href="#cb160-5" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">4</span>), <span class="st">'keyboard'</span>),</span>
+<span id="cb160-6"><a href="#cb160-6" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">6</span>), <span class="st">'keyboard'</span>),</span>
+<span id="cb160-7"><a href="#cb160-7" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">9</span>), <span class="st">'keyboard'</span>),</span>
+<span id="cb160-8"><a href="#cb160-8" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">12</span>), <span class="st">'mouse'</span>),</span>
+<span id="cb160-9"><a href="#cb160-9" aria-hidden="true" tabindex="-1"></a>        (date(<span class="dv">2017</span>, <span class="dv">11</span>, <span class="dv">18</span>), <span class="st">'keyboard'</span>)</span>
+<span id="cb160-10"><a href="#cb160-10" aria-hidden="true" tabindex="-1"></a>    ], </span>
+<span id="cb160-11"><a href="#cb160-11" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'date'</span>, <span class="st">'prod_cat'</span>]</span>
+<span id="cb160-12"><a href="#cb160-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb160-13"><a href="#cb160-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-14"><a href="#cb160-14" aria-hidden="true" tabindex="-1"></a>purchases.show()</span>
+<span id="cb160-15"><a href="#cb160-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-16"><a href="#cb160-16" aria-hidden="true" tabindex="-1"></a>window <span class="op">=</span> Window.partitionBy(<span class="st">'prod_cat'</span>).orderBy(<span class="st">'date'</span>)</span>
+<span id="cb160-17"><a href="#cb160-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-18"><a href="#cb160-18" aria-hidden="true" tabindex="-1"></a>prev_purch <span class="op">=</span> fn.lag(<span class="st">'date'</span>, <span class="dv">1</span>).over(window)</span>
+<span id="cb160-19"><a href="#cb160-19" aria-hidden="true" tabindex="-1"></a>next_purch <span class="op">=</span> fn.lead(<span class="st">'date'</span>, <span class="dv">1</span>).over(window)</span>
+<span id="cb160-20"><a href="#cb160-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-21"><a href="#cb160-21" aria-hidden="true" tabindex="-1"></a>purchases<span class="op">\</span></span>
+<span id="cb160-22"><a href="#cb160-22" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">'prev'</span>, prev_purch)<span class="op">\</span></span>
+<span id="cb160-23"><a href="#cb160-23" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">'next'</span>, next_purch)<span class="op">\</span></span>
+<span id="cb160-24"><a href="#cb160-24" aria-hidden="true" tabindex="-1"></a>    .orderBy(<span class="st">'prod_cat'</span>, <span class="st">'date'</span>)<span class="op">\</span></span>
+<span id="cb160-25"><a href="#cb160-25" aria-hidden="true" tabindex="-1"></a>    .show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+----------+--------+
@@ -2684,23 +2690,23 @@ AdaptiveSparkPlan isFinalPlan=false
 </section>
 <section id="rank-denserank-and-rownumber" class="level2">
 <h2 class="anchored" data-anchor-id="rank-denserank-and-rownumber">Rank, DenseRank and RowNumber</h2>
-<div id="d86884cf" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:40.005845Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:39.787433Z&quot;}}" data-execution_count="83">
+<div id="3f2f56e6" class="cell" data-execution_count="83">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb161"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a>contestants <span class="op">=</span> spark.createDataFrame(</span>
-<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a>    [   </span>
-<span id="cb161-3"><a href="#cb161-3" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'veterans'</span>, <span class="st">'John'</span>, <span class="dv">3000</span>),</span>
-<span id="cb161-4"><a href="#cb161-4" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'veterans'</span>, <span class="st">'Bob'</span>, <span class="dv">3200</span>),</span>
-<span id="cb161-5"><a href="#cb161-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'veterans'</span>, <span class="st">'Mary'</span>, <span class="dv">4000</span>),</span>
-<span id="cb161-6"><a href="#cb161-6" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'young'</span>, <span class="st">'Jane'</span>, <span class="dv">4000</span>),</span>
-<span id="cb161-7"><a href="#cb161-7" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'young'</span>, <span class="st">'April'</span>, <span class="dv">3100</span>),</span>
-<span id="cb161-8"><a href="#cb161-8" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'young'</span>, <span class="st">'Alice'</span>, <span class="dv">3700</span>),</span>
-<span id="cb161-9"><a href="#cb161-9" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'young'</span>, <span class="st">'Micheal'</span>, <span class="dv">4000</span>),</span>
-<span id="cb161-10"><a href="#cb161-10" aria-hidden="true" tabindex="-1"></a>    ], </span>
-<span id="cb161-11"><a href="#cb161-11" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'category'</span>, <span class="st">'name'</span>, <span class="st">'points'</span>]</span>
-<span id="cb161-12"><a href="#cb161-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb161-13"><a href="#cb161-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb161-14"><a href="#cb161-14" aria-hidden="true" tabindex="-1"></a>contestants.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb162"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a>contestants <span class="op">=</span> spark.createDataFrame(</span>
+<span id="cb162-2"><a href="#cb162-2" aria-hidden="true" tabindex="-1"></a>    [   </span>
+<span id="cb162-3"><a href="#cb162-3" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'veterans'</span>, <span class="st">'John'</span>, <span class="dv">3000</span>),</span>
+<span id="cb162-4"><a href="#cb162-4" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'veterans'</span>, <span class="st">'Bob'</span>, <span class="dv">3200</span>),</span>
+<span id="cb162-5"><a href="#cb162-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'veterans'</span>, <span class="st">'Mary'</span>, <span class="dv">4000</span>),</span>
+<span id="cb162-6"><a href="#cb162-6" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'young'</span>, <span class="st">'Jane'</span>, <span class="dv">4000</span>),</span>
+<span id="cb162-7"><a href="#cb162-7" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'young'</span>, <span class="st">'April'</span>, <span class="dv">3100</span>),</span>
+<span id="cb162-8"><a href="#cb162-8" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'young'</span>, <span class="st">'Alice'</span>, <span class="dv">3700</span>),</span>
+<span id="cb162-9"><a href="#cb162-9" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'young'</span>, <span class="st">'Micheal'</span>, <span class="dv">4000</span>),</span>
+<span id="cb162-10"><a href="#cb162-10" aria-hidden="true" tabindex="-1"></a>    ], </span>
+<span id="cb162-11"><a href="#cb162-11" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'category'</span>, <span class="st">'name'</span>, <span class="st">'points'</span>]</span>
+<span id="cb162-12"><a href="#cb162-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb162-13"><a href="#cb162-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb162-14"><a href="#cb162-14" aria-hidden="true" tabindex="-1"></a>contestants.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+--------+-------+------+
@@ -2717,27 +2723,27 @@ AdaptiveSparkPlan isFinalPlan=false
 </code></pre>
 </div>
 </div>
-<div id="7aaa0ec4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2022-01-26T10:58:40.653650Z&quot;,&quot;start_time&quot;:&quot;2022-01-26T10:58:40.009618Z&quot;}}" data-execution_count="84">
+<div id="ae272112" class="cell" data-execution_count="84">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb163"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a>window <span class="op">=</span> (</span>
-<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a>    Window</span>
-<span id="cb163-3"><a href="#cb163-3" aria-hidden="true" tabindex="-1"></a>        .partitionBy(<span class="st">'category'</span>)</span>
-<span id="cb163-4"><a href="#cb163-4" aria-hidden="true" tabindex="-1"></a>        .orderBy(contestants.points.desc())</span>
-<span id="cb163-5"><a href="#cb163-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb163-6"><a href="#cb163-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-7"><a href="#cb163-7" aria-hidden="true" tabindex="-1"></a>rank <span class="op">=</span> fn.rank().over(window)</span>
-<span id="cb163-8"><a href="#cb163-8" aria-hidden="true" tabindex="-1"></a>dense_rank <span class="op">=</span> fn.dense_rank().over(window)</span>
-<span id="cb163-9"><a href="#cb163-9" aria-hidden="true" tabindex="-1"></a>row_number <span class="op">=</span> fn.row_number().over(window)</span>
-<span id="cb163-10"><a href="#cb163-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-11"><a href="#cb163-11" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb163-12"><a href="#cb163-12" aria-hidden="true" tabindex="-1"></a>contestants</span>
-<span id="cb163-13"><a href="#cb163-13" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">'rank'</span>, rank)</span>
-<span id="cb163-14"><a href="#cb163-14" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">'dense_rank'</span>, dense_rank)</span>
-<span id="cb163-15"><a href="#cb163-15" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">'row_number'</span>, row_number)</span>
-<span id="cb163-16"><a href="#cb163-16" aria-hidden="true" tabindex="-1"></a>    .orderBy(<span class="st">'category'</span>, fn.col(<span class="st">'points'</span>).desc())</span>
-<span id="cb163-17"><a href="#cb163-17" aria-hidden="true" tabindex="-1"></a>    .show()</span>
-<span id="cb163-18"><a href="#cb163-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb164"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a>window <span class="op">=</span> (</span>
+<span id="cb164-2"><a href="#cb164-2" aria-hidden="true" tabindex="-1"></a>    Window</span>
+<span id="cb164-3"><a href="#cb164-3" aria-hidden="true" tabindex="-1"></a>        .partitionBy(<span class="st">'category'</span>)</span>
+<span id="cb164-4"><a href="#cb164-4" aria-hidden="true" tabindex="-1"></a>        .orderBy(contestants.points.desc())</span>
+<span id="cb164-5"><a href="#cb164-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb164-6"><a href="#cb164-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb164-7"><a href="#cb164-7" aria-hidden="true" tabindex="-1"></a>rank <span class="op">=</span> fn.rank().over(window)</span>
+<span id="cb164-8"><a href="#cb164-8" aria-hidden="true" tabindex="-1"></a>dense_rank <span class="op">=</span> fn.dense_rank().over(window)</span>
+<span id="cb164-9"><a href="#cb164-9" aria-hidden="true" tabindex="-1"></a>row_number <span class="op">=</span> fn.row_number().over(window)</span>
+<span id="cb164-10"><a href="#cb164-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb164-11"><a href="#cb164-11" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb164-12"><a href="#cb164-12" aria-hidden="true" tabindex="-1"></a>contestants</span>
+<span id="cb164-13"><a href="#cb164-13" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">'rank'</span>, rank)</span>
+<span id="cb164-14"><a href="#cb164-14" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">'dense_rank'</span>, dense_rank)</span>
+<span id="cb164-15"><a href="#cb164-15" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">'row_number'</span>, row_number)</span>
+<span id="cb164-16"><a href="#cb164-16" aria-hidden="true" tabindex="-1"></a>    .orderBy(<span class="st">'category'</span>, fn.col(<span class="st">'points'</span>).desc())</span>
+<span id="cb164-17"><a href="#cb164-17" aria-hidden="true" tabindex="-1"></a>    .show()</span>
+<span id="cb164-18"><a href="#cb164-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>+--------+-------+------+----+----------+----------+
@@ -2753,6 +2759,12 @@ AdaptiveSparkPlan isFinalPlan=false
 +--------+-------+------+----+----------+----------+
 </code></pre>
 </div>
+</div>
+<div id="e5b0dd79" class="cell" data-execution_count="89">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb166"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a>spark.stop()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 
 
