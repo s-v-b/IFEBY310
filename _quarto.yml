@@ -85,7 +85,8 @@ resources:
   - "/projects/hmw-II.html"
   - "/projects/hmw-II.pdf"
   - "/data/drug-enforcement.json.zip"
-  - "/data/webdata.parquet.zip"    
+  - "/data/webdata.parquet.zip"  
+  - "/data/nytimes_news_articles.txt"  
 
 format:
   html:
