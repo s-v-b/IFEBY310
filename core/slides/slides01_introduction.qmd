@@ -2,7 +2,7 @@
 date: "`r Sys.Date()`"
 title: "Big data technologies"
 
-engine: knitr
+engine: jupyter
 ---
 
 

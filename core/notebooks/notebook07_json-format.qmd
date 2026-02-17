@@ -197,12 +197,19 @@ type that is a built-in type. We can conveniently define a method `convert_to_di
 that returns a dictionary representation of our object. `json.dumps()` 
 takes in a optional argument, `default`, which specifies a function to be called if the object is not serializable. This function returns a JSON encodable version of the object.
 
-Recall that class `obj` has a `dunder` attribute `__dict__` that provides a basis for obtaining a dictionary with the attributes of any object:
+Recall that, by default, user defined classes have a `dunder` attribute `__dict__` that provides a basis for obtaining a dictionary with the (possibly dynamic) attributes of any object of these classes:
 
 ```{python}
 new_user.__dict__
 ```
 
+::: {.callout-warning}
+
+Types implemented in `C` (built-in types, but also `numpy.ndarray`) do not have `__dict__` attributes. 
+
+User defined classes with `__slots__` attribute do not have a `__dict__` attribute as well. 
+
+:::
 
 ```{python}
 def obj_to_dict(obj):
@@ -966,3 +973,20 @@ An `array` column can be *exploded*. This is like pivoting into long form. The r
 
 
 
+# Json string operations
+
+## Spark 3
+
+```{python}
+
+with open(filename, 'r') as file:
+    ljstrings = json.load(file)
+```
+
+```{python}
+df_foo = spark.createDataFrame([(1, '''{"a": 1}''')], ("key", "value"))
+df_foo.select(fn.from_json(df_foo.value, "a INT").alias("json")).show()
+```
+## Spark 4 and the `Variant` type
+
+[Spark SQL `variant_val`](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/variant_val.html)

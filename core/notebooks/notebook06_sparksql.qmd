@@ -44,37 +44,31 @@ row1['name']
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:57.185741Z', start_time: '2022-01-26T10:58:57.155181Z'}
 df = spark.createDataFrame([row1, row2, row3])
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:59:13.491438Z', start_time: '2022-01-26T10:59:13.486119Z'}
 df.printSchema()
 ```
 
 How does `printSchema` compare with Pandas `info()`?
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:59:17.760344Z', start_time: '2022-01-26T10:59:17.597166Z'}
 df.show()
 ```
 
 How does `show` compare with Pandas `head()`
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:59:25.889372Z', start_time: '2022-01-26T10:59:25.866666Z'}
 print(df.rdd.toDebugString().decode("utf-8"))
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:59:45.432264Z', start_time: '2022-01-26T10:59:45.426727Z'}
 df.rdd.getNumPartitions()
 ```
 
 ## Creating dataframes
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:18.707591Z', start_time: '2022-01-26T10:58:18.220608Z'}
 rows = [
     Row(name="John", age=21, gender="male"),
     Row(name="James", age=25, gender="female"),
@@ -85,7 +79,6 @@ df = spark.createDataFrame(rows)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:18.707591Z', start_time: '2022-01-26T10:58:18.220608Z'}
 df.show()
 ```
 
@@ -94,7 +87,6 @@ help(Row)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:19.065539Z', start_time: '2022-01-26T10:58:18.710711Z'}
 column_names = ["name", "age", "gender"]
 rows = [
     ["John", 21, "male"],
@@ -111,12 +103,10 @@ df.show()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:19.074335Z', start_time: '2022-01-26T10:58:19.068088Z'}
 df.printSchema()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:19.840178Z', start_time: '2022-01-26T10:58:19.077057Z'}
 # sc = SparkContext(conf=conf)  # no need for Spark 3...
 
 column_names = ["name", "age", "gender"]
@@ -135,14 +125,12 @@ There is special type schemata. A object of class `StructType` is made of a list
 
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:19.850578Z', start_time: '2022-01-26T10:58:19.843835Z'}
 df.schema
 ```
 
 How does `df.schema` relate to `df.printSchema()`? Where would you use the outputs of `df.schema` and `df.printSchema()`.
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:19.860631Z', start_time: '2022-01-26T10:58:19.854012Z'}
 type(df.schema)
 ```
 
@@ -151,7 +139,6 @@ A object of type `StructField` has a *name* like `gender`, a PySpark *type* like
 What does the boolean parameter stand for?
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:20.199419Z', start_time: '2022-01-26T10:58:19.863528Z'}
 from pyspark.sql.types import *
 
 schema = StructType(
@@ -177,7 +164,6 @@ PySpark offers two ways to query a datafrane:
   
 ```{python}
 #| label: play-it-like-sql
-#| ExecuteTime: {end_time: '2022-01-26T10:58:20.882311Z', start_time: '2022-01-26T10:58:20.201993Z'}
 column_names = ["name", "age", "gender"]
 rows = [
     ["John", 21, "male"],
@@ -246,7 +232,6 @@ men_df = (
 ## `SELECT`  (projection $π$)
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:21.162623Z', start_time: '2022-01-26T10:58:20.884802Z'}
 df.createOrReplaceTempView("table")    
 
 query = """
@@ -261,7 +246,6 @@ spark.sql(query).show()
 
 Using the API:
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:21.388097Z', start_time: '2022-01-26T10:58:21.164840Z'}
 (
     df
         .select("name", "age")
@@ -274,7 +258,6 @@ Using the API:
 ## `WHERE`  (filter, selection, $σ$)
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:21.704402Z', start_time: '2022-01-26T10:58:21.402155Z'}
 df.createOrReplaceTempView("table")
 
 query = """
@@ -299,7 +282,6 @@ Note that you can get rid of `|> SELECT *`
 
 Using the API 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:21.924501Z', start_time: '2022-01-26T10:58:21.706741Z'}
 ( 
     df
         .where("age > 21")
@@ -312,7 +294,6 @@ This implements `σ(df, "age > 21")`
 The `where()` method takes different types of inputs as argument: strings that can be interpreted as SQL conditions, but also boolean masks.
  
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:22.377417Z', start_time: '2022-01-26T10:58:21.926708Z'}
 # Alternatively:
 ( 
     df
@@ -324,7 +305,6 @@ The `where()` method takes different types of inputs as argument: strings that c
 or 
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:22.566385Z', start_time: '2022-01-26T10:58:22.380036Z'}
 ( 
     df
       .where(df.age > 21)
@@ -337,7 +317,6 @@ Where (and how) is the boolean mask built?
 
 Method chaining allows to construct complex queries 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:22.837136Z', start_time: '2022-01-26T10:58:22.569324Z'}
 ( 
     df
       .where("age > 21")
@@ -356,7 +335,6 @@ This implements
 ## `LIMIT`  
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:23.315363Z', start_time: '2022-01-26T10:58:22.842106Z'}
 df.createOrReplaceTempView("table")
 
 query = """
@@ -376,19 +354,16 @@ spark.sql(query).show()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:23.522646Z', start_time: '2022-01-26T10:58:23.318694Z'}
 df.limit(1).show()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:23.778517Z', start_time: '2022-01-26T10:58:23.525281Z'}
 df.select("*").limit(1).show()
 ```
 
 ## `ORDER BY`
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:24.190838Z', start_time: '2022-01-26T10:58:23.781166Z'}
 df.createOrReplaceTempView("table")
 
 query = """
@@ -411,14 +386,12 @@ spark.sql(query).show()
 With  the API 
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:24.368069Z', start_time: '2022-01-26T10:58:24.193899Z'}
 df.orderBy(df.name.asc()).show()
 ```
 
 ## `ALIAS`  (rename)
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:24.643668Z', start_time: '2022-01-26T10:58:24.370758Z'}
 df.createOrReplaceTempView("table")
 
 query = """
@@ -441,7 +414,6 @@ type(df.age)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:24.858104Z', start_time: '2022-01-26T10:58:24.646119Z'}
 
 (
     df.select(
@@ -455,7 +427,6 @@ type(df.age)
 ## `CAST`
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:25.072286Z', start_time: '2022-01-26T10:58:24.860474Z'}
 df.createOrReplaceTempView("table")
 
 query = """
@@ -477,7 +448,6 @@ spark.sql(query).show()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:25.384433Z', start_time: '2022-01-26T10:58:25.074523Z'}
 
 (
     df
@@ -491,7 +461,6 @@ spark.sql(query).show()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:25.648155Z', start_time: '2022-01-26T10:58:25.386952Z'}
 new_age_col = df.age.cast("float").alias("age_f")
 type(new_age_col), type(df.age)
 ```
@@ -503,7 +472,6 @@ df.select(df.name, new_age_col).show()
 ## Adding new columns
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:25.931495Z', start_time: '2022-01-26T10:58:25.651283Z'}
 df.createOrReplaceTempView("table")
 
 query = """
@@ -517,7 +485,6 @@ spark.sql(query).show()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:26.195480Z', start_time: '2022-01-26T10:58:25.933620Z'}
 ( 
     df
         .withColumn("age_months", df.age * 12)
@@ -526,7 +493,6 @@ spark.sql(query).show()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:26.422122Z', start_time: '2022-01-26T10:58:26.197759Z'}
 #| scrolled: true
 
 (
@@ -558,7 +524,6 @@ str(hui)
 ## Numeric functions examples
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:26.748718Z', start_time: '2022-01-26T10:58:26.425451Z'}
 from pyspark.sql import functions as fn
 
 columns = ["brand", "cost"]
@@ -585,7 +550,6 @@ ceil_cost = fn.ceil(df.cost)
 ## String functions examples
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:27.055563Z', start_time: '2022-01-26T10:58:26.751235Z'}
 from pyspark.sql import functions as fn
 
 columns = ["first_name", "last_name"]
@@ -630,7 +594,6 @@ Spark SQL offers a large  subsets of [SQL functions](https://www.postgresql.org/
 ## Date functions examples
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:27.373396Z', start_time: '2022-01-26T10:58:27.057938Z'}
 from datetime import date
 from pyspark.sql import functions as fn
 
@@ -672,7 +635,6 @@ date(2023, 2 , 14) + timedelta(days=3)
 ## Conditional transformations
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:27.630822Z', start_time: '2022-01-26T10:58:27.375855Z'}
 df = spark.createDataFrame([
     ("John", 21, "male"),
     ("Jane", 25, "female"),
@@ -682,7 +644,6 @@ df = spark.createDataFrame([
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:27.630822Z', start_time: '2022-01-26T10:58:27.375855Z'}
 supervisor = ( 
     fn.when(df.gender == 'male', 'Mr. Smith')
       .when(df.gender == 'female', 'Miss Jones')
@@ -693,14 +654,16 @@ type(supervisor), type(fn.when)
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:27.630822Z', start_time: '2022-01-26T10:58:27.375855Z'}
-df.withColumn("supervisor", supervisor).show()
+(
+    df
+        .withColumn("supervisor", supervisor)
+        .show()
+)
 ```
 
 ## User-defined functions
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:28.037428Z', start_time: '2022-01-26T10:58:27.633093Z'}
 from pyspark.sql import functions as fn
 from pyspark.sql.types import StringType
 
@@ -762,7 +725,6 @@ See [User-Defined Table Functions (UDTFs) in Python](https://docs.databricks.com
 ## Using the `spark.sql` API
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:29.098957Z', start_time: '2022-01-26T10:58:28.042691Z'}
 from datetime import date
 
 products = spark.createDataFrame(
@@ -795,7 +757,6 @@ Have a look at the PostgreSQL documentation. What are the different join methods
 ## Using a `SQL` query
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:29.731271Z', start_time: '2022-01-26T10:58:29.101559Z'}
 #| scrolled: true
 products.createOrReplaceTempView("products")
 purchases.createOrReplaceTempView("purchases")
@@ -820,7 +781,6 @@ spark.sql(query).explain()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:30.660419Z', start_time: '2022-01-26T10:58:29.734282Z'}
 new_purchases = spark.createDataFrame([
     (date(2017, 11, 1), 2, '1'),
     (date(2017, 11, 2), 1, '3'),
@@ -841,7 +801,6 @@ join_rule.info
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:31.319336Z', start_time: '2022-01-26T10:58:30.663809Z'}
 #| scrolled: true
 new_purchases = spark.createDataFrame([
     (date(2017, 11, 1), 2, '1'),
@@ -872,7 +831,6 @@ The `join` method has three parameters:
 ## Various types of joins
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:31.376310Z', start_time: '2022-01-26T10:58:31.323600Z'}
 left = spark.createDataFrame([
     (1, "A1"), (2, "A2"), (3, "A3"), (4, "A4")], 
     ["id", "value"])
@@ -888,7 +846,6 @@ join_types = [
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:34.708236Z', start_time: '2022-01-26T10:58:31.380091Z'}
 for join_type in join_types:
     print(join_type)
     left.join(right, on="id", how=join_type)\
@@ -901,7 +858,6 @@ for join_type in join_types:
 ## Examples using the API
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:35.398306Z', start_time: '2022-01-26T10:58:34.710552Z'}
 from pyspark.sql import functions as fn
 
 products = spark.createDataFrame([
@@ -924,7 +880,6 @@ What is the type of `products
         .groupBy('prod_cat')`? 
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:35.782623Z', start_time: '2022-01-26T10:58:35.400724Z'}
 
 (
     products
@@ -948,7 +903,6 @@ What is the type of `products
 
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:36.195471Z', start_time: '2022-01-26T10:58:35.784780Z'}
 from pyspark.sql import functions as fn
 
 (
@@ -962,7 +916,6 @@ from pyspark.sql import functions as fn
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:36.650354Z', start_time: '2022-01-26T10:58:36.207985Z'}
 from pyspark.sql import functions as fn
 
 (
@@ -987,7 +940,6 @@ from pyspark.sql import functions as fn
 
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:37.089099Z', start_time: '2022-01-26T10:58:36.652842Z'}
 products.createOrReplaceTempView("products")
 ```
 
@@ -1024,7 +976,6 @@ spark.sql(query).explain()
 ## Numerical window functions
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:37.751296Z', start_time: '2022-01-26T10:58:37.092075Z'}
 from pyspark.sql import Window
 from pyspark.sql import functions as fn
 
@@ -1110,7 +1061,6 @@ spark.sql(query).explain()
 # Windows can be defined on multiple columns
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:38.261379Z', start_time: '2022-01-26T10:58:37.753256Z'}
 from pyspark.sql import Window
 from pyspark.sql import functions as fn
 
@@ -1130,7 +1080,6 @@ avg = fn.avg('prod_value').over(window)
 ## Lag and Lead
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:39.785452Z', start_time: '2022-01-26T10:58:39.084502Z'}
 purchases = spark.createDataFrame(
     [
         (date(2017, 11, 1), 'mouse'),
@@ -1161,7 +1110,6 @@ purchases\
 ## Rank, DenseRank and RowNumber
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:40.005845Z', start_time: '2022-01-26T10:58:39.787433Z'}
 contestants = spark.createDataFrame(
     [   
         ('veterans', 'John', 3000),
@@ -1179,7 +1127,6 @@ contestants.show()
 ```
 
 ```{python}
-#| ExecuteTime: {end_time: '2022-01-26T10:58:40.653650Z', start_time: '2022-01-26T10:58:40.009618Z'}
 window = (
     Window
         .partitionBy('category')
@@ -1266,3 +1213,8 @@ for k, v in dic_df.items():
 We can now query the tables. 
 
 :::
+
+
+```{python}
+spark.stop()
+```

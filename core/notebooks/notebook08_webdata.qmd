@@ -44,6 +44,9 @@ Here is an agenda for this:
 ```{python}
 import os
 import sys
+import requests, zipfile, io
+from pathlib import Path
+
 
 os.environ['PYSPARK_PYTHON'] = sys.executable
 os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
@@ -54,6 +57,14 @@ os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
 from pyspark.sql import SparkSession
 ```
 
+
+```{python}
+from pyspark.sql import Window
+import pyspark.sql.functions as func
+from pyspark.sql.types import *
+from pyspark.sql.functions import col, lit
+```
+
 ::: {.callout-note}
 
 ### Spark in standalone mode
@@ -62,8 +73,26 @@ So far, we used the `local` mode.
 
 To launch spark in standalone mode, assuming the current working directory is `$SPARK_HOME` 
 
+Assume that `hadoop` is running. This can be checked by monitoring java processes running on the local machine 
+
+```{.jps}
+$ jps 
+30033 Jps
+>>> 18898 NodeManager
+>>> 17735 NameNode
+>>> 18216 SecondaryNameNode
+>>> 17965 DataNode
+>>> 18542 ResourceManager
+```
+`NameNode` `DataNode` and `SecondaryNameNode` have been launched by `start-dfs.sh`, while `NodeManager` and  `ResourceManager` have been 
+launched by `start-yarn`.
+
+We can monitor `NameNode` at `http://localhost:9870`
+
+Then we may launch a `master`  and a `worker` process. 
+
 ```{.bash}
-$ ./sbin/sWe may tart-master.sh --ip localhost
+$ ./sbin/start-master.sh --ip localhost
 >>> starting org.apache.spark.deploy.master.Master, logging to ...
 $ ./sbin/start-worker.sh spark://localhost:7077
 ```
@@ -81,7 +110,10 @@ from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as fn
 from pyspark.sql.functions import col
+```
 
+```{python}
+#| eval: false
 spark = (SparkSession
     .builder
     .appName("Taming Webdata")
@@ -93,15 +125,18 @@ sc = spark._sc
 
 ```{python}
 #| eval: false
-spark = SparkSession.builder \
-            .appName("Spark webdata") \
-            .master("spark://localhost:7077") \
-            .config("spark.driver.memory", "16G") \
-            .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer") \
-            .config("spark.kryoserializer.buffer.max", "2000M") \
-            .config("spark.driver.maxResultSize", "0") \
-            .config("spark.jars.packages", "com.johnsnowlabs.nlp:spark-nlp_2.12:5.2.3") \
+
+spark =  (
+    SparkSession.builder 
+            .appName("Spark webdata") 
+            .master("spark://localhost:7077") 
+            # .config("spark.driver.memory", "16G") 
+            # .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer") 
+            # .config("spark.kryoserializer.buffer.max", "2000M") 
+            # .config("spark.driver.maxResultSize", "0") 
+#            .config("spark.jars.packages", "com.johnsnowlabs.nlp:spark-nlp_2.12:5.2.3") \
             .getOrCreate()
+)
 ```
 
 ```{python}
@@ -115,10 +150,10 @@ spark = SparkSession.builder \
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-05-03T16:28:38.406210Z', start_time: '2020-05-03T16:28:08.594803Z'}
-import requests, zipfile, io
-from pathlib import Path
 
-path = Path('data/webdata.parquet')
+
+path = Path('./data/webdata.parquet')
+
 if not path.exists():
     url = "https://s-v-b.github.io/IFEBY310/data/webdata.parquet.zip"
     r = requests.get(url)
@@ -129,14 +164,13 @@ if not path.exists():
 ```{python}
 #| ExecuteTime: {end_time: '2020-05-03T16:27:49.141388Z', start_time: '2020-05-03T16:27:48.989135Z'}
 #| scrolled: true
-input_path = Path('./data')
-input_file =  'webdata.parquet'
-file_path = str(input_path / input_file)
+input_path = Path('data/webdata.parquet').absolute()
+file_path = 'file://' + str(input_path)
 
 df = spark.read.parquet(file_path)
 ```
 
-We can give a try to Pandas on Spark
+We can also give a try to [Pandas on Spark](https://spark.apache.org/pandas-on-spark/)
 
 ::: {.callout-note}
 
@@ -150,10 +184,16 @@ import comet as co
 import pyarrow.parquet as pq
 
 dfa = pq.read_table(file_path)
+
+type(dfa)
 ```
 
 ```{python}
 dfa.num_columns
+```
+
+```{python}
+dfa.schema
 ```
 
 ::: {.callout-warning}
@@ -199,7 +239,6 @@ First we need to import some things:
 - Spark types
 
 ```{python}
-#| ExecuteTime: {end_time: '2020-05-03T15:20:34.024704Z', start_time: '2020-05-03T15:20:34.016322Z'}
 from pyspark.sql import Window
 import pyspark.sql.functions as func
 from pyspark.sql.types import *
@@ -208,14 +247,17 @@ from pyspark.sql.functions import col, lit
 
 ## Compute the total number of unique users
 
+
+Compute the number of distinct values in column  `xid`
 ```{python}
-#| ExecuteTime: {end_time: '2020-05-03T15:20:36.790893Z', start_time: '2020-05-03T15:20:34.856924Z'}
 ( 
     df.select('xid')
       .distinct()
       .count()
 )
 ```
+
+Compute the number of distinct values in column `xid` for each partition of the dataframe. 
 
 ```{python}
 def foo(x):
@@ -227,6 +269,7 @@ def foo(x):
 ```{python}
 foo([1, 1, 2])
 ```
+
 
 ```{python}
 df.rdd.map(lambda x : x.xid).foreachPartition(foo)
@@ -248,9 +291,18 @@ This might pump up some computational resources
 
 ::: {.callout-note}
 
-The distinct values of `xid` seem to be evenly spread among the six files making the `parquet` directory 
+The distinct values of `xid` seem to be evenly spread among the six files making the `parquet` directory.  
 
 :::
+
+::: {.callout-note}
+
+Have a look at WebUI (usually `http://localhost:4040/`) and at the stages tab to visualize the corresponding DAG. 
+
+Can you match the items (at least some of them) of the output of `explain()` with the items visualized in the DAG?  
+
+:::
+
 
 ## Construct a column containing the total number of actions per user
 
@@ -276,6 +328,39 @@ df.show(n=2)
 
 Visualize the distribution of the number of users per number of actions.
 
+```{python}
+# One row per user with their n_events, then count users per n_events
+users_per_n_events = (
+    df.select('xid', 'n_events')
+    .dropDuplicates()
+    .groupBy('n_events')
+    .agg(func.count('xid').alias('height'))
+    .orderBy('n_events')
+)
+```
+
+```{python}
+#| label: fig-users-per-actions
+#| fig-cap: "Number of users (xid) per number of actions (n_events)"
+# Spark DataFrame plot (Plotly backend): n_events on X, number of users (height) on Y
+fig = (
+    users_per_n_events
+        .where(col('n_events') <= 10)
+        .plot.bar(
+            x='n_events', 
+            y='height', 
+            title='Number of users per number of actions performed',
+            labels={'n_events': 'Number of actions performed', 'height': 'Number of users'})
+)
+
+fig.update_layout(
+    xaxis_title='Number of actions performed',
+    yaxis_title='Number of users'
+)
+fig
+```
+
+
 ::: {.callout-note title="Question"}
 
 Construct a column containing the number of days since the last action of the user
@@ -297,7 +382,7 @@ max_date = (
 n_days_since_last_event = func.datediff(func.current_date(), max_date)
 
 df = df.withColumn('n_days_since_last_event',
-                   n_days_since_last_event)
+                    n_days_since_last_event)
 
 df.show(n=2)
 ```
@@ -313,14 +398,24 @@ df.printSchema()
 #| scrolled: true
 xid_device_partition = xid_partition.partitionBy('device')
 
-n_events_per_device = func.count(col('action')).over(xid_device_partition)
+n_events_per_device = (
+    func
+        .count(col('action'))
+        .over(xid_device_partition)
+)
 
 df = df.withColumn('n_events_per_device', n_events_per_device)
 
-df.head(n=2)
+df.show(n=2)
 ```
 
 ## Number of devices per user {{< fa mug-hot >}}
+
+::: {.callout-note}
+
+We do not intend to just perform an aggregation here. We aim at adding a new column to the dataframe. Using window functions (appropriate ranking function) may prove more readable and possibly more efficient than  performing aggregation and joining the result of aggregation with the original dataframe. 
+
+:::
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-05-03T15:21:06.411472Z', start_time: '2020-05-03T15:21:05.373879Z'}
@@ -340,8 +435,31 @@ n_unique_device = (
 
 df = df.withColumn('n_device', n_unique_device)
 
-df.head(n=2)
+df.show(n=2)
 ```
+
+
+```{python}
+#| label: number-events-per-device
+fig_2 = (
+    df.select(['device','n_events_per_device'])
+      .dropDuplicates()
+      .orderBy('n_events_per_device', ascending=False)
+      .plot.bar(
+            x='device', 
+            y='n_events_per_device')
+)
+
+fig_2.update_layout(
+    title='Number of events per device',
+    xaxis_title='Device',
+    yaxis_title='Number of events',
+    yaxis_type='log'
+)
+
+fig_2
+```
+
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-05-03T15:21:13.863382Z', start_time: '2020-05-03T15:21:12.479688Z'}
@@ -349,7 +467,7 @@ df.head(n=2)
 df\
     .where(col('n_device') > 1)\
     .select('xid', 'device', 'n_events',  'n_device', 'n_events_per_device')\
-    .head(n=8)
+    .show(n=8)
 ```
 
 ```{python}
@@ -359,24 +477,79 @@ df\
     .count()
 ```
 
-# Let's select the correct users and build a training dataset
+# Let  us select the correct users and build a training dataset
 
 We construct a ETL (Extract Transform Load) process on this data using the `pyspark.sql` API.
 
+
+::: {.callout-note}
+
+ETL (Extract Transform Load) and ELT (Extract Load Transform). Check that you understand these two acronyms. What do they stand for? What is the difference?
+
+:::
+
 ## Extraction
 
-Here extraction is just about reading the data
+Here *extraction* is just about reading the data.
+
+::: {.callout-note}
+
+What else coud *extraction* be about?
+
+:::
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-05-03T15:21:36.683625Z', start_time: '2020-05-03T15:21:36.427615Z'}
 #| scrolled: true
+
+file_path = './data/webdata.parquet'
+file_path = 'file://' + str(Path(file_path).absolute())
 df = spark.read.parquet(file_path)
 df.show(n=3)
 ```
 
+```{python}
+df = df.repartition(20, 'xid')
+```
+
+```{python}
+
+spark._sc.setCheckpointDir("file://" + str(Path('.').absolute()))   
+
+df.checkpoint()
+```
+
 ## Transformation of the data
 
-At this step we compute a lot of extra things from the data. The aim is to build *features* that describe users.
+At this step we compute a lot of extra things from the data. The aim is to build *features* that describe users. The features will eventually be used by ML (Machine Learning) methods.
+
+Each feature is built by feeding a *transformer* with a dataframe. Each 
+transformer returns a dataframe with one more column.
+
+The prospective list of transformers is:
+```
+hour_transformer
+n_actions_per_category_id_transformer
+n_days_since_last_action_transformer
+n_days_since_last_event_transformer
+n_events_per_category_id_transformer
+n_events_per_device_transformer
+n_events_per_hour_transformer
+n_events_per_website_id_transformer
+n_events_per_weekday_transformer
+n_unique_day_transformer
+n_unique_device_transformer
+n_unique_hour_transformer
+weekday_transformer
+```
+
+Each transformer is defined by 
+
+- a `Window` object (optional, some are used several times), 
+- a column function that defines the added column, and 
+- a name  for the added column. 
+
+The transformer is named after the name  of the added column. All transformers have the same signature. 
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-05-03T15:24:09.159215Z', start_time: '2020-05-03T15:24:09.136189Z'}
@@ -532,20 +705,36 @@ sample_df.count()
 
 ```{python}
 for transformer in transformers:
-    df = transformer(df)
-
-df.head(n=1)
-```
-
-```{python}
-for transformer in transformers:
     sample_df = transformer(sample_df)
 
-sample_df.head(n=1)
+sample_df.show(n=1)
 ```
 
 ```{python}
-df = sample_df
+sample_df.printSchema()
+```
+
+
+```{python}
+#| label: apply-transformers
+#| 
+from time import perf_counter
+
+t0 =  perf_counter()
+for transformer in transformers:
+    df = transformer(df)
+
+( 
+    df
+        .sample(withReplacement=False, fraction=.05)
+        .show(n=1)
+)
+
+print(perf_counter() -t0)
+```
+
+```{python}
+df.write.parquet('file:///home/boucheron/Documents/IFEBY310/core/notebooks/data/webdata-transformed.parquet', mode='overwrite')
 ```
 
 ```{python}
@@ -554,10 +743,57 @@ df = sample_df
 sorted(df.columns)
 ```
 
+
+::: {.callout-note}
+
+- How DRY-compliant is this code? 
+- Should we dry it?
+- Why would we dry it (readability, maintainability, ...)? 
+
+
+:::
+
+
 ## Load step
 
-Here, we use all the previous computations (saved in the columns of the dataframe) 
-to compute aggregated informations about each user.
+Here, we use all the previous computations (saved in the columns of the dataframe) to compute aggregated informations about each user.
+
+
+::: {.callout-note}
+
+All functions in the next chunk have one argument: a dataframe with schema
+
+```
+root
+ |-- xid: string (nullable = true)
+ |-- action: string (nullable = true)
+ |-- date: timestamp (nullable = true)
+ |-- website_id: string (nullable = true)
+ |-- url: string (nullable = true)
+ |-- category_id: float (nullable = true)
+ |-- zipcode: string (nullable = true)
+ |-- device: string (nullable = true)
+ |-- hour: integer (nullable = true)
+ |-- weekday: string (nullable = true)
+ |-- n_events_per_hour: long (nullable = false)
+ |-- n_events_per_weekday: long (nullable = false)
+ |-- n_days_since_last_event: double (nullable = true)
+ |-- n_days_since_last_action: double (nullable = true)
+ |-- n_unique_day: integer (nullable = true)
+ |-- n_unique_hour: integer (nullable = true)
+ |-- n_events_per_device: long (nullable = false)
+ |-- n_device: integer (nullable = true)
+ |-- n_actions_per_category_id: long (nullable = false)
+ |-- n_events_per_category_id: long (nullable = false)
+ |-- n_events_per_website_id: long (nullable = false)
+```
+
+All functions in the next chunk return a dataframe with three columns: 
+`xid`, `value`, `feature_name`.  Column `value` is obtained by renaming 
+a column `n_...` (built by one of the previous transformers). Column `feature_name`   
+
+
+:::
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-05-03T15:25:22.243433Z', start_time: '2020-05-03T15:25:22.217248Z'}
@@ -574,7 +810,7 @@ def n_events_per_hour_loader(df):
 
 def n_events_per_website_id_loader(df):
     csr = df.select('xid', 'website_id', 'n_events_per_website_id')\
-        .withColumnRenamed('n_events_per_hour', 'value')\
+        .withColumnRenamed('n_events_per_website_id', 'value')\
         .distinct()
     feature_name = func.concat(lit('n_events_per_website_id#'),
                                col('website_id'))
@@ -698,6 +934,18 @@ def n_events_per_website_id_loader(df):
     return csr
 ```
 
+
+::: {.callout-note}
+
+
+- How DRY-compliant is this code (bis)? 
+- Should we dry it?
+- Why would we dry it (readability, maintainability, ...)? 
+
+
+:::
+
+
 ```{python}
 #| ExecuteTime: {end_time: '2020-05-03T15:25:48.149670Z', start_time: '2020-05-03T15:25:37.966657Z'}
 #| scrolled: true
@@ -755,7 +1003,7 @@ csr = reduce(
     spam
 )
 
-csr.head(n=3)
+csr.show(n=3)
 ```
 
 ```{python}
@@ -788,17 +1036,24 @@ csr = csr.withColumn('col', col_idx)\
     .withColumn('row', row_idx)
 
 csr = csr.na.drop('any')
+```
 
+```{python}
 csr.head(n=5)
 ```
 
 
 ```{python}
 #| ExecuteTime: {end_time: '2020-05-03T15:32:02.552364Z', start_time: '2020-05-03T15:31:14.990298Z'}
-# Let's save the result of our hard work into a new parquet file
-output_path = Path('./data')
-output_file = str(output_path / 'csr.parquet')
+# Let's save the result of our hard work into a new parquet file (in the local filesystem)
+output_path = Path('./data').absolute()
+output_file = 'file://' + str(output_path / 'csr.parquet')
 csr.write.parquet(output_file, mode='overwrite')
+```
+
+```{python}
+# Save  the result  to hdfs
+cs.write.parquet('csr.parquet', mode='overwrite')
 ```
 
 # Preparation of the training dataset

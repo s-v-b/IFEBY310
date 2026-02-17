@@ -1,5 +1,5 @@
 ---
 title: "Spark Geo"
-engine: knitr
+engine: jupyter
 date: "2025-01-17"
 ---

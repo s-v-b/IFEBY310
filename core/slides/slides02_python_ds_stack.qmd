@@ -1,7 +1,7 @@
 ---
 date: "`r Sys.Date()`"
 title: "Python Data Science Stack"
-engine: knitr
+engine: jupyter
 ---
 
 # What is `Python` ?  {background-color="#1c191c"}

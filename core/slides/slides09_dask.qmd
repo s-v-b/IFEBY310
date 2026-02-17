@@ -3,6 +3,10 @@ title: "Dask"
 engine: jupyter
 date: "2025-01-17"
 
+format:
+  revealjs: 
+    scrollable: true
+
 execute: 
   eval: true
   echo: true
@@ -26,10 +30,10 @@ execute:
 
 ## Flavours of (big) data
 
-| Type        |     Typical size      | Features                                     |   Tool |
-|:--------------|:-----------------------:|:-----------------|--------------:|
-| Small data  |     Few GigaBytes     | Fits in RAM                                  | Pandas |
-| Medium data | Less than 2 Terabytes | Does not fit in RAM, fits on hard drive |   Dask |
+| Type        |     Typical size      | Features                                    |   Tool |
+|:------------|:---------------------:|:--------------------------------------------|:------:|
+| Small data  |     Few GigaBytes     | Fits in RAM                                 | Pandas |
+| Medium data | Less than 2 Terabytes | Does not fit in RAM, fits on hard drive     |   Dask |
 | Large data  |       Petabytes       | Does not fit on hard drive                  |  Spark |
 
 ---
@@ -58,6 +62,8 @@ These schedulers are low-latency and work hard to run computations in a small me
 
 
 [Dask FAQ](https://docs.dask.org/en/latest/faq.html)
+
+[]()
 
 . . .
 
@@ -199,6 +205,7 @@ def add(x, y):
 data = [1, 2, 3, 4, 5]
 
 output = []   # <2> 
+
 for x in data:
   a = inc(x)
   b = double(x)
@@ -535,10 +542,12 @@ df = data.to_dask_dataframe()
 
 ```{python}
 #| eval: false
-df.info()
-df._meta.dtypes
 
-df.npartitions
+try:
+df.info()
+#df._meta.dtypes
+
+# df.npartitions
 ```
 
 ```{python}
@@ -721,8 +730,12 @@ data.info
 ## 
 
 ```{python}
+from pathlib import Path
+fpath = Path('~/Downloads').expanduser() / 'nyc-2015.parquet/'
+
 ddf = dd.read_parquet(
-    "s3://dask-data/nyc-taxi/nyc-2015.parquet/part.*.parquet",
+#    "s3://dask-data/nyc-taxi/nyc-2015.parquet/part.*.parquet",
+    fpath,
     columns=[
       "passenger_count", 
       "tip_amount"],
