@@ -1,0 +1,76 @@
+
+```{python}
+#| label: chunk-make-appendix-bis
+#| echo: false
+#| eval: true
+#| code-fold: false
+#| output: asis
+# %%
+# %%
+import re
+from pathlib import Path
+from typing import List, Dict
+from IPython import get_ipython
+
+fpath = get_ipython().user_ns.get("__vsc_ipynb_file__")
+
+
+def parse_chunk_options(qmd_file: str) -> List[Dict[str, str]]:
+    """
+    Parse a .qmd file and extract all chunk options.
+    Returns a list of dictionaries, one per chunk with options.
+    """
+    content = Path(qmd_file).read_text()
+    
+    # Pattern to match Python code chunks
+    pattern = pattern = r'```\{python\}(.*?)```'
+
+    all_chunks = []
+    for match in re.finditer(pattern, content, re.DOTALL):
+        chunk_text = match.group(1)
+        options = {}
+        # print(chunk_text)
+        # Parse each line
+        chunk_body = ''
+        for line in chunk_text.split('\n'):
+            whole_line = line
+            line = line.strip()
+            if line.startswith('#|'):
+                # Remove #| and parse option
+                opt_line = line[2:].strip()
+                
+                # Handle different option formats
+                if ':' in opt_line:
+                    parts = opt_line.split(':', 1)
+                    key = parts[0].strip()
+                    value = parts[1].strip()
+                    # Remove quotes if present
+                    value = value.strip('"\'')
+                    options[key] = value
+                elif opt_line:  # Boolean option without value
+                    options[opt_line] = True
+            else:
+              chunk_body += whole_line + '\n'
+        
+        # Extract label if present (for reference)
+        if options:
+            options['body'] = chunk_body
+            all_chunks.append(options)
+    
+    return all_chunks
+
+# %%
+
+chunks = parse_chunk_options('fake_report_jupyter.qmd')
+
+print('```{.python}\n')
+
+# %%
+for c in  chunks: 
+  if 'appendix' in c and c['appendix']=='true':
+    print(c['body'])
+
+print('```\n')
+```
+
+

@@ -1,7 +1,18 @@
 ---
 title: "Spark NLP"
-engine: knitr
-date: "2025-01-17"
+engine: "jupyter"
+date: "2026-02-17"
+
+execute: 
+  echo: true
+  eval: true
+  warning: false
+  message: false
+
+format:
+  revealjs: 
+    scroll-view: true
+
 ---
 
 # Spark-NLP in perspective {background-color="#1c191c"}
@@ -69,12 +80,12 @@ A [databricks notebook](https://winf-hsos.github.io/databricks-notebooks/big-dat
 
 # A short example (from [John Snow Labs](https://sparknlp.org)) {background-color="#1c191c"}
 
----
+##  Objectives
 
 -   Initializing a `sparknlp` session
 -   Building a toy NLP pipeline for detecting dates in a text
 
-## Imports sparknlp and others
+## Imports `sparknlp` and others
 
 ```{python}
 # Import Spark NLP
@@ -85,6 +96,7 @@ import sparknlp
 ```
 
 ```{python}
+#| label: round-up-usual-suspects
 #| echo: false
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructField, StringType, StructType, DateType
@@ -101,31 +113,32 @@ import regex as re
 Assuming `standalone` mode on a laptop. `master` runs on `localhost`
 
 ```{python}
+#| label: spark-session-builder
 spark = SparkSession.builder \
-            .appName("Spark NLP") \
-#            .master("spark://localhost:7077") \
-            .config("spark.driver.memory", "16G") \
-            .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer") \
-            .config("spark.kryoserializer.buffer.max", "2000M") \
-            .config("spark.driver.maxResultSize", "0") \
-            .config("spark.jars.packages", "com.johnsnowlabs.nlp:spark-nlp_2.12:5.2.3") \
-            .getOrCreate()
+    .appName("Spark NLP") \
+    .master("local[*]") \
+    .config("spark.driver.memory", "16G") \
+    .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer") \
+    .config("spark.kryoserializer.buffer.max", "2000M") \
+    .config("spark.driver.maxResultSize", "0") \
+    .config("spark.jars.packages", "com.johnsnowlabs.nlp:spark-nlp_2.12:6.3.2") \
+    .getOrCreate()
 ```
 
-. . .
+## Check versions and context
 
 ```{python}
 sparknlp.version()
 ```
 
-...
-
 ```{python}
-spark
+spark.sparkContext
 ```
 
 
-## Toy (big) data
+# Toy (big) data  {background-color="#1c191c"}
+
+## Toy big raw data
 
 ```{python}
 fr_articles = [
@@ -136,7 +149,7 @@ fr_articles = [
 ]
 ```
 
-. . .
+## Toy big data (cont'd)
 
 ```{python}
 articles_cols = ["text"]
@@ -151,20 +164,24 @@ df.printSchema()
 ## Pipelines
 
 ```{python}
-document_assembler = DocumentAssembler() \
-            .setInputCol("text") \
+document_assembler = (
+  DocumentAssembler() 
+            .setInputCol("text") 
             .setOutputCol("document")
+)
 ```
 
 ::: callout
+
 Column `document` contains the 'text' to be annotated as well as some possible metadata.
 
 Starting point of any annotation process
 
-Spark NLP relies on Saprk SQL for storing, moving, data.
+Spark NLP relies on Spark SQL for storing, moving, data.
+
 :::
 
-. . .
+##  Looking for dates
 
 ```{python}
 date_matcher = DateMatcher() \
@@ -192,6 +209,8 @@ assembled = (
 )
 ```
 
+##
+
 ```{python}
 (
  date_matcher
@@ -206,12 +225,14 @@ assembled = (
 
 
 ```{python}
-
+#| label: more-challenges
 fr_articles.append(("Nous nous sommes rencontrés le 13/05/2018 puis le 18/05/2020.",))
 
 fr_articles.append(("Nous nous sommes rencontrés il y a 2 jours et il m'a dit qu'il nous rendrait visite la semaine prochaine.",))
 
 ```
+
+## Rebuild the data
 
 ```{python}
 df = spark.createDataFrame(
@@ -228,6 +249,8 @@ assembled = (
 )
 ```
 
+## Look for dates again
+
 ```{python}
 (
  date_matcher
@@ -240,12 +263,15 @@ assembled = (
 ## Another annotator
 
 ```{python}
+#| label: another-date-matcher
 date_matcher_bis = MultiDateMatcher() \
             .setInputCols(['document']) \
             .setOutputCol("date") \
             .setOutputFormat("MM/dd/yyyy") \
             .setSourceLanguage("fr")
 ```
+
+## Other findings
 
 ```{python}
 (
@@ -267,18 +293,25 @@ date_matcher_bis = MultiDateMatcher() \
 ##  Getting a corpus : ETL
 
 ```{python}
+# Warm up 
 pattern = 'URL: http://www.nytimes.com/(?P<zedate>[0-9]{4}/[0-9]{2}/[0-9]{2})/.*'
 title = 'URL: http://www.nytimes.com/[0-9]{4}/[0-9]{2}/[0-9]{2}/(.*)'
 reg_date = re.compile(pattern)
 reg_title = re.compile(title)
 ```
 
+## Getting a corpus (cont'd)
+
 ```{python}
-nypath = Path('../data/nytimes_news_articles.txt')
+#| label: Getting-the-ny-data
+nypath = Path('../../data/nytimes_news_articles.txt')
 corpus_list = list()
 ```
 
+##  Building the corpus   {.scrollable}
+
 ```{python}
+## label: parsing-ny-corpus
 with open(nypath, encoding='UTF-8')  as fd:
     doc, document = None, None
     while l := fd.readline():        
@@ -300,17 +333,24 @@ with open(nypath, encoding='UTF-8')  as fd:
             corpus_list.append((*document, doc))
 ```
 
+##
+
 ```{python}
-df_texts = spark.createDataFrame(corpus_list,
-                      schema= StructType([
-    StructField('date', DateType(), False),
-    StructField('title', StringType(), False),
-    StructField('topic', StringType(), False),
-    StructField('text', StringType(), True)
+#| label: building-df-from corpus
+df_texts = spark.createDataFrame(
+    corpus_list,
+    schema= StructType([
+      StructField('date', DateType(), False),
+      StructField('title', StringType(), False),
+      StructField('topic', StringType(), False),
+      StructField('text', StringType(), True)
 ]))
 ```
 
+## Checking the loaded data
+
 ```{python}
+#| label: check-corpus-df
 df_texts.printSchema()
 df_texts.count()
 ```
@@ -319,13 +359,16 @@ df_texts.count()
 
 Locally
 ```{python}
-#| eval: false
-df_texts.write.parquet('../data/ny_corpus_pq')
+#| eval: true
+#| label: saving-to-parquet
+df_texts.write.parquet('../../data/ny_corpus_pq', mode="overwrite")
 ```
 
+## Reloading
+
 ```{python}
-#| eval: false
-spam = spark.read.parquet('../data/ny_corpus_pq')
+#| eval: true
+spam = spark.read.parquet('../../data/ny_corpus_pq')
 
 spam.printSchema()
 ```
@@ -334,7 +377,8 @@ spam.printSchema()
 spam.rdd.getNumPartitions()
 ```
 
-## 
+## Feeding the spark-nlp
+
 ```{python}
 corpus_assembled = ( 
   document_assembler.transform(df_texts)
@@ -344,6 +388,8 @@ corpus_assembled = (
 ```{python}
 corpus_assembled.printSchema()
 ```
+
+## Looking for dates (again)
 
 ```{python}
 (
@@ -366,7 +412,9 @@ Extracted dates should be taken with a grain of salt
 from sparknlp.pretrained import PretrainedPipeline
 explain_document_pipeline = PretrainedPipeline("explain_document_ml")
 ```
-## Chaining annotators
+
+
+## Chaining annotators  {.scrollable}
 
 
 ```{python}
@@ -383,6 +431,9 @@ finisher = Finisher() \
     .setInputCols(["token"]) \
     .setIncludeMetadata(True)
 ```
+
+## Chaining annotators (cont'd) {.scrollable}
+
 
 ```{python}
 pipeline = Pipeline().setStages([
@@ -423,7 +474,8 @@ lemmatizer = (
 ```
 
 ::: {.callout-warning}
-```{.verbatim}
+
+```{.bash}
 lemma_antbnc download started this may take some time.
 Approximate size to download 907.6 KB
 [ / ]lemma_antbnc download started this may take some time.
@@ -435,6 +487,9 @@ Approximate size to download 907.6 KB
 ```
 :::
 
+## 
+
+
 ```{python}
 posTagger = PerceptronModel.pretrained() \
     .setInputCols(["document", "token"]) \
@@ -443,7 +498,7 @@ posTagger = PerceptronModel.pretrained() \
 
 ::: {.callout-warning}
 
-```
+```{.bash}
 pos_anc download started this may take some time.
 Approximate size to download 3.9 MB
 [ — ]pos_anc download started this may take some time.
@@ -456,6 +511,9 @@ Approximate size to download 3.9 MB
 ```
 
 :::
+
+##
+
 ```{python}
 finisher = (
   Finisher()
@@ -468,6 +526,7 @@ finisher = (
     .setOutputAsArray(True)
 )
 ```
+
 ## 
 
 ```{python}
@@ -483,6 +542,7 @@ pipeline = (
 )
 ```
 
+##
 
 ```{python}
 spam = ( 
@@ -538,3 +598,9 @@ root
 
 
 Column `document` is of type `ArrayType()`. The basetype of `document` column is of `StructType()` (`element`), the `element` contains subfields of primitive type, but alo a field of type `map` (`MapType()`) and a field of type `StructType()`.  
+
+
+
+```{python}
+spark.stop()
+```

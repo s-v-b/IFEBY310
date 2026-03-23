@@ -1,0 +1,266 @@
+---
+title: "LAB: Fake report"
+format:
+  html:
+    output-file: fake-report.html
+draft: false
+
+execute: 
+  eval: true
+  echo: false
+  collapse: false
+
+code-tools: 
+  source: repo
+
+params:
+  truc: html
+  year: 2025 
+  curriculum: "M1 MIDS & MFA"
+  university: "Université Paris Cité"
+  homepage: "https://s-v-b.github.io/IFEBY310"
+  moodle: ""
+
+
+chunk-labels:
+  - load_gapminder
+  - display_gapminder
+  - theme_scale
+  - visualize_static_gapminder
+  - animated
+
+engine: jupyter
+---
+
+
+
+
+
+# Motivation
+
+```{python}
+#| label: lorem
+
+import lorem
+lorem.paragraph()
+```
+
+
+# Reproducible data gathering 
+
+
+Data and metadata should be retrieved programmatically. 
+
+Here is an example from the [OECD API documentation](https://www.oecd.org/en/data/insights/data-explainers/2024/09/api.html). Other providers have their own API for example [Eurostat](https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-getting-started#SDMX2.1). 
+
+```{python}
+#| label: oecd-api
+#| echo: true
+#| appendix: false
+#| 
+url = "https://sdmx.oecd.org/public/rest/data/OECD.SDD.STES,DSD_STES@DF_CLI/.M.LI...AA...H?startPeriod=2023-02&dimensionAtObservation=AllDimensions&format=csvfilewithlabels"
+
+# df =  pd.read_csv(url)
+
+# df.info
+```
+
+{{< fa hand-point-right >}} Note that in your report, data gathering chunks should go to the appendix. 
+
+
+# 200 countries, 50 years, 20 lines of code
+
+You should build your report and your presentation around plots and tables.
+
+```{python}
+#| ref.label: lorem
+```
+
+```{python}
+#| label: load_gapminder 
+#| appendix: true
+
+# Load the data
+#
+import pandas as pd
+import plotly
+import plotly.express as px
+
+pd.options.plotting.backend = "plotly"
+from gapminder import gapminder
+```
+
+{{< fa hand-point-right >}} Display tables with style  (no kitsch please).
+
+```{python}
+#| label: display_gapminder
+#| appendix: true 
+
+#
+# Sample 2 rows per continent and format for display
+#
+df = (
+  gapminder
+    .groupby("continent", group_keys=True)
+    .apply(lambda g: 
+           g.sample(n=2, random_state=42), include_groups=False)
+    .reset_index()
+    .assign(pop=lambda x: x["pop"] / 1e6)
+)
+
+df = df.rename(columns={
+    "country": "Country",
+    "continent": "Continent",
+    "year": "Year",
+    "lifeExp": "Life Expectancy",
+    "pop": "Population (Millions Inhab.)",
+    "gdpPercap": "GDP per Capita",
+})
+
+df.style.format(
+  {
+    "Population (Millions Inhab.)": "{:.1f}", 
+    "Life Expectancy": "{:.1f}", 
+    "GDP per Capita": "${:,.0f}"
+    }
+)
+```
+
+
+```{python}
+#| label: theme_scale
+#| appendix: true
+#
+#
+# A neater color scale 
+#
+neat_color_scale = {
+      "Africa" : "#01d4e5",
+      "Americas" : "#7dea01" ,
+      "Asia" : "#fc5173",
+      "Europe" : "#fde803",
+      "Oceania" : "#536227"
+}
+```
+
+
+```{python}
+#| ref.label: lorem
+```
+
+{{< fa hand-point-right >}} Visualization matters
+
+
+```{python}
+#| label: setting-plotly-backend
+#| appendix: true
+
+pd.options.plotting.backend = 'plotly'
+```
+
+
+```{python}
+#| label: visualize_static_gapminder
+#| appendix: true
+#
+# Use plotly backend for dataframes
+#
+
+
+a_year = gapminder["year"].sample(1, random_state=42).iloc[0]
+df = gapminder[gapminder["year"] == a_year].copy()
+
+p = px.scatter(
+    data_frame=df,
+    x="gdpPercap",
+    y="lifeExp",
+    size="pop",
+    color="continent",
+    hover_data={
+      "country": True, 
+      "pop": ":,", 
+      "gdpPercap": ":,.0f", 
+      "lifeExp": ":.1f"},
+    log_x=True,
+    size_max=15,
+    color_discrete_map=neat_color_scale,
+    opacity=0.5,
+    title=f"Gapminder {a_year}",
+    labels={
+        "gdpPercap": "Yearly Income per Capita",
+        "lifeExp": "Life Expectancy",
+    },
+)
+
+p.update_layout(
+    xaxis_title="Yearly Income per Capita",
+    yaxis_title="Life Expectancy",
+    annotations=[
+        dict(
+            text="From sick and poor (bottom left) to healthy and rich (top right)",
+            xref="paper",
+            yref="paper",
+            x=0.5,
+            y=-0.12,
+            showarrow=False,
+            font=dict(size=10),
+        )
+    ],
+)
+p
+```
+
+
+
+# Wizardry
+
+
+```{python}
+#| ref.label: lorem
+```
+
+```{python}
+#| label: animated
+#| appendix: true
+#
+# Animated scatter on the whole gapminder dataframe, year as frame
+#
+p_animated = px.scatter(
+    data_frame=gapminder,
+    x="gdpPercap",
+    y="lifeExp",
+    size="pop",
+    color="continent",
+    animation_frame="year",
+    hover_data={"country": True, "pop": ":,", "gdpPercap": ":,.0f", "lifeExp": ":.1f"},
+    log_x=True,
+    size_max=15,
+    color_discrete_map=neat_color_scale,
+    opacity=0.5,
+    title="Gapminder",
+    labels={
+        "gdpPercap": "Yearly Income per Capita",
+        "lifeExp": "Life Expectancy",
+    },
+)
+p_animated.update_layout(
+    height=500,
+    width=750,
+    xaxis_title="Yearly Income per Capita",
+    yaxis_title="Life Expectancy",
+    showlegend=True,
+)
+p_animated
+```
+
+
+
+# Appendix 
+
+
+{{< fa hand-point-right >}} The appendix should contain the code that helped you create the document
+
+
+
+
+{{< include _util_chunks_appendix.qmd >}}

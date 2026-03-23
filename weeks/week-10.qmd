@@ -15,6 +15,17 @@ engine: jupyter
 
 :::
 
+
+::: {.callout-important}
+
+## Homework out {{< fa bullhorn >}}
+
+[Projects](/projects-listings.qmd)
+
+[Project due May 18th, 2026](/core/projects/hmw_spark_balzac.qmd)
+
+:::
+
 ## Lecture : slides
 
 - {{< fa display >}} [Spark tips](/core/slides/slides08_spark-tips.html){target="_blank"}
