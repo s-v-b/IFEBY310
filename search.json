@@ -189,7 +189,7 @@
     "href": "projects-listings.html",
     "title": "Projects",
     "section": "",
-    "text": "Modus operandi\n\n\n\nCourse evaluation is based on Projects \n\n Find a friend : all work done by pairs of students\n Create a single private GitHub repository for each project and each pair of students.\n Grant me access to these repositories\n All work is transmitted through your private repository and nowhere else\n No emails for project submission\n All projects deliverables consist of Quarto files\n The report should be rendered at least in HTML format, and possibly also in PDF format\n Do not forget to disclose your name and first name in the report\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Description\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTitle\n\n\n\nDescription\n\n\n\n\n\n\n\n\nMar 10, 2025\n\n\nTable wrangling, visualization\n\n\nPython, NLP, Spacy, Dask\n\n\n\n\n\n\nNo matching items",
+    "text": "NoteModus operandi\n\n\n\nCourse evaluation is based on Projects \n\n Find a friend : all work done by pairs of students\n Create a single private GitHub repository for each project and each pair of students.\n Grant me access to these repositories\n All work is transmitted through your private repository and nowhere else\n No emails for project submission\n All projects deliverables consist of Quarto files\n The report should be rendered at least in HTML format, and possibly also in PDF format\n Do not forget to disclose your name and first name in the report\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\n\nTitle\n\n\n\nDescription\n\n\n\n\n\n\n\n\nMar 23, 2026\n\n\nSpark, NLP, Table wrangling, visualization\n\n\nPython, NLP, Spark\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Homeworks"
     ]
@@ -1642,14 +1642,14 @@
     "href": "core/notebooks/notebook07_json-format.html#serialization-and-deserialization-of-custom-objects",
     "title": "Using JSON data with Python",
     "section": "Serialization and deserialization of custom objects",
-    "text": "Serialization and deserialization of custom objects\n\n\nCode\nclass User(object):\n    \"\"\"Custom User Class\n    \"\"\"\n    def __init__(self, name, age, active, balance, \n                 other_names, friends, spouse):\n        self.name = name\n        self.age = age\n        self.active = active\n        self.balance = balance\n        self.other_names = other_names\n        self.friends = friends\n        self.spouse = spouse\n            \n    def __repr__(self):\n        s = \"User(\"\n        s += \"name=\" + repr(self.name)\n        s += \", age=\" + repr(self.age)\n        s += \", active=\" + repr(self.active)\n        s += \", other_names=\" + repr(self.other_names)\n        s += \", friends=\" + repr(self.friends)\n        s += \", spouse=\" + repr(self.spouse) + \")\"\n        return s\n\n\n\n\n\n\n\n\nTip\n\n\n\nBrush up your dunder/magic methods, for example in Fluent Python by Ramalho (Chapter I: The Python data model, Section Overview of Special Methods)\nSee also package dataclasses\n\n\nCode\nfrom dataclasses import dataclass\n\n@dataclass\nclass User2:\n    name: str \n    age: int\n    active: bool\n    balance: float \n    other_names: str\n    friends: list\n    spouse: str\n\nnobody = User2(\n    name=\"Doe\", \n    age=21, \n    active=True,\n    balance= 2.5, \n    other_names=\"Roy Bean\", \n    friends=[\"Joe\", \"Jack\", \"William\", \"Averell\"], \n    spouse=\"Calamity Jane\"\n)\n\nnobody\n\n\nUser2(name='Doe', age=21, active=True, balance=2.5, other_names='Roy Bean', friends=['Joe', 'Jack', 'William', 'Averell'], spouse='Calamity Jane')\n\n\n\n\n\n\nCode\nnew_user = User(\n    name = \"Foo Bar\",\n    age = 78,\n    friends = [\"Jane\", \"John\"],\n    balance = 345.80,\n    other_names = (\"Doe\", \"Joe\"),\n    active = True,\n    spouse = None\n)\n\nnew_user\n\n\nUser(name='Foo Bar', age=78, active=True, other_names=('Doe', 'Joe'), friends=['Jane', 'John'], spouse=None)\n\n\n\n\n\n\n\n\nNote\n\n\n\nUncomment to see what happens\n\n\n\n\nCode\n# This will raise a TypeError\n# json.dumps(new_user)\n\n\nAs expected, the custom object new_user is not JSON serializable. So let’s build a method that does that for us.\n\nThis comes as no surprise to us, since earlier on we observed that the json module only handles the built-in types, and User is not one.\nWe need to send our user data to a client over a network, so how do we get ourselves out of this error state?\nA simple solution would be to convert our custom type into a serializable type that is a built-in type. We can conveniently define a method convert_to_dict() that returns a dictionary representation of our object. json.dumps() takes in a optional argument, default, which specifies a function to be called if the object is not serializable. This function returns a JSON encodable version of the object.\n\nRecall that class obj has a dunder attribute __dict__ that provides a basis for obtaining a dictionary with the attributes of any object:\n\n\nCode\nnew_user.__dict__\n\n\n{'name': 'Foo Bar',\n 'age': 78,\n 'active': True,\n 'balance': 345.8,\n 'other_names': ('Doe', 'Joe'),\n 'friends': ['Jane', 'John'],\n 'spouse': None}\n\n\n\n\nCode\ndef obj_to_dict(obj):\n    \"\"\"Converts an object to a dictionary representation of the object including \n    meta-data information about the object's module and class name.\n\n    Parameters\n    ----------\n    obj : `object`\n        A python object to be converted into a dictionary representation\n\n    Returns\n    -------\n    output : `dict`\n        A dictionary representation of the object\n    \"\"\"\n    # Add object meta data \n    obj_dict = {\n        \"__class__\": obj.__class__.__name__,\n        \"__module__\": obj.__module__\n    }\n    # Add the object properties\n    return obj_dict | obj.__dict__\n\n\n\n\nCode\nobj_to_dict(new_user)\n\n\n{'__class__': 'User',\n '__module__': '__main__',\n 'name': 'Foo Bar',\n 'age': 78,\n 'active': True,\n 'balance': 345.8,\n 'other_names': ('Doe', 'Joe'),\n 'friends': ['Jane', 'John'],\n 'spouse': None}\n\n\nThe function convert_to_dict does the following:\n\ncreate a dictionary named obj_dict to act as the dict representation of our object.\ndunder attributes __class__.__name__ and __module__ provide crucial metadata on the object: the class name and the module name\nadd the instance attributes of the object using obj.__dict__ (Python stores instance attributes in a dictionary)\n\nThe resulting obj_dict is now serializable (provided all attributes of our object are).\nNow we can comfortably call json.dumps() on the object and pass default=convert_to_dict\n\n\n\n\n\n\nNote\n\n\n\nObviously this fails if one of the attributes is not JSON serializable\n\n\n\n\nCode\nprint(json.dumps(new_user, default=obj_to_dict, indent=4, sort_keys=True))\n\n\n{\n    \"__class__\": \"User\",\n    \"__module__\": \"__main__\",\n    \"active\": true,\n    \"age\": 78,\n    \"balance\": 345.8,\n    \"friends\": [\n        \"Jane\",\n        \"John\"\n    ],\n    \"name\": \"Foo Bar\",\n    \"other_names\": [\n        \"Doe\",\n        \"Joe\"\n    ],\n    \"spouse\": null\n}\n\n\nNow, if we want to decode (deserialiaze) a custom object, and create the correct object type, we need a function that does the inverse of obj_to_dict, since json.loads simply returns a dict:\n\n\nCode\nuser_data = json.loads(json.dumps(new_user, default=obj_to_dict))\nprint(user_data)\n\n\n{'__class__': 'User', '__module__': '__main__', 'name': 'Foo Bar', 'age': 78, 'active': True, 'balance': 345.8, 'other_names': ['Doe', 'Joe'], 'friends': ['Jane', 'John'], 'spouse': None}\n\n\nIt also works for sequences of objects!\n\n\nCode\nusers_data = json.loads(json.dumps([new_user, nobody], default=obj_to_dict))\n\nprint(users_data)\n\n\n[{'__class__': 'User', '__module__': '__main__', 'name': 'Foo Bar', 'age': 78, 'active': True, 'balance': 345.8, 'other_names': ['Doe', 'Joe'], 'friends': ['Jane', 'John'], 'spouse': None}, {'__class__': 'User2', '__module__': '__main__', 'name': 'Doe', 'age': 21, 'active': True, 'balance': 2.5, 'other_names': 'Roy Bean', 'friends': ['Joe', 'Jack', 'William', 'Averell'], 'spouse': 'Calamity Jane'}]\n\n\n\n\n\n\n\n\nNote\n\n\n\nWe need json.loads() to reconstruct a User object from this dictionary: json.loads() takes an optional argument object_hook which specifies a function that returns the desired custom object, given the decoded output (which in this case, is a dict).\n\n\n\n\nCode\ndef dict_to_obj(input_dict):\n    \"\"\"Converts a dictionary representation of an object to an instance of the object.\n\n    Parameters\n    ----------\n    input_dict : `dict`\n        A dictionary representation of the object, containing \"__module__\" \n        and \"__class__\" metadata\n\n    Returns\n    -------    \n    obj : `object`\n        A python object constructed from the dictionary representation    \n    \"\"\"\n    assert \"__class__\" in input_dict and \"__module__\" in input_dict\n    class_name = input_dict.pop(\"__class__\")\n    module_name = input_dict.pop(\"__module__\")\n    module = __import__(module_name)\n    class_ = getattr(module, class_name)\n    obj = class_(**input_dict)\n    return obj\n\n\nThis function does the following:\n\nExtract the class name from the dictionary under the key __class__\nExtract the module name from the dictionary under the key __module__\nImports the module and get the class\nInstantiate the class by giving to the class constructor all the instance arguments through dictionary unpacking\n\n\n\nCode\nobj_data = json.dumps(new_user, default=obj_to_dict)\nnew_object = json.loads(obj_data, object_hook=dict_to_obj)\nnew_object\n\n\nUser(name='Foo Bar', age=78, active=True, other_names=['Doe', 'Joe'], friends=['Jane', 'John'], spouse=None)\n\n\n\n\nCode\ntype(new_object)\n\n\n__main__.User\n\n\n\n\nCode\nnew_object.age\n\n\n78\n\n\n\n\n\n\n\n\nNote\n\n\n\nFunctions obj_to_dict() and dict_to_obj() are showcases for special/magic/dunder methods.\nIn the definition of class User, two special methods were explicitly defined: __init__() and __repr__(). But many more are available, including __dir__().\nRemember that some dunder members of the object are not callable.\n\n\n\n\nCode\n[dude for dude in dir(new_object) \n          if dude.startswith('__') and \n             callable(getattr(new_object, dude))]\n\n\n['__class__',\n '__delattr__',\n '__dir__',\n '__eq__',\n '__format__',\n '__ge__',\n '__getattribute__',\n '__getstate__',\n '__gt__',\n '__hash__',\n '__init__',\n '__init_subclass__',\n '__le__',\n '__lt__',\n '__ne__',\n '__new__',\n '__reduce__',\n '__reduce_ex__',\n '__repr__',\n '__setattr__',\n '__sizeof__',\n '__str__',\n '__subclasshook__']\n\n\n\n\nCode\n[dude for dude in dir(new_object) \n          if dude.startswith('__') and \n             not callable(getattr(new_object, dude))]\n\n\n['__dict__', '__doc__', '__module__', '__weakref__']\n\n\n\n\nCode\nnew_object.__getattribute__('age')\n\ngetattr(new_object, 'age')\n\n\n78\n\n\n\n\n\n\n\n\nNote\n\n\n\nHave a look at dataclasses documentation.\nSee also Chapter 5: Data class builders in Fluent Python"
+    "text": "Serialization and deserialization of custom objects\n\n\nCode\nclass User(object):\n    \"\"\"Custom User Class\n    \"\"\"\n    def __init__(self, name, age, active, balance, \n                 other_names, friends, spouse):\n        self.name = name\n        self.age = age\n        self.active = active\n        self.balance = balance\n        self.other_names = other_names\n        self.friends = friends\n        self.spouse = spouse\n            \n    def __repr__(self):\n        s = \"User(\"\n        s += \"name=\" + repr(self.name)\n        s += \", age=\" + repr(self.age)\n        s += \", active=\" + repr(self.active)\n        s += \", other_names=\" + repr(self.other_names)\n        s += \", friends=\" + repr(self.friends)\n        s += \", spouse=\" + repr(self.spouse) + \")\"\n        return s\n\n\n\n\n\n\n\n\nTip\n\n\n\nBrush up your dunder/magic methods, for example in Fluent Python by Ramalho (Chapter I: The Python data model, Section Overview of Special Methods)\nSee also package dataclasses\n\n\nCode\nfrom dataclasses import dataclass\n\n@dataclass\nclass User2:\n    name: str \n    age: int\n    active: bool\n    balance: float \n    other_names: str\n    friends: list\n    spouse: str\n\nnobody = User2(\n    name=\"Doe\", \n    age=21, \n    active=True,\n    balance= 2.5, \n    other_names=\"Roy Bean\", \n    friends=[\"Joe\", \"Jack\", \"William\", \"Averell\"], \n    spouse=\"Calamity Jane\"\n)\n\nnobody\n\n\nUser2(name='Doe', age=21, active=True, balance=2.5, other_names='Roy Bean', friends=['Joe', 'Jack', 'William', 'Averell'], spouse='Calamity Jane')\n\n\n\n\n\n\nCode\nnew_user = User(\n    name = \"Foo Bar\",\n    age = 78,\n    friends = [\"Jane\", \"John\"],\n    balance = 345.80,\n    other_names = (\"Doe\", \"Joe\"),\n    active = True,\n    spouse = None\n)\n\nnew_user\n\n\nUser(name='Foo Bar', age=78, active=True, other_names=('Doe', 'Joe'), friends=['Jane', 'John'], spouse=None)\n\n\n\n\n\n\n\n\nNote\n\n\n\nUncomment to see what happens\n\n\n\n\nCode\n# This will raise a TypeError\n# json.dumps(new_user)\n\n\nAs expected, the custom object new_user is not JSON serializable. So let’s build a method that does that for us.\n\nThis comes as no surprise to us, since earlier on we observed that the json module only handles the built-in types, and User is not one.\nWe need to send our user data to a client over a network, so how do we get ourselves out of this error state?\nA simple solution would be to convert our custom type into a serializable type that is a built-in type. We can conveniently define a method convert_to_dict() that returns a dictionary representation of our object. json.dumps() takes in a optional argument, default, which specifies a function to be called if the object is not serializable. This function returns a JSON encodable version of the object.\n\nRecall that, by default, user defined classes have a dunder attribute __dict__ that provides a basis for obtaining a dictionary with the (possibly dynamic) attributes of any object of these classes:\n\n\nCode\nnew_user.__dict__\n\n\n{'name': 'Foo Bar',\n 'age': 78,\n 'active': True,\n 'balance': 345.8,\n 'other_names': ('Doe', 'Joe'),\n 'friends': ['Jane', 'John'],\n 'spouse': None}\n\n\n\n\n\n\n\n\nWarning\n\n\n\nTypes implemented in C (built-in types, but also numpy.ndarray) do not have __dict__ attributes.\nUser defined classes with __slots__ attribute do not have a __dict__ attribute as well.\n\n\n\n\nCode\ndef obj_to_dict(obj):\n    \"\"\"Converts an object to a dictionary representation of the object including \n    meta-data information about the object's module and class name.\n\n    Parameters\n    ----------\n    obj : `object`\n        A python object to be converted into a dictionary representation\n\n    Returns\n    -------\n    output : `dict`\n        A dictionary representation of the object\n    \"\"\"\n    # Add object meta data \n    obj_dict = {\n        \"__class__\": obj.__class__.__name__,\n        \"__module__\": obj.__module__\n    }\n    # Add the object properties\n    return obj_dict | obj.__dict__\n\n\n\n\nCode\nobj_to_dict(new_user)\n\n\n{'__class__': 'User',\n '__module__': '__main__',\n 'name': 'Foo Bar',\n 'age': 78,\n 'active': True,\n 'balance': 345.8,\n 'other_names': ('Doe', 'Joe'),\n 'friends': ['Jane', 'John'],\n 'spouse': None}\n\n\nThe function convert_to_dict does the following:\n\ncreate a dictionary named obj_dict to act as the dict representation of our object.\ndunder attributes __class__.__name__ and __module__ provide crucial metadata on the object: the class name and the module name\nadd the instance attributes of the object using obj.__dict__ (Python stores instance attributes in a dictionary)\n\nThe resulting obj_dict is now serializable (provided all attributes of our object are).\nNow we can comfortably call json.dumps() on the object and pass default=convert_to_dict\n\n\n\n\n\n\nNote\n\n\n\nObviously this fails if one of the attributes is not JSON serializable\n\n\n\n\nCode\nprint(json.dumps(new_user, default=obj_to_dict, indent=4, sort_keys=True))\n\n\n{\n    \"__class__\": \"User\",\n    \"__module__\": \"__main__\",\n    \"active\": true,\n    \"age\": 78,\n    \"balance\": 345.8,\n    \"friends\": [\n        \"Jane\",\n        \"John\"\n    ],\n    \"name\": \"Foo Bar\",\n    \"other_names\": [\n        \"Doe\",\n        \"Joe\"\n    ],\n    \"spouse\": null\n}\n\n\nNow, if we want to decode (deserialiaze) a custom object, and create the correct object type, we need a function that does the inverse of obj_to_dict, since json.loads simply returns a dict:\n\n\nCode\nuser_data = json.loads(json.dumps(new_user, default=obj_to_dict))\nprint(user_data)\n\n\n{'__class__': 'User', '__module__': '__main__', 'name': 'Foo Bar', 'age': 78, 'active': True, 'balance': 345.8, 'other_names': ['Doe', 'Joe'], 'friends': ['Jane', 'John'], 'spouse': None}\n\n\nIt also works for sequences of objects!\n\n\nCode\nusers_data = json.loads(json.dumps([new_user, nobody], default=obj_to_dict))\n\nprint(users_data)\n\n\n[{'__class__': 'User', '__module__': '__main__', 'name': 'Foo Bar', 'age': 78, 'active': True, 'balance': 345.8, 'other_names': ['Doe', 'Joe'], 'friends': ['Jane', 'John'], 'spouse': None}, {'__class__': 'User2', '__module__': '__main__', 'name': 'Doe', 'age': 21, 'active': True, 'balance': 2.5, 'other_names': 'Roy Bean', 'friends': ['Joe', 'Jack', 'William', 'Averell'], 'spouse': 'Calamity Jane'}]\n\n\n\n\n\n\n\n\nNote\n\n\n\nWe need json.loads() to reconstruct a User object from this dictionary: json.loads() takes an optional argument object_hook which specifies a function that returns the desired custom object, given the decoded output (which in this case, is a dict).\n\n\n\n\nCode\ndef dict_to_obj(input_dict):\n    \"\"\"Converts a dictionary representation of an object to an instance of the object.\n\n    Parameters\n    ----------\n    input_dict : `dict`\n        A dictionary representation of the object, containing \"__module__\" \n        and \"__class__\" metadata\n\n    Returns\n    -------    \n    obj : `object`\n        A python object constructed from the dictionary representation    \n    \"\"\"\n    assert \"__class__\" in input_dict and \"__module__\" in input_dict\n    class_name = input_dict.pop(\"__class__\")\n    module_name = input_dict.pop(\"__module__\")\n    module = __import__(module_name)\n    class_ = getattr(module, class_name)\n    obj = class_(**input_dict)\n    return obj\n\n\nThis function does the following:\n\nExtract the class name from the dictionary under the key __class__\nExtract the module name from the dictionary under the key __module__\nImports the module and get the class\nInstantiate the class by giving to the class constructor all the instance arguments through dictionary unpacking\n\n\n\nCode\nobj_data = json.dumps(new_user, default=obj_to_dict)\nnew_object = json.loads(obj_data, object_hook=dict_to_obj)\nnew_object\n\n\nUser(name='Foo Bar', age=78, active=True, other_names=['Doe', 'Joe'], friends=['Jane', 'John'], spouse=None)\n\n\n\n\nCode\ntype(new_object)\n\n\n__main__.User\n\n\n\n\nCode\nnew_object.age\n\n\n78\n\n\n\n\n\n\n\n\nNote\n\n\n\nFunctions obj_to_dict() and dict_to_obj() are showcases for special/magic/dunder methods.\nIn the definition of class User, two special methods were explicitly defined: __init__() and __repr__(). But many more are available, including __dir__().\nRemember that some dunder members of the object are not callable.\n\n\n\n\nCode\n[dude for dude in dir(new_object) \n          if dude.startswith('__') and \n             callable(getattr(new_object, dude))]\n\n\n['__class__',\n '__delattr__',\n '__dir__',\n '__eq__',\n '__format__',\n '__ge__',\n '__getattribute__',\n '__getstate__',\n '__gt__',\n '__hash__',\n '__init__',\n '__init_subclass__',\n '__le__',\n '__lt__',\n '__ne__',\n '__new__',\n '__reduce__',\n '__reduce_ex__',\n '__repr__',\n '__setattr__',\n '__sizeof__',\n '__str__',\n '__subclasshook__']\n\n\n\n\nCode\n[dude for dude in dir(new_object) \n          if dude.startswith('__') and \n             not callable(getattr(new_object, dude))]\n\n\n['__dict__', '__doc__', '__module__', '__weakref__']\n\n\n\n\nCode\nnew_object.__getattribute__('age')\n\ngetattr(new_object, 'age')\n\n\n78\n\n\n\n\n\n\n\n\nNote\n\n\n\nHave a look at dataclasses documentation.\nSee also Chapter 5: Data class builders in Fluent Python"
   },
   {
     "objectID": "core/notebooks/notebook07_json-format.html#reading-a-json-dataset-with-spark",
     "href": "core/notebooks/notebook07_json-format.html#reading-a-json-dataset-with-spark",
     "title": "Using JSON data with Python",
     "section": "Reading a JSON dataset with Spark",
-    "text": "Reading a JSON dataset with Spark\n\n\nCode\nfrom pyspark import SparkConf, SparkContext\nfrom pyspark.sql import SparkSession\nfrom pyspark.sql import functions as fn\nfrom pyspark.sql.functions import col\n\nspark = (\n    SparkSession\n    .builder\n    .appName(\"Spark JSON\")\n    .getOrCreate()\n)\n\nsc = spark._sc\n\n\nWARNING: Using incubator modules: jdk.incubator.vector\nUsing Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties\n26/02/16 09:54:58 WARN Utils: Your hostname, boucheron-Precision-5480, resolves to a loopback address: 127.0.1.1; using 172.23.32.10 instead (on interface eth0)\n26/02/16 09:54:58 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address\nUsing Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties\nSetting default log level to \"WARN\".\nTo adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).\n26/02/16 09:54:58 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable\n\n\n\n\nCode\nfilename = \"drug-enforcement.json\"\n\n\nFirst, lets look at the data. It’s a large set of JSON records about drugs enforcement.\n\n\nCode\n!head -n 100 drug-enforcement.json\n\n\n[\n    {\n      \"classification\": \"Class II\",\n      \"center_classification_date\": \"20121025\",\n      \"report_date\": \"20121031\",\n      \"postal_code\": \"08816-2108\",\n      \"termination_date\": \"20141007\",\n      \"recall_initiation_date\": \"20120904\",\n      \"recall_number\": \"D-026-2013\",\n      \"city\": \"East Brunswick\",\n      \"event_id\": \"63384\",\n      \"distribution_pattern\": \"Nationwide\",\n      \"openfda\": {},\n      \"recalling_firm\": \"Raritan Pharmaceuticals, Inc.\",\n      \"voluntary_mandated\": \"Voluntary: Firm Initiated\",\n      \"state\": \"NJ\",\n      \"reason_for_recall\": \"Microbial Contamination of Non-Sterile Products: Product is being recalled due to possible microbial contamination by C. difficile discovered in the raw material.\",\n      \"initial_firm_notification\": \"E-Mail\",\n      \"status\": \"Terminated\",\n      \"product_type\": \"Drugs\",\n      \"country\": \"United States\",\n      \"product_description\": \"Wal-Mucil 100% Natural Fiber, 100% Natural Psyllium Seed Husk, Fiber Laxative/Supplement, a)160 capsules per bottle (item #503663), and b) 320 capsules per bottle (Item #586143), Distributed by: Walgreen Co., 200 Wilmot Road, Deerfield, IL 60015-4616, www.walgreens.com, a) UPC 3-11917-08151-9, b) UPC 3-11917-07658-4\",\n      \"code_info\": \"Lots a) 15952, 16270,16425, Exp 06/15; b)16459, 16466, 16467, Exp 07/15\",\n      \"address_1\": \"8 Joanna Ct\",\n      \"address_2\": \"\",\n      \"product_quantity\": \"56,808 bottles\"\n    },\n    {\n      \"classification\": \"Class II\",\n      \"center_classification_date\": \"20121025\",\n      \"report_date\": \"20121031\",\n      \"postal_code\": \"08816-2108\",\n      \"termination_date\": \"20141007\",\n      \"recall_initiation_date\": \"20120904\",\n      \"recall_number\": \"D-031-2013\",\n      \"city\": \"East Brunswick\",\n      \"event_id\": \"63384\",\n      \"distribution_pattern\": \"Nationwide\",\n      \"openfda\": {},\n      \"recalling_firm\": \"Raritan Pharmaceuticals, Inc.\",\n      \"voluntary_mandated\": \"Voluntary: Firm Initiated\",\n      \"state\": \"NJ\",\n      \"reason_for_recall\": \"Microbial Contamination of Non-Sterile Products: Product is being recalled due to possible microbial contamination by C. difficile discovered in the raw material.\",\n      \"initial_firm_notification\": \"E-Mail\",\n      \"status\": \"Terminated\",\n      \"product_type\": \"Drugs\",\n      \"country\": \"United States\",\n      \"product_description\": \"Premier Value Fiber Plus Calcium Supplement Capsules, 120 capsules per bottle, Distributed by: Chain Drug Consortium, LLC, Boca Raton, FL, UPC 8-40986-01987-6\",\n      \"code_info\": \"Lot 15087, Exp 08/15\",\n      \"address_1\": \"8 Joanna Ct\",\n      \"address_2\": \"\",\n      \"product_quantity\": \"96 bottles\"\n    },\n    {\n      \"classification\": \"Class III\",\n      \"center_classification_date\": \"20121106\",\n      \"report_date\": \"20121114\",\n      \"postal_code\": \"08807\",\n      \"termination_date\": \"20130325\",\n      \"recall_initiation_date\": \"20121015\",\n      \"recall_number\": \"D-047-2013\",\n      \"city\": \"Bridgewater\",\n      \"event_id\": \"63488\",\n      \"distribution_pattern\": \"Nationwide\",\n      \"openfda\": {},\n      \"recalling_firm\": \"Valeant Pharmaceuticals\",\n      \"voluntary_mandated\": \"Voluntary: Firm Initiated\",\n      \"state\": \"NJ\",\n      \"reason_for_recall\": \"Subpotent (Single Ingredient) Drug: This product was found to be subpotent for the salicylic acid ingredient.  Additionally, this product is mislabeled because the label either omits or erroneously added inactive ingredients to the label.\",\n      \"initial_firm_notification\": \"Letter\",\n      \"status\": \"Terminated\",\n      \"product_type\": \"Drugs\",\n      \"country\": \"United States\",\n      \"product_description\": \"AcneFree 3-in-1 Acne Night Repair Foam (retinol + salicylic acid 1.5% w/v), 3 oz (85 g) canister, Dist. by: University Medical Pharmaceuticals Corp., Irvine, CA  92618, UPC 7 88521 13548 6.\",\n      \"code_info\": \"All lots with expiration dates between 10/10/12 through 10/10/14 of UPC 7 88521 13548 6\",\n      \"address_1\": \"700 Rte 206 North\",\n      \"address_2\": \"\",\n      \"product_quantity\": \"81,319 canisters\"\n    },\n    {\n      \"classification\": \"Class III\",\n      \"center_classification_date\": \"20121220\",\n      \"report_date\": \"20121226\",\n      \"postal_code\": \"08558-1311\",\n      \"termination_date\": \"20140429\",\n      \"recall_initiation_date\": \"20121204\",\n      \"recall_number\": \"D-098-2013\",\n      \"city\": \"Skillman\",\n      \"more_code_info\": null,\n      \"event_id\": \"63787\",\n      \"distribution_pattern\": \"Nationwide\",\n      \"openfda\": {},\n      \"recalling_firm\": \"Johnson & Johnson\",\n      \"voluntary_mandated\": \"Voluntary: Firm Initiated\",\n      \"state\": \"NJ\",\n      \"reason_for_recall\": \"Superpotent (Single Ingredient Drug): salicylic acid\",\n      \"initial_firm_notification\": \"Letter\",\n      \"status\": \"Terminated\",\n      \"product_type\": \"Drugs\",\n      \"country\": \"United States\",\n\n\n\n\n\n\n\n\nNote\n\n\n\nWe need to tell spark that rows span on several lines with the multLine option\nSee Reading from JSON files in Spark documentation\n\n\n\n\nCode\nimport os \n\ndf = (\n    spark\n        .read\n        .json('file://' + os.path.abspath(filename), \n               multiLine=True)\n)\n\n\n\n\nCode\ndf.printSchema()\n\n\nroot\n |-- address_1: string (nullable = true)\n |-- address_2: string (nullable = true)\n |-- center_classification_date: string (nullable = true)\n |-- city: string (nullable = true)\n |-- classification: string (nullable = true)\n |-- code_info: string (nullable = true)\n |-- country: string (nullable = true)\n |-- distribution_pattern: string (nullable = true)\n |-- event_id: string (nullable = true)\n |-- initial_firm_notification: string (nullable = true)\n |-- more_code_info: string (nullable = true)\n |-- openfda: struct (nullable = true)\n |    |-- application_number: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- brand_name: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- generic_name: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- is_original_packager: array (nullable = true)\n |    |    |-- element: boolean (containsNull = true)\n |    |-- manufacturer_name: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- nui: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- original_packager_product_ndc: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- package_ndc: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- pharm_class_cs: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- pharm_class_epc: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- pharm_class_moa: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- pharm_class_pe: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- product_ndc: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- product_type: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- route: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- rxcui: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- spl_id: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- spl_set_id: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- substance_name: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- unii: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- upc: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |-- postal_code: string (nullable = true)\n |-- product_description: string (nullable = true)\n |-- product_quantity: string (nullable = true)\n |-- product_type: string (nullable = true)\n |-- reason_for_recall: string (nullable = true)\n |-- recall_initiation_date: string (nullable = true)\n |-- recall_number: string (nullable = true)\n |-- recalling_firm: string (nullable = true)\n |-- report_date: string (nullable = true)\n |-- state: string (nullable = true)\n |-- status: string (nullable = true)\n |-- termination_date: string (nullable = true)\n |-- voluntary_mandated: string (nullable = true)\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nIn a less user-friendly format:\n\n\n\n\nCode\ndf.schema\n\n\nStructType([StructField('address_1', StringType(), True), StructField('address_2', StringType(), True), StructField('center_classification_date', StringType(), True), StructField('city', StringType(), True), StructField('classification', StringType(), True), StructField('code_info', StringType(), True), StructField('country', StringType(), True), StructField('distribution_pattern', StringType(), True), StructField('event_id', StringType(), True), StructField('initial_firm_notification', StringType(), True), StructField('more_code_info', StringType(), True), StructField('openfda', StructType([StructField('application_number', ArrayType(StringType(), True), True), StructField('brand_name', ArrayType(StringType(), True), True), StructField('generic_name', ArrayType(StringType(), True), True), StructField('is_original_packager', ArrayType(BooleanType(), True), True), StructField('manufacturer_name', ArrayType(StringType(), True), True), StructField('nui', ArrayType(StringType(), True), True), StructField('original_packager_product_ndc', ArrayType(StringType(), True), True), StructField('package_ndc', ArrayType(StringType(), True), True), StructField('pharm_class_cs', ArrayType(StringType(), True), True), StructField('pharm_class_epc', ArrayType(StringType(), True), True), StructField('pharm_class_moa', ArrayType(StringType(), True), True), StructField('pharm_class_pe', ArrayType(StringType(), True), True), StructField('product_ndc', ArrayType(StringType(), True), True), StructField('product_type', ArrayType(StringType(), True), True), StructField('route', ArrayType(StringType(), True), True), StructField('rxcui', ArrayType(StringType(), True), True), StructField('spl_id', ArrayType(StringType(), True), True), StructField('spl_set_id', ArrayType(StringType(), True), True), StructField('substance_name', ArrayType(StringType(), True), True), StructField('unii', ArrayType(StringType(), True), True), StructField('upc', ArrayType(StringType(), True), True)]), True), StructField('postal_code', StringType(), True), StructField('product_description', StringType(), True), StructField('product_quantity', StringType(), True), StructField('product_type', StringType(), True), StructField('reason_for_recall', StringType(), True), StructField('recall_initiation_date', StringType(), True), StructField('recall_number', StringType(), True), StructField('recalling_firm', StringType(), True), StructField('report_date', StringType(), True), StructField('state', StringType(), True), StructField('status', StringType(), True), StructField('termination_date', StringType(), True), StructField('voluntary_mandated', StringType(), True)])\n\n\n\n\n\n\n\n\nNote\n\n\n\nThis dataset is a little bit of a mess!\nThis should not be surprising. The data used to populate the Spark dataframe are not classically tabular but what people call semi-structured. Json is well-suited to store, represent, and exchange such data.\nIn the classical age of tabular data (according to Codd’s principles), a table cell could only hold a scalar value (numeric, logical, text, date, timestamp, …), nowadays Relational Database Management Systems handle Arrays, Composite Types, Range Types, …, and Json (see PostgreSQL).\nSpark, R, and Pandas, and modern relational databases also allow us to work with complex types.\nModern column oriented file format like parquet also work with nested structures.\n\n\n\nFirst, there is a nested opendfa dictionary. Each element of the dictionary is an array\nA first good idea is to “flatten” the schema of the DataFrame, so that there are no nested types any more."
+    "text": "Reading a JSON dataset with Spark\n\n\nCode\nfrom pyspark import SparkConf, SparkContext\nfrom pyspark.sql import SparkSession\nfrom pyspark.sql import functions as fn\nfrom pyspark.sql.functions import col\n\nspark = (\n    SparkSession\n    .builder\n    .appName(\"Spark JSON\")\n    .getOrCreate()\n)\n\nsc = spark._sc\n\n\nWARNING: Using incubator modules: jdk.incubator.vector\nUsing Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties\n26/02/17 14:58:53 WARN Utils: Your hostname, boucheron-Precision-5480, resolves to a loopback address: 127.0.1.1; using 172.23.32.10 instead (on interface eth0)\n26/02/17 14:58:53 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address\nUsing Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties\nSetting default log level to \"WARN\".\nTo adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).\n26/02/17 14:58:53 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable\n26/02/17 14:58:54 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.\n\n\n\n\nCode\nfilename = \"drug-enforcement.json\"\n\n\nFirst, lets look at the data. It’s a large set of JSON records about drugs enforcement.\n\n\nCode\n!head -n 100 drug-enforcement.json\n\n\n[\n    {\n      \"classification\": \"Class II\",\n      \"center_classification_date\": \"20121025\",\n      \"report_date\": \"20121031\",\n      \"postal_code\": \"08816-2108\",\n      \"termination_date\": \"20141007\",\n      \"recall_initiation_date\": \"20120904\",\n      \"recall_number\": \"D-026-2013\",\n      \"city\": \"East Brunswick\",\n      \"event_id\": \"63384\",\n      \"distribution_pattern\": \"Nationwide\",\n      \"openfda\": {},\n      \"recalling_firm\": \"Raritan Pharmaceuticals, Inc.\",\n      \"voluntary_mandated\": \"Voluntary: Firm Initiated\",\n      \"state\": \"NJ\",\n      \"reason_for_recall\": \"Microbial Contamination of Non-Sterile Products: Product is being recalled due to possible microbial contamination by C. difficile discovered in the raw material.\",\n      \"initial_firm_notification\": \"E-Mail\",\n      \"status\": \"Terminated\",\n      \"product_type\": \"Drugs\",\n      \"country\": \"United States\",\n      \"product_description\": \"Wal-Mucil 100% Natural Fiber, 100% Natural Psyllium Seed Husk, Fiber Laxative/Supplement, a)160 capsules per bottle (item #503663), and b) 320 capsules per bottle (Item #586143), Distributed by: Walgreen Co., 200 Wilmot Road, Deerfield, IL 60015-4616, www.walgreens.com, a) UPC 3-11917-08151-9, b) UPC 3-11917-07658-4\",\n      \"code_info\": \"Lots a) 15952, 16270,16425, Exp 06/15; b)16459, 16466, 16467, Exp 07/15\",\n      \"address_1\": \"8 Joanna Ct\",\n      \"address_2\": \"\",\n      \"product_quantity\": \"56,808 bottles\"\n    },\n    {\n      \"classification\": \"Class II\",\n      \"center_classification_date\": \"20121025\",\n      \"report_date\": \"20121031\",\n      \"postal_code\": \"08816-2108\",\n      \"termination_date\": \"20141007\",\n      \"recall_initiation_date\": \"20120904\",\n      \"recall_number\": \"D-031-2013\",\n      \"city\": \"East Brunswick\",\n      \"event_id\": \"63384\",\n      \"distribution_pattern\": \"Nationwide\",\n      \"openfda\": {},\n      \"recalling_firm\": \"Raritan Pharmaceuticals, Inc.\",\n      \"voluntary_mandated\": \"Voluntary: Firm Initiated\",\n      \"state\": \"NJ\",\n      \"reason_for_recall\": \"Microbial Contamination of Non-Sterile Products: Product is being recalled due to possible microbial contamination by C. difficile discovered in the raw material.\",\n      \"initial_firm_notification\": \"E-Mail\",\n      \"status\": \"Terminated\",\n      \"product_type\": \"Drugs\",\n      \"country\": \"United States\",\n      \"product_description\": \"Premier Value Fiber Plus Calcium Supplement Capsules, 120 capsules per bottle, Distributed by: Chain Drug Consortium, LLC, Boca Raton, FL, UPC 8-40986-01987-6\",\n      \"code_info\": \"Lot 15087, Exp 08/15\",\n      \"address_1\": \"8 Joanna Ct\",\n      \"address_2\": \"\",\n      \"product_quantity\": \"96 bottles\"\n    },\n    {\n      \"classification\": \"Class III\",\n      \"center_classification_date\": \"20121106\",\n      \"report_date\": \"20121114\",\n      \"postal_code\": \"08807\",\n      \"termination_date\": \"20130325\",\n      \"recall_initiation_date\": \"20121015\",\n      \"recall_number\": \"D-047-2013\",\n      \"city\": \"Bridgewater\",\n      \"event_id\": \"63488\",\n      \"distribution_pattern\": \"Nationwide\",\n      \"openfda\": {},\n      \"recalling_firm\": \"Valeant Pharmaceuticals\",\n      \"voluntary_mandated\": \"Voluntary: Firm Initiated\",\n      \"state\": \"NJ\",\n      \"reason_for_recall\": \"Subpotent (Single Ingredient) Drug: This product was found to be subpotent for the salicylic acid ingredient.  Additionally, this product is mislabeled because the label either omits or erroneously added inactive ingredients to the label.\",\n      \"initial_firm_notification\": \"Letter\",\n      \"status\": \"Terminated\",\n      \"product_type\": \"Drugs\",\n      \"country\": \"United States\",\n      \"product_description\": \"AcneFree 3-in-1 Acne Night Repair Foam (retinol + salicylic acid 1.5% w/v), 3 oz (85 g) canister, Dist. by: University Medical Pharmaceuticals Corp., Irvine, CA  92618, UPC 7 88521 13548 6.\",\n      \"code_info\": \"All lots with expiration dates between 10/10/12 through 10/10/14 of UPC 7 88521 13548 6\",\n      \"address_1\": \"700 Rte 206 North\",\n      \"address_2\": \"\",\n      \"product_quantity\": \"81,319 canisters\"\n    },\n    {\n      \"classification\": \"Class III\",\n      \"center_classification_date\": \"20121220\",\n      \"report_date\": \"20121226\",\n      \"postal_code\": \"08558-1311\",\n      \"termination_date\": \"20140429\",\n      \"recall_initiation_date\": \"20121204\",\n      \"recall_number\": \"D-098-2013\",\n      \"city\": \"Skillman\",\n      \"more_code_info\": null,\n      \"event_id\": \"63787\",\n      \"distribution_pattern\": \"Nationwide\",\n      \"openfda\": {},\n      \"recalling_firm\": \"Johnson & Johnson\",\n      \"voluntary_mandated\": \"Voluntary: Firm Initiated\",\n      \"state\": \"NJ\",\n      \"reason_for_recall\": \"Superpotent (Single Ingredient Drug): salicylic acid\",\n      \"initial_firm_notification\": \"Letter\",\n      \"status\": \"Terminated\",\n      \"product_type\": \"Drugs\",\n      \"country\": \"United States\",\n\n\n\n\n\n\n\n\nNote\n\n\n\nWe need to tell spark that rows span on several lines with the multLine option\nSee Reading from JSON files in Spark documentation\n\n\n\n\nCode\nimport os \n\ndf = (\n    spark\n        .read\n        .json('file://' + os.path.abspath(filename), \n               multiLine=True)\n)\n\n\n\n\nCode\ndf.printSchema()\n\n\nroot\n |-- address_1: string (nullable = true)\n |-- address_2: string (nullable = true)\n |-- center_classification_date: string (nullable = true)\n |-- city: string (nullable = true)\n |-- classification: string (nullable = true)\n |-- code_info: string (nullable = true)\n |-- country: string (nullable = true)\n |-- distribution_pattern: string (nullable = true)\n |-- event_id: string (nullable = true)\n |-- initial_firm_notification: string (nullable = true)\n |-- more_code_info: string (nullable = true)\n |-- openfda: struct (nullable = true)\n |    |-- application_number: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- brand_name: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- generic_name: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- is_original_packager: array (nullable = true)\n |    |    |-- element: boolean (containsNull = true)\n |    |-- manufacturer_name: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- nui: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- original_packager_product_ndc: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- package_ndc: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- pharm_class_cs: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- pharm_class_epc: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- pharm_class_moa: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- pharm_class_pe: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- product_ndc: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- product_type: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- route: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- rxcui: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- spl_id: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- spl_set_id: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- substance_name: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- unii: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |    |-- upc: array (nullable = true)\n |    |    |-- element: string (containsNull = true)\n |-- postal_code: string (nullable = true)\n |-- product_description: string (nullable = true)\n |-- product_quantity: string (nullable = true)\n |-- product_type: string (nullable = true)\n |-- reason_for_recall: string (nullable = true)\n |-- recall_initiation_date: string (nullable = true)\n |-- recall_number: string (nullable = true)\n |-- recalling_firm: string (nullable = true)\n |-- report_date: string (nullable = true)\n |-- state: string (nullable = true)\n |-- status: string (nullable = true)\n |-- termination_date: string (nullable = true)\n |-- voluntary_mandated: string (nullable = true)\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nIn a less user-friendly format:\n\n\n\n\nCode\ndf.schema\n\n\nStructType([StructField('address_1', StringType(), True), StructField('address_2', StringType(), True), StructField('center_classification_date', StringType(), True), StructField('city', StringType(), True), StructField('classification', StringType(), True), StructField('code_info', StringType(), True), StructField('country', StringType(), True), StructField('distribution_pattern', StringType(), True), StructField('event_id', StringType(), True), StructField('initial_firm_notification', StringType(), True), StructField('more_code_info', StringType(), True), StructField('openfda', StructType([StructField('application_number', ArrayType(StringType(), True), True), StructField('brand_name', ArrayType(StringType(), True), True), StructField('generic_name', ArrayType(StringType(), True), True), StructField('is_original_packager', ArrayType(BooleanType(), True), True), StructField('manufacturer_name', ArrayType(StringType(), True), True), StructField('nui', ArrayType(StringType(), True), True), StructField('original_packager_product_ndc', ArrayType(StringType(), True), True), StructField('package_ndc', ArrayType(StringType(), True), True), StructField('pharm_class_cs', ArrayType(StringType(), True), True), StructField('pharm_class_epc', ArrayType(StringType(), True), True), StructField('pharm_class_moa', ArrayType(StringType(), True), True), StructField('pharm_class_pe', ArrayType(StringType(), True), True), StructField('product_ndc', ArrayType(StringType(), True), True), StructField('product_type', ArrayType(StringType(), True), True), StructField('route', ArrayType(StringType(), True), True), StructField('rxcui', ArrayType(StringType(), True), True), StructField('spl_id', ArrayType(StringType(), True), True), StructField('spl_set_id', ArrayType(StringType(), True), True), StructField('substance_name', ArrayType(StringType(), True), True), StructField('unii', ArrayType(StringType(), True), True), StructField('upc', ArrayType(StringType(), True), True)]), True), StructField('postal_code', StringType(), True), StructField('product_description', StringType(), True), StructField('product_quantity', StringType(), True), StructField('product_type', StringType(), True), StructField('reason_for_recall', StringType(), True), StructField('recall_initiation_date', StringType(), True), StructField('recall_number', StringType(), True), StructField('recalling_firm', StringType(), True), StructField('report_date', StringType(), True), StructField('state', StringType(), True), StructField('status', StringType(), True), StructField('termination_date', StringType(), True), StructField('voluntary_mandated', StringType(), True)])\n\n\n\n\n\n\n\n\nNote\n\n\n\nThis dataset is a little bit of a mess!\nThis should not be surprising. The data used to populate the Spark dataframe are not classically tabular but what people call semi-structured. Json is well-suited to store, represent, and exchange such data.\nIn the classical age of tabular data (according to Codd’s principles), a table cell could only hold a scalar value (numeric, logical, text, date, timestamp, …), nowadays Relational Database Management Systems handle Arrays, Composite Types, Range Types, …, and Json (see PostgreSQL).\nSpark, R, and Pandas, and modern relational databases also allow us to work with complex types.\nModern column oriented file format like parquet also work with nested structures.\n\n\n\nFirst, there is a nested opendfa dictionary. Each element of the dictionary is an array\nA first good idea is to “flatten” the schema of the DataFrame, so that there are no nested types any more."
   },
   {
     "objectID": "core/notebooks/notebook07_json-format.html#flattening-the-schema",
@@ -3626,7 +3626,7 @@
     "href": "core/slides/slides06_file-formats.html#main-file-formats",
     "title": "File formats",
     "section": "Main file formats",
-    "text": "Main file formats\n::: {.center}ile:///home/boucheron/Documents/IFEBY310/_site/notebooks-listings.html\n    \n:::\nWe shall talk about the core concepts and use-cases for the following popular data formats:\n\nAvro : https://avro.apache.org\nORC : https://parquet.apache.org\nParquet : https://orc.apache.org"
+    "text": "Main file formats\n\n    \n\nWe shall talk about the core concepts and use-cases for the following popular data formats:\n\nAvro : https://avro.apache.org\nORC : https://parquet.apache.org\nParquet : https://orc.apache.org"
   },
   {
     "objectID": "core/slides/slides06_file-formats.html#avro-principles",
@@ -3786,14 +3786,14 @@
     "objectID": "core/slides/slides02_python_ds_stack.html#features-of-python-1",
     "href": "core/slides/slides02_python_ds_stack.html#features-of-python-1",
     "title": "Python Data Science Stack",
-    "section": "Features of Python\n",
-    "text": "Features of Python\n\n\nHigh-level data types (tuples, dict, list, set, etc.)\nStandard libraries with batteries included\n\nString services,\nRegular expressions\nDatetime\n…\n\n\nLibraries for scientific computing\nEasy and efficient I/O, many file formats\nOS, threading, multiprocessing\nNetworking, email, html, webserver, scrapping\nCan be extended with C/C++ and easily accelerated (cython, numba, pypy)\nTons of external libraries"
+    "section": "Features of Python",
+    "text": "Features of Python\n\nHigh-level data types (tuples, dict, list, set, etc.)\nStandard libraries with batteries included\n\nString services,\nRegular expressions\nDatetime\n…\n\nLibraries for scientific computing\nEasy and efficient I/O, many file formats\nOS, threading, multiprocessing\nNetworking, email, html, webserver, scrapping\nCan be extended with C/C++ and easily accelerated (cython, numba, pypy)\nTons of external libraries"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#features-of-python-2",
     "href": "core/slides/slides02_python_ds_stack.html#features-of-python-2",
     "title": "Python Data Science Stack",
-    "section": "Features of Python\n",
+    "section": "Features of Python",
     "text": "Features of Python"
   },
   {
@@ -3807,7 +3807,7 @@
     "objectID": "core/slides/slides02_python_ds_stack.html#python-popularity-growth",
     "href": "core/slides/slides02_python_ds_stack.html#python-popularity-growth",
     "title": "Python Data Science Stack",
-    "section": "\nPython popularity growth",
+    "section": "Python popularity growth",
     "text": "Python popularity growth"
   },
   {
@@ -3822,70 +3822,70 @@
     "href": "core/slides/slides02_python_ds_stack.html#numpy",
     "title": "Python Data Science Stack",
     "section": "Numpy",
-    "text": "Numpy\n\n\n\n\n\n\n\n\nnumpy is all about multi-dimensional arrays and matrices\nhigh-level computation such as\n\nlinear algebra: numpy.linalg\n\nrandom number generation:numpy.random\n\n\n\nFast but not optimized for multi-threaded architectures\nNot for distributed multi-machine settings"
+    "text": "Numpy\n\n\n  \n\n\n\n\nnumpy is all about multi-dimensional arrays and matrices\nhigh-level computation such as\n\nlinear algebra: numpy.linalg\nrandom number generation:numpy.random\n\nFast but not optimized for multi-threaded architectures\nNot for distributed multi-machine settings"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#scipy",
     "href": "core/slides/slides02_python_ds_stack.html#scipy",
     "title": "Python Data Science Stack",
     "section": "Scipy",
-    "text": "Scipy\n\n\n\n\n\n\n\n\nscipy extends numpy with extra modules:\n\noptimization,\nintegration,\nFFT, signal and image processing\n…\n\n\nSparse matrix formats in scipy.sparse"
+    "text": "Scipy\n\n\n  \n\n\n\n\nscipy extends numpy with extra modules:\n\noptimization,\nintegration,\nFFT, signal and image processing\n…\n\nSparse matrix formats in scipy.sparse"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#pandas",
     "href": "core/slides/slides02_python_ds_stack.html#pandas",
     "title": "Python Data Science Stack",
     "section": "Pandas",
-    "text": "Pandas\n\n\n\n\n\n\n\n\npandas builds upon numpy to provide a high-performance, easy-to-use DataFrame object, with high-level data processing\nEasy I/O with most data format : csv, json, hdf5, feather, parquet, etc.\n\nSQL semantics: select, filter, join, groupby, agg, , where, etc.\nVery large general-purpose library for data processing, not distributed, medium scale data only\n\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nPandas online book\nPandas homepage\nPolars homepage\nPolars versus Pandas"
+    "text": "Pandas\n\n\n    \n\n\n\n\npandas builds upon numpy to provide a high-performance, easy-to-use DataFrame object, with high-level data processing\nEasy I/O with most data format : csv, json, hdf5, feather, parquet, etc.\nSQL semantics: select, filter, join, groupby, agg, , where, etc.\nVery large general-purpose library for data processing, not distributed, medium scale data only\n\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nPandas online book\nPandas homepage\nPolars homepage\nPolars versus Pandas"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#dask",
     "href": "core/slides/slides02_python_ds_stack.html#dask",
     "title": "Python Data Science Stack",
     "section": "Dask",
-    "text": "Dask\n\n\n\n\n\n\n\n\ndask is roughly a distributed and parallel pandas\n\nSame API has pandas !\nTask scheduling, lazy evaluation, distributed dataframes\nStill young and far behind spark, but can be useful\nEasier than spark, full Python (no JVM)\n\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nDask homepage"
+    "text": "Dask\n\n\n    \n\n\n\n\ndask is roughly a distributed and parallel pandas\nSame API has pandas !\nTask scheduling, lazy evaluation, distributed dataframes\nStill young and far behind spark, but can be useful\nEasier than spark, full Python (no JVM)\n\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nDask homepage"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#pyspark",
     "href": "core/slides/slides02_python_ds_stack.html#pyspark",
     "title": "Python Data Science Stack",
     "section": "Pyspark",
-    "text": "Pyspark\n\n\n\n\n\n\n\n\npyspark is the python API to spark, a big data processing framework\nWe will use it a lot in this course\nNative API to spark is scala: pyspark can be slower (much slower if you are not careful)\n\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nPyspark documentation\nSpark Apache Project"
+    "text": "Pyspark\n\n\n    \n\n\n\n\npyspark is the python API to spark, a big data processing framework\nWe will use it a lot in this course\nNative API to spark is scala: pyspark can be slower (much slower if you are not careful)\n\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nPyspark documentation\nSpark Apache Project"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#sqlalchemy",
     "href": "core/slides/slides02_python_ds_stack.html#sqlalchemy",
     "title": "Python Data Science Stack",
     "section": "SQLAlchemy",
-    "text": "SQLAlchemy\n\n\n\n\n\n\nObject Relational Model (ORM)\nODBC\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nSQl Alchemy homepage\npsycopg2\npsycopg documentation"
+    "text": "SQLAlchemy\n\n\n    \n\n\n\nObject Relational Model (ORM)\nODBC\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nSQl Alchemy homepage\npsycopg2\npsycopg documentation"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#pyarrow",
     "href": "core/slides/slides02_python_ds_stack.html#pyarrow",
     "title": "Python Data Science Stack",
     "section": "Pyarrow",
-    "text": "Pyarrow\n\n\n\n\n\n\n\nThe universal columnar format and multi-language toolbox for fast data interchange and in-memory analytics\n\n\nApache Arrow defines a language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware like CPUs and GPUs. The Arrow memory format also supports zero-copy reads for lightning-fast data access without serialization overhead.\n\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nApache Arrow Project Homepage\nPyarrow documentation"
+    "text": "Pyarrow\n\n\n    \n\n\n\n\nThe universal columnar format and multi-language toolbox for fast data interchange and in-memory analytics\n\n\nApache Arrow defines a language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware like CPUs and GPUs. The Arrow memory format also supports zero-copy reads for lightning-fast data access without serialization overhead.\n\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nApache Arrow Project Homepage\nPyarrow documentation"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#matplotlib",
     "href": "core/slides/slides02_python_ds_stack.html#matplotlib",
     "title": "Python Data Science Stack",
     "section": "Matplotlib",
-    "text": "Matplotlib\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmatplotlib provides versatile 2D plotting capabilities\n\nscientific computing\ndata visualization\n\n\nLarge and customizable library\nThe historical one, somewhat low-level when plotting things related to data\n\n\n\n\n\n\n\n\n\nLinks\n\n\nMatplotlib Homepage"
+    "text": "Matplotlib\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nmatplotlib provides versatile 2D plotting capabilities\n\nscientific computing\ndata visualization\n\nLarge and customizable library\nThe historical one, somewhat low-level when plotting things related to data\n\n\n\n\n\n\n\n\n\nLinks\n\n\nMatplotlib Homepage"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#plotly",
     "href": "core/slides/slides02_python_ds_stack.html#plotly",
     "title": "Python Data Science Stack",
     "section": "Plotly",
-    "text": "Plotly\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAn interactive visualization library for web browsers based on javascript graphic library d3.js\n\nWith a clean and simple python interface, can be used in a jupyter notebook\nInteractions enabled by default (zoom, etc.) and fast rendering\nVery good looking plots with good default parameters\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nPlotly homepage"
+    "text": "Plotly\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAn interactive visualization library for web browsers based on javascript graphic library d3.js\n\nWith a clean and simple python interface, can be used in a jupyter notebook\nInteractions enabled by default (zoom, etc.) and fast rendering\nVery good looking plots with good default parameters\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nPlotly homepage"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#altair",
     "href": "core/slides/slides02_python_ds_stack.html#altair",
     "title": "Python Data Science Stack",
     "section": "Altair",
-    "text": "Altair\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVega-Altair: Declarative Visualization in Python\nVega-Altair is a declarative visualization library for Python. Its simple, friendly and consistent API, built on top of the powerful Vega-Lite grammar, empowers you to spend less time writing code and more time exploring your data.\n\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nAltair homepage\nVega-Lite: A Grammar of Interactive Graphics"
+    "text": "Altair\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVega-Altair: Declarative Visualization in Python\nVega-Altair is a declarative visualization library for Python. Its simple, friendly and consistent API, built on top of the powerful Vega-Lite grammar, empowers you to spend less time writing code and more time exploring your data.\n\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\nAltair homepage\nVega-Lite: A Grammar of Interactive Graphics"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#dash",
@@ -3906,14 +3906,14 @@
     "href": "core/slides/slides02_python_ds_stack.html#pure-python-interfaces",
     "title": "Python Data Science Stack",
     "section": "Pure Python interfaces",
-    "text": "Pure Python interfaces\n\n\n\n\nWays to use all these tools\n\nWrite a script script.py and use python directly in a CLI : python script.py\nUse the ipython interactive shell"
+    "text": "Pure Python interfaces\n\n    \n\n\nWays to use all these tools\n\nWrite a script script.py and use python directly in a CLI : python script.py\nUse the ipython interactive shell"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#interfaces-jupyter",
     "href": "core/slides/slides02_python_ds_stack.html#interfaces-jupyter",
     "title": "Python Data Science Stack",
     "section": "Interfaces : Jupyter",
-    "text": "Interfaces : Jupyter\n\n\n\n\n\nUse jupyter: a web application that allows to create and run documents, called notebooks (with .ipynb extension)\nNotebooks can contain code, equations, visualizations, text, etc. (literate programming)\nEach notebook has a kernel running a python/R,Julia, … thread\nA problem: a ipynb file is a json document. Leads to bad code diff, a problem with git versioning\n\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\njupyter\njupyterlab\npolynote"
+    "text": "Interfaces : Jupyter\n\n    \n\n\n\nUse jupyter: a web application that allows to create and run documents, called notebooks (with .ipynb extension)\nNotebooks can contain code, equations, visualizations, text, etc. (literate programming)\nEach notebook has a kernel running a python/R,Julia, … thread\nA problem: a ipynb file is a json document. Leads to bad code diff, a problem with git versioning\n\n\n\n\n\n\n\n\n\n\nLinks\n\n\n\njupyter\njupyterlab\npolynote"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#quarto",
@@ -3927,7 +3927,7 @@
     "href": "core/slides/slides02_python_ds_stack.html#interfaceside-vs-code-and-other-editors",
     "title": "Python Data Science Stack",
     "section": "Interfaces/IDE : VS Code (and other editors)",
-    "text": "Interfaces/IDE : VS Code (and other editors)\nintroducing-vs-code-insiders-podcast\n\n\nvs code blog"
+    "text": "Interfaces/IDE : VS Code (and other editors)\nintroducing-vs-code-insiders-podcast\n\n\n\nvs code blog"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#reticulate",
@@ -3969,7 +3969,7 @@
     "href": "core/slides/slides02_python_ds_stack.html#getting-faster",
     "title": "Python Data Science Stack",
     "section": "Getting faster",
-    "text": "Getting faster\n\n\nnumba, cython, cupy"
+    "text": "Getting faster\n\nnumba, cython, cupy"
   },
   {
     "objectID": "core/slides/slides02_python_ds_stack.html#and",
@@ -4795,7 +4795,7 @@
     "href": "core/slides/slides01_introduction.html#who-are-we",
     "title": "Big data technologies",
     "section": "Who are we ?",
-    "text": "Who are we ?\n\n\n\n\n\n\nStéphane Boucheron\nLPSM\nStatistics \n\nhttps://stephane-v-boucheron.fr\n\n\n\n\n\n\nCristina Sirangelo\nIRIF\nData Science, Databases \n\nhttps://www.irif.fr/~amelie/"
+    "text": "Who are we ?\n\n\n\n\n\n\nStéphane Boucheron\nLPSM\nStatistics \nhttps://stephane-v-boucheron.fr\n\n\n\n\n\n\nCristina Sirangelo\nIRIF\nData Science, Databases \nhttps://www.irif.fr/~amelie/"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#course-logistics-1",
@@ -4823,14 +4823,14 @@
     "href": "core/slides/slides01_introduction.html#why-docker-what-is-it",
     "title": "Big data technologies",
     "section": "Why docker ? What is it ?",
-    "text": "Why docker ? What is it ?\n\nDon’t mess with your python env. and configuration files\nEverything in embedded in a container (better than a Virtual Machine)\nA container is an instance of an image\n\nSame image = same environment for everybody\nSame image = no {version, dependencies, install} problems\nIt is an entreprise standard used everywhere now!"
+    "text": "Why docker ? What is it ?\n\nDon’t mess with your python env. and configuration files\nEverything in embedded in a container (better than a Virtual Machine)\nA container is an instance of an image\nSame image = same environment for everybody\nSame image = no {version, dependencies, install} problems\nIt is an entreprise standard used everywhere now!"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#docker-1",
     "href": "core/slides/slides01_introduction.html#docker-1",
     "title": "Big data technologies",
-    "section": "\n docker\n",
-    "text": "docker\n\n\nHave a look at https://s-v-b.github.io/IFEBY310/tools\nHave a look at the Dockerfile to explain a little bit how the image is built\nPerform a quick demo on how to use the docker image\n\n\n\n\n\n\n\nAnd that’s it for logistics !"
+    "section": " docker",
+    "text": "docker\n\nHave a look at https://s-v-b.github.io/IFEBY310/tools\nHave a look at the Dockerfile to explain a little bit how the image is built\nPerform a quick demo on how to use the docker image\n\n\n\n\n\n\n\nAnd that’s it for logistics !"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#big-data-1",
@@ -4843,50 +4843,50 @@
     "objectID": "core/slides/slides01_introduction.html#question",
     "href": "core/slides/slides01_introduction.html#question",
     "title": "Big data technologies",
-    "section": "Question \n",
-    "text": "Question \n\n\nHow do we catch up to process the data deluge and to learn from it ?"
+    "section": "Question ",
+    "text": "Question \n\nHow do we catch up to process the data deluge and to learn from it ?"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#order-of-magnitudes",
     "href": "core/slides/slides01_introduction.html#order-of-magnitudes",
     "title": "Big data technologies",
     "section": "Order of magnitudes",
-    "text": "Order of magnitudes\nbit\nA bit is a value of either a 1 or 0 (on or off)\nbyte (B)\nA byte is made of 8 bits\n\n1 character, e.g., “a”, is one byte\n\nKilobyte (KB)\nA kilobyte is \\(1024 =2^{10}\\) bytes\n\n\n2 or 3 paragraphs of ASCII text"
+    "text": "Order of magnitudes\nbit\nA bit is a value of either a 1 or 0 (on or off)\nbyte (B)\nA byte is made of 8 bits\n\n1 character, e.g., “a”, is one byte\n\nKilobyte (KB)\nA kilobyte is \\(1024 =2^{10}\\) bytes\n\n2 or 3 paragraphs of ASCII text"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#some-more-comparisons",
     "href": "core/slides/slides01_introduction.html#some-more-comparisons",
     "title": "Big data technologies",
     "section": "Some more comparisons",
-    "text": "Some more comparisons\nMegabyte (MB)\nA megabyte is \\(1 048 576=2^{20}\\) B or \\(1 024\\) KB\n\n\n873 pages of plain text\n\n4 books (200 pages or 240 000 characters)\n\nGigabyte (GB)\nA gigabyte is \\(1 073 741 824=2^{30}\\) B, \\(1 024\\) MB or \\(1 048 576\\) KB\n\n\n894 784 pages of plain text (1 200 characters)\n\n4 473 books (200 pages or 240 000 characters)\n\n640 web pages (with 1.6 MB average file size)\n\n341 digital pictures (with 3 MB average file size)\n\n256 MP3 audio files (with 4 MB average file size)\n\n1,5 650 MB CD"
+    "text": "Some more comparisons\nMegabyte (MB)\nA megabyte is \\(1 048 576=2^{20}\\) B or \\(1 024\\) KB\n\n873 pages of plain text\n4 books (200 pages or 240 000 characters)\n\nGigabyte (GB)\nA gigabyte is \\(1 073 741 824=2^{30}\\) B, \\(1 024\\) MB or \\(1 048 576\\) KB\n\n894 784 pages of plain text (1 200 characters)\n4 473 books (200 pages or 240 000 characters)\n640 web pages (with 1.6 MB average file size)\n341 digital pictures (with 3 MB average file size)\n256 MP3 audio files (with 4 MB average file size)\n1,5 650 MB CD"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#even-more",
     "href": "core/slides/slides01_introduction.html#even-more",
     "title": "Big data technologies",
     "section": "Even more",
-    "text": "Even more\nTerabyte (TB)\nA terabyte is \\(1 099 511 627 776=2^{40}\\) B, 1 024 GB or 1 048 576 MB.\n\n\n916 259 689 pages of plain text (1 200 characters)\n\n4 581 298 books (200 pages or 240 000 characters)\n\n655 360 web pages (with 1.6 MB average file size)\n\n349 525 digital pictures (with 3 MB average file size)\n\n262 144 MP3 audio files (with 4 MB average file size)\n\n1 613 650 MB CD’s\n\n233 4.38 GB DVDs\n\n40 25 GB Blu-ray discs"
+    "text": "Even more\nTerabyte (TB)\nA terabyte is \\(1 099 511 627 776=2^{40}\\) B, 1 024 GB or 1 048 576 MB.\n\n916 259 689 pages of plain text (1 200 characters)\n4 581 298 books (200 pages or 240 000 characters)\n655 360 web pages (with 1.6 MB average file size)\n349 525 digital pictures (with 3 MB average file size)\n262 144 MP3 audio files (with 4 MB average file size)\n1 613 650 MB CD’s\n233 4.38 GB DVDs\n40 25 GB Blu-ray discs"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#the-deluge",
     "href": "core/slides/slides01_introduction.html#the-deluge",
     "title": "Big data technologies",
     "section": "The deluge",
-    "text": "The deluge\nPetabyte (PB)\nA petabyte is 1 024 TB, 1 048 576 GB or 1 073 741 824 MB\n\\[1125899906842624 = 2^{50} \\quad\\text{Bytes}\\]\n\n\n938 249 922 368 pages of plain text (1 200 characters)\n\n4 691 249 611 books (200 pages or 240 000 characters)\n\n671 088 640 web pages (with 1.6 MB average file size)\n\n357 913 941 digital pictures (with 3 MB average file size)\n\n268 435 456 MP3 audio files (with 4 MB average file size)\n\n1 651 910 650 MB CD’s\n\n239 400 4.38 GB DVDs\n\n41 943 25 GB Blu-ray discs\n\nExabyte, etc.\n\n1 EB = 1 exabyte = 1 024 PB\n1 ZB = 1 zettabyte = 1 024 EB"
+    "text": "The deluge\nPetabyte (PB)\nA petabyte is 1 024 TB, 1 048 576 GB or 1 073 741 824 MB\n\\[1125899906842624 = 2^{50} \\quad\\text{Bytes}\\]\n\n938 249 922 368 pages of plain text (1 200 characters)\n4 691 249 611 books (200 pages or 240 000 characters)\n671 088 640 web pages (with 1.6 MB average file size)\n357 913 941 digital pictures (with 3 MB average file size)\n268 435 456 MP3 audio files (with 4 MB average file size)\n1 651 910 650 MB CD’s\n239 400 4.38 GB DVDs\n41 943 25 GB Blu-ray discs\n\nExabyte, etc.\n\n1 EB = 1 exabyte = 1 024 PB\n1 ZB = 1 zettabyte = 1 024 EB"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#some-figures",
     "href": "core/slides/slides01_introduction.html#some-figures",
     "title": "Big data technologies",
     "section": "Some figures",
-    "text": "Some figures\nYou have every single second1:\n\nAt least 8,000 tweets sent\n900+ photos posted on Instagram\nThousands of Skype calls made\nOver 70,000 Google searches performed\nAround 80,000 YouTube videos viewed\nOver 2 million emails sent\nhttps://www.internetlivestats.com"
+    "text": "Some figures\nYou have every single second1:\n\nAt least 8,000 tweets sent\n900+ photos posted on Instagram\nThousands of Skype calls made\nOver 70,000 Google searches performed\nAround 80,000 YouTube videos viewed\nOver 2 million emails sent\n\nhttps://www.internetlivestats.com"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#some-figures-1",
     "href": "core/slides/slides01_introduction.html#some-figures-1",
     "title": "Big data technologies",
     "section": "Some figures",
-    "text": "Some figures\nThere are1:\n\n\n5 billion web pages as of mid-2019 (indexed web)\n\nand we expected2:\n\n\n4.8 ZB of annual IP traffic in 2022\n\nNote that\n\n\n1 ZB \\(\\approx\\) 36 000 years of HD video\nNetflix’s entire catalog is \\(\\approx\\) 3.5 years of HD video\nhttps://www.worldwidewebsize.comCisco’s Visual Networking Index"
+    "text": "Some figures\nThere are1:\n\n5 billion web pages as of mid-2019 (indexed web)\n\nand we expected2:\n\n4.8 ZB of annual IP traffic in 2022\n\nNote that\n\n1 ZB \\(\\approx\\) 36 000 years of HD video\nNetflix’s entire catalog is \\(\\approx\\) 3.5 years of HD video\n\nhttps://www.worldwidewebsize.comCisco’s Visual Networking Index"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#some-figures-2",
@@ -4900,7 +4900,7 @@
     "href": "core/slides/slides01_introduction.html#latency-numbers",
     "title": "Big data technologies",
     "section": "Latency numbers",
-    "text": "Latency numbers\n\n\n\n\n\n\n\n\n\nMemory type\nLatency(ns)\nLatency(us)\n(ms)\n\n\n\n\nL1 cache reference\n0.5 ns\n\n\n\n\n\nL2 cache reference\n7 ns\n\n\n14x L1 cache\n\n\nMain memory reference\n100 ns\n\n\n20x L2, 200x L1\n\n\nCompress 1K bytes with Zippy/Snappy\n3,000 ns\n3 us\n\n\n\n\nSend 1K bytes over 1 Gbps network\n10,000 ns\n10 us\n\n\n\n\nRead 4K randomly from SSD*\n150,000 ns\n150 us\n\n~1GB/sec SSD\n\n\nRead 1 MB sequentially from memory\n250,000 ns\n250 us\n\n\n\n\nRound trip within same datacenter\n500,000 ns\n500 us\n\n\n\n\nRead 1 MB sequentially from SSD*\n1,000,000 ns\n1,000 us\n1 ms\n~1GB/sec SSD, 4X memory\n\n\nDisk seek\n10,000,000 ns\n10,000 us\n10 ms\n20x datacenter roundtrip\n\n\nRead 1 MB sequentially from disk\n20,000,000 ns\n20,000 us\n20 ms\n80x memory, 20x SSD\n\n\nSend packet US -&gt; Europe -&gt; US\n150,000,000 ns\n150,000 us\n150 ms\n600x memory"
+    "text": "Latency numbers\n\n\n\n\n\n\n\n\n\n\nMemory type\nLatency(ns)\nLatency(us)\n(ms)\n\n\n\n\n\nL1 cache reference\n0.5 ns\n\n\n\n\n\nL2 cache reference\n7 ns\n\n\n14x L1 cache\n\n\nMain memory reference\n100 ns\n\n\n20x L2, 200x L1\n\n\nCompress 1K bytes with Zippy/Snappy\n3,000 ns\n3 us\n\n\n\n\nSend 1K bytes over 1 Gbps network\n10,000 ns\n10 us\n\n\n\n\nRead 4K randomly from SSD*\n150,000 ns\n150 us\n\n~1GB/sec SSD\n\n\nRead 1 MB sequentially from memory\n250,000 ns\n250 us\n\n\n\n\nRound trip within same datacenter\n500,000 ns\n500 us\n\n\n\n\nRead 1 MB sequentially from SSD*\n1,000,000 ns\n1,000 us\n1 ms\n~1GB/sec SSD, 4X memory\n\n\nDisk seek\n10,000,000 ns\n10,000 us\n10 ms\n20x datacenter roundtrip\n\n\nRead 1 MB sequentially from disk\n20,000,000 ns\n20,000 us\n20 ms\n80x memory, 20x SSD\n\n\nSend packet US -&gt; Europe -&gt; US\n150,000,000 ns\n150,000 us\n150 ms\n600x memory"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#section-2",
@@ -4928,7 +4928,7 @@
     "href": "core/slides/slides01_introduction.html#latency-numbers-for-mortals",
     "title": "Big data technologies",
     "section": "Latency numbers for mortals",
-    "text": "Latency numbers for mortals\nMultiply all durations by a billion \\(10^9\\)\n\n\n\n\n\n\n\nMemory type\nLatency\nHuman duration\n\n\n\nL1 cache reference\n0.5 s\nOne heart beat (0.5 s)\n\n\nL2 cache reference\n7 s\nLong yawn\n\n\nMain memory reference\n100 s\nBrushing your teeth\n\n\nSend 2K bytes over 1 Gbps network\n5.5 hr\nFrom lunch to end of work day\n\n\nSSD random read\n1.7 days\nA normal weekend\n\n\nRead 1 MB sequentially from memory\n2.9 days\nA long weekend\n\n\nRound trip within same datacenter\n5.8 days\nA medium vacation\n\n\nRead 1 MB sequentially from SSD\n11.6 days\nWaiting for almost 2 weeks for a delivery\n\n\nDisk seek\n16.5 weeks\nA semester in university\n\n\nRead 1 MB sequentially from disk\n7.8 months\nAlmost producing a new human being\n\n\nSend packet US -&gt; Europe -&gt; US\n4.8 years\nAverage time it takes to complete a bachelor’s degree"
+    "text": "Latency numbers for mortals\nMultiply all durations by a billion \\(10^9\\)\n\n\n\n\n\n\n\n\nMemory type\nLatency\nHuman duration\n\n\n\n\nL1 cache reference\n0.5 s\nOne heart beat (0.5 s)\n\n\nL2 cache reference\n7 s\nLong yawn\n\n\nMain memory reference\n100 s\nBrushing your teeth\n\n\nSend 2K bytes over 1 Gbps network\n5.5 hr\nFrom lunch to end of work day\n\n\nSSD random read\n1.7 days\nA normal weekend\n\n\nRead 1 MB sequentially from memory\n2.9 days\nA long weekend\n\n\nRound trip within same datacenter\n5.8 days\nA medium vacation\n\n\nRead 1 MB sequentially from SSD\n11.6 days\nWaiting for almost 2 weeks for a delivery\n\n\nDisk seek\n16.5 weeks\nA semester in university\n\n\nRead 1 MB sequentially from disk\n7.8 months\nAlmost producing a new human being\n\n\nSend packet US -&gt; Europe -&gt; US\n4.8 years\nAverage time it takes to complete a bachelor’s degree"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#challenges-with-big-datasets",
@@ -4970,14 +4970,14 @@
     "href": "core/slides/slides01_introduction.html#is-it-hpc",
     "title": "Big data technologies",
     "section": "Is it HPC ?",
-    "text": "Is it HPC ?\n\nHigh Performance Computing (HPC)\nParallel computing\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nFor HPC, scaling up means using a bigger machine\n\nHuge performance increase for medium scale problems\n\nVery expensive, specialized machines, lots of processors and memory\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo"
+    "text": "Is it HPC ?\n\nHigh Performance Computing (HPC)\nParallel computing\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nFor HPC, scaling up means using a bigger machine\nHuge performance increase for medium scale problems\nVery expensive, specialized machines, lots of processors and memory\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#and",
     "href": "core/slides/slides01_introduction.html#and",
     "title": "Big data technologies",
-    "section": "\n and \n",
-    "text": "and \n\n\nGoogle committed to a number of key tenants when designing its data center architecture. Most significantly —and at the time, uniquely— Google committed to massively parallelizing and distributing processing across very large numbers of commodity servers.\n\n\nGoogle also adopted a “Jedis build their own lightsabers” attitude: very little third party —and virtually no commercial— software would be found in the Google architecture.\n\n\nBuild was considered better than buy at Google.\n\nFrom Next Generation Dabases"
+    "section": " and ",
+    "text": "and \n\nGoogle committed to a number of key tenants when designing its data center architecture. Most significantly —and at the time, uniquely— Google committed to massively parallelizing and distributing processing across very large numbers of commodity servers.\n\n\nGoogle also adopted a “Jedis build their own lightsabers” attitude: very little third party —and virtually no commercial— software would be found in the Google architecture.\n\n\nBuild was considered better than buy at Google.\n\nFrom Next Generation Dabases"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#the-big-data-universe",
@@ -4997,22 +4997,22 @@
     "objectID": "core/slides/slides01_introduction.html#tools",
     "href": "core/slides/slides01_introduction.html#tools",
     "title": "Big data technologies",
-    "section": "Tools \n",
-    "text": "Tools \n\n\nSoftwares such as HadoopMR (Hadoop Map Reduce) and more recently Spark and Dask cope with these challenges\nThey are distributed computational engines: softwares that ease the development of distributed algorithms\n\nThey run on clusters (several machine on a network), managed by a resource manager such as :\n\n\n Yarn : https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html\n\nKubernetes : https://kubernetes.io\n\n\nA resource manager ensures that the tasks running on the cluster do not try to use the same resources all at once"
+    "section": "Tools ",
+    "text": "Tools \n\nSoftwares such as HadoopMR (Hadoop Map Reduce) and more recently Spark and Dask cope with these challenges\nThey are distributed computational engines: softwares that ease the development of distributed algorithms\n\nThey run on clusters (several machine on a network), managed by a resource manager such as :\n\n Yarn : https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html\nKubernetes : https://kubernetes.io\n\nA resource manager ensures that the tasks running on the cluster do not try to use the same resources all at once"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#apache-spark-1",
     "href": "core/slides/slides01_introduction.html#apache-spark-1",
     "title": "Big data technologies",
-    "section": "Apache Spark\n",
-    "text": "Apache Spark\n\nThe course will focus mainly on Spark for big data processing\n\n\nhttps://spark.apache.org\n\n\n\nSpark is an enterprise standard  (cf https://spark.apache.org/powered-by.html)\nOne of the most used big data processing framework\n\nOpen source\n\nThe predecessor of Spark is Hadoop\nSee Chapter 2 in Next Generation Dabases\nGuy Harrison"
+    "section": "Apache Spark",
+    "text": "Apache Spark\nThe course will focus mainly on Spark for big data processing\n\n\nhttps://spark.apache.org\n\n\nSpark is an enterprise standard  (cf https://spark.apache.org/powered-by.html)\nOne of the most used big data processing framework\nOpen source\n\nThe predecessor of Spark is Hadoop\nSee Chapter 2 in Next Generation Dabases\nGuy Harrison"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#hadoop",
     "href": "core/slides/slides01_introduction.html#hadoop",
     "title": "Big data technologies",
     "section": "Hadoop",
-    "text": "Hadoop\n\nHadoop has a simple API and good fault tolerance (tolerance to nodes failing midway through a processing job)\nThe cost is lots of data shuffling across the network\nWith intermediate computations written to disk over the network which we know is very time expensive\n\nIt is made of three components:\n\nHDFS (Highly Distributed File System) inspired from GoogleFileSystem, see https://ai.google/research/pubs/pub51\nYARN (Yet Another Ressource Negociator) for processing management.\nMapReduce inspired from Google for processing again.https://research.google.com/archive/mapreduce.html"
+    "text": "Hadoop\n\nHadoop has a simple API and good fault tolerance (tolerance to nodes failing midway through a processing job)\nThe cost is lots of data shuffling across the network\nWith intermediate computations written to disk over the network which we know is very time expensive\n\nIt is made of three components:\n\nHDFS (Highly Distributed File System) inspired from GoogleFileSystem, see https://ai.google/research/pubs/pub51\nYARN (Yet Another Ressource Negociator) for processing management.\nMapReduce inspired from Google for processing again. https://research.google.com/archive/mapreduce.html"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#section-4",
@@ -5033,20 +5033,20 @@
     "href": "core/slides/slides01_introduction.html#spark",
     "title": "Big data technologies",
     "section": "Spark",
-    "text": "Spark\nAdvantages of Spark over HadoopMR ?\n\n\nIn-memory storage: use RAM for fast iterative computations\n\nLower overhead for starting jobs\n\nSimple and expressive with Scala, Python, R, Java APIs\n\nHigher level libraries with SparkSQL, SparkStreaming, etc.\n\nDisadvantages of Spark over HadoopMR ?\n\n\nSpark requires servers with more CPU and more memory\n\nBut still much cheaper than HPC\n\nSpark is much faster than Hadoop\n\n\nHadoop uses disk and network\n\n\nSpark tries to use memory as much as possible for operations while minimizing network use"
+    "text": "Spark\nAdvantages of Spark over HadoopMR ?\n\nIn-memory storage: use RAM for fast iterative computations\nLower overhead for starting jobs\nSimple and expressive with Scala, Python, R, Java APIs\nHigher level libraries with SparkSQL, SparkStreaming, etc.\n\nDisadvantages of Spark over HadoopMR ?\n\nSpark requires servers with more CPU and more memory\nBut still much cheaper than HPC\n\nSpark is much faster than Hadoop\n\nHadoop uses disk and network\nSpark tries to use memory as much as possible for operations while minimizing network use"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#spark-versus-hadoop",
     "href": "core/slides/slides01_introduction.html#spark-versus-hadoop",
     "title": "Big data technologies",
-    "section": "\nSpark versus Hadoop\n",
-    "text": "Spark versus Hadoop\n\n\n\n\n\n\n\n\n\nHadoopMR\nSpark\n\n\n\nStorage\nDisk\nin-memory or disk\n\n\nOperations\nMap, reduce\nMap, reduce, join, sample, …\n\n\nExecution model\nBatch\nBatch, interactive, streaming \n\n\nProgramming environments\nJava\nScala, Java, Python, R"
+    "section": "Spark versus Hadoop",
+    "text": "Spark versus Hadoop\n\n\n\n\n\n\n\n\n\nHadoopMR\nSpark\n\n\n\n\nStorage\nDisk\nin-memory or disk\n\n\nOperations\nMap, reduce\nMap, reduce, join, sample, …\n\n\nExecution model\nBatch\nBatch, interactive, streaming \n\n\nProgramming environments\nJava\nScala, Java, Python, R"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#spark-and-hadoop-comparison",
     "href": "core/slides/slides01_introduction.html#spark-and-hadoop-comparison",
     "title": "Big data technologies",
-    "section": "\nSpark and Hadoop comparison",
+    "section": "Spark and Hadoop comparison",
     "text": "Spark and Hadoop comparison\nFor logistic regression training (a simple classification algorithm which requires several passes on a dataset)"
   },
   {
@@ -5067,7 +5067,7 @@
     "objectID": "core/slides/slides01_introduction.html#spark-can-run-everywhere",
     "href": "core/slides/slides01_introduction.html#spark-can-run-everywhere",
     "title": "Big data technologies",
-    "section": "\nSpark can run “everywhere”",
+    "section": "Spark can run “everywhere”",
     "text": "Spark can run “everywhere”"
   },
   {
@@ -5082,35 +5082,35 @@
     "href": "core/slides/slides01_introduction.html#very-tentative-agenda-for-the-course",
     "title": "Big data technologies",
     "section": "Very tentative agenda for the course",
-    "text": "Very tentative agenda for the course\nWeeks 1, 2 and 3  The Python data-science stack for medium-scale problems\nWeeks 4 and 5  Introduction to spark and its low-level API\nWeeks 6, 7 and 8 Spark’s high level API: .stress[spark.sql]. Data from different formats and sources\nWeek 9  Run a job on a cluster with spark-submit, monitoring, mistakes and debugging\nWeeks 10, 11, 12  Introduction to spark applications and spark-streaming"
+    "text": "Very tentative agenda for the course\nWeeks 1, 2 and 3  The Python data-science stack for medium-scale problems\nWeeks 4 and 5  Introduction to spark and its low-level API\nWeeks 6, 7 and 8  Spark’s high level API: .stress[spark.sql]. Data from different formats and sources\nWeek 9  Run a job on a cluster with spark-submit, monitoring, mistakes and debugging\nWeeks 10, 11, 12  Introduction to spark applications and spark-streaming"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#main-tools-for-the-course-tentative",
     "href": "core/slides/slides01_introduction.html#main-tools-for-the-course-tentative",
     "title": "Big data technologies",
     "section": "Main tools for the course (tentative…)",
-    "text": "Main tools for the course (tentative…)\nInfrastructure\n\n\n\nPython stack\n\n\n\nData Visualization"
+    "text": "Main tools for the course (tentative…)\nInfrastructure\n\n \n\nPython stack\n\n      \n\nData Visualization"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#main-tools-for-the-course-tentative-1",
     "href": "core/slides/slides01_introduction.html#main-tools-for-the-course-tentative-1",
     "title": "Big data technologies",
     "section": "Main tools for the course (tentative…)",
-    "text": "Main tools for the course (tentative…)\nBig data processing\n\n\n\nData storage / formats / querying"
+    "text": "Main tools for the course (tentative…)\nBig data processing\n\n    \n\nData storage / formats / querying"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#learning-resources",
     "href": "core/slides/slides01_introduction.html#learning-resources",
     "title": "Big data technologies",
     "section": "Learning resources",
-    "text": "Learning resources\n\nSpark Documentation Website http://spark.apache.org/docs/latest/\nAPI docs http://spark.apache.org/docs/latest/api/scala/index.html http://spark.apache.org/docs/latest/api/python/\nDatabricks learning notebooks https://databricks.com/resources\nStackOverflow https://stackoverflow.com/tags/apache-spark https://stackoverflow.com/tags/pyspark\nMore advanced http://books.japila.pl/apache-spark-internals/\nMisc. Next Generation Databases: NoSQLand Big Data by Guy HarrisonData Pipelines Pocket Reference by J. Densmore"
+    "text": "Learning resources\n\nSpark Documentation Website  http://spark.apache.org/docs/latest/\nAPI docs  http://spark.apache.org/docs/latest/api/scala/index.html  http://spark.apache.org/docs/latest/api/python/\nDatabricks learning notebooks  https://databricks.com/resources\nStackOverflow  https://stackoverflow.com/tags/apache-spark  https://stackoverflow.com/tags/pyspark\nMore advanced  http://books.japila.pl/apache-spark-internals/\nMisc.  Next Generation Databases: NoSQLand Big Data by Guy Harrison Data Pipelines Pocket Reference by J. Densmore"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#learning-resources-1",
     "href": "core/slides/slides01_introduction.html#learning-resources-1",
     "title": "Big data technologies",
     "section": "Learning Resources",
-    "text": "Learning Resources\n\n\n\n\nBook: Spark The Definitive Guide http://shop.oreilly.com/product/0636920034957.do https://github.com/databricks/Spark-The-Definitive-Guide\n\n\n\n\n\n\nAbove all"
+    "text": "Learning Resources\n\n\n\nBook: Spark The Definitive Guide http://shop.oreilly.com/product/0636920034957.do  https://github.com/databricks/Spark-The-Definitive-Guide\n\n\n\n\n\nAbove all"
   },
   {
     "objectID": "core/slides/slides01_introduction.html#data-centers-1",
@@ -5593,7 +5593,7 @@
     "href": "core/slides/spark-nlp.html#spacy-and-spark",
     "title": "Spark NLP",
     "section": "spaCy and Spark?",
-    "text": "spaCy and Spark?\nA databricks notebook discusses possible interactions between spaCy and Spark on a use case:\n\n\nGet the tweets (the texts) into a Spark dataframe using spark.sql()\n\nConvert the Spark dataframe to a numpy array\nStream all tweets in batches using nlp.pipe()\n\nGo through the processed tweets and take copy everything we need in a large array object\nConvert back the large array object into a Spark dataframe\nSave the dataframe as table, so we can query the whole thing withh SQL again\n\n\n\n\n\n\n\n\n\nNo hint at parallelizing spaCy’s annotation process"
+    "text": "spaCy and Spark?\nA databricks notebook discusses possible interactions between spaCy and Spark on a use case:\n\n\nGet the tweets (the texts) into a Spark dataframe using spark.sql()\nConvert the Spark dataframe to a numpy array\nStream all tweets in batches using nlp.pipe()\nGo through the processed tweets and take copy everything we need in a large array object\nConvert back the large array object into a Spark dataframe\nSave the dataframe as table, so we can query the whole thing withh SQL again\n\n\n\n\n\n\n\n\n\nNo hint at parallelizing spaCy’s annotation process"
   },
   {
     "objectID": "core/slides/spark-nlp.html#spacy-v2-current-v3.7",
@@ -5614,42 +5614,42 @@
     "href": "core/slides/spark-nlp.html#initiate-spark-session",
     "title": "Spark NLP",
     "section": "Initiate Spark session",
-    "text": "Initiate Spark session\nAssuming standalone mode on a laptop. master runs on localhost\n\nspark = SparkSession.builder \\\n            .appName(\"Spark NLP\") \\\n#            .master(\"spark://localhost:7077\") \\\n            .config(\"spark.driver.memory\", \"16G\") \\\n            .config(\"spark.serializer\", \"org.apache.spark.serializer.KryoSerializer\") \\\n            .config(\"spark.kryoserializer.buffer.max\", \"2000M\") \\\n            .config(\"spark.driver.maxResultSize\", \"0\") \\\n            .config(\"spark.jars.packages\", \"com.johnsnowlabs.nlp:spark-nlp_2.12:5.2.3\") \\\n            .getOrCreate()\n\n\n\n\n\n\nsparknlp.version()\n\n\n\n\n…\n\nspark"
+    "text": "Initiate Spark session\nAssuming standalone mode on a laptop. master runs on localhost\n\nspark = SparkSession.builder \\\n    .appName(\"Spark NLP\") \\\n    .master(\"local[*]\") \\\n    .config(\"spark.driver.memory\", \"16G\") \\\n    .config(\"spark.serializer\", \"org.apache.spark.serializer.KryoSerializer\") \\\n    .config(\"spark.kryoserializer.buffer.max\", \"2000M\") \\\n    .config(\"spark.driver.maxResultSize\", \"0\") \\\n    .config(\"spark.jars.packages\", \"com.johnsnowlabs.nlp:spark-nlp_2.12:6.3.2\") \\\n    .getOrCreate()\n\n\n\n\n\n\n# sparknlp.version()\n\n\n\n\n…\n\nspark\n\n\n\n\n            \n                SparkSession - in-memory\n                \n        \n            SparkContext\n\n            Spark UI\n\n            \n              Version\n                v3.5.3\n              Master\n                local[*]\n              AppName\n                Spark NLP"
   },
   {
     "objectID": "core/slides/spark-nlp.html#toy-big-data",
     "href": "core/slides/spark-nlp.html#toy-big-data",
     "title": "Spark NLP",
     "section": "Toy (big) data",
-    "text": "Toy (big) data\n\nfr_articles = [\n  (\"Le dimanche 11 juillet 2021, Chiellini a utilisé le mot Kiricocho lorsque Saka s'est approché du ballon pour le penalty.\",),\n  (\"La prochaine Coupe du monde aura lieu en novembre 2022.\",),\n  (\"À Noël 800, Charlemagne se fit couronner empereur à Rome.\",),\n  (\"Le Marathon de Paris a lieu le premier dimanche d'avril 2024\",)\n]\n\n\n\n\n\n\narticles_cols = [\"text\"]\n\ndf = spark.createDataFrame(\n  data=fr_articles, \n  schema=articles_cols)\n\ndf.printSchema()"
+    "text": "Toy (big) data\n\nfr_articles = [\n  (\"Le dimanche 11 juillet 2021, Chiellini a utilisé le mot Kiricocho lorsque Saka s'est approché du ballon pour le penalty.\",),\n  (\"La prochaine Coupe du monde aura lieu en novembre 2022.\",),\n  (\"À Noël 800, Charlemagne se fit couronner empereur à Rome.\",),\n  (\"Le Marathon de Paris a lieu le premier dimanche d'avril 2024\",)\n]\n\n\n\n\n\n\narticles_cols = [\"text\"]\n\ndf = spark.createDataFrame(\n  data=fr_articles, \n  schema=articles_cols)\n\ndf.printSchema()\n\n\n\nroot\n |-- text: string (nullable = true)"
   },
   {
     "objectID": "core/slides/spark-nlp.html#pipelines",
     "href": "core/slides/spark-nlp.html#pipelines",
     "title": "Spark NLP",
     "section": "Pipelines",
-    "text": "Pipelines\n\ndocument_assembler = DocumentAssembler() \\\n            .setInputCol(\"text\") \\\n            .setOutputCol(\"document\")\n\n\n\n\n\n\n\nColumn document contains the ‘text’ to be annotated as well as some possible metadata.\nStarting point of any annotation process\nSpark NLP relies on Saprk SQL for storing, moving, data.\n\n\n\n\n\ndate_matcher = DateMatcher() \\\n            .setInputCols(['document']) \\\n            .setOutputCol(\"date\") \\\n            .setOutputFormat(\"MM/dd/yyyy\") \\\n            .setSourceLanguage(\"fr\")\n\n\n\n\n\n\n\n\nSpark NLP adopts an original way of storing annotations\nSpark NLP creates columns for annotations\nSpark NLP stores annotation in Spark dataframes\nAnnotators are\n\nTranformers\nEstimators\nModels"
+    "text": "Pipelines\n\ndocument_assembler = (\n  DocumentAssembler() \n            .setInputCol(\"text\") \n            .setOutputCol(\"document\")\n)\n\n\n\n\n\n\n\nColumn document contains the ‘text’ to be annotated as well as some possible metadata.\nStarting point of any annotation process\nSpark NLP relies on Saprk SQL for storing, moving, data.\n\n\n\n\n\ndate_matcher = DateMatcher() \\\n            .setInputCols(['document']) \\\n            .setOutputCol(\"date\") \\\n            .setOutputFormat(\"MM/dd/yyyy\") \\\n            .setSourceLanguage(\"fr\")\n\n\n\n\n\n\n\n\nSpark NLP adopts an original way of storing annotations\nSpark NLP creates columns for annotations\nSpark NLP stores annotation in Spark dataframes\nAnnotators are\n\nTranformers\nEstimators\nModels"
   },
   {
     "objectID": "core/slides/spark-nlp.html#transformationaction",
     "href": "core/slides/spark-nlp.html#transformationaction",
     "title": "Spark NLP",
     "section": "Transformation/Action",
-    "text": "Transformation/Action\n\nassembled = ( \n  document_assembler.transform(df)\n)\n\n\n\n\n\n(\n date_matcher\n  .transform(assembled)\n  .select('date')\n  .show(10, False)\n)"
+    "text": "Transformation/Action\n\nassembled = ( \n  document_assembler.transform(df)\n)\n\n\n\n\n\n(\n date_matcher\n  .transform(assembled)\n  .select('date')\n  .show(10, False)\n)\n\n\n\n+-------------------------------------------------+\n|date                                             |\n+-------------------------------------------------+\n|[{date, 10, 21, 07/11/2021, {sentence -&gt; 0}, []}]|\n|[{date, 41, 53, 11/01/2022, {sentence -&gt; 0}, []}]|\n|[]                                               |\n|[{date, 3, 60, 01/01/2024, {sentence -&gt; 0}, []}] |\n+-------------------------------------------------+"
   },
   {
     "objectID": "core/slides/spark-nlp.html#more",
     "href": "core/slides/spark-nlp.html#more",
     "title": "Spark NLP",
     "section": "More",
-    "text": "More\n\nfr_articles.append((\"Nous nous sommes rencontrés le 13/05/2018 puis le 18/05/2020.\",))\n\nfr_articles.append((\"Nous nous sommes rencontrés il y a 2 jours et il m'a dit qu'il nous rendrait visite la semaine prochaine.\",))\n\n\n\n\n\ndf = spark.createDataFrame(\n  data=fr_articles, \n  schema=articles_cols)\n\ndf.printSchema()\ndf.show()\n\n\n\n\n\nassembled = ( \n  document_assembler.transform(df)\n)\n\n\n\n\n\n(\n date_matcher\n  .transform(assembled)\n  .select('date')\n  .show(10, False)\n)"
+    "text": "More\n\nfr_articles.append((\"Nous nous sommes rencontrés le 13/05/2018 puis le 18/05/2020.\",))\n\nfr_articles.append((\"Nous nous sommes rencontrés il y a 2 jours et il m'a dit qu'il nous rendrait visite la semaine prochaine.\",))\n\n\n\n\n\ndf = spark.createDataFrame(\n  data=fr_articles, \n  schema=articles_cols)\n\ndf.printSchema()\ndf.show()\n\n\n\nroot\n |-- text: string (nullable = true)\n\n+--------------------+\n|                text|\n+--------------------+\n|Le dimanche 11 ju...|\n|La prochaine Coup...|\n|À Noël 800, Charl...|\n|Le Marathon de Pa...|\n|Nous nous sommes ...|\n|Nous nous sommes ...|\n+--------------------+\n\n\n\n\nassembled = ( \n  document_assembler.transform(df)\n)\n\n\n\n\n\n(\n date_matcher\n  .transform(assembled)\n  .select('date')\n  .show(10, False)\n)\n\n\n\n+-------------------------------------------------+\n|date                                             |\n+-------------------------------------------------+\n|[{date, 10, 21, 07/11/2021, {sentence -&gt; 0}, []}]|\n|[{date, 41, 53, 11/01/2022, {sentence -&gt; 0}, []}]|\n|[]                                               |\n|[{date, 3, 60, 01/01/2024, {sentence -&gt; 0}, []}] |\n|[{date, 31, 40, 05/13/2018, {sentence -&gt; 0}, []}]|\n|[{date, 84, 92, 02/24/2026, {sentence -&gt; 0}, []}]|\n+-------------------------------------------------+"
   },
   {
     "objectID": "core/slides/spark-nlp.html#another-annotator",
     "href": "core/slides/spark-nlp.html#another-annotator",
     "title": "Spark NLP",
     "section": "Another annotator",
-    "text": "Another annotator\n\ndate_matcher_bis = MultiDateMatcher() \\\n            .setInputCols(['document']) \\\n            .setOutputCol(\"date\") \\\n            .setOutputFormat(\"MM/dd/yyyy\") \\\n            .setSourceLanguage(\"fr\")\n\n\n\n\n\n(\n  date_matcher_bis\n    .transform(assembled)\n    .select(\"date\")\n    .show(10, False)\n)"
+    "text": "Another annotator\n\ndate_matcher_bis = MultiDateMatcher() \\\n            .setInputCols(['document']) \\\n            .setOutputCol(\"date\") \\\n            .setOutputFormat(\"MM/dd/yyyy\") \\\n            .setSourceLanguage(\"fr\")\n\n\n\n\n\n(\n  date_matcher_bis\n    .transform(assembled)\n    .select(\"date\")\n    .show(10, False)\n)\n\n\n\n+--------------------------------------------------------------------------------------------------+\n|date                                                                                              |\n+--------------------------------------------------------------------------------------------------+\n|[{date, 11, 22, 07/11/2021, {sentence -&gt; 0}, []}]                                                 |\n|[{date, 41, 53, 11/01/2022, {sentence -&gt; 0}, []}]                                                 |\n|[]                                                                                                |\n|[{date, 53, 62, 04/01/2024, {sentence -&gt; 0}, []}]                                                 |\n|[{date, 31, 40, 05/13/2018, {sentence -&gt; 0}, []}, {date, 50, 59, 05/18/2020, {sentence -&gt; 0}, []}]|\n|[{date, 28, 37, 02/15/2026, {sentence -&gt; 0}, []}, {date, 80, 88, 02/24/2026, {sentence -&gt; 0}, []}]|\n+--------------------------------------------------------------------------------------------------+"
   },
   {
     "objectID": "core/slides/spark-nlp.html#sql-lib-and-dataframes",
@@ -5670,28 +5670,28 @@
     "href": "core/slides/spark-nlp.html#getting-a-corpus-etl",
     "title": "Spark NLP",
     "section": "Getting a corpus : ETL",
-    "text": "Getting a corpus : ETL\n\npattern = 'URL: http://www.nytimes.com/(?P&lt;zedate&gt;[0-9]{4}/[0-9]{2}/[0-9]{2})/.*'\ntitle = 'URL: http://www.nytimes.com/[0-9]{4}/[0-9]{2}/[0-9]{2}/(.*)'\nreg_date = re.compile(pattern)\nreg_title = re.compile(title)\n\n\n\n\n\nnypath = Path('../data/nytimes_news_articles.txt')\ncorpus_list = list()\n\n\n\n\n\nwith open(nypath, encoding='UTF-8')  as fd:\n    doc, document = None, None\n    while l := fd.readline():        \n        if m := reg_date.match(l):\n            if doc is not None:\n                corpus_list.append((*document, doc))\n                doc, document = None, None\n            ymd = date(*[int(n) for n in m.groups()[0].split('/')])\n            title = (\n                reg_title.match(l)\n                  .groups()[0]\n                  .split('/')\n            )\n            document =  (ymd, title[-1], '/'.join(title[:-1]))\n            doc = ''\n        else: doc = doc + l\n    else:\n        if doc is not None:\n            corpus_list.append((*document, doc))\n\n\n\n\n\ndf_texts = spark.createDataFrame(corpus_list,\n                      schema= StructType([\n    StructField('date', DateType(), False),\n    StructField('title', StringType(), False),\n    StructField('topic', StringType(), False),\n    StructField('text', StringType(), True)\n]))\n\n\n\n\n\ndf_texts.printSchema()\ndf_texts.count()"
+    "text": "Getting a corpus : ETL\n\n# Warm up \npattern = 'URL: http://www.nytimes.com/(?P&lt;zedate&gt;[0-9]{4}/[0-9]{2}/[0-9]{2})/.*'\ntitle = 'URL: http://www.nytimes.com/[0-9]{4}/[0-9]{2}/[0-9]{2}/(.*)'\nreg_date = re.compile(pattern)\nreg_title = re.compile(title)\n\n\n\n\n\n# Getting the data\nnypath = Path('../../data/nytimes_news_articles.txt')\ncorpus_list = list()"
   },
   {
     "objectID": "core/slides/spark-nlp.html#saving",
     "href": "core/slides/spark-nlp.html#saving",
     "title": "Spark NLP",
     "section": "Saving",
-    "text": "Saving\nLocally ::: {.cell}\ndf_texts.write.parquet('../data/ny_corpus_pq')\n:::\n\nspam = spark.read.parquet('../data/ny_corpus_pq')\n\nspam.printSchema()\n\n\n\n\n\nspam.rdd.getNumPartitions()"
+    "text": "Saving\nLocally\n\ndf_texts.write.parquet('../../data/ny_corpus_pq', mode=\"overwrite\")\n\n\n\n\n\nspam = spark.read.parquet('../../data/ny_corpus_pq')\n\nspam.printSchema()\n\n\n\nroot\n |-- date: date (nullable = true)\n |-- title: string (nullable = true)\n |-- topic: string (nullable = true)\n |-- text: string (nullable = true)\n\n\n\n\nspam.rdd.getNumPartitions()\n\n\n\n20"
   },
   {
     "objectID": "core/slides/spark-nlp.html#section",
     "href": "core/slides/spark-nlp.html#section",
     "title": "Spark NLP",
     "section": "",
-    "text": "corpus_assembled = ( \n  document_assembler.transform(df_texts)\n)\n\n\n\n\n\ncorpus_assembled.printSchema()\n\n\n\n\n\n(\n  date_matcher_bis\n    .transform(corpus_assembled)\n    .select(\"title\", \"date\")\n    .show(10, False)\n)\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\nExtracted dates should be taken with a grain of salt"
+    "text": "corpus_assembled = ( \n  document_assembler.transform(df_texts)\n)\n\n\n\n\n\ncorpus_assembled.printSchema()\n\n\n\nroot\n |-- date: date (nullable = false)\n |-- title: string (nullable = false)\n |-- topic: string (nullable = false)\n |-- text: string (nullable = true)\n |-- document: array (nullable = true)\n |    |-- element: struct (containsNull = true)\n |    |    |-- annotatorType: string (nullable = true)\n |    |    |-- begin: integer (nullable = false)\n |    |    |-- end: integer (nullable = false)\n |    |    |-- result: string (nullable = true)\n |    |    |-- metadata: map (nullable = true)\n |    |    |    |-- key: string\n |    |    |    |-- value: string (valueContainsNull = true)\n |    |    |-- embeddings: array (nullable = true)\n |    |    |    |-- element: float (containsNull = false)\n\n\n\n\n(\n  date_matcher_bis\n    .transform(corpus_assembled)\n    .select(\"title\", \"date\")\n    .show(10, False)\n)\n\n\n\n+-----------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+\n|title                                                                        |date                                                                                                                                                          |\n+-----------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+\n|washington-nationals-max-scherzer-baffles-mets-completing-a-sweep.html       |[{date, 478, 1690, 01/04/2026, {sentence -&gt; 0}, []}]                                                                                                          |\n|mayor-de-blasios-counsel-to-leave-next-month-to-lead-police-review-board.html|[{date, 1, 670, 05/01/2014, {sentence -&gt; 0}, []}, {date, 82, 91, 03/17/2026, {sentence -&gt; 0}, []}]                                                            |\n|three-men-charged-in-killing-of-cuomo-administration-lawyer.html             |[{date, 81, 547, 08/08/2026, {sentence -&gt; 0}, []}, {date, 42, 50, 02/17/2025, {sentence -&gt; 0}, []}, {date, 1261, 1268, 02/16/2026, {sentence -&gt; 0}, []}]      |\n|tekserve-precursor-to-the-apple-store-to-close-after-29-years.html           |[{date, 1699, 1710, 02/17/2011, {sentence -&gt; 0}, []}, {date, 257, 1549, 07/23/1987, {sentence -&gt; 0}, []}]                                                     |\n|once-at-michael-phelpss-feet-and-still-chasing-them.html                     |[{date, 1101, 1111, 02/17/2026, {sentence -&gt; 0}, []}, {date, 204, 3658, 08/14/2004, {sentence -&gt; 0}, []}, {date, 2985, 2993, 02/17/2025, {sentence -&gt; 0}, []}]|\n|missy-franklin-breaks-through-in-trials-and-earns-a-return-to-olympics.html  |[{date, 369, 1462, 12/21/2012, {sentence -&gt; 0}, []}]                                                                                                          |\n|lionsgate-is-said-to-be-near-deal-to-buy-starz.html                          |[{date, 290, 2569, 12/28/2026, {sentence -&gt; 0}, []}, {date, 1802, 1810, 02/17/2025, {sentence -&gt; 0}, []}]                                                     |\n|pool-rules-no-running-no-eating-or-drinking-no-men.html                      |[{date, 274, 1351, 12/20/1922, {sentence -&gt; 0}, []}]                                                                                                          |\n|knicks-look-to-young-blood-and-free-agency-to-patch-porous-roster.html       |[{date, 473, 3111, 05/30/2014, {sentence -&gt; 0}, []}, {date, 1090, 1098, 02/10/2026, {sentence -&gt; 0}, []}]                                                     |\n|latest-sign-of-change-in-harlem-its-congressional-candidate.html             |[{date, 389, 1270, 12/01/2026, {sentence -&gt; 0}, []}]                                                                                                          |\n+-----------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+\nonly showing top 10 rows\n\n\n\n\n\n\n\n\n\nWarning\n\n\nExtracted dates should be taken with a grain of salt"
   },
   {
     "objectID": "core/slides/spark-nlp.html#public-pipelines",
     "href": "core/slides/spark-nlp.html#public-pipelines",
     "title": "Spark NLP",
     "section": "Public pipelines",
-    "text": "Public pipelines\n\nfrom sparknlp.pretrained import PretrainedPipeline\nexplain_document_pipeline = PretrainedPipeline(\"explain_document_ml\")"
+    "text": "Public pipelines\n\nfrom sparknlp.pretrained import PretrainedPipeline\nexplain_document_pipeline = PretrainedPipeline(\"explain_document_ml\")\n\n\n\nexplain_document_ml download started this may take some time.\nApprox size to download 9 MB\n[ | ]\n\n\nexplain_document_ml download started this may take some time.\nApproximate size to download 9 MB\nDownload done! Loading the resource.\n[ / ]\n\n\n[ — ][OK!]"
   },
   {
     "objectID": "core/slides/spark-nlp.html#chaining-annotators",
@@ -5712,7 +5712,7 @@
     "href": "core/slides/spark-nlp.html#a-customized-pipeline",
     "title": "Spark NLP",
     "section": "A customized pipeline",
-    "text": "A customized pipeline\n\nstemmer = (\n  Stemmer()\n    .setInputCols(['token'])\n    .setOutputCol('stem')\n)\n\n\n\n\n\nlemmatizer = (\n  LemmatizerModel.pretrained()\n    .setInputCols(['token'])\n    .setOutputCol('lemma')\n)\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\nlemma_antbnc download started this may take some time.\nApproximate size to download 907.6 KB\n[ / ]lemma_antbnc download started this may take some time.\nApproximate size to download 907.6 KB\n[ / ]Download done! Loading the resource.\n[ — ]\n\n[OK!]\n\n\n\n\nposTagger = PerceptronModel.pretrained() \\\n    .setInputCols([\"document\", \"token\"]) \\\n    .setOutputCol(\"pos\")\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\npos_anc download started this may take some time.\nApproximate size to download 3.9 MB\n[ — ]pos_anc download started this may take some time.\nApproximate size to download 3.9 MB\n[ \\ ]Download done! Loading the resource.\n[Stage 34:===========================================&gt;              (3 + 1) / 4]\n[ | ]\n                                                                \n[OK!]\n\n\n\n\nfinisher = (\n  Finisher()\n    .setInputCols([\n      'token', \n#      'stem', \n#      'lemma', \n      'pos'])\n    .setIncludeMetadata(False)\n    .setOutputAsArray(True)\n)"
+    "text": "A customized pipeline\n\nstemmer = (\n  Stemmer()\n    .setInputCols(['token'])\n    .setOutputCol('stem')\n)\n\n\n\n\n\nlemmatizer = (\n  LemmatizerModel.pretrained()\n    .setInputCols(['token'])\n    .setOutputCol('lemma')\n)\n\n\n\nlemma_antbnc download started this may take some time.\n\n\nApproximate size to download 907.6 KB\n[ | ]\n\n\nlemma_antbnc download started this may take some time.\nApproximate size to download 907.6 KB\nDownload done! Loading the resource.\n[OK!]\n\n\n\n\n\n\n\n\nWarning\n\n\nlemma_antbnc download started this may take some time.\nApproximate size to download 907.6 KB\n[ / ]lemma_antbnc download started this may take some time.\nApproximate size to download 907.6 KB\n[ / ]Download done! Loading the resource.\n[ — ]\n\n[OK!]\n\n\n\n\nposTagger = PerceptronModel.pretrained() \\\n    .setInputCols([\"document\", \"token\"]) \\\n    .setOutputCol(\"pos\")\n\n\n\npos_anc download started this may take some time.\nApproximate size to download 3.9 MB\n[ | ]\n\n\npos_anc download started this may take some time.\nApproximate size to download 3.9 MB\nDownload done! Loading the resource.\n[ / ][OK!]\n\n\n\n\n\n\n\n\nWarning\n\n\npos_anc download started this may take some time.\nApproximate size to download 3.9 MB\n[ — ]pos_anc download started this may take some time.\nApproximate size to download 3.9 MB\n[ \\ ]Download done! Loading the resource.\n[Stage 34:===========================================&gt;              (3 + 1) / 4]\n[ | ]\n                                                                \n[OK!]\n\n\n\n\nfinisher = (\n  Finisher()\n    .setInputCols([\n      'token', \n#      'stem', \n#      'lemma', \n      'pos'])\n    .setIncludeMetadata(False)\n    .setOutputAsArray(True)\n)"
   },
   {
     "objectID": "core/slides/spark-nlp.html#section-1",
@@ -5789,21 +5789,21 @@
     "href": "core/slides/slides06_arrow.html#what",
     "title": "Apache Arrow",
     "section": "What ?",
-    "text": "What ?\nApache Arrow project was announced in 2016\n\nApache Arrow defines a language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware like CPUs and GPUs. The Arrow memory format also supports zero-copy reads for lightning-fast data access without serialization overhead.\n\nSee Arrow website\nApache Arrow complements columnar formats for files (on disk) like Parquet and ORC (also sponsored by Apache)"
+    "text": "What ?\nApache Arrow project was announced in 2016\n\nApache Arrow defines a language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware like CPUs and GPUs. The Arrow memory format also supports zero-copy reads for lightning-fast data access without serialization overhead.\n\nSee Arrow website\nIn words, Apache Arrow complements columnar formats for files (on disk) like Parquet and ORC (also sponsored by Apache)"
   },
   {
     "objectID": "core/slides/slides06_arrow.html#in-memory-analytics",
     "href": "core/slides/slides06_arrow.html#in-memory-analytics",
     "title": "Apache Arrow",
-    "section": "In Memory Analytics",
-    "text": "In Memory Analytics"
+    "section": "In Memory Analytics ?",
+    "text": "In Memory Analytics ?\nBook"
   },
   {
     "objectID": "core/slides/slides06_arrow.html#why",
     "href": "core/slides/slides06_arrow.html#why",
     "title": "Apache Arrow",
     "section": "Why ?",
-    "text": "Why ?\nThe columnar format has some key features:\n\nData adjacency for sequential access (scans)\n\\(O(1)\\) (constant-time) random access\nSIMD and vectorization-friendly\nRelocatable without pointer swizzling, allowing for true zero-copy access in shared memory\n\n\nThe Arrow columnar format provides analytical performance and data locality guarantees in exchange for comparatively more expensive mutation operations\n\n\nSee also Harrisson for columnar databases\n\nColumnar compression\nColumnar write penalty\n\n\nThe column stores perform poorly during single-row modifications"
+    "text": "Why ?\nThe columnar format has some key features:\n\nData adjacency for sequential access (scans)\n\\(O(1)\\) (constant-time) random access\nSIMD (Single Instruction Multiple Data) and vectorization-friendly\nRelocatable without pointer swizzling, allowing for true zero-copy access in shared memory\n\n\nThe Arrow columnar format provides analytical performance and data locality guarantees in exchange for comparatively more expensive mutation operations\n\n\nSee also Guy Harrisson’s book for columnar databases\n\nColumnar compression\nColumnar write penalty\n\n\nThe column stores perform poorly during single-row modifications"
   },
   {
     "objectID": "core/slides/slides06_arrow.html#specification",
@@ -5817,21 +5817,21 @@
     "href": "core/slides/slides06_arrow.html#lexikon",
     "title": "Apache Arrow",
     "section": "Lexikon",
-    "text": "Lexikon"
+    "text": "Lexikon\n\nbuffer\nslot\noffset\narray\ntypes (data/primitive/nested/parametric)\nparent/child array"
   },
   {
     "objectID": "core/slides/slides06_arrow.html#physical-layout",
     "href": "core/slides/slides06_arrow.html#physical-layout",
     "title": "Apache Arrow",
     "section": "Physical layout",
-    "text": "Physical layout"
+    "text": "Physical layout\nEach array (column) is a sequence of buffers in memory:\n\nBuffer 0: validity bitmap — 1 bit per slot (0 = null, 1 = valid)\nBuffer 1: data (fixed-width types) or offsets (variable-width types)\nBuffer 2 (variable-width only): concatenated payload (e.g. string bytes)\n\n\nRelocatable buffers → zero-copy sharing between processes/languages."
   },
   {
     "objectID": "core/slides/slides06_arrow.html#padding",
     "href": "core/slides/slides06_arrow.html#padding",
     "title": "Apache Arrow",
     "section": "Padding",
-    "text": "Padding"
+    "text": "Padding\nmplementations are recommended to allocate memory on aligned addresses (multiple of 8- or 64-bytes) and pad (overallocate) to a length that is a multiple of 8 or 64 bytes.\nWhen serializing Arrow data for interprocess communication, these alignment and padding requirements are enforced.\nThe recommendation for 64 byte alignment comes from the Intel performance guide that recommends alignment of memory to match SIMD register width."
   },
   {
     "objectID": "core/slides/slides06_arrow.html#null-values",
@@ -5880,7 +5880,7 @@
     "href": "core/slides/slides06_arrow.html#arrow-to-and-from-pandas",
     "title": "Apache Arrow",
     "section": "Arrow to and from Pandas",
-    "text": "Arrow to and from Pandas\nArrow, Numpy, Pandas offer sequential structures (1-dimensional Numpy arrays, Pandas Series, …) and tables. Arrow offers tools to convert from Arrow format to Pandas and back\n\nThe equivalent to a pandas DataFrame in Arrow is a Table. Both consist of a set of named columns of equal length.\n\n\n\nWhile pandas only supports flat columns, the Table also provides nested columns, thus it can represent more data than a DataFrame, so a full conversion is not always possible.\n\n\nimport pyarrow as pa\nimport pandas as pd\n\ndf = pd.DataFrame({\"a\": [1, 2, 3]})\n# Convert from pandas to Arrow\ntable = pa.Table.from_pandas(df)\n# Convert back to pandas\ndf_new = table.to_pandas()\n# Infer Arrow schema from pandas\nschema = pa.Schema.from_pandas(df)\n\n\n\n\n\n\n\n\nArrow doc\nPandas doc"
+    "text": "Arrow to and from Pandas\nArrow, Numpy, Pandas offer sequential structures (1-dimensional Numpy arrays, Pandas Series, …) and tables. Arrow offers tools to convert from Arrow format to Pandas and back\n\nThe equivalent to a pandas DataFrame in Arrow is a Table. Both consist of a set of named columns of equal length.\n\n\n\nWhile pandas only supported flat columns, the Table also provides nested columns, thus it can represent more data than a DataFrame, so a full conversion is not always possible.\n\n\nimport pyarrow as pa\nimport pandas as pd\n\ndf = pd.DataFrame({\"a\": [1, 2, 3]})\n# Convert from pandas to Arrow\ntable = pa.Table.from_pandas(df)\n# Convert back to pandas\ndf_new = table.to_pandas()\n# Infer Arrow schema from pandas\nschema = pa.Schema.from_pandas(df)\n\n\n\n\n\n\n\n\nArrow doc\nPandas doc"
   },
   {
     "objectID": "core/slides/slides06_arrow.html#handling-pandas-indexes",
@@ -5935,7 +5935,7 @@
     "objectID": "core/slides/slides02_python_ds_stack.html#the-stackoverflow-2025-survey",
     "href": "core/slides/slides02_python_ds_stack.html#the-stackoverflow-2025-survey",
     "title": "Python Data Science Stack",
-    "section": "The stackoverflow 2025 survey\n",
+    "section": "The stackoverflow 2025 survey",
     "text": "The stackoverflow 2025 survey"
   },
   {
@@ -6013,7 +6013,7 @@
     "href": "core/projects/fake-report.html",
     "title": "LAB: Fake report",
     "section": "",
-    "text": "Motivation\n\n\n'Tempora est sit consectetur tempora ipsum. Est porro magnam dolorem velit numquam dolore. Quaerat porro amet dolor amet eius. Ut quaerat quiquia quiquia est. Tempora porro labore est eius amet neque. Porro velit consectetur quisquam velit non porro neque. Dolor consectetur aliquam etincidunt etincidunt ipsum eius.'\n\n\n\n\nReproducible data gathering\nData and metadata should be retrieved programmatically.\nHere is an example from the OECD API documentation. Other providers have their own API for example Eurostat.\n\nurl = \"https://sdmx.oecd.org/public/rest/data/OECD.SDD.STES,DSD_STES@DF_CLI/.M.LI...AA...H?startPeriod=2023-02&dimensionAtObservation=AllDimensions&format=csvfilewithlabels\"\n\n# df =  pd.read_csv(url)\n\n# df.info\n\n Note that in your report, data gathering chunks should go to the appendix.\n\n\n200 countries, 50 years, 20 lines of code\nYou should build your report and your presentation around plots and tables.\n Display tables with style (no kitsch please).\n\n\n/tmp/ipykernel_311897/2177124417.py:7: FutureWarning:\n\nDataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.\n\n\n\n\n\n\n\n\n \nCountry\nContinent\nYear\nLife Expectancy\nPopulation (Millions Inhab.)\nGDP per Capita\n\n\n\n\n1262\nReunion\nAfrica\n1962\n57.7\n0.4\n$3,174\n\n\n1348\nSierra Leone\nAfrica\n1972\n35.4\n2.9\n$1,354\n\n\n1115\nNicaragua\nAmericas\n2007\n72.9\n5.7\n$2,749\n\n\n1610\nUnited States\nAmericas\n1962\n70.2\n186.5\n$16,173\n\n\n702\nIndia\nAsia\n1982\n56.6\n708.0\n$856\n\n\n1213\nPhilippines\nAsia\n1957\n51.3\n26.1\n$1,548\n\n\n1148\nNorway\nEurope\n1992\n77.3\n4.3\n$33,966\n\n\n150\nBosnia and Herzegovina\nEurope\n1982\n70.7\n4.2\n$4,127\n\n\n68\nAustralia\nOceania\n1992\n77.6\n17.5\n$23,425\n\n\n1096\nNew Zealand\nOceania\n1972\n71.9\n2.9\n$16,046\n\n\n\n\n\n Visualization matters\n\n\n                            \n                                            \n\n\n\n\nWizardry\n\n\n                            \n                                            \n\n\n\n\nAppendix\n The appendix should contain the code that helped you create the document\n\n\n\n\n# Load the data\n#\nimport pandas as pd\nimport plotly\nimport plotly.express as px\n\npd.options.plotting.backend = \"plotly\"\nfrom gapminder import gapminder\n\n\n\n\n#\n# Sample 2 rows per continent and format for display\n#\ndf = (\n  gapminder\n    .groupby(\"continent\", group_keys=False)\n    .apply(lambda g: \n           g.sample(n=2, random_state=42))\n    .assign(pop=lambda x: x[\"pop\"] / 1e6)\n)\n\ndf = df.rename(columns={\n    \"country\": \"Country\",\n    \"continent\": \"Continent\",\n    \"year\": \"Year\",\n    \"lifeExp\": \"Life Expectancy\",\n    \"pop\": \"Population (Millions Inhab.)\",\n    \"gdpPercap\": \"GDP per Capita\",\n})\n\ndf.style.format(\n  {\n    \"Population (Millions Inhab.)\": \"{:.1f}\", \n    \"Life Expectancy\": \"{:.1f}\", \n    \"GDP per Capita\": \"${:,.0f}\"\n    }\n)\n\n\n\n#\n#\n# A neater color scale \n#\nneat_color_scale = {\n      \"Africa\" : \"#01d4e5\",\n      \"Americas\" : \"#7dea01\" ,\n      \"Asia\" : \"#fc5173\",\n      \"Europe\" : \"#fde803\",\n      \"Oceania\" : \"#536227\"\n}\n\n\n\n\npd.options.plotting.backend = 'plotly'\n\n\n\n#\n# Use plotly backend for dataframes\n#\n\n\na_year = gapminder[\"year\"].sample(1, random_state=42).iloc[0]\ndf = gapminder[gapminder[\"year\"] == a_year].copy()\n\np = px.scatter(\n    data_frame=df,\n    x=\"gdpPercap\",\n    y=\"lifeExp\",\n    size=\"pop\",\n    color=\"continent\",\n    hover_data={\n      \"country\": True, \n      \"pop\": \":,\", \n      \"gdpPercap\": \":,.0f\", \n      \"lifeExp\": \":.1f\"},\n    log_x=True,\n    size_max=15,\n    color_discrete_map=neat_color_scale,\n    opacity=0.5,\n    title=f\"Gapminder {a_year}\",\n    labels={\n        \"gdpPercap\": \"Yearly Income per Capita\",\n        \"lifeExp\": \"Life Expectancy\",\n    },\n)\n\np.update_layout(\n    xaxis_title=\"Yearly Income per Capita\",\n    yaxis_title=\"Life Expectancy\",\n    annotations=[\n        dict(\n            text=\"From sick and poor (bottom left) to healthy and rich (top right)\",\n            xref=\"paper\",\n            yref=\"paper\",\n            x=0.5,\n            y=-0.12,\n            showarrow=False,\n            font=dict(size=10),\n        )\n    ],\n)\np\n\n\n\n#\n# Animated scatter on the whole gapminder dataframe, year as frame\n#\np_animated = px.scatter(\n    data_frame=gapminder,\n    x=\"gdpPercap\",\n    y=\"lifeExp\",\n    size=\"pop\",\n    color=\"continent\",\n    animation_frame=\"year\",\n    hover_data={\"country\": True, \"pop\": \":,\", \"gdpPercap\": \":,.0f\", \"lifeExp\": \":.1f\"},\n    log_x=True,\n    size_max=15,\n    color_discrete_map=neat_color_scale,\n    opacity=0.5,\n    title=\"Gapminder\",\n    labels={\n        \"gdpPercap\": \"Yearly Income per Capita\",\n        \"lifeExp\": \"Life Expectancy\",\n    },\n)\np_animated.update_layout(\n    height=500,\n    width=750,\n    xaxis_title=\"Yearly Income per Capita\",\n    yaxis_title=\"Life Expectancy\",\n    showlegend=True,\n)\np_animated"
+    "text": "Motivation\n\n\n'Labore modi labore voluptatem non ipsum dolor. Ut neque tempora voluptatem porro numquam dolor adipisci. Consectetur velit eius est. Modi ipsum ut aliquam tempora quaerat consectetur eius. Neque labore porro porro labore. Sed consectetur velit velit sed sed porro. Etincidunt quiquia dolorem est dolor magnam. Magnam tempora modi etincidunt consectetur etincidunt.'\n\n\n\n\nReproducible data gathering\nData and metadata should be retrieved programmatically.\nHere is an example from the OECD API documentation. Other providers have their own API for example Eurostat.\n\nurl = \"https://sdmx.oecd.org/public/rest/data/OECD.SDD.STES,DSD_STES@DF_CLI/.M.LI...AA...H?startPeriod=2023-02&dimensionAtObservation=AllDimensions&format=csvfilewithlabels\"\n\n# df =  pd.read_csv(url)\n\n# df.info\n\n Note that in your report, data gathering chunks should go to the appendix.\n\n\n200 countries, 50 years, 20 lines of code\nYou should build your report and your presentation around plots and tables.\n\n\n/home/boucheron/Documents/IFEBY310/.nlp-venv/lib/python3.12/site-packages/gapminder/data.py:1: UserWarning:\n\npkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.\n\n\n\n Display tables with style (no kitsch please).\n\n\n\n\n\n\n\n \nContinent\nlevel_1\nCountry\nYear\nLife Expectancy\nPopulation (Millions Inhab.)\nGDP per Capita\n\n\n\n\n0\nAfrica\n1262\nReunion\n1962\n57.7\n0.4\n$3,174\n\n\n1\nAfrica\n1348\nSierra Leone\n1972\n35.4\n2.9\n$1,354\n\n\n2\nAmericas\n1115\nNicaragua\n2007\n72.9\n5.7\n$2,749\n\n\n3\nAmericas\n1610\nUnited States\n1962\n70.2\n186.5\n$16,173\n\n\n4\nAsia\n702\nIndia\n1982\n56.6\n708.0\n$856\n\n\n5\nAsia\n1213\nPhilippines\n1957\n51.3\n26.1\n$1,548\n\n\n6\nEurope\n1148\nNorway\n1992\n77.3\n4.3\n$33,966\n\n\n7\nEurope\n150\nBosnia and Herzegovina\n1982\n70.7\n4.2\n$4,127\n\n\n8\nOceania\n68\nAustralia\n1992\n77.6\n17.5\n$23,425\n\n\n9\nOceania\n1096\nNew Zealand\n1972\n71.9\n2.9\n$16,046\n\n\n\n\n\n Visualization matters\n\n\n                            \n                                            \n\n\n\n\nWizardry\n\n\n                            \n                                            \n\n\n\n\nAppendix\n The appendix should contain the code that helped you create the document\n\n\n\n\n# Load the data\n#\nimport pandas as pd\nimport plotly\nimport plotly.express as px\n\npd.options.plotting.backend = \"plotly\"\nfrom gapminder import gapminder\n\n\n\n\n#\n# Sample 2 rows per continent and format for display\n#\ndf = (\n  gapminder\n    .groupby(\"continent\", group_keys=True)\n    .apply(lambda g: \n           g.sample(n=2, random_state=42), include_groups=False)\n    .reset_index()\n    .assign(pop=lambda x: x[\"pop\"] / 1e6)\n)\n\ndf = df.rename(columns={\n    \"country\": \"Country\",\n    \"continent\": \"Continent\",\n    \"year\": \"Year\",\n    \"lifeExp\": \"Life Expectancy\",\n    \"pop\": \"Population (Millions Inhab.)\",\n    \"gdpPercap\": \"GDP per Capita\",\n})\n\ndf.style.format(\n  {\n    \"Population (Millions Inhab.)\": \"{:.1f}\", \n    \"Life Expectancy\": \"{:.1f}\", \n    \"GDP per Capita\": \"${:,.0f}\"\n    }\n)\n\n\n\n#\n#\n# A neater color scale \n#\nneat_color_scale = {\n      \"Africa\" : \"#01d4e5\",\n      \"Americas\" : \"#7dea01\" ,\n      \"Asia\" : \"#fc5173\",\n      \"Europe\" : \"#fde803\",\n      \"Oceania\" : \"#536227\"\n}\n\n\n\n\npd.options.plotting.backend = 'plotly'\n\n\n\n#\n# Use plotly backend for dataframes\n#\n\n\na_year = gapminder[\"year\"].sample(1, random_state=42).iloc[0]\ndf = gapminder[gapminder[\"year\"] == a_year].copy()\n\np = px.scatter(\n    data_frame=df,\n    x=\"gdpPercap\",\n    y=\"lifeExp\",\n    size=\"pop\",\n    color=\"continent\",\n    hover_data={\n      \"country\": True, \n      \"pop\": \":,\", \n      \"gdpPercap\": \":,.0f\", \n      \"lifeExp\": \":.1f\"},\n    log_x=True,\n    size_max=15,\n    color_discrete_map=neat_color_scale,\n    opacity=0.5,\n    title=f\"Gapminder {a_year}\",\n    labels={\n        \"gdpPercap\": \"Yearly Income per Capita\",\n        \"lifeExp\": \"Life Expectancy\",\n    },\n)\n\np.update_layout(\n    xaxis_title=\"Yearly Income per Capita\",\n    yaxis_title=\"Life Expectancy\",\n    annotations=[\n        dict(\n            text=\"From sick and poor (bottom left) to healthy and rich (top right)\",\n            xref=\"paper\",\n            yref=\"paper\",\n            x=0.5,\n            y=-0.12,\n            showarrow=False,\n            font=dict(size=10),\n        )\n    ],\n)\np\n\n\n\n#\n# Animated scatter on the whole gapminder dataframe, year as frame\n#\np_animated = px.scatter(\n    data_frame=gapminder,\n    x=\"gdpPercap\",\n    y=\"lifeExp\",\n    size=\"pop\",\n    color=\"continent\",\n    animation_frame=\"year\",\n    hover_data={\"country\": True, \"pop\": \":,\", \"gdpPercap\": \":,.0f\", \"lifeExp\": \":.1f\"},\n    log_x=True,\n    size_max=15,\n    color_discrete_map=neat_color_scale,\n    opacity=0.5,\n    title=\"Gapminder\",\n    labels={\n        \"gdpPercap\": \"Yearly Income per Capita\",\n        \"lifeExp\": \"Life Expectancy\",\n    },\n)\np_animated.update_layout(\n    height=500,\n    width=750,\n    xaxis_title=\"Yearly Income per Capita\",\n    yaxis_title=\"Life Expectancy\",\n    showlegend=True,\n)\np_animated"
   },
   {
     "objectID": "core/slides/slides04_sparkl.html#sparkcontext-sparksession",
@@ -6091,5 +6091,481 @@
     "title": "Using with pyspark for data preprocessing",
     "section": "Finally !!",
     "text": "Finally !!\nWow ! That was a lot of work. Now we have a features matrix \\(X\\) and a vector of labels \\(y\\).\n\n\nCode\nX.indices\n\n\narray([ 3,  4,  5, ..., 85, 88, 89], shape=(1630302,), dtype=int32)\n\n\n\n\nCode\nX.indptr\n\n\narray([      0,      10,      20, ..., 1630282, 1630292, 1630302],\n      shape=(152348,), dtype=int32)\n\n\n\n\nCode\nX.shape, X.nnz\n\n\n((152347, 90), 1630302)\n\n\n\n\nCode\ny.shape, y.sum()\n\n\n((152347,), np.int64(1594))"
+  },
+  {
+    "objectID": "core/notebooks/notebook07_json-format.html#spark-3",
+    "href": "core/notebooks/notebook07_json-format.html#spark-3",
+    "title": "Using JSON data with Python",
+    "section": "Spark 3",
+    "text": "Spark 3\n\n\nCode\nwith open(filename, 'r') as file:\n    ljstrings = json.load(file)\n\n\n\n\nCode\ndf_foo = spark.createDataFrame([(1, '''{\"a\": 1}''')], (\"key\", \"value\"))\ndf_foo.select(fn.from_json(df_foo.value, \"a INT\").alias(\"json\")).show()\n\n\n+----+\n|json|\n+----+\n| {1}|\n+----+"
+  },
+  {
+    "objectID": "core/notebooks/notebook07_json-format.html#spark-4-and-the-variant-type",
+    "href": "core/notebooks/notebook07_json-format.html#spark-4-and-the-variant-type",
+    "title": "Using JSON data with Python",
+    "section": "Spark 4 and the Variant type",
+    "text": "Spark 4 and the Variant type\nSpark SQL variant_val"
+  },
+  {
+    "objectID": "core/slides/spark-nlp.html#building-the-corpus",
+    "href": "core/slides/spark-nlp.html#building-the-corpus",
+    "title": "Spark NLP",
+    "section": "Building the corpus",
+    "text": "Building the corpus\n\n##\nwith open(nypath, encoding='UTF-8')  as fd:\n    doc, document = None, None\n    while l := fd.readline():        \n        if m := reg_date.match(l):\n            if doc is not None:\n                corpus_list.append((*document, doc))\n                doc, document = None, None\n            ymd = date(*[int(n) for n in m.groups()[0].split('/')])\n            title = (\n                reg_title.match(l)\n                  .groups()[0]\n                  .split('/')\n            )\n            document =  (ymd, title[-1], '/'.join(title[:-1]))\n            doc = ''\n        else: doc = doc + l\n    else:\n        if doc is not None:\n            corpus_list.append((*document, doc))\n\n\n\n\n\ndf_texts = spark.createDataFrame(\n    corpus_list,\n    schema= StructType([\n      StructField('date', DateType(), False),\n      StructField('title', StringType(), False),\n      StructField('topic', StringType(), False),\n      StructField('text', StringType(), True)\n]))"
+  },
+  {
+    "objectID": "core/slides/spark-nlp.html#checking-the-loaded-data",
+    "href": "core/slides/spark-nlp.html#checking-the-loaded-data",
+    "title": "Spark NLP",
+    "section": "Checking the loaded data",
+    "text": "Checking the loaded data\n\ndf_texts.printSchema()\ndf_texts.count()\n\n\n\nroot\n |-- date: date (nullable = false)\n |-- title: string (nullable = false)\n |-- topic: string (nullable = false)\n |-- text: string (nullable = true)\n\n\n\n8888"
+  },
+  {
+    "objectID": "core/slides/slides06_arrow.html#in-picture",
+    "href": "core/slides/slides06_arrow.html#in-picture",
+    "title": "Apache Arrow",
+    "section": "In picture",
+    "text": "In picture\n  Table:  columns [ id (int32)  |  name (string) ]\n          length = 4\n\n  Column \"id\" (fixed-width):\n  ┌─────────────────┬──────────────────────────────┐\n  │ validity bitmap    │  data buffer (4 bytes/slot)        │\n  │  [1,1,0,1]         │  [ 10, 20, ??, 40 ]                │\n  └─────────────────┴──────────────────────────────┘\n   slot:                0    1    2    3\n\n  Column \"name\" (variable-width):\n  ┌─────────────────┬─────────────────┬─────────────────────────┐\n  │ validity bitmap     │ offset buffer   │  data buffer           │\n  │  [1,1,1,0]          │ [0,3,7,11,11]   │  \"AliceBobCarol\"       │\n  └─────────────────┴ ─────────────────┴────────────────────────┘\n   slot 0: bytes [0..3),  slot 1: [3..7),  slot 2: [7..11),  slot 3: null"
+  },
+  {
+    "objectID": "core/slides/slides06_arrow.html#arrow-data-types",
+    "href": "core/slides/slides06_arrow.html#arrow-data-types",
+    "title": "Apache Arrow",
+    "section": "Arrow data types",
+    "text": "Arrow data types\nEach data type has a well-defined physical layout.\nThe Arrow columnar memory layout only applies to data and not metadata.\nImplementations are free to represent metadata in-memory in whichever form is convenient for them.\nWe handle metadata serialization in an implementation-independent way using Flatbuffers (see below)\nSee the different physical layouts defined by Arrow"
+  },
+  {
+    "objectID": "core/slides/slides06_arrow.html#arrow-extension-types",
+    "href": "core/slides/slides06_arrow.html#arrow-extension-types",
+    "title": "Apache Arrow",
+    "section": "Arrow extension types",
+    "text": "Arrow extension types\nExample: defining a JSON type laid upon the standard String data type"
+  },
+  {
+    "objectID": "core/slides/slides06_arrow.html#arrow-pycapsule-protocol",
+    "href": "core/slides/slides06_arrow.html#arrow-pycapsule-protocol",
+    "title": "Apache Arrow",
+    "section": "Arrow PyCapsule Protocol",
+    "text": "Arrow PyCapsule Protocol\nThe Arrow C data interface allows moving data between different DataFrame libraries through the Arrow format, and is designed to be zero-copy where possible.\nIn Python, this interface is exposed through the Arrow PyCapsule Protocol"
+  },
+  {
+    "objectID": "core/notebooks/notebook16_fileformats.html",
+    "href": "core/notebooks/notebook16_fileformats.html",
+    "title": "File formats",
+    "section": "",
+    "text": "Code\nimport os\nimport sys\nimport requests, zipfile, io\n\nfrom time import perf_counter\nCode\nfrom pyspark import SparkConf, SparkContext\nfrom pyspark.sql import SparkSession\nCode\nfrom pyspark.sql import Window\nimport pyspark.sql.functions as func\nfrom pyspark.sql.types import *\nfrom pyspark.sql.functions import col, lit\nimport pyspark\nCode\nfrom functools import reduce\nimport numpy as np\nfrom scipy.sparse import csr_matrix\nimport json\nCode\nimport pyarrow\nimport pyarrow.parquet as pq\nCode\nimport pandas as pd"
+  },
+  {
+    "objectID": "core/notebooks/notebook16_fileformats.html#csv-versus-parquet",
+    "href": "core/notebooks/notebook16_fileformats.html#csv-versus-parquet",
+    "title": "File formats",
+    "section": "CSV versus parquet",
+    "text": "CSV versus parquet\n\n\nCode\n# %%\npath_to_parquet = 'file://' + os.path.abspath(wbd_path)\npath_to_csv = path_to_parquet.replace('parquet', 'csv')\n\ndf.write.csv(path_to_csv, mode=\"overwrite\")\n\n\n\n\nCode\n!du -s ./data/webdata*\n\n\n163516  ./data/webdata.csv\n27916   ./data/webdata.orc\n38280   ./data/webdata.parquet\n4   ./data/webdata_schema.json\n42832   ./data/webdata-transformed.parquet\n\n\n\n\nCode\ndf_csv = spark.read.csv(path_to_csv)\n\ndf_csv.printSchema()\n\n\nroot\n |-- _c0: string (nullable = true)\n |-- _c1: string (nullable = true)\n |-- _c2: string (nullable = true)\n |-- _c3: string (nullable = true)\n |-- _c4: string (nullable = true)\n |-- _c5: string (nullable = true)\n |-- _c6: string (nullable = true)\n |-- _c7: string (nullable = true)\n\n\n\nCSV is not self-documented!\nThe schema has to saved somewhere and then reloaded. StructType has a json() method, that encodes\n\n\nCode\nwebdata_schema = df.schema  # StructType()\n\n# %%\nwith open('./data/webdata_schema.json', 'w') as fp:\n  fp.write(webdata_schema.json()) # Saved \n\n\n\n\nCode\n# %%\nwith open('./data/webdata_schema.json', 'r') as fp:\n  schema_str = json.load(fp)   # Reloaded \n\ntentative_schema = StructType.fromJson(schema_str) \n\n\n\n\nCode\n(\n    spark\n        .read\n        .schema(tentative_schema)\n        .csv(path_to_csv)\n        .printSchema()\n)\n\n\nroot\n |-- xid: string (nullable = true)\n |-- action: string (nullable = true)\n |-- date: timestamp (nullable = true)\n |-- website_id: string (nullable = true)\n |-- url: string (nullable = true)\n |-- category_id: float (nullable = true)\n |-- zipcode: string (nullable = true)\n |-- device: string (nullable = true)"
+  },
+  {
+    "objectID": "core/notebooks/notebook16_fileformats.html#parquet-versus-orc",
+    "href": "core/notebooks/notebook16_fileformats.html#parquet-versus-orc",
+    "title": "File formats",
+    "section": "Parquet versus ORC",
+    "text": "Parquet versus ORC\n\n\nCode\npath_to_orc = 'file://' + os.path.abspath(wbd_path.replace('parquet', 'orc'))\n\ndf.write.orc(path_to_orc, mode=\"overwrite\")\n\n\n[Stage 1146:===========================&gt;                           (6 + 6) / 12]                                                                                \n\n\n\n\nCode\n!du -s ./data/webdata*\n\n\n163516  ./data/webdata.csv\n27916   ./data/webdata.orc\n38280   ./data/webdata.parquet\n4   ./data/webdata_schema.json\n42832   ./data/webdata-transformed.parquet\n\n\n\n\nCode\n( \n    spark\n        .read\n        .orc(path_to_orc)\n        .printSchema()\n)\n\n\nroot\n |-- xid: string (nullable = true)\n |-- action: string (nullable = true)\n |-- date: timestamp (nullable = true)\n |-- website_id: string (nullable = true)\n |-- url: string (nullable = true)\n |-- category_id: float (nullable = true)\n |-- zipcode: string (nullable = true)\n |-- device: string (nullable = true)"
+  },
+  {
+    "objectID": "core/notebooks/notebook16_fileformats.html#from-the-doc",
+    "href": "core/notebooks/notebook16_fileformats.html#from-the-doc",
+    "title": "File formats",
+    "section": "From the doc",
+    "text": "From the doc\n\n\nCode\nfrom pyspark.sql import Row\n\n# spark is from the previous example.\n# Create a simple DataFrame, stored into a partition directory\nsc = spark.sparkContext\n\nsquaresDF = spark.createDataFrame(sc.parallelize(range(1, 6))\n                                  .map(lambda i: Row(single=i, double=i ** 2)))\nsquaresDF.write.parquet(\"data/test_table/key=1\", \nmode=\"overwrite\")\n\n# Create another DataFrame in a new partition directory,\n# adding a new column and dropping an existing column\ncubesDF = spark.createDataFrame(sc.parallelize(range(6, 11))\n                                .map(lambda i: Row(single=i, triple=i ** 3)))\n\ncubesDF.write.parquet(\"data/test_table/key=2\", mode=\"overwrite\")\n\n# Read the partitioned table\nmergedDF = (\n    spark\n        .read\n        .option(\"mergeSchema\", \"true\")\n        .parquet(\"data/test_table\")\n)\nmergedDF.printSchema()\n\n# The final schema consists of all 3 columns in the Parquet files together\n# with the partitioning column appeared in the partition directory paths.\n# root\n#  |-- double: long (nullable = true)\n#  |-- single: long (nullable = true)\n#  |-- triple: long (nullable = true)\n#  |-- key: integer (nullable = true)\n\n\nroot\n |-- single: long (nullable = true)\n |-- double: long (nullable = true)\n |-- triple: long (nullable = true)\n |-- key: integer (nullable = true)\n\n\n\n\n\nCode\nmergedDF.show()\n\n\n+------+------+------+---+\n|single|double|triple|key|\n+------+------+------+---+\n|     6|  NULL|   216|  2|\n|     9|  NULL|   729|  2|\n|     7|  NULL|   343|  2|\n|     3|     9|  NULL|  1|\n|     1|     1|  NULL|  1|\n|     5|    25|  NULL|  1|\n|     2|     4|  NULL|  1|\n|     4|    16|  NULL|  1|\n|     8|  NULL|   512|  2|\n|    10|  NULL|  1000|  2|\n+------+------+------+---+"
+  },
+  {
+    "objectID": "core/notebooks/notebook16_fileformats.html#citibike-data",
+    "href": "core/notebooks/notebook16_fileformats.html#citibike-data",
+    "title": "File formats",
+    "section": "Citibike data",
+    "text": "Citibike data"
+  },
+  {
+    "objectID": "core/slides/slides06_file-formats.html#parquet-and-thrift",
+    "href": "core/slides/slides06_file-formats.html#parquet-and-thrift",
+    "title": "File formats",
+    "section": "Parquet and Thrift",
+    "text": "Parquet and Thrift\nIn Parquet files, Thrift is used to define and serialize the file’s metadata structure."
+  },
+  {
+    "objectID": "core/slides/slides06_file-formats.html#read-write-intensive-query-pattern",
+    "href": "core/slides/slides06_file-formats.html#read-write-intensive-query-pattern",
+    "title": "File formats",
+    "section": "Read / Write intensive & query pattern",
+    "text": "Read / Write intensive & query pattern\n\nRow-based file formats are overall better for storing write-intensive data because appending new records is easier\nIf only a small subset of columns is queried frequently, columnar formats will be better since only those needed columns will be accessed and transmitted (whereas row formats need to pull all the columns)"
+  },
+  {
+    "objectID": "core/slides/slides06_file-formats.html#schema-evolution",
+    "href": "core/slides/slides06_file-formats.html#schema-evolution",
+    "title": "File formats",
+    "section": "Schema Evolution",
+    "text": "Schema Evolution\n\nOne challenge in big data is the frequent change of data schema: e.g. adding/dropping columns and changing columns names\nIf you know that the schema of the data will change several times, the best choice is Avro\nAvro data schema is in JSON and Avro is able to keep data compact even when many different schemas exist\n\nSee Schema merging for parquet files"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#spark-nlp",
+    "href": "core/slides/slides14_spark-nlp.html#spark-nlp",
+    "title": "Spark NLP",
+    "section": "Spark NLP",
+    "text": "Spark NLP\nSpark NLP provides an example of an application in the Apache Spark Ecosystem\n\nSpark NLP relies on the Spark SQL Lib and Spark Dataframes (high level APIs) and also on the Spark ML Lib.\n\n\nSpark NLP borrows ideas from existing NLP softwares and adapts the known techniques to the Spark principles\n…\nNLP deals with many applications of machine learning\n\nAutomatic translation (see deepl.com)\nTopic modeling (text clustering)\nSentiment Analysis\nLLMs\n…"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#two-flavors-of-nlp-libraries",
+    "href": "core/slides/slides14_spark-nlp.html#two-flavors-of-nlp-libraries",
+    "title": "Spark NLP",
+    "section": "Two flavors of NLP libraries",
+    "text": "Two flavors of NLP libraries\n\nFunctionality Libraries nltk.org\nAnnotation Libraries spaCy’s site"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#spacy-and-spark",
+    "href": "core/slides/slides14_spark-nlp.html#spacy-and-spark",
+    "title": "Spark NLP",
+    "section": "spaCy and Spark?",
+    "text": "spaCy and Spark?\nA databricks notebook discusses possible interactions between spaCy and Spark on a use case:\n\n\nGet the tweets (the texts) into a Spark dataframe using spark.sql()\nConvert the Spark dataframe to a numpy array\nStream all tweets in batches using nlp.pipe()\nGo through the processed tweets and take copy everything we need in a large array object\nConvert back the large array object into a Spark dataframe\nSave the dataframe as table, so we can query the whole thing withh SQL again\n\n\n\n\n\n\n\n\n\nNo hint at parallelizing spaCy’s annotation process"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#spacy-v2-current-v3.7",
+    "href": "core/slides/slides14_spark-nlp.html#spacy-v2-current-v3.7",
+    "title": "Spark NLP",
+    "section": "spaCy v2 (current v3.7)",
+    "text": "spaCy v2 (current v3.7)\n\nspaCy v2 now fully supports the Pickle protocol, making it easy to use spaCy with Apache Spark.\n\nspaCy v2 documentation"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#imports-sparknlp-and-others",
+    "href": "core/slides/slides14_spark-nlp.html#imports-sparknlp-and-others",
+    "title": "Spark NLP",
+    "section": "Imports sparknlp and others",
+    "text": "Imports sparknlp and others\n\n# Import Spark NLP\nfrom sparknlp.base import *\nfrom sparknlp.annotator import *\nfrom sparknlp.pretrained import PretrainedPipeline\nimport sparknlp"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#initiate-spark-session",
+    "href": "core/slides/slides14_spark-nlp.html#initiate-spark-session",
+    "title": "Spark NLP",
+    "section": "Initiate Spark session",
+    "text": "Initiate Spark session\nAssuming standalone mode on a laptop. master runs on localhost\n\nspark = SparkSession.builder \\\n    .appName(\"Spark NLP\") \\\n    .master(\"local[*]\") \\\n    .config(\"spark.driver.memory\", \"16G\") \\\n    .config(\"spark.serializer\", \"org.apache.spark.serializer.KryoSerializer\") \\\n    .config(\"spark.kryoserializer.buffer.max\", \"2000M\") \\\n    .config(\"spark.driver.maxResultSize\", \"0\") \\\n    .config(\"spark.jars.packages\", \"com.johnsnowlabs.nlp:spark-nlp_2.12:6.3.2\") \\\n    .getOrCreate()\n\n\n\n:: loading settings :: url = jar:file:/home/boucheron/.sdkman/candidates/spark/3.5.3/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#toy-big-data",
+    "href": "core/slides/slides14_spark-nlp.html#toy-big-data",
+    "title": "Spark NLP",
+    "section": "Toy (big) data",
+    "text": "Toy (big) data\n\nfr_articles = [\n  (\"Le dimanche 11 juillet 2021, Chiellini a utilisé le mot Kiricocho lorsque Saka s'est approché du ballon pour le penalty.\",),\n  (\"La prochaine Coupe du monde aura lieu en novembre 2022.\",),\n  (\"À Noël 800, Charlemagne se fit couronner empereur à Rome.\",),\n  (\"Le Marathon de Paris a lieu le premier dimanche d'avril 2024\",)\n]\n\n\n\n\n\n\narticles_cols = [\"text\"]\n\ndf = spark.createDataFrame(\n  data=fr_articles, \n  schema=articles_cols)\n\ndf.printSchema()\n\n\n\nroot\n |-- text: string (nullable = true)"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#pipelines",
+    "href": "core/slides/slides14_spark-nlp.html#pipelines",
+    "title": "Spark NLP",
+    "section": "Pipelines",
+    "text": "Pipelines\n\ndocument_assembler = (\n  DocumentAssembler() \n            .setInputCol(\"text\") \n            .setOutputCol(\"document\")\n)\n\n\n\n\n\n\n\nColumn document contains the ‘text’ to be annotated as well as some possible metadata.\nStarting point of any annotation process\nSpark NLP relies on Spark SQL for storing, moving, data."
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#transformationaction",
+    "href": "core/slides/slides14_spark-nlp.html#transformationaction",
+    "title": "Spark NLP",
+    "section": "Transformation/Action",
+    "text": "Transformation/Action\n\nassembled = ( \n  document_assembler.transform(df)\n)"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#more",
+    "href": "core/slides/slides14_spark-nlp.html#more",
+    "title": "Spark NLP",
+    "section": "More",
+    "text": "More\n\nfr_articles.append((\"Nous nous sommes rencontrés le 13/05/2018 puis le 18/05/2020.\",))\n\nfr_articles.append((\"Nous nous sommes rencontrés il y a 2 jours et il m'a dit qu'il nous rendrait visite la semaine prochaine.\",))"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#another-annotator",
+    "href": "core/slides/slides14_spark-nlp.html#another-annotator",
+    "title": "Spark NLP",
+    "section": "Another annotator",
+    "text": "Another annotator\n\ndate_matcher_bis = MultiDateMatcher() \\\n            .setInputCols(['document']) \\\n            .setOutputCol(\"date\") \\\n            .setOutputFormat(\"MM/dd/yyyy\") \\\n            .setSourceLanguage(\"fr\")"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#sql-lib-and-dataframes",
+    "href": "core/slides/slides14_spark-nlp.html#sql-lib-and-dataframes",
+    "title": "Spark NLP",
+    "section": "SQL Lib and Dataframes",
+    "text": "SQL Lib and Dataframes"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#ml-lib-transformers-and-estimators",
+    "href": "core/slides/slides14_spark-nlp.html#ml-lib-transformers-and-estimators",
+    "title": "Spark NLP",
+    "section": "ML Lib, Transformers and Estimators",
+    "text": "ML Lib, Transformers and Estimators"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#getting-a-corpus-etl",
+    "href": "core/slides/slides14_spark-nlp.html#getting-a-corpus-etl",
+    "title": "Spark NLP",
+    "section": "Getting a corpus : ETL",
+    "text": "Getting a corpus : ETL\n\n# Warm up \npattern = 'URL: http://www.nytimes.com/(?P&lt;zedate&gt;[0-9]{4}/[0-9]{2}/[0-9]{2})/.*'\ntitle = 'URL: http://www.nytimes.com/[0-9]{4}/[0-9]{2}/[0-9]{2}/(.*)'\nreg_date = re.compile(pattern)\nreg_title = re.compile(title)"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#building-the-corpus",
+    "href": "core/slides/slides14_spark-nlp.html#building-the-corpus",
+    "title": "Spark NLP",
+    "section": "Building the corpus",
+    "text": "Building the corpus\n\n## label: parsing-ny-corpus\nwith open(nypath, encoding='UTF-8')  as fd:\n    doc, document = None, None\n    while l := fd.readline():        \n        if m := reg_date.match(l):\n            if doc is not None:\n                corpus_list.append((*document, doc))\n                doc, document = None, None\n            ymd = date(*[int(n) for n in m.groups()[0].split('/')])\n            title = (\n                reg_title.match(l)\n                  .groups()[0]\n                  .split('/')\n            )\n            document =  (ymd, title[-1], '/'.join(title[:-1]))\n            doc = ''\n        else: doc = doc + l\n    else:\n        if doc is not None:\n            corpus_list.append((*document, doc))"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#checking-the-loaded-data",
+    "href": "core/slides/slides14_spark-nlp.html#checking-the-loaded-data",
+    "title": "Spark NLP",
+    "section": "Checking the loaded data",
+    "text": "Checking the loaded data\n\ndf_texts.printSchema()\ndf_texts.count()\n\n\n\nroot\n |-- date: date (nullable = false)\n |-- title: string (nullable = false)\n |-- topic: string (nullable = false)\n |-- text: string (nullable = true)\n\n\n\n8888"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#saving",
+    "href": "core/slides/slides14_spark-nlp.html#saving",
+    "title": "Spark NLP",
+    "section": "Saving",
+    "text": "Saving\nLocally\n\ndf_texts.write.parquet('../../data/ny_corpus_pq', mode=\"overwrite\")"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#section",
+    "href": "core/slides/slides14_spark-nlp.html#section",
+    "title": "Spark NLP",
+    "section": "",
+    "text": "(\n date_matcher\n  .transform(assembled)\n  .select('date')\n  .show(10, False)\n)\n\n\n\n+-------------------------------------------------+\n|date                                             |\n+-------------------------------------------------+\n|[{date, 10, 21, 07/11/2021, {sentence -&gt; 0}, []}]|\n|[{date, 41, 53, 11/01/2022, {sentence -&gt; 0}, []}]|\n|[]                                               |\n|[{date, 3, 60, 01/01/2024, {sentence -&gt; 0}, []}] |\n+-------------------------------------------------+"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#public-pipelines",
+    "href": "core/slides/slides14_spark-nlp.html#public-pipelines",
+    "title": "Spark NLP",
+    "section": "Public pipelines",
+    "text": "Public pipelines\n\nfrom sparknlp.pretrained import PretrainedPipeline\nexplain_document_pipeline = PretrainedPipeline(\"explain_document_ml\")\n\n\n\nexplain_document_ml download started this may take some time.\nApprox size to download 9 MB\n[ | ]\n\n\nexplain_document_ml download started this may take some time.\nApproximate size to download 9 MB\nDownload done! Loading the resource.\n[ / ][ — ][OK!]"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#chaining-annotators",
+    "href": "core/slides/slides14_spark-nlp.html#chaining-annotators",
+    "title": "Spark NLP",
+    "section": "Chaining annotators",
+    "text": "Chaining annotators\n\nsentenceDetector = SentenceDetector() \\\n    .setInputCols([\"document\"]) \\\n    .setOutputCol(\"sentence\")\nregexTokenizer = Tokenizer() \\\n    .setInputCols([\"sentence\"]) \\\n    .setOutputCol(\"token\")\n\n\n\n\n\nfinisher = Finisher() \\\n    .setInputCols([\"token\"]) \\\n    .setIncludeMetadata(True)"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#fitting-and-transforming",
+    "href": "core/slides/slides14_spark-nlp.html#fitting-and-transforming",
+    "title": "Spark NLP",
+    "section": "Fitting and transforming",
+    "text": "Fitting and transforming\n\nspam = ( \n  pipeline.fit(df_texts)\n    .transform(df_texts)\n    .select(\"finished_token\")\n    .collect()\n)"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#a-customized-pipeline",
+    "href": "core/slides/slides14_spark-nlp.html#a-customized-pipeline",
+    "title": "Spark NLP",
+    "section": "A customized pipeline",
+    "text": "A customized pipeline\n\nstemmer = (\n  Stemmer()\n    .setInputCols(['token'])\n    .setOutputCol('stem')\n)\n\n\n\n\n\nlemmatizer = (\n  LemmatizerModel.pretrained()\n    .setInputCols(['token'])\n    .setOutputCol('lemma')\n)\n\n\n\nlemma_antbnc download started this may take some time.\n\n\nApproximate size to download 907.6 KB\n[ | ]\n\n\nlemma_antbnc download started this may take some time.\nApproximate size to download 907.6 KB\nDownload done! Loading the resource.\n[OK!]\n\n\n\n\n\n\n\n\nWarning\n\n\nlemma_antbnc download started this may take some time.\nApproximate size to download 907.6 KB\n[ / ]lemma_antbnc download started this may take some time.\nApproximate size to download 907.6 KB\n[ / ]Download done! Loading the resource.\n[ — ]\n\n[OK!]"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#section-1",
+    "href": "core/slides/slides14_spark-nlp.html#section-1",
+    "title": "Spark NLP",
+    "section": "",
+    "text": "df_texts = spark.createDataFrame(\n    corpus_list,\n    schema= StructType([\n      StructField('date', DateType(), False),\n      StructField('title', StringType(), False),\n      StructField('topic', StringType(), False),\n      StructField('text', StringType(), True)\n]))"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#topic-modelling",
+    "href": "core/slides/slides14_spark-nlp.html#topic-modelling",
+    "title": "Spark NLP",
+    "section": "Topic modelling",
+    "text": "Topic modelling"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#tf-idf",
+    "href": "core/slides/slides14_spark-nlp.html#tf-idf",
+    "title": "Spark NLP",
+    "section": "TF-IDF",
+    "text": "TF-IDF"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#latent-dirichlet-allocation",
+    "href": "core/slides/slides14_spark-nlp.html#latent-dirichlet-allocation",
+    "title": "Spark NLP",
+    "section": "Latent Dirichlet Allocation",
+    "text": "Latent Dirichlet Allocation"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#execution-modes",
+    "href": "core/slides/slides14_spark-nlp.html#execution-modes",
+    "title": "Spark NLP",
+    "section": "Execution modes",
+    "text": "Execution modes\n\nstandalone\nclient\ncluster"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#section-2",
+    "href": "core/slides/slides14_spark-nlp.html#section-2",
+    "title": "Spark NLP",
+    "section": "",
+    "text": "posTagger = PerceptronModel.pretrained() \\\n    .setInputCols([\"document\", \"token\"]) \\\n    .setOutputCol(\"pos\")\n\n\n\npos_anc download started this may take some time.\nApproximate size to download 3.9 MB\n[ | ]\n\n\npos_anc download started this may take some time.\nApproximate size to download 3.9 MB\nDownload done! Loading the resource.\n[ / ][OK!]\n\n\n\n\n\n\n\n\nWarning\n\n\npos_anc download started this may take some time.\nApproximate size to download 3.9 MB\n[ — ]pos_anc download started this may take some time.\nApproximate size to download 3.9 MB\n[ \\ ]Download done! Loading the resource.\n[Stage 34:===========================================&gt;              (3 + 1) / 4]\n[ | ]\n                                                                \n[OK!]"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#toy-big-data-contd",
+    "href": "core/slides/slides14_spark-nlp.html#toy-big-data-contd",
+    "title": "Spark NLP",
+    "section": "Toy big data (cont’d)",
+    "text": "Toy big data (cont’d)\n\narticles_cols = [\"text\"]\n\ndf = spark.createDataFrame(\n  data=fr_articles, \n  schema=articles_cols)\n\ndf.printSchema()\n\n\n\nroot\n |-- text: string (nullable = true)"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#section-3",
+    "href": "core/slides/slides14_spark-nlp.html#section-3",
+    "title": "Spark NLP",
+    "section": "",
+    "text": "finisher = (\n  Finisher()\n    .setInputCols([\n      'token', \n#      'stem', \n#      'lemma', \n      'pos'])\n    .setIncludeMetadata(False)\n    .setOutputAsArray(True)\n)"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#section-4",
+    "href": "core/slides/slides14_spark-nlp.html#section-4",
+    "title": "Spark NLP",
+    "section": "",
+    "text": "pipeline = (\n  Pipeline()\n    .setStages([\n      document_assembler,\n      sentenceDetector,\n      regexTokenizer,\n      posTagger, \n      finisher\n    ])\n)"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#section-5",
+    "href": "core/slides/slides14_spark-nlp.html#section-5",
+    "title": "Spark NLP",
+    "section": "",
+    "text": "spam = ( \n  pipeline.fit(df_texts)\n    .transform(df_texts)\n    .selectExpr(\"*\")\n    .collect()\n)"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#section-6",
+    "href": "core/slides/slides14_spark-nlp.html#section-6",
+    "title": "Spark NLP",
+    "section": "",
+    "text": "(\n date_matcher\n  .transform(assembled)\n  .select('date')\n  .show(10, False)\n)\n\n\n\n+-------------------------------------------------+\n|date                                             |\n+-------------------------------------------------+\n|[{date, 10, 21, 07/11/2021, {sentence -&gt; 0}, []}]|\n|[{date, 41, 53, 11/01/2022, {sentence -&gt; 0}, []}]|\n|[]                                               |\n|[{date, 3, 60, 01/01/2024, {sentence -&gt; 0}, []}] |\n|[{date, 31, 40, 05/13/2018, {sentence -&gt; 0}, []}]|\n|[{date, 84, 92, 03/21/2026, {sentence -&gt; 0}, []}]|\n+-------------------------------------------------+"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#section-7",
+    "href": "core/slides/slides14_spark-nlp.html#section-7",
+    "title": "Spark NLP",
+    "section": "",
+    "text": "corpus_assembled = ( \n  document_assembler.transform(df_texts)\n)\n\n\n\n\n\ncorpus_assembled.printSchema()\n\n\n\nroot\n |-- date: date (nullable = false)\n |-- title: string (nullable = false)\n |-- topic: string (nullable = false)\n |-- text: string (nullable = true)\n |-- document: array (nullable = true)\n |    |-- element: struct (containsNull = true)\n |    |    |-- annotatorType: string (nullable = true)\n |    |    |-- begin: integer (nullable = false)\n |    |    |-- end: integer (nullable = false)\n |    |    |-- result: string (nullable = true)\n |    |    |-- metadata: map (nullable = true)\n |    |    |    |-- key: string\n |    |    |    |-- value: string (valueContainsNull = true)\n |    |    |-- embeddings: array (nullable = true)\n |    |    |    |-- element: float (containsNull = false)\n\n\n\n\n(\n  date_matcher_bis\n    .transform(corpus_assembled)\n    .select(\"title\", \"date\")\n    .show(10, False)\n)\n\n\n\n+-----------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+\n|title                                                                        |date                                                                                                                                                          |\n+-----------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+\n|washington-nationals-max-scherzer-baffles-mets-completing-a-sweep.html       |[{date, 478, 1690, 01/04/2026, {sentence -&gt; 0}, []}]                                                                                                          |\n|mayor-de-blasios-counsel-to-leave-next-month-to-lead-police-review-board.html|[{date, 1, 670, 05/01/2014, {sentence -&gt; 0}, []}, {date, 82, 91, 04/14/2026, {sentence -&gt; 0}, []}]                                                            |\n|three-men-charged-in-killing-of-cuomo-administration-lawyer.html             |[{date, 81, 547, 08/08/2026, {sentence -&gt; 0}, []}, {date, 42, 50, 03/14/2025, {sentence -&gt; 0}, []}, {date, 1261, 1268, 03/09/2026, {sentence -&gt; 0}, []}]      |\n|tekserve-precursor-to-the-apple-store-to-close-after-29-years.html           |[{date, 1699, 1710, 03/14/2011, {sentence -&gt; 0}, []}, {date, 257, 1549, 07/23/1987, {sentence -&gt; 0}, []}]                                                     |\n|once-at-michael-phelpss-feet-and-still-chasing-them.html                     |[{date, 1101, 1111, 03/14/2026, {sentence -&gt; 0}, []}, {date, 204, 3658, 08/14/2004, {sentence -&gt; 0}, []}, {date, 2985, 2993, 03/14/2025, {sentence -&gt; 0}, []}]|\n|missy-franklin-breaks-through-in-trials-and-earns-a-return-to-olympics.html  |[{date, 369, 1462, 12/21/2012, {sentence -&gt; 0}, []}]                                                                                                          |\n|lionsgate-is-said-to-be-near-deal-to-buy-starz.html                          |[{date, 290, 2569, 12/28/2026, {sentence -&gt; 0}, []}, {date, 1802, 1810, 03/14/2025, {sentence -&gt; 0}, []}]                                                     |\n|pool-rules-no-running-no-eating-or-drinking-no-men.html                      |[{date, 274, 1351, 12/20/1922, {sentence -&gt; 0}, []}]                                                                                                          |\n|knicks-look-to-young-blood-and-free-agency-to-patch-porous-roster.html       |[{date, 473, 3111, 05/30/2014, {sentence -&gt; 0}, []}, {date, 1090, 1098, 03/07/2026, {sentence -&gt; 0}, []}]                                                     |\n|latest-sign-of-change-in-harlem-its-congressional-candidate.html             |[{date, 389, 1270, 12/01/2026, {sentence -&gt; 0}, []}]                                                                                                          |\n+-----------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+\nonly showing top 10 rows\n\n\n\n\n\n\n\n\n\nWarning\n\n\nExtracted dates should be taken with a grain of salt"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#section-8",
+    "href": "core/slides/slides14_spark-nlp.html#section-8",
+    "title": "Spark NLP",
+    "section": "",
+    "text": "pipeline = (\n  Pipeline()\n    .setStages([\n      document_assembler,\n      sentenceDetector,\n      regexTokenizer,\n      posTagger, \n      finisher\n    ])\n)\n\n\n\n\n\nspam = ( \n  pipeline.fit(df_texts)\n    .transform(df_texts)\n    .selectExpr(\"*\")\n    .collect()\n)"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#objectives",
+    "href": "core/slides/slides14_spark-nlp.html#objectives",
+    "title": "Spark NLP",
+    "section": "Objectives",
+    "text": "Objectives\n\nInitializing a sparknlp session\nBuilding a toy NLP pipeline for detecting dates in a text"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#check-versions-and-context",
+    "href": "core/slides/slides14_spark-nlp.html#check-versions-and-context",
+    "title": "Spark NLP",
+    "section": "Check versions and context",
+    "text": "Check versions and context\n\nsparknlp.version()\n\n\n\n'6.3.2'\n\n\n\nspark.sparkContext\n\n\n\n\n        \n            SparkContext\n\n            Spark UI\n\n            \n              Version\n                v3.5.3\n              Master\n                local[*]\n              AppName\n                Spark NLP"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#toy-big-raw-data",
+    "href": "core/slides/slides14_spark-nlp.html#toy-big-raw-data",
+    "title": "Spark NLP",
+    "section": "Toy big raw data",
+    "text": "Toy big raw data\n\nfr_articles = [\n  (\"Le dimanche 11 juillet 2021, Chiellini a utilisé le mot Kiricocho lorsque Saka s'est approché du ballon pour le penalty.\",),\n  (\"La prochaine Coupe du monde aura lieu en novembre 2022.\",),\n  (\"À Noël 800, Charlemagne se fit couronner empereur à Rome.\",),\n  (\"Le Marathon de Paris a lieu le premier dimanche d'avril 2024\",)\n]"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#looking-for-dates",
+    "href": "core/slides/slides14_spark-nlp.html#looking-for-dates",
+    "title": "Spark NLP",
+    "section": "Looking for dates",
+    "text": "Looking for dates\n\ndate_matcher = DateMatcher() \\\n            .setInputCols(['document']) \\\n            .setOutputCol(\"date\") \\\n            .setOutputFormat(\"MM/dd/yyyy\") \\\n            .setSourceLanguage(\"fr\")\n\n\n\n\n\n\n\n\nSpark NLP adopts an original way of storing annotations\nSpark NLP creates columns for annotations\nSpark NLP stores annotation in Spark dataframes\nAnnotators are\n\nTranformers\nEstimators\nModels"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#rebuild-the-data",
+    "href": "core/slides/slides14_spark-nlp.html#rebuild-the-data",
+    "title": "Spark NLP",
+    "section": "Rebuild the data",
+    "text": "Rebuild the data\n\ndf = spark.createDataFrame(\n  data=fr_articles, \n  schema=articles_cols)\n\ndf.printSchema()\ndf.show()\n\n\n\nroot\n |-- text: string (nullable = true)\n\n+--------------------+\n|                text|\n+--------------------+\n|Le dimanche 11 ju...|\n|La prochaine Coup...|\n|À Noël 800, Charl...|\n|Le Marathon de Pa...|\n|Nous nous sommes ...|\n|Nous nous sommes ...|\n+--------------------+\n\n\n\n\nassembled = ( \n  document_assembler.transform(df)\n)"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#look-for-dates-again",
+    "href": "core/slides/slides14_spark-nlp.html#look-for-dates-again",
+    "title": "Spark NLP",
+    "section": "Look for dates again",
+    "text": "Look for dates again\n\n(\n date_matcher\n  .transform(assembled)\n  .select('date')\n  .show(10, False)\n)\n\n\n\n+-------------------------------------------------+\n|date                                             |\n+-------------------------------------------------+\n|[{date, 10, 21, 07/11/2021, {sentence -&gt; 0}, []}]|\n|[{date, 41, 53, 11/01/2022, {sentence -&gt; 0}, []}]|\n|[]                                               |\n|[{date, 3, 60, 01/01/2024, {sentence -&gt; 0}, []}] |\n|[{date, 31, 40, 05/13/2018, {sentence -&gt; 0}, []}]|\n|[{date, 84, 92, 03/21/2026, {sentence -&gt; 0}, []}]|\n+-------------------------------------------------+"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#other-findings",
+    "href": "core/slides/slides14_spark-nlp.html#other-findings",
+    "title": "Spark NLP",
+    "section": "Other findings",
+    "text": "Other findings\n\n(\n  date_matcher_bis\n    .transform(assembled)\n    .select(\"date\")\n    .show(10, False)\n)\n\n\n\n+--------------------------------------------------------------------------------------------------+\n|date                                                                                              |\n+--------------------------------------------------------------------------------------------------+\n|[{date, 11, 22, 07/11/2021, {sentence -&gt; 0}, []}]                                                 |\n|[{date, 41, 53, 11/01/2022, {sentence -&gt; 0}, []}]                                                 |\n|[]                                                                                                |\n|[{date, 53, 62, 04/01/2024, {sentence -&gt; 0}, []}]                                                 |\n|[{date, 31, 40, 05/13/2018, {sentence -&gt; 0}, []}, {date, 50, 59, 05/18/2020, {sentence -&gt; 0}, []}]|\n|[{date, 28, 37, 03/12/2026, {sentence -&gt; 0}, []}, {date, 80, 88, 03/21/2026, {sentence -&gt; 0}, []}]|\n+--------------------------------------------------------------------------------------------------+"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#getting-a-corpus-contd",
+    "href": "core/slides/slides14_spark-nlp.html#getting-a-corpus-contd",
+    "title": "Spark NLP",
+    "section": "Getting a corpus (cont’d)",
+    "text": "Getting a corpus (cont’d)\n\nnypath = Path('../../data/nytimes_news_articles.txt')\ncorpus_list = list()"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#reloading",
+    "href": "core/slides/slides14_spark-nlp.html#reloading",
+    "title": "Spark NLP",
+    "section": "Reloading",
+    "text": "Reloading\n\nspam = spark.read.parquet('../../data/ny_corpus_pq')\n\nspam.printSchema()\n\n\n\nroot\n |-- date: date (nullable = true)\n |-- title: string (nullable = true)\n |-- topic: string (nullable = true)\n |-- text: string (nullable = true)\n\n\n\n\nspam.rdd.getNumPartitions()\n\n\n\n20"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#feeding-the-spark-nlp",
+    "href": "core/slides/slides14_spark-nlp.html#feeding-the-spark-nlp",
+    "title": "Spark NLP",
+    "section": "Feeding the spark-nlp",
+    "text": "Feeding the spark-nlp\n\ncorpus_assembled = ( \n  document_assembler.transform(df_texts)\n)\n\n\n\n\n\ncorpus_assembled.printSchema()\n\n\n\nroot\n |-- date: date (nullable = false)\n |-- title: string (nullable = false)\n |-- topic: string (nullable = false)\n |-- text: string (nullable = true)\n |-- document: array (nullable = true)\n |    |-- element: struct (containsNull = true)\n |    |    |-- annotatorType: string (nullable = true)\n |    |    |-- begin: integer (nullable = false)\n |    |    |-- end: integer (nullable = false)\n |    |    |-- result: string (nullable = true)\n |    |    |-- metadata: map (nullable = true)\n |    |    |    |-- key: string\n |    |    |    |-- value: string (valueContainsNull = true)\n |    |    |-- embeddings: array (nullable = true)\n |    |    |    |-- element: float (containsNull = false)"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#looking-for-dates-again",
+    "href": "core/slides/slides14_spark-nlp.html#looking-for-dates-again",
+    "title": "Spark NLP",
+    "section": "Looking for dates (again)",
+    "text": "Looking for dates (again)\n\n(\n  date_matcher_bis\n    .transform(corpus_assembled)\n    .select(\"title\", \"date\")\n    .show(10, False)\n)\n\n\n\n+-----------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+\n|title                                                                        |date                                                                                                                                                          |\n+-----------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+\n|washington-nationals-max-scherzer-baffles-mets-completing-a-sweep.html       |[{date, 478, 1690, 01/04/2026, {sentence -&gt; 0}, []}]                                                                                                          |\n|mayor-de-blasios-counsel-to-leave-next-month-to-lead-police-review-board.html|[{date, 1, 670, 05/01/2014, {sentence -&gt; 0}, []}, {date, 82, 91, 04/14/2026, {sentence -&gt; 0}, []}]                                                            |\n|three-men-charged-in-killing-of-cuomo-administration-lawyer.html             |[{date, 81, 547, 08/08/2026, {sentence -&gt; 0}, []}, {date, 42, 50, 03/14/2025, {sentence -&gt; 0}, []}, {date, 1261, 1268, 03/09/2026, {sentence -&gt; 0}, []}]      |\n|tekserve-precursor-to-the-apple-store-to-close-after-29-years.html           |[{date, 1699, 1710, 03/14/2011, {sentence -&gt; 0}, []}, {date, 257, 1549, 07/23/1987, {sentence -&gt; 0}, []}]                                                     |\n|once-at-michael-phelpss-feet-and-still-chasing-them.html                     |[{date, 1101, 1111, 03/14/2026, {sentence -&gt; 0}, []}, {date, 204, 3658, 08/14/2004, {sentence -&gt; 0}, []}, {date, 2985, 2993, 03/14/2025, {sentence -&gt; 0}, []}]|\n|missy-franklin-breaks-through-in-trials-and-earns-a-return-to-olympics.html  |[{date, 369, 1462, 12/21/2012, {sentence -&gt; 0}, []}]                                                                                                          |\n|lionsgate-is-said-to-be-near-deal-to-buy-starz.html                          |[{date, 290, 2569, 12/28/2026, {sentence -&gt; 0}, []}, {date, 1802, 1810, 03/14/2025, {sentence -&gt; 0}, []}]                                                     |\n|pool-rules-no-running-no-eating-or-drinking-no-men.html                      |[{date, 274, 1351, 12/20/1922, {sentence -&gt; 0}, []}]                                                                                                          |\n|knicks-look-to-young-blood-and-free-agency-to-patch-porous-roster.html       |[{date, 473, 3111, 05/30/2014, {sentence -&gt; 0}, []}, {date, 1090, 1098, 03/07/2026, {sentence -&gt; 0}, []}]                                                     |\n|latest-sign-of-change-in-harlem-its-congressional-candidate.html             |[{date, 389, 1270, 12/01/2026, {sentence -&gt; 0}, []}]                                                                                                          |\n+-----------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+\nonly showing top 10 rows\n\n\n\n\n\n\n\n\n\nWarning\n\n\nExtracted dates should be taken with a grain of salt"
+  },
+  {
+    "objectID": "core/slides/slides14_spark-nlp.html#chaining-annotators-contd",
+    "href": "core/slides/slides14_spark-nlp.html#chaining-annotators-contd",
+    "title": "Spark NLP",
+    "section": "Chaining annotators (cont’d)",
+    "text": "Chaining annotators (cont’d)\n\npipeline = Pipeline().setStages([\n    document_assembler,\n    sentenceDetector,\n    regexTokenizer,\n    finisher\n])"
+  },
+  {
+    "objectID": "core/projects/hmw_spark_balzac.html",
+    "href": "core/projects/hmw_spark_balzac.html",
+    "title": "Hmw : Spark, File formats, and NLP",
+    "section": "",
+    "text": "Important\n\n\n\n\nDue : May 18, 2026\nWork in pairs\nDeliver your work as a qmd file through a github  repository\nUse the quarto package for reproducible research\nUse pyspark or sparlyr\nUse spark-nlp for text annotation\nThe report should be rendered at least in HTML format, and possibly also in PDF format"
+  },
+  {
+    "objectID": "core/projects/hmw_spark_balzac.html#report-organization",
+    "href": "core/projects/hmw_spark_balzac.html#report-organization",
+    "title": "Hmw : Spark, File formats, and NLP",
+    "section": " Report organization",
+    "text": "Report organization\n\nThe first part (introduction) of the report shall be dedicated to the description of the data to be extracted and to the extraction pipeline.\nThe second part of the report shall be dedicated to the description of load/transform pipeline.\nThe third part of the report shall be dedicated to the description of the annotation pipelines.\nThe fourth part of the report shall be dedicated to the stylometric analysis: which questions did you pick u25p, plots, summary tables and comments. Refrain from overplaying your hand: yours plots are not likely to provide a new literary interpretation of XIXth century literature. Comment the data, all the data, and nothing but the data.\nThe fifth and most important part deals with your experience with Spark and big data file formats.\n\n\nUse Spark UI and possibly other profiling tools to investigate the ways Spark processes the jobs you submit.\nIdentify critical shuffles\nTry to mitigate the impact of critical shuffles\n\nDetail the mitigating strategies\nCompare their impact\n\nAssess the impact of caching/persisting/checkpointing on your workflow\nCompare the impact of using csv/parquet/orc/json for storage (on local file systems at least, hdfs if you can)\n\n\nThe sixth part is the appendix. The first four parts should be mostly text and plots. The fifth part should be text, tables and diagrams. The sixth part should be code only.The appendix shall be dedicated to the details of the pipelines. You shall give the code. You shall also give the code of the graphical pipelines in the appendix. See report template with the code in the appendix using Jupyter engine\n\nYou shall avoid copy-paste coding. Don’t Repeat Yourself. Quarto with Jupyter engine provides the tools to organize the Quarto file so that you can write your code once and use it many times, once for data wrangling and plotting (without echoing), then for listing and explanation.\n\n\n\n\n\n\nTipOrganizing a report using the jupyter engine"
+  },
+  {
+    "objectID": "core/projects/hmw_spark_balzac.html#references",
+    "href": "core/projects/hmw_spark_balzac.html#references",
+    "title": "Hmw : Spark, File formats, and NLP",
+    "section": " References",
+    "text": "References\n\nData Humanities with R\nSpacy\nSpark NLP\nWeb scrapping\nscrapy\nstylo\n\npy2r\nComputational stylistics"
+  },
+  {
+    "objectID": "core/projects/hmw_spark_balzac.html#data-sources",
+    "href": "core/projects/hmw_spark_balzac.html#data-sources",
+    "title": "Hmw : Spark, File formats, and NLP",
+    "section": "Data sources",
+    "text": "Data sources\n\nProject Gutenberg: you can find the La Comédie Humaine (Balzac) using a simple search. All volumes can be downloaded as text files from there.\nFor other authors, it is up to you."
+  },
+  {
+    "objectID": "core/projects/hmw_spark_balzac.html#grading-criteria",
+    "href": "core/projects/hmw_spark_balzac.html#grading-criteria",
+    "title": "Hmw : Spark, File formats, and NLP",
+    "section": " Grading criteria",
+    "text": "Grading criteria\n\n\n\nCriterion\nPoints\nDetails\n\n\n\n\nSpark experience\n\\(30\\%\\)\n\n\n\nNarrative, spelling and syntax\n\\(10\\%\\)\nEnglish/French \n\n\nPlots correction\n\\(10\\%\\)\nchoice of aesthetics, geom, scale … \n\n\nPlot style\n\\(5\\%\\)\nTitles, legends, labels, breaks … \n\n\nETL\n\\(15\\%\\)\nETL, SQL like manipulations \n\n\nAnnotation\n\\(10\\%\\)\nAnnotations \n\n\nComputing Statistics\n\\(10\\%\\)\n… \n\n\nDRY compliance\n\\(10 \\%\\)\nDRY principle at  Wikipedia"
   }
 ]

@@ -5,7 +5,9 @@
   },
   {
     "listing": "/projects-listings.html",
-    "items": []
+    "items": [
+      "/core/projects/hmw_spark_balzac.html"
+    ]
   },
   {
     "listing": "/notebooks-listings.html",

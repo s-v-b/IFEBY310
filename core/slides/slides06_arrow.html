@@ -12,13 +12,13 @@
 <link href="../../site_libs/quarto-contrib/grid-no-htext-1.0.0/grid_no_htext.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
+<link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.24">
 
   <meta name="author" content="Équipe de Statistique">
   <meta name="dcterms.date" content="2026-01-08">
-  <title>IFEBY310 - Spring 2025 – Apache Arrow</title>
+  <title>IFEBY310 - Spring 2026 – Apache Arrow</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -214,9 +214,9 @@
   };
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-<meta property="og:title" content="Apache Arrow – IFEBY310 - Spring 2025">
+<meta property="og:title" content="Apache Arrow – IFEBY310 - Spring 2026">
 <meta property="og:description" content="Technologies Big Data Master MIDS/MFA/LOGOIS">
-<meta property="og:site_name" content="IFEBY310 - Spring 2025">
+<meta property="og:site_name" content="IFEBY310 - Spring 2026">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -261,10 +261,11 @@
 <p>Apache Arrow defines a language-independent <em>columnar memory format</em> for flat and hierarchical data, organized for efficient analytic operations on modern hardware like CPUs and GPUs. The Arrow memory format also supports zero-copy reads for lightning-fast data access without serialization overhead.</p>
 </blockquote>
 <p>See <a href="https://arrow.apache.org">Arrow website</a></p>
-<p>Apache Arrow complements columnar formats for files (on disk) like Parquet and ORC (also sponsored by Apache)</p>
+<p>In words, Apache Arrow complements columnar formats for files (on disk) like <code>Parquet</code> and <code>ORC</code> (also sponsored by Apache)</p>
 </section>
 <section id="in-memory-analytics" class="slide level2 center">
-<h2>In Memory Analytics</h2>
+<h2>In Memory Analytics ?</h2>
+<p><a href="https://www.packtpub.com/en-us/product/in-memory-analytics-with-apache-arrow-9781801071031">Book</a></p>
 </section>
 <section id="why" class="slide level2 center">
 <h2>Why ?</h2>
@@ -272,14 +273,14 @@
 <ul>
 <li><p>Data adjacency for sequential access (scans)</p></li>
 <li><p><span class="math inline">\(O(1)\)</span> (constant-time) random access</p></li>
-<li><p>SIMD and vectorization-friendly</p></li>
+<li><p>SIMD (Single Instruction Multiple Data) and vectorization-friendly</p></li>
 <li><p>Relocatable without <em>pointer swizzling</em>, allowing for <em>true zero-copy access</em> in shared memory</p></li>
 </ul>
 <blockquote>
 <p>The Arrow columnar format provides analytical performance and data locality guarantees in exchange for comparatively more expensive mutation operations</p>
 </blockquote>
 <aside class="notes">
-<p>See also Harrisson for columnar databases</p>
+<p>See also <a href="http://guyharrison.squarespace.com/my-books/">Guy Harrisson’s book</a> for columnar databases</p>
 <ul>
 <li>Columnar compression</li>
 <li>Columnar write penalty</li>
@@ -302,7 +303,7 @@
 <section>
 <section id="arrow-columnar-format" class="title-slide slide level1 center" data-background-color="#1c191c">
 <h1>Arrow columnar format</h1>
-
+<p>Most of the content of this slides deck comes from <a href="https://arrow.apache.org/docs/format/Columnar.html">Arrow documentation</a></p>
 </section>
 <section id="specification" class="slide level2 center">
 <h2>Specification</h2>
@@ -314,13 +315,64 @@
 </ul>
 </section>
 <section id="lexikon" class="slide level2 center">
-<h2>Lexikon</h2>
+<h2><a href="https://arrow.apache.org/docs/format/Columnar.html#terminology">Lexikon</a></h2>
+<ul>
+<li>buffer</li>
+<li>slot</li>
+<li>offset</li>
+<li>array</li>
+<li>types (data/primitive/nested/parametric)</li>
+<li>parent/child array</li>
+</ul>
 </section>
 <section id="physical-layout" class="slide level2 center">
 <h2>Physical layout</h2>
+<p>Each <strong>array</strong> (column) is a sequence of <strong>buffers</strong> in memory:</p>
+<ul>
+<li><strong>Buffer 0</strong>: validity bitmap — 1 bit per slot (0 = null, 1 = valid)</li>
+<li><strong>Buffer 1</strong>: data (fixed-width types) <em>or</em> offsets (variable-width types)</li>
+<li><strong>Buffer 2</strong> (variable-width only): concatenated payload (e.g.&nbsp;string bytes)</li>
+</ul>
+<div class="column-margin">
+<p><em>Relocatable buffers → zero-copy sharing between processes/languages.</em></p>
+</div>
+</section>
+<section id="in-picture" class="slide level2 center">
+<h2>In picture</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource {verbatim} number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>  Table:  columns [ id (int32)  |  name (string) ]</span>
+<span id="cb1-2"><a></a>          length = 4</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a>  Column "id" (fixed-width):</span>
+<span id="cb1-5"><a></a>  ┌─────────────────┬──────────────────────────────┐</span>
+<span id="cb1-6"><a></a>  │ validity bitmap    │  data buffer (4 bytes/slot)        │</span>
+<span id="cb1-7"><a></a>  │  [1,1,0,1]         │  [ 10, 20, ??, 40 ]                │</span>
+<span id="cb1-8"><a></a>  └─────────────────┴──────────────────────────────┘</span>
+<span id="cb1-9"><a></a>   slot:                0    1    2    3</span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a>  Column "name" (variable-width):</span>
+<span id="cb1-12"><a></a>  ┌─────────────────┬─────────────────┬─────────────────────────┐</span>
+<span id="cb1-13"><a></a>  │ validity bitmap     │ offset buffer   │  data buffer           │</span>
+<span id="cb1-14"><a></a>  │  [1,1,1,0]          │ [0,3,7,11,11]   │  "AliceBobCarol"       │</span>
+<span id="cb1-15"><a></a>  └─────────────────┴ ─────────────────┴────────────────────────┘</span>
+<span id="cb1-16"><a></a>   slot 0: bytes [0..3),  slot 1: [3..7),  slot 2: [7..11),  slot 3: null</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="arrow-data-types" class="slide level2 center">
+<h2>Arrow data types</h2>
+<p>Each data type has a well-defined physical layout.</p>
+<p>The Arrow columnar memory layout only applies to data and not metadata.</p>
+<p>Implementations are free to represent metadata in-memory in whichever form is convenient for them.</p>
+<p>We handle metadata serialization in an implementation-independent way using Flatbuffers (see below)</p>
+<p><a href="https://arrow.apache.org/docs/format/Columnar.html#physical-memory-layout">See the different physical layouts defined by Arrow</a></p>
+</section>
+<section id="arrow-extension-types" class="slide level2 center">
+<h2>Arrow extension types</h2>
+<p>Example: defining a JSON type laid upon the standard String data type</p>
 </section>
 <section id="padding" class="slide level2 center">
 <h2>Padding</h2>
+<p>mplementations are recommended to allocate memory on aligned addresses (multiple of 8- or 64-bytes) and pad (overallocate) to a length that is a multiple of 8 or 64 bytes.</p>
+<p>When serializing Arrow data for interprocess communication, these alignment and padding requirements are enforced.</p>
+<p>The recommendation for 64 byte alignment comes from the Intel performance guide that recommends alignment of memory to match SIMD register width.</p>
 </section>
 <section id="null-values" class="slide level2 center">
 <h2>Null values</h2>
@@ -341,7 +393,7 @@
 <section id="importing-pyarrow" class="slide level2 center">
 <h2>Importing <code>pyarrow</code></h2>
 <div id="528662ee" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> pyarrow <span class="im">as</span> pa</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> pyarrow <span class="im">as</span> pa</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="2">
 
@@ -360,23 +412,23 @@
 <h2>Arrow to and from Pandas</h2>
 <p>Arrow, Numpy, Pandas offer sequential structures (1-dimensional Numpy arrays, Pandas Series, …) and tables. Arrow offers tools to convert from Arrow format to Pandas and back</p>
 <blockquote>
-<p>The equivalent to a pandas DataFrame in Arrow is a Table. Both consist of a set of named columns of equal length.</p>
+<p>The equivalent to a pandas DataFrame in Arrow is a <code>Table</code>. Both consist of a set of named columns of equal length.</p>
 </blockquote>
 <div class="fragment">
 <blockquote>
-<p>While pandas only supports <em>flat</em> columns, the Table also provides <em>nested</em> columns, thus it can represent more data than a DataFrame, so a full conversion is not always possible.</p>
+<p>While pandas only supported <em>flat</em> columns, the Table also provides <em>nested</em> columns, thus it can represent more data than a DataFrame, so a full conversion is not always possible.</p>
 </blockquote>
 <div id="2d4cad25" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> pyarrow <span class="im">as</span> pa</span>
-<span id="cb2-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-3"><a></a></span>
-<span id="cb2-4"><a></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"a"</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]})</span>
-<span id="cb2-5"><a></a><span class="co"># Convert from pandas to Arrow</span></span>
-<span id="cb2-6"><a></a>table <span class="op">=</span> pa.Table.from_pandas(df)</span>
-<span id="cb2-7"><a></a><span class="co"># Convert back to pandas</span></span>
-<span id="cb2-8"><a></a>df_new <span class="op">=</span> table.to_pandas()</span>
-<span id="cb2-9"><a></a><span class="co"># Infer Arrow schema from pandas</span></span>
-<span id="cb2-10"><a></a>schema <span class="op">=</span> pa.Schema.from_pandas(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> pyarrow <span class="im">as</span> pa</span>
+<span id="cb3-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"a"</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]})</span>
+<span id="cb3-5"><a></a><span class="co"># Convert from pandas to Arrow</span></span>
+<span id="cb3-6"><a></a>table <span class="op">=</span> pa.Table.from_pandas(df)</span>
+<span id="cb3-7"><a></a><span class="co"># Convert back to pandas</span></span>
+<span id="cb3-8"><a></a>df_new <span class="op">=</span> table.to_pandas()</span>
+<span id="cb3-9"><a></a><span class="co"># Infer Arrow schema from pandas</span></span>
+<span id="cb3-10"><a></a>schema <span class="op">=</span> pa.Schema.from_pandas(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="3">
 
@@ -406,6 +458,11 @@
 <blockquote>
 <p>Pandas categorical columns are converted to Arrow dictionary arrays, a special array type optimized to handle repeated and limited number of possible values.</p>
 </blockquote>
+</section>
+<section id="arrow-pycapsule-protocol" class="slide level2 center">
+<h2>Arrow PyCapsule Protocol</h2>
+<p>The Arrow C data interface allows moving data between different DataFrame libraries through the Arrow format, and is designed to be zero-copy where possible.</p>
+<p>In Python, this interface is exposed through the <a href="https://arrow.apache.org/docs/format/CDataInterface/PyCapsuleInterface.html">Arrow PyCapsule Protocol</a></p>
 </section>
 <section id="arrow-database-connectivity" class="slide level2 center">
 <h2>Arrow database connectivity</h2>
